@@ -85,7 +85,7 @@ object fmMain: TfmMain
       640)
     object Bevel4: TBevel
       Left = 0
-      Top = 97
+      Top = 65
       Width = 409
       Height = 4
       Align = alTop
@@ -96,7 +96,7 @@ object fmMain: TfmMain
     end
     object laCls: TLabel
       Left = 385
-      Top = 437
+      Top = 139
       Width = 18
       Height = 13
       Anchors = [akRight, akBottom]
@@ -113,7 +113,7 @@ object fmMain: TfmMain
       Left = 0
       Top = 0
       Width = 409
-      Height = 97
+      Height = 65
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
@@ -125,7 +125,7 @@ object fmMain: TfmMain
         Caption = 'ECG Inputfile'
       end
       object btInputfile: TSpeedButton
-        Left = 378
+        Left = 380
         Top = 9
         Width = 23
         Height = 22
@@ -135,117 +135,82 @@ object fmMain: TfmMain
       object Label2: TLabel
         Left = 8
         Top = 40
-        Width = 49
+        Width = 55
         Height = 13
-        Caption = 'Von Index'
+        Caption = 'Von Sample'
       end
       object Label5: TLabel
-        Left = 8
-        Top = 67
-        Width = 44
-        Height = 13
-        Caption = 'Bis Index'
-      end
-      object Label4: TLabel
-        Left = 156
+        Left = 168
         Top = 40
         Width = 50
         Height = 13
-        Caption = 'Von M.Sek'
+        Caption = 'Bis Sample'
       end
-      object Label6: TLabel
-        Left = 156
-        Top = 67
-        Width = 45
-        Height = 13
-        Caption = 'Bis M.Sek'
-      end
-      object Label7: TLabel
-        Left = 289
+      object Label3: TLabel
+        Left = 323
         Top = 40
-        Width = 47
+        Width = 38
         Height = 13
-        Caption = 'Min. Wert'
-      end
-      object Label8: TLabel
-        Left = 289
-        Top = 67
-        Width = 51
-        Height = 13
-        Caption = 'Max. Wert'
+        Caption = 'Trenner'
       end
       object edInputfile: TEdit
         Left = 77
         Top = 10
-        Width = 301
+        Width = 303
         Height = 21
         TabOrder = 0
         Text = 'edInputfile'
       end
-      object edVonIdx: TEdit
+      object edVonSample: TEdit
         Left = 77
         Top = 37
         Width = 60
         Height = 21
-        TabOrder = 1
-      end
-      object edBisIdx: TEdit
-        Left = 77
-        Top = 64
-        Width = 60
-        Height = 21
         TabOrder = 2
       end
-      object edVonMsec: TEdit
-        Left = 214
+      object edBisSample: TEdit
+        Left = 237
         Top = 37
         Width = 60
         Height = 21
         TabOrder = 3
       end
-      object edBisMsec: TEdit
-        Left = 214
-        Top = 64
-        Width = 60
-        Height = 21
-        TabOrder = 4
-      end
-      object edMinWert: TEdit
-        Left = 341
+      object cbDelim: TComboBox
+        Left = 367
         Top = 37
-        Width = 60
+        Width = 36
         Height = 21
-        TabOrder = 5
-      end
-      object edMaxWert: TEdit
-        Left = 341
-        Top = 64
-        Width = 60
-        Height = 21
-        TabOrder = 6
+        Style = csDropDownList
+        ItemHeight = 13
+        ItemIndex = 0
+        TabOrder = 1
+        Text = ';'
+        Items.Strings = (
+          ';'
+          ','
+          '\t')
       end
     end
     object memo: TMemo
       Left = 0
-      Top = 456
+      Top = 158
       Width = 409
-      Height = 184
+      Height = 482
       Align = alBottom
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 1
     end
     object pbJob: TProgressBar
-      Left = 0
-      Top = 101
-      Width = 409
+      Left = 8
+      Top = 71
+      Width = 395
       Height = 17
-      Align = alTop
       TabOrder = 2
     end
     object btRead: TButton
-      Left = 6
-      Top = 128
+      Left = 8
+      Top = 96
       Width = 180
       Height = 25
       Caption = '&1 - Werte einlesen'
@@ -253,8 +218,8 @@ object fmMain: TfmMain
       OnClick = btReadClick
     end
     object btMaxMin: TButton
-      Left = 6
-      Top = 159
+      Left = 8
+      Top = 127
       Width = 180
       Height = 25
       Caption = '&2 - Draw Image Gesamt'
@@ -269,12 +234,7 @@ object fmMain: TfmMain
     Height = 640
     Align = alClient
     BevelOuter = bvNone
-    Caption = 'pnClient'
     TabOrder = 2
-    ExplicitLeft = 560
-    ExplicitTop = 192
-    ExplicitWidth = 185
-    ExplicitHeight = 41
   end
   object tStartup: TTimer
     Enabled = False

@@ -21,6 +21,9 @@ __fastcall TfmMain::TfmMain(TComponent* Owner)
 
 	String file = String(path) + "\\EcgTool.ini";
 	Ini = new TIniFile(file);
+
+	bRun  = false;
+	bStop = false;
 	}
 //---------------------------------------------------------------------------
 __fastcall TfmMain::~TfmMain()
@@ -37,14 +40,11 @@ void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
 
-	edInputfile->Text = Ini->ReadString("EcgTool", "Inputfile", "");
+	edInputfile->Text  = Ini->ReadString("EcgTool", "Inputfile", "");
+	cbDelim->ItemIndex = Ini->ReadInteger("EcgTool", "ComboDelim", 0);
 
-	edVonIdx->Text  = (String)Ini->ReadInteger("EcgTool", "VonIdx",  0);
-	edBisIdx->Text  = (String)Ini->ReadInteger("EcgTool", "BisIdx",  0);
-	edVonMsec->Text = (String)Ini->ReadInteger("EcgTool", "VonMsec", 0);
-	edBisMsec->Text = (String)Ini->ReadInteger("EcgTool", "BisMsec", 0);
-	edMinWert->Text = (String)Ini->ReadInteger("EcgTool", "MinWert", 0);
-	edMaxWert->Text = (String)Ini->ReadInteger("EcgTool", "MaxWert", 0);
+	edVonSample->Text  = (String)Ini->ReadInteger("EcgTool", "edVonSample",  0);
+	edBisSample->Text  = (String)Ini->ReadInteger("EcgTool", "edBisSample",  0);
 
 	Print("EcgTool gestartet");
 	btRead->SetFocus();
@@ -52,14 +52,11 @@ void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::FormClose(TObject *Sender, TCloseAction &Action)
 	{
-	Ini->WriteString("EcgTool", "Inputfile", edInputfile->Text);
+	Ini->WriteString("EcgTool", "Inputfile",   edInputfile->Text);
+	Ini->WriteInteger("EcgTool", "ComboDelim", cbDelim->ItemIndex);
 
-	Ini->WriteInteger("EcgTool", "VonIdx",  	 edVonIdx->Text.ToIntDef(0));
-	Ini->WriteInteger("EcgTool", "BisIdx",  	 edBisIdx->Text.ToIntDef(0));
-	Ini->WriteInteger("EcgTool", "VonMsec",  	 edVonMsec->Text.ToIntDef(0));
-	Ini->WriteInteger("EcgTool", "BisMsec",  	 edBisMsec->Text.ToIntDef(0));
-	Ini->WriteInteger("EcgTool", "MinWert",  	 edMinWert->Text.ToIntDef(0));
-	Ini->WriteInteger("EcgTool", "MaxWert",  	 edMaxWert->Text.ToIntDef(0));
+	Ini->WriteInteger("EcgTool", "edVonSample",	 edVonSample->Text.ToIntDef(0));
+	Ini->WriteInteger("EcgTool", "edBisSample",	 edBisSample->Text.ToIntDef(0));
 
 	Ini->UpdateFile();
 	}
@@ -83,6 +80,64 @@ void TfmMain::Print(char* msg, ...)
 
 	memo->Lines->Add(buffer);
 	va_end(argptr);
+	}
+//---------------------------------------------------------------------------
+void TfmMain::ReadFile()
+	{
+	Print("start readFile...");
+	String ecgFile = edInputfile->Text;
+	if (ecgFile == "") return;
+
+	String delim = ";";
+	if (cbDelim->ItemIndex == 1) //Komma
+		delim = ",";
+	else if (cbDelim->ItemIndex == 2) //Tab
+		delim = "\t";
+
+	fcsv = new cCsv(); //todo in c'tor verlagern
+	if (!fcsv->OpenFile(ecgFile, delim))
+		{
+		Print("Fehler aufgetreten: %s", fcsv->getError());
+		return;
+		}
+
+	int vonSamp = edVonSample->Text.ToIntDef(-1);
+	int bisSamp = edBisSample->Text.ToIntDef(-1);
+
+	pbJob->Max = fcsv->getFileMax();
+	pbJob->Position = fcsv->getFilePos();
+
+	if (!fcsv->StartAt(vonSamp))
+		{
+		Print("Fehler aufgetreten: %s", fcsv->getError());
+		return;
+		}
+	else
+		Print("\t%04d: %04d: %.4f",
+			fcsv->getLineNo(),
+			fcsv->getSample(),
+			fcsv->getI());
+
+	while (fcsv->NextUntil(bisSamp))
+		{
+		if (bStop)
+			{
+			Print("## Vorgang abgebrochen ##");
+			break;
+			}
+
+		pbJob->Position = fcsv->getFilePos();
+		Application->ProcessMessages();
+
+		Print("\t%04d: %04d: %.4f",
+			fcsv->getLineNo(),
+			fcsv->getSample(),
+			fcsv->getI());
+		}
+
+	pbJob->Position = pbJob->Max;
+	Print("...finished readFile");
+	delete fcsv;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -111,7 +166,20 @@ void __fastcall TfmMain::btInputfileClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btReadClick(TObject *Sender)
 	{
-	Print("pressed btRead...");
+	String cap = btRead->Caption;
+	if (!bRun)
+		{
+		btRead->Caption = "&ABBRECHEN";
+		bStop = false;
+		bRun  = true;
+		ReadFile();
+		bRun = false;
+		btRead->Caption = cap;
+		}
+	else
+		{
+		bStop = true;
+		}
 	}
 //---------------------------------------------------------------------------
 

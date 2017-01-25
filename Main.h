@@ -12,12 +12,19 @@
 #include <IniFiles.hpp>
 #include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
+#include "cCsv.h"
+//---------------------------------------------------------------------------
 class TfmMain : public TForm
 {
 private:
 	TIniFile*		Ini;
+	cCsv*			fcsv;
+
+	bool			bRun;
+	bool			bStop;
 
 	void 			Print(char* msg, ...);
+	void			ReadFile();
 
 __published:	// IDE-verwaltete Komponenten
 	TTimer *tStartup;
@@ -30,17 +37,9 @@ __published:	// IDE-verwaltete Komponenten
 	TSpeedButton *btInputfile;
 	TLabel *Label2;
 	TLabel *Label5;
-	TLabel *Label4;
-	TLabel *Label6;
-	TLabel *Label7;
-	TLabel *Label8;
 	TEdit *edInputfile;
-	TEdit *edVonIdx;
-	TEdit *edBisIdx;
-	TEdit *edVonMsec;
-	TEdit *edBisMsec;
-	TEdit *edMinWert;
-	TEdit *edMaxWert;
+	TEdit *edVonSample;
+	TEdit *edBisSample;
 	TBevel *Bevel1;
 	TBevel *Bevel3;
 	TMemo *memo;
@@ -50,6 +49,8 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *btMaxMin;
 	TLabel *laCls;
 	TPanel *pnClient;
+	TComboBox *cbDelim;
+	TLabel *Label3;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
