@@ -49,6 +49,7 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *btRead;
 	TButton *btMaxMin;
 	TLabel *laCls;
+	TPanel *pnClient;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);

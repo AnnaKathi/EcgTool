@@ -48,7 +48,6 @@ object fmMain: TfmMain
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 1036
     DesignSize = (
       1077
       41)
@@ -71,7 +70,6 @@ object fmMain: TfmMain
       ParentColor = True
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1020
     end
   end
   object pnLeft: TPanel
@@ -82,8 +80,6 @@ object fmMain: TfmMain
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = -6
-    ExplicitTop = 41
     DesignSize = (
       409
       640)
@@ -121,9 +117,6 @@ object fmMain: TfmMain
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = 96
-      ExplicitTop = 138
-      ExplicitWidth = 417
       object Label1: TLabel
         Left = 8
         Top = 13
@@ -249,9 +242,6 @@ object fmMain: TfmMain
       Height = 17
       Align = alTop
       TabOrder = 2
-      ExplicitLeft = 10
-      ExplicitTop = 103
-      ExplicitWidth = 393
     end
     object btRead: TButton
       Left = 6
@@ -271,6 +261,20 @@ object fmMain: TfmMain
       Enabled = False
       TabOrder = 4
     end
+  end
+  object pnClient: TPanel
+    Left = 413
+    Top = 45
+    Width = 664
+    Height = 640
+    Align = alClient
+    BevelOuter = bvNone
+    Caption = 'pnClient'
+    TabOrder = 2
+    ExplicitLeft = 560
+    ExplicitTop = 192
+    ExplicitWidth = 185
+    ExplicitHeight = 41
   end
   object tStartup: TTimer
     Enabled = False
