@@ -1,7 +1,8 @@
 //---------------------------------------------------------------------------
-
 #include <vcl.h>
 #pragma hdrstop
+
+#include <stdio.h>
 
 #include "Main.h"
 //---------------------------------------------------------------------------
@@ -11,20 +12,74 @@ TfmMain *fmMain;
 //---------------------------------------------------------------------------
 __fastcall TfmMain::TfmMain(TComponent* Owner)
 	: TForm(Owner)
-{
-}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::FormKeyPress(TObject *Sender, char &Key)
 	{
-	if (Key == VK_ESCAPE)
-		{
-		Key = 0;
-		Close();
-		}
+	char path[MAX_PATH];
+	strcpy(path, Application->ExeName.c_str());
+	char* pt = strrchr(path, '\\');
+	if (pt != 0)
+		*pt = 0;
+
+	String file = String(path) + "\\EcgTool.ini";
+	Ini = new TIniFile(file);
 	}
 //---------------------------------------------------------------------------
+__fastcall TfmMain::~TfmMain()
+	{
+	delete Ini;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::FormShow(TObject *Sender)
+	{
+	tStartup->Enabled = true;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::tStartupTimer(TObject *Sender)
+	{
+	tStartup->Enabled = false;
+	edInputfile->Text  = Ini->ReadString("EcgTool", "Inputfile", "");
+	cbDelim->ItemIndex = Ini->ReadInteger("EcgTool", "ComboDelim", 0);
 
-/* Testcode
+	edVonSample->Text = (String)Ini->ReadInteger("EcgTool", "edVonSample", 0);
+	edBisSample->Text = (String)Ini->ReadInteger("EcgTool", "edBisSample", 0);
+
+	btRead->SetFocus();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::FormClose(TObject *Sender, TCloseAction &Action)
+	{
+	Ini->WriteString("EcgTool", "Inputfile",   edInputfile->Text);
+	Ini->WriteInteger("EcgTool", "ComboDelim", cbDelim->ItemIndex);
+
+	Ini->WriteInteger("EcgTool", "edVonSample", edVonSample->Text.ToIntDef(0));
+	Ini->WriteInteger("EcgTool", "edBisSample", edBisSample->Text.ToIntDef(0));
+
+	Ini->UpdateFile();
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   Funktionen   *****************************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+void TfmMain::Print(char* msg, ...)
+	{
+	char    buffer[512];
+	int     nsiz;
+	va_list argptr;
+
+	va_start(argptr, msg);
+	nsiz = vsnprintf(0, 0, msg, argptr);
+	if (nsiz >= sizeof(buffer)-2) nsiz = sizeof(buffer)-2;
+
+	vsnprintf(buffer, nsiz, msg, argptr);
+	buffer[nsiz] = 0;
+
+	memo->Lines->Add(buffer);
+	va_end(argptr);
+	}
+//---------------------------------------------------------------------------
+void TfmMain::ReadFile()
+	{
+	/* Testcode
 	cQrs& q = alg1.ecg.qrs;  //wenn nur eins verwendet wird
 	q.run();
 
@@ -42,4 +97,31 @@ void __fastcall TfmMain::FormKeyPress(TObject *Sender, char &Key)
 
 	String m = alg1.ecg.csv.readFile("test");
 	Label3->Caption = m;
-*/
+	*/
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/**************   Meldungen vom Formular   *********************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::FormKeyPress(TObject *Sender, char &Key)
+	{
+	if (Key == VK_ESCAPE)
+		{
+		Key = 0;
+		Close();
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btInputfileClick(TObject *Sender)
+	{
+	if (OpenDialog->Execute())
+    	edInputfile->Text = OpenDialog->FileName;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::laClsClick(TObject *Sender)
+	{
+	memo->Lines->Clear();
+	}
+//---------------------------------------------------------------------------
+
