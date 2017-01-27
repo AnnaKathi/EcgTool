@@ -7,15 +7,24 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-TForm1 *Form1;
+TfmMain *fmMain;
 //---------------------------------------------------------------------------
-__fastcall TForm1::TForm1(TComponent* Owner)
+__fastcall TfmMain::TfmMain(TComponent* Owner)
 	: TForm(Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::Button1Click(TObject *Sender)
+void __fastcall TfmMain::FormKeyPress(TObject *Sender, char &Key)
 	{
+	if (Key == VK_ESCAPE)
+		{
+		Key = 0;
+		Close();
+		}
+	}
+//---------------------------------------------------------------------------
+
+/* Testcode
 	cQrs& q = alg1.ecg.qrs;  //wenn nur eins verwendet wird
 	q.run();
 
@@ -30,5 +39,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 
 	no = alg1.ecg.heart.calc();
 	Label2->Caption = "Heartbeat meldet: " + String(no);
-	}
-//---------------------------------------------------------------------------
+
+	String m = alg1.ecg.csv.readFile("test");
+	Label3->Caption = m;
+*/

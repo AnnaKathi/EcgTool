@@ -6,24 +6,29 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 cEcg::cEcg()
-	: fqrs(new cQrs), fheart(new cHeartbeat)
+	: fqrs(new cQrs), fheart(new cHeartbeat), fcsv(new cCsv)
 	{
-
-
 	}
-
+//---------------------------------------------------------------------------
 cEcg::~cEcg()
 	{
+	if (fcsv) delete fcsv;
 	if (fqrs) delete fqrs;
 	if (fheart) delete fheart;
 	}
-
+//---------------------------------------------------------------------------
+cCsv& cEcg::get_csv()
+	{
+	return *fcsv;
+	}
+//---------------------------------------------------------------------------
 cQrs& cEcg::get_qrs()
 	{
 	return *fqrs;
 	}
-
+//---------------------------------------------------------------------------
 cHeartbeat& cEcg::get_heart()
 	{
 	return *fheart;
 	}
+//---------------------------------------------------------------------------
