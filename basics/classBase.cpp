@@ -1,27 +1,4 @@
 /*****************************************************************************
- * MS-Adam 7.x
- * -----------
- * Copyright (c) 1987-2017
- * Martin Stratmann, c/o MS-Software GmbH, Rankestr. 4-6, 45144 Essen
- * martin.stratmann@mslib.net
- * all rights reserved.
- *
- * Project:
- * mskasse.cbproj - PC-Kasse
- *
- * Module:
- * classCashBase.cpp - Basisklasse der Kassenarbeitsklasen mit Fehlerbehandlung
- *
- * Procs:
- * class cChashBase
- *
- * Info:
- * Programmers:
- * ms - Martin Stratmann
- * an - Anna Stratmann
- *
- * $History$
- * 23.01.2017 ms Erstellung
  */
 //---------------------------------------------------------------------------
 #pragma hdrstop

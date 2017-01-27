@@ -1,3 +1,22 @@
+	/* Testcode
+	cQrs& q = alg1.ecg.qrs;  //wenn nur eins verwendet wird
+	q.run();
+
+	cQrs q1 = alg1.ecg.qrs; //das ist eine Kopie !
+	// q.data = q1.data
+
+	alg1.ecg.qrs.run();
+	alg1.ecg.heart.run();
+
+	int no = q.calc();
+	Label1->Caption = "QRS hat ausgerechnet: " + String(no);
+
+	no = alg1.ecg.heart.calc();
+	Label2->Caption = "Heartbeat meldet: " + String(no);
+
+	String m = alg1.ecg.csv.readFile("test");
+	Label3->Caption = m;
+	*/
 //---------------------------------------------------------------------------
 #include <vcl.h>
 #pragma hdrstop
@@ -21,6 +40,9 @@ __fastcall TfmMain::TfmMain(TComponent* Owner)
 
 	String file = String(path) + "\\EcgTool.ini";
 	Ini = new TIniFile(file);
+
+	bRun  = false;
+	bStop = false;
 	}
 //---------------------------------------------------------------------------
 __fastcall TfmMain::~TfmMain()
@@ -79,25 +101,38 @@ void TfmMain::Print(char* msg, ...)
 //---------------------------------------------------------------------------
 void TfmMain::ReadFile()
 	{
-	/* Testcode
-	cQrs& q = alg1.ecg.qrs;  //wenn nur eins verwendet wird
-	q.run();
+	Print("start readFile...");
+	String ecgFile = edInputfile->Text;
+	if (ecgFile == "") return;
 
-	cQrs q1 = alg1.ecg.qrs; //das ist eine Kopie !
-	// q.data = q1.data
+	String delim = ";";
+	if (cbDelim->ItemIndex == 1) //Komma
+		delim = ",";
+	else if (cbDelim->ItemIndex == 2) //Tab
+		delim = "\t";
 
-	alg1.ecg.qrs.run();
-	alg1.ecg.heart.run();
+	int vonSamp = edVonSample->Text.ToIntDef(-1);
+	int bisSamp = edBisSample->Text.ToIntDef(-1);
 
-	int no = q.calc();
-	Label1->Caption = "QRS hat ausgerechnet: " + String(no);
+	cData& data = alg1.ecg.data;
+	if (!data.getFile(ecgFile, delim, vonSamp, bisSamp))
+		{
+		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
+		return;
+		}
 
-	no = alg1.ecg.heart.calc();
-	Label2->Caption = "Heartbeat meldet: " + String(no);
+	Print("\tDatensätze im Array: %d", data.farr_charac.Number);
+	Print("\tIndex im Array: %d - %d", data.farr_charac.VonIdx, data.farr_charac.BisIdx);
+	Print("\tMSek. im Array: %d - %d", data.farr_charac.VonMsec, data.farr_charac.BisMsec);
+	Print("\tWerte im Array: (%.4f) - (%.4f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
 
-	String m = alg1.ecg.csv.readFile("test");
-	Label3->Caption = m;
-	*/
+	Print("...finished readFile");
+
+	}
+//---------------------------------------------------------------------------
+void TfmMain::Draw()
+	{
+	alg1.ecg.data.display(imgEcg);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -122,6 +157,42 @@ void __fastcall TfmMain::btInputfileClick(TObject *Sender)
 void __fastcall TfmMain::laClsClick(TObject *Sender)
 	{
 	memo->Lines->Clear();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btReadClick(TObject *Sender)
+	{
+	String cap = btRead->Caption;
+	if (!bRun)
+		{
+		btRead->Caption = "&ABBRECHEN";
+		bStop = false;
+		bRun  = true;
+		ReadFile();
+		bRun = false;
+		btRead->Caption = cap;
+		}
+	else
+		{
+		bStop = true;
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btDrawClick(TObject *Sender)
+	{
+	String cap = btDraw->Caption;
+	if (!bRun)
+		{
+		btDraw->Caption = "&ABBRECHEN";
+		bStop = false;
+		bRun  = true;
+		Draw();
+		bRun = false;
+		btDraw->Caption = cap;
+		}
+	else
+		{
+		bStop = true;
+		}
 	}
 //---------------------------------------------------------------------------
 

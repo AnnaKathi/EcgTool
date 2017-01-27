@@ -2,8 +2,8 @@ object fmMain: TfmMain
   Left = 0
   Top = 0
   Caption = 'fmMain'
-  ClientHeight = 666
-  ClientWidth = 1034
+  ClientHeight = 696
+  ClientWidth = 1141
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object fmMain: TfmMain
   object Bevel1: TBevel
     Left = 0
     Top = 41
-    Width = 1034
+    Width = 1141
     Height = 4
     Align = alTop
     Shape = bsTopLine
@@ -32,7 +32,7 @@ object fmMain: TfmMain
     Left = 409
     Top = 45
     Width = 4
-    Height = 621
+    Height = 651
     Align = alLeft
     Shape = bsLeftLine
     ExplicitTop = 26
@@ -41,20 +41,19 @@ object fmMain: TfmMain
   object pnInfo: TPanel
     Left = 0
     Top = 0
-    Width = 1034
+    Width = 1141
     Height = 41
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = -43
-    ExplicitWidth = 1077
+    ExplicitWidth = 1034
     DesignSize = (
-      1034
+      1141
       41)
     object mInfo: TMemo
       Left = 8
       Top = 10
-      Width = 1018
+      Width = 1125
       Height = 25
       Anchors = [akLeft, akTop, akRight]
       BorderStyle = bsNone
@@ -70,22 +69,21 @@ object fmMain: TfmMain
       ParentColor = True
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1061
+      ExplicitWidth = 1018
     end
   end
   object pnLeft: TPanel
     Left = 0
     Top = 45
     Width = 409
-    Height = 621
+    Height = 651
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 26
-    ExplicitHeight = 640
+    ExplicitHeight = 621
     DesignSize = (
       409
-      621)
+      651)
     object Bevel4: TBevel
       Left = 0
       Top = 65
@@ -99,7 +97,7 @@ object fmMain: TfmMain
     end
     object laCls: TLabel
       Left = 385
-      Top = 154
+      Top = 184
       Width = 18
       Height = 13
       Anchors = [akRight, akBottom]
@@ -197,14 +195,14 @@ object fmMain: TfmMain
     end
     object memo: TMemo
       Left = 0
-      Top = 173
+      Top = 203
       Width = 409
       Height = 448
       Align = alBottom
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 1
-      ExplicitTop = 192
+      ExplicitTop = 173
     end
     object pbJob: TProgressBar
       Left = 8
@@ -220,6 +218,7 @@ object fmMain: TfmMain
       Height = 25
       Caption = '&1 - Werte einlesen'
       TabOrder = 3
+      OnClick = btReadClick
     end
     object btDraw: TButton
       Left = 8
@@ -227,26 +226,24 @@ object fmMain: TfmMain
       Width = 180
       Height = 25
       Caption = '&2 - Draw Image Gesamt'
-      Enabled = False
       TabOrder = 4
+      OnClick = btDrawClick
     end
   end
   object pnClient: TPanel
     Left = 413
     Top = 45
-    Width = 621
-    Height = 621
+    Width = 728
+    Height = 651
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = 370
-    ExplicitTop = 26
-    ExplicitWidth = 664
-    ExplicitHeight = 640
+    ExplicitWidth = 621
+    ExplicitHeight = 621
     object imgEcg: TImage
       Left = 0
       Top = 0
-      Width = 621
+      Width = 728
       Height = 152
       Align = alTop
       ExplicitWidth = 664

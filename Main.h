@@ -20,8 +20,12 @@ private:
 	TIniFile*	Ini;
 	cAlg1		alg1;
 
+	bool		bRun;
+	bool		bStop;
+
 	void 		Print(char* msg, ...);
 	void		ReadFile();
+	void		Draw();
 
 
 
@@ -57,6 +61,8 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall laClsClick(TObject *Sender);
 	void __fastcall btInputfileClick(TObject *Sender);
+	void __fastcall btReadClick(TObject *Sender);
+	void __fastcall btDrawClick(TObject *Sender);
 
 
 public:
