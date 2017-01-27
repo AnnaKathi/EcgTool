@@ -1,3 +1,2 @@
-# EcgTool - WORK
-Evaluate Ecg Data, Arbeits-Branch
-27/01/17, neue Version miot neuer Logik, ersetzt die alte Vererbungslogik
+# EcgTool - Preprocessing
+28/01/2017, Intention: Werte runden, Kurve glätten, Teile entfernen
