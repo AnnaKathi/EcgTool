@@ -23,6 +23,7 @@
 
 #include <stdio.h>
 
+#include "RequestBox.h"
 #include "Main.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -99,6 +100,11 @@ void TfmMain::Print(char* msg, ...)
 	va_end(argptr);
 	}
 //---------------------------------------------------------------------------
+void TfmMain::Draw()
+	{
+	alg1.ecg.data.display(imgEcg);
+	}
+//---------------------------------------------------------------------------
 void TfmMain::ReadFile()
 	{
 	Print("start readFile...");
@@ -124,15 +130,56 @@ void TfmMain::ReadFile()
 	Print("\tDatensätze im Array: %d", data.farr_charac.Number);
 	Print("\tIndex im Array: %d - %d", data.farr_charac.VonIdx, data.farr_charac.BisIdx);
 	Print("\tMSek. im Array: %d - %d", data.farr_charac.VonMsec, data.farr_charac.BisMsec);
-	Print("\tWerte im Array: (%.4f) - (%.4f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
+	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
 
 	Print("...finished readFile");
-
+	Draw();
 	}
 //---------------------------------------------------------------------------
-void TfmMain::Draw()
+void TfmMain::Runden()
 	{
-	alg1.ecg.data.display(imgEcg);
+	Print("rounding values...");
+	int stellen = DlgRequest(this, "Anzahl Nachkommastellen").ToDouble();
+	if (stellen <= 0) return;
+
+	cData& data = alg1.ecg.data;
+	if (!data.roundAt(stellen))
+		{
+		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
+		return;
+		}
+
+	Print("\tDatensätze im Array: %d", data.farr_charac.Number);
+	Print("\tIndex im Array: %d - %d", data.farr_charac.VonIdx, data.farr_charac.BisIdx);
+	Print("\tMSek. im Array: %d - %d", data.farr_charac.VonMsec, data.farr_charac.BisMsec);
+	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
+
+	Print("...finished rounding values");
+	Draw();
+	}
+//---------------------------------------------------------------------------
+void TfmMain::MovingAv()
+	{
+	Print("build moving average...");
+	int window = DlgRequest(this, "Anzahl Werte im gleitenden Durchschnitt").ToIntDef(-1);
+	if (window <= 0) return;
+
+	bool calcBegin = true; //todo: abfragen
+
+	cData& data = alg1.ecg.data;
+	if (!data.movingAv(window, calcBegin))
+		{
+		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
+		return;
+		}
+
+	Print("\tDatensätze im Array: %d", data.farr_charac.Number);
+	Print("\tIndex im Array: %d - %d", data.farr_charac.VonIdx, data.farr_charac.BisIdx);
+	Print("\tMSek. im Array: %d - %d", data.farr_charac.VonMsec, data.farr_charac.BisMsec);
+	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
+
+	Print("...finished moving average");
+	Draw();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -145,6 +192,20 @@ void __fastcall TfmMain::FormKeyPress(TObject *Sender, char &Key)
 		{
 		Key = 0;
 		Close();
+		}
+	else if (Key == VK_F12)
+		{
+		Key = 0;
+		btInputfileClick(Sender);
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::FormKeyDown(TObject *Sender, WORD &Key,
+	  TShiftState Shift)
+	{
+	if (Shift.Contains(ssShift) && Key == VK_F11)
+		{
+		btInputfileClick(Sender);
 		}
 	}
 //---------------------------------------------------------------------------
@@ -177,17 +238,35 @@ void __fastcall TfmMain::btReadClick(TObject *Sender)
 		}
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::btDrawClick(TObject *Sender)
+void __fastcall TfmMain::btRundenClick(TObject *Sender)
 	{
-	String cap = btDraw->Caption;
+	String cap = btRunden->Caption;
 	if (!bRun)
 		{
-		btDraw->Caption = "&ABBRECHEN";
+		btRunden->Caption = "&ABBRECHEN";
 		bStop = false;
 		bRun  = true;
-		Draw();
+		Runden();
 		bRun = false;
-		btDraw->Caption = cap;
+		btRunden->Caption = cap;
+		}
+	else
+		{
+		bStop = true;
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btMovAvClick(TObject *Sender)
+	{
+	String cap = btMovAv->Caption;
+	if (!bRun)
+		{
+		btMovAv->Caption = "&ABBRECHEN";
+		bStop = false;
+		bRun  = true;
+		MovingAv();
+		bRun = false;
+		btMovAv->Caption = cap;
 		}
 	else
 		{

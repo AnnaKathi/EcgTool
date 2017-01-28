@@ -14,6 +14,47 @@ cData::~cData()
 	{
 	}
 //---------------------------------------------------------------------------
+void cData::resetValues()
+	{
+	//die Werte inputVonIdx, inputBisIdx, inputVonMsec, inputBisMsec,
+	//inputMinWert und inputMaxWert müssen neu gesetzt werden
+	iarray_itr itr = farr.begin();
+	int key = itr->first;
+	ilist_t& v = itr->second;
+	float zeit = v[0];
+	float wert = v[1];
+
+	farr_charac.VonIdx  = 0;
+	farr_charac.VonMsec = zeit;	farr_charac.BisMsec = zeit;
+	farr_charac.MinWert = wert;	farr_charac.MaxWert = wert;
+
+	//array umschreiben in ein neues array und dann zurückassoziieren
+	iarray_t arrneu = farr; farr.clear();
+	int ix = 0;
+	for (itr = arrneu.begin(); itr != arrneu.end(); itr++)
+		{
+		key = itr->first;
+		ilist_t& v = itr->second;
+		zeit = v[0];
+		wert = v[1];
+
+		farr[ix].push_back(zeit);
+		farr[ix].push_back(wert);
+		ix++;
+
+		if (key < farr_charac.VonIdx) farr_charac.VonIdx = key;
+		if (key > farr_charac.BisIdx) farr_charac.BisIdx = key;
+
+		if (zeit < farr_charac.VonMsec) farr_charac.VonMsec = zeit;
+		if (zeit > farr_charac.BisMsec) farr_charac.BisMsec = zeit;
+
+		if (wert < farr_charac.MinWert) farr_charac.MinWert = wert;
+		if (wert > farr_charac.MaxWert) farr_charac.MaxWert = wert;
+		}
+
+	farr_charac.BisIdx = ix-1;
+	}
+//---------------------------------------------------------------------------
 bool cData::getFile(String file, String delim, int vonMsec, int bisMsec)
 	{
 	farr.clear();
@@ -27,14 +68,14 @@ bool cData::getFile(String file, String delim, int vonMsec, int bisMsec)
 	farr_charac.VonMsec = farr_charac.BisMsec = fcsv->getSample();
 	farr_charac.MinWert = farr_charac.MaxWert = fcsv->getI();
 
-	int zeit;
+	float zeit;
 	float lead1;
 	int ix = 0;
 	do
 		{
-		zeit  = fcsv->getSample();
+		zeit  = fcsv->getLineNo(); //todo: fcsv->getSample(); ist in Datei nicht vorhanden
 		lead1 = fcsv->getI();
-		farr[ix].push_back((float)zeit);
+		farr[ix].push_back(zeit);
 		farr[ix].push_back(lead1);
 		ix++;
 
@@ -60,6 +101,9 @@ bool cData::display(TImage* img)
 	//--- Anzahl der x- und y-Werte ausrechnen
 	float range_x = farr_charac.BisIdx  - farr_charac.VonIdx;
 	float range_y = farr_charac.MaxWert - farr_charac.MinWert;
+
+	if (range_x <= 0) return fail(-1, "Die Input-Werte (Index) stimmen nicht");
+	if (range_y <= 0) return fail(-1, "Die Input-Werte (Value) stimmen nicht");
 
 	//--- Anpassungfaktoren für x- und y-Achse ausrechnen
 	float factor_x = (float)img->Width / range_x;
@@ -101,6 +145,159 @@ bool cData::display(TImage* img)
 		}
 
 
+	return ok();
+	}
+//---------------------------------------------------------------------------
+#define MAX_NO_STELLEN 20
+bool cData::roundAt(int nachkommastellen)
+	{
+	/* Werte sind in float abgespeichert, z.B. 0,009816540195
+	 * Beispiel: auf 0,000x runden:
+	 * 		0,0098 16540195
+	 *		0,000x ab hier ignorieren
+	 */
+
+	//TODO: ist das überhaupt sinnvoll????
+
+	if (nachkommastellen < 0)
+		return fail(-1, "Die Zahl der Nachkommastellen ist ungültig: " + String(nachkommastellen));
+
+	if (nachkommastellen > MAX_NO_STELLEN)
+		{
+		String m =
+			"Die ANzahl der Nachkommastellen ist größer als die maximal mögliche Anzahl. Stellen = "
+			+ String(nachkommastellen) + ", Maximal möglich = " + String(MAX_NO_STELLEN);
+		return fail(-1, m);
+		}
+
+	String temp, zahl, begin, middle, end;
+	char nachkomma[MAX_NO_STELLEN+1];
+	float wert;
+	int pos, n;
+	for (int i = 0; i < farr.size(); i++)
+		{
+		wert = farr[i][1]; //lead 1
+		temp = String(wert);
+
+		pos    = temp.Pos(",");
+		zahl   = temp.SubString(0, pos-1);
+		begin  = temp.SubString(pos+1, nachkommastellen-1);
+		middle = temp.SubString(pos+1+nachkommastellen-1, 1);
+		end    = temp.SubString(pos+1+nachkommastellen, 1);
+
+		n = end.ToInt();
+		if (n > 5) //aufrunden
+			middle = String(middle.ToInt() + 1);
+
+		temp = zahl + "," + begin + middle;
+		wert = temp.ToDouble();
+
+		farr[i][1] = wert;
+		}
+
+	resetValues();
+	return ok();
+	}
+//---------------------------------------------------------------------------
+#define MAX_NO_MOV_AV 250
+bool cData::movingAv(int window, bool CalcBegin) //default CalcBegin=true
+	{
+	if (window <= 0)
+		return fail(-1, "Das Fenster ist zu klein: " + String(window));
+
+	else if (window > farr.size())
+		{
+		//Das Fenster ist größer als die Anzahl enthaltener Werte
+		String m = "Das Fenster ist zu groß. Fenster = " + String(window) +
+			", Anzahl Elemente im Array = " + String(farr.size());
+		return fail(-1, m);
+		}
+
+	else if (window > MAX_NO_MOV_AV)
+		{
+		//Das Fenster ist größer als die maximal mögliche Anzahl
+		String m =
+			"Das Fenster ist größer als die maximal mögliche Breite. Fenster = "
+			+ String(window) + ", Maximal möglich = " + String(MAX_NO_MOV_AV);
+		return fail(-1, m);
+		}
+
+	float mov[MAX_NO_MOV_AV];
+	for (int i = 0; i < MAX_NO_MOV_AV; i++)
+		mov[i] = 0.0;
+
+	iarray_t neu;
+	iarray_itr ineu;
+	neu.clear();
+
+	float zeit, lead1;
+	float summe, mittel;
+	int new_index = 0;
+	for (int i = 0; i < farr.size(); i++)
+		{
+		zeit  = farr[i][0];
+		lead1 = farr[i][1];
+
+		if (i < window)
+			{
+			//es sind noch nicht genug Werte im array vorhanden, Wert hinten anhängen
+			mov[i] = lead1;
+
+			//wenn keepBegin=true dann trotzdem Mittelwert ausrechnen,
+			//sonst unveränderten Wert aus dem Array übernehmen
+			if (CalcBegin)
+				{
+				summe = 0;
+				for (int a = 0; a <= i; a++)
+					summe += mov[a];
+				mittel = summe / (i+1);
+
+				neu[new_index].push_back(zeit);
+				neu[new_index].push_back(mittel);
+				new_index++;
+				}
+			else
+				{
+				//Anfangswerte dienen nur zur Berechnung, aus dem Array werden
+				//sie aber entfernt, weil die Fensterbreite noch nicht
+				//erreicht ist
+				/* das hier nicht machen !
+				neu[i].push_back(zeit);
+				neu[i].push_back(lead1);
+				*/
+				}
+			continue;
+			}
+
+		//genug Werte vorhanden, alle Werte eins nach vorn schieben
+		for (int a = 0; a < (window-1); a++)
+			mov[a] = mov[a+1];
+		mov[window-1] = lead1;
+
+		summe = 0;
+		for (int a = 0; a < window; a++)
+			summe += mov[a];
+		mittel = summe / window;
+
+		neu[new_index].push_back(zeit);
+		neu[new_index].push_back(mittel);
+		new_index++;
+		}
+
+	//Werte wieder zurückschreiben ins array
+	farr.clear();
+	int ix = 0;
+	for (ineu = neu.begin(); ineu != neu.end(); ineu++)
+		{
+		ilist_t& v = ineu->second;
+		farr[ix].push_back(v[0]);
+		farr[ix].push_back(v[1]);
+		ix++;
+		}
+
+	//die Werte inputVonIdx, inputBisIdx, inputVonMsec, inputBisMsec,
+	//inputMinWert und inputMaxWert müssen neu gesetzt werden
+	resetValues();
 	return ok();
 	}
 //---------------------------------------------------------------------------
