@@ -7,20 +7,9 @@
 enum BASE_ERROR_CODES
 	{
 	CE_OK,              // no error, all things done well
-	CE_SIGNALEOF,       // EOF Signal, no error
-
-    CE_HARDERRORS,      // real error codes
-                        // --------------------------------------------------
-    CE_NOCASHFILE,      // no cash file avaliable
-    CE_CANTOPEN,        // can't open cashfile
-    CE_FILEERROR,       // can't seek or read from file
-    CE_WRITEERROR,      // can't write to file
-    CE_FILECORRUPT,     // unexpected record, can't seek to KAID
-    CE_UNEXPECTEOF,     // unexpected eof in next_rec, kasse_t-record expected
-
-    CE_EXCEPTION,       // exception raised
-    CE_UNKNOWN,         // unknown error
-    };
+	CE_HARDERRORS,      // real error codes
+						// --------------------------------------------------
+	};
 //---------------------------------------------------------------------------   
 class PACKAGE cBase
     {

@@ -96,14 +96,14 @@ bool cData::getFile(String file, String delim, int vonMsec, int bisMsec)
 bool cData::display(TImage* img)
 	{
 	if (img == NULL)
-		return fail(-1, "Es wurde keim Bild übergeben.");
+		return fail(1, "Es wurde keim Bild übergeben.");
 
 	//--- Anzahl der x- und y-Werte ausrechnen
 	float range_x = farr_charac.BisIdx  - farr_charac.VonIdx;
 	float range_y = farr_charac.MaxWert - farr_charac.MinWert;
 
-	if (range_x <= 0) return fail(-1, "Die Input-Werte (Index) stimmen nicht");
-	if (range_y <= 0) return fail(-1, "Die Input-Werte (Value) stimmen nicht");
+	if (range_x <= 0) return fail(1, "Die Input-Werte (Index) stimmen nicht");
+	if (range_y <= 0) return fail(1, "Die Input-Werte (Value) stimmen nicht");
 
 	//--- Anpassungfaktoren für x- und y-Achse ausrechnen
 	float factor_x = (float)img->Width / range_x;
@@ -160,14 +160,14 @@ bool cData::roundAt(int nachkommastellen)
 	//TODO: ist das überhaupt sinnvoll????
 
 	if (nachkommastellen < 0)
-		return fail(-1, "Die Zahl der Nachkommastellen ist ungültig: " + String(nachkommastellen));
+		return fail(1, "Die Zahl der Nachkommastellen ist ungültig: " + String(nachkommastellen));
 
 	if (nachkommastellen > MAX_NO_STELLEN)
 		{
 		String m =
 			"Die ANzahl der Nachkommastellen ist größer als die maximal mögliche Anzahl. Stellen = "
 			+ String(nachkommastellen) + ", Maximal möglich = " + String(MAX_NO_STELLEN);
-		return fail(-1, m);
+		return fail(1, m);
 		}
 
 	String temp, zahl, begin, middle, end;
@@ -203,14 +203,14 @@ bool cData::roundAt(int nachkommastellen)
 bool cData::movingAv(int window, bool CalcBegin) //default CalcBegin=true
 	{
 	if (window <= 0)
-		return fail(-1, "Das Fenster ist zu klein: " + String(window));
+		return fail(1, "Das Fenster ist zu klein: " + String(window));
 
 	else if (window > farr.size())
 		{
 		//Das Fenster ist größer als die Anzahl enthaltener Werte
 		String m = "Das Fenster ist zu groß. Fenster = " + String(window) +
 			", Anzahl Elemente im Array = " + String(farr.size());
-		return fail(-1, m);
+		return fail(1, m);
 		}
 
 	else if (window > MAX_NO_MOV_AV)
@@ -219,7 +219,7 @@ bool cData::movingAv(int window, bool CalcBegin) //default CalcBegin=true
 		String m =
 			"Das Fenster ist größer als die maximal mögliche Breite. Fenster = "
 			+ String(window) + ", Maximal möglich = " + String(MAX_NO_MOV_AV);
-		return fail(-1, m);
+		return fail(1, m);
 		}
 
 	float mov[MAX_NO_MOV_AV];
@@ -301,3 +301,45 @@ bool cData::movingAv(int window, bool CalcBegin) //default CalcBegin=true
 	return ok();
 	}
 //---------------------------------------------------------------------------
+int cData::cut(int vonMsec, int bisMsec)
+	{
+	if (vonMsec < farr_charac.VonMsec)
+		{
+		String m = "Der übergebene Wert 'Von' ist kleiner als der "
+			"Anfangswert der Kurve: " + String(farr_charac.VonMsec);
+		return fail(1, m);
+		}
+
+	if (bisMsec > farr_charac.BisMsec)
+		{
+		String m = "Der übergebene Wert 'Bis' ist größer als der "
+			"Endwert der Kurve: " + String(farr_charac.BisMsec);
+		return fail(1, m);
+		}
+
+	int key, zeit;
+	int count = 0;
+
+	//reverse Iterator, läuft von hinten nach vorne
+	iarray_t::reverse_iterator itr_rev = farr.rbegin();
+
+	while (itr_rev != farr.rend())
+		{
+		zeit = itr_rev->first;
+		if (zeit < vonMsec) break;    //Wert liegt nach gewünschtem (reverse) Abschnitt
+		if (zeit > bisMsec)
+			{
+			//Wert liegt vor gewünschtem (reverse) Abschnitt
+			itr_rev++;
+			continue;
+			}
+
+		farr.erase(zeit);
+		count++;
+		}
+
+	resetValues();
+	return count;
+	}
+//---------------------------------------------------------------------------
+

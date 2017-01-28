@@ -36,6 +36,8 @@ public:
 	bool		display(TImage* img);
 	bool		roundAt(int nachkommastellen);
 	bool		movingAv(int window, bool CalcBegin = true);
+	
+	int			cut(int vonMsec, int bisMsec);
 
 private:
 	cCsv*		fcsv;

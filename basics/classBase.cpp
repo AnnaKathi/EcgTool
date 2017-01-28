@@ -43,7 +43,7 @@ bool cBase::get_success()
 //---------------------------------------------------------------------------
 bool cBase::get_error()
     {
-    return ferror_code > CE_HARDERRORS;
+    return ferror_code >= CE_HARDERRORS;
     }
 //---------------------------------------------------------------------------
 void cBase::set_trigger(String value)

@@ -235,6 +235,15 @@ object fmMain: TfmMain
       TabOrder = 4
       OnClick = btRundenClick
     end
+    object btCut: TButton
+      Left = 223
+      Top = 98
+      Width = 180
+      Height = 25
+      Caption = '&4 - Kurve schneiden'
+      TabOrder = 6
+      OnClick = btCutClick
+    end
   end
   object pnClient: TPanel
     Left = 413

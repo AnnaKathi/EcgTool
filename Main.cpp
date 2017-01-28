@@ -182,6 +182,32 @@ void TfmMain::MovingAv()
 	Draw();
 	}
 //---------------------------------------------------------------------------
+void TfmMain::CutCurve()
+	{
+	Print("cut curve...");
+	int von = DlgRequest(this, "Werte löschen von Millisekunde").ToIntDef(-1);
+	int bis = DlgRequest(this, "Werte löschen bis Millisekunde").ToIntDef(-1);
+	if (von < 0 || bis < 0) return;
+	if (bis < von) return;
+
+	cData& data = alg1.ecg.data;
+	int no = data.cut(von, bis);
+	if (data.error)
+		{
+		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
+		return;
+		}
+
+	Print("\tEs wurden %d Datensätze gelöscht", no);
+	Print("\tDatensätze im Array: %d", data.farr_charac.Number);
+	Print("\tIndex im Array: %d - %d", data.farr_charac.VonIdx, data.farr_charac.BisIdx);
+	Print("\tMSek. im Array: %d - %d", data.farr_charac.VonMsec, data.farr_charac.BisMsec);
+	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
+
+	Print("...finished cutting");
+	Draw();
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   Meldungen vom Formular   *********************************/
 /***************************************************************************/
@@ -267,6 +293,24 @@ void __fastcall TfmMain::btMovAvClick(TObject *Sender)
 		MovingAv();
 		bRun = false;
 		btMovAv->Caption = cap;
+		}
+	else
+		{
+		bStop = true;
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btCutClick(TObject *Sender)
+	{
+	String cap = btCut->Caption;
+	if (!bRun)
+		{
+		btCut->Caption = "&ABBRECHEN";
+		bStop = false;
+		bRun  = true;
+		CutCurve();
+		bRun = false;
+		btCut->Caption = cap;
 		}
 	else
 		{
