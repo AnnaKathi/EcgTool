@@ -208,6 +208,25 @@ void TfmMain::CutCurve()
 	Draw();
 	}
 //---------------------------------------------------------------------------
+void TfmMain::GetTurns()
+	{
+	Print("Wendepunkte berechnen...");
+	float schwelle_proz = DlgRequest(this, "Schwellenwert für Wendepunkt-Berechnung").ToDouble();
+	if (schwelle_proz < 0 || schwelle_proz > 1) return;
+
+	cTurns& turns = alg1.ecg.turns;
+	int no = turns.calcTurns(alg1.ecg.data, schwelle_proz);
+	if (turns.error)
+		{
+		Print("## Fehler aufgetreten: %d, %s", turns.error_code, turns.error_msg);
+		return;
+		}
+
+	Print("\tEs wurden %d Wendepunkte gefunden", no);
+	Print("...finished turns");
+	Draw();
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   Meldungen vom Formular   *********************************/
 /***************************************************************************/
@@ -311,6 +330,24 @@ void __fastcall TfmMain::btCutClick(TObject *Sender)
 		CutCurve();
 		bRun = false;
 		btCut->Caption = cap;
+		}
+	else
+		{
+		bStop = true;
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btTurnsClick(TObject *Sender)
+	{
+	String cap = btTurns->Caption;
+	if (!bRun)
+		{
+		btTurns->Caption = "&ABBRECHEN";
+		bStop = false;
+		bRun  = true;
+		GetTurns();
+		bRun = false;
+		btTurns->Caption = cap;
 		}
 	else
 		{

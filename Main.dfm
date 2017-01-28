@@ -244,6 +244,15 @@ object fmMain: TfmMain
       TabOrder = 6
       OnClick = btCutClick
     end
+    object btTurns: TButton
+      Left = 223
+      Top = 129
+      Width = 180
+      Height = 25
+      Caption = '&5 - Wendepunkte berechnen'
+      TabOrder = 7
+      OnClick = btTurnsClick
+    end
   end
   object pnClient: TPanel
     Left = 413

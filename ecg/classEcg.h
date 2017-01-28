@@ -7,6 +7,7 @@
 #include "../basics/classBase.h"
 #include "../basics/classData.h"
 //---------------------------------------------------------------------------
+#include "classTurns.h"
 #include "classQrs.h"
 #include "classHeartbeat.h"
 //---------------------------------------------------------------------------
@@ -17,12 +18,16 @@ public:
 	~cEcg();
 
 __property cData& data 		 = { read=get_data };
+__property cTurns& turns	 = { read=get_turns };
 __property cQrs& qrs 		 = { read=get_qrs };
 __property cHeartbeat& heart = { read=get_heart };
 
 private:
 	cData*		fdata;
 	cData&		get_data();
+
+	cTurns*		fturns;
+	cTurns&		get_turns();
 
 	cQrs*		fqrs;
 	cQrs&		get_qrs();

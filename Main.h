@@ -6,12 +6,13 @@
 #include <Controls.hpp>
 #include <StdCtrls.hpp>
 #include <Forms.hpp>
-#include "classAlg1.h"
 #include <Buttons.hpp>
 #include <ComCtrls.hpp>
 #include <ExtCtrls.hpp>
 #include <IniFiles.hpp>
 #include <Dialogs.hpp>
+//---------------------------------------------------------------------------
+#include "classAlg1.h"
 //---------------------------------------------------------------------------
 class TfmMain : public TForm
 {
@@ -28,6 +29,7 @@ private:
 	void		Runden();
 	void		MovingAv();
 	void		CutCurve();
+	void		GetTurns();
 
 
 
@@ -59,6 +61,7 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *btMovAv;
 	TButton *btRunden;
 	TButton *btCut;
+	TButton *btTurns;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -70,6 +73,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btMovAvClick(TObject *Sender);
 	void __fastcall btRundenClick(TObject *Sender);
 	void __fastcall btCutClick(TObject *Sender);
+	void __fastcall btTurnsClick(TObject *Sender);
 
 
 public:
