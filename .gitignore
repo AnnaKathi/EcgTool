@@ -1,0 +1,41 @@
+# Others
+*.dia~
+
+# Embarcadero development
+*.dsk
+*.local
+*.stat
+*.zip
+*.pch
+*.#??
+*.~*
+__history
+__recovery/
+win32
+win64
+debug
+
+# Nusphere PHP IDE
+*.idx
+*.ppx
+*.ppx.*
+*$wrk
+
+# Compiled Object files
+*.i
+*.obj
+*.$$$
+
+# Compiled Dynamic libraries
+#*.dll
+
+# Compiled Static libraries
+#*.lib
+
+# Executables
+#*.exe
+*.out
+*.app
+*.xls
+*.map
+*.tds
