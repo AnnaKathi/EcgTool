@@ -14,6 +14,7 @@ object fmMain: TfmMain
   OldCreateOrder = False
   Position = poDesktopCenter
   OnClose = FormClose
+  OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   PixelsPerInch = 96
@@ -46,7 +47,6 @@ object fmMain: TfmMain
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 1034
     DesignSize = (
       1141
       41)
@@ -69,7 +69,6 @@ object fmMain: TfmMain
       ParentColor = True
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1018
     end
   end
   object pnLeft: TPanel
@@ -80,7 +79,6 @@ object fmMain: TfmMain
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitHeight = 621
     DesignSize = (
       409
       651)
@@ -202,7 +200,6 @@ object fmMain: TfmMain
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 1
-      ExplicitTop = 173
     end
     object pbJob: TProgressBar
       Left = 8
@@ -220,14 +217,32 @@ object fmMain: TfmMain
       TabOrder = 3
       OnClick = btReadClick
     end
-    object btDraw: TButton
+    object btMovAv: TButton
+      Left = 8
+      Top = 159
+      Width = 180
+      Height = 25
+      Caption = '&3 - Kurve gl'#228'tten'
+      TabOrder = 5
+      OnClick = btMovAvClick
+    end
+    object btRunden: TButton
       Left = 8
       Top = 129
       Width = 180
       Height = 25
-      Caption = '&2 - Draw Image Gesamt'
+      Caption = '&2 - Werte runden'
       TabOrder = 4
-      OnClick = btDrawClick
+      OnClick = btRundenClick
+    end
+    object btCut: TButton
+      Left = 223
+      Top = 98
+      Width = 180
+      Height = 25
+      Caption = '&4 - Kurve schneiden'
+      TabOrder = 6
+      OnClick = btCutClick
     end
   end
   object pnClient: TPanel
@@ -238,8 +253,6 @@ object fmMain: TfmMain
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitWidth = 621
-    ExplicitHeight = 621
     object imgEcg: TImage
       Left = 0
       Top = 0
@@ -257,7 +270,7 @@ object fmMain: TfmMain
     Top = 8
   end
   object OpenDialog: TOpenDialog
-    Filter = 'CSV-Dateien|*.csv'
+    Filter = 'TXT-Dateien|*.txt|CSV-Dateien|*.csv'
     Left = 424
     Top = 8
   end

@@ -34,10 +34,16 @@ public:
 	sArrayCha	farr_charac; //todo getter und setter machen
 	bool		getFile(String file, String delim, int vonMsec, int bisMsec);
 	bool		display(TImage* img);
+	bool		roundAt(int nachkommastellen);
+	bool		movingAv(int window, bool CalcBegin = true);
+	
+	int			cut(int vonMsec, int bisMsec);
 
 private:
 	cCsv*		fcsv;
 	iarray_t	farr;  //alle eingelesenen EKG-Werte
+
+	void 		resetValues();
 
 	};
 //---------------------------------------------------------------------------

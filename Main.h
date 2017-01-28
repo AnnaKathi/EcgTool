@@ -1,5 +1,4 @@
 //---------------------------------------------------------------------------
-
 #ifndef MainH
 #define MainH
 //---------------------------------------------------------------------------
@@ -24,8 +23,11 @@ private:
 	bool		bStop;
 
 	void 		Print(char* msg, ...);
-	void		ReadFile();
 	void		Draw();
+	void		ReadFile();
+	void		Runden();
+	void		MovingAv();
+	void		CutCurve();
 
 
 
@@ -49,12 +51,14 @@ __published:	// IDE-verwaltete Komponenten
 	TMemo *memo;
 	TProgressBar *pbJob;
 	TButton *btRead;
-	TButton *btDraw;
 	TPanel *pnClient;
 	TImage *imgEcg;
 	TBevel *Bevel3;
 	TTimer *tStartup;
 	TOpenDialog *OpenDialog;
+	TButton *btMovAv;
+	TButton *btRunden;
+	TButton *btCut;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -62,7 +66,10 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall laClsClick(TObject *Sender);
 	void __fastcall btInputfileClick(TObject *Sender);
 	void __fastcall btReadClick(TObject *Sender);
-	void __fastcall btDrawClick(TObject *Sender);
+	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall btMovAvClick(TObject *Sender);
+	void __fastcall btRundenClick(TObject *Sender);
+	void __fastcall btCutClick(TObject *Sender);
 
 
 public:
