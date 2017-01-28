@@ -29,6 +29,7 @@ private:
 	void		Runden();
 	void		MovingAv();
 	void		CutCurve();
+	void		Derivates();
 	void		GetTurns();
 
 
@@ -62,6 +63,7 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *btRunden;
 	TButton *btCut;
 	TButton *btTurns;
+	TButton *btDerivates;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -74,6 +76,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btRundenClick(TObject *Sender);
 	void __fastcall btCutClick(TObject *Sender);
 	void __fastcall btTurnsClick(TObject *Sender);
+	void __fastcall btDerivatesClick(TObject *Sender);
 
 
 public:

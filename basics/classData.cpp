@@ -342,4 +342,41 @@ int cData::cut(int vonMsec, int bisMsec)
 	return count;
 	}
 //---------------------------------------------------------------------------
+bool cData::calcDerivates()
+	{
+	if (farr.size() < 0)
+		return fail(1, "Das Daten-Array ist leer");
 
+	fderiv1.clear();
+
+	//erste Ableitung = Steigung von farr
+	int zeit;
+	int ix = 0;
+	float before, lead1, steigung;
+	bool first = true;
+	for (iarray_itr itr = farr.begin(); itr != farr.end(); itr++)
+		{
+		zeit = itr->first;
+		ilist_t& v = itr->second;
+		lead1 = v[1];
+
+		if (!first)
+			{
+			steigung = lead1 - before;
+			fderiv1[ix].push_back(zeit);
+			fderiv1[ix].push_back(steigung);
+			ix++;
+			}
+
+		first = false;
+		before = lead1;
+		}
+
+	return ok();
+	}
+//---------------------------------------------------------------------------
+iarray_t cData::get_array()
+	{
+	return farr;
+	}
+//---------------------------------------------------------------------------

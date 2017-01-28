@@ -2,17 +2,11 @@
 #ifndef classDataH
 #define classDataH
 //---------------------------------------------------------------------------
-#include <map>
-#include <vector>
 #include <classes.hpp>
 #include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "classBase.cpp"
 #include "classCsv.h"
-//---------------------------------------------------------------------------
-typedef std::vector<float> ilist_t;
-typedef std::map<float,ilist_t> iarray_t;
-typedef iarray_t::iterator iarray_itr;
 //---------------------------------------------------------------------------
 typedef struct sARRAYCHA //Charkterwerte eines Arrays
 	{
@@ -36,14 +30,21 @@ public:
 	bool		display(TImage* img);
 	bool		roundAt(int nachkommastellen);
 	bool		movingAv(int window, bool CalcBegin = true);
-	
 	int			cut(int vonMsec, int bisMsec);
+
+	//------- mathematische Funktionen --------------------------------------
+	bool		calcDerivates();
+
+__property iarray_t data_array = { read=get_array };
 
 private:
 	cCsv*		fcsv;
 	iarray_t	farr;  //alle eingelesenen EKG-Werte
+	iarray_t	fderiv1; //erste Ableitung
 
 	void 		resetValues();
+
+	iarray_t	get_array();
 
 	};
 //---------------------------------------------------------------------------

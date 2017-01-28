@@ -208,14 +208,30 @@ void TfmMain::CutCurve()
 	Draw();
 	}
 //---------------------------------------------------------------------------
+void TfmMain::Derivates()
+	{
+	Print("1. Ableitung berechnen...");
+
+	cData& data = alg1.ecg.data;
+	if (!data.calcDerivates())
+		{
+		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
+		return;
+		}
+
+	Print("...Berechnung der 1. Ableitung abgeschlossen");
+	}
+//---------------------------------------------------------------------------
 void TfmMain::GetTurns()
 	{
 	Print("Wendepunkte berechnen...");
+	/* obsolete ?
 	float schwelle_proz = DlgRequest(this, "Schwellenwert für Wendepunkt-Berechnung").ToDouble();
 	if (schwelle_proz < 0 || schwelle_proz > 1) return;
+	*/
 
 	cTurns& turns = alg1.ecg.turns;
-	int no = turns.calcTurns(alg1.ecg.data, schwelle_proz);
+	int no = turns.calcTurns(alg1.ecg.data);
 	if (turns.error)
 		{
 		Print("## Fehler aufgetreten: %d, %s", turns.error_code, turns.error_msg);
@@ -330,6 +346,24 @@ void __fastcall TfmMain::btCutClick(TObject *Sender)
 		CutCurve();
 		bRun = false;
 		btCut->Caption = cap;
+		}
+	else
+		{
+		bStop = true;
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btDerivatesClick(TObject *Sender)
+	{
+	String cap = btDerivates->Caption;
+	if (!bRun)
+		{
+		btDerivates->Caption = "&ABBRECHEN";
+		bStop = false;
+		bRun  = true;
+		Derivates();
+		bRun = false;
+		btDerivates->Caption = cap;
 		}
 	else
 		{

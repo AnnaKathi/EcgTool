@@ -4,8 +4,8 @@
 //---------------------------------------------------------------------------
 #include <classes.hpp>
 //---------------------------------------------------------------------------
-#include "classBase.h"
-#include "classData.h"
+#include "../basics/classBase.h"
+#include "../basics/classData.h"
 //---------------------------------------------------------------------------
 class PACKAGE cTurns : public cBase
 	{
@@ -13,10 +13,11 @@ public:
 	cTurns();
 	~cTurns();
 
-	int		calcTurns(cData data, float schwelle);
+	int			calcTurns(cData data);
 
 private:
-
+	//warum geht das nicht ?? iarray_t	farr; //die eigentliche Kurve
+	//warum geht das nicht ?? iarray_t	ftrn; //die Wendepunkte
 	};
 //---------------------------------------------------------------------------
 #endif

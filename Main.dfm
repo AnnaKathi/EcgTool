@@ -246,12 +246,22 @@ object fmMain: TfmMain
     end
     object btTurns: TButton
       Left = 223
+      Top = 159
+      Width = 180
+      Height = 25
+      Caption = '&6 - Wendepunkte berechnen'
+      Enabled = False
+      TabOrder = 8
+      OnClick = btTurnsClick
+    end
+    object btDerivates: TButton
+      Left = 223
       Top = 129
       Width = 180
       Height = 25
-      Caption = '&5 - Wendepunkte berechnen'
+      Caption = '&5 - Ableitung(en) bilden'
       TabOrder = 7
-      OnClick = btTurnsClick
+      OnClick = btDerivatesClick
     end
   end
   object pnClient: TPanel

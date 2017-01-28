@@ -2,7 +2,13 @@
 #ifndef classBaseH
 #define classBaseH
 //---------------------------------------------------------------------------
+#include <map>
+#include <vector>
 #include <classes.hpp>
+//---------------------------------------------------------------------------
+typedef std::vector<float> ilist_t;
+typedef std::map<float,ilist_t> iarray_t;
+typedef iarray_t::iterator iarray_itr;
 //---------------------------------------------------------------------------
 enum BASE_ERROR_CODES
 	{
