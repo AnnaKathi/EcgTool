@@ -95,7 +95,7 @@ object fmMain: TfmMain
     end
     object laCls: TLabel
       Left = 385
-      Top = 184
+      Top = 269
       Width = 18
       Height = 13
       Anchors = [akRight, akBottom]
@@ -107,7 +107,6 @@ object fmMain: TfmMain
       Font.Style = [fsUnderline]
       ParentFont = False
       OnClick = laClsClick
-      ExplicitTop = 173
     end
     object Panel3: TPanel
       Left = 0
@@ -193,9 +192,9 @@ object fmMain: TfmMain
     end
     object memo: TMemo
       Left = 0
-      Top = 203
+      Top = 288
       Width = 409
-      Height = 448
+      Height = 363
       Align = alBottom
       ReadOnly = True
       ScrollBars = ssBoth
@@ -209,59 +208,157 @@ object fmMain: TfmMain
       TabOrder = 2
     end
     object btRead: TButton
+      Tag = 1
       Left = 8
       Top = 98
-      Width = 180
+      Width = 125
       Height = 25
       Caption = '&1 - Werte einlesen'
       TabOrder = 3
       OnClick = btReadClick
     end
     object btMovAv: TButton
+      Tag = 3
       Left = 8
       Top = 159
-      Width = 180
+      Width = 125
       Height = 25
       Caption = '&3 - Kurve gl'#228'tten'
       TabOrder = 5
       OnClick = btMovAvClick
     end
     object btRunden: TButton
+      Tag = 2
       Left = 8
-      Top = 129
-      Width = 180
+      Top = 128
+      Width = 125
       Height = 25
       Caption = '&2 - Werte runden'
       TabOrder = 4
       OnClick = btRundenClick
     end
     object btCut: TButton
-      Left = 223
-      Top = 98
-      Width = 180
+      Tag = 4
+      Left = 8
+      Top = 190
+      Width = 125
       Height = 25
       Caption = '&4 - Kurve schneiden'
       TabOrder = 6
       OnClick = btCutClick
     end
     object btTurns: TButton
-      Left = 223
-      Top = 159
-      Width = 180
+      Tag = 5
+      Left = 8
+      Top = 221
+      Width = 125
       Height = 25
-      Caption = '&6 - Wendepunkte berechnen'
+      Caption = '&5 - Wendepunkte'
       Enabled = False
-      TabOrder = 8
+      TabOrder = 7
       OnClick = btTurnsClick
     end
     object btDerivates: TButton
-      Left = 223
-      Top = 129
-      Width = 180
+      Tag = 6
+      Left = 144
+      Top = 98
+      Width = 125
       Height = 25
-      Caption = '&5 - Ableitung(en) bilden'
-      TabOrder = 7
+      Caption = '&q - 1. Ableitung bilden'
+      TabOrder = 8
       OnClick = btDerivatesClick
+    end
+    object btAblRunden: TButton
+      Tag = 7
+      Left = 144
+      Top = 129
+      Width = 125
+      Height = 25
+      Caption = '&w - Werte runden'
+      TabOrder = 9
+      OnClick = btAblRundenClick
+    end
+    object btAblMovAv: TButton
+      Tag = 8
+      Left = 144
+      Top = 159
+      Width = 125
+      Height = 25
+      Caption = '&e - Kurve gl'#228'tten'
+      TabOrder = 10
+      OnClick = btAblMovAvClick
+    end
+    object btAblCut: TButton
+      Tag = 9
+      Left = 144
+      Top = 190
+      Width = 125
+      Height = 25
+      Caption = '&r - Kurve schneiden'
+      TabOrder = 11
+      OnClick = btAblCutClick
+    end
+    object btAblTurns: TButton
+      Tag = 10
+      Left = 144
+      Top = 221
+      Width = 125
+      Height = 25
+      Caption = '&t - Wendepunkte'
+      Enabled = False
+      TabOrder = 12
+      OnClick = btAblTurnsClick
+    end
+    object btAbl2: TButton
+      Tag = 11
+      Left = 278
+      Top = 98
+      Width = 125
+      Height = 25
+      Caption = '&a - 2. Ableitung bilden'
+      TabOrder = 13
+      OnClick = btAbl2Click
+    end
+    object btAbl2Runden: TButton
+      Tag = 12
+      Left = 278
+      Top = 129
+      Width = 125
+      Height = 25
+      Caption = '&s - Werte runden'
+      TabOrder = 14
+      OnClick = btAbl2RundenClick
+    end
+    object btAbl2MovAv: TButton
+      Tag = 13
+      Left = 278
+      Top = 159
+      Width = 125
+      Height = 25
+      Caption = '&d - Kurve gl'#228'tten'
+      TabOrder = 15
+      OnClick = btAbl2MovAvClick
+    end
+    object btAbl2Cut: TButton
+      Tag = 14
+      Left = 278
+      Top = 190
+      Width = 125
+      Height = 25
+      Caption = '&f - Kurve schneiden'
+      TabOrder = 16
+      OnClick = btAbl2CutClick
+    end
+    object btAbl2Turns: TButton
+      Tag = 15
+      Left = 278
+      Top = 221
+      Width = 125
+      Height = 25
+      Caption = '&g - Wendepunkte'
+      Enabled = False
+      TabOrder = 17
+      OnClick = btAbl2TurnsClick
     end
   end
   object pnClient: TPanel

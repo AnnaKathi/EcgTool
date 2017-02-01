@@ -7,6 +7,7 @@
 //---------------------------------------------------------------------------
 #include "classBase.cpp"
 #include "classCsv.h"
+#include "classArray.h"
 #include "classDerivate.h"
 //---------------------------------------------------------------------------
 /*
@@ -50,6 +51,8 @@ private:
 
 	cDerivate*	fderiv2; //zweite Ableitung
 	cDerivate&	get_deriv2();
+
+	cArray*		farray; //Klasse mit Grundfunktionalitäten
 
 	iarray_t	farr;  //alle eingelesenen EKG-Werte
 	iarray_t	get_array();

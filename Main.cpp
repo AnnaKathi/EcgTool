@@ -211,23 +211,6 @@ void TfmMain::CutCurve()
 	alg1.ecg.data.display(imgEcg);
 	}
 //---------------------------------------------------------------------------
-void TfmMain::Derivates()
-	{
-	Print("Ableitungen berechnen...");
-
-	cData& data = alg1.ecg.data;
-	if (!data.buildDerivates())
-		{
-		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
-		return;
-		}
-
-	alg1.ecg.data.derivate1.display(img2);
-	alg1.ecg.data.derivate2.display(img3);
-
-	Print("...Berechnung der Ableitungen abgeschlossen");
-	}
-//---------------------------------------------------------------------------
 void TfmMain::GetTurns()
 	{
 	Print("Wendepunkte berechnen...");
@@ -246,6 +229,234 @@ void TfmMain::GetTurns()
 
 	Print("\tEs wurden %d Wendepunkte gefunden", no);
 	Print("...finished turns");
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/**************   Funktionen auf erster Ableitung   ************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+void TfmMain::Derivate1()
+	{
+	Print("Erste Ableitung berechnen...");
+
+	cData& data = alg1.ecg.data;
+	if (!data.buildDerivates())
+		{
+		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
+		return;
+		}
+
+	alg1.ecg.data.derivate1.display(img2);
+
+	Print("...Berechnung der Ableitungen abgeschlossen");
+	}
+//---------------------------------------------------------------------------
+void TfmMain::Abl1Runden()
+	{
+	Print("ERSTE ABLEITUNG rounding values...");
+	int stellen = DlgRequest(this, "Anzahl Nachkommastellen").ToDouble();
+	if (stellen <= 0) return;
+
+	cDerivate& deriv = alg1.ecg.data.derivate1;
+	if (!deriv.roundAt(stellen))
+		{
+		Print("## Fehler aufgetreten: %d, %s", deriv.error_code, deriv.error_msg);
+		return;
+		}
+
+	Print("\tDatensätze im Array: %d", deriv.farr_charac.Number);
+	Print("\tIndex im Array: %d - %d", deriv.farr_charac.VonIdx, deriv.farr_charac.BisIdx);
+	Print("\tMSek. im Array: %d - %d", deriv.farr_charac.VonMsec, deriv.farr_charac.BisMsec);
+	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
+
+	Print("...finished rounding values");
+	alg1.ecg.data.derivate1.display(img2);
+	}
+//---------------------------------------------------------------------------
+void TfmMain::Abl1MovingAv()
+	{
+	Print("ERSTE ABLEITUNG build moving average...");
+	int window = DlgRequest(this, "Anzahl Werte im gleitenden Durchschnitt").ToIntDef(-1);
+	if (window <= 0) return;
+
+	bool calcBegin = true; //todo: abfragen
+
+	cDerivate& deriv = alg1.ecg.data.derivate1;
+	if (!deriv.movingAv(window, calcBegin))
+		{
+		Print("## Fehler aufgetreten: %d, %s", deriv.error_code, deriv.error_msg);
+		return;
+		}
+
+	Print("\tDatensätze im Array: %d", deriv.farr_charac.Number);
+	Print("\tIndex im Array: %d - %d", deriv.farr_charac.VonIdx, deriv.farr_charac.BisIdx);
+	Print("\tMSek. im Array: %d - %d", deriv.farr_charac.VonMsec, deriv.farr_charac.BisMsec);
+	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
+
+	Print("...finished moving average");
+	alg1.ecg.data.derivate1.display(img2);
+	}
+//---------------------------------------------------------------------------
+void TfmMain::Abl1CutCurve()
+	{
+	Print("ERSTE ABLEITUNG cut curve...");
+	int von = DlgRequest(this, "Werte löschen von Millisekunde").ToIntDef(-1);
+	int bis = DlgRequest(this, "Werte löschen bis Millisekunde").ToIntDef(-1);
+	if (von < 0 || bis < 0) return;
+	if (bis < von) return;
+
+	cDerivate& deriv = alg1.ecg.data.derivate1;
+	int no = deriv.cut(von, bis);
+	if (deriv.error)
+		{
+		Print("## Fehler aufgetreten: %d, %s", deriv.error_code, deriv.error_msg);
+		return;
+		}
+
+	Print("\tEs wurden %d Datensätze gelöscht", no);
+	Print("\tDatensätze im Array: %d", deriv.farr_charac.Number);
+	Print("\tIndex im Array: %d - %d", deriv.farr_charac.VonIdx, deriv.farr_charac.BisIdx);
+	Print("\tMSek. im Array: %d - %d", deriv.farr_charac.VonMsec, deriv.farr_charac.BisMsec);
+	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
+
+	Print("...finished cutting");
+	alg1.ecg.data.derivate1.display(img2);
+	}
+//---------------------------------------------------------------------------
+void TfmMain::Abl1GetTurns()
+	{
+	Print("ERSTE ABLEITUNG Wendepunkte berechnen...");
+	/* obsolete ?
+	float schwelle_proz = DlgRequest(this, "Schwellenwert für Wendepunkt-Berechnung").ToDouble();
+	if (schwelle_proz < 0 || schwelle_proz > 1) return;
+	*/
+
+	/* TODO
+	cTurns& turns = alg1.ecg.turns;
+	int no = turns.calcTurns(alg1.ecg.data);
+	if (turns.error)
+		{
+		Print("## Fehler aufgetreten: %d, %s", turns.error_code, turns.error_msg);
+		return;
+		}
+
+	Print("\tEs wurden %d Wendepunkte gefunden", no);
+	Print("...finished turns");
+	*/
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/**************   Funktionen auf zweiter Ableitung   ***********************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+void TfmMain::Derivate2()
+	{
+	Print("Zweite Ableitung berechnen...");
+
+	cData& data = alg1.ecg.data;
+	if (!data.buildDerivates())
+		{
+		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
+		return;
+		}
+
+	alg1.ecg.data.derivate2.display(img3);
+
+	Print("...Berechnung der Ableitungen abgeschlossen");
+	}
+//---------------------------------------------------------------------------
+void TfmMain::Abl2Runden()
+	{
+	Print("ZWEITE ABLEITUNG rounding values...");
+	int stellen = DlgRequest(this, "Anzahl Nachkommastellen").ToDouble();
+	if (stellen <= 0) return;
+
+	cDerivate& deriv = alg1.ecg.data.derivate2;
+	if (!deriv.roundAt(stellen))
+		{
+		Print("## Fehler aufgetreten: %d, %s", deriv.error_code, deriv.error_msg);
+		return;
+		}
+
+	Print("\tDatensätze im Array: %d", deriv.farr_charac.Number);
+	Print("\tIndex im Array: %d - %d", deriv.farr_charac.VonIdx, deriv.farr_charac.BisIdx);
+	Print("\tMSek. im Array: %d - %d", deriv.farr_charac.VonMsec, deriv.farr_charac.BisMsec);
+	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
+
+	Print("...finished rounding values");
+	alg1.ecg.data.derivate2.display(img3);
+	}
+//---------------------------------------------------------------------------
+void TfmMain::Abl2MovingAv()
+	{
+	Print("ZWEITE ABLEITUNG build moving average...");
+	int window = DlgRequest(this, "Anzahl Werte im gleitenden Durchschnitt").ToIntDef(-1);
+	if (window <= 0) return;
+
+	bool calcBegin = true; //todo: abfragen
+
+	cDerivate& deriv = alg1.ecg.data.derivate2;
+	if (!deriv.movingAv(window, calcBegin))
+		{
+		Print("## Fehler aufgetreten: %d, %s", deriv.error_code, deriv.error_msg);
+		return;
+		}
+
+	Print("\tDatensätze im Array: %d", deriv.farr_charac.Number);
+	Print("\tIndex im Array: %d - %d", deriv.farr_charac.VonIdx, deriv.farr_charac.BisIdx);
+	Print("\tMSek. im Array: %d - %d", deriv.farr_charac.VonMsec, deriv.farr_charac.BisMsec);
+	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
+
+	Print("...finished moving average");
+	alg1.ecg.data.derivate2.display(img3);
+	}
+//---------------------------------------------------------------------------
+void TfmMain::Abl2CutCurve()
+	{
+	Print("ZWEITE ABLEITUNG cut curve...");
+	int von = DlgRequest(this, "Werte löschen von Millisekunde").ToIntDef(-1);
+	int bis = DlgRequest(this, "Werte löschen bis Millisekunde").ToIntDef(-1);
+	if (von < 0 || bis < 0) return;
+	if (bis < von) return;
+
+	cDerivate& deriv = alg1.ecg.data.derivate2;
+	int no = deriv.cut(von, bis);
+	if (deriv.error)
+		{
+		Print("## Fehler aufgetreten: %d, %s", deriv.error_code, deriv.error_msg);
+		return;
+		}
+
+	Print("\tEs wurden %d Datensätze gelöscht", no);
+	Print("\tDatensätze im Array: %d", deriv.farr_charac.Number);
+	Print("\tIndex im Array: %d - %d", deriv.farr_charac.VonIdx, deriv.farr_charac.BisIdx);
+	Print("\tMSek. im Array: %d - %d", deriv.farr_charac.VonMsec, deriv.farr_charac.BisMsec);
+	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
+
+	Print("...finished cutting");
+	alg1.ecg.data.derivate2.display(img3);
+	}
+//---------------------------------------------------------------------------
+void TfmMain::Abl2GetTurns()
+	{
+	Print("ZWEITE ABLEITUNG Wendepunkte berechnen...");
+	/* obsolete ?
+	float schwelle_proz = DlgRequest(this, "Schwellenwert für Wendepunkt-Berechnung").ToDouble();
+	if (schwelle_proz < 0 || schwelle_proz > 1) return;
+	*/
+
+	/* TODO
+	cTurns& turns = alg1.ecg.turns;
+	int no = turns.calcTurns(alg1.ecg.data);
+	if (turns.error)
+		{
+		Print("## Fehler aufgetreten: %d, %s", turns.error_code, turns.error_msg);
+		return;
+		}
+
+	Print("\tEs wurden %d Wendepunkte gefunden", no);
+	Print("...finished turns");
+	*/
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -286,112 +497,117 @@ void __fastcall TfmMain::laClsClick(TObject *Sender)
 	memo->Lines->Clear();
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::btReadClick(TObject *Sender)
+void TfmMain::sendClick(TButton* bt)
 	{
-	String cap = btRead->Caption;
+	String cap = bt->Caption;
 	if (!bRun)
 		{
-		btRead->Caption = "&ABBRECHEN";
+		bt->Caption = "&ABBRECHEN";
 		bStop = false;
 		bRun  = true;
-		ReadFile();
+
+		switch (bt->Tag)
+			{
+			case  1: ReadFile(); 		break;
+			case  2: Runden();			break;
+			case  3: MovingAv();		break;
+			case  4: CutCurve();		break;
+			case  5: GetTurns();		break;
+			case  6: Derivate1();		break;
+			case  7: Abl1Runden();		break;
+			case  8: Abl1MovingAv();	break;
+			case  9: Abl1CutCurve();	break;
+			case 10: Abl1GetTurns();	break;
+			case 11: Derivate2();		break;
+			case 12: Abl2Runden();		break;
+			case 13: Abl2MovingAv();	break;
+			case 14: Abl2CutCurve();	break;
+			case 15: Abl2GetTurns();	break;
+			//default, nicht nötig
+			}
+
 		bRun = false;
-		btRead->Caption = cap;
+		bt->Caption = cap;
 		}
 	else
 		{
 		bStop = true;
 		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btReadClick(TObject *Sender)
+	{
+	sendClick(btRead);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btRundenClick(TObject *Sender)
 	{
-	String cap = btRunden->Caption;
-	if (!bRun)
-		{
-		btRunden->Caption = "&ABBRECHEN";
-		bStop = false;
-		bRun  = true;
-		Runden();
-		bRun = false;
-		btRunden->Caption = cap;
-		}
-	else
-		{
-		bStop = true;
-		}
+	sendClick(btRunden);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btMovAvClick(TObject *Sender)
 	{
-	String cap = btMovAv->Caption;
-	if (!bRun)
-		{
-		btMovAv->Caption = "&ABBRECHEN";
-		bStop = false;
-		bRun  = true;
-		MovingAv();
-		bRun = false;
-		btMovAv->Caption = cap;
-		}
-	else
-		{
-		bStop = true;
-		}
+	sendClick(btMovAv);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btCutClick(TObject *Sender)
 	{
-	String cap = btCut->Caption;
-	if (!bRun)
-		{
-		btCut->Caption = "&ABBRECHEN";
-		bStop = false;
-		bRun  = true;
-		CutCurve();
-		bRun = false;
-		btCut->Caption = cap;
-		}
-	else
-		{
-		bStop = true;
-		}
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::btDerivatesClick(TObject *Sender)
-	{
-	String cap = btDerivates->Caption;
-	if (!bRun)
-		{
-		btDerivates->Caption = "&ABBRECHEN";
-		bStop = false;
-		bRun  = true;
-		Derivates();
-		bRun = false;
-		btDerivates->Caption = cap;
-		}
-	else
-		{
-		bStop = true;
-		}
+	sendClick(btCut);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btTurnsClick(TObject *Sender)
 	{
-	String cap = btTurns->Caption;
-	if (!bRun)
-		{
-		btTurns->Caption = "&ABBRECHEN";
-		bStop = false;
-		bRun  = true;
-		GetTurns();
-		bRun = false;
-		btTurns->Caption = cap;
-		}
-	else
-		{
-		bStop = true;
-		}
+	sendClick(btTurns);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btDerivatesClick(TObject *Sender)
+	{
+	sendClick(btDerivates);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btAblRundenClick(TObject *Sender)
+	{
+	sendClick(btAblRunden);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btAblMovAvClick(TObject *Sender)
+	{
+	sendClick(btAblMovAv);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btAblCutClick(TObject *Sender)
+	{
+	sendClick(btAblCut);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btAblTurnsClick(TObject *Sender)
+	{
+	sendClick(btAblTurns);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btAbl2Click(TObject *Sender)
+	{
+    sendClick(btAbl2);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btAbl2RundenClick(TObject *Sender)
+	{
+	sendClick(btAbl2Runden);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btAbl2MovAvClick(TObject *Sender)
+	{
+	sendClick(btAbl2MovAv);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btAbl2CutClick(TObject *Sender)
+	{
+    sendClick(btAbl2Cut);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btAbl2TurnsClick(TObject *Sender)
+	{
+	sendClick(btAbl2Turns);
 	}
 //---------------------------------------------------------------------------
 

@@ -1,15 +1,12 @@
 //---------------------------------------------------------------------------
-#ifndef classDerivateH
-#define classDerivateH
+#ifndef classArrayH
+#define classArrayH
 //---------------------------------------------------------------------------
 #include <classes.hpp>
 #include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "classBase.h"
-#include "classArray.h"
-#include "classMath.h"
 //---------------------------------------------------------------------------
-/*
 typedef struct sARRAYCHA //Charkterwerte eines Arrays
 	{
 	int			VonIdx;  //kleinster Index
@@ -21,30 +18,24 @@ typedef struct sARRAYCHA //Charkterwerte eines Arrays
 	int			Number;  //Anzahl Datensätze im Array
 	} sArrayCha;
 //---------------------------------------------------------------------------
-*/
-class PACKAGE cDerivate : public cBase
+class PACKAGE cArray : public cBase
 	{
 public:
-	cDerivate();
-	~cDerivate();
+	cArray();
+	~cArray();
 
 	sArrayCha	farr_charac; //todo getter und setter machen
 
-	bool		build(iarray_t array);
-	bool 		display(TImage* img);
+	bool 		resetValues(sArrayCha& cha);
+	bool 		display(iarray_t array, TImage* img);
 
-	bool		roundAt(int nachkommastellen);
-	bool		movingAv(int window, bool CalcBegin = true);
-	int			cut(int vonMsec, int bisMsec);
-	
-__property iarray_t	deriv_array = { read=get_array };
+	iarray_t 	roundAt(iarray_t array, int nachkommastellen);
+	iarray_t 	movingAv(iarray_t array, int window, bool CalcBegin);
+	iarray_t 	cut(iarray_t array, int vonMsec, int bisMsec);
 
 private:
-	cMath*		fmath;
-	cArray*		farray; //Grundfunktionalitäten
-
 	iarray_t	farr;
-	iarray_t	get_array();
+
 
 	};
 //---------------------------------------------------------------------------

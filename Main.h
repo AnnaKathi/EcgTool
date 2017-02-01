@@ -28,8 +28,21 @@ private:
 	void		Runden();
 	void		MovingAv();
 	void		CutCurve();
-	void		Derivates();
 	void		GetTurns();
+
+	void		Derivate1();
+	void		Abl1Runden();
+	void		Abl1MovingAv();
+	void		Abl1CutCurve();
+	void		Abl1GetTurns();
+
+	void		Derivate2();
+	void		Abl2Runden();
+	void		Abl2MovingAv();
+	void		Abl2CutCurve();
+	void		Abl2GetTurns();
+
+	void		sendClick(TButton* bt);
 
 
 
@@ -67,6 +80,15 @@ __published:	// IDE-verwaltete Komponenten
 	TImage *img2;
 	TImage *img3;
 	TBevel *Bevel5;
+	TButton *btAblRunden;
+	TButton *btAblMovAv;
+	TButton *btAblCut;
+	TButton *btAblTurns;
+	TButton *btAbl2;
+	TButton *btAbl2Runden;
+	TButton *btAbl2MovAv;
+	TButton *btAbl2Cut;
+	TButton *btAbl2Turns;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -80,6 +102,15 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btCutClick(TObject *Sender);
 	void __fastcall btTurnsClick(TObject *Sender);
 	void __fastcall btDerivatesClick(TObject *Sender);
+	void __fastcall btAblRundenClick(TObject *Sender);
+	void __fastcall btAblMovAvClick(TObject *Sender);
+	void __fastcall btAblCutClick(TObject *Sender);
+	void __fastcall btAblTurnsClick(TObject *Sender);
+	void __fastcall btAbl2Click(TObject *Sender);
+	void __fastcall btAbl2RundenClick(TObject *Sender);
+	void __fastcall btAbl2MovAvClick(TObject *Sender);
+	void __fastcall btAbl2CutClick(TObject *Sender);
+	void __fastcall btAbl2TurnsClick(TObject *Sender);
 
 
 public:
