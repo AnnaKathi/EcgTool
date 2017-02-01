@@ -220,7 +220,7 @@ void TfmMain::GetTurns()
 	*/
 
 	cTurns& turns = alg1.ecg.turns;
-	int no = turns.calcTurns(alg1.ecg.data);
+	int no = turns.calcTurns(alg1.ecg.data.data_array);
 	if (turns.error)
 		{
 		Print("## Fehler aufgetreten: %d, %s", turns.error_code, turns.error_msg);

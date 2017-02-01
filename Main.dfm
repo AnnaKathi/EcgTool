@@ -254,7 +254,6 @@ object fmMain: TfmMain
       Width = 125
       Height = 25
       Caption = '&5 - Wendepunkte'
-      Enabled = False
       TabOrder = 7
       OnClick = btTurnsClick
     end
@@ -305,7 +304,6 @@ object fmMain: TfmMain
       Width = 125
       Height = 25
       Caption = '&t - Wendepunkte'
-      Enabled = False
       TabOrder = 12
       OnClick = btAblTurnsClick
     end
@@ -356,7 +354,6 @@ object fmMain: TfmMain
       Width = 125
       Height = 25
       Caption = '&g - Wendepunkte'
-      Enabled = False
       TabOrder = 17
       OnClick = btAbl2TurnsClick
     end

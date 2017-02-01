@@ -5,7 +5,6 @@
 #include <classes.hpp>
 //---------------------------------------------------------------------------
 #include "../basics/classBase.h"
-#include "../basics/classData.h"
 //---------------------------------------------------------------------------
 class PACKAGE cTurns : public cBase
 	{
@@ -13,7 +12,7 @@ public:
 	cTurns();
 	~cTurns();
 
-	int			calcTurns(cData data);
+	int			calcTurns(iarray_t array);
 
 private:
 	//warum geht das nicht ?? iarray_t	farr; //die eigentliche Kurve
