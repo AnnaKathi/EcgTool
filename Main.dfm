@@ -278,7 +278,47 @@ object fmMain: TfmMain
       Width = 728
       Height = 152
       Align = alTop
-      ExplicitWidth = 664
+      ExplicitLeft = 2
+      ExplicitTop = 2
+    end
+    object Bevel2: TBevel
+      Left = 0
+      Top = 152
+      Width = 728
+      Height = 4
+      Align = alTop
+      Shape = bsTopLine
+      ExplicitLeft = 280
+      ExplicitTop = 240
+      ExplicitWidth = 50
+    end
+    object img2: TImage
+      Left = 0
+      Top = 156
+      Width = 728
+      Height = 152
+      Align = alTop
+      ExplicitLeft = -4
+      ExplicitTop = 352
+    end
+    object img3: TImage
+      Left = 0
+      Top = 312
+      Width = 728
+      Height = 152
+      Align = alTop
+      ExplicitLeft = -28
+      ExplicitTop = 500
+    end
+    object Bevel5: TBevel
+      Left = 0
+      Top = 308
+      Width = 728
+      Height = 4
+      Align = alTop
+      Shape = bsTopLine
+      ExplicitLeft = -4
+      ExplicitTop = 344
     end
   end
   object tStartup: TTimer

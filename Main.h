@@ -24,7 +24,6 @@ private:
 	bool		bStop;
 
 	void 		Print(char* msg, ...);
-	void		Draw();
 	void		ReadFile();
 	void		Runden();
 	void		MovingAv();
@@ -64,6 +63,10 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *btCut;
 	TButton *btTurns;
 	TButton *btDerivates;
+	TBevel *Bevel2;
+	TImage *img2;
+	TImage *img3;
+	TBevel *Bevel5;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);

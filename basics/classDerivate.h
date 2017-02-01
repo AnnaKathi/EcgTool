@@ -1,15 +1,13 @@
 //---------------------------------------------------------------------------
-#ifndef classDataH
-#define classDataH
+#ifndef classDerivateH
+#define classDerivateH
 //---------------------------------------------------------------------------
 #include <classes.hpp>
 #include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
-#include "classBase.cpp"
-#include "classCsv.h"
-#include "classDerivate.h"
+#include "classBase.h"
+#include "classMath.h"
 //---------------------------------------------------------------------------
-/*
 typedef struct sARRAYCHA //Charkterwerte eines Arrays
 	{
 	int			VonIdx;  //kleinster Index
@@ -21,41 +19,25 @@ typedef struct sARRAYCHA //Charkterwerte eines Arrays
 	int			Number;  //Anzahl Datensätze im Array
 	} sArrayCha;
 //---------------------------------------------------------------------------
-*/
-class PACKAGE cData : public cBase
+class PACKAGE cDerivate : public cBase
 	{
 public:
-	cData();
-	~cData();
+	cDerivate();
+	~cDerivate();
 
 	sArrayCha	farr_charac; //todo getter und setter machen
-	bool		getFile(String file, String delim, int vonMsec, int bisMsec);
-	bool		display(TImage* img);
-	bool		roundAt(int nachkommastellen);
-	bool		movingAv(int window, bool CalcBegin = true);
-	int			cut(int vonMsec, int bisMsec);
 
-	//------- mathematische Funktionen --------------------------------------
-	bool		buildDerivates();
+	bool		build(iarray_t array);
+	void 		resetValues();
+	bool 		display(TImage* img);
 
-__property iarray_t   data_array = { read=get_array  };
-__property cDerivate& derivate1  = { read=get_deriv1 };
-__property cDerivate& derivate2  = { read=get_deriv2 };
+__property iarray_t	deriv_array = { read=get_array };
 
 private:
-	cCsv*		fcsv;
+	cMath*		fmath;
 
-	cDerivate*	fderiv1; //erste Ableitung
-	cDerivate&	get_deriv1();
-
-	cDerivate*	fderiv2; //zweite Ableitung
-	cDerivate&	get_deriv2();
-
-	iarray_t	farr;  //alle eingelesenen EKG-Werte
+	iarray_t	farr;
 	iarray_t	get_array();
-
-	void 		resetValues();
-
 
 	};
 //---------------------------------------------------------------------------

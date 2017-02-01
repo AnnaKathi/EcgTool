@@ -100,11 +100,6 @@ void TfmMain::Print(char* msg, ...)
 	va_end(argptr);
 	}
 //---------------------------------------------------------------------------
-void TfmMain::Draw()
-	{
-	alg1.ecg.data.display(imgEcg);
-	}
-//---------------------------------------------------------------------------
 void TfmMain::ReadFile()
 	{
 	Print("start readFile...");
@@ -133,7 +128,15 @@ void TfmMain::ReadFile()
 	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
 
 	Print("...finished readFile");
-	Draw();
+	alg1.ecg.data.display(imgEcg);
+
+	img2->Canvas->Brush->Color = clWhite;
+	img2->Canvas->FillRect(Rect(0, 0, img2->Picture->Width, img2->Picture->Height));
+	img2->Canvas->Pen->Color = clBlack;
+
+	img3->Canvas->Brush->Color = clWhite;
+	img3->Canvas->FillRect(Rect(0, 0, img3->Picture->Width, img3->Picture->Height));
+	img3->Canvas->Pen->Color = clBlack;
 	}
 //---------------------------------------------------------------------------
 void TfmMain::Runden()
@@ -155,7 +158,7 @@ void TfmMain::Runden()
 	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
 
 	Print("...finished rounding values");
-	Draw();
+	alg1.ecg.data.display(imgEcg);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::MovingAv()
@@ -179,7 +182,7 @@ void TfmMain::MovingAv()
 	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
 
 	Print("...finished moving average");
-	Draw();
+	alg1.ecg.data.display(imgEcg);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::CutCurve()
@@ -205,21 +208,24 @@ void TfmMain::CutCurve()
 	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
 
 	Print("...finished cutting");
-	Draw();
+	alg1.ecg.data.display(imgEcg);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::Derivates()
 	{
-	Print("1. Ableitung berechnen...");
+	Print("Ableitungen berechnen...");
 
 	cData& data = alg1.ecg.data;
-	if (!data.calcDerivates())
+	if (!data.buildDerivates())
 		{
 		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
 		return;
 		}
 
-	Print("...Berechnung der 1. Ableitung abgeschlossen");
+	alg1.ecg.data.derivate1.display(img2);
+	alg1.ecg.data.derivate2.display(img3);
+
+	Print("...Berechnung der Ableitungen abgeschlossen");
 	}
 //---------------------------------------------------------------------------
 void TfmMain::GetTurns()
@@ -240,7 +246,6 @@ void TfmMain::GetTurns()
 
 	Print("\tEs wurden %d Wendepunkte gefunden", no);
 	Print("...finished turns");
-	Draw();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

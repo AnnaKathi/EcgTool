@@ -6,7 +6,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 cData::cData()
-	: fcsv(new cCsv)
+	: fcsv(new cCsv), fderiv1(new cDerivate), fderiv2(new cDerivate)
 	{
 	}
 //---------------------------------------------------------------------------
@@ -342,36 +342,17 @@ int cData::cut(int vonMsec, int bisMsec)
 	return count;
 	}
 //---------------------------------------------------------------------------
-bool cData::calcDerivates()
+bool cData::buildDerivates()
 	{
 	if (farr.size() < 0)
 		return fail(1, "Das Daten-Array ist leer");
 
-	fderiv1.clear();
+	if (!fderiv1->build(farr))
+		; //todo
 
-	//erste Ableitung = Steigung von farr
-	int zeit;
-	int ix = 0;
-	float before, lead1, steigung;
-	bool first = true;
-	for (iarray_itr itr = farr.begin(); itr != farr.end(); itr++)
-		{
-		zeit = itr->first;
-		ilist_t& v = itr->second;
-		lead1 = v[1];
-
-		if (!first)
-			{
-			steigung = lead1 - before;
-			fderiv1[ix].push_back(zeit);
-			fderiv1[ix].push_back(steigung);
-			ix++;
-			}
-
-		first = false;
-		before = lead1;
-		}
-
+	if (!fderiv2->build(fderiv1->deriv_array))
+		; //todo
+		
 	return ok();
 	}
 //---------------------------------------------------------------------------
@@ -380,3 +361,14 @@ iarray_t cData::get_array()
 	return farr;
 	}
 //---------------------------------------------------------------------------
+cDerivate& cData::get_deriv1()
+	{
+	return *fderiv1;
+	}
+//---------------------------------------------------------------------------
+cDerivate& cData::get_deriv2()
+	{
+	return *fderiv2;
+	}
+//---------------------------------------------------------------------------
+
