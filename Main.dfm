@@ -247,15 +247,15 @@ object fmMain: TfmMain
       TabOrder = 6
       OnClick = btCutClick
     end
-    object btTurns: TButton
+    object btRpeaks: TButton
       Tag = 5
       Left = 8
       Top = 221
       Width = 125
       Height = 25
-      Caption = '&5 - Wendepunkte'
+      Caption = '&5 - R-Peaks'
       TabOrder = 7
-      OnClick = btTurnsClick
+      OnClick = btRpeaksClick
     end
     object btDerivates: TButton
       Tag = 6
@@ -304,6 +304,7 @@ object fmMain: TfmMain
       Width = 125
       Height = 25
       Caption = '&t - Wendepunkte'
+      Enabled = False
       TabOrder = 12
       OnClick = btAblTurnsClick
     end
@@ -354,6 +355,7 @@ object fmMain: TfmMain
       Width = 125
       Height = 25
       Caption = '&g - Wendepunkte'
+      Enabled = False
       TabOrder = 17
       OnClick = btAbl2TurnsClick
     end

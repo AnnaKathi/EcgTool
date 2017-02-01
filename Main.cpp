@@ -211,24 +211,14 @@ void TfmMain::CutCurve()
 	alg1.ecg.data.display(imgEcg);
 	}
 //---------------------------------------------------------------------------
-void TfmMain::GetTurns()
+void TfmMain::FindRpeaks()
 	{
-	Print("Wendepunkte berechnen...");
-	/* obsolete ?
-	float schwelle_proz = DlgRequest(this, "Schwellenwert für Wendepunkt-Berechnung").ToDouble();
-	if (schwelle_proz < 0 || schwelle_proz > 1) return;
-	*/
+	Print("R-Peaks finden...");
 
-	cTurns& turns = alg1.ecg.turns;
-	int no = turns.calcTurns(alg1.ecg.data.data_array);
-	if (turns.error)
-		{
-		Print("## Fehler aufgetreten: %d, %s", turns.error_code, turns.error_msg);
-		return;
-		}
+	cRpeaks& rpeaks = alg1.ecg.rpeaks;
+	iarray_t asc = rpeaks.find(alg1.ecg.data.data_array, img2, img3);
 
-	Print("\tEs wurden %d Wendepunkte gefunden", no);
-	Print("...finished turns");
+	Print("...finished r-peaks");
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -323,28 +313,6 @@ void TfmMain::Abl1CutCurve()
 	alg1.ecg.data.derivate1.display(img2);
 	}
 //---------------------------------------------------------------------------
-void TfmMain::Abl1GetTurns()
-	{
-	Print("ERSTE ABLEITUNG Wendepunkte berechnen...");
-	/* obsolete ?
-	float schwelle_proz = DlgRequest(this, "Schwellenwert für Wendepunkt-Berechnung").ToDouble();
-	if (schwelle_proz < 0 || schwelle_proz > 1) return;
-	*/
-
-	/* TODO
-	cTurns& turns = alg1.ecg.turns;
-	int no = turns.calcTurns(alg1.ecg.data);
-	if (turns.error)
-		{
-		Print("## Fehler aufgetreten: %d, %s", turns.error_code, turns.error_msg);
-		return;
-		}
-
-	Print("\tEs wurden %d Wendepunkte gefunden", no);
-	Print("...finished turns");
-	*/
-	}
-//---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   Funktionen auf zweiter Ableitung   ***********************/
 /***************************************************************************/
@@ -437,28 +405,6 @@ void TfmMain::Abl2CutCurve()
 	alg1.ecg.data.derivate2.display(img3);
 	}
 //---------------------------------------------------------------------------
-void TfmMain::Abl2GetTurns()
-	{
-	Print("ZWEITE ABLEITUNG Wendepunkte berechnen...");
-	/* obsolete ?
-	float schwelle_proz = DlgRequest(this, "Schwellenwert für Wendepunkt-Berechnung").ToDouble();
-	if (schwelle_proz < 0 || schwelle_proz > 1) return;
-	*/
-
-	/* TODO
-	cTurns& turns = alg1.ecg.turns;
-	int no = turns.calcTurns(alg1.ecg.data);
-	if (turns.error)
-		{
-		Print("## Fehler aufgetreten: %d, %s", turns.error_code, turns.error_msg);
-		return;
-		}
-
-	Print("\tEs wurden %d Wendepunkte gefunden", no);
-	Print("...finished turns");
-	*/
-	}
-//---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   Meldungen vom Formular   *********************************/
 /***************************************************************************/
@@ -512,17 +458,17 @@ void TfmMain::sendClick(TButton* bt)
 			case  2: Runden();			break;
 			case  3: MovingAv();		break;
 			case  4: CutCurve();		break;
-			case  5: GetTurns();		break;
+			case  5: FindRpeaks();		break;
 			case  6: Derivate1();		break;
 			case  7: Abl1Runden();		break;
 			case  8: Abl1MovingAv();	break;
 			case  9: Abl1CutCurve();	break;
-			case 10: Abl1GetTurns();	break;
+			case 10: break;
 			case 11: Derivate2();		break;
 			case 12: Abl2Runden();		break;
 			case 13: Abl2MovingAv();	break;
 			case 14: Abl2CutCurve();	break;
-			case 15: Abl2GetTurns();	break;
+			case 15: break;
 			//default, nicht nötig
 			}
 
@@ -555,9 +501,9 @@ void __fastcall TfmMain::btCutClick(TObject *Sender)
 	sendClick(btCut);
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::btTurnsClick(TObject *Sender)
+void __fastcall TfmMain::btRpeaksClick(TObject *Sender)
 	{
-	sendClick(btTurns);
+	sendClick(btRpeaks);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btDerivatesClick(TObject *Sender)

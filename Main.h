@@ -28,19 +28,17 @@ private:
 	void		Runden();
 	void		MovingAv();
 	void		CutCurve();
-	void		GetTurns();
+	void		FindRpeaks();
 
 	void		Derivate1();
 	void		Abl1Runden();
 	void		Abl1MovingAv();
 	void		Abl1CutCurve();
-	void		Abl1GetTurns();
 
 	void		Derivate2();
 	void		Abl2Runden();
 	void		Abl2MovingAv();
 	void		Abl2CutCurve();
-	void		Abl2GetTurns();
 
 	void		sendClick(TButton* bt);
 
@@ -74,7 +72,7 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *btMovAv;
 	TButton *btRunden;
 	TButton *btCut;
-	TButton *btTurns;
+	TButton *btRpeaks;
 	TButton *btDerivates;
 	TBevel *Bevel2;
 	TImage *img2;
@@ -100,7 +98,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btMovAvClick(TObject *Sender);
 	void __fastcall btRundenClick(TObject *Sender);
 	void __fastcall btCutClick(TObject *Sender);
-	void __fastcall btTurnsClick(TObject *Sender);
+	void __fastcall btRpeaksClick(TObject *Sender);
 	void __fastcall btDerivatesClick(TObject *Sender);
 	void __fastcall btAblRundenClick(TObject *Sender);
 	void __fastcall btAblMovAvClick(TObject *Sender);

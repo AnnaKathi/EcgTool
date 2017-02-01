@@ -18,6 +18,7 @@ int	cTurns::calcTurns(iarray_t array)
 	//auf einer Datenstruktur alle Wendepunkte feststellen, ein Wendepunkt
 	//liegt vor, wenn der betrachtete Wert sich mehr als 'schwelle_proz' von den
 	//Werten recht und links unterscheidet (Prozentwert!!)
+	/*
 	int count = 0;
 
 	if (array.size() <= 0)
@@ -42,5 +43,7 @@ int	cTurns::calcTurns(iarray_t array)
 
 	//Zugriff auf cBase nicht möglich, warum ?? ok();
 	return count;
+	*/
+	return 0;
 	}
 //---------------------------------------------------------------------------
