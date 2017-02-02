@@ -216,7 +216,9 @@ void TfmMain::FindRpeaks()
 	Print("R-Peaks finden...");
 
 	cRpeaks& rpeaks = alg1.ecg.rpeaks;
-	iarray_t asc = rpeaks.find(alg1.ecg.data.data_array, img2, img3);
+	iarray_t rp = rpeaks.find(alg1.ecg.data.data_array, img2, img3, pbJob);
+
+	farray.displayPoints(alg1.ecg.data.data_array, rp, img3);
 
 	Print("...finished r-peaks");
 	}
@@ -313,6 +315,18 @@ void TfmMain::Abl1CutCurve()
 	alg1.ecg.data.derivate1.display(img2);
 	}
 //---------------------------------------------------------------------------
+void TfmMain::Abl1Rpeaks()
+	{
+	Print("ERSTE ABLEITUNG R-Peaks finden...");
+
+	cRpeaks& rpeaks = alg1.ecg.rpeaks;
+	iarray_t rp = rpeaks.find(alg1.ecg.data.derivate1.deriv_array, img3, img3, pbJob);
+
+	farray.displayPoints(alg1.ecg.data.derivate1.deriv_array, rp, img2);
+
+	Print("...finished r-peaks");
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   Funktionen auf zweiter Ableitung   ***********************/
 /***************************************************************************/
@@ -405,6 +419,18 @@ void TfmMain::Abl2CutCurve()
 	alg1.ecg.data.derivate2.display(img3);
 	}
 //---------------------------------------------------------------------------
+void TfmMain::Abl2Rpeaks()
+	{
+	Print("ZWEITE ABLEITUNG R-Peaks finden...");
+
+	cRpeaks& rpeaks = alg1.ecg.rpeaks;
+	iarray_t rp = rpeaks.find(alg1.ecg.data.derivate2.deriv_array, img2, img2, pbJob);
+
+	farray.displayPoints(alg1.ecg.data.derivate2.deriv_array, rp, img3);
+
+	Print("...finished r-peaks");
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   Meldungen vom Formular   *********************************/
 /***************************************************************************/
@@ -463,12 +489,12 @@ void TfmMain::sendClick(TButton* bt)
 			case  7: Abl1Runden();		break;
 			case  8: Abl1MovingAv();	break;
 			case  9: Abl1CutCurve();	break;
-			case 10: break;
+			case 10: Abl1Rpeaks(); 		break;
 			case 11: Derivate2();		break;
 			case 12: Abl2Runden();		break;
 			case 13: Abl2MovingAv();	break;
 			case 14: Abl2CutCurve();	break;
-			case 15: break;
+			case 15: Abl2Rpeaks();		break;
 			//default, nicht nötig
 			}
 

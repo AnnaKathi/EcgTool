@@ -14,13 +14,14 @@ public:
 	cRpeaks();
 	~cRpeaks();
 
-	iarray_t	find(iarray_t array, TImage* img1, TImage* img2);
+
+	iarray_t	find(iarray_t array, TImage* img1, TImage* img2, TProgressBar* job);
 
 private:
 	cMath*		fmath;
 	cArray*		farray;
 
-	iarray_t	fdesc; //absteigende Array-Werte
+	sArrayCha	charac; //todo getter und setter machen
 
 	};
 //---------------------------------------------------------------------------

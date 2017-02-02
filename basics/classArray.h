@@ -26,8 +26,9 @@ public:
 
 	sArrayCha	farr_charac; //todo getter und setter machen
 
-	bool 		resetValues(sArrayCha& cha);
+	bool 		resetValues(iarray_t array, sArrayCha& cha);
 	bool 		display(iarray_t array, TImage* img);
+	bool 		displayPoints(iarray_t curve, iarray_t points, TImage* img);
 
 	iarray_t 	roundAt(iarray_t array, int nachkommastellen);
 	iarray_t 	movingAv(iarray_t array, int window, bool CalcBegin);
@@ -35,6 +36,8 @@ public:
 
 private:
 	iarray_t	farr;
+
+	bool 		resetValues(sArrayCha& cha);
 
 
 	};

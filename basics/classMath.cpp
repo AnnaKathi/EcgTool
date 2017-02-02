@@ -44,68 +44,77 @@ iarray_t cMath::calcDerivate(iarray_t array)
 	return deriv;
 	}
 //---------------------------------------------------------------------------
-iarray_t cMath::sortAscending(iarray_t array)
+iarray_t cMath::sortAsc(iarray_t array, TProgressBar* job)
 	{
-	//Werte aufsteigend sortieren
-	iarray_t asc;
-	asc.clear();
-	asc = array;
-
-	//todo, eleganter und zeitsparender mit Quicksort o.ä.
-
-	int n, i, zeit;
-	float wert;
-	for (n = asc.size(); n > 1; n--)
-		{
-		for (i = 0; i < n-1; i++)
-			{
-			if (asc[i][1] > asc[i+1][1])
-				{
-				//swap values
-				zeit = asc[i][0];
-				wert = asc[i][1];
-
-				asc[i][0] = asc[i+1][0];
-				asc[i][1] = asc[i+1][1];
-
-				asc[i+1][0] = zeit;
-				asc[i+1][0] = wert;
-				}
-			}
-		}
-	return asc;
+	return sort(array, true, job);
 	}
 //---------------------------------------------------------------------------
-iarray_t cMath::sortDescending(iarray_t array)
+iarray_t cMath::sortDesc(iarray_t array, TProgressBar* job)
 	{
-	//Werte aufsteigend sortieren
-	iarray_t desc;
-	desc.clear();
-	desc = array;
+	return sort(array, false, job);
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/**************   private Funktionen   *************************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+iarray_t cMath::sort(iarray_t array, bool asc, TProgressBar* job)
+	{
+	//Werte sortieren
+	iarray_t arr;
+	arr.clear();
+	arr = array;
 
+	//todo: progressBar, anders lösen
 	//todo, eleganter und zeitsparender mit Quicksort o.ä.
 
-	int n, i, zeit;
-	float wert;
-	for (n = desc.size(); n > 1; n--)
+	int n, i, zeit1, zeit2;
+	float wert1, wert2;
+
+	int last = arr.size();
+	bool swapped, swap;
+	job->Max = last;
+	job->Position = 0;
+	while (last > 0)
 		{
-		for (i = 0; i < n-1; i++)
+		swapped = false;
+		for (i = 0; i < last-1; i++) //vom ersten bis zum letzten Wert im Restfenster
 			{
-			if (desc[i][1] < desc[i+1][1])
+			zeit1 = arr[i][0];
+			wert1 = arr[i][1];
+
+			zeit2 = arr[i+1][0];
+			wert2 = arr[i+1][1];
+
+				 if ( asc && (wert1 > wert2)) swap = true;
+			else if (!asc && (wert1 < wert2)) swap = true;
+			else swap = false;
+
+			if (swap)
 				{
 				//swap values
-				zeit = desc[i][0];
-				wert = desc[i][1];
+				arr[i][0] = zeit2;
+				arr[i][1] = wert2;
 
-				desc[i][0] = desc[i+1][0];
-				desc[i][1] = desc[i+1][1];
+				arr[i+1][0] = zeit1;
+				arr[i+1][1] = wert1;
 
-				desc[i+1][0] = zeit;
-				desc[i+1][0] = wert;
+				swapped = true;
 				}
 			}
+
+		if (!swapped)
+			{
+			//es wurden keine Werte mehr geswappt, dann können wir aufhören
+			break;
+			}
+
+		last--;
+		job->Position++;
 		}
-	return desc;
+
+	job->Position = 0;
+	return arr;
 	}
 //---------------------------------------------------------------------------
 

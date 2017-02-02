@@ -12,6 +12,7 @@
 #include <IniFiles.hpp>
 #include <Dialogs.hpp>
 //---------------------------------------------------------------------------
+#include "basics/classArray.h"
 #include "classAlg1.h"
 //---------------------------------------------------------------------------
 class TfmMain : public TForm
@@ -19,6 +20,7 @@ class TfmMain : public TForm
 private:
 	TIniFile*	Ini;
 	cAlg1		alg1;
+	cArray		farray;
 
 	bool		bRun;
 	bool		bStop;
@@ -34,11 +36,13 @@ private:
 	void		Abl1Runden();
 	void		Abl1MovingAv();
 	void		Abl1CutCurve();
+	void		Abl1Rpeaks();
 
 	void		Derivate2();
 	void		Abl2Runden();
 	void		Abl2MovingAv();
 	void		Abl2CutCurve();
+	void 		Abl2Rpeaks();
 
 	void		sendClick(TButton* bt);
 

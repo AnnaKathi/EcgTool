@@ -34,7 +34,7 @@ bool cDerivate::roundAt(int nachkommastellen)
 		{
 		//die Werte inputVonIdx, inputBisIdx, inputVonMsec, inputBisMsec,
 		//inputMinWert und inputMaxWert müssen neu gesetzt werden
-		farray->resetValues(farr_charac);
+		farray->resetValues(farr, farr_charac);
 		}
 
 	return !farray->error;
@@ -48,7 +48,7 @@ bool cDerivate::movingAv(int window, bool CalcBegin) //default CalcBegin=true
 		{
 		//die Werte inputVonIdx, inputBisIdx, inputVonMsec, inputBisMsec,
 		//inputMinWert und inputMaxWert müssen neu gesetzt werden
-		farray->resetValues(farr_charac);
+		farray->resetValues(farr, farr_charac);
 		}
 
 	return !farray->error;
@@ -62,7 +62,7 @@ int cDerivate::cut(int vonMsec, int bisMsec)
 		{
 		//die Werte inputVonIdx, inputBisIdx, inputVonMsec, inputBisMsec,
 		//inputMinWert und inputMaxWert müssen neu gesetzt werden
-		farray->resetValues(farr_charac);
+		farray->resetValues(farr, farr_charac);
 		}
 
 	return !farray->error;

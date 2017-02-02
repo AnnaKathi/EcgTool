@@ -15,12 +15,17 @@ cArray::~cArray()
 //---------------------------------------------------------------------------
 bool cArray::resetValues(sArrayCha& cha)
 	{
-	if (farr.size() <= 0)
+	return resetValues(farr, cha);
+	}
+//---------------------------------------------------------------------------
+bool cArray::resetValues(iarray_t array, sArrayCha& cha)
+	{
+	if (array.size() <= 0)
 		return fail(1, "Das Array ist leer oder nicht vorhanden.");
 
 	//die Werte inputVonIdx, inputBisIdx, inputVonMsec, inputBisMsec,
 	//inputMinWert und inputMaxWert müssen neu gesetzt werden
-	iarray_itr itr = farr.begin();
+	iarray_itr itr = array.begin();
 	int key = itr->first;
 	ilist_t& v = itr->second;
 	float zeit = v[0];
@@ -31,7 +36,7 @@ bool cArray::resetValues(sArrayCha& cha)
 	cha.MinWert = wert;	cha.MaxWert = wert;
 
 	//array umschreiben in ein neues array und dann zurückassoziieren
-	iarray_t arrneu = farr; farr.clear();
+	iarray_t arrneu = array; array.clear();
 	int ix = 0;
 	for (itr = arrneu.begin(); itr != arrneu.end(); itr++)
 		{
@@ -40,8 +45,8 @@ bool cArray::resetValues(sArrayCha& cha)
 		zeit = v[0];
 		wert = v[1];
 
-		farr[ix].push_back(zeit);
-		farr[ix].push_back(wert);
+		array[ix].push_back(zeit);
+		array[ix].push_back(wert);
 		ix++;
 
 		if (key < cha.VonIdx)   cha.VonIdx = key;
@@ -56,6 +61,36 @@ bool cArray::resetValues(sArrayCha& cha)
 
 	cha.BisIdx = ix-1;
 	return ok();
+	}
+//---------------------------------------------------------------------------
+bool cArray::displayPoints(iarray_t curve, iarray_t points, TImage* img)
+	{
+	//erste Kurve zeichnen
+	if (!display(curve, img)) return false;
+
+	float range_x  = farr_charac.BisIdx  - farr_charac.VonIdx;
+	float range_y  = farr_charac.MaxWert - farr_charac.MinWert;
+	float factor_x = (float)img->Width / range_x;
+	float factor_y = (float)img->Height / range_y;
+
+	img->Canvas->Brush->Color = clBlue;
+
+	float zeit, wert;
+	int x, y;
+	for (int i = 0; i < points.size(); i++)
+		{
+		zeit = points[i][0];
+		wert = points[i][1];
+
+		wert -= farr_charac.MinWert; //relativ ausrichten
+
+		x  = zeit * factor_x;
+		y = img->Height - (wert * factor_y);
+
+		img->Canvas->FillRect(Rect(x-5, y-5, x+5, y+5));
+		}
+
+	img->Canvas->Brush->Color = clBlack;
 	}
 //---------------------------------------------------------------------------
 bool cArray::display(iarray_t array, TImage* img)
@@ -161,7 +196,7 @@ iarray_t cArray::roundAt(iarray_t array, int nachkommastellen)
 		middle = temp.SubString(pos+1+nachkommastellen-1, 1);
 		end    = temp.SubString(pos+1+nachkommastellen, 1);
 
-		n = end.ToInt();
+		n = end.ToIntDef(0);
 		if (n > 5) //aufrunden
 			middle = String(middle.ToInt() + 1);
 
