@@ -13,6 +13,7 @@
 #include <Dialogs.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classArray.h"
+#include "basics/classMath.h"
 #include "classAlg1.h"
 //---------------------------------------------------------------------------
 class TfmMain : public TForm
@@ -21,6 +22,7 @@ private:
 	TIniFile*	Ini;
 	cAlg1		alg1;
 	cArray		farray;
+	cMath		fmath;
 
 	bool		bRun;
 	bool		bStop;
@@ -45,6 +47,7 @@ private:
 	void 		Abl2Rpeaks();
 
 	void		sendClick(TButton* bt);
+
 
 
 
@@ -91,6 +94,8 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *btAbl2MovAv;
 	TButton *btAbl2Cut;
 	TButton *btAbl2Turns;
+	TBevel *Bevel6;
+	TImage *img4;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);

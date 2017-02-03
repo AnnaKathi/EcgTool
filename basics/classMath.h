@@ -13,12 +13,12 @@ public:
 	cMath();
 	~cMath();
 
+	void		setImage(TImage* img);  //todo: wieder löschen
 	iarray_t	calcDerivate(iarray_t array);
-	iarray_t	sortAsc(iarray_t  array, TProgressBar* job); //Werte aufsteigend sortieren
-	iarray_t	sortDesc(iarray_t array, TProgressBar* job); //Werte absteigend sortieren
+
+	iarray_t	resort(iarray_t array, bool asc);
 
 private:
-	iarray_t	sort(iarray_t array, bool asc, TProgressBar* job);
 
 	};
 //---------------------------------------------------------------------------

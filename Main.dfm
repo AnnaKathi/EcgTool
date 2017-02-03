@@ -299,7 +299,7 @@ object fmMain: TfmMain
     end
     object btAblTurns: TButton
       Tag = 10
-      Left = 147
+      Left = 144
       Top = 221
       Width = 125
       Height = 25
@@ -401,8 +401,8 @@ object fmMain: TfmMain
       Width = 728
       Height = 152
       Align = alTop
-      ExplicitLeft = -28
-      ExplicitTop = 500
+      ExplicitLeft = -4
+      ExplicitTop = 308
     end
     object Bevel5: TBevel
       Left = 0
@@ -411,8 +411,27 @@ object fmMain: TfmMain
       Height = 4
       Align = alTop
       Shape = bsTopLine
+      ExplicitLeft = 6
+      ExplicitTop = 304
+    end
+    object Bevel6: TBevel
+      Left = 0
+      Top = 464
+      Width = 728
+      Height = 4
+      Align = alTop
+      Shape = bsTopLine
       ExplicitLeft = -4
       ExplicitTop = 344
+    end
+    object img4: TImage
+      Left = 0
+      Top = 468
+      Width = 728
+      Height = 152
+      Align = alTop
+      ExplicitLeft = 2
+      ExplicitTop = 314
     end
   end
   object tStartup: TTimer

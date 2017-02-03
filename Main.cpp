@@ -137,6 +137,10 @@ void TfmMain::ReadFile()
 	img3->Canvas->Brush->Color = clWhite;
 	img3->Canvas->FillRect(Rect(0, 0, img3->Picture->Width, img3->Picture->Height));
 	img3->Canvas->Pen->Color = clBlack;
+
+	img4->Canvas->Brush->Color = clWhite;
+	img4->Canvas->FillRect(Rect(0, 0, img4->Picture->Width, img4->Picture->Height));
+	img4->Canvas->Pen->Color = clBlack;
 	}
 //---------------------------------------------------------------------------
 void TfmMain::Runden()
@@ -218,7 +222,7 @@ void TfmMain::FindRpeaks()
 	cRpeaks& rpeaks = alg1.ecg.rpeaks;
 	iarray_t rp = rpeaks.find(alg1.ecg.data.data_array, img2, img3, pbJob);
 
-	farray.displayPoints(alg1.ecg.data.data_array, rp, img3);
+	farray.displayPoints(alg1.ecg.data.data_array, rp, imgEcg);
 
 	Print("...finished r-peaks");
 	}
