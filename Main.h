@@ -33,6 +33,7 @@ private:
 	void		MovingAv();
 	void		CutCurve();
 	void		FindRpeaks();
+	void		Heartbeat();
 
 	void		Derivate1();
 	void		Abl1Runden();
@@ -96,6 +97,7 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *btAbl2Turns;
 	TBevel *Bevel6;
 	TImage *img4;
+	TButton *btHeartbeat;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -118,6 +120,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btAbl2MovAvClick(TObject *Sender);
 	void __fastcall btAbl2CutClick(TObject *Sender);
 	void __fastcall btAbl2TurnsClick(TObject *Sender);
+	void __fastcall btHeartbeatClick(TObject *Sender);
 
 
 public:

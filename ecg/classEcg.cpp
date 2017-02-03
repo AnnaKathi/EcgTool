@@ -6,7 +6,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 cEcg::cEcg()
-	: frpeaks(new cRpeaks), fqrs(new cQrs), fheart(new cHeartbeat), fdata(new cData)
+	: frpeaks(new cRpeaks), fqrs(new cQrs), fheart(new cHeartbeats), fdata(new cData)
 	{
 	}
 //---------------------------------------------------------------------------
@@ -37,7 +37,7 @@ cQrs& cEcg::get_qrs()
 	return *fqrs;
 	}
 //---------------------------------------------------------------------------
-cHeartbeat& cEcg::get_heart()
+cHeartbeats& cEcg::get_heart()
 	{
 	return *fheart;
 	}

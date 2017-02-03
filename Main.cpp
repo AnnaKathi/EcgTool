@@ -227,6 +227,28 @@ void TfmMain::FindRpeaks()
 	Print("...finished r-peaks");
 	}
 //---------------------------------------------------------------------------
+void TfmMain::Heartbeat()
+	{
+	Print("Heartbeat finden...");
+
+	iarray_t rp = alg1.ecg.rpeaks.find(alg1.ecg.data.data_array, img2, img3, pbJob);
+	farray.displayPoints(alg1.ecg.data.data_array, rp, imgEcg);
+
+	cHeartbeats h = alg1.ecg.heart;
+	if (!h.build(alg1.ecg.data.data_array, rp))
+		{
+		Print("## Fehler aufgetreten: %d, %s", h.error_code, h.error_msg);
+		return;
+		}
+
+	for (h.first(); ; h.next())
+		{
+		//todo...
+		}
+
+	Print("...finished heartbeat");
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   Funktionen auf erster Ableitung   ************************/
 /***************************************************************************/
@@ -428,7 +450,7 @@ void TfmMain::Abl2Rpeaks()
 	Print("ZWEITE ABLEITUNG R-Peaks finden...");
 
 	cRpeaks& rpeaks = alg1.ecg.rpeaks;
-	iarray_t rp = rpeaks.find(alg1.ecg.data.derivate2.deriv_array, img2, img2, pbJob);
+	iarray_t rp = rpeaks.find(alg1.ecg.data.derivate2.deriv_array, img3, img4, pbJob);
 
 	farray.displayPoints(alg1.ecg.data.derivate2.deriv_array, rp, img3);
 
@@ -489,16 +511,17 @@ void TfmMain::sendClick(TButton* bt)
 			case  3: MovingAv();		break;
 			case  4: CutCurve();		break;
 			case  5: FindRpeaks();		break;
-			case  6: Derivate1();		break;
-			case  7: Abl1Runden();		break;
-			case  8: Abl1MovingAv();	break;
-			case  9: Abl1CutCurve();	break;
-			case 10: Abl1Rpeaks(); 		break;
-			case 11: Derivate2();		break;
-			case 12: Abl2Runden();		break;
-			case 13: Abl2MovingAv();	break;
-			case 14: Abl2CutCurve();	break;
-			case 15: Abl2Rpeaks();		break;
+			case  6: Heartbeat();		break;
+			case  7: Derivate1();		break;
+			case  8: Abl1Runden();		break;
+			case  9: Abl1MovingAv();	break;
+			case 10: Abl1CutCurve();	break;
+			case 11: Abl1Rpeaks(); 		break;
+			case 12: Derivate2();		break;
+			case 13: Abl2Runden();		break;
+			case 14: Abl2MovingAv();	break;
+			case 15: Abl2CutCurve();	break;
+			case 16: Abl2Rpeaks();		break;
 			//default, nicht nötig
 			}
 
@@ -584,6 +607,11 @@ void __fastcall TfmMain::btAbl2CutClick(TObject *Sender)
 void __fastcall TfmMain::btAbl2TurnsClick(TObject *Sender)
 	{
 	sendClick(btAbl2Turns);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btHeartbeatClick(TObject *Sender)
+	{
+	sendClick(btHeartbeat);
 	}
 //---------------------------------------------------------------------------
 

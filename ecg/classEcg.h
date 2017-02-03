@@ -18,11 +18,11 @@ public:
 	cEcg();
 	~cEcg();
 
-__property cData& data 		 = { read=get_data };
-__property cRpeaks& rpeaks	 = { read=get_rpeaks };
-__property cTurns& turns	 = { read=get_turns };
-__property cQrs& qrs 		 = { read=get_qrs };
-__property cHeartbeat& heart = { read=get_heart };
+__property cData& data 		  = { read=get_data };
+__property cRpeaks& rpeaks	  = { read=get_rpeaks };
+__property cTurns& turns	  = { read=get_turns };
+__property cQrs& qrs 		  = { read=get_qrs };
+__property cHeartbeats& heart = { read=get_heart };
 
 private:
 	cData*		fdata;
@@ -37,8 +37,8 @@ private:
 	cQrs*		fqrs;
 	cQrs&		get_qrs();
 
-	cHeartbeat*	fheart;
-	cHeartbeat&	get_heart();
+	cHeartbeats*	fheart;
+	cHeartbeats&	get_heart();
 
 
 	};

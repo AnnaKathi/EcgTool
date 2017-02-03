@@ -258,104 +258,114 @@ object fmMain: TfmMain
       OnClick = btRpeaksClick
     end
     object btDerivates: TButton
-      Tag = 6
+      Tag = 7
       Left = 144
       Top = 98
       Width = 125
       Height = 25
       Caption = '&q - 1. Ableitung bilden'
-      TabOrder = 8
+      TabOrder = 9
       OnClick = btDerivatesClick
     end
     object btAblRunden: TButton
-      Tag = 7
+      Tag = 8
       Left = 144
       Top = 129
       Width = 125
       Height = 25
       Caption = '&w - Werte runden'
-      TabOrder = 9
+      TabOrder = 10
       OnClick = btAblRundenClick
     end
     object btAblMovAv: TButton
-      Tag = 8
+      Tag = 9
       Left = 144
       Top = 159
       Width = 125
       Height = 25
       Caption = '&e - Kurve gl'#228'tten'
-      TabOrder = 10
+      TabOrder = 11
       OnClick = btAblMovAvClick
     end
     object btAblCut: TButton
-      Tag = 9
+      Tag = 10
       Left = 144
       Top = 190
       Width = 125
       Height = 25
       Caption = '&r - Kurve schneiden'
-      TabOrder = 11
+      TabOrder = 12
       OnClick = btAblCutClick
     end
     object btAblTurns: TButton
-      Tag = 10
+      Tag = 11
       Left = 144
       Top = 221
       Width = 125
       Height = 25
       Caption = '&t - R-Peaks'
-      TabOrder = 12
+      TabOrder = 13
       OnClick = btAblTurnsClick
     end
     object btAbl2: TButton
-      Tag = 11
+      Tag = 12
       Left = 278
       Top = 98
       Width = 125
       Height = 25
       Caption = '&a - 2. Ableitung bilden'
-      TabOrder = 13
+      TabOrder = 14
       OnClick = btAbl2Click
     end
     object btAbl2Runden: TButton
-      Tag = 12
+      Tag = 13
       Left = 278
       Top = 129
       Width = 125
       Height = 25
       Caption = '&s - Werte runden'
-      TabOrder = 14
+      TabOrder = 15
       OnClick = btAbl2RundenClick
     end
     object btAbl2MovAv: TButton
-      Tag = 13
+      Tag = 14
       Left = 278
       Top = 159
       Width = 125
       Height = 25
       Caption = '&d - Kurve gl'#228'tten'
-      TabOrder = 15
+      TabOrder = 16
       OnClick = btAbl2MovAvClick
     end
     object btAbl2Cut: TButton
-      Tag = 14
+      Tag = 15
       Left = 278
       Top = 190
       Width = 125
       Height = 25
       Caption = '&f - Kurve schneiden'
-      TabOrder = 16
+      TabOrder = 17
       OnClick = btAbl2CutClick
     end
     object btAbl2Turns: TButton
-      Tag = 15
+      Tag = 16
       Left = 278
       Top = 221
       Width = 125
       Height = 25
       Caption = '&g - R-Peaks'
-      TabOrder = 17
+      TabOrder = 18
       OnClick = btAbl2TurnsClick
+    end
+    object btHeartbeat: TButton
+      Tag = 6
+      Left = 8
+      Top = 252
+      Width = 125
+      Height = 25
+      Caption = '&6 - Heartbeat'
+      TabOrder = 8
+      OnClick = btHeartbeatClick
     end
   end
   object pnClient: TPanel
