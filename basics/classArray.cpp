@@ -63,10 +63,18 @@ bool cArray::resetValues(iarray_t array, sArrayCha& cha)
 	return ok();
 	}
 //---------------------------------------------------------------------------
+void cArray::clearImg(TImage* img)
+	{
+	if (img == NULL) return; 
+	img->Canvas->Brush->Color = clWhite;
+	img->Canvas->FillRect(Rect(0, 0, img->Picture->Width, img->Picture->Height));
+	img->Canvas->Pen->Color = clBlack;
+	}
+//---------------------------------------------------------------------------
 bool cArray::displayPoints(iarray_t curve, iarray_t points, TImage* img)
 	{
 	//erste Kurve zeichnen
-	if (!display(curve, img)) return false;
+	if (!redisplay(curve, img)) return false;
 
 	float range_x  = farr_charac.BisIdx  - farr_charac.VonIdx;
 	float range_y  = farr_charac.MaxWert - farr_charac.MinWert;
@@ -91,6 +99,15 @@ bool cArray::displayPoints(iarray_t curve, iarray_t points, TImage* img)
 		}
 
 	img->Canvas->Brush->Color = clBlack;
+	return ok();
+	}
+//---------------------------------------------------------------------------
+bool cArray::redisplay(iarray_t array, TImage* img)
+	{
+	//Kombination aus clearImg und display, vereinfacht den Aufruf in höheren Klassen
+	if (img == NULL) return fail(1, "Es wurde kein Bild übergeben.");
+	clearImg(img);
+	return display(array, img);
 	}
 //---------------------------------------------------------------------------
 bool cArray::display(iarray_t array, TImage* img)
@@ -113,10 +130,10 @@ bool cArray::display(iarray_t array, TImage* img)
 	float factor_x = (float)img->Width / range_x;
 	float factor_y = (float)img->Height / range_y;
 
-	//--- Bild vorbereiten
-	img->Canvas->Brush->Color = clWhite;
-	img->Canvas->FillRect(Rect(0, 0, img->Picture->Width, img->Picture->Height));
-	img->Canvas->Pen->Color = clBlack;
+	//--> Bild vorbereiten, wird hier nicht gemacht, damit z.B. für den
+	//Standardherzschlag mehrere Kurven übereinander gezeichnet werden können
+	//d.h. das Löschen von gezeichnetem Inhalt liegt in der Verantwortung des
+	//Aufrufenden
 
 	//--- Map-Werte einzeichnen
 	int x, y1, y2;
@@ -150,64 +167,6 @@ bool cArray::display(iarray_t array, TImage* img)
 
 
 	return ok();
-	}
-//---------------------------------------------------------------------------
-#define MAX_NO_STELLEN 20
-iarray_t cArray::roundAt(iarray_t array, int nachkommastellen)
-	{
-	/* Werte sind in float abgespeichert, z.B. 0,009816540195
-	 * Beispiel: auf 0,000x runden:
-	 * 		0,0098 16540195
-	 *		0,000x ab hier ignorieren
-	 */
-
-	//TODO: ist das überhaupt sinnvoll????
-
-	farr.clear();
-	if (nachkommastellen < 0)
-		{
-		fail(1, "Die Zahl der Nachkommastellen ist ungültig: " + String(nachkommastellen));
-		return farr;
-		}
-
-	if (nachkommastellen > MAX_NO_STELLEN)
-		{
-		String m =
-			"Die Anzahl der Nachkommastellen ist größer als die maximal mögliche Anzahl. Stellen = "
-			+ String(nachkommastellen) + ", Maximal möglich = " + String(MAX_NO_STELLEN);
-		fail(1, m);
-		return farr;
-		}
-
-	farr = array;
-
-	String temp, zahl, begin, middle, end;
-	char nachkomma[MAX_NO_STELLEN+1];
-	float wert;
-	int pos, n;
-	for (int i = 0; i < farr.size(); i++)
-		{
-		wert = farr[i][1]; //lead 1
-		temp = String(wert);
-
-		pos    = temp.Pos(",");
-		zahl   = temp.SubString(0, pos-1);
-		begin  = temp.SubString(pos+1, nachkommastellen-1);
-		middle = temp.SubString(pos+1+nachkommastellen-1, 1);
-		end    = temp.SubString(pos+1+nachkommastellen, 1);
-
-		n = end.ToIntDef(0);
-		if (n > 5) //aufrunden
-			middle = String(middle.ToInt() + 1);
-
-		temp = zahl + "," + begin + middle;
-		wert = temp.ToDouble();
-
-		farr[i][1] = wert;
-		}
-
-	ok();
-	return farr;
 	}
 //---------------------------------------------------------------------------
 #define MAX_NO_MOV_AV 250
@@ -350,7 +309,7 @@ iarray_t cArray::cut(iarray_t array, int vonMsec, int bisMsec)
 		{
 		zeit = itr_rev->first;
 		if (zeit < vonMsec) break;    //Wert liegt nach gewünschtem (reverse) Abschnitt
-		if (zeit > bisMsec)
+		if (zeit >= bisMsec)
 			{
 			//Wert liegt vor gewünschtem (reverse) Abschnitt
 			itr_rev++;

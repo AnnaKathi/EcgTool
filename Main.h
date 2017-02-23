@@ -29,20 +29,17 @@ private:
 
 	void 		Print(char* msg, ...);
 	void		ReadFile();
-	void		Runden();
 	void		MovingAv();
 	void		CutCurve();
 	void		FindRpeaks();
 	void		Heartbeat();
 
 	void		Derivate1();
-	void		Abl1Runden();
 	void		Abl1MovingAv();
 	void		Abl1CutCurve();
 	void		Abl1Rpeaks();
 
 	void		Derivate2();
-	void		Abl2Runden();
 	void		Abl2MovingAv();
 	void		Abl2CutCurve();
 	void 		Abl2Rpeaks();
@@ -78,7 +75,6 @@ __published:	// IDE-verwaltete Komponenten
 	TTimer *tStartup;
 	TOpenDialog *OpenDialog;
 	TButton *btMovAv;
-	TButton *btRunden;
 	TButton *btCut;
 	TButton *btRpeaks;
 	TButton *btDerivates;
@@ -86,12 +82,10 @@ __published:	// IDE-verwaltete Komponenten
 	TImage *img2;
 	TImage *img3;
 	TBevel *Bevel5;
-	TButton *btAblRunden;
 	TButton *btAblMovAv;
 	TButton *btAblCut;
 	TButton *btAblTurns;
 	TButton *btAbl2;
-	TButton *btAbl2Runden;
 	TButton *btAbl2MovAv;
 	TButton *btAbl2Cut;
 	TButton *btAbl2Turns;
@@ -107,16 +101,13 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btReadClick(TObject *Sender);
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall btMovAvClick(TObject *Sender);
-	void __fastcall btRundenClick(TObject *Sender);
 	void __fastcall btCutClick(TObject *Sender);
 	void __fastcall btRpeaksClick(TObject *Sender);
 	void __fastcall btDerivatesClick(TObject *Sender);
-	void __fastcall btAblRundenClick(TObject *Sender);
 	void __fastcall btAblMovAvClick(TObject *Sender);
 	void __fastcall btAblCutClick(TObject *Sender);
 	void __fastcall btAblTurnsClick(TObject *Sender);
 	void __fastcall btAbl2Click(TObject *Sender);
-	void __fastcall btAbl2RundenClick(TObject *Sender);
 	void __fastcall btAbl2MovAvClick(TObject *Sender);
 	void __fastcall btAbl2CutClick(TObject *Sender);
 	void __fastcall btAbl2TurnsClick(TObject *Sender);

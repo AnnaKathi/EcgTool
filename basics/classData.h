@@ -31,8 +31,7 @@ public:
 
 	sArrayCha	farr_charac; //todo getter und setter machen
 	bool		getFile(String file, String delim, int vonMsec, int bisMsec);
-	bool		display(TImage* img);
-	bool		roundAt(int nachkommastellen);
+	bool		redisplay(TImage* img);
 	bool		movingAv(int window, bool CalcBegin = true);
 	int			cut(int vonMsec, int bisMsec);
 

@@ -18,11 +18,11 @@ iarray_t cRpeaks::find(iarray_t array, TImage* img1, TImage* img2, TProgressBar*
 	{
 	iarray_t desc = fmath->resort(array, false);
 	//iarray_t desc = fmath->bubbleSortDesc(array, job);
-	farray->display(desc, img1);
+	farray->redisplay(desc, img1);
 
 	farray->resetValues(desc, charac);
 
-	//Schwellenwert verwenden, der R-Peak macht vom Herzschlag ca. 5% aus
+	//Schwellenwert verwenden, der R-Peak macht vom Herzschlag ca. x% aus
 	float anteil_qrs = 0.025;
 
 	iarray_t peaks; peaks.clear();
@@ -44,8 +44,8 @@ iarray_t cRpeaks::find(iarray_t array, TImage* img1, TImage* img2, TProgressBar*
 		{
 		rpeakZeit = peaks[0][0];
 		rpeakWert = peaks[0][1];
-		rp[rp_count].push_back(rpeakZeit);
-		rp[rp_count].push_back(rpeakWert);
+		rp[rpeakZeit].push_back(rpeakZeit);
+		rp[rpeakZeit].push_back(rpeakWert);
 		rp_count++;
 
 		msec_von = rpeakZeit - 100;
@@ -69,7 +69,26 @@ iarray_t cRpeaks::find(iarray_t array, TImage* img1, TImage* img2, TProgressBar*
 		peaks = arrneu;
 		}
 
-	return rp;
+	//als Key wurde für rp der Zeitwert des R-Peaks verwendet, hier muss das
+	//Array deswegen noch einmal umgeschrieben werden, sodass korrekte Indizes
+	//vorhanden sind auf die sich aufbauende Funktionen beziehen können
+	iarray_t rr; rr.clear();
+	int key, zeit;
+	float wert;
+	int ix = 0;
+	for (iarray_itr itr = rp.begin(); itr != rp.end(); itr++)
+		{
+		key = itr->first;
+		ilist_t& v = itr->second;
+		zeit = v[0];
+		wert = v[1];
+
+		rr[ix].push_back(zeit);
+		rr[ix].push_back(wert);
+		ix++;
+		}
+
+	return rr;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

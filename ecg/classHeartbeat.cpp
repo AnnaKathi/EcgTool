@@ -13,69 +13,92 @@ cHeartbeats::~cHeartbeats()
 	{
 	}
 //---------------------------------------------------------------------------
-bool cHeartbeats::build(iarray_t curve, iarray_t rpeaks)
+bool cHeartbeats::reset(iarray_t curve)
 	{
-	//von r-peak bis r-peak ist jeweils ein Herzschlag
-	fheartbeats.clear();
-	int von, bis;
-	bool first = true;
-	int ix = 0;
-	iarray_t beat;
-	for (iarray_itr itr = rpeaks.begin(); itr != rpeaks.end(); itr++)
-		{
-		ilist_t& v = itr->second;
-		bis = v[0]; //Zeitwert aktueller R-Peak
-		if (first)
-			{
-			//Anfang bis zum 1. R-Peak wegschneiden
-			curve = farray.cut(curve, 0, bis);
-			von   = bis;
-			first = false;
-			continue;
-			}
+	//erst R-Peaks bilden
+	cRpeaks rp;
+	iarray_t rpeaks = rp.find(curve, NULL, NULL, NULL);
 
-		beat = farray.cut(curve, von, bis);
-		for (int n = 0; n < beat.size(); n++)
-			{
-			fheartbeats[ix].push_back(v[0]);
-			fheartbeats[ix].push_back(v[1]);
-			}
-
-		ix++;
-		von = bis;
-		}
-
-	if (ix > 0)
-		return true;
-	else
-    	return false;
+	return reset(curve, rpeaks);
 	}
 //---------------------------------------------------------------------------
-iarray_t cHeartbeats::first()
+bool cHeartbeats::reset(iarray_t curve, iarray_t rpeaks)
 	{
-	findex = -1; //next setzt das eins hoch
+	//von r-peak bis r-peak ist jeweils ein Herzschlag
+	fcurve  = curve;
+	frpeaks = rpeaks;
+
+	if (!farray.resetValues(fcurve, charac))
+		return fail(1, "Die Eigenschaftswerte konnten nicht gesetzt werden.");
+	farray.farr_charac = charac;
+
+	findex = 0;
+	return ok();
+	}
+//---------------------------------------------------------------------------
+bool cHeartbeats::first(iarray_t curve)
+	{
+	//erst R-Peaks bilden
+	cRpeaks rp;
+	iarray_t rpeaks = rp.find(curve, NULL, NULL, NULL);
+
+	return first(curve, rpeaks);
+	}
+//---------------------------------------------------------------------------
+bool cHeartbeats::first(iarray_t curve, iarray_t rpeaks)
+	{
+	if (!reset(curve, rpeaks))
+		return fail(1, "Reset konnte nicht durchgeführt werden");
+
 	return next();
 	}
 //---------------------------------------------------------------------------
-iarray_t cHeartbeats::next()
+bool cHeartbeats::next()
 	{
+	//den nächsten Herzschlag "rausschneiden" und in fheartbeat hinterlegen
+	//den R-Peak[0] kann man überspringen, weil dieser den Anfang der Kurve,
+	//und damit einen unvollständigen Herzschlag darstellt
 	findex++;
+	if (findex == frpeaks.size())
+		return fail(0, "Ende der Kurve erreicht"); //letzter Abschnitt erreicht
+	else if (findex >= frpeaks.size())
+		return fail(2, "Index überschritten"); //das sollte eig nicht passieren
 
-	iarray_t beat; beat.clear();
-	int key;
-	int ix = 0;
-	for (iarray_itr itr = fheartbeats.begin(); itr != fheartbeats.end(); itr++)
-		{
-		key = itr->first;
-		if (key != findex) continue;
+	int von = frpeaks[findex-1][0]; //Zeitwert vorangegangener R-Peak
+	int bis = frpeaks[findex][0];	//Zeitwert aktueller R-Peak
 
-		ilist_t& v = itr->second;
-		beat[ix].push_back(v[0]);
-		beat[ix].push_back(v[1]);
-		ix++;
-		}
+	iarray_t rp = fcurve;
+	rp = farray.cut(rp, charac.VonMsec, von-1);
+	if (rp.size() <= 0)
+		return fail(2, "Fehler beim Erstellen des Herzschlag-Arrays (von)");
 
-	return beat;
+	rp = farray.cut(rp, bis-1, charac.BisMsec);
+	if (rp.size() <= 0)
+		return fail(2, "Fehler beim Erstellen des Herzschlag-Arrays (bis)");
+
+	fheartbeat = rp;
+	return ok();
+	}
+//---------------------------------------------------------------------------
+bool cHeartbeats::end()
+	{
+	if (findex >= frpeaks.size())
+		return true;
+	else
+		return false;
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/********************   private Funktionen   *******************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/**************   getter und setter   **************************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+iarray_t cHeartbeats::get_heartbeat()
+	{
+	return fheartbeat;
 	}
 //---------------------------------------------------------------------------
 

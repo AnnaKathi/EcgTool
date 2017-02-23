@@ -27,10 +27,12 @@ public:
 	sArrayCha	farr_charac; //todo getter und setter machen
 
 	bool 		resetValues(iarray_t array, sArrayCha& cha);
+
+	void 		clearImg(TImage* img);
 	bool 		display(iarray_t array, TImage* img);
+	bool 		redisplay(iarray_t array, TImage* img); //ruft erst clear und dann display auf
 	bool 		displayPoints(iarray_t curve, iarray_t points, TImage* img);
 
-	iarray_t 	roundAt(iarray_t array, int nachkommastellen);
 	iarray_t 	movingAv(iarray_t array, int window, bool CalcBegin);
 	iarray_t 	cut(iarray_t array, int vonMsec, int bisMsec);
 

@@ -31,9 +31,8 @@ public:
 	sArrayCha	farr_charac; //todo getter und setter machen
 
 	bool		build(iarray_t array);
-	bool 		display(TImage* img);
+	bool 		redisplay(TImage* img);
 
-	bool		roundAt(int nachkommastellen);
 	bool		movingAv(int window, bool CalcBegin = true);
 	int			cut(int vonMsec, int bisMsec);
 	

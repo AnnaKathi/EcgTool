@@ -218,153 +218,123 @@ object fmMain: TfmMain
       OnClick = btReadClick
     end
     object btMovAv: TButton
-      Tag = 3
-      Left = 8
-      Top = 159
-      Width = 125
-      Height = 25
-      Caption = '&3 - Kurve gl'#228'tten'
-      TabOrder = 5
-      OnClick = btMovAvClick
-    end
-    object btRunden: TButton
       Tag = 2
       Left = 8
-      Top = 128
+      Top = 127
       Width = 125
       Height = 25
-      Caption = '&2 - Werte runden'
+      Caption = '&2 - Kurve gl'#228'tten'
       TabOrder = 4
-      OnClick = btRundenClick
+      OnClick = btMovAvClick
     end
     object btCut: TButton
-      Tag = 4
+      Tag = 3
       Left = 8
-      Top = 190
+      Top = 158
       Width = 125
       Height = 25
-      Caption = '&4 - Kurve schneiden'
-      TabOrder = 6
+      Caption = '&3 - Kurve schneiden'
+      TabOrder = 5
       OnClick = btCutClick
     end
     object btRpeaks: TButton
-      Tag = 5
+      Tag = 4
       Left = 8
-      Top = 221
+      Top = 189
       Width = 125
       Height = 25
-      Caption = '&5 - R-Peaks'
-      TabOrder = 7
+      Caption = '&4 - R-Peaks'
+      TabOrder = 6
       OnClick = btRpeaksClick
     end
     object btDerivates: TButton
-      Tag = 7
+      Tag = 6
       Left = 144
       Top = 98
       Width = 125
       Height = 25
       Caption = '&q - 1. Ableitung bilden'
-      TabOrder = 9
+      TabOrder = 8
       OnClick = btDerivatesClick
     end
-    object btAblRunden: TButton
-      Tag = 8
-      Left = 144
-      Top = 129
-      Width = 125
-      Height = 25
-      Caption = '&w - Werte runden'
-      TabOrder = 10
-      OnClick = btAblRundenClick
-    end
     object btAblMovAv: TButton
-      Tag = 9
+      Tag = 7
       Left = 144
-      Top = 159
+      Top = 127
       Width = 125
       Height = 25
-      Caption = '&e - Kurve gl'#228'tten'
-      TabOrder = 11
+      Caption = '&w - Kurve gl'#228'tten'
+      TabOrder = 9
       OnClick = btAblMovAvClick
     end
     object btAblCut: TButton
-      Tag = 10
+      Tag = 8
       Left = 144
-      Top = 190
+      Top = 158
       Width = 125
       Height = 25
-      Caption = '&r - Kurve schneiden'
-      TabOrder = 12
+      Caption = '&e - Kurve schneiden'
+      TabOrder = 10
       OnClick = btAblCutClick
     end
     object btAblTurns: TButton
-      Tag = 11
+      Tag = 9
       Left = 144
-      Top = 221
+      Top = 189
       Width = 125
       Height = 25
-      Caption = '&t - R-Peaks'
-      TabOrder = 13
+      Caption = '&r - R-Peaks'
+      TabOrder = 11
       OnClick = btAblTurnsClick
     end
     object btAbl2: TButton
-      Tag = 12
+      Tag = 10
       Left = 278
       Top = 98
       Width = 125
       Height = 25
       Caption = '&a - 2. Ableitung bilden'
-      TabOrder = 14
+      TabOrder = 12
       OnClick = btAbl2Click
     end
-    object btAbl2Runden: TButton
-      Tag = 13
-      Left = 278
-      Top = 129
-      Width = 125
-      Height = 25
-      Caption = '&s - Werte runden'
-      TabOrder = 15
-      OnClick = btAbl2RundenClick
-    end
     object btAbl2MovAv: TButton
-      Tag = 14
+      Tag = 11
       Left = 278
-      Top = 159
+      Top = 127
       Width = 125
       Height = 25
-      Caption = '&d - Kurve gl'#228'tten'
-      TabOrder = 16
+      Caption = '&s - Kurve gl'#228'tten'
+      TabOrder = 13
       OnClick = btAbl2MovAvClick
     end
     object btAbl2Cut: TButton
-      Tag = 15
+      Tag = 12
       Left = 278
-      Top = 190
+      Top = 158
       Width = 125
       Height = 25
-      Caption = '&f - Kurve schneiden'
-      TabOrder = 17
+      Caption = '&d - Kurve schneiden'
+      TabOrder = 14
       OnClick = btAbl2CutClick
     end
     object btAbl2Turns: TButton
-      Tag = 16
+      Tag = 13
       Left = 278
-      Top = 221
+      Top = 189
       Width = 125
       Height = 25
-      Caption = '&g - R-Peaks'
-      TabOrder = 18
+      Caption = '&f - R-Peaks'
+      TabOrder = 15
       OnClick = btAbl2TurnsClick
     end
     object btHeartbeat: TButton
-      Tag = 6
+      Tag = 5
       Left = 8
-      Top = 252
+      Top = 220
       Width = 125
       Height = 25
-      Caption = '&6 - Heartbeat'
-      TabOrder = 8
+      Caption = '&5 - Heartbeat'
+      TabOrder = 7
       OnClick = btHeartbeatClick
     end
   end

@@ -20,24 +20,9 @@ bool cDerivate::build(iarray_t array)
 	return ok();
 	}
 //---------------------------------------------------------------------------
-bool cDerivate::display(TImage* img)
+bool cDerivate::redisplay(TImage* img)
 	{
-	return farray->display(farr, img);
-	}
-//---------------------------------------------------------------------------
-bool cDerivate::roundAt(int nachkommastellen)
-	{
-	//TODO: ist das überhaupt sinnvoll????
-	farr = farray->roundAt(farr, nachkommastellen);
-
-	if (!farray->error)
-		{
-		//die Werte inputVonIdx, inputBisIdx, inputVonMsec, inputBisMsec,
-		//inputMinWert und inputMaxWert müssen neu gesetzt werden
-		farray->resetValues(farr, farr_charac);
-		}
-
-	return !farray->error;
+	return farray->redisplay(farr, img);
 	}
 //---------------------------------------------------------------------------
 bool cDerivate::movingAv(int window, bool CalcBegin) //default CalcBegin=true

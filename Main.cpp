@@ -128,7 +128,7 @@ void TfmMain::ReadFile()
 	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
 
 	Print("...finished readFile");
-	alg1.ecg.data.display(imgEcg);
+	alg1.ecg.data.redisplay(imgEcg);
 
 	img2->Canvas->Brush->Color = clWhite;
 	img2->Canvas->FillRect(Rect(0, 0, img2->Picture->Width, img2->Picture->Height));
@@ -141,28 +141,6 @@ void TfmMain::ReadFile()
 	img4->Canvas->Brush->Color = clWhite;
 	img4->Canvas->FillRect(Rect(0, 0, img4->Picture->Width, img4->Picture->Height));
 	img4->Canvas->Pen->Color = clBlack;
-	}
-//---------------------------------------------------------------------------
-void TfmMain::Runden()
-	{
-	Print("rounding values...");
-	int stellen = DlgRequest(this, "Anzahl Nachkommastellen").ToDouble();
-	if (stellen <= 0) return;
-
-	cData& data = alg1.ecg.data;
-	if (!data.roundAt(stellen))
-		{
-		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
-		return;
-		}
-
-	Print("\tDatensätze im Array: %d", data.farr_charac.Number);
-	Print("\tIndex im Array: %d - %d", data.farr_charac.VonIdx, data.farr_charac.BisIdx);
-	Print("\tMSek. im Array: %d - %d", data.farr_charac.VonMsec, data.farr_charac.BisMsec);
-	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
-
-	Print("...finished rounding values");
-	alg1.ecg.data.display(imgEcg);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::MovingAv()
@@ -186,7 +164,7 @@ void TfmMain::MovingAv()
 	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
 
 	Print("...finished moving average");
-	alg1.ecg.data.display(imgEcg);
+	alg1.ecg.data.redisplay(imgEcg);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::CutCurve()
@@ -212,7 +190,7 @@ void TfmMain::CutCurve()
 	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
 
 	Print("...finished cutting");
-	alg1.ecg.data.display(imgEcg);
+	alg1.ecg.data.redisplay(imgEcg);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::FindRpeaks()
@@ -223,6 +201,22 @@ void TfmMain::FindRpeaks()
 	iarray_t rp = rpeaks.find(alg1.ecg.data.data_array, img2, img3, pbJob);
 
 	farray.displayPoints(alg1.ecg.data.data_array, rp, imgEcg);
+
+	//Ausgabe der gefundenen Werte
+	Print("Gefundene R-Peaks:");
+	Print("\tIndex \tZeit \tWert");
+	Print("\t--------------------------------");
+	int key, zeit;
+	float wert;
+	for (iarray_itr itr = rp.begin(); itr != rp.end(); itr++)
+		{
+		key = itr->first;
+		ilist_t& v = itr->second;
+		zeit = v[0];
+		wert = v[1];
+
+		Print("\t%d \t%d \t%.4f", key, zeit, wert);
+		}
 
 	Print("...finished r-peaks");
 	}
@@ -235,17 +229,26 @@ void TfmMain::Heartbeat()
 	farray.displayPoints(alg1.ecg.data.data_array, rp, imgEcg);
 
 	cHeartbeats h = alg1.ecg.heart;
-	if (!h.build(alg1.ecg.data.data_array, rp))
+	if (!h.reset(alg1.ecg.data.data_array))
 		{
 		Print("## Fehler aufgetreten: %d, %s", h.error_code, h.error_msg);
 		return;
 		}
 
-	for (h.first(); ; h.next())
+	int count = 0;
+	while (h.next())
 		{
-		//todo...
+		farray.display(h.heartbeat, img4);
+		count++;
 		}
 
+	if (h.error_code > 0)
+		{
+		Print("## Fehler aufgetreten: %d, %s", h.error_code, h.error_msg);
+		return;
+		}
+
+	Print("\t%d Heartbeats gefunden", count);
 	Print("...finished heartbeat");
 	}
 //---------------------------------------------------------------------------
@@ -264,31 +267,9 @@ void TfmMain::Derivate1()
 		return;
 		}
 
-	alg1.ecg.data.derivate1.display(img2);
+	alg1.ecg.data.derivate1.redisplay(img2);
 
 	Print("...Berechnung der Ableitungen abgeschlossen");
-	}
-//---------------------------------------------------------------------------
-void TfmMain::Abl1Runden()
-	{
-	Print("ERSTE ABLEITUNG rounding values...");
-	int stellen = DlgRequest(this, "Anzahl Nachkommastellen").ToDouble();
-	if (stellen <= 0) return;
-
-	cDerivate& deriv = alg1.ecg.data.derivate1;
-	if (!deriv.roundAt(stellen))
-		{
-		Print("## Fehler aufgetreten: %d, %s", deriv.error_code, deriv.error_msg);
-		return;
-		}
-
-	Print("\tDatensätze im Array: %d", deriv.farr_charac.Number);
-	Print("\tIndex im Array: %d - %d", deriv.farr_charac.VonIdx, deriv.farr_charac.BisIdx);
-	Print("\tMSek. im Array: %d - %d", deriv.farr_charac.VonMsec, deriv.farr_charac.BisMsec);
-	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
-
-	Print("...finished rounding values");
-	alg1.ecg.data.derivate1.display(img2);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::Abl1MovingAv()
@@ -312,7 +293,7 @@ void TfmMain::Abl1MovingAv()
 	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
 
 	Print("...finished moving average");
-	alg1.ecg.data.derivate1.display(img2);
+	alg1.ecg.data.derivate1.redisplay(img2);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::Abl1CutCurve()
@@ -338,7 +319,7 @@ void TfmMain::Abl1CutCurve()
 	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
 
 	Print("...finished cutting");
-	alg1.ecg.data.derivate1.display(img2);
+	alg1.ecg.data.derivate1.redisplay(img2);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::Abl1Rpeaks()
@@ -349,6 +330,22 @@ void TfmMain::Abl1Rpeaks()
 	iarray_t rp = rpeaks.find(alg1.ecg.data.derivate1.deriv_array, img3, img3, pbJob);
 
 	farray.displayPoints(alg1.ecg.data.derivate1.deriv_array, rp, img2);
+
+	//Ausgabe der gefundenen Werte
+	Print("Gefundene R-Peaks:");
+	Print("\tIndex \tZeit \tWert");
+	Print("\t--------------------------------");
+	int key, zeit;
+	float wert;
+	for (iarray_itr itr = rp.begin(); itr != rp.end(); itr++)
+		{
+		key = itr->first;
+		ilist_t& v = itr->second;
+		zeit = v[0];
+		wert = v[1];
+
+		Print("\t%d \t%d \t%.4f", key, zeit, wert);
+		}
 
 	Print("...finished r-peaks");
 	}
@@ -368,31 +365,9 @@ void TfmMain::Derivate2()
 		return;
 		}
 
-	alg1.ecg.data.derivate2.display(img3);
+	alg1.ecg.data.derivate2.redisplay(img3);
 
 	Print("...Berechnung der Ableitungen abgeschlossen");
-	}
-//---------------------------------------------------------------------------
-void TfmMain::Abl2Runden()
-	{
-	Print("ZWEITE ABLEITUNG rounding values...");
-	int stellen = DlgRequest(this, "Anzahl Nachkommastellen").ToDouble();
-	if (stellen <= 0) return;
-
-	cDerivate& deriv = alg1.ecg.data.derivate2;
-	if (!deriv.roundAt(stellen))
-		{
-		Print("## Fehler aufgetreten: %d, %s", deriv.error_code, deriv.error_msg);
-		return;
-		}
-
-	Print("\tDatensätze im Array: %d", deriv.farr_charac.Number);
-	Print("\tIndex im Array: %d - %d", deriv.farr_charac.VonIdx, deriv.farr_charac.BisIdx);
-	Print("\tMSek. im Array: %d - %d", deriv.farr_charac.VonMsec, deriv.farr_charac.BisMsec);
-	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
-
-	Print("...finished rounding values");
-	alg1.ecg.data.derivate2.display(img3);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::Abl2MovingAv()
@@ -416,7 +391,7 @@ void TfmMain::Abl2MovingAv()
 	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
 
 	Print("...finished moving average");
-	alg1.ecg.data.derivate2.display(img3);
+	alg1.ecg.data.derivate2.redisplay(img3);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::Abl2CutCurve()
@@ -442,7 +417,7 @@ void TfmMain::Abl2CutCurve()
 	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
 
 	Print("...finished cutting");
-	alg1.ecg.data.derivate2.display(img3);
+	alg1.ecg.data.derivate2.redisplay(img3);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::Abl2Rpeaks()
@@ -453,6 +428,22 @@ void TfmMain::Abl2Rpeaks()
 	iarray_t rp = rpeaks.find(alg1.ecg.data.derivate2.deriv_array, img3, img4, pbJob);
 
 	farray.displayPoints(alg1.ecg.data.derivate2.deriv_array, rp, img3);
+
+	//Ausgabe der gefundenen Werte
+	Print("Gefundene R-Peaks:");
+	Print("\tIndex \tZeit \tWert");
+	Print("\t--------------------------------");
+	int key, zeit;
+	float wert;
+	for (iarray_itr itr = rp.begin(); itr != rp.end(); itr++)
+		{
+		key = itr->first;
+		ilist_t& v = itr->second;
+		zeit = v[0];
+		wert = v[1];
+
+		Print("\t%d \t%d \t%.4f", key, zeit, wert);
+		}
 
 	Print("...finished r-peaks");
 	}
@@ -507,21 +498,18 @@ void TfmMain::sendClick(TButton* bt)
 		switch (bt->Tag)
 			{
 			case  1: ReadFile(); 		break;
-			case  2: Runden();			break;
-			case  3: MovingAv();		break;
-			case  4: CutCurve();		break;
-			case  5: FindRpeaks();		break;
-			case  6: Heartbeat();		break;
-			case  7: Derivate1();		break;
-			case  8: Abl1Runden();		break;
-			case  9: Abl1MovingAv();	break;
-			case 10: Abl1CutCurve();	break;
-			case 11: Abl1Rpeaks(); 		break;
-			case 12: Derivate2();		break;
-			case 13: Abl2Runden();		break;
-			case 14: Abl2MovingAv();	break;
-			case 15: Abl2CutCurve();	break;
-			case 16: Abl2Rpeaks();		break;
+			case  2: MovingAv();		break;
+			case  3: CutCurve();		break;
+			case  4: FindRpeaks();		break;
+			case  5: Heartbeat();		break;
+			case  6: Derivate1();		break;
+			case  7: Abl1MovingAv();	break;
+			case  8: Abl1CutCurve();	break;
+			case  9: Abl1Rpeaks(); 		break;
+			case 10: Derivate2();		break;
+			case 11: Abl2MovingAv();	break;
+			case 12: Abl2CutCurve();	break;
+			case 13: Abl2Rpeaks();		break;
 			//default, nicht nötig
 			}
 
@@ -537,11 +525,6 @@ void TfmMain::sendClick(TButton* bt)
 void __fastcall TfmMain::btReadClick(TObject *Sender)
 	{
 	sendClick(btRead);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::btRundenClick(TObject *Sender)
-	{
-	sendClick(btRunden);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btMovAvClick(TObject *Sender)
@@ -564,11 +547,6 @@ void __fastcall TfmMain::btDerivatesClick(TObject *Sender)
 	sendClick(btDerivates);
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::btAblRundenClick(TObject *Sender)
-	{
-	sendClick(btAblRunden);
-	}
-//---------------------------------------------------------------------------
 void __fastcall TfmMain::btAblMovAvClick(TObject *Sender)
 	{
 	sendClick(btAblMovAv);
@@ -587,11 +565,6 @@ void __fastcall TfmMain::btAblTurnsClick(TObject *Sender)
 void __fastcall TfmMain::btAbl2Click(TObject *Sender)
 	{
     sendClick(btAbl2);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::btAbl2RundenClick(TObject *Sender)
-	{
-	sendClick(btAbl2Runden);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btAbl2MovAvClick(TObject *Sender)

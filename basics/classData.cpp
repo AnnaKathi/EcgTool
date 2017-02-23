@@ -93,24 +93,9 @@ bool cData::getFile(String file, String delim, int vonMsec, int bisMsec)
 	return ok();
 	}
 //---------------------------------------------------------------------------
-bool cData::display(TImage* img)
+bool cData::redisplay(TImage* img)
 	{
-    return farray->display(farr, img);
-	}
-//---------------------------------------------------------------------------
-bool cData::roundAt(int nachkommastellen)
-	{
-	//TODO: ist das überhaupt sinnvoll????
-	farr = farray->roundAt(farr, nachkommastellen);
-
-	if (!farray->error)
-		{
-		//die Werte inputVonIdx, inputBisIdx, inputVonMsec, inputBisMsec,
-		//inputMinWert und inputMaxWert müssen neu gesetzt werden
-		farray->resetValues(farr, farr_charac);
-		}
-
-	return !farray->error;
+    return farray->redisplay(farr, img);
 	}
 //---------------------------------------------------------------------------
 bool cData::movingAv(int window, bool CalcBegin) //default CalcBegin=true
@@ -143,7 +128,7 @@ int cData::cut(int vonMsec, int bisMsec)
 //---------------------------------------------------------------------------
 bool cData::buildDerivates()
 	{
-	if (farr.size() < 0)
+	if (farr.size() <= 0)
 		return fail(1, "Das Daten-Array ist leer");
 
 	if (!fderiv1->build(farr))
