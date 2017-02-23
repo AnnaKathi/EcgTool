@@ -17,7 +17,7 @@ bool cHeartbeats::reset(iarray_t curve)
 	{
 	//erst R-Peaks bilden
 	cRpeaks rp;
-	iarray_t rpeaks = rp.find(curve, NULL, NULL, NULL);
+	iarray_t rpeaks = rp.find(curve, NULL);
 
 	return reset(curve, rpeaks);
 	}
@@ -40,7 +40,7 @@ bool cHeartbeats::first(iarray_t curve)
 	{
 	//erst R-Peaks bilden
 	cRpeaks rp;
-	iarray_t rpeaks = rp.find(curve, NULL, NULL, NULL);
+	iarray_t rpeaks = rp.find(curve, NULL);
 
 	return first(curve, rpeaks);
 	}

@@ -24,6 +24,7 @@
 #include <stdio.h>
 
 #include "RequestBox.h"
+#include "Details.h"
 #include "Main.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -137,10 +138,6 @@ void TfmMain::ReadFile()
 	img3->Canvas->Brush->Color = clWhite;
 	img3->Canvas->FillRect(Rect(0, 0, img3->Picture->Width, img3->Picture->Height));
 	img3->Canvas->Pen->Color = clBlack;
-
-	img4->Canvas->Brush->Color = clWhite;
-	img4->Canvas->FillRect(Rect(0, 0, img4->Picture->Width, img4->Picture->Height));
-	img4->Canvas->Pen->Color = clBlack;
 	}
 //---------------------------------------------------------------------------
 void TfmMain::MovingAv()
@@ -198,7 +195,7 @@ void TfmMain::FindRpeaks()
 	Print("R-Peaks finden...");
 
 	cRpeaks& rpeaks = alg1.ecg.rpeaks;
-	iarray_t rp = rpeaks.find(alg1.ecg.data.data_array, img2, img3, pbJob);
+	iarray_t rp = rpeaks.find(alg1.ecg.data.data_array, img2);
 
 	farray.displayPoints(alg1.ecg.data.data_array, rp, imgEcg);
 
@@ -225,7 +222,7 @@ void TfmMain::Heartbeat()
 	{
 	Print("Heartbeat finden...");
 
-	iarray_t rp = alg1.ecg.rpeaks.find(alg1.ecg.data.data_array, img2, img3, pbJob);
+	iarray_t rp = alg1.ecg.rpeaks.find(alg1.ecg.data.data_array, img2);
 	farray.displayPoints(alg1.ecg.data.data_array, rp, imgEcg);
 
 	cHeartbeats h = alg1.ecg.heart;
@@ -238,7 +235,7 @@ void TfmMain::Heartbeat()
 	int count = 0;
 	while (h.next())
 		{
-		farray.display(h.heartbeat, img4);
+		farray.display(h.heartbeat, img3);
 		count++;
 		}
 
@@ -327,7 +324,7 @@ void TfmMain::Abl1Rpeaks()
 	Print("ERSTE ABLEITUNG R-Peaks finden...");
 
 	cRpeaks& rpeaks = alg1.ecg.rpeaks;
-	iarray_t rp = rpeaks.find(alg1.ecg.data.derivate1.deriv_array, img3, img3, pbJob);
+	iarray_t rp = rpeaks.find(alg1.ecg.data.derivate1.deriv_array, img3);
 
 	farray.displayPoints(alg1.ecg.data.derivate1.deriv_array, rp, img2);
 
@@ -425,7 +422,7 @@ void TfmMain::Abl2Rpeaks()
 	Print("ZWEITE ABLEITUNG R-Peaks finden...");
 
 	cRpeaks& rpeaks = alg1.ecg.rpeaks;
-	iarray_t rp = rpeaks.find(alg1.ecg.data.derivate2.deriv_array, img3, img4, pbJob);
+	iarray_t rp = rpeaks.find(alg1.ecg.data.derivate2.deriv_array, img2);
 
 	farray.displayPoints(alg1.ecg.data.derivate2.deriv_array, rp, img3);
 
@@ -585,6 +582,11 @@ void __fastcall TfmMain::btAbl2TurnsClick(TObject *Sender)
 void __fastcall TfmMain::btHeartbeatClick(TObject *Sender)
 	{
 	sendClick(btHeartbeat);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btDetailsClick(TObject *Sender)
+	{
+	DlgShowDetails(this, alg1);
 	}
 //---------------------------------------------------------------------------
 

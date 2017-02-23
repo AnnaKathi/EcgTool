@@ -14,11 +14,11 @@ cRpeaks::~cRpeaks()
 	{
 	}
 //---------------------------------------------------------------------------
-iarray_t cRpeaks::find(iarray_t array, TImage* img1, TImage* img2, TProgressBar* job)
+iarray_t cRpeaks::find(iarray_t array, TImage* img1)
 	{
 	iarray_t desc = fmath->resort(array, false);
-	//iarray_t desc = fmath->bubbleSortDesc(array, job);
-	farray->redisplay(desc, img1);
+	if (img1 != NULL)
+		farray->redisplay(desc, img1);
 
 	farray->resetValues(desc, charac);
 

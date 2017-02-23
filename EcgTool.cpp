@@ -5,6 +5,7 @@
 //---------------------------------------------------------------------------
 USEFORM("Main.cpp", fmMain);
 USEFORM("RequestBox.cpp", fmRequest);
+USEFORM("Details.cpp", fmDetails);
 //---------------------------------------------------------------------------
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -14,6 +15,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		SetApplicationMainFormOnTaskBar(Application, true);
 		Application->CreateForm(__classid(TfmMain), &fmMain);
 		Application->CreateForm(__classid(TfmRequest), &fmRequest);
+		Application->CreateForm(__classid(TfmDetails), &fmDetails);
 		Application->Run();
 	}
 	catch (Exception &exception)

@@ -15,7 +15,7 @@ public:
 	~cRpeaks();
 
 
-	iarray_t	find(iarray_t array, TImage* img1, TImage* img2, TProgressBar* job);
+	iarray_t	find(iarray_t array, TImage* img1);
 
 private:
 	cMath*		fmath;

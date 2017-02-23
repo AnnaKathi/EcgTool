@@ -2,8 +2,8 @@ object fmMain: TfmMain
   Left = 0
   Top = 0
   Caption = 'fmMain'
-  ClientHeight = 696
-  ClientWidth = 1141
+  ClientHeight = 519
+  ClientWidth = 1092
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,7 +22,7 @@ object fmMain: TfmMain
   object Bevel1: TBevel
     Left = 0
     Top = 41
-    Width = 1141
+    Width = 1092
     Height = 4
     Align = alTop
     Shape = bsTopLine
@@ -33,7 +33,7 @@ object fmMain: TfmMain
     Left = 409
     Top = 45
     Width = 4
-    Height = 651
+    Height = 474
     Align = alLeft
     Shape = bsLeftLine
     ExplicitTop = 26
@@ -42,18 +42,19 @@ object fmMain: TfmMain
   object pnInfo: TPanel
     Left = 0
     Top = 0
-    Width = 1141
+    Width = 1092
     Height = 41
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 1141
     DesignSize = (
-      1141
+      1092
       41)
     object mInfo: TMemo
       Left = 8
       Top = 10
-      Width = 1125
+      Width = 1076
       Height = 25
       Anchors = [akLeft, akTop, akRight]
       BorderStyle = bsNone
@@ -69,19 +70,21 @@ object fmMain: TfmMain
       ParentColor = True
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 1125
     end
   end
   object pnLeft: TPanel
     Left = 0
     Top = 45
     Width = 409
-    Height = 651
+    Height = 474
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitHeight = 651
     DesignSize = (
       409
-      651)
+      474)
     object Bevel4: TBevel
       Left = 0
       Top = 65
@@ -95,10 +98,10 @@ object fmMain: TfmMain
     end
     object laCls: TLabel
       Left = 385
-      Top = 269
+      Top = 232
       Width = 18
       Height = 13
-      Anchors = [akRight, akBottom]
+      Anchors = [akTop, akRight]
       Caption = 'CLS'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlue
@@ -192,9 +195,9 @@ object fmMain: TfmMain
     end
     object memo: TMemo
       Left = 0
-      Top = 288
+      Top = 251
       Width = 409
-      Height = 363
+      Height = 223
       Align = alBottom
       ReadOnly = True
       ScrollBars = ssBoth
@@ -337,28 +340,40 @@ object fmMain: TfmMain
       TabOrder = 7
       OnClick = btHeartbeatClick
     end
+    object btDetails: TButton
+      Left = 216
+      Top = 224
+      Width = 75
+      Height = 25
+      Caption = 'Details'
+      TabOrder = 16
+      OnClick = btDetailsClick
+    end
   end
   object pnClient: TPanel
     Left = 413
     Top = 45
-    Width = 728
-    Height = 651
+    Width = 679
+    Height = 474
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitWidth = 728
+    ExplicitHeight = 651
     object imgEcg: TImage
       Left = 0
       Top = 0
-      Width = 728
+      Width = 679
       Height = 152
       Align = alTop
       ExplicitLeft = 2
       ExplicitTop = 2
+      ExplicitWidth = 728
     end
     object Bevel2: TBevel
       Left = 0
       Top = 152
-      Width = 728
+      Width = 679
       Height = 4
       Align = alTop
       Shape = bsTopLine
@@ -369,49 +384,44 @@ object fmMain: TfmMain
     object img2: TImage
       Left = 0
       Top = 156
-      Width = 728
+      Width = 679
       Height = 152
       Align = alTop
       ExplicitLeft = -4
       ExplicitTop = 352
+      ExplicitWidth = 728
     end
     object img3: TImage
       Left = 0
       Top = 312
-      Width = 728
+      Width = 679
       Height = 152
       Align = alTop
       ExplicitLeft = -4
       ExplicitTop = 308
+      ExplicitWidth = 728
     end
     object Bevel5: TBevel
       Left = 0
       Top = 308
-      Width = 728
+      Width = 679
       Height = 4
       Align = alTop
       Shape = bsTopLine
       ExplicitLeft = 6
       ExplicitTop = 304
+      ExplicitWidth = 728
     end
     object Bevel6: TBevel
       Left = 0
       Top = 464
-      Width = 728
+      Width = 679
       Height = 4
       Align = alTop
       Shape = bsTopLine
       ExplicitLeft = -4
       ExplicitTop = 344
-    end
-    object img4: TImage
-      Left = 0
-      Top = 468
-      Width = 728
-      Height = 152
-      Align = alTop
-      ExplicitLeft = 2
-      ExplicitTop = 314
+      ExplicitWidth = 728
     end
   end
   object tStartup: TTimer
