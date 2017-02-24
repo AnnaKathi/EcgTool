@@ -21,15 +21,21 @@ public:
 	bool		next();
 	bool		end();
 
+	iarray_t	calcAvBeat(iarray_t curve);
+
 __property iarray_t   heartbeat = { read=get_heartbeat  };
+__property iarray_t   avBeat	= { read=get_AvBeat		};
 
 private:
 	cArray		farray;
 	iarray_t	fcurve;
 	iarray_t	frpeaks;
 
-	iarray_t	fheartbeat;
+	iarray_t	fheartbeat; //jeweils ein einzelner Herzschlag, für first-next
 	iarray_t	get_heartbeat();
+
+	iarray_t	fAvBeat; //Standardherzschlag
+	iarray_t	get_AvBeat();
 
 	sArrayCha	charac; //todo getter und setter machen
 

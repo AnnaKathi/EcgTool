@@ -305,20 +305,22 @@ iarray_t cArray::cut(iarray_t array, int vonMsec, int bisMsec)
 	//reverse Iterator, läuft von hinten nach vorne
 	iarray_t::reverse_iterator itr_rev = farr.rbegin();
 
-	while (itr_rev != farr.rend())
+	do
 		{
-		zeit = itr_rev->first;
+		key = itr_rev->first;
+		ilist_t& v = itr_rev->second;
+		zeit = v[0];
 		if (zeit < vonMsec) break;    //Wert liegt nach gewünschtem (reverse) Abschnitt
-		if (zeit >= bisMsec)
+		if (zeit > bisMsec)
 			{
 			//Wert liegt vor gewünschtem (reverse) Abschnitt
 			itr_rev++;
 			continue;
 			}
 
-		farr.erase(zeit);
+		farr.erase(key);
 		count++;
-		}
+		} while (itr_rev != farr.rend());
 
 	ok();
 	return farr;

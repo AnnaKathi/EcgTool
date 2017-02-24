@@ -95,7 +95,8 @@ void TfmDetails::PaintCurves()
 			farray.display(h.heartbeat, imgBeats);
 
 		//-- Standardherzschlag
-		//TODO h.calcStandard()
+		h.calcAvBeat(alg1->ecg.data.data_array);
+		farray.redisplay(h.avBeat, imgHerz);
 		}
 
 	else if (cbKurve->ItemIndex == cbDerivate1)
@@ -114,7 +115,8 @@ void TfmDetails::PaintCurves()
 			farray.display(h.heartbeat, imgBeats);
 
 		//-- Standardherzschlag
-		//TODO h.calcStandard()
+		h.calcAvBeat(alg1->ecg.data.derivate1.deriv_array);
+		farray.redisplay(h.avBeat, imgHerz);
 		}
 
 	else if (cbKurve->ItemIndex == cbDerivate2)
@@ -133,7 +135,8 @@ void TfmDetails::PaintCurves()
 			farray.display(h.heartbeat, imgBeats);
 
 		//-- Standardherzschlag
-		//TODO h.calcStandard()
+		h.calcAvBeat(alg1->ecg.data.derivate2.deriv_array);
+		farray.redisplay(h.avBeat, imgHerz);
 		}
 	}
 //---------------------------------------------------------------------------
