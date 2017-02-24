@@ -4,7 +4,7 @@ object fmDetails: TfmDetails
   Caption = 'Detailansicht'
   ClientHeight = 712
   ClientWidth = 490
-  Color = clBtnFace
+  Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -116,6 +116,7 @@ object fmDetails: TfmDetails
     Height = 33
     Align = alTop
     BevelOuter = bvNone
+    ParentColor = True
     TabOrder = 0
     DesignSize = (
       490
@@ -137,8 +138,6 @@ object fmDetails: TfmDetails
       ParentColor = True
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1125
-      ExplicitHeight = 25
     end
   end
   object pnCombo: TPanel
@@ -162,6 +161,7 @@ object fmDetails: TfmDetails
       Width = 393
       Height = 21
       Style = csDropDownList
+      Color = clWhite
       ItemHeight = 13
       ItemIndex = 0
       TabOrder = 0
@@ -181,7 +181,6 @@ object fmDetails: TfmDetails
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 89
     object Label2: TLabel
       Left = 8
       Top = 8
@@ -204,7 +203,6 @@ object fmDetails: TfmDetails
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 3
-    ExplicitTop = 270
     object Label3: TLabel
       Left = 8
       Top = 8
@@ -227,7 +225,6 @@ object fmDetails: TfmDetails
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 4
-    ExplicitTop = 383
     object Label4: TLabel
       Left = 8
       Top = 8
@@ -250,7 +247,6 @@ object fmDetails: TfmDetails
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 5
-    ExplicitTop = 530
     object Label5: TLabel
       Left = 8
       Top = 8

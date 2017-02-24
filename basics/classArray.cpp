@@ -210,25 +210,29 @@ iarray_t cArray::movingAv(iarray_t array, int window, bool CalcBegin)
 
 	float zeit, lead1;
 	float summe, mittel;
+	int count = -1;
 	int new_index = 0;
-	for (int i = 0; i < farr.size(); i++)
+//	for (int i = 0; i < farr.size(); i++)
+	for (iarray_itr itr = farr.begin(); itr != farr.end(); itr++)
 		{
-		zeit  = farr[i][0];
-		lead1 = farr[i][1];
+		count++;
+		ilist_t& v = itr->second;
+		zeit  = v[0];
+		lead1 = v[1];
 
-		if (i < window)
+		if (count < window)
 			{
 			//es sind noch nicht genug Werte im array vorhanden, Wert hinten anhängen
-			mov[i] = lead1;
+			mov[count] = lead1;
 
-			//wenn keepBegin=true dann trotzdem Mittelwert ausrechnen,
+			//wenn calcBegin=true dann trotzdem Mittelwert ausrechnen,
 			//sonst unveränderten Wert aus dem Array übernehmen
 			if (CalcBegin)
 				{
 				summe = 0;
-				for (int a = 0; a <= i; a++)
+				for (int a = 0; a <= count; a++)
 					summe += mov[a];
-				mittel = summe / (i+1);
+				mittel = summe / (count+1);
 
 				neu[new_index].push_back(zeit);
 				neu[new_index].push_back(mittel);
@@ -280,6 +284,7 @@ iarray_t cArray::movingAv(iarray_t array, int window, bool CalcBegin)
 iarray_t cArray::cut(iarray_t array, int vonMsec, int bisMsec)
 	{
 	farr.clear();
+	resetValues(array, farr_charac);
 
 	if (vonMsec < farr_charac.VonMsec)
 		{

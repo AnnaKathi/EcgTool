@@ -33,7 +33,7 @@ public:
 	bool		getFile(String file, String delim, int vonMsec, int bisMsec);
 	bool		redisplay(TImage* img);
 	bool		movingAv(int window, bool CalcBegin = true);
-	int			cut(int vonMsec, int bisMsec);
+	bool		cut(int vonMsec, int bisMsec);
 
 	//------- mathematische Funktionen --------------------------------------
 	bool		buildDerivates();

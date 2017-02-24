@@ -43,12 +43,17 @@ __fastcall TfmMain::TfmMain(TComponent* Owner)
 	String file = String(path) + "\\EcgTool.ini";
 	Ini = new TIniFile(file);
 
+	fmDetails = new TfmDetails(this);
+	fmDetails->Hide();
+	bDisplayedDetails = false;
+
 	bRun  = false;
 	bStop = false;
 	}
 //---------------------------------------------------------------------------
 __fastcall TfmMain::~TfmMain()
 	{
+	delete fmDetails;
 	delete Ini;
 	}
 //---------------------------------------------------------------------------
@@ -66,6 +71,21 @@ void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 	edVonSample->Text = (String)Ini->ReadInteger("EcgTool", "edVonSample", 0);
 	edBisSample->Text = (String)Ini->ReadInteger("EcgTool", "edBisSample", 0);
 
+	edCutVon->Text = (String)Ini->ReadInteger("EcgTool", "edCutVon", 0);
+	edCutBis->Text = (String)Ini->ReadInteger("EcgTool", "edCutBis", 0);
+
+	edGl1->Text = (String)Ini->ReadInteger("EcgTool", "edGl1", 0);
+	edGl2->Text = (String)Ini->ReadInteger("EcgTool", "edGl2", 0);
+	edGl3->Text = (String)Ini->ReadInteger("EcgTool", "edGl3", 0);
+
+	cxDropBegin->Checked = Ini->ReadBool("EcgTool", "cxDropBegin", false);
+
+	Left = Ini->ReadInteger("EcgTool", "Left", -1);
+	if (Left <= 0) 	Left = (Screen->DesktopWidth - Width)/2;  //mittig ausrichten
+
+	Top  = Ini->ReadInteger("EcgTool", "Top",  -1);
+	if (Top <= 0) 	Top = (Screen->DesktopHeight - Height)/2; //mittig ausrichten
+
 	btRead->SetFocus();
 	}
 //---------------------------------------------------------------------------
@@ -76,6 +96,18 @@ void __fastcall TfmMain::FormClose(TObject *Sender, TCloseAction &Action)
 
 	Ini->WriteInteger("EcgTool", "edVonSample", edVonSample->Text.ToIntDef(0));
 	Ini->WriteInteger("EcgTool", "edBisSample", edBisSample->Text.ToIntDef(0));
+
+	Ini->WriteInteger("EcgTool", "edCutVon", edCutVon->Text.ToIntDef(0));
+	Ini->WriteInteger("EcgTool", "edCutBis", edCutBis->Text.ToIntDef(0));
+
+	Ini->WriteInteger("EcgTool", "edGl1", edGl1->Text.ToIntDef(0));
+	Ini->WriteInteger("EcgTool", "edGl2", edGl2->Text.ToIntDef(0));
+	Ini->WriteInteger("EcgTool", "edGl3", edGl3->Text.ToIntDef(0));
+
+	Ini->WriteBool("EcgTool", "cxDropBegin", cxDropBegin->Checked);
+
+	Ini->WriteInteger("EcgTool", "Left", Left);
+	Ini->WriteInteger("EcgTool", "Top",  Top);
 
 	Ini->UpdateFile();
 	}
@@ -116,12 +148,23 @@ void TfmMain::ReadFile()
 	int vonSamp = edVonSample->Text.ToIntDef(-1);
 	int bisSamp = edBisSample->Text.ToIntDef(-1);
 
+	//-- EKG-Daten
 	cData& data = alg1.ecg.data;
 	if (!data.getFile(ecgFile, delim, vonSamp, bisSamp))
 		{
 		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
 		return;
 		}
+	alg1.ecg.data.redisplay(imgEcg);
+
+	//-- Erste und zweite Ableitung
+	if (!data.buildDerivates())
+		{
+		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
+		return;
+		}
+	alg1.ecg.data.derivate1.redisplay(imgDeriv1);
+	alg1.ecg.data.derivate2.redisplay(imgDeriv2);
 
 	Print("\tDatensätze im Array: %d", data.farr_charac.Number);
 	Print("\tIndex im Array: %d - %d", data.farr_charac.VonIdx, data.farr_charac.BisIdx);
@@ -129,320 +172,118 @@ void TfmMain::ReadFile()
 	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
 
 	Print("...finished readFile");
-	alg1.ecg.data.redisplay(imgEcg);
 
-	img2->Canvas->Brush->Color = clWhite;
-	img2->Canvas->FillRect(Rect(0, 0, img2->Picture->Width, img2->Picture->Height));
-	img2->Canvas->Pen->Color = clBlack;
-
-	img3->Canvas->Brush->Color = clWhite;
-	img3->Canvas->FillRect(Rect(0, 0, img3->Picture->Width, img3->Picture->Height));
-	img3->Canvas->Pen->Color = clBlack;
-	}
-//---------------------------------------------------------------------------
-void TfmMain::MovingAv()
-	{
-	Print("build moving average...");
-	int window = DlgRequest(this, "Anzahl Werte im gleitenden Durchschnitt").ToIntDef(-1);
-	if (window <= 0) return;
-
-	bool calcBegin = true; //todo: abfragen
-
-	cData& data = alg1.ecg.data;
-	if (!data.movingAv(window, calcBegin))
+	//Detail-Werte anzeigen
+	if (!bDisplayedDetails)
 		{
-		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
-		return;
+		fmDetails->Execute(fmMain, alg1);
+		bDisplayedDetails = true;
 		}
-
-	Print("\tDatensätze im Array: %d", data.farr_charac.Number);
-	Print("\tIndex im Array: %d - %d", data.farr_charac.VonIdx, data.farr_charac.BisIdx);
-	Print("\tMSek. im Array: %d - %d", data.farr_charac.VonMsec, data.farr_charac.BisMsec);
-	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
-
-	Print("...finished moving average");
-	alg1.ecg.data.redisplay(imgEcg);
+	else
+		fmDetails->Renew(alg1);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::CutCurve()
 	{
 	Print("cut curve...");
+	/* obsolete, Bereich wird nun über das Formular angegeben
 	int von = DlgRequest(this, "Werte löschen von Millisekunde").ToIntDef(-1);
 	int bis = DlgRequest(this, "Werte löschen bis Millisekunde").ToIntDef(-1);
+	*/
+
+	int von = edCutVon->Text.ToIntDef(-1);
+	int bis = edCutBis->Text.ToIntDef(-1);
 	if (von < 0 || bis < 0) return;
 	if (bis < von) return;
 
+	//-- EKG-Daten
 	cData& data = alg1.ecg.data;
-	int no = data.cut(von, bis);
-	if (data.error)
+	if (!data.cut(von, bis))
 		{
 		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
 		return;
 		}
+	alg1.ecg.data.redisplay(imgEcg);
 
-	Print("\tEs wurden %d Datensätze gelöscht", no);
+	//-- Erste Ableitung
+	cDerivate& deriv1 = alg1.ecg.data.derivate1;
+	if (!deriv1.cut(von, bis))
+		{
+		Print("## Fehler aufgetreten: %d, %s", deriv1.error_code, deriv1.error_msg);
+		return;
+		}
+	alg1.ecg.data.derivate1.redisplay(imgDeriv1);
+
+	//-- Zweite Ableitung
+	cDerivate& deriv2 = alg1.ecg.data.derivate2;
+	if (!deriv2.cut(von, bis))
+		{
+		Print("## Fehler aufgetreten: %d, %s", deriv2.error_code, deriv2.error_msg);
+		return;
+		}
+	alg1.ecg.data.derivate2.redisplay(imgDeriv2);
+
 	Print("\tDatensätze im Array: %d", data.farr_charac.Number);
 	Print("\tIndex im Array: %d - %d", data.farr_charac.VonIdx, data.farr_charac.BisIdx);
 	Print("\tMSek. im Array: %d - %d", data.farr_charac.VonMsec, data.farr_charac.BisMsec);
 	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
 
 	Print("...finished cutting");
+
+	//Detail-Werte aktuelisieren
+	fmDetails->Renew(alg1);
+	}
+//---------------------------------------------------------------------------
+void TfmMain::MovingAv()
+	{
+	Print("build moving average...");
+	/* obsolete, Werte werden über das Formular angegeben
+	int window = DlgRequest(this, "Anzahl Werte im gleitenden Durchschnitt").ToIntDef(-1);
+	*/
+
+	int window1 = edGl1->Text.ToIntDef(-1);
+	int window2 = edGl2->Text.ToIntDef(-1);
+	int window3 = edGl3->Text.ToIntDef(-1);
+	if (window1 <= 0 || window2 <= 0 || window3 <= 0) return;
+
+	bool dropBegin = cxDropBegin->Checked;
+
+	//-- EKG-Daten
+	cData& data = alg1.ecg.data;
+	if (!data.movingAv(window1, !dropBegin))
+		{
+		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
+		return;
+		}
 	alg1.ecg.data.redisplay(imgEcg);
-	}
-//---------------------------------------------------------------------------
-void TfmMain::FindRpeaks()
-	{
-	Print("R-Peaks finden...");
 
-	cRpeaks& rpeaks = alg1.ecg.rpeaks;
-	iarray_t rp = rpeaks.find(alg1.ecg.data.data_array, img2);
-
-	farray.displayPoints(alg1.ecg.data.data_array, rp, imgEcg);
-
-	//Ausgabe der gefundenen Werte
-	Print("Gefundene R-Peaks:");
-	Print("\tIndex \tZeit \tWert");
-	Print("\t--------------------------------");
-	int key, zeit;
-	float wert;
-	for (iarray_itr itr = rp.begin(); itr != rp.end(); itr++)
+	//-- Erste Ableitung
+	cDerivate& deriv1 = alg1.ecg.data.derivate1;
+	if (!deriv1.movingAv(window2, !dropBegin))
 		{
-		key = itr->first;
-		ilist_t& v = itr->second;
-		zeit = v[0];
-		wert = v[1];
-
-		Print("\t%d \t%d \t%.4f", key, zeit, wert);
-		}
-
-	Print("...finished r-peaks");
-	}
-//---------------------------------------------------------------------------
-void TfmMain::Heartbeat()
-	{
-	Print("Heartbeat finden...");
-
-	iarray_t rp = alg1.ecg.rpeaks.find(alg1.ecg.data.data_array, img2);
-	farray.displayPoints(alg1.ecg.data.data_array, rp, imgEcg);
-
-	cHeartbeats h = alg1.ecg.heart;
-	if (!h.reset(alg1.ecg.data.data_array))
-		{
-		Print("## Fehler aufgetreten: %d, %s", h.error_code, h.error_msg);
+		Print("## Fehler aufgetreten: %d, %s", deriv1.error_code, deriv1.error_msg);
 		return;
 		}
+	alg1.ecg.data.derivate1.redisplay(imgDeriv1);
 
-	int count = 0;
-	while (h.next())
+	//-- Zweite Ableitung
+	cDerivate& deriv2 = alg1.ecg.data.derivate2;
+	if (!deriv2.movingAv(window3, !dropBegin))
 		{
-		farray.display(h.heartbeat, img3);
-		count++;
-		}
-
-	if (h.error_code > 0)
-		{
-		Print("## Fehler aufgetreten: %d, %s", h.error_code, h.error_msg);
+		Print("## Fehler aufgetreten: %d, %s", deriv2.error_code, deriv2.error_msg);
 		return;
 		}
+	alg1.ecg.data.derivate2.redisplay(imgDeriv2);
 
-	Print("\t%d Heartbeats gefunden", count);
-	Print("...finished heartbeat");
-	}
-//---------------------------------------------------------------------------
-/***************************************************************************/
-/**************   Funktionen auf erster Ableitung   ************************/
-/***************************************************************************/
-//---------------------------------------------------------------------------
-void TfmMain::Derivate1()
-	{
-	Print("Erste Ableitung berechnen...");
-
-	cData& data = alg1.ecg.data;
-	if (!data.buildDerivates())
-		{
-		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
-		return;
-		}
-
-	alg1.ecg.data.derivate1.redisplay(img2);
-
-	Print("...Berechnung der Ableitungen abgeschlossen");
-	}
-//---------------------------------------------------------------------------
-void TfmMain::Abl1MovingAv()
-	{
-	Print("ERSTE ABLEITUNG build moving average...");
-	int window = DlgRequest(this, "Anzahl Werte im gleitenden Durchschnitt").ToIntDef(-1);
-	if (window <= 0) return;
-
-	bool calcBegin = true; //todo: abfragen
-
-	cDerivate& deriv = alg1.ecg.data.derivate1;
-	if (!deriv.movingAv(window, calcBegin))
-		{
-		Print("## Fehler aufgetreten: %d, %s", deriv.error_code, deriv.error_msg);
-		return;
-		}
-
-	Print("\tDatensätze im Array: %d", deriv.farr_charac.Number);
-	Print("\tIndex im Array: %d - %d", deriv.farr_charac.VonIdx, deriv.farr_charac.BisIdx);
-	Print("\tMSek. im Array: %d - %d", deriv.farr_charac.VonMsec, deriv.farr_charac.BisMsec);
-	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
+	Print("\tDatensätze im Array: %d", data.farr_charac.Number);
+	Print("\tIndex im Array: %d - %d", data.farr_charac.VonIdx, data.farr_charac.BisIdx);
+	Print("\tMSek. im Array: %d - %d", data.farr_charac.VonMsec, data.farr_charac.BisMsec);
+	Print("\tWerte im Array: (%.6f) - (%.6f)", data.farr_charac.MinWert, data.farr_charac.MaxWert);
 
 	Print("...finished moving average");
-	alg1.ecg.data.derivate1.redisplay(img2);
-	}
-//---------------------------------------------------------------------------
-void TfmMain::Abl1CutCurve()
-	{
-	Print("ERSTE ABLEITUNG cut curve...");
-	int von = DlgRequest(this, "Werte löschen von Millisekunde").ToIntDef(-1);
-	int bis = DlgRequest(this, "Werte löschen bis Millisekunde").ToIntDef(-1);
-	if (von < 0 || bis < 0) return;
-	if (bis < von) return;
 
-	cDerivate& deriv = alg1.ecg.data.derivate1;
-	int no = deriv.cut(von, bis);
-	if (deriv.error)
-		{
-		Print("## Fehler aufgetreten: %d, %s", deriv.error_code, deriv.error_msg);
-		return;
-		}
-
-	Print("\tEs wurden %d Datensätze gelöscht", no);
-	Print("\tDatensätze im Array: %d", deriv.farr_charac.Number);
-	Print("\tIndex im Array: %d - %d", deriv.farr_charac.VonIdx, deriv.farr_charac.BisIdx);
-	Print("\tMSek. im Array: %d - %d", deriv.farr_charac.VonMsec, deriv.farr_charac.BisMsec);
-	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
-
-	Print("...finished cutting");
-	alg1.ecg.data.derivate1.redisplay(img2);
-	}
-//---------------------------------------------------------------------------
-void TfmMain::Abl1Rpeaks()
-	{
-	Print("ERSTE ABLEITUNG R-Peaks finden...");
-
-	cRpeaks& rpeaks = alg1.ecg.rpeaks;
-	iarray_t rp = rpeaks.find(alg1.ecg.data.derivate1.deriv_array, img3);
-
-	farray.displayPoints(alg1.ecg.data.derivate1.deriv_array, rp, img2);
-
-	//Ausgabe der gefundenen Werte
-	Print("Gefundene R-Peaks:");
-	Print("\tIndex \tZeit \tWert");
-	Print("\t--------------------------------");
-	int key, zeit;
-	float wert;
-	for (iarray_itr itr = rp.begin(); itr != rp.end(); itr++)
-		{
-		key = itr->first;
-		ilist_t& v = itr->second;
-		zeit = v[0];
-		wert = v[1];
-
-		Print("\t%d \t%d \t%.4f", key, zeit, wert);
-		}
-
-	Print("...finished r-peaks");
-	}
-//---------------------------------------------------------------------------
-/***************************************************************************/
-/**************   Funktionen auf zweiter Ableitung   ***********************/
-/***************************************************************************/
-//---------------------------------------------------------------------------
-void TfmMain::Derivate2()
-	{
-	Print("Zweite Ableitung berechnen...");
-
-	cData& data = alg1.ecg.data;
-	if (!data.buildDerivates())
-		{
-		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
-		return;
-		}
-
-	alg1.ecg.data.derivate2.redisplay(img3);
-
-	Print("...Berechnung der Ableitungen abgeschlossen");
-	}
-//---------------------------------------------------------------------------
-void TfmMain::Abl2MovingAv()
-	{
-	Print("ZWEITE ABLEITUNG build moving average...");
-	int window = DlgRequest(this, "Anzahl Werte im gleitenden Durchschnitt").ToIntDef(-1);
-	if (window <= 0) return;
-
-	bool calcBegin = true; //todo: abfragen
-
-	cDerivate& deriv = alg1.ecg.data.derivate2;
-	if (!deriv.movingAv(window, calcBegin))
-		{
-		Print("## Fehler aufgetreten: %d, %s", deriv.error_code, deriv.error_msg);
-		return;
-		}
-
-	Print("\tDatensätze im Array: %d", deriv.farr_charac.Number);
-	Print("\tIndex im Array: %d - %d", deriv.farr_charac.VonIdx, deriv.farr_charac.BisIdx);
-	Print("\tMSek. im Array: %d - %d", deriv.farr_charac.VonMsec, deriv.farr_charac.BisMsec);
-	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
-
-	Print("...finished moving average");
-	alg1.ecg.data.derivate2.redisplay(img3);
-	}
-//---------------------------------------------------------------------------
-void TfmMain::Abl2CutCurve()
-	{
-	Print("ZWEITE ABLEITUNG cut curve...");
-	int von = DlgRequest(this, "Werte löschen von Millisekunde").ToIntDef(-1);
-	int bis = DlgRequest(this, "Werte löschen bis Millisekunde").ToIntDef(-1);
-	if (von < 0 || bis < 0) return;
-	if (bis < von) return;
-
-	cDerivate& deriv = alg1.ecg.data.derivate2;
-	int no = deriv.cut(von, bis);
-	if (deriv.error)
-		{
-		Print("## Fehler aufgetreten: %d, %s", deriv.error_code, deriv.error_msg);
-		return;
-		}
-
-	Print("\tEs wurden %d Datensätze gelöscht", no);
-	Print("\tDatensätze im Array: %d", deriv.farr_charac.Number);
-	Print("\tIndex im Array: %d - %d", deriv.farr_charac.VonIdx, deriv.farr_charac.BisIdx);
-	Print("\tMSek. im Array: %d - %d", deriv.farr_charac.VonMsec, deriv.farr_charac.BisMsec);
-	Print("\tWerte im Array: (%.6f) - (%.6f)", deriv.farr_charac.MinWert, deriv.farr_charac.MaxWert);
-
-	Print("...finished cutting");
-	alg1.ecg.data.derivate2.redisplay(img3);
-	}
-//---------------------------------------------------------------------------
-void TfmMain::Abl2Rpeaks()
-	{
-	Print("ZWEITE ABLEITUNG R-Peaks finden...");
-
-	cRpeaks& rpeaks = alg1.ecg.rpeaks;
-	iarray_t rp = rpeaks.find(alg1.ecg.data.derivate2.deriv_array, img2);
-
-	farray.displayPoints(alg1.ecg.data.derivate2.deriv_array, rp, img3);
-
-	//Ausgabe der gefundenen Werte
-	Print("Gefundene R-Peaks:");
-	Print("\tIndex \tZeit \tWert");
-	Print("\t--------------------------------");
-	int key, zeit;
-	float wert;
-	for (iarray_itr itr = rp.begin(); itr != rp.end(); itr++)
-		{
-		key = itr->first;
-		ilist_t& v = itr->second;
-		zeit = v[0];
-		wert = v[1];
-
-		Print("\t%d \t%d \t%.4f", key, zeit, wert);
-		}
-
-	Print("...finished r-peaks");
+	//Detail-Werte aktuelisieren
+	fmDetails->Renew(alg1);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -495,18 +336,8 @@ void TfmMain::sendClick(TButton* bt)
 		switch (bt->Tag)
 			{
 			case  1: ReadFile(); 		break;
-			case  2: MovingAv();		break;
-			case  3: CutCurve();		break;
-			case  4: FindRpeaks();		break;
-			case  5: Heartbeat();		break;
-			case  6: Derivate1();		break;
-			case  7: Abl1MovingAv();	break;
-			case  8: Abl1CutCurve();	break;
-			case  9: Abl1Rpeaks(); 		break;
-			case 10: Derivate2();		break;
-			case 11: Abl2MovingAv();	break;
-			case 12: Abl2CutCurve();	break;
-			case 13: Abl2Rpeaks();		break;
+			case  2: CutCurve();		break;
+			case  3: MovingAv();		break;
 			//default, nicht nötig
 			}
 
@@ -524,69 +355,14 @@ void __fastcall TfmMain::btReadClick(TObject *Sender)
 	sendClick(btRead);
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::btMovAvClick(TObject *Sender)
-	{
-	sendClick(btMovAv);
-	}
-//---------------------------------------------------------------------------
 void __fastcall TfmMain::btCutClick(TObject *Sender)
 	{
 	sendClick(btCut);
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::btRpeaksClick(TObject *Sender)
+void __fastcall TfmMain::btMovAvClick(TObject *Sender)
 	{
-	sendClick(btRpeaks);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::btDerivatesClick(TObject *Sender)
-	{
-	sendClick(btDerivates);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::btAblMovAvClick(TObject *Sender)
-	{
-	sendClick(btAblMovAv);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::btAblCutClick(TObject *Sender)
-	{
-	sendClick(btAblCut);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::btAblTurnsClick(TObject *Sender)
-	{
-	sendClick(btAblTurns);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::btAbl2Click(TObject *Sender)
-	{
-    sendClick(btAbl2);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::btAbl2MovAvClick(TObject *Sender)
-	{
-	sendClick(btAbl2MovAv);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::btAbl2CutClick(TObject *Sender)
-	{
-    sendClick(btAbl2Cut);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::btAbl2TurnsClick(TObject *Sender)
-	{
-	sendClick(btAbl2Turns);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::btHeartbeatClick(TObject *Sender)
-	{
-	sendClick(btHeartbeat);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::btDetailsClick(TObject *Sender)
-	{
-	DlgShowDetails(this, alg1);
+	sendClick(btMovAv);
 	}
 //---------------------------------------------------------------------------
 

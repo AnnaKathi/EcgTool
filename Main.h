@@ -23,31 +23,18 @@ private:
 	cAlg1		alg1;
 	cArray		farray;
 	cMath		fmath;
+	TfmDetails*	fmDetails;
 
+	bool		bDisplayedDetails;
 	bool		bRun;
 	bool		bStop;
 
 	void 		Print(char* msg, ...);
 	void		ReadFile();
-	void		MovingAv();
 	void		CutCurve();
-	void		FindRpeaks();
-	void		Heartbeat();
-
-	void		Derivate1();
-	void		Abl1MovingAv();
-	void		Abl1CutCurve();
-	void		Abl1Rpeaks();
-
-	void		Derivate2();
-	void		Abl2MovingAv();
-	void		Abl2CutCurve();
-	void 		Abl2Rpeaks();
+	void		MovingAv();
 
 	void		sendClick(TButton* bt);
-
-
-
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -59,12 +46,8 @@ __published:	// IDE-verwaltete Komponenten
 	TPanel *Panel3;
 	TLabel *Label1;
 	TSpeedButton *btInputfile;
-	TLabel *Label2;
-	TLabel *Label5;
 	TLabel *Label3;
 	TEdit *edInputfile;
-	TEdit *edVonSample;
-	TEdit *edBisSample;
 	TComboBox *cbDelim;
 	TMemo *memo;
 	TProgressBar *pbJob;
@@ -76,22 +59,26 @@ __published:	// IDE-verwaltete Komponenten
 	TOpenDialog *OpenDialog;
 	TButton *btMovAv;
 	TButton *btCut;
-	TButton *btRpeaks;
-	TButton *btDerivates;
 	TBevel *Bevel2;
-	TImage *img2;
-	TImage *img3;
+	TImage *imgDeriv1;
+	TImage *imgDeriv2;
 	TBevel *Bevel5;
-	TButton *btAblMovAv;
-	TButton *btAblCut;
-	TButton *btAblTurns;
-	TButton *btAbl2;
-	TButton *btAbl2MovAv;
-	TButton *btAbl2Cut;
-	TButton *btAbl2Turns;
 	TBevel *Bevel6;
-	TButton *btHeartbeat;
-	TButton *btDetails;
+	TEdit *edGl1;
+	TEdit *edGl2;
+	TEdit *edGl3;
+	TLabel *Label4;
+	TLabel *Label6;
+	TLabel *Label7;
+	TLabel *Label9;
+	TEdit *edCutVon;
+	TEdit *edCutBis;
+	TLabel *Label10;
+	TLabel *Label8;
+	TEdit *edVonSample;
+	TLabel *Label11;
+	TEdit *edBisSample;
+	TCheckBox *cxDropBegin;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -102,17 +89,6 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall btMovAvClick(TObject *Sender);
 	void __fastcall btCutClick(TObject *Sender);
-	void __fastcall btRpeaksClick(TObject *Sender);
-	void __fastcall btDerivatesClick(TObject *Sender);
-	void __fastcall btAblMovAvClick(TObject *Sender);
-	void __fastcall btAblCutClick(TObject *Sender);
-	void __fastcall btAblTurnsClick(TObject *Sender);
-	void __fastcall btAbl2Click(TObject *Sender);
-	void __fastcall btAbl2MovAvClick(TObject *Sender);
-	void __fastcall btAbl2CutClick(TObject *Sender);
-	void __fastcall btAbl2TurnsClick(TObject *Sender);
-	void __fastcall btHeartbeatClick(TObject *Sender);
-	void __fastcall btDetailsClick(TObject *Sender);
 
 
 public:

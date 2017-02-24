@@ -20,8 +20,11 @@ enum {
 class TfmDetails : public TForm
 {
 private:
+	TForm*		Papa;
 	cAlg1*		alg1;
 	cArray		farray;
+
+	void		placeForm();
 
 	void		PaintCurves();
 
@@ -60,10 +63,10 @@ __published:	// IDE-verwaltete Komponenten
 
 public:
 	__fastcall TfmDetails(TComponent* Owner);
-	bool 		Execute(cAlg1& alg);
+	bool 		Execute(TForm* papa, cAlg1& alg);
+	bool		Renew(cAlg1& alg);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmDetails *fmDetails;
-bool DlgShowDetails(TForm* Papa, cAlg1& alg);
 //---------------------------------------------------------------------------
 #endif

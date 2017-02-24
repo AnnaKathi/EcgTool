@@ -8,28 +8,23 @@
 #pragma resource "*.dfm"
 TfmDetails *fmDetails;
 //---------------------------------------------------------------------------
-bool DlgShowDetails(TForm* Papa, cAlg1& alg)
-	{
-	TfmDetails* Form = new TfmDetails(Papa);
-	bool rc = false;
-
-	if (Form)
-		{
-		rc = Form->Execute(alg);
-		delete Form;
-		}
-	return rc;
-	}
-//---------------------------------------------------------------------------
 __fastcall TfmDetails::TfmDetails(TComponent* Owner)
 	: TForm(Owner)
 	{
 	}
 //---------------------------------------------------------------------------
-bool TfmDetails::Execute(cAlg1& alg)
+bool TfmDetails::Execute(TForm* papa, cAlg1& alg)
+	{
+	Papa = papa;
+	alg1 = &alg;
+	Show();
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmDetails::Renew(cAlg1& alg)
 	{
 	alg1 = &alg;
-	ShowModal();
+	cbKurveChange(this);
 	return true;
 	}
 //---------------------------------------------------------------------------
@@ -41,6 +36,7 @@ void __fastcall TfmDetails::FormShow(TObject *Sender)
 void __fastcall TfmDetails::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
+	placeForm();
 	cbKurveChange(Sender);
 	}
 //---------------------------------------------------------------------------
@@ -71,6 +67,34 @@ void __fastcall TfmDetails::tComboTimer(TObject *Sender)
 	PaintCurves();
 
 	cbKurve->Enabled = true;
+	}
+//---------------------------------------------------------------------------
+void TfmDetails::placeForm()
+	{
+	//Formular rechts ausrichten wenn es geht
+	int left  = Papa->Left + Papa->Width + 25;
+	int right = left + Width;
+	if (right > Screen->DesktopWidth)
+		{
+		//passt es vllt links daneben ?
+		left = Papa->Left - Width - 25;
+		if (left < 0)
+			{
+			//passt weder rechts noch links daneben, mittig anzeigen
+			left = (Screen->DesktopWidth - Width)/2;
+			}
+		}
+	Left = left;
+
+	//Formular vertikal mittig zum Hauptformular ausrichten wenn es geht
+	int mitte = Papa->Top + (Papa->Height/2);
+	int top   = mitte - (Height/2);
+	if (top < 0)
+		{
+		//Formular oben am Hauptformular ausrichten
+		top = Papa->Top;
+		}
+	Top = top;
 	}
 //---------------------------------------------------------------------------
 void TfmDetails::PaintCurves()

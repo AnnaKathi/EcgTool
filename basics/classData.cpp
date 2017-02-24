@@ -107,12 +107,13 @@ bool cData::movingAv(int window, bool CalcBegin) //default CalcBegin=true
 		//die Werte inputVonIdx, inputBisIdx, inputVonMsec, inputBisMsec,
 		//inputMinWert und inputMaxWert müssen neu gesetzt werden
 		farray->resetValues(farr, farr_charac);
-		}
-
-	return !farray->error;
+		return ok();
+        }
+	else
+		return fail(farray->error_code, farray->error_msg);
 	}
 //---------------------------------------------------------------------------
-int cData::cut(int vonMsec, int bisMsec)
+bool cData::cut(int vonMsec, int bisMsec)
 	{
 	farr = farray->cut(farr, vonMsec, bisMsec);
 
@@ -121,9 +122,10 @@ int cData::cut(int vonMsec, int bisMsec)
 		//die Werte inputVonIdx, inputBisIdx, inputVonMsec, inputBisMsec,
 		//inputMinWert und inputMaxWert müssen neu gesetzt werden
 		farray->resetValues(farr, farr_charac);
+		return ok();
 		}
-
-	return !farray->error;
+	else
+		return fail(farray->error_code, farray->error_msg);
 	}
 //---------------------------------------------------------------------------
 bool cData::buildDerivates()

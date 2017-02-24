@@ -34,9 +34,10 @@ bool cDerivate::movingAv(int window, bool CalcBegin) //default CalcBegin=true
 		//die Werte inputVonIdx, inputBisIdx, inputVonMsec, inputBisMsec,
 		//inputMinWert und inputMaxWert müssen neu gesetzt werden
 		farray->resetValues(farr, farr_charac);
+		return ok();
 		}
-
-	return !farray->error;
+	else
+		return fail(farray->error_code, farray->error_msg);
 	}
 //---------------------------------------------------------------------------
 int cDerivate::cut(int vonMsec, int bisMsec)
@@ -48,9 +49,10 @@ int cDerivate::cut(int vonMsec, int bisMsec)
 		//die Werte inputVonIdx, inputBisIdx, inputVonMsec, inputBisMsec,
 		//inputMinWert und inputMaxWert müssen neu gesetzt werden
 		farray->resetValues(farr, farr_charac);
+		return ok();
 		}
-
-	return !farray->error;
+	else
+		return fail(farray->error_code, farray->error_msg);
 	}
 //---------------------------------------------------------------------------
 iarray_t cDerivate::get_array()
