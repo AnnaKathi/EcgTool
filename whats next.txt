@@ -1,13 +1,5 @@
 branch		what's next ?
-------		----------------------------------------------------
-preprocessing	cData, Werte runden 
-		Kurve glätten
-		Daten-Teil rausschneiden und darstellen
-		Daten-Teil rausschneiden
+------------	----------------------------------------------------
+importschema	Dynamisch Importschemata für die csv-Dateien anlegen lassen
 
-turns		Turning Points finden
-		Punkte in der KUrve markieren
-
-minmax
-		Lokale Minima und Maxima finden 
-		Punkte in der Kurve markierenmarkieren
+MySQL		csv-Daten in MySQL-Datenbank umlesen
