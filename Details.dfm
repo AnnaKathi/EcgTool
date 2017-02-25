@@ -1,9 +1,10 @@
 object fmDetails: TfmDetails
   Left = 0
   Top = 0
+  BorderStyle = bsToolWindow
   Caption = 'Detailansicht'
-  ClientHeight = 712
-  ClientWidth = 490
+  ClientHeight = 691
+  ClientWidth = 494
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,6 +14,7 @@ object fmDetails: TfmDetails
   KeyPreview = True
   OldCreateOrder = False
   OnClose = FormClose
+  OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   PixelsPerInch = 96
@@ -20,7 +22,7 @@ object fmDetails: TfmDetails
   object Bevel1: TBevel
     Left = 0
     Top = 33
-    Width = 490
+    Width = 494
     Height = 4
     Align = alTop
     Shape = bsTopLine
@@ -30,101 +32,111 @@ object fmDetails: TfmDetails
   end
   object Bevel2: TBevel
     Left = 0
-    Top = 83
-    Width = 490
+    Top = 102
+    Width = 494
     Height = 4
     Align = alTop
     Shape = bsTopLine
     ExplicitTop = 41
+    ExplicitWidth = 490
   end
   object imgRpeaks: TImage
     Left = 0
-    Top = 268
-    Width = 490
+    Top = 287
+    Width = 494
     Height = 109
     Align = alTop
     ExplicitTop = 523
+    ExplicitWidth = 490
   end
   object Bevel3: TBevel
     Left = 0
-    Top = 377
-    Width = 490
+    Top = 396
+    Width = 494
     Height = 4
     Align = alTop
     Shape = bsTopLine
     ExplicitLeft = -8
     ExplicitTop = 422
+    ExplicitWidth = 490
   end
   object Bevel4: TBevel
     Left = 0
-    Top = 230
-    Width = 490
+    Top = 249
+    Width = 494
     Height = 4
     Align = alTop
     Shape = bsTopLine
     ExplicitTop = 238
+    ExplicitWidth = 490
   end
   object imgData: TImage
     Left = 0
-    Top = 121
-    Width = 490
+    Top = 140
+    Width = 494
     Height = 109
     Align = alTop
     ExplicitTop = 129
+    ExplicitWidth = 490
   end
   object imgBeats: TImage
     Left = 0
-    Top = 415
-    Width = 490
+    Top = 434
+    Width = 494
     Height = 109
     Align = alTop
     ExplicitTop = 625
+    ExplicitWidth = 490
   end
   object Bevel5: TBevel
     Left = 0
-    Top = 524
-    Width = 490
+    Top = 543
+    Width = 494
     Height = 4
     Align = alTop
     Shape = bsTopLine
     ExplicitLeft = -8
     ExplicitTop = 575
+    ExplicitWidth = 490
   end
   object imgHerz: TImage
     Left = 0
-    Top = 562
-    Width = 490
+    Top = 581
+    Width = 494
     Height = 109
     Align = alTop
     ExplicitLeft = -8
     ExplicitTop = 643
+    ExplicitWidth = 490
   end
   object Bevel6: TBevel
     Left = 0
-    Top = 671
-    Width = 490
+    Top = 690
+    Width = 494
     Height = 4
     Align = alTop
     Shape = bsTopLine
     ExplicitLeft = -8
     ExplicitTop = 700
+    ExplicitWidth = 490
   end
   object pnInfo: TPanel
     Left = 0
     Top = 0
-    Width = 490
+    Width = 494
     Height = 33
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
+    ExplicitWidth = 490
     DesignSize = (
-      490
+      494
       33)
     object mInfo: TMemo
       Left = 8
       Top = 10
-      Width = 474
+      Width = 478
       Height = 17
       Anchors = [akLeft, akTop, akRight, akBottom]
       BorderStyle = bsNone
@@ -137,17 +149,20 @@ object fmDetails: TfmDetails
         'Detailansicht einer Kurve')
       ParentColor = True
       ParentFont = False
+      ReadOnly = True
       TabOrder = 0
+      ExplicitWidth = 474
     end
   end
   object pnCombo: TPanel
     Left = 0
     Top = 37
-    Width = 490
-    Height = 46
+    Width = 494
+    Height = 65
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 490
     object Label1: TLabel
       Left = 8
       Top = 16
@@ -172,15 +187,25 @@ object fmDetails: TfmDetails
         'Erste Ableitung'
         'Zweite Ableitung')
     end
+    object pbJob: TProgressBar
+      Left = 89
+      Top = 40
+      Width = 393
+      Height = 17
+      TabOrder = 1
+      Visible = False
+    end
   end
   object pnHeader1: TPanel
     Left = 0
-    Top = 87
-    Width = 490
+    Top = 106
+    Width = 494
     Height = 34
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitTop = 87
+    ExplicitWidth = 490
     object Label2: TLabel
       Left = 8
       Top = 8
@@ -197,12 +222,14 @@ object fmDetails: TfmDetails
   end
   object Panel1: TPanel
     Left = 0
-    Top = 234
-    Width = 490
+    Top = 253
+    Width = 494
     Height = 34
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 3
+    ExplicitTop = 234
+    ExplicitWidth = 490
     object Label3: TLabel
       Left = 8
       Top = 8
@@ -219,12 +246,14 @@ object fmDetails: TfmDetails
   end
   object Panel2: TPanel
     Left = 0
-    Top = 381
-    Width = 490
+    Top = 400
+    Width = 494
     Height = 34
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 4
+    ExplicitTop = 381
+    ExplicitWidth = 490
     object Label4: TLabel
       Left = 8
       Top = 8
@@ -241,12 +270,14 @@ object fmDetails: TfmDetails
   end
   object Panel3: TPanel
     Left = 0
-    Top = 528
-    Width = 490
+    Top = 547
+    Width = 494
     Height = 34
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 5
+    ExplicitTop = 528
+    ExplicitWidth = 490
     object Label5: TLabel
       Left = 8
       Top = 8

@@ -54,6 +54,29 @@ void __fastcall TfmDetails::FormKeyPress(TObject *Sender, char &Key)
 		}
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmDetails::FormKeyDown(TObject *Sender, WORD &Key,
+	  TShiftState Shift)
+	{
+	if (Shift.Contains(ssCtrl) && Shift.Contains(ssShift))
+		{
+		if (Key == 0x31) //"1" -> EKG-Daten aufrufen
+			{
+			cbKurve->ItemIndex = cbEkgData;
+			cbKurveChange(Sender);
+			}
+		else if (Key == 0x32) //"2" -> Erste Ableitung aufrufen
+			{
+			cbKurve->ItemIndex = cbDerivate1;
+			cbKurveChange(Sender);
+			}
+		else if (Key == 0x33) //"3" -> Zweite Ableitung aufrufen
+			{
+			cbKurve->ItemIndex = cbDerivate2;
+			cbKurveChange(Sender);
+			}
+		}
+	}
+//---------------------------------------------------------------------------
 void __fastcall TfmDetails::cbKurveChange(TObject *Sender)
 	{
 	tCombo->Enabled = true;
@@ -97,8 +120,28 @@ void TfmDetails::placeForm()
 	Top = top;
 	}
 //---------------------------------------------------------------------------
+inline void TfmDetails::StartJob()
+	{
+	pbJob->Max 	   = 4;
+	pbJob->Visible = true;
+	Application->ProcessMessages();
+	}
+//---------------------------------------------------------------------------
+inline void TfmDetails::TickJob()
+	{
+	pbJob->Position++;
+	Application->ProcessMessages();
+	}
+//---------------------------------------------------------------------------
+inline void TfmDetails::EndJob()
+	{
+	pbJob->Visible = false;
+	Application->ProcessMessages();
+	}
+//---------------------------------------------------------------------------
 void TfmDetails::PaintCurves()
 	{
+	StartJob();
 	farray.clearImg(imgData);
 	farray.clearImg(imgRpeaks);
 	farray.clearImg(imgBeats);
@@ -107,60 +150,74 @@ void TfmDetails::PaintCurves()
 		{
 		//-- Originaldaten
 		farray.redisplay(alg1->ecg.data.data_array, imgData);
+		TickJob();
 
 		//-- R-Peaks
 		iarray_t rp = alg1->ecg.rpeaks.find(alg1->ecg.data.data_array, NULL);
 		farray.displayPoints(alg1->ecg.data.data_array, rp, imgRpeaks);
+		TickJob();
 
 		//-- Herzschläge
 		cHeartbeats h = alg1->ecg.heart;
 		h.reset(alg1->ecg.data.data_array);
 		while (h.next())
 			farray.display(h.heartbeat, imgBeats);
+		TickJob();
 
 		//-- Standardherzschlag
 		h.calcAvBeat(alg1->ecg.data.data_array);
 		farray.redisplay(h.avBeat, imgHerz);
+		TickJob();
 		}
 
 	else if (cbKurve->ItemIndex == cbDerivate1)
 		{
 		//-- Originaldaten
 		farray.redisplay(alg1->ecg.data.derivate1.deriv_array, imgData);
+		TickJob();
 
 		//-- R-Peaks
 		iarray_t rp = alg1->ecg.rpeaks.find(alg1->ecg.data.derivate1.deriv_array, NULL);
 		farray.displayPoints(alg1->ecg.data.derivate1.deriv_array, rp, imgRpeaks);
+		TickJob();
 
 		//-- Herzschläge
 		cHeartbeats h = alg1->ecg.heart;
 		h.reset(alg1->ecg.data.derivate1.deriv_array);
 		while (h.next())
 			farray.display(h.heartbeat, imgBeats);
+		TickJob();
 
 		//-- Standardherzschlag
 		h.calcAvBeat(alg1->ecg.data.derivate1.deriv_array);
 		farray.redisplay(h.avBeat, imgHerz);
+		TickJob();
 		}
 
 	else if (cbKurve->ItemIndex == cbDerivate2)
 		{
 		//-- Originaldaten
 		farray.redisplay(alg1->ecg.data.derivate2.deriv_array, imgData);
+		TickJob();
 
 		//-- R-Peaks
 		iarray_t rp = alg1->ecg.rpeaks.find(alg1->ecg.data.derivate2.deriv_array, NULL);
 		farray.displayPoints(alg1->ecg.data.derivate2.deriv_array, rp, imgRpeaks);
+		TickJob();
 
 		//-- Herzschläge
 		cHeartbeats h = alg1->ecg.heart;
 		h.reset(alg1->ecg.data.derivate2.deriv_array);
 		while (h.next())
 			farray.display(h.heartbeat, imgBeats);
+		TickJob();
 
 		//-- Standardherzschlag
 		h.calcAvBeat(alg1->ecg.data.derivate2.deriv_array);
 		farray.redisplay(h.avBeat, imgHerz);
+		TickJob();
 		}
+	EndJob();
 	}
 //---------------------------------------------------------------------------
+

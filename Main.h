@@ -79,6 +79,7 @@ __published:	// IDE-verwaltete Komponenten
 	TLabel *Label11;
 	TEdit *edBisSample;
 	TCheckBox *cxDropBegin;
+	TTimer *tDetails;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -89,6 +90,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall btMovAvClick(TObject *Sender);
 	void __fastcall btCutClick(TObject *Sender);
+	void __fastcall tDetailsTimer(TObject *Sender);
 
 
 public:

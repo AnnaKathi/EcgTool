@@ -3,19 +3,7 @@
 	q.run();
 
 	cQrs q1 = alg1.ecg.qrs; //das ist eine Kopie !
-	// q.data = q1.data
-
-	alg1.ecg.qrs.run();
-	alg1.ecg.heart.run();
-
-	int no = q.calc();
-	Label1->Caption = "QRS hat ausgerechnet: " + String(no);
-
-	no = alg1.ecg.heart.calc();
-	Label2->Caption = "Heartbeat meldet: " + String(no);
-
-	String m = alg1.ecg.csv.readFile("test");
-	Label3->Caption = m;
+	q.data = q1.data
 	*/
 //---------------------------------------------------------------------------
 #include <vcl.h>
@@ -181,6 +169,14 @@ void TfmMain::ReadFile()
 		}
 	else
 		fmDetails->Renew(alg1);
+
+	tDetails->Enabled = true;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::tDetailsTimer(TObject *Sender)
+	{
+	tDetails->Enabled = false;
+	fmDetails->BringToFront();
 	}
 //---------------------------------------------------------------------------
 void TfmMain::CutCurve()

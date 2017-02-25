@@ -79,8 +79,6 @@ object fmMain: TfmMain
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = -6
-    ExplicitTop = 47
     DesignSize = (
       337
       474)
@@ -328,8 +326,6 @@ object fmMain: TfmMain
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
-    ExplicitLeft = 560
-    ExplicitWidth = 532
     object imgEcg: TImage
       Left = 0
       Top = 0
@@ -404,6 +400,13 @@ object fmMain: TfmMain
   object OpenDialog: TOpenDialog
     Filter = 'TXT-Dateien|*.txt|CSV-Dateien|*.csv'
     Left = 424
+    Top = 8
+  end
+  object tDetails: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = tDetailsTimer
+    Left = 456
     Top = 8
   end
 end

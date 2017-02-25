@@ -10,6 +10,7 @@
 //---------------------------------------------------------------------------
 #include "basics/classArray.h"
 #include "classAlg1.h"
+#include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
 enum {
 	cbEkgData,
@@ -26,6 +27,10 @@ private:
 
 	void		placeForm();
 
+	inline void	StartJob();
+	inline void	TickJob();
+	inline void	EndJob();
+	
 	void		PaintCurves();
 
 __published:	// IDE-verwaltete Komponenten
@@ -54,12 +59,14 @@ __published:	// IDE-verwaltete Komponenten
 	TLabel *Label5;
 	TImage *imgHerz;
 	TBevel *Bevel6;
+	TProgressBar *pbJob;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall cbKurveChange(TObject *Sender);
 	void __fastcall tComboTimer(TObject *Sender);
+	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 
 public:
 	__fastcall TfmDetails(TComponent* Owner);
