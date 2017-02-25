@@ -282,6 +282,29 @@ void TfmMain::MovingAv()
 	fmDetails->Renew(alg1);
 	}
 //---------------------------------------------------------------------------
+void TfmMain::Importschema()
+	{
+	//todo implementieren
+	}
+//---------------------------------------------------------------------------
+void TfmMain::MySqlSave()
+	{
+	if (alg1.ecg.data.data_array.size() <= 0)
+		{
+		Print("## Fehler aufgetreten: Es wurden noch keine EKG-Daten eingelesen");
+		return;
+		}
+
+	String name = DlgRequest(this, "Personenname");
+	String pos  = DlgRequest(this, "Position der Aufnahme");
+
+	if (!fmysql.saveToDbase(name, pos, alg1.ecg.data.data_array))
+		{
+		Print("## Fehler aufgetreten: %d, %s", fmysql.error_code, fmysql.error_msg);
+		return;
+		}
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   Meldungen vom Formular   *********************************/
 /***************************************************************************/
@@ -359,6 +382,23 @@ void __fastcall TfmMain::btCutClick(TObject *Sender)
 void __fastcall TfmMain::btMovAvClick(TObject *Sender)
 	{
 	sendClick(btMovAv);
+	}
+//---------------------------------------------------------------------------
+//------ Menuklicks --------------------------------------------------------
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::Importschemata2Click(TObject *Sender)
+	{
+	Importschema();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::DateninMySQLDatenbankspeichern1Click(TObject *Sender)
+	{
+	MySqlSave();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::Beenden1Click(TObject *Sender)
+	{
+	Close();
 	}
 //---------------------------------------------------------------------------
 

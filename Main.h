@@ -11,9 +11,11 @@
 #include <ExtCtrls.hpp>
 #include <IniFiles.hpp>
 #include <Dialogs.hpp>
+#include <Menus.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classArray.h"
 #include "basics/classMath.h"
+#include "data/classMySql.h"
 #include "classAlg1.h"
 //---------------------------------------------------------------------------
 class TfmMain : public TForm
@@ -21,6 +23,7 @@ class TfmMain : public TForm
 private:
 	TIniFile*	Ini;
 	cAlg1		alg1;
+	cMySql		fmysql;
 	cArray		farray;
 	cMath		fmath;
 	TfmDetails*	fmDetails;
@@ -33,6 +36,9 @@ private:
 	void		ReadFile();
 	void		CutCurve();
 	void		MovingAv();
+
+	void		Importschema();
+	void		MySqlSave();
 
 	void		sendClick(TButton* bt);
 
@@ -80,6 +86,12 @@ __published:	// IDE-verwaltete Komponenten
 	TEdit *edBisSample;
 	TCheckBox *cxDropBegin;
 	TTimer *tDetails;
+	TMainMenu *MainMenu;
+	TMenuItem *Importschemata1;
+	TMenuItem *Importschemata2;
+	TMenuItem *DateninMySQLDatenbankspeichern1;
+	TMenuItem *N1;
+	TMenuItem *Beenden1;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -91,6 +103,9 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btMovAvClick(TObject *Sender);
 	void __fastcall btCutClick(TObject *Sender);
 	void __fastcall tDetailsTimer(TObject *Sender);
+	void __fastcall Beenden1Click(TObject *Sender);
+	void __fastcall Importschemata2Click(TObject *Sender);
+	void __fastcall DateninMySQLDatenbankspeichern1Click(TObject *Sender);
 
 
 public:

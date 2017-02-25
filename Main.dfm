@@ -11,6 +11,7 @@ object fmMain: TfmMain
   Font.Name = 'Tahoma'
   Font.Style = []
   KeyPreview = True
+  Menu = MainMenu
   OldCreateOrder = False
   Position = poDesktopCenter
   OnClose = FormClose
@@ -408,5 +409,28 @@ object fmMain: TfmMain
     OnTimer = tDetailsTimer
     Left = 456
     Top = 8
+  end
+  object MainMenu: TMainMenu
+    Left = 488
+    Top = 8
+    object Importschemata1: TMenuItem
+      Caption = 'EKG-Daten'
+      object Importschemata2: TMenuItem
+        Caption = 'Importschemata...'
+        Enabled = False
+        OnClick = Importschemata2Click
+      end
+      object DateninMySQLDatenbankspeichern1: TMenuItem
+        Caption = 'Daten in MySQL-Datenbank speichern...'
+        OnClick = DateninMySQLDatenbankspeichern1Click
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object Beenden1: TMenuItem
+        Caption = 'Beenden'
+        OnClick = Beenden1Click
+      end
+    end
   end
 end
