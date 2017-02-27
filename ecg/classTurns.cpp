@@ -41,7 +41,6 @@ int	cTurns::calcTurns(iarray_t array)
 		//todo
 		}
 
-	//Zugriff auf cBase nicht möglich, warum ?? ok();
 	return count;
 	*/
 	return 0;
