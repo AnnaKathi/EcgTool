@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 
-#include "RequestBox.h" wird aktuell nicht benötigt
+#include "RequestBox.h" 
 #include "Details.h"
 #include "Main.h"
 //---------------------------------------------------------------------------

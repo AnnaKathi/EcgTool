@@ -26,7 +26,8 @@ bool cMySql::saveToDbase(String name, String pos, iarray_t array)
 	//todo, Datenarray in MySql-Datenbank speichern
 
 	//todo, Name usw nicht auf Übergabeparameter auslegen, sondern via struct übergeben o.ä.
-	
+
+	//mysql_init(fmysql);
 	return ok();
 	}
 //---------------------------------------------------------------------------
