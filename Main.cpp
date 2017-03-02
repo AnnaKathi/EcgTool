@@ -290,7 +290,17 @@ void TfmMain::MySqlSave()
 	String name = DlgRequest(this, "Personenname");
 	String pos  = DlgRequest(this, "Position der Aufnahme");
 
-	if (!fmysql.saveToDbase(name, pos, alg1.ecg.data.data_array))
+	int p = 0;
+		 if (pos == "liegend") p = posLiegend;
+	else if (pos == "sitzend") p = posSitzend;
+	else if (pos == "stehend") p = posStehend;
+	else if (pos == "gehend")  p = posGehend;
+	
+	fmysql.mysql_data.array = alg1.ecg.data.data_array;
+	sprintf(fmysql.mysql_data.name, "%.63s", name.c_str());
+	fmysql.mysql_data.pos   = (ePosition)p;
+
+	if (!fmysql.saveToDbase())
 		{
 		Print("## Fehler aufgetreten: %d, %s", fmysql.error_code, fmysql.error_msg);
 		return;
@@ -386,6 +396,32 @@ void __fastcall TfmMain::DateninMySQLDatenbankspeichern1Click(TObject *Sender)
 void __fastcall TfmMain::Beenden1Click(TObject *Sender)
 	{
 	Close();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::Button1Click(TObject *Sender)
+	{
+	//Daten aus Datenbank anzeigen
+	if (!fmysql.LoadData())
+		{
+		Print("## Fehler aufgetreten: %d, %s", fmysql.error_code, fmysql.error_msg);
+		return;
+		}
+
+	sMySqlRow row;
+	Print("Datenbankdaten ecg.ecgdata:");
+	while (fmysql.nextRow())
+		{
+		row = fmysql.row;
+		Print("%02d: %s \t%s \t%.1f - %.1f - %.1f - %.1f - %.1f",
+			row.ident,
+			row.name,
+			row.pos,
+			row.werte[0],
+			row.werte[1],
+			row.werte[2],
+			row.werte[3],
+			row.werte[4]);
+		}
 	}
 //---------------------------------------------------------------------------
 

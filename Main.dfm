@@ -317,6 +317,15 @@ object fmMain: TfmMain
       Caption = 'Anfangswerte '#252'berspringen'
       TabOrder = 10
     end
+    object Button1: TButton
+      Left = 16
+      Top = 216
+      Width = 75
+      Height = 25
+      Caption = 'Test DB'
+      TabOrder = 14
+      OnClick = Button1Click
+    end
   end
   object pnClient: TPanel
     Left = 341

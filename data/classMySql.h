@@ -3,10 +3,35 @@
 #define classMySqlH
 //---------------------------------------------------------------------------
 #include <classes.hpp>
+#include <IniFiles.hpp>
 //---------------------------------------------------------------------------
 #include "../basics/classBase.h"
 #include "../basics/classCsv.h"
-//#include "../inc/mysql/mysql.h"
+#include "../inc/mysql/mysql.h"
+//---------------------------------------------------------------------------
+enum ePosition
+	{
+	posNone = 0,
+	posLiegend,
+	posSitzend,
+	posStehend,
+	posGehend
+	};
+//---------------------------------------------------------------------------
+struct sMySqlData
+	{
+	iarray_t	array; //EKG-Stream
+	char		name[64];
+	ePosition	pos; //liegend, sitzend, stehend, gehend -> enum ePosition
+	};
+//---------------------------------------------------------------------------
+struct sMySqlRow
+	{
+	int		ident;
+	char	name[128];
+	char	pos[24];
+	double	werte[5];
+	};
 //---------------------------------------------------------------------------
 class PACKAGE cMySql : public cBase
 	{
@@ -14,12 +39,39 @@ public:
 	cMySql();
 	~cMySql();
 
-	bool		saveToDbase(String name, String pos, iarray_t array);
+	sMySqlData	mysql_data; //todo getter und setter machen
+
+	bool 		LoadData();
+	bool		nextRow();
+
+	bool		saveToDbase();
+
+__property sMySqlRow row = { read=get_row };
 
 private:
+	TIniFile*	Ini;
 	cCsv*		fcsv;
-//	MYSQL*		fmysql;
 
+	bool		bMySqlConnected;
+	MYSQL*      fsql;
+	MYSQL*      fcon;
+	MYSQL_RES*  fres;
+	MYSQL_ROW	frow;
+	sMySqlRow	fsqlrow;
+	sMySqlRow 	get_row();
+
+	String		ferror;
+
+	String		serv;
+	String		user;
+	String		pass;
+	String		data;
+	int         port;
+
+	bool		getLoginData();
+	bool 		OpenMysql();
+	void 		CloseMysql();
+	bool 		UpdateMysql();
 	};
 //---------------------------------------------------------------------------
 #endif
