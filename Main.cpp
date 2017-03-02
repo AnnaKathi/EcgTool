@@ -1,17 +1,10 @@
-	/* Testcode
-	cQrs& q = alg1.ecg.qrs;  //wenn nur eins verwendet wird
-	q.run();
-
-	cQrs q1 = alg1.ecg.qrs; //das ist eine Kopie !
-	q.data = q1.data
-	*/
 //---------------------------------------------------------------------------
 #include <vcl.h>
 #pragma hdrstop
 
 #include <stdio.h>
 
-#include "RequestBox.h"
+#include "RequestBox.h" wird aktuell nicht benötigt
 #include "Details.h"
 #include "Main.h"
 //---------------------------------------------------------------------------
@@ -101,7 +94,7 @@ void __fastcall TfmMain::FormClose(TObject *Sender, TCloseAction &Action)
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
-/******************   Funktionen   *****************************************/
+/******************   Grundfunktionen   ************************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
 void TfmMain::Print(char* msg, ...)
@@ -121,12 +114,17 @@ void TfmMain::Print(char* msg, ...)
 	va_end(argptr);
 	}
 //---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   EKG-Funktionen   *************************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
 void TfmMain::ReadFile()
 	{
 	Print("start readFile...");
 	String ecgFile = edInputfile->Text;
 	if (ecgFile == "") return;
 
+	//todo, über dyn Importschemata wählen lassen
 	String delim = ";";
 	if (cbDelim->ItemIndex == 1) //Komma
 		delim = ",";
@@ -143,7 +141,7 @@ void TfmMain::ReadFile()
 		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
 		return;
 		}
-	alg1.ecg.data.redisplay(imgEcg);
+	data.redisplay(imgEcg);
 
 	//-- Erste und zweite Ableitung
 	if (!data.buildDerivates())
@@ -151,8 +149,8 @@ void TfmMain::ReadFile()
 		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
 		return;
 		}
-	alg1.ecg.data.derivate1.redisplay(imgDeriv1);
-	alg1.ecg.data.derivate2.redisplay(imgDeriv2);
+	data.derivate1.redisplay(imgDeriv1);
+	data.derivate2.redisplay(imgDeriv2);
 
 	Print("\tDatensätze im Array: %d", data.farr_charac.Number);
 	Print("\tIndex im Array: %d - %d", data.farr_charac.VonIdx, data.farr_charac.BisIdx);
@@ -182,10 +180,6 @@ void __fastcall TfmMain::tDetailsTimer(TObject *Sender)
 void TfmMain::CutCurve()
 	{
 	Print("cut curve...");
-	/* obsolete, Bereich wird nun über das Formular angegeben
-	int von = DlgRequest(this, "Werte löschen von Millisekunde").ToIntDef(-1);
-	int bis = DlgRequest(this, "Werte löschen bis Millisekunde").ToIntDef(-1);
-	*/
 
 	int von = edCutVon->Text.ToIntDef(-1);
 	int bis = edCutBis->Text.ToIntDef(-1);
@@ -199,7 +193,7 @@ void TfmMain::CutCurve()
 		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
 		return;
 		}
-	alg1.ecg.data.redisplay(imgEcg);
+	data.redisplay(imgEcg);
 
 	//-- Erste Ableitung
 	cDerivate& deriv1 = alg1.ecg.data.derivate1;
@@ -208,7 +202,7 @@ void TfmMain::CutCurve()
 		Print("## Fehler aufgetreten: %d, %s", deriv1.error_code, deriv1.error_msg);
 		return;
 		}
-	alg1.ecg.data.derivate1.redisplay(imgDeriv1);
+	data.derivate1.redisplay(imgDeriv1);
 
 	//-- Zweite Ableitung
 	cDerivate& deriv2 = alg1.ecg.data.derivate2;
@@ -217,7 +211,7 @@ void TfmMain::CutCurve()
 		Print("## Fehler aufgetreten: %d, %s", deriv2.error_code, deriv2.error_msg);
 		return;
 		}
-	alg1.ecg.data.derivate2.redisplay(imgDeriv2);
+	data.derivate2.redisplay(imgDeriv2);
 
 	Print("\tDatensätze im Array: %d", data.farr_charac.Number);
 	Print("\tIndex im Array: %d - %d", data.farr_charac.VonIdx, data.farr_charac.BisIdx);
@@ -233,9 +227,6 @@ void TfmMain::CutCurve()
 void TfmMain::MovingAv()
 	{
 	Print("build moving average...");
-	/* obsolete, Werte werden über das Formular angegeben
-	int window = DlgRequest(this, "Anzahl Werte im gleitenden Durchschnitt").ToIntDef(-1);
-	*/
 
 	int window1 = edGl1->Text.ToIntDef(-1);
 	int window2 = edGl2->Text.ToIntDef(-1);
@@ -251,7 +242,7 @@ void TfmMain::MovingAv()
 		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
 		return;
 		}
-	alg1.ecg.data.redisplay(imgEcg);
+	data.redisplay(imgEcg);
 
 	//-- Erste Ableitung
 	cDerivate& deriv1 = alg1.ecg.data.derivate1;
@@ -260,7 +251,7 @@ void TfmMain::MovingAv()
 		Print("## Fehler aufgetreten: %d, %s", deriv1.error_code, deriv1.error_msg);
 		return;
 		}
-	alg1.ecg.data.derivate1.redisplay(imgDeriv1);
+	data.derivate1.redisplay(imgDeriv1);
 
 	//-- Zweite Ableitung
 	cDerivate& deriv2 = alg1.ecg.data.derivate2;
@@ -269,7 +260,7 @@ void TfmMain::MovingAv()
 		Print("## Fehler aufgetreten: %d, %s", deriv2.error_code, deriv2.error_msg);
 		return;
 		}
-	alg1.ecg.data.derivate2.redisplay(imgDeriv2);
+	data.derivate2.redisplay(imgDeriv2);
 
 	Print("\tDatensätze im Array: %d", data.farr_charac.Number);
 	Print("\tIndex im Array: %d - %d", data.farr_charac.VonIdx, data.farr_charac.BisIdx);
@@ -295,6 +286,7 @@ void TfmMain::MySqlSave()
 		return;
 		}
 
+	//todo: über struct lösen, erstmal manuelle Testdaten verwenden
 	String name = DlgRequest(this, "Personenname");
 	String pos  = DlgRequest(this, "Position der Aufnahme");
 
@@ -315,11 +307,6 @@ void __fastcall TfmMain::FormKeyPress(TObject *Sender, char &Key)
 		{
 		Key = 0;
 		Close();
-		}
-	else if (Key == VK_F12)
-		{
-		Key = 0;
-		btInputfileClick(Sender);
 		}
 	}
 //---------------------------------------------------------------------------
@@ -354,9 +341,9 @@ void TfmMain::sendClick(TButton* bt)
 
 		switch (bt->Tag)
 			{
-			case  1: ReadFile(); 		break;
-			case  2: CutCurve();		break;
-			case  3: MovingAv();		break;
+			case  1: ReadFile(); break;
+			case  2: CutCurve(); break;
+			case  3: MovingAv(); break;
 			//default, nicht nötig
 			}
 

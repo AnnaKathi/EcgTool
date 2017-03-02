@@ -33,6 +33,7 @@ private:
 	bool		bStop;
 
 	void 		Print(char* msg, ...);
+	
 	void		ReadFile();
 	void		CutCurve();
 	void		MovingAv();

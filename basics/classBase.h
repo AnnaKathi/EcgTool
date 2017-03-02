@@ -15,6 +15,7 @@ enum BASE_ERROR_CODES
 	CE_OK,              // no error, all things done well
 	CE_HARDERRORS,      // real error codes
 						// --------------------------------------------------
+	CE_EXAMPLE,			// example of real error code if necessary
 	};
 //---------------------------------------------------------------------------   
 class PACKAGE cBase
@@ -22,7 +23,6 @@ class PACKAGE cBase
 public:
     cBase();
 	virtual ~cBase();
-
 
 __property bool     success    = { read=get_success };
 __property bool     error      = { read=get_error   };
@@ -46,6 +46,7 @@ protected:
 private:
     bool            get_success();
     bool            get_error();
-    };
+	};
+//---------------------------------------------------------------------------
 #endif
 

@@ -13,21 +13,6 @@ __fastcall TfmDetails::TfmDetails(TComponent* Owner)
 	{
 	}
 //---------------------------------------------------------------------------
-bool TfmDetails::Execute(TForm* papa, cAlg1& alg)
-	{
-	Papa = papa;
-	alg1 = &alg;
-	Show();
-	return true;
-	}
-//---------------------------------------------------------------------------
-bool TfmDetails::Renew(cAlg1& alg)
-	{
-	alg1 = &alg;
-	cbKurveChange(this);
-	return true;
-	}
-//---------------------------------------------------------------------------
 void __fastcall TfmDetails::FormShow(TObject *Sender)
 	{
 	tStartup->Enabled = true;
@@ -45,52 +30,28 @@ void __fastcall TfmDetails::FormClose(TObject *Sender, TCloseAction &Action)
 	//
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmDetails::FormKeyPress(TObject *Sender, char &Key)
+/***************************************************************************/
+/**************   Public Functions   ***************************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+bool TfmDetails::Execute(TForm* papa, cAlg1& alg)
 	{
-	if (Key == VK_ESCAPE)
-		{
-		Key = 0;
-		Close();
-		}
+	Papa = papa;
+	alg1 = &alg;
+	Show();
+	return true;
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmDetails::FormKeyDown(TObject *Sender, WORD &Key,
-	  TShiftState Shift)
+bool TfmDetails::Renew(cAlg1& alg)
 	{
-	if (Shift.Contains(ssCtrl) && Shift.Contains(ssShift))
-		{
-		if (Key == 0x31) //"1" -> EKG-Daten aufrufen
-			{
-			cbKurve->ItemIndex = cbEkgData;
-			cbKurveChange(Sender);
-			}
-		else if (Key == 0x32) //"2" -> Erste Ableitung aufrufen
-			{
-			cbKurve->ItemIndex = cbDerivate1;
-			cbKurveChange(Sender);
-			}
-		else if (Key == 0x33) //"3" -> Zweite Ableitung aufrufen
-			{
-			cbKurve->ItemIndex = cbDerivate2;
-			cbKurveChange(Sender);
-			}
-		}
+	alg1 = &alg;
+	cbKurveChange(this);
+	return true;
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmDetails::cbKurveChange(TObject *Sender)
-	{
-	tCombo->Enabled = true;
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmDetails::tComboTimer(TObject *Sender)
-	{
-	tCombo->Enabled  = false;
-	cbKurve->Enabled = false; //damit die Funktion sich nicht überholt
-
-	PaintCurves();
-
-	cbKurve->Enabled = true;
-	}
+/***************************************************************************/
+/******************   Funktionen   *****************************************/
+/***************************************************************************/
 //---------------------------------------------------------------------------
 void TfmDetails::placeForm()
 	{
@@ -145,7 +106,7 @@ void TfmDetails::PaintCurves()
 	farray.clearImg(imgData);
 	farray.clearImg(imgRpeaks);
 	farray.clearImg(imgBeats);
-	
+
 	if (cbKurve->ItemIndex == cbEkgData)
 		{
 		//-- Originaldaten
@@ -218,6 +179,55 @@ void TfmDetails::PaintCurves()
 		TickJob();
 		}
 	EndJob();
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/**************   Meldungen vom Formular   *********************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+void __fastcall TfmDetails::FormKeyPress(TObject *Sender, char &Key)
+	{
+	if (Key == VK_ESCAPE)
+		{
+		Key = 0;
+		Close();
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmDetails::FormKeyDown(TObject *Sender, WORD &Key,
+	  TShiftState Shift)
+	{
+	if (Shift.Contains(ssCtrl) && Shift.Contains(ssShift))
+		{
+		if (Key == 0x31) //"1" -> EKG-Daten aufrufen
+			{
+			cbKurve->ItemIndex = cbEkgData;
+			cbKurveChange(Sender);
+			}
+		else if (Key == 0x32) //"2" -> Erste Ableitung aufrufen
+			{
+			cbKurve->ItemIndex = cbDerivate1;
+			cbKurveChange(Sender);
+			}
+		else if (Key == 0x33) //"3" -> Zweite Ableitung aufrufen
+			{
+			cbKurve->ItemIndex = cbDerivate2;
+			cbKurveChange(Sender);
+			}
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmDetails::cbKurveChange(TObject *Sender)
+	{
+	tCombo->Enabled = true;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmDetails::tComboTimer(TObject *Sender)
+	{
+	tCombo->Enabled  = false;
+	cbKurve->Enabled = false; //damit die Funktion sich nicht überholt
+	PaintCurves();
+	cbKurve->Enabled = true;
 	}
 //---------------------------------------------------------------------------
 

@@ -1,3 +1,4 @@
+//todo: anpassen auf dyn Formate
 //---------------------------------------------------------------------------
 #pragma hdrstop
 
@@ -129,7 +130,7 @@ bool cCsv::NextUntil(int sample)
 //---------------------------------------------------------------------------
 bool cCsv::ParseLine()
 	{
-	//die Werte werden Kommagetrennt aufgeführt
+	//die Werte werden Semikolon- oder Tabgetrennt aufgeführt
 	char value[128];
 	char* pt;
 	float val;
@@ -152,7 +153,7 @@ bool cCsv::ParseLine()
 			test = test.SubString(0, n-1) + "." + test.SubString(n+1, 9999);
 		strcpy(value, test.c_str());
 
-		//Komma durch PUnkt ersetzen, damit die Nachkommastellen richtig rauskommen
+		//Komma durch Punkt ersetzen, damit die Nachkommastellen richtig rauskommen
 
 		val = atof(value);
 

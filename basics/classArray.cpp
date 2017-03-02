@@ -212,7 +212,6 @@ iarray_t cArray::movingAv(iarray_t array, int window, bool CalcBegin)
 	float summe, mittel;
 	int count = -1;
 	int new_index = 0;
-//	for (int i = 0; i < farr.size(); i++)
 	for (iarray_itr itr = farr.begin(); itr != farr.end(); itr++)
 		{
 		count++;
@@ -309,7 +308,6 @@ iarray_t cArray::cut(iarray_t array, int vonMsec, int bisMsec)
 
 	//reverse Iterator, läuft von hinten nach vorne
 	iarray_t::reverse_iterator itr_rev = farr.rbegin();
-
 	do
 		{
 		key = itr_rev->first;

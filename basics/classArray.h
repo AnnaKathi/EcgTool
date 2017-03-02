@@ -40,8 +40,6 @@ private:
 	iarray_t	farr;
 
 	bool 		resetValues(sArrayCha& cha);
-
-
 	};
 //---------------------------------------------------------------------------
 #endif

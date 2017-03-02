@@ -9,7 +9,7 @@
 #include "classArray.h"
 #include "classMath.h"
 //---------------------------------------------------------------------------
-/*
+/* todo: obsolete ?
 typedef struct sARRAYCHA //Charkterwerte eines Arrays
 	{
 	int			VonIdx;  //kleinster Index
@@ -44,7 +44,6 @@ private:
 
 	iarray_t	farr;
 	iarray_t	get_array();
-
 	};
 //---------------------------------------------------------------------------
 #endif

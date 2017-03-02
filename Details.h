@@ -5,12 +5,12 @@
 #include <Classes.hpp>
 #include <Controls.hpp>
 #include <StdCtrls.hpp>
+#include <ComCtrls.hpp>
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classArray.h"
 #include "classAlg1.h"
-#include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
 enum {
 	cbEkgData,

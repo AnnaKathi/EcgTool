@@ -14,6 +14,7 @@ cMySql::cMySql()
 //---------------------------------------------------------------------------
 cMySql::~cMySql()
 	{
+	if (fcsv) delete fcsv;
 	}
 //---------------------------------------------------------------------------
 bool cMySql::saveToDbase(String name, String pos, iarray_t array)

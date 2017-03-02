@@ -1,9 +1,8 @@
 //---------------------------------------------------------------------------
-
 #include <vcl.h>
 #pragma hdrstop
 
-#include "RequestBox.h"
+#include "RequestBox.h" 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -11,6 +10,7 @@ TfmRequest *fmRequest;
 //---------------------------------------------------------------------------
 String DlgRequest(TForm* Papa, String msg)
 	{
+	//quick and dirty, todo: ausbauen oder App->MsgBox verwenden
 	TfmRequest* Form = new TfmRequest(Papa);
 	String rc = "";
 
@@ -26,7 +26,6 @@ String DlgRequest(TForm* Papa, String msg)
 String TfmRequest::Execute(String msg)
 	{
 	Answer = "";
-	mRequest->Lines->Clear();
 	mRequest->Text = msg;
 	ShowModal();
 	return Answer;

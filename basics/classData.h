@@ -10,7 +10,7 @@
 #include "classArray.h"
 #include "classDerivate.h"
 //---------------------------------------------------------------------------
-/*
+/* todo: obsolete ?
 typedef struct sARRAYCHA //Charkterwerte eines Arrays
 	{
 	int			VonIdx;  //kleinster Index
@@ -30,6 +30,8 @@ public:
 	~cData();
 
 	sArrayCha	farr_charac; //todo getter und setter machen
+
+	//------- Grundfunktionen -----------------------------------------------
 	bool		getFile(String file, String delim, int vonMsec, int bisMsec);
 	bool		redisplay(TImage* img);
 	bool		movingAv(int window, bool CalcBegin = true);
@@ -57,8 +59,6 @@ private:
 	iarray_t	get_array();
 
 	void 		resetValues();
-
-
 	};
 //---------------------------------------------------------------------------
 #endif

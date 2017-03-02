@@ -14,7 +14,6 @@ public:
 	cRpeaks();
 	~cRpeaks();
 
-
 	iarray_t	find(iarray_t array, TImage* img1);
 
 private:
@@ -22,7 +21,6 @@ private:
 	cArray*		farray;
 
 	sArrayCha	charac; //todo getter und setter machen
-
 	};
 //---------------------------------------------------------------------------
 #endif

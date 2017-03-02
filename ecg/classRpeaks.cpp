@@ -12,6 +12,8 @@ cRpeaks::cRpeaks()
 //---------------------------------------------------------------------------
 cRpeaks::~cRpeaks()
 	{
+	if (fmath)  delete fmath;
+	if (farray) delete farray;
 	}
 //---------------------------------------------------------------------------
 iarray_t cRpeaks::find(iarray_t array, TImage* img1)
@@ -23,7 +25,7 @@ iarray_t cRpeaks::find(iarray_t array, TImage* img1)
 	farray->resetValues(desc, charac);
 
 	//Schwellenwert verwenden, der R-Peak macht vom Herzschlag ca. x% aus
-	float anteil_qrs = 0.025;
+	float anteil_qrs = 0.025; //todo: vom Benutzer einstellen lassen
 
 	iarray_t peaks; peaks.clear();
 	int last = desc.size() * anteil_qrs;

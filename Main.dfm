@@ -256,6 +256,7 @@ object fmMain: TfmMain
       Width = 125
       Height = 25
       Caption = '&2 - Kurven schneiden'
+      Enabled = False
       TabOrder = 3
       OnClick = btCutClick
     end

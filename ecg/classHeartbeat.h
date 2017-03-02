@@ -40,7 +40,7 @@ private:
 	sArrayCha	charac; //todo getter und setter machen
 
 	int			findex;
-
-    };
+	};
+//---------------------------------------------------------------------------
 #endif
 

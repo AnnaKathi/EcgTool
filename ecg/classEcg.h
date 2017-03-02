@@ -39,7 +39,6 @@ private:
 
 	cHeartbeats*	fheart;
 	cHeartbeats&	get_heart();
-
-
 	};
+//---------------------------------------------------------------------------
 #endif

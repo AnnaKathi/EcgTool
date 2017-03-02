@@ -19,7 +19,7 @@ enum CSV_ERROR_CODES
 	EC_NOFIELD,			// kein (weiteres) Feld vorhanden
 	};
 //---------------------------------------------------------------------------
-struct cEcgLine
+struct cEcgLine //todo weiter ausbauen für weitere leads
 	{
 	int 	lineno;
 	int		sample;
@@ -59,7 +59,6 @@ private:
 
 	bool 		Skip();
 	bool 		ParseLine();
-
 	};
 //---------------------------------------------------------------------------
 #endif
