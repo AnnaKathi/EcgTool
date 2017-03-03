@@ -63,7 +63,7 @@ bool cMySql::saveToDbase()
 	return ok();
 	}
 //---------------------------------------------------------------------------
-bool cMySql::LoadData()
+bool cMySql::loadData()
 	{
 	if (!getLoginData())
 		return fail(2, ferror.c_str());
@@ -84,7 +84,6 @@ bool cMySql::LoadData()
 		return false;
 		}
 
-	int test = mysql_num_rows(fres);
 	if (mysql_num_rows(fres) == 0)
 		{
 		ferror = "keine Daten gefunden";
@@ -179,7 +178,48 @@ void cMySql::CloseMysql()
 bool cMySql::UpdateMysql()
 	{
 	//todo: implementieren
+	/*INSERT INTO `ecg`.`ecgdata`
+		(`Name`, `Position`, `T1`, `T2`, `T3`, `T4`, `T5`)
+	  VALUES
+		('Manuela', '2', 0.146, 5.187, 1.999, 0.164, 1.976);
+	*/
+
+	char q[1024];
+	sprintf(q, "INSERT INTO `%s`.`%s` "
+		"(`Name`, `Position`, `T1`, `T2`, `T3`, `T4`, `T5`) "
+		"VALUES ('%s', '%d', %.6f, %.6f, %.6f, %.6f, %.6f)",
+		"ecg", "ecgdata",
+		mysql_data.name, mysql_data.pos,
+		mysql_data.array[0][1],
+		mysql_data.array[1][1],
+		mysql_data.array[2][1],
+		mysql_data.array[3][1],
+		mysql_data.array[4][1]);
+
+	String query = String(q);
+	if (mysql_real_query(fcon, query.c_str(), query.Length()) != 0)
+		{
+		ferror = "Fehler in SELECT * : " + String(mysql_error(fcon));
+		return false;
+		}
+
 	return true;
+	}
+//---------------------------------------------------------------------------
+bool cMySql::deleteData(int ident)
+	{
+	//DELETE FROM `ecg`.`ecgdata` WHERE  `Ident`=33;
+	if (ident <= 0)
+		return fail(1, "Es wurde kein Ident übergeben");
+
+	char q[1024];
+	sprintf(q, "DELETE FROM `%s`.`%s` WHERE  `Ident`=%d", "ecg", "ecgdata", ident);
+
+	String query = String(q);
+	if (mysql_real_query(fcon, query.c_str(), query.Length()) != 0)
+		return fail(2, "Fehler in SELECT * : " + String(mysql_error(fcon)));
+
+	return ok();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

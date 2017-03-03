@@ -33,10 +33,12 @@ public:
 
 	sMySqlData	mysql_data; //todo getter und setter machen
 
-	bool 		LoadData();
+	bool 		loadData();
 	bool		nextRow();
 
 	bool		saveToDbase();
+
+	bool		deleteData(int ident);
 
 __property sMySqlRow row = { read=get_row };
 __property int num_rows  = { read=get_num_rows };

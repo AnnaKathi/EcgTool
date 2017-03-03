@@ -99,7 +99,7 @@ void TfmData::ShowEcgData()
 	lvData->Items->BeginUpdate();
 
 	//Daten aus Datenbank anzeigen
-	if (!fmysql.LoadData())
+	if (!fmysql.loadData())
 		{
 		Application->MessageBox(fmysql.error_msg.c_str(), "Fehler aufgetreten", MB_OK);
 		lvData->Items->EndUpdate();
@@ -170,6 +170,62 @@ bool TfmData::CheckFilter(sMySqlRow row)
 	return true;
 	}
 //---------------------------------------------------------------------------
+void TfmData::CreateTestdata()
+	{
+	//einen neuen Datensatz erzeugen mit zufälligen Werten
+	Randomize();
+
+	String n;
+	int no = Random(7);
+	switch (no)
+		{
+		case 0: n = "Anna"; 	break;
+		case 1: n = "Theresa"; 	break;
+		case 2: n = "Manfred"; 	break;
+		case 3: n = "Martin"; 	break;
+		case 4: n = "Manuela"; 	break;
+		case 5: n = "Atha"; 	break;
+		case 6: n = "Vici";	 	break;
+		default: n = "John Doe";
+		}
+
+	sprintf(fmysql.mysql_data.name, "%.63s", n.c_str());
+
+	ePosition pos;
+	int p = Random(4)+1;
+	switch (p)
+		{
+		case 1: pos = posLiegend; break;
+		case 2: pos = posSitzend; break;
+		case 3: pos = posStehend; break;
+		case 4: pos = posGehend;  break;
+		default: pos = posNone;
+		}
+
+	fmysql.mysql_data.pos = pos;
+	iarray_t array; array.clear();
+
+	char zahl[6];
+	for (int i = 0; i < 5; i++)
+		{
+		sprintf(zahl, "%d.%d%d%d%d",
+			Random(9),
+			Random(9),
+			Random(9),
+			Random(9),
+			Random(9));
+
+		array[i].push_back(i);
+		float z = atof(zahl);
+		array[i].push_back(z);
+		}
+
+	fmysql.mysql_data.array = array;
+
+	if (!fmysql.saveToDbase())
+		;
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /********************   Actions   ******************************************/
 /***************************************************************************/
@@ -188,6 +244,34 @@ void __fastcall TfmData::acFilterExecute(TObject *Sender)
 	{
 	if (BuildFilter())
     	ShowEcgData();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::acDeleteExecute(TObject *Sender)
+	{
+	if (lvData->SelCount < 0) return;
+	else if (lvData->SelCount == 1)
+		{
+		int ident = (int)lvData->Selected->Data;
+		if (ident <= 0) return;
+		if (!fmysql.deleteData(ident))
+			;
+		}
+
+	else //Multi-Select
+		{
+		for (int i = 0; i < lvData->Items->Count; i++)
+			{
+			TListItem* item = lvData->Items->Item[i];
+			if (!item->Selected) continue;
+
+			int ident = (int)item->Data;
+			if (ident <= 0) continue;
+			if (!fmysql.deleteData(ident))
+				;
+			}
+		}
+
+	acRefreshExecute(Sender);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -230,6 +314,27 @@ void __fastcall TfmData::edNameChange(TObject *Sender)
 void __fastcall TfmData::cbPositionChange(TObject *Sender)
 	{
 	acFilterExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::btCreateTestDataClick(TObject *Sender)
+	{
+	CreateTestdata();
+	acRefreshExecute(this);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::lvDataClick(TObject *Sender)
+	{
+	if (lvData->SelCount <= 0) acDelete->Enabled = false;
+	else if (lvData->SelCount == 1)
+		{
+		acDelete->Caption = "&Datensatz löschen";
+		acDelete->Enabled = true;
+		}
+	else //Multiselect
+		{
+		acDelete->Caption = "&Datensätze löschen";
+		acDelete->Enabled = true;
+		}
 	}
 //---------------------------------------------------------------------------
 

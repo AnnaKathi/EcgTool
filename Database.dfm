@@ -132,10 +132,13 @@ object fmData: TfmData
         Caption = 'T5'
       end>
     GridLines = True
+    MultiSelect = True
     ReadOnly = True
     RowSelect = True
+    PopupMenu = PopupMenu
     TabOrder = 2
     ViewStyle = vsReport
+    OnClick = lvDataClick
   end
   object pnFilter: TPanel
     Left = 0
@@ -224,6 +227,15 @@ object fmData: TfmData
       TabOrder = 3
       OnChange = cbPositionChange
     end
+    object btCreateTestData: TButton
+      Left = 368
+      Top = 33
+      Width = 145
+      Height = 25
+      Caption = 'Create Testdata'
+      TabOrder = 4
+      OnClick = btCreateTestDataClick
+    end
   end
   object tStartup: TTimer
     Enabled = False
@@ -246,6 +258,18 @@ object fmData: TfmData
     object acFilter: TAction
       Caption = '&Filter'
       OnExecute = acFilterExecute
+    end
+    object acDelete: TAction
+      Caption = '&Datensatz l'#246'schen'
+      Enabled = False
+      OnExecute = acDeleteExecute
+    end
+  end
+  object PopupMenu: TPopupMenu
+    Left = 232
+    Top = 264
+    object Datensatzlschen1: TMenuItem
+      Action = acDelete
     end
   end
 end

@@ -10,9 +10,11 @@
 #include <ComCtrls.hpp>
 #include <ActnList.hpp>
 #include <IniFiles.hpp>
+#include <System.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
 #include "data/classMySql.h"
+#include <Menus.hpp>
 //---------------------------------------------------------------------------
 struct sFilter
 	{
@@ -43,6 +45,8 @@ private:
 	bool		BuildFilter();
 	bool		CheckFilter(sMySqlRow row);
 
+	void		CreateTestdata();
+
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
 	TMemo *mInfo;
@@ -67,6 +71,10 @@ __published:	// IDE-verwaltete Komponenten
 	TEdit *edName;
 	TLabel *Label5;
 	TComboBox *cbPosition;
+	TButton *btCreateTestData;
+	TPopupMenu *PopupMenu;
+	TAction *acDelete;
+	TMenuItem *Datensatzlschen1;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -79,6 +87,9 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall edIdVonExit(TObject *Sender);
 	void __fastcall edNameChange(TObject *Sender);
 	void __fastcall cbPositionChange(TObject *Sender);
+	void __fastcall btCreateTestDataClick(TObject *Sender);
+	void __fastcall acDeleteExecute(TObject *Sender);
+	void __fastcall lvDataClick(TObject *Sender);
 
 public:
 	__fastcall TfmData(TComponent* Owner);
