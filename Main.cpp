@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include "RequestBox.h" 
+#include "Database.h"
 #include "Details.h"
 #include "Main.h"
 //---------------------------------------------------------------------------
@@ -398,30 +399,9 @@ void __fastcall TfmMain::Beenden1Click(TObject *Sender)
 	Close();
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::Button1Click(TObject *Sender)
+void __fastcall TfmMain::Datenanzeigen1Click(TObject *Sender)
 	{
-	//Daten aus Datenbank anzeigen
-	if (!fmysql.LoadData())
-		{
-		Print("## Fehler aufgetreten: %d, %s", fmysql.error_code, fmysql.error_msg);
-		return;
-		}
-
-	sMySqlRow row;
-	Print("Datenbankdaten ecg.ecgdata:");
-	while (fmysql.nextRow())
-		{
-		row = fmysql.row;
-		Print("%02d: %s \t%s \t%.1f - %.1f - %.1f - %.1f - %.1f",
-			row.ident,
-			row.name,
-			row.pos,
-			row.werte[0],
-			row.werte[1],
-			row.werte[2],
-			row.werte[3],
-			row.werte[4]);
-		}
+	DlgDatabase(this);
 	}
 //---------------------------------------------------------------------------
 

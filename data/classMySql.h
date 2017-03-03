@@ -27,10 +27,10 @@ struct sMySqlData
 //---------------------------------------------------------------------------
 struct sMySqlRow
 	{
-	int		ident;
-	char	name[128];
-	char	pos[24];
-	double	werte[5];
+	int			ident;
+	char		name[128];
+	ePosition	pos;
+	double		werte[5];
 	};
 //---------------------------------------------------------------------------
 class PACKAGE cMySql : public cBase
@@ -47,6 +47,7 @@ public:
 	bool		saveToDbase();
 
 __property sMySqlRow row = { read=get_row };
+__property int num_rows  = { read=get_num_rows };
 
 private:
 	TIniFile*	Ini;
@@ -59,6 +60,7 @@ private:
 	MYSQL_ROW	frow;
 	sMySqlRow	fsqlrow;
 	sMySqlRow 	get_row();
+	int			get_num_rows();
 
 	String		ferror;
 

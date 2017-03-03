@@ -324,7 +324,6 @@ object fmMain: TfmMain
       Height = 25
       Caption = 'Test DB'
       TabOrder = 14
-      OnClick = Button1Click
     end
   end
   object pnClient: TPanel
@@ -440,6 +439,13 @@ object fmMain: TfmMain
       object Beenden1: TMenuItem
         Caption = 'Beenden'
         OnClick = Beenden1Click
+      end
+    end
+    object Datenbank1: TMenuItem
+      Caption = 'Datenbank'
+      object Datenanzeigen1: TMenuItem
+        Caption = 'Daten anzeigen...'
+        OnClick = Datenanzeigen1Click
       end
     end
   end

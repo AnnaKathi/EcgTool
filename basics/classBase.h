@@ -17,11 +17,11 @@ enum BASE_ERROR_CODES
 						// --------------------------------------------------
 	CE_EXAMPLE,			// example of real error code if necessary
 	};
-//---------------------------------------------------------------------------   
+//---------------------------------------------------------------------------
 class PACKAGE cBase
-    {
+	{
 public:
-    cBase();
+	cBase();
 	virtual ~cBase();
 
 __property bool     success    = { read=get_success };

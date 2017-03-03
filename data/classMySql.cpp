@@ -108,7 +108,7 @@ bool cMySql::nextRow()
 
 	fsqlrow.ident = atoi(frow[0]);
 	sprintf(fsqlrow.name, "%.123s", frow[1]);
-	sprintf(fsqlrow.pos,  "%.23s",  frow[2]);
+	fsqlrow.pos = (ePosition) atoi(frow[2]); //todo ePosition umwandeln in Text
 
 	fsqlrow.werte[0] = atof(frow[3]);
 	fsqlrow.werte[1] = atof(frow[4]);
@@ -191,3 +191,9 @@ sMySqlRow cMySql::get_row()
 	return fsqlrow;
 	}
 //---------------------------------------------------------------------------
+int	cMySql::get_num_rows()
+	{
+	return mysql_num_rows(fres);
+	}
+//---------------------------------------------------------------------------
+

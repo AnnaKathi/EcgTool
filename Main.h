@@ -94,6 +94,8 @@ __published:	// IDE-verwaltete Komponenten
 	TMenuItem *N1;
 	TMenuItem *Beenden1;
 	TButton *Button1;
+	TMenuItem *Datenbank1;
+	TMenuItem *Datenanzeigen1;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -108,7 +110,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall Beenden1Click(TObject *Sender);
 	void __fastcall Importschemata2Click(TObject *Sender);
 	void __fastcall DateninMySQLDatenbankspeichern1Click(TObject *Sender);
-	void __fastcall Button1Click(TObject *Sender);
+	void __fastcall Datenanzeigen1Click(TObject *Sender);
 
 
 public:

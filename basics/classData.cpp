@@ -15,7 +15,7 @@ cData::~cData()
 	if (fcsv)    delete fcsv;
 	if (farray)  delete farray;
 	if (fderiv1) delete fderiv1;
-	if (fderiv2) delete fderiv1;
+	if (fderiv2) delete fderiv2;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
