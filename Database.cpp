@@ -56,15 +56,15 @@ void __fastcall TfmData::FormShow(TObject *Sender)
 void __fastcall TfmData::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
-
-	FormLoadEdits(this);
+	ftools.PositionenToCombo(cbPosition);
+	ftools.FormLoad(this);
 	ShowEcgData();
 	edIdVon->SetFocus();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmData::FormClose(TObject *Sender, TCloseAction &Action)
 	{
-	FormSaveEdits(this);
+	ftools.FormSave(this);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -121,7 +121,7 @@ void TfmData::ShowEcgData()
 		item->Data = (void*) row.ident;
 		item->Caption = String(row.ident);
 		item->SubItems->Add(row.name);
-		item->SubItems->Add(row.pos);
+		item->SubItems->Add(ftools.GetPosition(row.pos));
 		for (int i = 0; i < 5; i++)
 			item->SubItems->Add(String(row.werte[i]));
 		}
@@ -230,44 +230,6 @@ void __fastcall TfmData::edNameChange(TObject *Sender)
 void __fastcall TfmData::cbPositionChange(TObject *Sender)
 	{
 	acFilterExecute(Sender);
-	}
-//---------------------------------------------------------------------------
-/***************************************************************************/
-/**************   Formulardaten laden und speichern   **********************/
-/***************************************************************************/
-//---------------------------------------------------------------------------
-//todo: in EcgTool.cpp verlagern ?
-bool TfmData::FormLoadEdits(TForm* fm)
-	{
-	if (fm == Null) return false;
-	for (int i = 0; i < fm->ComponentCount; i++)
-		{
-		TComponent* comp = fm->Components[i];
-		if (String(comp->ClassName()) != "TEdit") continue;
-
-		TEdit* ed = (TEdit*) comp;
-		String key = fm->Name + "." + ed->Name;
-		ed->Text = Ini->ReadString("FormEdits", key, "");
-		}
-
-	return true;
-	}
-//---------------------------------------------------------------------------
-bool TfmData::FormSaveEdits(TForm* fm)
-	{
-	if (fm == Null) return false;
-	for (int i = 0; i < fm->ComponentCount; i++)
-		{
-		TComponent* comp = fm->Components[i];
-		if (String(comp->ClassName()) != "TEdit") continue;
-
-		TEdit* ed = (TEdit*) comp;
-		String key = fm->Name + "." + ed->Name;
-		Ini->WriteString("FormEdits", key, ed->Text);
-		}
-
-	Ini->UpdateFile();
-	return true;
 	}
 //---------------------------------------------------------------------------
 

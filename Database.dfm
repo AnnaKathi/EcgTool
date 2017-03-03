@@ -221,16 +221,8 @@ object fmData: TfmData
       Height = 21
       Style = csDropDownList
       ItemHeight = 13
-      ItemIndex = 0
       TabOrder = 3
-      Text = '- alle Positionen -'
       OnChange = cbPositionChange
-      Items.Strings = (
-        '- alle Positionen -'
-        'liegend'
-        'sitzend'
-        'stehend'
-        'gehend')
     end
   end
   object tStartup: TTimer

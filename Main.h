@@ -13,15 +13,18 @@
 #include <Dialogs.hpp>
 #include <Menus.hpp>
 //---------------------------------------------------------------------------
+#include "basics/classTools.h"
 #include "basics/classArray.h"
 #include "basics/classMath.h"
 #include "data/classMySql.h"
+#include "definitions.h"
 #include "classAlg1.h"
 //---------------------------------------------------------------------------
 class TfmMain : public TForm
 {
 private:
 	TIniFile*	Ini;
+	cTools		ftools;
 	cAlg1		alg1;
 	cMySql		fmysql;
 	cArray		farray;

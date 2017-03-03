@@ -5,18 +5,10 @@
 #include <classes.hpp>
 #include <IniFiles.hpp>
 //---------------------------------------------------------------------------
+#include "definitions.h"
 #include "../basics/classBase.h"
 #include "../basics/classCsv.h"
 #include "../inc/mysql/mysql.h"
-//---------------------------------------------------------------------------
-enum ePosition
-	{
-	posNone = 0,
-	posLiegend,
-	posSitzend,
-	posStehend,
-	posGehend
-	};
 //---------------------------------------------------------------------------
 struct sMySqlData
 	{

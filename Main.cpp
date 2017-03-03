@@ -47,51 +47,13 @@ void __fastcall TfmMain::FormShow(TObject *Sender)
 void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
-	edInputfile->Text  = Ini->ReadString("EcgTool", "Inputfile", "");
-	cbDelim->ItemIndex = Ini->ReadInteger("EcgTool", "ComboDelim", 0);
-
-	edVonSample->Text = (String)Ini->ReadInteger("EcgTool", "edVonSample", 0);
-	edBisSample->Text = (String)Ini->ReadInteger("EcgTool", "edBisSample", 0);
-
-	edCutVon->Text = (String)Ini->ReadInteger("EcgTool", "edCutVon", 0);
-	edCutBis->Text = (String)Ini->ReadInteger("EcgTool", "edCutBis", 0);
-
-	edGl1->Text = (String)Ini->ReadInteger("EcgTool", "edGl1", 0);
-	edGl2->Text = (String)Ini->ReadInteger("EcgTool", "edGl2", 0);
-	edGl3->Text = (String)Ini->ReadInteger("EcgTool", "edGl3", 0);
-
-	cxDropBegin->Checked = Ini->ReadBool("EcgTool", "cxDropBegin", false);
-
-	Left = Ini->ReadInteger("EcgTool", "Left", -1);
-	if (Left <= 0) 	Left = (Screen->DesktopWidth - Width)/2;  //mittig ausrichten
-
-	Top  = Ini->ReadInteger("EcgTool", "Top",  -1);
-	if (Top <= 0) 	Top = (Screen->DesktopHeight - Height)/2; //mittig ausrichten
-
+	ftools.FormLoad(this);
 	btRead->SetFocus();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::FormClose(TObject *Sender, TCloseAction &Action)
 	{
-	Ini->WriteString("EcgTool", "Inputfile",   edInputfile->Text);
-	Ini->WriteInteger("EcgTool", "ComboDelim", cbDelim->ItemIndex);
-
-	Ini->WriteInteger("EcgTool", "edVonSample", edVonSample->Text.ToIntDef(0));
-	Ini->WriteInteger("EcgTool", "edBisSample", edBisSample->Text.ToIntDef(0));
-
-	Ini->WriteInteger("EcgTool", "edCutVon", edCutVon->Text.ToIntDef(0));
-	Ini->WriteInteger("EcgTool", "edCutBis", edCutBis->Text.ToIntDef(0));
-
-	Ini->WriteInteger("EcgTool", "edGl1", edGl1->Text.ToIntDef(0));
-	Ini->WriteInteger("EcgTool", "edGl2", edGl2->Text.ToIntDef(0));
-	Ini->WriteInteger("EcgTool", "edGl3", edGl3->Text.ToIntDef(0));
-
-	Ini->WriteBool("EcgTool", "cxDropBegin", cxDropBegin->Checked);
-
-	Ini->WriteInteger("EcgTool", "Left", Left);
-	Ini->WriteInteger("EcgTool", "Top",  Top);
-
-	Ini->UpdateFile();
+	ftools.FormSave(this);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -291,12 +253,8 @@ void TfmMain::MySqlSave()
 	String name = DlgRequest(this, "Personenname");
 	String pos  = DlgRequest(this, "Position der Aufnahme");
 
-	int p = 0;
-		 if (pos == "liegend") p = posLiegend;
-	else if (pos == "sitzend") p = posSitzend;
-	else if (pos == "stehend") p = posStehend;
-	else if (pos == "gehend")  p = posGehend;
-	
+	ePosition p = ftools.GetPosition(pos);
+
 	fmysql.mysql_data.array = alg1.ecg.data.data_array;
 	sprintf(fmysql.mysql_data.name, "%.63s", name.c_str());
 	fmysql.mysql_data.pos   = (ePosition)p;

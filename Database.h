@@ -11,6 +11,7 @@
 #include <ActnList.hpp>
 #include <IniFiles.hpp>
 //---------------------------------------------------------------------------
+#include "basics/classTools.h"
 #include "data/classMySql.h"
 //---------------------------------------------------------------------------
 struct sFilter
@@ -27,6 +28,7 @@ class TfmData : public TForm
 {
 private:
 	TIniFile*	Ini;
+	cTools		ftools;
 	cMySql		fmysql;
 	sFilter		ffilter;
 
@@ -40,10 +42,6 @@ private:
 	bool		bFilter;
 	bool		BuildFilter();
 	bool		CheckFilter(sMySqlRow row);
-
-	bool 		FormLoadEdits(TForm* fm);
-	bool 		FormSaveEdits(TForm* fm);
-
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
