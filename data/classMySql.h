@@ -38,7 +38,7 @@ public:
 
 	bool		saveToDbase();
 
-	bool		deleteData(int ident);
+	bool		deleteDataByIdent(int ident);
 
 __property sMySqlRow row = { read=get_row };
 __property int num_rows  = { read=get_num_rows };

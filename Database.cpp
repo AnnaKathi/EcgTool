@@ -253,7 +253,7 @@ void __fastcall TfmData::acDeleteExecute(TObject *Sender)
 		{
 		int ident = (int)lvData->Selected->Data;
 		if (ident <= 0) return;
-		if (!fmysql.deleteData(ident))
+		if (!fmysql.deleteDataByIdent(ident))
 			;
 		}
 
@@ -266,7 +266,7 @@ void __fastcall TfmData::acDeleteExecute(TObject *Sender)
 
 			int ident = (int)item->Data;
 			if (ident <= 0) continue;
-			if (!fmysql.deleteData(ident))
+			if (!fmysql.deleteDataByIdent(ident))
 				;
 			}
 		}

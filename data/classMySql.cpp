@@ -8,6 +8,9 @@
 #pragma package(smart_init)
 #pragma link "inc/mysql/libmysql.lib"
 //---------------------------------------------------------------------------
+#define DATABASE "ecg"
+#define ECGTABL  "ecgdata"
+//---------------------------------------------------------------------------
 cMySql::cMySql()
 	: fcsv(new cCsv)
 	{
@@ -71,7 +74,7 @@ bool cMySql::loadData()
 	if (!OpenMysql())
 		return fail(3, ferror.c_str());
 
-	String q = "select * from ecgdata";
+	String q = "select * from " + String(ECGTABL);
 	if (mysql_real_query(fcon, q.c_str(), q.Length()) != 0)
 		{
 		ferror = "Fehler in SELECT * : " + String(mysql_error(fcon));
@@ -188,7 +191,7 @@ bool cMySql::UpdateMysql()
 	sprintf(q, "INSERT INTO `%s`.`%s` "
 		"(`Name`, `Position`, `T1`, `T2`, `T3`, `T4`, `T5`) "
 		"VALUES ('%s', '%d', %.6f, %.6f, %.6f, %.6f, %.6f)",
-		"ecg", "ecgdata",
+		DATABASE, ECGTABL,
 		mysql_data.name, mysql_data.pos,
 		mysql_data.array[0][1],
 		mysql_data.array[1][1],
@@ -206,14 +209,14 @@ bool cMySql::UpdateMysql()
 	return true;
 	}
 //---------------------------------------------------------------------------
-bool cMySql::deleteData(int ident)
+bool cMySql::deleteDataByIdent(int ident)
 	{
 	//DELETE FROM `ecg`.`ecgdata` WHERE  `Ident`=33;
 	if (ident <= 0)
 		return fail(1, "Es wurde kein Ident übergeben");
 
 	char q[1024];
-	sprintf(q, "DELETE FROM `%s`.`%s` WHERE  `Ident`=%d", "ecg", "ecgdata", ident);
+	sprintf(q, "DELETE FROM `%s`.`%s` WHERE  `Ident`=%d", DATABASE, ECGTABL, ident);
 
 	String query = String(q);
 	if (mysql_real_query(fcon, query.c_str(), query.Length()) != 0)
