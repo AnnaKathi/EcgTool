@@ -214,6 +214,10 @@ void __fastcall TfmDetails::FormKeyDown(TObject *Sender, WORD &Key,
 			cbKurve->ItemIndex = cbDerivate2;
 			cbKurveChange(Sender);
 			}
+		else if (Key == 0x50) //"P" -> Papa fokussieren
+			{
+			Papa->BringToFront();
+			}
 		}
 	}
 //---------------------------------------------------------------------------

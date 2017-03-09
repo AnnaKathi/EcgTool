@@ -105,6 +105,16 @@ bool cTools::FormLoad(TForm* fm)
 		top = Screen->DesktopHeight - fm->Height; //unten ausrichten
 	fm->Top = top;
 
+	//Formulardimensionen laden
+	//diese Width ist evtl anders als die vordesignte fm->Width
+	int width = Ini->ReadInteger("FormPos", fm->Name + ".Width", -1);
+	if (width > 0 && ((fm->Left + width) <= Screen->DesktopWidth))
+		fm->Width = width;
+
+	int height = Ini->ReadInteger("FormPos", fm->Name + ".Height", -1);
+	if (height > 0 && ((fm->Top + height) <= Screen->DesktopHeight))
+		fm->Height = height;
+
 	delete Ini;
 	return true;
 	}
@@ -141,6 +151,10 @@ bool cTools::FormSave(TForm* fm)
 	//Formularposition speichern
 	Ini->WriteInteger("FormPos", fm->Name + ".Left", fm->Left);
 	Ini->WriteInteger("FormPos", fm->Name + ".Top",  fm->Top);
+
+	//Formulardimensionen speichern
+	Ini->WriteInteger("FormPos", fm->Name + ".Width",  fm->Width);
+	Ini->WriteInteger("FormPos", fm->Name + ".Height", fm->Height);
 
 	Ini->UpdateFile();
 	delete Ini;
