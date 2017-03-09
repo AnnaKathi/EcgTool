@@ -2,6 +2,7 @@
 #ifndef definitionsH
 #define definitionsH
 //---------------------------------------------------------------------------
+/* Position in der ein EKG aufgenommen wurde, z.B. liegend oder stehend */
 enum ePosition
 	{
 	posNone = 0,

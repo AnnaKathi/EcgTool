@@ -61,7 +61,7 @@ String cTools::GetIniFile()
 	return dat;
 	}
 //---------------------------------------------------------------------------
-bool cTools::FormLoad(TForm* fm)
+void cTools::FormLoad(TForm* fm)
 	{
 	TIniFile* Ini = new TIniFile(GetIniFile());
 
@@ -116,10 +116,9 @@ bool cTools::FormLoad(TForm* fm)
 		fm->Height = height;
 
 	delete Ini;
-	return true;
 	}
 //---------------------------------------------------------------------------
-bool cTools::FormSave(TForm* fm)
+void cTools::FormSave(TForm* fm)
 	{
 	TIniFile* Ini = new TIniFile(GetIniFile());
 
@@ -158,7 +157,6 @@ bool cTools::FormSave(TForm* fm)
 
 	Ini->UpdateFile();
 	delete Ini;
-	return true;
 	}
 //---------------------------------------------------------------------------
 

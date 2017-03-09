@@ -8,6 +8,7 @@
 //---------------------------------------------------------------------------
 #include "classBase.h"
 //---------------------------------------------------------------------------
+/* spezielle Fehlercodes von cCsv */
 enum CSV_ERROR_CODES
 	{
 	EC_OK,				// no error, all things done well
@@ -19,6 +20,7 @@ enum CSV_ERROR_CODES
 	EC_NOFIELD,			// kein (weiteres) Feld vorhanden
 	};
 //---------------------------------------------------------------------------
+/* Struktur für die auszulesenden EKG-Daten */
 struct cEcgLine //todo weiter ausbauen für weitere leads
 	{
 	int 	lineno;
@@ -26,27 +28,120 @@ struct cEcgLine //todo weiter ausbauen für weitere leads
 	float	i;
 	};
 //---------------------------------------------------------------------------
+//! liest eine CSV-Datei ein
+/*! Die Klasse cCsv liest eine csv-Datei (bzw. eine txt-Datei) ein und füllt
+ *  für jede (gültige) Zeile die Struktur EcgLine.
+ */
 class PACKAGE cCsv : public cBase
 	{
 public:
-	cCsv();
-	~cCsv();
+	cCsv();  //!< Konstruktor für CCsv
+	~cCsv(); //!< Destruktor für cCsv
 
-	bool 		OpenFile(String file, String delim = ';');
-	void 		CloseFile();
-	bool 		Reset();
+	//-----------------------------------------------------------------------
+	//--- Dateihandling -----------------------------------------------------
+	//-----------------------------------------------------------------------
+		//! Datei öffnen
+		/*! Öffnet die übergebene Datei und stellt den zu verwendenden Delimeter
+		 *  (Semikolon oder Tab) ein. Als Standard Delimeter wird ';' verwendet.
+		 *  /param (String) file, Datei die geöffnet werden soll
+		 *  /param (String) delim, Delimeter der verwendet werden soll, Standard
+		 *		ist ';'
+		 *  /return (bool) true im Erfolgsfall, sonst false
+		 */
+		bool 		OpenFile(String file, String delim = ';');
 
-	bool 		StartAt(int sample);
-	bool 		First();
-	bool 		Next();
-	bool 		NextUntil(int sample);
+		//! Datei schließen
+		/*! Schließt die Datei und gibt den FilePointer frei, sofern gesetzt.
+		 */
+		void 		CloseFile();
 
-	int			getFileMax();
-	int			getFilePos();
+		//! FilePointer zum Anfang der Datei zurücksetzen
+		/*! Der FilePointer wird zum Anfang der Datei zurückgesetzt (fseek SEEK_SET)
+		 *  /return (bool) true im Erfolgsfall, sonst false
+		 */
+		bool 		Reset();
 
-	int 		getLineNo();
-	int 		getSample();
-	float 		getI();
+	//-----------------------------------------------------------------------
+	//--- Datei einlesen ----------------------------------------------------
+	//-----------------------------------------------------------------------
+		//! Beginnt das Einlesen, ggf. ab einer bestimmten Millisekunde
+		/*! Beginnt das  Einlesen der geöffneten Datei. Dafür werden zunächst
+		 *  Leerzeielen am Anfang, sowie die Spaltenköpfe übersprungen.
+		 *  Darüber hinaus kann man eine Millisekunde übergeben, ab der das
+		 *  Einlesen beginnen soll. In diesem Fall werden alle Datensätze bis zu
+		 *  diesem Wert (exklusiv) übersprungen.
+		 *  /param (int) sample, Startwert ab dem die Datei eingelsen werden soll
+		 *  /return (bool) true wenn der Startpunkt für das Einlesen gefunden
+		 *		werden konnte, sonst false
+		 */
+		bool 		StartAt(int sample);
+
+		//! ersten Datensatz lesen
+		/*! Liest den ersten Datensatz aus der Datei nach dem Startpunkt (siehe
+		 *  StartAt(...)). Intern wird der Aufruf auf Next() weitergeleitet. Die
+		 *  Funktion dient nur dem Aufruf in einer for-Schleife
+		 *  (for (rc = First(), rc != false; rc = Next()).
+		 *  /return (bool) true wenn ein Datensatz eingelesen werden konnte,
+		 *		sonst false (z.B. wenn die Datei zu Ende ist)
+		 */
+		bool 		First();
+
+		//! nächsten Datensatz lesen
+		/*! Liest den nächsten Datensatz aus der Datei (bis zum nächsten \n).
+		 *  /return (bool) true wenn ein Datensatz eingelesen werden konnte,
+		 *		sonst false (z.B. wenn die Datei zu Ende ist)
+		 */
+		bool 		Next();
+
+		//! nächsten Datensatz lesen, Alternative zu First/Next
+		/*! Liest den nächsten Datensatz aus der Datei bis zum übergebenen
+		 *  Millisekunden-Wert (inklusive).
+		 *  /param (int) sample, Millisekunde bis zu der gelesen werden soll
+		 *  /return (bool) true wenn ein Datensatz eingelesen werden konnte,
+		 *		sonst false (z.B. wenn die Datei zu Ende ist oder der eingelesene
+		 *		Datensatz hinter dem übergebenen Millisekundenwert liegt)
+		 */
+		bool 		NextUntil(int sample);
+
+	//-----------------------------------------------------------------------
+	//--- allgemeine getter -------------------------------------------------
+	//-----------------------------------------------------------------------
+		//! Größe der Datei
+		/*! Gibt die Größe der einzulesenden Datei in Bytes zurück (ftell).
+		 *  Kann z.B. für Fortschrittsanzeigen verwendet werden.
+		 *  /return (int) Größe der Datei
+		 */
+		int			getFileMax();
+
+		//! aktuelle Position in der Datei
+		/*! Gibt die aktuelle Position in der Datei in Bytes zurück (ftell).
+		 *  Kann z.B. für Fortschrittsanzeigen verwendet werden.
+		 *  /return (int) Position in der Datei
+		 */
+		int			getFilePos();
+
+	//-----------------------------------------------------------------------
+	//--- getter zur EKG-Struktur -------------------------------------------
+	//-----------------------------------------------------------------------
+		//! aktuelle Zeilennummer
+		/*! Gibt nach First/Next/NextUntil die aktuelle Zeilennummer zurück
+		 *  /return (int) Zeilennummer
+		 */
+		int 		getLineNo();
+
+		//! aktuelles Sample (= Millisekunde)
+		/*! Gibt nach First/Next/NextUntil die aktuelle Samplenummer
+		 *  (= Millisekunde) zurück
+		 *  /return (int) Sample
+		 */
+		int 		getSample();
+
+		//! aktueller Wert Lead 1
+		/*! Gibt nach First/Next/NextUntil den aktuellen Wert von lead '1' zurück
+		 *  /return (fliat) Lead 1
+		 */
+		float 		getI();
 
 private:
 	FILE*		fp;

@@ -1,6 +1,10 @@
 # Others 
 *.dia~
 
+# Doxygen Files
+html/
+latex/
+
 # Embarcadero development
 *.dsk
 *.local
