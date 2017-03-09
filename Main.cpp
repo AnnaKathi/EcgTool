@@ -1,3 +1,4 @@
+//Todo: Position in Lage umbennen ?
 //---------------------------------------------------------------------------
 #include <vcl.h>
 #pragma hdrstop

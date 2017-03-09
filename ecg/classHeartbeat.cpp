@@ -1,3 +1,4 @@
+//Todo: Standardherzschlag auf bestimmte Zeitdauer normalisieren
 //---------------------------------------------------------------------------
 #pragma hdrstop
 
