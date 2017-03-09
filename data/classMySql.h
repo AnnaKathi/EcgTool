@@ -31,8 +31,6 @@ public:
 	cMySql();
 	~cMySql();
 
-	sMySqlData	mysql_data; //todo getter und setter machen
-
 	bool 		loadData();
 	bool		nextRow();
 
@@ -40,8 +38,9 @@ public:
 
 	bool		deleteDataByIdent(int ident);
 
-__property sMySqlRow row = { read=get_row };
 __property int num_rows  = { read=get_num_rows };
+__property sMySqlRow row = { read=get_row };  //eine Ergebniszeile aus einer Abfrage
+__property sMySqlData& mysql_data = { read=get_mysql_data }; //die Daten die abgespeichert werden sollen
 
 private:
 	TIniFile*	Ini;
@@ -52,9 +51,15 @@ private:
 	MYSQL*      fcon;
 	MYSQL_RES*  fres;
 	MYSQL_ROW	frow;
+	int			get_num_rows();
+
+	//eine Ergeniszeile aus einer MySql-Abfrage, z.B. für nextRow()
 	sMySqlRow	fsqlrow;
 	sMySqlRow 	get_row();
-	int			get_num_rows();
+
+	// MySql-Daten, die vom Aufrufenden übergeben werden (array mit Werten, Name, usw)
+	sMySqlData	fsqldata;
+	sMySqlData&	get_mysql_data();
 
 	String		ferror;
 

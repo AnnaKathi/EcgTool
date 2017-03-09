@@ -59,10 +59,9 @@ bool cMySql::saveToDbase()
 	if (!UpdateMysql())
 		return fail(4, ferror.c_str());
 
-	//-- MySql-Datenbank Schließen
+	//-- MySql-Datenbank schließen
 	CloseMysql();
 
-	//todo, Name usw nicht auf Übergabeparameter auslegen, sondern via struct übergeben o.ä.
 	return ok();
 	}
 //---------------------------------------------------------------------------
@@ -237,6 +236,11 @@ sMySqlRow cMySql::get_row()
 int	cMySql::get_num_rows()
 	{
 	return mysql_num_rows(fres);
+	}
+//---------------------------------------------------------------------------
+sMySqlData& cMySql::get_mysql_data()
+	{
+	return fsqldata;
 	}
 //---------------------------------------------------------------------------
 
