@@ -25,22 +25,45 @@ struct sMySqlRow
 	double		werte[5];
 	};
 //---------------------------------------------------------------------------
+//! Kapselt verschiedene MySql-Funktionalitäten
+/*! Die Klasse cMySql bietet verschiedene MySql-Funktionalitäten an.
+ */
 class PACKAGE cMySql : public cBase
 	{
 public:
-	cMySql();
-	~cMySql();
+	cMySql();  //!< Konstruktor für cMySql
+	~cMySql(); //!< Destruktor für cMySql
 
+	//! Lädt die Daten der Tabelle ecg.ecgdata
+	/*! Lädt die Daten der Tabelle ecg.ecgdata
+	 *  /return (bool) true wenn erfolgreich, sonst false
+	 */
 	bool 		loadData();
+	
+	//! Lädt die nächste MySql-Zeile in den Speichern
+	/*! Nach dem Ausführen von loadData() kann mit next() die nächste Datenzeile
+	 *  der MySql-Tabelle cg.ecgdata in den Speicher geladen werden.
+	 *  /return (bool) true wenn erfolgreich, sonst false
+	 */
 	bool		nextRow();
 
+	//! Speichert einen vollständigen ECG-Datensatz ab (aktuell noch Testversion)
+	/*! Eine ECG-Datenstruktur wird in die Tabelle ecg.ecgdata gespeichert. Die 
+	 *  Datenstruktur muss vorab manuell gefüllt werden.
+	 *  /return (bool) true wenn erfolgreich, sonst false
+	 */
 	bool		saveToDbase();
 
+	//! Löscht einen Datensatz
+	/*! Löscht den Datensatz 'ident'
+	 *  /param (int) ident, ID des zu löschenden Datensatzes
+	 *  /return (bool) true wenn erfolgreich, sonst false
+	 */
 	bool		deleteDataByIdent(int ident);
 
-__property int num_rows  = { read=get_num_rows };
-__property sMySqlRow row = { read=get_row };  //eine Ergebniszeile aus einer Abfrage
-__property sMySqlData& mysql_data = { read=get_mysql_data }; //die Daten die abgespeichert werden sollen
+__property int num_rows  = { read=get_num_rows }; //!< Anzahl geladener Zeilen
+__property sMySqlRow row = { read=get_row };  //!< Ergebniszeile aus einer Abfrage
+__property sMySqlData& mysql_data = { read=get_mysql_data }; //!< Datenstruktur die abgespeichert werden soll
 
 private:
 	TIniFile*	Ini;
