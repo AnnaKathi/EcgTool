@@ -119,10 +119,18 @@ void TfmDetails::PaintCurves()
 		TickJob();
 
 		//-- Herzschläge
-		cHeartbeats h = alg1->ecg.heart;
+		//die einzelnen Herzschläge müssen auf die gleiche Länge normalisiert werden
+		//als Länge wird (erst einmal) die Länge zwischen den 1. RPeak und dem
+		//2. verwendet, todo: über alle R-Peaks eine Länge berechnen
+		int zeitges = 0;
+		for (int i = 1; i < rp.size(); i++)
+			zeitges += (rp[i][0] - rp[i-1][0]);
+		int length = zeitges / (rp.size()-1);
+
+		cHeartbeats& h = alg1->ecg.heart;
 		h.reset(alg1->ecg.data.data_array);
 		while (h.next())
-			farray.display(h.heartbeat, imgBeats);
+			farray.display(fdata.normalize(h.heartbeat, length), imgBeats);
 		TickJob();
 
 		//-- Standardherzschlag
@@ -143,10 +151,18 @@ void TfmDetails::PaintCurves()
 		TickJob();
 
 		//-- Herzschläge
+		//die einzelnen Herzschläge müssen auf die gleiche Länge normalisiert werden
+		//als Länge wird (erst einmal) die Länge zwischen den 1. RPeak und dem
+		//2. verwendet, todo: über alle R-Peaks eine Länge berechnen
+		int zeitges = 0;
+		for (int i = 1; i < rp.size(); i++)
+			zeitges += (rp[i][0] - rp[i-1][0]);
+		int length = zeitges / (rp.size()-1);
+
 		cHeartbeats h = alg1->ecg.heart;
 		h.reset(alg1->ecg.data.derivate1.deriv_array);
 		while (h.next())
-			farray.display(h.heartbeat, imgBeats);
+			farray.display(fdata.normalize(h.heartbeat, length), imgBeats);
 		TickJob();
 
 		//-- Standardherzschlag
@@ -167,10 +183,18 @@ void TfmDetails::PaintCurves()
 		TickJob();
 
 		//-- Herzschläge
+		//die einzelnen Herzschläge müssen auf die gleiche Länge normalisiert werden
+		//als Länge wird (erst einmal) die Länge zwischen den 1. RPeak und dem
+		//2. verwendet, todo: über alle R-Peaks eine Länge berechnen
+		int zeitges = 0;
+		for (int i = 1; i < rp.size(); i++)
+			zeitges += (rp[i][0] - rp[i-1][0]);
+		int length = zeitges / (rp.size()-1);
+
 		cHeartbeats h = alg1->ecg.heart;
 		h.reset(alg1->ecg.data.derivate2.deriv_array);
 		while (h.next())
-			farray.display(h.heartbeat, imgBeats);
+			farray.display(fdata.normalize(h.heartbeat, length), imgBeats);
 		TickJob();
 
 		//-- Standardherzschlag

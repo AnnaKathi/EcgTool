@@ -158,6 +158,90 @@ bool cData::buildDerivates()
 	return ok();
 	}
 //---------------------------------------------------------------------------
+iarray_t cData::normalize(iarray_t array, int length)
+	{
+	//Array auf die übergebene Länge normalisieren
+	//wenn das Array verkürzt werden muss, werden Werte gelöscht, wenn es
+	//verlängert werden muss, werden Durchschnittswerte hinzugefügt
+	int arraylen = array.size();
+	if (arraylen == length) return array; //passt bereits
+
+	iarray_t newarray; newarray.clear();
+	if (arraylen > length)
+		{
+		//Array verkürzen
+		int delvals = arraylen - length;  //soviele Werte müssen gelöscht werden
+		float blocks  = (float)arraylen / (float)delvals; //alle x Werte einen Wert löschen
+
+		//der erste Wert wird direkt am Anfang gelöscht (zw. 1. und 2. Wert)
+		float pos = 1.0;
+		int ix  = 0;
+		int key, zeit;
+		float wert, newval;
+
+		for (iarray_itr itr = array.begin(); itr != array.end(); itr++)
+			{
+			key = itr->first;
+			ilist_t& v = itr->second;
+			zeit = v[0];
+			wert = v[1];
+
+			if (key == (int)pos)
+				{
+				//diesen Wert überspringen
+				pos += blocks;
+				}
+			else
+				{
+				//bestehenden Wert übertragen
+				newarray[ix].push_back(ix);
+				newarray[ix].push_back(wert);
+				ix++;
+				}
+			}
+		}
+	else
+		{
+		//Array verlängern
+		int newvals = length - arraylen;  //soviele neue Werte werden benötigt
+		float blocks  = (float)arraylen / (float)newvals; //alle x Werte einen neuen Wert einfügen
+
+		//der erste Wert wird direkt am Anfang eingefügt (zw. 1. und 2. Wert)
+		float pos = 1.0;
+		int ix  = 0;
+		int key, zeit;
+		float wert, newval;
+		float lastwert = 0.0;
+
+		for (iarray_itr itr = array.begin(); itr != array.end(); itr++)
+			{
+			key = itr->first;
+			ilist_t& v = itr->second;
+			zeit = v[0];
+			wert = v[1];
+
+			//bestehenden Wert übertragen
+			newarray[ix].push_back(ix);
+			newarray[ix].push_back(wert);
+			ix++;
+			if (key == (int)pos)
+				{
+				//hier einen Wert einfügen
+				newval = (lastwert+wert)/2;
+				newarray[ix].push_back(ix);
+				newarray[ix].push_back(newval);
+				ix++;
+
+				pos += blocks;
+				}
+
+			lastwert = wert;
+			}
+		}
+
+	return newarray;
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   getter und setter   **************************************/
 /***************************************************************************/

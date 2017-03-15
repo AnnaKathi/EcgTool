@@ -10,6 +10,8 @@
 #include <ExtCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classArray.h"
+#include "basics/classData.h"
+#include "ecg/classHeartbeat.h"
 #include "classAlg1.h"
 //---------------------------------------------------------------------------
 enum {
@@ -24,6 +26,7 @@ private:
 	TForm*		Papa;
 	cAlg1*		alg1;
 	cArray		farray;
+	cData		fdata;
 
 	void		placeForm();
 

@@ -317,6 +317,22 @@ object fmMain: TfmMain
       Caption = 'Anfangswerte '#252'berspringen'
       TabOrder = 10
     end
+    object Button1: TButton
+      Left = 16
+      Top = 216
+      Width = 89
+      Height = 25
+      Caption = 'Test Normalize'
+      TabOrder = 14
+      OnClick = Button1Click
+    end
+    object Edit1: TEdit
+      Left = 112
+      Top = 224
+      Width = 121
+      Height = 21
+      TabOrder = 15
+    end
   end
   object pnClient: TPanel
     Left = 341

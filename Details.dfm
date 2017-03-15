@@ -129,7 +129,6 @@ object fmDetails: TfmDetails
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 490
     DesignSize = (
       494
       33)
@@ -151,7 +150,6 @@ object fmDetails: TfmDetails
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 474
     end
   end
   object pnCombo: TPanel
@@ -162,7 +160,6 @@ object fmDetails: TfmDetails
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 490
     object Label1: TLabel
       Left = 8
       Top = 16
@@ -204,8 +201,6 @@ object fmDetails: TfmDetails
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 87
-    ExplicitWidth = 490
     object Label2: TLabel
       Left = 8
       Top = 8
@@ -228,8 +223,6 @@ object fmDetails: TfmDetails
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 3
-    ExplicitTop = 234
-    ExplicitWidth = 490
     object Label3: TLabel
       Left = 8
       Top = 8
@@ -252,8 +245,6 @@ object fmDetails: TfmDetails
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 4
-    ExplicitTop = 381
-    ExplicitWidth = 490
     object Label4: TLabel
       Left = 8
       Top = 8
@@ -276,8 +267,6 @@ object fmDetails: TfmDetails
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 5
-    ExplicitTop = 528
-    ExplicitWidth = 490
     object Label5: TLabel
       Left = 8
       Top = 8

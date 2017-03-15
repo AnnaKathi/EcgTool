@@ -363,4 +363,13 @@ void __fastcall TfmMain::Datenanzeigen1Click(TObject *Sender)
 	DlgDatabase(this);
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmMain::Button1Click(TObject *Sender)
+	{
+	//EKG-Stream "normalisieren"
+	int length = Edit1->Text.ToIntDef(0);
+	cData& data = alg1.ecg.data;
+	iarray_t arr = data.normalize(alg1.ecg.data.data_array, length);
+	farray.redisplay(arr, imgDeriv1);
+	}
+//---------------------------------------------------------------------------
 

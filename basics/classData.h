@@ -93,6 +93,18 @@ public:
 		 */
 		bool		buildDerivates();
 
+		//! EKG-Signal (array) auf die angegebene Länge normalisieren
+		/*! Das übergebene Array wird auf die angegebene Länge normalisiert.
+		 *  Wenn das Array verkürzt werden muss, werden in regelmäßigen Abständen
+		 *  Werte entfernt. Wenn es verlängert werden muss, werden in
+		 *  regelmäßigen Abständen Werte hinzugefügt (Durchschnitt aus dem
+		 *  vorangehenden und dem nachfolgenden Wert).
+		 *  /param (std::map) array, EKG-Werte die normalisiert werden sollen
+		 *  /param (int) length, Länge auf die normliaisert werden soll
+		 *  /return (bool) true wenn erfolgreich, sonst false
+		 */
+		iarray_t	normalize(iarray_t array, int length);
+
 __property iarray_t   data_array = { read=get_array  }; //!< Internes Datenarray
 __property cDerivate& derivate1  = { read=get_deriv1 }; //!< Erste Ableitung
 __property cDerivate& derivate2  = { read=get_deriv2 }; //!< Zweite Ableitung

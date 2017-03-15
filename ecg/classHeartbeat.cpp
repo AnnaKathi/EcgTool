@@ -123,6 +123,7 @@ iarray_t cHeartbeats::calcAvBeat(iarray_t curve)
 		//jeweils ein Herzschlag ist in fheartbeat abgespeichert, pro Zeitwert
 		//werden alle gefundenen Ausschläge aufaddiert. Im zweiten Feld ist
 		//die Anzahl der Werte gespeichert
+		//todo: Normalisierung einfügen
 		for (iarray_itr itr = fheartbeat.begin(); itr != fheartbeat.end(); itr++)
 			{
 			key = itr->first;
