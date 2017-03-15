@@ -96,7 +96,6 @@ __published:	// IDE-verwaltete Komponenten
 	TMenuItem *DateninMySQLDatenbankspeichern1;
 	TMenuItem *N1;
 	TMenuItem *Beenden1;
-	TButton *Button1;
 	TMenuItem *Datenbank1;
 	TMenuItem *Datenanzeigen1;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
