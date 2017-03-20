@@ -9,7 +9,7 @@
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
 //---------------------------------------------------------------------------
-#include "algorithms/classAlg1.h"
+#include "ecg/classEcg.h"
 #include "basics/classArray.h"
 #include "basics/classData.h"
 #include "ecg/classHeartbeat.h"
@@ -24,7 +24,7 @@ class TfmDetails : public TForm
 {
 private:
 	TForm*		Papa;
-	cAlg1*		alg1;
+	cEcg*		ecg;
 	cArray		farray;
 	cData		fdata;
 
@@ -73,8 +73,8 @@ __published:	// IDE-verwaltete Komponenten
 
 public:
 	__fastcall TfmDetails(TComponent* Owner);
-	bool 		Execute(TForm* papa, cAlg1& alg);
-	bool		Renew(cAlg1& alg);
+	bool 		Execute(TForm* papa, cEcg& Ecg);
+	bool		Renew(cEcg& Ecg);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmDetails *fmDetails;

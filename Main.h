@@ -13,7 +13,6 @@
 #include <Dialogs.hpp>
 #include <Menus.hpp>
 //---------------------------------------------------------------------------
-#include "algorithms/classAlg1.h"
 #include "basics/classTools.h"
 #include "basics/classArray.h"
 #include "basics/classMath.h"
@@ -25,7 +24,7 @@ class TfmMain : public TForm
 private:
 	TIniFile*	Ini;
 	cTools		ftools;
-	cAlg1		alg1;
+	cEcg		ecg;
 	cMySql		fmysql;
 	cArray		farray;
 	cMath		fmath;

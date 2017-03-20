@@ -34,17 +34,17 @@ void __fastcall TfmDetails::FormClose(TObject *Sender, TCloseAction &Action)
 /**************   Public Functions   ***************************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-bool TfmDetails::Execute(TForm* papa, cAlg1& alg)
+bool TfmDetails::Execute(TForm* papa, cEcg& Ecg)
 	{
 	Papa = papa;
-	alg1 = &alg;
+	ecg = &Ecg;
 	Show();
 	return true;
 	}
 //---------------------------------------------------------------------------
-bool TfmDetails::Renew(cAlg1& alg)
+bool TfmDetails::Renew(cEcg& Ecg)
 	{
-	alg1 = &alg;
+	ecg = &Ecg;
 	cbKurveChange(this);
 	return true;
 	}
@@ -110,12 +110,12 @@ void TfmDetails::PaintCurves()
 	if (cbKurve->ItemIndex == cbEkgData)
 		{
 		//-- Originaldaten
-		farray.redisplay(alg1->ecg.data.data_array, imgData);
+		farray.redisplay(ecg->data.data_array, imgData);
 		TickJob();
 
 		//-- R-Peaks
-		iarray_t rp = alg1->ecg.rpeaks.find(alg1->ecg.data.data_array, NULL);
-		farray.displayPoints(alg1->ecg.data.data_array, rp, imgRpeaks);
+		iarray_t rp = ecg->rpeaks.find(ecg->data.data_array, NULL);
+		farray.displayPoints(ecg->data.data_array, rp, imgRpeaks);
 		TickJob();
 
 		//-- Herzschläge
@@ -131,14 +131,14 @@ void TfmDetails::PaintCurves()
 		else
         	length = 0;
 
-		cHeartbeats& h = alg1->ecg.heart;
-		h.reset(alg1->ecg.data.data_array);
+		cHeartbeats& h = ecg->heart;
+		h.reset(ecg->data.data_array);
 		while (h.next())
 			farray.display(fdata.normalize(h.heartbeat, length), imgBeats);
 		TickJob();
 
 		//-- Standardherzschlag
-		h.calcAvBeat(alg1->ecg.data.data_array);
+		h.calcAvBeat(ecg->data.data_array);
 		farray.redisplay(h.avBeat, imgHerz);
 		TickJob();
 		}
@@ -146,12 +146,12 @@ void TfmDetails::PaintCurves()
 	else if (cbKurve->ItemIndex == cbDerivate1)
 		{
 		//-- Originaldaten
-		farray.redisplay(alg1->ecg.data.derivate1.deriv_array, imgData);
+		farray.redisplay(ecg->data.derivate1.deriv_array, imgData);
 		TickJob();
 
 		//-- R-Peaks
-		iarray_t rp = alg1->ecg.rpeaks.find(alg1->ecg.data.derivate1.deriv_array, NULL);
-		farray.displayPoints(alg1->ecg.data.derivate1.deriv_array, rp, imgRpeaks);
+		iarray_t rp = ecg->rpeaks.find(ecg->data.derivate1.deriv_array, NULL);
+		farray.displayPoints(ecg->data.derivate1.deriv_array, rp, imgRpeaks);
 		TickJob();
 
 		//-- Herzschläge
@@ -167,14 +167,14 @@ void TfmDetails::PaintCurves()
 		else
         	length = 0;
 
-		cHeartbeats h = alg1->ecg.heart;
-		h.reset(alg1->ecg.data.derivate1.deriv_array);
+		cHeartbeats h = ecg->heart;
+		h.reset(ecg->data.derivate1.deriv_array);
 		while (h.next())
 			farray.display(fdata.normalize(h.heartbeat, length), imgBeats);
 		TickJob();
 
 		//-- Standardherzschlag
-		h.calcAvBeat(alg1->ecg.data.derivate1.deriv_array);
+		h.calcAvBeat(ecg->data.derivate1.deriv_array);
 		farray.redisplay(h.avBeat, imgHerz);
 		TickJob();
 		}
@@ -182,12 +182,12 @@ void TfmDetails::PaintCurves()
 	else if (cbKurve->ItemIndex == cbDerivate2)
 		{
 		//-- Originaldaten
-		farray.redisplay(alg1->ecg.data.derivate2.deriv_array, imgData);
+		farray.redisplay(ecg->data.derivate2.deriv_array, imgData);
 		TickJob();
 
 		//-- R-Peaks
-		iarray_t rp = alg1->ecg.rpeaks.find(alg1->ecg.data.derivate2.deriv_array, NULL);
-		farray.displayPoints(alg1->ecg.data.derivate2.deriv_array, rp, imgRpeaks);
+		iarray_t rp = ecg->rpeaks.find(ecg->data.derivate2.deriv_array, NULL);
+		farray.displayPoints(ecg->data.derivate2.deriv_array, rp, imgRpeaks);
 		TickJob();
 
 		//-- Herzschläge
@@ -203,14 +203,14 @@ void TfmDetails::PaintCurves()
 		else
         	length = 0;
 
-		cHeartbeats h = alg1->ecg.heart;
-		h.reset(alg1->ecg.data.derivate2.deriv_array);
+		cHeartbeats h = ecg->heart;
+		h.reset(ecg->data.derivate2.deriv_array);
 		while (h.next())
 			farray.display(fdata.normalize(h.heartbeat, length), imgBeats);
 		TickJob();
 
 		//-- Standardherzschlag
-		h.calcAvBeat(alg1->ecg.data.derivate2.deriv_array);
+		h.calcAvBeat(ecg->data.derivate2.deriv_array);
 		farray.redisplay(h.avBeat, imgHerz);
 		TickJob();
 		}

@@ -13,11 +13,7 @@ public:
 	cAlg1();
 	~cAlg1();
 
-__property cEcg& ecg = { read=get_ecg };
-
 private:
-	cEcg*	fecg;
-	cEcg&	get_ecg();
 	};
 //---------------------------------------------------------------------------
 #endif

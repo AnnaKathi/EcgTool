@@ -101,7 +101,7 @@ void TfmMain::ReadFile()
 	int bisSamp = edBisSample->Text.ToIntDef(-1);
 
 	//-- EKG-Daten
-	cData& data = alg1.ecg.data;
+	cData& data = ecg.data;
 	if (!data.getFile(ecgFile, delim, vonSamp, bisSamp))
 		{
 		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
@@ -128,11 +128,11 @@ void TfmMain::ReadFile()
 	//Detail-Werte anzeigen
 	if (!bDisplayedDetails)
 		{
-		fmDetails->Execute(fmMain, alg1);
+		fmDetails->Execute(fmMain, ecg);
 		bDisplayedDetails = true;
 		}
 	else
-		fmDetails->Renew(alg1);
+		fmDetails->Renew(ecg);
 
 	tDetails->Enabled = true;
 	}
@@ -153,7 +153,7 @@ void TfmMain::CutCurve()
 	if (bis < von) return;
 
 	//-- EKG-Daten
-	cData& data = alg1.ecg.data;
+	cData& data = ecg.data;
 	if (!data.cut(von, bis))
 		{
 		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
@@ -162,7 +162,7 @@ void TfmMain::CutCurve()
 	data.redisplay(imgEcg);
 
 	//-- Erste Ableitung
-	cDerivate& deriv1 = alg1.ecg.data.derivate1;
+	cDerivate& deriv1 = ecg.data.derivate1;
 	if (!deriv1.cut(von, bis))
 		{
 		Print("## Fehler aufgetreten: %d, %s", deriv1.error_code, deriv1.error_msg);
@@ -171,7 +171,7 @@ void TfmMain::CutCurve()
 	data.derivate1.redisplay(imgDeriv1);
 
 	//-- Zweite Ableitung
-	cDerivate& deriv2 = alg1.ecg.data.derivate2;
+	cDerivate& deriv2 = ecg.data.derivate2;
 	if (!deriv2.cut(von, bis))
 		{
 		Print("## Fehler aufgetreten: %d, %s", deriv2.error_code, deriv2.error_msg);
@@ -187,7 +187,7 @@ void TfmMain::CutCurve()
 	Print("...finished cutting");
 
 	//Detail-Werte aktuelisieren
-	fmDetails->Renew(alg1);
+	fmDetails->Renew(ecg);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::MovingAv()
@@ -202,7 +202,7 @@ void TfmMain::MovingAv()
 	bool dropBegin = cxDropBegin->Checked;
 
 	//-- EKG-Daten
-	cData& data = alg1.ecg.data;
+	cData& data = ecg.data;
 	if (!data.movingAv(window1, !dropBegin))
 		{
 		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
@@ -211,7 +211,7 @@ void TfmMain::MovingAv()
 	data.redisplay(imgEcg);
 
 	//-- Erste Ableitung
-	cDerivate& deriv1 = alg1.ecg.data.derivate1;
+	cDerivate& deriv1 = ecg.data.derivate1;
 	if (!deriv1.movingAv(window2, !dropBegin))
 		{
 		Print("## Fehler aufgetreten: %d, %s", deriv1.error_code, deriv1.error_msg);
@@ -220,7 +220,7 @@ void TfmMain::MovingAv()
 	data.derivate1.redisplay(imgDeriv1);
 
 	//-- Zweite Ableitung
-	cDerivate& deriv2 = alg1.ecg.data.derivate2;
+	cDerivate& deriv2 = ecg.data.derivate2;
 	if (!deriv2.movingAv(window3, !dropBegin))
 		{
 		Print("## Fehler aufgetreten: %d, %s", deriv2.error_code, deriv2.error_msg);
@@ -236,7 +236,7 @@ void TfmMain::MovingAv()
 	Print("...finished moving average");
 
 	//Detail-Werte aktuelisieren
-	fmDetails->Renew(alg1);
+	fmDetails->Renew(ecg);
 	}
 //---------------------------------------------------------------------------
 void TfmMain::Importschema()
@@ -246,7 +246,7 @@ void TfmMain::Importschema()
 //---------------------------------------------------------------------------
 void TfmMain::MySqlSave()
 	{
-	if (alg1.ecg.data.data_array.size() <= 0)
+	if (ecg.data.data_array.size() <= 0)
 		{
 		Print("## Fehler aufgetreten: Es wurden noch keine EKG-Daten eingelesen");
 		return;
@@ -258,7 +258,7 @@ void TfmMain::MySqlSave()
 
 	ePosition p = ftools.GetPosition(pos);
 
-	fmysql.mysql_data.array = alg1.ecg.data.data_array;
+	fmysql.mysql_data.array = ecg.data.data_array;
 	sprintf(fmysql.mysql_data.name, "%.63s", name.c_str());
 	fmysql.mysql_data.pos   = (ePosition)p;
 
@@ -367,12 +367,12 @@ void __fastcall TfmMain::Datenanzeigen1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::estenmitAlg11Click(TObject *Sender)
 	{
-	DlgAlgorithmus1(this, alg1.ecg);
+	DlgAlgorithmus1(this, ecg);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::GetValuefromAlg11Click(TObject *Sender)
 	{
-	double val = GetAlgorithmus1(this, alg1.ecg);
+	double val = GetAlgorithmus1(this, ecg);
 	Application->MessageBox(String(val).c_str(), "Erkennungswert", MB_OK);
 	}
 //---------------------------------------------------------------------------
