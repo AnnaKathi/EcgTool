@@ -70,8 +70,10 @@ private:
 	cCsv*		fcsv;
 
 	bool		bMySqlConnected;
-	MYSQL*      fsql;
 	MYSQL*      fcon;
+
+	//ECG-Data
+	MYSQL*      fsql;
 	MYSQL_RES*  fres;
 	MYSQL_ROW	frow;
 	int			get_num_rows();

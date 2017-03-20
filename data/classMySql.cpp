@@ -1,3 +1,5 @@
+//todo: diese Klasse als Grundklasse auslegen, aufbauend eine Klasse pro Datenbank
+//erstellen (ecgdata, subjects, ...)
 //---------------------------------------------------------------------------
 #pragma hdrstop
 
@@ -10,6 +12,7 @@
 //---------------------------------------------------------------------------
 #define DATABASE "ecg"
 #define ECGTABL  "ecgdata"
+#define SUBTABL  "subjects"
 //---------------------------------------------------------------------------
 cMySql::cMySql()
 	: fcsv(new cCsv)
