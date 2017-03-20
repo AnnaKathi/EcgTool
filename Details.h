@@ -9,10 +9,10 @@
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
 //---------------------------------------------------------------------------
+#include "algorithms/classAlg1.h"
 #include "basics/classArray.h"
 #include "basics/classData.h"
 #include "ecg/classHeartbeat.h"
-#include "classAlg1.h"
 //---------------------------------------------------------------------------
 enum {
 	cbEkgData,
