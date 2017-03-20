@@ -1,23 +1,19 @@
 //---------------------------------------------------------------------------
-#ifndef classAlg1H
-#define classAlg1H
+#ifndef classACH
+#define classACH
 //---------------------------------------------------------------------------
 #include <classes.hpp>
 //---------------------------------------------------------------------------
-#include "basics/classBase.h"
-#include "ecg/classEcg.h"
+#include "../basics/classBase.h"
 //---------------------------------------------------------------------------
-class PACKAGE cAlg1 : public cBase
+//! Die Klasse cAC bietet Funktionalitäten an, um eine Autokorrelation erstellen zu können
+class PACKAGE cAC : public cBase
 	{
 public:
-	cAlg1();
-	~cAlg1();
-
-__property cEcg& ecg = { read=get_ecg };
+	cAC();
+	~cAC();
 
 private:
-	cEcg*	fecg;
-	cEcg&	get_ecg();
 	};
 //---------------------------------------------------------------------------
 #endif

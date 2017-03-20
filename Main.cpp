@@ -5,7 +5,9 @@
 
 #include <stdio.h>
 
-#include "RequestBox.h" 
+#include "algorithms/Alg1.h"
+
+#include "RequestBox.h"
 #include "Database.h"
 #include "Details.h"
 #include "Main.h"
@@ -363,13 +365,15 @@ void __fastcall TfmMain::Datenanzeigen1Click(TObject *Sender)
 	DlgDatabase(this);
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::Button1Click(TObject *Sender)
+void __fastcall TfmMain::estenmitAlg11Click(TObject *Sender)
 	{
-	//EKG-Stream "normalisieren"
-	int length = Edit1->Text.ToIntDef(0);
-	cData& data = alg1.ecg.data;
-	iarray_t arr = data.normalize(alg1.ecg.data.data_array, length);
-	farray.redisplay(arr, imgDeriv1);
+	DlgAlgorithmus1(this, alg1.ecg);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::GetValuefromAlg11Click(TObject *Sender)
+	{
+	double val = GetAlgorithmus1(this, alg1.ecg);
+	Application->MessageBox(String(val).c_str(), "Erkennungswert", MB_OK);
 	}
 //---------------------------------------------------------------------------
 

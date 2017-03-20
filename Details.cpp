@@ -125,7 +125,11 @@ void TfmDetails::PaintCurves()
 		int zeitges = 0;
 		for (int i = 1; i < rp.size(); i++)
 			zeitges += (rp[i][0] - rp[i-1][0]);
-		int length = zeitges / (rp.size()-1);
+		int length;
+		if (rp.size() > 1)
+			length = zeitges / (rp.size()-1);
+		else
+        	length = 0;
 
 		cHeartbeats& h = alg1->ecg.heart;
 		h.reset(alg1->ecg.data.data_array);
@@ -157,7 +161,11 @@ void TfmDetails::PaintCurves()
 		int zeitges = 0;
 		for (int i = 1; i < rp.size(); i++)
 			zeitges += (rp[i][0] - rp[i-1][0]);
-		int length = zeitges / (rp.size()-1);
+		int length;
+		if (rp.size() > 1)
+			length = zeitges / (rp.size()-1);
+		else
+        	length = 0;
 
 		cHeartbeats h = alg1->ecg.heart;
 		h.reset(alg1->ecg.data.derivate1.deriv_array);
@@ -189,7 +197,11 @@ void TfmDetails::PaintCurves()
 		int zeitges = 0;
 		for (int i = 1; i < rp.size(); i++)
 			zeitges += (rp[i][0] - rp[i-1][0]);
-		int length = zeitges / (rp.size()-1);
+		int length;
+		if (rp.size() > 1)
+			length = zeitges / (rp.size()-1);
+		else
+        	length = 0;
 
 		cHeartbeats h = alg1->ecg.heart;
 		h.reset(alg1->ecg.data.derivate2.deriv_array);

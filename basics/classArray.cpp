@@ -329,3 +329,21 @@ iarray_t cArray::cut(iarray_t array, int vonMsec, int bisMsec)
 	return farr;
 	}
 //---------------------------------------------------------------------------
+double cArray::calcAvWert(iarray_t array)
+	{
+	if (array.size() <= 0) return 0.0;
+
+	double sum = 0.0;
+	double wert;
+	for (iarray_itr itr = array.begin(); itr != array.end(); itr++)
+		{
+		ilist_t& v = itr->second;
+		wert = v[1];
+		sum += wert;
+		}
+
+	double res = sum / array.size();
+	return res;
+	}
+//---------------------------------------------------------------------------
+

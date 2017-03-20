@@ -91,6 +91,14 @@ public:
 	 */
 	iarray_t 	movingAv(iarray_t array, int window, bool CalcBegin);
 
+	//! Berechnet den Durchschnittswert des Arrays
+	/*! Alle Werte des übergebenen Arrays werden addiert und durch die Anzahl
+	 *  der enthaltenen Werte geteilt.
+	 *  /param (std::map) Array das verwendet werden soll
+	 *  /return (double) Durchschnittswert des Arrays 
+	 */
+	double		calcAvWert(iarray_t array);
+
 	//! Daten aus dem übergebenen Array entfernen
 	/*! Der Bereich von-bis (Millisekunden) wird aus dem übergebenen Array
 	 *  entfernt.
