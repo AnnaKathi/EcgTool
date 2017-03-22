@@ -19,13 +19,13 @@
     <CfgParent>Base</CfgParent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Base)'!=''">
-    <OutputExt>exe</OutputExt>
     <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
-    <Defines>NO_STRICT</Defines>
+    <OutputExt>exe</OutputExt>
     <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+    <Defines>NO_STRICT</Defines>
     <DynamicRTL>true</DynamicRTL>
-    <UsePackages>true</UsePackages>
     <ILINK_ObjectSearchPath>TestKlassen;ecg;basics;data;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications</ILINK_ObjectSearchPath>
+    <UsePackages>true</UsePackages>
     <ProjectType>CppVCLApplication</ProjectType>
     <PackageImports>vcl.bpi;rtl.bpi;bcbie.bpi;vclx.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;dbrtl.bpi;vcldb.bpi;bdertl.bpi;vcldbx.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;websnap.bpi;webdsnap.bpi;inet.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;dsnap.bpi</PackageImports>
     <BCC_wpar>false</BCC_wpar>
@@ -35,10 +35,10 @@
     <Multithreaded>true</Multithreaded>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Cfg_1)'!=''">
-    <DCC_Optimize>false</DCC_Optimize>
     <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
-    <Defines>_DEBUG;$(Defines)</Defines>
+    <DCC_Optimize>false</DCC_Optimize>
     <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+    <Defines>_DEBUG;$(Defines)</Defines>
     <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
     <BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
     <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
@@ -49,8 +49,8 @@
     <IntermediateOutputDir>out\debug</IntermediateOutputDir>
     <TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
     <BCC_StackFrames>true</BCC_StackFrames>
-    <ILINK_LibraryPath>$(BDS)\lib\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+    <ILINK_LibraryPath>$(BDS)\lib\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     <TASM_Debugging>Full</TASM_Debugging>
     <BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
   </PropertyGroup>
@@ -98,35 +98,40 @@
     <CppCompile Include="algorithms\classifications\classKPCA.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
       <DependentOn>algorithms\classifications\classKPCA.h</DependentOn>
-      <BuildOrder>26</BuildOrder>
+      <BuildOrder>27</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\classifications\classLDA.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
       <DependentOn>algorithms\classifications\classLDA.h</DependentOn>
-      <BuildOrder>25</BuildOrder>
+      <BuildOrder>26</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\classifications\classMLP.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
-      <BuildOrder>27</BuildOrder>
+      <BuildOrder>28</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\classifications\classSVM.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
-      <BuildOrder>28</BuildOrder>
+      <BuildOrder>29</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classAC.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classAC.h</DependentOn>
-      <BuildOrder>22</BuildOrder>
+      <BuildOrder>23</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classChoi.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classChoi.h</DependentOn>
-      <BuildOrder>24</BuildOrder>
+      <BuildOrder>25</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classQRS3.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classQRS3.h</DependentOn>
-      <BuildOrder>23</BuildOrder>
+      <BuildOrder>24</BuildOrder>
+    </CppCompile>
+    <CppCompile Include="algorithms\features\classRandomPoints.cpp">
+      <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
+      <DependentOn>algorithms\features\classRandomPoints.h</DependentOn>
+      <BuildOrder>22</BuildOrder>
     </CppCompile>
     <CppCompile Include="basics\classArray.cpp">
       <VirtualFolder>{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}</VirtualFolder>

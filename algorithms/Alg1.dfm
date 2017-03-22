@@ -38,8 +38,6 @@ object fmAlg1: TfmAlg1
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = -357
-    ExplicitWidth = 1092
     DesignSize = (
       735
       41)
@@ -62,7 +60,6 @@ object fmAlg1: TfmAlg1
       ParentColor = True
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1076
     end
   end
   object Panel1: TPanel
@@ -73,9 +70,6 @@ object fmAlg1: TfmAlg1
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = 168
-    ExplicitTop = 504
-    ExplicitWidth = 185
     object Button1: TButton
       Left = 8
       Top = 8
@@ -119,6 +113,22 @@ object fmAlg1: TfmAlg1
     Width = 121
     Height = 21
     TabOrder = 5
+  end
+  object btStep3: TButton
+    Left = 8
+    Top = 408
+    Width = 257
+    Height = 25
+    Caption = 'Schritt 3 - Klasse cAlg1'
+    TabOrder = 6
+    OnClick = btStep3Click
+  end
+  object edAlg1: TEdit
+    Left = 288
+    Top = 410
+    Width = 121
+    Height = 21
+    TabOrder = 7
   end
   object tStartup: TTimer
     Enabled = False

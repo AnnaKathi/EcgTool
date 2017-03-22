@@ -11,7 +11,8 @@
 class PACKAGE cQrs : public cBase
 	{
 public:
-	cQrs(); //! Konstruktor für cQRS
+	cQrs();  //! Konstruktor für cQRS
+	~cQrs(); //! Destruktor für cQRS
 
 private:
 

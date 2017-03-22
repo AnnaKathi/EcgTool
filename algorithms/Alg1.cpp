@@ -141,6 +141,31 @@ double TfmAlg1::CalcRange() //Schritt 2
 	return range;
 	}
 //---------------------------------------------------------------------------
+void TfmAlg1::DoClass() //Schritt 3
+	{
+	Print("--------------------------------------------");
+	Print("3 - Verwendet Klasse cAlg1...");
+
+	if (!falg.setupData(*fecg))
+		{
+		Print("\t### FEHLER: %s", falg.error_msg);
+		return;
+		}
+
+	if (!falg.buildRandomPoints(20))
+		{
+		Print("\t### FEHLER: %s", falg.error_msg);
+		return;
+		}
+	Print("\t...Random Points berechnet");
+
+	String r = falg.getRandomPoints();
+	Print("\t...Random Points: %s", r.c_str());
+
+	edAlg1->Text = r;
+	Print("...Klassenberechnungen abgeschlossen");
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /********************   Actions   ******************************************/
 /***************************************************************************/
@@ -173,6 +198,11 @@ void __fastcall TfmAlg1::btStep1Click(TObject *Sender)
 void __fastcall TfmAlg1::btStep2Click(TObject *Sender)
 	{
 	Range = CalcRange();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmAlg1::btStep3Click(TObject *Sender)
+	{
+	DoClass();
 	}
 //---------------------------------------------------------------------------
 

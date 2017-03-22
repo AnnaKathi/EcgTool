@@ -26,6 +26,7 @@ private:
 	double		Range;
 	bool		FindBeat();
 	double		CalcRange();
+	void		DoClass();
 
 
 __published:	// IDE-verwaltete Komponenten
@@ -42,6 +43,8 @@ __published:	// IDE-verwaltete Komponenten
 	TImage *imgBeat;
 	TButton *btStep2;
 	TEdit *edRange;
+	TButton *btStep3;
+	TEdit *edAlg1;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -49,6 +52,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acCloseExecute(TObject *Sender);
 	void __fastcall btStep1Click(TObject *Sender);
 	void __fastcall btStep2Click(TObject *Sender);
+	void __fastcall btStep3Click(TObject *Sender);
 
 public:
 	__fastcall TfmAlg1(TComponent* Owner);
