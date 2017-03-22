@@ -19,13 +19,13 @@
     <CfgParent>Base</CfgParent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Base)'!=''">
-    <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
     <OutputExt>exe</OutputExt>
-    <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+    <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
     <Defines>NO_STRICT</Defines>
+    <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
     <DynamicRTL>true</DynamicRTL>
-    <ILINK_ObjectSearchPath>TestKlassen;ecg;basics;data;tools;alg;algorithms</ILINK_ObjectSearchPath>
     <UsePackages>true</UsePackages>
+    <ILINK_ObjectSearchPath>TestKlassen;ecg;basics;data;tools;alg;algorithms</ILINK_ObjectSearchPath>
     <ProjectType>CppVCLApplication</ProjectType>
     <PackageImports>vcl.bpi;rtl.bpi;bcbie.bpi;vclx.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;dbrtl.bpi;vcldb.bpi;bdertl.bpi;vcldbx.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;websnap.bpi;webdsnap.bpi;inet.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;dsnap.bpi</PackageImports>
     <BCC_wpar>false</BCC_wpar>
@@ -35,10 +35,10 @@
     <Multithreaded>true</Multithreaded>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Cfg_1)'!=''">
-    <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
     <DCC_Optimize>false</DCC_Optimize>
-    <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+    <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
     <Defines>_DEBUG;$(Defines)</Defines>
+    <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
     <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
     <BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
     <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
@@ -49,8 +49,8 @@
     <IntermediateOutputDir>out\debug</IntermediateOutputDir>
     <TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
     <BCC_StackFrames>true</BCC_StackFrames>
-    <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
     <ILINK_LibraryPath>$(BDS)\lib\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+    <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
     <TASM_Debugging>Full</TASM_Debugging>
     <BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
   </PropertyGroup>
@@ -64,7 +64,12 @@
     <Borland.Personality>CPlusPlusBuilder.Personality</Borland.Personality>
     <Borland.ProjectType>CppVCLApplication</Borland.ProjectType>
     <BorlandProject>
-<BorlandProject><CPlusPlusBuilder.Personality><Source><Source Name="MainSource">EcgTool.cpp</Source></Source><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1031</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Debugging><Debugging Name="DebugSourceDirs"></Debugging></Debugging><Parameters><Parameters Name="RunParams"></Parameters><Parameters Name="Launcher"></Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="DebugCWD"></Parameters><Parameters Name="HostApplication"></Parameters><Parameters Name="RemoteHost"></Parameters><Parameters Name="RemotePath"></Parameters><Parameters Name="RemoteParams"></Parameters><Parameters Name="RemoteLauncher"></Parameters><Parameters Name="UseRemoteLauncher">False</Parameters><Parameters Name="RemoteCWD"></Parameters><Parameters Name="RemoteDebug">False</Parameters><Parameters Name="Debug Symbols Search Path"></Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><Linker><Linker Name="LibPrefix"></Linker><Linker Name="LibSuffix"></Linker><Linker Name="LibVersion"></Linker></Linker><ProjectProperties><ProjectProperties Name="AutoShowDeps">False</ProjectProperties><ProjectProperties Name="ManagePaths">True</ProjectProperties><ProjectProperties Name="VerifyPackages">True</ProjectProperties></ProjectProperties><VFOLDERS><VFOLDER ID="{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}" name="algorithms" /><VFOLDER ID="{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}" name="basics" /><VFOLDER ID="{B3254D2F-43CF-4407-88B5-8E53A989EAAF}" name="tools" /><VFOLDER ID="{F0934E87-5C3D-47C3-8E43-EE413825840D}" name="ecg" /><VFOLDER ID="{060BE206-D5A5-4510-B4BC-72B96736B23E}" name="data" /></VFOLDERS><HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Count">3</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item0">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item1">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item2">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg</HistoryLists_hlIncludePath></HistoryLists_hlIncludePath><HistoryLists_hlFinalOutputDir><HistoryLists_hlFinalOutputDir Name="Count">1</HistoryLists_hlFinalOutputDir><HistoryLists_hlFinalOutputDir Name="Item0">out</HistoryLists_hlFinalOutputDir></HistoryLists_hlFinalOutputDir><HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Count">1</HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Item0">$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\lib\psdk;ecg;basics;data;inc</HistoryLists_hlILINK_LibraryPath></HistoryLists_hlILINK_LibraryPath><HistoryLists_hlDefines><HistoryLists_hlDefines Name="Count">1</HistoryLists_hlDefines><HistoryLists_hlDefines Name="Item0">NO_STRICT</HistoryLists_hlDefines></HistoryLists_hlDefines><HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_MaxErrors Name="Count">1</HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_MaxErrors Name="Item0">0</HistoryLists_hlILINK_MaxErrors></HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_FileAlignment Name="Count">1</HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_FileAlignment Name="Item0">0x200</HistoryLists_hlILINK_FileAlignment></HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_ObjectAlignment><HistoryLists_hlILINK_ObjectAlignment Name="Count">1</HistoryLists_hlILINK_ObjectAlignment><HistoryLists_hlILINK_ObjectAlignment Name="Item0">4096</HistoryLists_hlILINK_ObjectAlignment></HistoryLists_hlILINK_ObjectAlignment><Excluded_Packages>
+<BorlandProject><CPlusPlusBuilder.Personality><Source><Source Name="MainSource">EcgTool.cpp</Source></Source><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1031</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Debugging><Debugging Name="DebugSourceDirs"></Debugging></Debugging><Parameters><Parameters Name="RunParams"></Parameters><Parameters Name="Launcher"></Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="DebugCWD"></Parameters><Parameters Name="HostApplication"></Parameters><Parameters Name="RemoteHost"></Parameters><Parameters Name="RemotePath"></Parameters><Parameters Name="RemoteParams"></Parameters><Parameters Name="RemoteLauncher"></Parameters><Parameters Name="UseRemoteLauncher">False</Parameters><Parameters Name="RemoteCWD"></Parameters><Parameters Name="RemoteDebug">False</Parameters><Parameters Name="Debug Symbols Search Path"></Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><Linker><Linker Name="LibPrefix"></Linker><Linker Name="LibSuffix"></Linker><Linker Name="LibVersion"></Linker></Linker><ProjectProperties><ProjectProperties Name="AutoShowDeps">False</ProjectProperties><ProjectProperties Name="ManagePaths">True</ProjectProperties><ProjectProperties Name="VerifyPackages">True</ProjectProperties></ProjectProperties><VFOLDERS>
+      <VFOLDER ID="{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}" name="algorithms" />
+      <VFOLDER ID="{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}" name="basics" />
+      <VFOLDER ID="{F0934E87-5C3D-47C3-8E43-EE413825840D}" name="ecg" />
+      <VFOLDER ID="{060BE206-D5A5-4510-B4BC-72B96736B23E}" name="data" />
+    </VFOLDERS><HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Count">3</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item0">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item1">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item2">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg</HistoryLists_hlIncludePath></HistoryLists_hlIncludePath><HistoryLists_hlFinalOutputDir><HistoryLists_hlFinalOutputDir Name="Count">1</HistoryLists_hlFinalOutputDir><HistoryLists_hlFinalOutputDir Name="Item0">out</HistoryLists_hlFinalOutputDir></HistoryLists_hlFinalOutputDir><HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Count">1</HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Item0">$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\lib\psdk;ecg;basics;data;inc</HistoryLists_hlILINK_LibraryPath></HistoryLists_hlILINK_LibraryPath><HistoryLists_hlDefines><HistoryLists_hlDefines Name="Count">1</HistoryLists_hlDefines><HistoryLists_hlDefines Name="Item0">NO_STRICT</HistoryLists_hlDefines></HistoryLists_hlDefines><HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_MaxErrors Name="Count">1</HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_MaxErrors Name="Item0">0</HistoryLists_hlILINK_MaxErrors></HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_FileAlignment Name="Count">1</HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_FileAlignment Name="Item0">0x200</HistoryLists_hlILINK_FileAlignment></HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_ObjectAlignment><HistoryLists_hlILINK_ObjectAlignment Name="Count">1</HistoryLists_hlILINK_ObjectAlignment><HistoryLists_hlILINK_ObjectAlignment Name="Item0">4096</HistoryLists_hlILINK_ObjectAlignment></HistoryLists_hlILINK_ObjectAlignment><Excluded_Packages>
       <Excluded_Packages Name="$(BDS)\bin\bcboffice2k100.bpl">CodeGear C++Builder Office 2000 Servers Package</Excluded_Packages>
       <Excluded_Packages Name="$(BDS)\bin\bcbofficexp100.bpl">CodeGear C++Builder Office XP Servers Package</Excluded_Packages>
     </Excluded_Packages></CPlusPlusBuilder.Personality></BorlandProject></BorlandProject>
@@ -128,7 +133,7 @@
     <CppCompile Include="data\classMySql.cpp">
       <VirtualFolder>{060BE206-D5A5-4510-B4BC-72B96736B23E}</VirtualFolder>
       <DependentOn>data\classMySql.h</DependentOn>
-      <BuildOrder>23</BuildOrder>
+      <BuildOrder>21</BuildOrder>
     </CppCompile>
     <CppCompile Include="Details.cpp">
       <Form>fmDetails</Form>
@@ -141,27 +146,27 @@
     <CppCompile Include="ecg\classEcg.cpp">
       <VirtualFolder>{F0934E87-5C3D-47C3-8E43-EE413825840D}</VirtualFolder>
       <DependentOn>ecg\classEcg.h</DependentOn>
-      <BuildOrder>18</BuildOrder>
+      <BuildOrder>16</BuildOrder>
     </CppCompile>
     <CppCompile Include="ecg\classHeartbeat.cpp">
       <VirtualFolder>{F0934E87-5C3D-47C3-8E43-EE413825840D}</VirtualFolder>
       <DependentOn>ecg\classHeartbeat.h</DependentOn>
-      <BuildOrder>21</BuildOrder>
+      <BuildOrder>19</BuildOrder>
     </CppCompile>
     <CppCompile Include="ecg\classQrs.cpp">
       <VirtualFolder>{F0934E87-5C3D-47C3-8E43-EE413825840D}</VirtualFolder>
       <DependentOn>ecg\classQrs.h</DependentOn>
-      <BuildOrder>22</BuildOrder>
+      <BuildOrder>20</BuildOrder>
     </CppCompile>
     <CppCompile Include="ecg\classRpeaks.cpp">
       <VirtualFolder>{F0934E87-5C3D-47C3-8E43-EE413825840D}</VirtualFolder>
       <DependentOn>ecg\classRpeaks.h</DependentOn>
-      <BuildOrder>19</BuildOrder>
+      <BuildOrder>17</BuildOrder>
     </CppCompile>
     <CppCompile Include="ecg\classTurns.cpp">
       <VirtualFolder>{F0934E87-5C3D-47C3-8E43-EE413825840D}</VirtualFolder>
       <DependentOn>ecg\classTurns.h</DependentOn>
-      <BuildOrder>20</BuildOrder>
+      <BuildOrder>18</BuildOrder>
     </CppCompile>
     <CppCompile Include="Main.cpp">
       <Form>fmMain</Form>
@@ -172,16 +177,6 @@
       <Form>fmRequest</Form>
       <DependentOn>RequestBox.h</DependentOn>
       <BuildOrder>3</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="tools\classAC.cpp">
-      <VirtualFolder>{B3254D2F-43CF-4407-88B5-8E53A989EAAF}</VirtualFolder>
-      <DependentOn>tools\classAC.h</DependentOn>
-      <BuildOrder>17</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="tools\classWavelets.cpp">
-      <VirtualFolder>{B3254D2F-43CF-4407-88B5-8E53A989EAAF}</VirtualFolder>
-      <DependentOn>tools\classWavelets.h</DependentOn>
-      <BuildOrder>16</BuildOrder>
     </CppCompile>
     <None Include="definitions.h">
       <VirtualFolder>{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}</VirtualFolder>
