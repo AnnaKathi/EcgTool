@@ -3,7 +3,7 @@ object fmDetails: TfmDetails
   Top = 0
   BorderStyle = bsToolWindow
   Caption = 'Detailansicht'
-  ClientHeight = 691
+  ClientHeight = 770
   ClientWidth = 494
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
@@ -40,29 +40,9 @@ object fmDetails: TfmDetails
     ExplicitTop = 41
     ExplicitWidth = 490
   end
-  object imgRpeaks: TImage
-    Left = 0
-    Top = 287
-    Width = 494
-    Height = 109
-    Align = alTop
-    ExplicitTop = 523
-    ExplicitWidth = 490
-  end
-  object Bevel3: TBevel
-    Left = 0
-    Top = 396
-    Width = 494
-    Height = 4
-    Align = alTop
-    Shape = bsTopLine
-    ExplicitLeft = -8
-    ExplicitTop = 422
-    ExplicitWidth = 490
-  end
   object Bevel4: TBevel
     Left = 0
-    Top = 249
+    Top = 368
     Width = 494
     Height = 4
     Align = alTop
@@ -74,23 +54,20 @@ object fmDetails: TfmDetails
     Left = 0
     Top = 140
     Width = 494
-    Height = 109
+    Height = 95
     Align = alTop
-    ExplicitTop = 129
-    ExplicitWidth = 490
+    ExplicitTop = 134
   end
   object imgBeats: TImage
     Left = 0
-    Top = 434
+    Top = 406
     Width = 494
-    Height = 109
+    Height = 95
     Align = alTop
-    ExplicitTop = 625
-    ExplicitWidth = 490
   end
   object Bevel5: TBevel
     Left = 0
-    Top = 543
+    Top = 501
     Width = 494
     Height = 4
     Align = alTop
@@ -101,24 +78,55 @@ object fmDetails: TfmDetails
   end
   object imgHerz: TImage
     Left = 0
-    Top = 581
+    Top = 539
     Width = 494
-    Height = 109
+    Height = 95
     Align = alTop
-    ExplicitLeft = -8
-    ExplicitTop = 643
-    ExplicitWidth = 490
   end
   object Bevel6: TBevel
     Left = 0
-    Top = 690
+    Top = 634
+    Width = 494
+    Height = 4
+    Align = alTop
+    Shape = bsTopLine
+    ExplicitLeft = 8
+    ExplicitTop = 632
+  end
+  object imgAC: TImage
+    Left = 0
+    Top = 273
+    Width = 494
+    Height = 95
+    Align = alTop
+    ExplicitTop = 488
+  end
+  object Bevel7: TBevel
+    Left = 0
+    Top = 235
     Width = 494
     Height = 4
     Align = alTop
     Shape = bsTopLine
     ExplicitLeft = -8
-    ExplicitTop = 700
-    ExplicitWidth = 490
+    ExplicitTop = 233
+  end
+  object imgAcHerz: TImage
+    Left = 0
+    Top = 672
+    Width = 494
+    Height = 95
+    Align = alTop
+    ExplicitTop = 678
+  end
+  object Bevel3: TBevel
+    Left = 0
+    Top = 767
+    Width = 494
+    Height = 4
+    Align = alTop
+    Shape = bsTopLine
+    ExplicitTop = 777
   end
   object pnInfo: TPanel
     Left = 0
@@ -204,31 +212,9 @@ object fmDetails: TfmDetails
     object Label2: TLabel
       Left = 8
       Top = 8
-      Width = 82
+      Width = 159
       Height = 14
-      Caption = 'Originaldaten'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold, fsUnderline]
-      ParentFont = False
-    end
-  end
-  object Panel1: TPanel
-    Left = 0
-    Top = 253
-    Width = 494
-    Height = 34
-    Align = alTop
-    BevelOuter = bvNone
-    TabOrder = 3
-    object Label3: TLabel
-      Left = 8
-      Top = 8
-      Width = 49
-      Height = 14
-      Caption = 'R-Peaks'
+      Caption = 'Originaldaten mit R-Peaks'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
@@ -239,12 +225,13 @@ object fmDetails: TfmDetails
   end
   object Panel2: TPanel
     Left = 0
-    Top = 400
+    Top = 372
     Width = 494
     Height = 34
     Align = alTop
     BevelOuter = bvNone
-    TabOrder = 4
+    TabOrder = 3
+    ExplicitTop = 400
     object Label4: TLabel
       Left = 8
       Top = 8
@@ -261,18 +248,66 @@ object fmDetails: TfmDetails
   end
   object Panel3: TPanel
     Left = 0
-    Top = 547
+    Top = 505
     Width = 494
     Height = 34
     Align = alTop
     BevelOuter = bvNone
-    TabOrder = 5
+    TabOrder = 4
+    ExplicitTop = 547
     object Label5: TLabel
       Left = 8
       Top = 8
       Width = 121
       Height = 14
       Caption = 'Standardherzschlag'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold, fsUnderline]
+      ParentFont = False
+    end
+  end
+  object Panel4: TPanel
+    Left = 0
+    Top = 239
+    Width = 494
+    Height = 34
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 5
+    ExplicitTop = 378
+    object Label6: TLabel
+      Left = 8
+      Top = 8
+      Width = 175
+      Height = 14
+      Caption = 'Autokorrelation mit R-Peaks'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold, fsUnderline]
+      ParentFont = False
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 638
+    Width = 494
+    Height = 34
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 6
+    ExplicitLeft = -8
+    ExplicitTop = 634
+    object Label3: TLabel
+      Left = 8
+      Top = 8
+      Width = 223
+      Height = 14
+      Caption = 'Autokorrelation Standardherzschlag'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -12

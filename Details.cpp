@@ -83,7 +83,7 @@ void TfmDetails::placeForm()
 //---------------------------------------------------------------------------
 inline void TfmDetails::StartJob()
 	{
-	pbJob->Max 	   = 4;
+	pbJob->Max 	   = 5;
 	pbJob->Visible = true;
 	Application->ProcessMessages();
 	}
@@ -104,117 +104,62 @@ void TfmDetails::PaintCurves()
 	{
 	StartJob();
 	farray.clearImg(imgData);
-	farray.clearImg(imgRpeaks);
+	farray.clearImg(imgAC);
 	farray.clearImg(imgBeats);
 
 	if (cbKurve->ItemIndex == cbEkgData)
-		{
-		//-- Originaldaten
-		farray.redisplay(ecg->data.data_array, imgData);
-		TickJob();
-
-		//-- R-Peaks
-		iarray_t rp = ecg->rpeaks.find(ecg->data.data_array, NULL);
-		farray.displayPoints(ecg->data.data_array, rp, imgRpeaks);
-		TickJob();
-
-		//-- Herzschläge
-		//die einzelnen Herzschläge müssen auf die gleiche Länge normalisiert werden
-		//als Länge wird (erst einmal) die Länge zwischen den 1. RPeak und dem
-		//2. verwendet, todo: über alle R-Peaks eine Länge berechnen
-		int zeitges = 0;
-		for (int i = 1; i < rp.size(); i++)
-			zeitges += (rp[i][0] - rp[i-1][0]);
-		int length;
-		if (rp.size() > 1)
-			length = zeitges / (rp.size()-1);
-		else
-        	length = 0;
-
-		cHeartbeats& h = ecg->heart;
-		h.reset(ecg->data.data_array);
-		while (h.next())
-			farray.display(fdata.normalize(h.heartbeat, length), imgBeats);
-		TickJob();
-
-		//-- Standardherzschlag
-		h.calcAvBeat(ecg->data.data_array);
-		farray.redisplay(h.avBeat, imgHerz);
-		TickJob();
-		}
+		DoCurves(ecg->data.data_array);
 
 	else if (cbKurve->ItemIndex == cbDerivate1)
-		{
-		//-- Originaldaten
-		farray.redisplay(ecg->data.derivate1.deriv_array, imgData);
-		TickJob();
-
-		//-- R-Peaks
-		iarray_t rp = ecg->rpeaks.find(ecg->data.derivate1.deriv_array, NULL);
-		farray.displayPoints(ecg->data.derivate1.deriv_array, rp, imgRpeaks);
-		TickJob();
-
-		//-- Herzschläge
-		//die einzelnen Herzschläge müssen auf die gleiche Länge normalisiert werden
-		//als Länge wird (erst einmal) die Länge zwischen den 1. RPeak und dem
-		//2. verwendet, todo: über alle R-Peaks eine Länge berechnen
-		int zeitges = 0;
-		for (int i = 1; i < rp.size(); i++)
-			zeitges += (rp[i][0] - rp[i-1][0]);
-		int length;
-		if (rp.size() > 1)
-			length = zeitges / (rp.size()-1);
-		else
-        	length = 0;
-
-		cHeartbeats h = ecg->heart;
-		h.reset(ecg->data.derivate1.deriv_array);
-		while (h.next())
-			farray.display(fdata.normalize(h.heartbeat, length), imgBeats);
-		TickJob();
-
-		//-- Standardherzschlag
-		h.calcAvBeat(ecg->data.derivate1.deriv_array);
-		farray.redisplay(h.avBeat, imgHerz);
-		TickJob();
-		}
+		DoCurves(ecg->data.derivate1.deriv_array);
 
 	else if (cbKurve->ItemIndex == cbDerivate2)
-		{
-		//-- Originaldaten
-		farray.redisplay(ecg->data.derivate2.deriv_array, imgData);
-		TickJob();
+		DoCurves(ecg->data.derivate2.deriv_array);
 
-		//-- R-Peaks
-		iarray_t rp = ecg->rpeaks.find(ecg->data.derivate2.deriv_array, NULL);
-		farray.displayPoints(ecg->data.derivate2.deriv_array, rp, imgRpeaks);
-		TickJob();
-
-		//-- Herzschläge
-		//die einzelnen Herzschläge müssen auf die gleiche Länge normalisiert werden
-		//als Länge wird (erst einmal) die Länge zwischen den 1. RPeak und dem
-		//2. verwendet, todo: über alle R-Peaks eine Länge berechnen
-		int zeitges = 0;
-		for (int i = 1; i < rp.size(); i++)
-			zeitges += (rp[i][0] - rp[i-1][0]);
-		int length;
-		if (rp.size() > 1)
-			length = zeitges / (rp.size()-1);
-		else
-        	length = 0;
-
-		cHeartbeats h = ecg->heart;
-		h.reset(ecg->data.derivate2.deriv_array);
-		while (h.next())
-			farray.display(fdata.normalize(h.heartbeat, length), imgBeats);
-		TickJob();
-
-		//-- Standardherzschlag
-		h.calcAvBeat(ecg->data.derivate2.deriv_array);
-		farray.redisplay(h.avBeat, imgHerz);
-		TickJob();
-		}
 	EndJob();
+	}
+//---------------------------------------------------------------------------
+void TfmDetails::DoCurves(iarray_t aDaten)
+	{
+	//-- Originaldaten mit R-Peaks
+	iarray_t rp = ecg->rpeaks.find(aDaten, NULL);
+	farray.displayPoints(aDaten, rp, imgData);
+	TickJob();
+
+	//-- Autokorrelation mit R-Peaks
+	iarray_t ac   = fac.buildAC(aDaten);
+	iarray_t rpac = ecg->rpeaks.find(ac, NULL);
+	farray.displayPoints(ac, rpac, imgAC);
+	TickJob();
+
+	//-- Herzschläge
+	//die einzelnen Herzschläge müssen auf die gleiche Länge normalisiert werden
+	//als Länge wird (erst einmal) die Länge zwischen den 1. RPeak und dem
+	//2. verwendet, todo: über alle R-Peaks eine Länge berechnen
+	int zeitges = 0;
+	for (int i = 1; i < rp.size(); i++)
+		zeitges += (rp[i][0] - rp[i-1][0]);
+	int length;
+	if (rp.size() > 1)
+		length = zeitges / (rp.size()-1);
+	else
+		length = 0;
+
+	cHeartbeats& h = ecg->heart;
+	h.reset(aDaten);
+	while (h.next())
+		farray.display(fdata.normalize(h.heartbeat, length), imgBeats);
+	TickJob();
+
+	//-- Standardherzschlag
+	h.calcAvBeat(aDaten);
+	farray.redisplay(h.avBeat, imgHerz);
+	TickJob();
+
+	//-- AC Standardherzschlag
+	iarray_t ach = fac.buildAC(h.avBeat);
+	farray.redisplay(ach, imgAcHerz);
+	TickJob();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

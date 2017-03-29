@@ -13,6 +13,7 @@
 #include "basics/classArray.h"
 #include "basics/classData.h"
 #include "ecg/classHeartbeat.h"
+#include "algorithms/features/classAC.h"
 //---------------------------------------------------------------------------
 enum {
 	cbEkgData,
@@ -25,6 +26,7 @@ class TfmDetails : public TForm
 private:
 	TForm*		Papa;
 	cEcg*		ecg;
+	cAC			fac;
 	cArray		farray;
 	cData		fdata;
 
@@ -33,8 +35,9 @@ private:
 	inline void	StartJob();
 	inline void	TickJob();
 	inline void	EndJob();
-	
+
 	void		PaintCurves();
+	void		DoCurves(iarray_t aDaten);
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -45,15 +48,11 @@ __published:	// IDE-verwaltete Komponenten
 	TLabel *Label1;
 	TComboBox *cbKurve;
 	TBevel *Bevel2;
-	TImage *imgRpeaks;
 	TPanel *pnHeader1;
 	TLabel *Label2;
-	TBevel *Bevel3;
 	TTimer *tCombo;
 	TBevel *Bevel4;
 	TImage *imgData;
-	TPanel *Panel1;
-	TLabel *Label3;
 	TPanel *Panel2;
 	TLabel *Label4;
 	TImage *imgBeats;
@@ -63,6 +62,14 @@ __published:	// IDE-verwaltete Komponenten
 	TImage *imgHerz;
 	TBevel *Bevel6;
 	TProgressBar *pbJob;
+	TPanel *Panel4;
+	TLabel *Label6;
+	TImage *imgAC;
+	TBevel *Bevel7;
+	TPanel *Panel1;
+	TLabel *Label3;
+	TImage *imgAcHerz;
+	TBevel *Bevel3;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);

@@ -6,6 +6,7 @@
 #include <stdio.h>
 
 #include "algorithms/Alg1.h"
+#include "algorithms/features/classAC.h"
 
 #include "RequestBox.h"
 #include "Database.h"
@@ -374,6 +375,44 @@ void __fastcall TfmMain::GetValuefromAlg11Click(TObject *Sender)
 	{
 	double val = GetAlgorithmus1(this, ecg);
 	Application->MessageBox(String(val).c_str(), "Erkennungswert", MB_OK);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btACClick(TObject *Sender)
+	{
+	//Autokorrelation ALT, Originalalgorithmus von Website
+	btAC->Enabled = false;
+	cAC ac;
+	iarray_t arr = ac.buildACOld(ecg.data.data_array);
+	farray.display(arr, imgEcg);
+	Application->ProcessMessages();
+
+	arr = ac.buildACOld(ecg.data.derivate1.deriv_array);
+	farray.display(arr, imgDeriv1);
+	Application->ProcessMessages();
+
+	arr = ac.buildACOld(ecg.data.derivate2.deriv_array);
+	farray.display(arr, imgDeriv2);
+	Application->ProcessMessages();
+	btAC->Enabled = true;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btNeuClick(TObject *Sender)
+	{
+	//Autokorrelation, eigener Algorithmus
+	btNeu->Enabled = false;
+	cAC ac;
+	iarray_t arr = ac.buildAC(ecg.data.data_array);
+	farray.display(arr, imgEcg);
+	Application->ProcessMessages();
+
+	arr = ac.buildAC(ecg.data.derivate1.deriv_array);
+	farray.display(arr, imgDeriv1);
+	Application->ProcessMessages();
+
+	arr = ac.buildAC(ecg.data.derivate2.deriv_array);
+	farray.display(arr, imgDeriv2);
+	Application->ProcessMessages();
+	btNeu->Enabled = true;
 	}
 //---------------------------------------------------------------------------
 
