@@ -3,10 +3,12 @@
 #pragma hdrstop
 //---------------------------------------------------------------------------
 USEFORM("Main.cpp", fmMain);
+USEFORM("EcgView.cpp", fmEcg);
 USEFORM("RequestBox.cpp", fmRequest);
 USEFORM("Details.cpp", fmDetails);
 USEFORM("Database.cpp", fmData);
 USEFORM("algorithms\Alg1.cpp", fmAlg1);
+USEFORM("Session.cpp", fmSession);
 //---------------------------------------------------------------------------
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -15,10 +17,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->Initialize();
 		SetApplicationMainFormOnTaskBar(Application, true);
 		Application->CreateForm(__classid(TfmMain), &fmMain);
-		Application->CreateForm(__classid(TfmRequest), &fmRequest);
-		Application->CreateForm(__classid(TfmDetails), &fmDetails);
-		Application->CreateForm(__classid(TfmData), &fmData);
-		Application->CreateForm(__classid(TfmAlg1), &fmAlg1);
+		Application->CreateForm(__classid(TfmSession), &fmSession);
 		Application->Run();
 	}
 	catch (Exception &exception)

@@ -82,6 +82,20 @@ public:
 		 */
 		void 		FormSave(TForm* fm);
 
+	//-------------------------------------------------------------------------
+	//--- Sonstige Funktionen -------------------------------------------------
+	//-------------------------------------------------------------------------
+
+		//! Feststellen ob das Programm auf einem Heimrechner ausgeführt wird (= im Debugmodus)
+		/*! Überprüft ob der ausführende Rechner in der Liste der "HomeStations"
+		 *  vorhanden ist. Falls ja, handelt es sich um einen "HeimRechner", d.h.
+		 *  das Programm läuft im Debugmodus.\r\n
+		 *  Kann verwendet werden um ggf. Testfunktionen o.ä. an oder aus zu schalten.
+		 *  /return true wenn es sich beim ausführenden Rechner um einen Heimrechner
+		 *		handelt, sonst false
+		 */
+    	bool		IsDebug();
+
 private:
 
 	};
