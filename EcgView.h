@@ -16,7 +16,7 @@
 #include "basics/classTools.h"
 #include "basics/classArray.h"
 #include "basics/classMath.h"
-#include "data/classMySql.h"
+//#include "data/classMySql.h"
 #include "ecg/classEcg.h"
 #include "definitions.h"
 #include "Details.h"
@@ -27,7 +27,7 @@ private:
 	TIniFile*	Ini;
 	cTools		ftools;
 	cEcg		ecg;
-	cMySql		fmysql;
+//todo	cMySql		fmysql;
 	cArray		farray;
 	cMath		fmath;
 	TfmDetails*	fmDetails;

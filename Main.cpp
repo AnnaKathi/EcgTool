@@ -2,6 +2,7 @@
 #include <vcl.h>
 #pragma hdrstop
 
+#include "Database.h"
 #include "EcgView.h"
 #include "Session.h"
 #include "Main.h"
@@ -57,6 +58,11 @@ void __fastcall TfmMain::acLookIntoECGExecute(TObject *Sender)
 	delete formecg;
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmMain::acShowDataExecute(TObject *Sender)
+	{
+	DlgDatabase(this);
+	}
+//---------------------------------------------------------------------------
 void __fastcall TfmMain::acPeopleExecute(TObject *Sender)
 	{
 	//
@@ -87,4 +93,5 @@ void __fastcall TfmMain::FormKeyPress(TObject *Sender, char &Key)
 	acCloseExecute(Sender);
 	}
 //---------------------------------------------------------------------------
+
 

@@ -34,7 +34,6 @@ __fastcall TfmData::TfmData(TComponent* Owner)
 	Ini = new TIniFile(file);
 
 	bFilter = false;
-	bShowEcgData = false;
 	}
 //---------------------------------------------------------------------------
 __fastcall TfmData::~TfmData()
@@ -58,12 +57,26 @@ void __fastcall TfmData::tStartupTimer(TObject *Sender)
 	tStartup->Enabled = false;
 	ftools.PositionenToCombo(cbPosition);
 	ftools.FormLoad(this);
+
+	if (!fmysql.open())
+		{
+		String msg =
+			"Die MySql-Datenbank 'ecg' konnte nicht geöffnet werden."
+			"Die Funktion meldet: " + fmysql.error_msg;
+		Application->MessageBox(msg.c_str(), "Fehler beim Öffnen der Datenbank", MB_OK);
+		Close();
+		return;
+		}
+
+	ShowPeople();
+	ShowDiseases();
 	ShowEcgData();
 	edIdVon->SetFocus();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmData::FormClose(TObject *Sender, TCloseAction &Action)
 	{
+	fmysql.close();
 	ftools.FormSave(this);
 	}
 //---------------------------------------------------------------------------
@@ -90,140 +103,288 @@ inline void TfmData::EndJob()
 //---------------------------------------------------------------------------
 void TfmData::ShowEcgData()
 	{
-	if (bShowEcgData) return;
-
-	bShowEcgData = true; // verhindern dass die Funktion mehrfach aufgerufen wird
 	acRefresh->Enabled = false;
 
 	lvData->Items->Clear();
 	lvData->Items->BeginUpdate();
 
 	//Daten aus Datenbank anzeigen
-	if (!fmysql.loadData())
+	if (!fmysql.ecg.loadTable())
 		{
 		Application->MessageBox(fmysql.error_msg.c_str(), "Fehler aufgetreten", MB_OK);
 		lvData->Items->EndUpdate();
 		return;
 		}
 
-	StartJob(fmysql.num_rows);
+	StartJob(fmysql.ecg.num_rows);
 
-	sMySqlRow row;
 	TListItem* item;
-	while (fmysql.nextRow())
+	while (fmysql.ecg.nextRow())
 		{
 		TickJob();
-		row = fmysql.row;
 
-		if (!CheckFilter(row)) continue;
+		if (!CheckEcgFilter()) continue;
 
 		item = lvData->Items->Add();
-		item->Data = (void*) row.ident;
-		item->Caption = String(row.ident);
-		item->SubItems->Add(row.name);
-		item->SubItems->Add(ftools.GetPosition(row.pos));
+		item->Data = (void*) fmysql.ecg.row.ident;
+		item->Caption = String(fmysql.ecg.row.ident);
+
+		String name = fmysql.people.getNameOf(fmysql.ecg.row.person);
+		item->SubItems->Add(name);
+
+		item->SubItems->Add(fmysql.ecg.row.session);
+		item->SubItems->Add(ftools.GetPosition(fmysql.ecg.row.pos));
 		for (int i = 0; i < 5; i++)
-			item->SubItems->Add(String(row.werte[i]));
+			item->SubItems->Add(String(fmysql.ecg.row.werte[i]));
 		}
 
 	lvData->Items->EndUpdate();
-	bShowEcgData = false;
 	acRefresh->Enabled = true;
 	EndJob();
 	}
 //---------------------------------------------------------------------------
-bool TfmData::BuildFilter()
+void TfmData::ShowEcgOf(int person)
 	{
-	if (bFilter) return false;
-	bFilter = true;
+	acRefresh->Enabled = false;
 
-	ffilter.identVon = edIdVon->Text.ToIntDef(-1);
-	ffilter.identBis = edIdBis->Text.ToIntDef(-1);
+	lvData->Items->Clear();
+	lvData->Items->BeginUpdate();
 
-	ffilter.name = edName->Text;
-	ffilter.pos  = (ePosition)cbPosition->ItemIndex;
+	//Daten aus Datenbank anzeigen
+	if (!fmysql.ecg.loadByPerson(person))
+		{
+		Application->MessageBox(fmysql.error_msg.c_str(), "Fehler aufgetreten", MB_OK);
+		lvData->Items->EndUpdate();
+		return;
+		}
+
+	StartJob(fmysql.ecg.num_rows);
+
+	TListItem* item;
+	while (fmysql.ecg.nextRow())
+		{
+		TickJob();
+
+		if (!CheckEcgFilter()) continue;
+
+		item = lvData->Items->Add();
+		item->Data = (void*) fmysql.ecg.row.ident;
+		item->Caption = String(fmysql.ecg.row.ident);
+
+		item->SubItems->Add(fmysql.people.getNameOf(fmysql.ecg.row.person));
+
+		item->SubItems->Add(fmysql.ecg.row.session);
+		item->SubItems->Add(ftools.GetPosition(fmysql.ecg.row.pos));
+		for (int i = 0; i < 5; i++)
+			item->SubItems->Add(String(fmysql.ecg.row.werte[i]));
+		}
+
+	lvData->Items->EndUpdate();
+	acRefresh->Enabled = true;
+	EndJob();
+	}
+//---------------------------------------------------------------------------
+void TfmData::ShowPeople()
+	{
+	acRefresh->Enabled = false;
+
+	lvPeople->Items->Clear();
+	lvPeople->Items->BeginUpdate();
+
+	//Daten aus Datenbank anzeigen
+	if (!fmysql.people.loadTable())
+		{
+		Application->MessageBox(fmysql.error_msg.c_str(), "Fehler aufgetreten", MB_OK);
+		lvPeople->Items->EndUpdate();
+		return;
+		}
+
+	StartJob(fmysql.people.num_rows);
+
+	TListItem* item;
+	String name;
+	while (fmysql.people.nextRow())
+		{
+		TickJob();
+
+		if (!CheckPeopleFilter()) continue;
+
+		item = lvPeople->Items->Add();
+		item->Data = (void*) fmysql.people.row.ident;
+		item->Caption = String(fmysql.people.row.ident);
+		name = String(fmysql.people.row.vorname) + " " + String(fmysql.people.row.nachname);
+		item->SubItems->Add(name.c_str());
+		item->SubItems->Add(fmysql.people.getDiseasesOf(fmysql.people.row.ident));
+		}
+
+	lvPeople->Items->EndUpdate();
+	acRefresh->Enabled = true;
+	EndJob();
+	}
+//---------------------------------------------------------------------------
+void TfmData::ShowDiseases()
+	{
+	acRefresh->Enabled = false;
+
+	lvDiseases->Items->Clear();
+	lvDiseases->Items->BeginUpdate();
+
+	//Daten aus Datenbank anzeigen
+	if (!fmysql.diseases.loadTable())
+		{
+		Application->MessageBox(fmysql.error_msg.c_str(), "Fehler aufgetreten", MB_OK);
+		lvDiseases->Items->EndUpdate();
+		return;
+		}
+
+	StartJob(fmysql.diseases.num_rows);
+
+	TListItem* item;
+	String name;
+	while (fmysql.diseases.nextRow())
+		{
+		TickJob();
+
+		if (!CheckDiseaseFilter()) continue;
+
+		item = lvDiseases->Items->Add();
+		item->Data = (void*) fmysql.diseases.row.ident;
+		item->Caption = String(fmysql.diseases.row.ident);
+		item->SubItems->Add(fmysql.diseases.row.bez);
+		}
+
+	lvDiseases->Items->EndUpdate();
+	acRefresh->Enabled = true;
+	EndJob();
+	}
+//---------------------------------------------------------------------------
+void TfmData::ShowDiseasesOf(int person)
+	{
+	acRefresh->Enabled = false;
+
+	lvDiseases->Items->Clear();
+	lvDiseases->Items->BeginUpdate();
+
+	//Daten aus Datenbank anzeigen
+	if (!fmysql.diseases.loadTable()) //todo loadByPerson einbauen
+		{
+		Application->MessageBox(fmysql.error_msg.c_str(), "Fehler aufgetreten", MB_OK);
+		lvDiseases->Items->EndUpdate();
+		return;
+		}
+
+	StartJob(fmysql.diseases.num_rows);
+
+	TListItem* item;
+	String name;
+	while (fmysql.diseases.nextRow())
+		{
+		TickJob();
+
+		if (!CheckDiseaseFilter()) continue;
+
+		item = lvDiseases->Items->Add();
+		item->Data = (void*) fmysql.diseases.row.ident;
+		item->Caption = String(fmysql.diseases.row.ident);
+		item->SubItems->Add(fmysql.diseases.row.bez);
+		}
+
+	lvDiseases->Items->EndUpdate();
+	acRefresh->Enabled = true;
+	EndJob();
+	}
+//---------------------------------------------------------------------------
+//-- build filters ----------------------------------------------------------
+//---------------------------------------------------------------------------
+bool TfmData::BuildEcgFilter()
+	{
+	ffecg.identVon = edIdVon->Text.ToIntDef(-1);
+	ffecg.identBis = edIdBis->Text.ToIntDef(-1);
+
+	ffecg.name = edEcgName->Text;
+	ffecg.pos  = (ePosition)cbPosition->ItemIndex;
 	//...todo
 
-	bFilter = false;
 	return true;
 	}
 //---------------------------------------------------------------------------
-bool TfmData::CheckFilter(sMySqlRow row)
+bool TfmData::BuildPeopleFilter()
 	{
-	if (ffilter.identVon > 0 && row.ident < ffilter.identVon) return false;
-	if (ffilter.identBis > 0 && row.ident > ffilter.identBis) return false;
+	ffpeople.identVon = edPeopleIdVon->Text.ToIntDef(-1);
+	ffpeople.identBis = edPeopleIdBis->Text.ToIntDef(-1);
 
-	if (ffilter.name != "")
+	ffpeople.name = edPeopleName->Text;
+	//...todo
+
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmData::BuildDiseaseFilter()
+	{
+	ffdisease.identVon = edDisIdVon->Text.ToIntDef(-1);
+	ffdisease.identBis = edDisIdBis->Text.ToIntDef(-1);
+
+	ffdisease.name = edDisName->Text;
+	//...todo
+
+	return true;
+	}
+//---------------------------------------------------------------------------
+//-- check filters ----------------------------------------------------------
+//---------------------------------------------------------------------------
+bool TfmData::CheckEcgFilter()
+	{
+	if (ffecg.identVon > 0 && fmysql.ecg.row.ident < ffecg.identVon) return false;
+	if (ffecg.identBis > 0 && fmysql.ecg.row.ident > ffecg.identBis) return false;
+
+	if (ffecg.name != "")
 		{
 		//enthält-Suche
-		String nn = String(row.name).LowerCase();
-		if (nn.Pos(ffilter.name.LowerCase()) <= 0)
-        	return false;
+		String nn = fmysql.people.getNameOf(fmysql.ecg.row.person).LowerCase();
+		if (nn.Pos(ffecg.name.LowerCase()) <= 0)
+			return false;
 		}
 
-	if (ffilter.pos > posNone)
+	if (ffecg.pos > posNone)
 		{
-		if (row.pos != ffilter.pos)
+		if (fmysql.ecg.row.pos != ffecg.pos)
+			return false;
+		}
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmData::CheckPeopleFilter()
+	{
+	int id = fmysql.people.row.ident;
+	if (ffpeople.identVon > 0 && id < ffpeople.identVon) return false;
+	if (ffpeople.identBis > 0 && id > ffpeople.identBis) return false;
+
+	if (ffpeople.name != "")
+		{
+		//enthält-Suche
+		String nn = fmysql.people.getNameOf(id).LowerCase();
+		if (nn.Pos(ffpeople.name.LowerCase()) <= 0)
 			return false;
 		}
 
 	return true;
 	}
 //---------------------------------------------------------------------------
-void TfmData::CreateTestdata()
+bool TfmData::CheckDiseaseFilter()
 	{
-	//einen neuen Datensatz erzeugen mit zufälligen Werten
-	Randomize();
+	int id = fmysql.diseases.row.ident;
+	if (ffdisease.identVon > 0 && id < ffdisease.identVon) return false;
+	if (ffdisease.identBis > 0 && id > ffdisease.identBis) return false;
 
-	String n;
-	int no = Random(7);
-	switch (no)
+	if (ffdisease.name != "")
 		{
-		case 0: n = "Anna"; 	break;
-		case 1: n = "Theresa"; 	break;
-		case 2: n = "Manfred"; 	break;
-		case 3: n = "Martin"; 	break;
-		case 4: n = "Manuela"; 	break;
-		case 5: n = "Atha"; 	break;
-		case 6: n = "Vici";	 	break;
-		default: n = "John Doe";
+		//enthält-Suche
+		String nn = fmysql.diseases.getNameOf(id).LowerCase();
+		if (nn.Pos(ffdisease.name.LowerCase()) <= 0)
+			return false;
 		}
 
-	sprintf(fmysql.mysql_data.name, "%.63s", n.c_str());
-
-	ePosition pos;
-	int p = Random(4)+1;
-	switch (p)
-		{
-		case 1: pos = posLiegend; break;
-		case 2: pos = posSitzend; break;
-		case 3: pos = posStehend; break;
-		case 4: pos = posGehend;  break;
-		default: pos = posNone;
-		}
-
-	fmysql.mysql_data.pos = pos;
-	iarray_t array; array.clear();
-
-	char zahl[6];
-	for (int i = 0; i < 5; i++)
-		{
-		sprintf(zahl, "%d.%d%d%d%d",
-			Random(9),
-			Random(9),
-			Random(9),
-			Random(9),
-			Random(9));
-
-		array[i].push_back(i);
-		float z = atof(zahl);
-		array[i].push_back(z);
-		}
-
-	fmysql.mysql_data.array = array;
-
-	if (!fmysql.saveToDbase())
-		;
+	return true;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -238,23 +399,96 @@ void __fastcall TfmData::acCloseExecute(TObject *Sender)
 void __fastcall TfmData::acRefreshExecute(TObject *Sender)
 	{
 	ShowEcgData();
+	ShowPeople();
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmData::acFilterExecute(TObject *Sender)
+void __fastcall TfmData::acEcgFilterExecute(TObject *Sender)
 	{
-	if (BuildFilter())
-    	ShowEcgData();
+	if (BuildEcgFilter())
+		ShowEcgData();
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmData::acDeleteExecute(TObject *Sender)
+void __fastcall TfmData::acPeopleFilterExecute(TObject *Sender)
+	{
+	if (BuildPeopleFilter())
+		ShowPeople();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::acDisFilterExecute(TObject *Sender)
+	{
+	if (BuildDiseaseFilter())
+		ShowDiseases();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::acPeopleDelExecute(TObject *Sender)
+	{
+	if (lvPeople->SelCount < 0) return;
+	else if (lvPeople->SelCount == 1)
+		{
+		int ident = (int)lvPeople->Selected->Data;
+		if (ident <= 0) return;
+		if (!fmysql.people.deleteByIdent(ident))
+			; //todo
+		}
+
+	else //Multi-Select
+		{
+		for (int i = 0; i < lvPeople->Items->Count; i++)
+			{
+			TListItem* item = lvPeople->Items->Item[i];
+			if (!item->Selected) continue;
+
+			int ident = (int)item->Data;
+			if (ident <= 0) continue;
+			if (!fmysql.people.deleteByIdent(ident))
+				; //todo
+			}
+		}
+
+	acRefreshExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::acPeopleAddExecute(TObject *Sender)
+	{
+	//todo
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::acPeopleSelectExecute(TObject *Sender)
+	{
+	if (lvPeople->SelCount <= 0) return;
+	TListItem* item = lvPeople->Selected;
+	int person = (int)item->Data;
+
+	ShowDiseasesOf(person);
+
+	edEcgName->Text = fmysql.people.getNameOf(person);
+	edEcgName->Enabled = false;
+	ShowEcgOf(person);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::acDisSelectExecute(TObject *Sender)
+	{
+	//
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::acPeopleDisselectExecute(TObject *Sender)
+	{
+	//Auswahl aufheben
+	lvPeople->Selected = false;
+	ShowEcgData();
+	edEcgName->Text = "";
+	edEcgName->Enabled = true;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::acEcgDelExecute(TObject *Sender)
 	{
 	if (lvData->SelCount < 0) return;
 	else if (lvData->SelCount == 1)
 		{
 		int ident = (int)lvData->Selected->Data;
 		if (ident <= 0) return;
-		if (!fmysql.deleteDataByIdent(ident))
-			;
+		if (!fmysql.ecg.deleteByIdent(ident))
+        	; //todo
 		}
 
 	else //Multi-Select
@@ -266,12 +500,17 @@ void __fastcall TfmData::acDeleteExecute(TObject *Sender)
 
 			int ident = (int)item->Data;
 			if (ident <= 0) continue;
-			if (!fmysql.deleteDataByIdent(ident))
-				;
+			if (!fmysql.ecg.deleteByIdent(ident))
+				; //todo
 			}
 		}
 
 	acRefreshExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::acEcgAddExecute(TObject *Sender)
+	{
+	//
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -297,44 +536,96 @@ void __fastcall TfmData::edIdVonKeyPress(TObject *Sender, char &Key)
 	if (Key == VK_RETURN)
 		{
 		Key = 0;
-		acFilterExecute(Sender);
+		acEcgFilterExecute(Sender);
 		}
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmData::edIdVonExit(TObject *Sender)
 	{
-	acFilterExecute(Sender);
+	acEcgFilterExecute(Sender);
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmData::edNameChange(TObject *Sender)
+void __fastcall TfmData::edEcgNameChange(TObject *Sender)
 	{
-	acFilterExecute(Sender);
+	acEcgFilterExecute(Sender);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmData::cbPositionChange(TObject *Sender)
 	{
-	acFilterExecute(Sender);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmData::btCreateTestDataClick(TObject *Sender)
-	{
-	CreateTestdata();
-	acRefreshExecute(this);
+	acEcgFilterExecute(Sender);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmData::lvDataClick(TObject *Sender)
 	{
-	if (lvData->SelCount <= 0) acDelete->Enabled = false;
+	if (lvData->SelCount <= 0) acEcgDel->Enabled = false;
 	else if (lvData->SelCount == 1)
 		{
-		acDelete->Caption = "&Datensatz löschen";
-		acDelete->Enabled = true;
+		acEcgDel->Caption = "&EKG-Datensatz löschen";
+		acEcgDel->Enabled = true;
 		}
 	else //Multiselect
 		{
-		acDelete->Caption = "&Datensätze löschen";
-		acDelete->Enabled = true;
+		acEcgDel->Caption = "&EKG-Datensätze löschen";
+		acEcgDel->Enabled = true;
 		}
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmData::lvPeopleClick(TObject *Sender)
+	{
+	if (lvPeople->SelCount <= 0)
+		{
+		acPeopleDel->Enabled = false;
+		acPeopleSelect->Enabled = false;
+		}
+	else
+		{
+		acPeopleDel->Enabled = true;
+		acPeopleSelect->Enabled = true;
+
+		if (lvPeople->SelCount == 1) //Single Select
+			acPeopleDel->Caption = "&Personen-Datensatz löschen";
+		else //Multiselect
+			acPeopleDel->Caption = "&Personen-Datensätze löschen";
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::lvPeopleDblClick(TObject *Sender)
+	{
+	//nur die EKG-Daten der Person anzeigen
+	acPeopleSelectExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::edPeopleNameChange(TObject *Sender)
+	{
+	acPeopleFilterExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::edPeopleNameExit(TObject *Sender)
+	{
+	acPeopleFilterExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::edPeopleNameKeyPress(TObject *Sender, char &Key)
+	{
+	acPeopleFilterExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::edDisIdVonExit(TObject *Sender)
+	{
+	acDisFilterExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+
+void __fastcall TfmData::edDisIdVonKeyPress(TObject *Sender, char &Key)
+	{
+	acDisFilterExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::edDisNameChange(TObject *Sender)
+	{
+	acDisFilterExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+
+
 

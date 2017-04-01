@@ -15,14 +15,14 @@
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
 #include "basics/classData.h"
-#include "data/classMySql.h"
+//#include "data/classMySql.h"
 //---------------------------------------------------------------------------
 class TfmSession : public TForm
 {
 private:
 	cTools		ftools;
 	cData		fdata;
-	cMySql		fsql;	
+//	cMySql		fsql;	
 
 	String		getNow();
 	bool		save(TEdit* ed);

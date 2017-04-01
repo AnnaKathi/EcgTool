@@ -11,12 +11,12 @@
 #include <ActnList.hpp>
 #include <IniFiles.hpp>
 #include <System.hpp>
+#include <Menus.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
 #include "data/classMySql.h"
-#include <Menus.hpp>
 //---------------------------------------------------------------------------
-struct sFilter
+struct sFilterEcg
 	{
 	int			identVon;
 	int			identBis;
@@ -26,26 +26,52 @@ struct sFilter
 	double		wertBis;
 	};
 //---------------------------------------------------------------------------
+struct sFilterPeople
+	{
+	int			identVon;
+	int			identBis;
+	String		name;
+	};
+//---------------------------------------------------------------------------
+struct sFilterDisease
+	{
+	int			identVon;
+	int			identBis;
+	String		name;
+	};
+//---------------------------------------------------------------------------
 class TfmData : public TForm
 {
 private:
-	TIniFile*	Ini;
-	cTools		ftools;
-	cMySql		fmysql;
-	sFilter		ffilter;
+	TIniFile*		Ini;
+	cTools			ftools;
+	cMySql			fmysql;
+
+	sFilterEcg		ffecg;
+	sFilterPeople 	ffpeople;
+	sFilterDisease 	ffdisease;
+
 
 	inline void StartJob(int max);
 	inline void TickJob(int tick = 1);
 	inline void EndJob();
 
-	bool		bShowEcgData;
+	void		ShowPeople();
+
+	void		ShowDiseases();
+	void		ShowDiseasesOf(int person);
+	
 	void 		ShowEcgData();
+	void		ShowEcgOf(int person);
+
 
 	bool		bFilter;
-	bool		BuildFilter();
-	bool		CheckFilter(sMySqlRow row);
-
-	void		CreateTestdata();
+	bool		BuildEcgFilter();
+	bool		BuildPeopleFilter();
+	bool		BuildDiseaseFilter();
+	bool		CheckEcgFilter();
+	bool		CheckPeopleFilter();
+	bool		CheckDiseaseFilter();
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -53,28 +79,75 @@ __published:	// IDE-verwaltete Komponenten
 	TTimer *tStartup;
 	TPanel *Panel1;
 	TButton *btClose;
-	TListView *lvData;
 	TButton *Button1;
 	TActionList *ActionList;
 	TAction *acClose;
 	TAction *acRefresh;
 	TProgressBar *pbJob;
-	TPanel *pnFilter;
 	TBevel *Bevel1;
+	TPopupMenu *PopupMenuEcgData;
+	TPanel *pnPeople;
+	TSplitter *Splitter1;
+	TPanel *pnEcgData;
+	TPanel *pnFilter;
 	TLabel *Label1;
 	TLabel *Label2;
-	TEdit *edIdVon;
 	TLabel *Label3;
-	TEdit *edIdBis;
-	TAction *acFilter;
 	TLabel *Label4;
-	TEdit *edName;
 	TLabel *Label5;
+	TEdit *edIdVon;
+	TEdit *edIdBis;
+	TEdit *edEcgName;
 	TComboBox *cbPosition;
-	TButton *btCreateTestData;
-	TPopupMenu *PopupMenu;
-	TAction *acDelete;
-	TMenuItem *Datensatzlschen1;
+	TBevel *Bevel2;
+	TListView *lvData;
+	TPanel *Panel2;
+	TLabel *Label6;
+	TLabel *Label7;
+	TLabel *Label8;
+	TLabel *Label9;
+	TEdit *edPeopleIdVon;
+	TEdit *edPeopleIdBis;
+	TEdit *edPeopleName;
+	TBevel *Bevel3;
+	TListView *lvPeople;
+	TPopupMenu *PopupMenuPeople;
+	TMenuItem *MenuItem1;
+	TActionList *ActionListPeople;
+	TAction *acPeopleDel;
+	TAction *acPeopleAdd;
+	TActionList *ActionListEcgData;
+	TAction *acEcgAdd;
+	TAction *acEcgDel;
+	TMenuItem *Peronhinzufgen1;
+	TMenuItem *EKGDatensatzhinzufgen1;
+	TMenuItem *EkgDatensatzlschen1;
+	TAction *acPeopleSelect;
+	TAction *acPeopleDisselect;
+	TMenuItem *N1;
+	TMenuItem *Personauswhlen1;
+	TMenuItem *Auswahlaufheben1;
+	TAction *acPeopleFilter;
+	TAction *acEcgFilter;
+	TPanel *Panel3;
+	TBevel *Bevel4;
+	TPanel *Panel4;
+	TLabel *Label10;
+	TLabel *Label11;
+	TLabel *Label12;
+	TLabel *Label13;
+	TEdit *edDisIdVon;
+	TEdit *edDisIdBis;
+	TEdit *edDisName;
+	TListView *lvDiseases;
+	TSplitter *Splitter2;
+	TActionList *ActionListDiseases;
+	TPopupMenu *PopupMenuDiseases;
+	TAction *acDisFilter;
+	TAction *acDisAdd;
+	TAction *acDisDel;
+	TAction *acDisSelect;
+	TAction *acDisSisselect;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -83,13 +156,28 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acCloseExecute(TObject *Sender);
 	void __fastcall acRefreshExecute(TObject *Sender);
 	void __fastcall edIdVonKeyPress(TObject *Sender, char &Key);
-	void __fastcall acFilterExecute(TObject *Sender);
 	void __fastcall edIdVonExit(TObject *Sender);
-	void __fastcall edNameChange(TObject *Sender);
+	void __fastcall edEcgNameChange(TObject *Sender);
 	void __fastcall cbPositionChange(TObject *Sender);
-	void __fastcall btCreateTestDataClick(TObject *Sender);
-	void __fastcall acDeleteExecute(TObject *Sender);
 	void __fastcall lvDataClick(TObject *Sender);
+	void __fastcall lvPeopleClick(TObject *Sender);
+	void __fastcall acPeopleDelExecute(TObject *Sender);
+	void __fastcall acPeopleAddExecute(TObject *Sender);
+	void __fastcall acEcgDelExecute(TObject *Sender);
+	void __fastcall acEcgAddExecute(TObject *Sender);
+	void __fastcall lvPeopleDblClick(TObject *Sender);
+	void __fastcall acPeopleSelectExecute(TObject *Sender);
+	void __fastcall acPeopleDisselectExecute(TObject *Sender);
+	void __fastcall edPeopleNameChange(TObject *Sender);
+	void __fastcall edPeopleNameExit(TObject *Sender);
+	void __fastcall edPeopleNameKeyPress(TObject *Sender, char &Key);
+	void __fastcall acPeopleFilterExecute(TObject *Sender);
+	void __fastcall acEcgFilterExecute(TObject *Sender);
+	void __fastcall edDisIdVonExit(TObject *Sender);
+	void __fastcall edDisIdVonKeyPress(TObject *Sender, char &Key);
+	void __fastcall edDisNameChange(TObject *Sender);
+	void __fastcall acDisFilterExecute(TObject *Sender);
+	void __fastcall acDisSelectExecute(TObject *Sender);
 
 public:
 	__fastcall TfmData(TComponent* Owner);

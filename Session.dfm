@@ -3,7 +3,7 @@ object fmSession: TfmSession
   Top = 0
   Caption = 'Session anlegen'
   ClientHeight = 676
-  ClientWidth = 592
+  ClientWidth = 467
   Color = clInfoBk
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object fmSession: TfmSession
   object Bevel1: TBevel
     Left = 0
     Top = 41
-    Width = 592
+    Width = 467
     Height = 4
     Align = alTop
     Shape = bsTopLine
@@ -36,7 +36,7 @@ object fmSession: TfmSession
     Caption = 'Date-Time-Stamp'
   end
   object btNow: TSpeedButton
-    Left = 359
+    Left = 413
     Top = 60
     Width = 33
     Height = 24
@@ -57,14 +57,14 @@ object fmSession: TfmSession
     Caption = 'Researchers'
   end
   object SpeedButton1: TSpeedButton
-    Left = 359
+    Left = 413
     Top = 96
     Width = 33
     Height = 22
     Action = acReAdd
   end
   object SpeedButton2: TSpeedButton
-    Left = 359
+    Left = 413
     Top = 124
     Width = 33
     Height = 22
@@ -136,21 +136,20 @@ object fmSession: TfmSession
   object pnInfo: TPanel
     Left = 0
     Top = 0
-    Width = 592
+    Width = 467
     Height = 41
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitLeft = -181
-    ExplicitWidth = 822
+    ExplicitWidth = 592
     DesignSize = (
-      592
+      467
       41)
     object mInfo: TMemo
       Left = 8
       Top = 10
-      Width = 576
+      Width = 451
       Height = 25
       Anchors = [akLeft, akTop, akRight]
       BorderStyle = bsNone
@@ -165,20 +164,20 @@ object fmSession: TfmSession
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 1076
+      ExplicitWidth = 576
     end
   end
   object edStamp: TEdit
     Left = 136
     Top = 61
-    Width = 217
+    Width = 271
     Height = 22
     TabOrder = 1
   end
   object lvResearchers: TListView
     Left = 136
     Top = 96
-    Width = 217
+    Width = 271
     Height = 97
     Columns = <
       item
@@ -198,7 +197,7 @@ object fmSession: TfmSession
   object cbPerson: TComboBox
     Left = 136
     Top = 227
-    Width = 256
+    Width = 310
     Height = 22
     Style = csDropDownList
     ItemHeight = 14

@@ -106,6 +106,7 @@ void __fastcall TfmSession::acSaveExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 bool TfmSession::save(TEdit* ed)
 	{
+	/*
 	if (ed->Text == "") return true;
 	if (!fdata.getFile(edL1->Hint, "\t", 0, 3000))
 		; //todo
@@ -122,6 +123,7 @@ bool TfmSession::save(TEdit* ed)
 	if (!fsql.saveToDbase())
 		; //todo
 
+	*/
 	return true;
 	}
 //---------------------------------------------------------------------------

@@ -261,6 +261,7 @@ void TfmEcg::Importschema()
 //---------------------------------------------------------------------------
 void TfmEcg::MySqlSave()
 	{
+	/*
 	if (ecg.data.data_array.size() <= 0)
 		{
 		Print("## Fehler aufgetreten: Es wurden noch keine EKG-Daten eingelesen");
@@ -282,6 +283,7 @@ void TfmEcg::MySqlSave()
 		Print("## Fehler aufgetreten: %d, %s", fmysql.error_code, fmysql.error_msg);
 		return;
 		}
+	*/
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
