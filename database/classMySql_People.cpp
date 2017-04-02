@@ -34,9 +34,28 @@ bool cMySqlPeople::doQuery(String q)
 /******************   Funktionen: laden   **********************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-bool cMySqlPeople::loadTable()
+bool cMySqlPeople::get(int person)
+	{
+	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE `Ident` = " + String(person);
+	if (!fwork->query(q))
+		return false;
+
+	fres = fwork->getResult();
+	frow = mysql_fetch_row(fres);
+	if (frow == NULL) return false;
+
+   	fdata.ident   = atoi(frow[0]);
+	sprintf(fdata.vorname,  "%.127s", frow[1]);
+	sprintf(fdata.nachname, "%.127s", frow[2]);
+
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool cMySqlPeople::loadTable(String order) //order ist vorbesetzt mit ""
 	{
 	String q = "SELECT * FROM " + String(TABLE);
+	if (order != "") q += " ORDER BY " + order;
+	
 	if (!fwork->query(q))
 		return fail(fwork->error_code, fwork->error_msg);
 	else
@@ -62,6 +81,40 @@ bool cMySqlPeople::nextRow()
 	//String test = getDiseasesOf(fdata.ident);
 
 	return true;
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   Funktionen: speichern   ******************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+bool cMySqlPeople::insert(sPeople data)
+	{
+	//INSERT INTO `ecg`.`subjects` (`Vorname`, `Nachname`) VALUES ('Otto', 'Mustermann');
+	String q = "INSERT INTO " + String(TABLE) + " ";
+	q+= "(`Vorname`, `Nachname`) VALUES ";
+	q+= "(";
+	q+= "'" + String(data.vorname) + "', ";
+	q+= "'" + String(data.nachname) + "'";
+	q+= ")";
+
+	if (!fwork->send(q))
+		return fail(fwork->error_code, fwork->error_msg);
+	else
+		return ok();
+	}
+//---------------------------------------------------------------------------
+bool cMySqlPeople::update(sPeople data)
+	{
+	//UPDATE `ecg`.`subjects` SET `Vorname`='Otto', `Nachname`='Mustermann' WHERE  `Ident`=7;
+	String q = "UPDATE " + String(TABLE) + " SET ";
+	q+= "Vorname='"  + String(data.vorname)  + "',";
+	q+= "Nachname='" + String(data.nachname) + "' ";
+	q+= "WHERE Ident=" + String(data.ident);
+
+	if (!fwork->send(q))
+		return fail(fwork->error_code, fwork->error_msg);
+	else
+		return ok();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -113,6 +166,30 @@ sarray_t cMySqlPeople::getDiseasesOf(int person)
 
 	fres = res_old; //Position zurücksetzen
 	return arr;
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   Funktionen: Daten anzeigen   *************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+bool cMySqlPeople::listInCombo(TComboBox* cb, int mode) //mode ist mit 0 vorbesetzt
+	{
+	//Alle Personen aus der DB in der ComboBox anzeigen, der mode bestimmt
+	//was angezeigt wird
+	if (!loadTable("Nachname ASC"))
+		return fail(fwork->error_code, fwork->error_msg);
+
+	cb->Items->Clear();
+	String pers;
+	while (nextRow())
+		{
+		if (mode == 1)  pers = String(fdata.nachname) + ", " + String(fdata.vorname);
+		else 			pers = String(fdata.vorname) + " " + String(fdata.nachname);
+
+		cb->Items->Add(pers);
+		}
+
+	return ok();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

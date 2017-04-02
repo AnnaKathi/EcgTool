@@ -3,6 +3,7 @@
 #define classMySql_PeopleH
 //---------------------------------------------------------------------------
 #include <classes.hpp>
+#include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "definitions.h"
 #include "../basics/classBase.h"
@@ -23,12 +24,20 @@ public:
 	~cMySqlPeople();
 
 	//-- Daten laden
-	bool	loadTable(); //lädt die gesamte Tabelle
+	bool 	get(int person); //einzelnen Datensatz laden
+	bool	loadTable(String order = ""); //lädt die gesamte Tabelle
 	bool	nextRow();
 
+	//-- Daten speichern
+	bool	insert(sPeople data);
+	bool	update(sPeople data);
+	
 	//-- Daten feststellen
 	String	 getNameOf(int person);
 	sarray_t getDiseasesOf(int person);
+
+	//-- Daten anzeigen
+	bool	listInCombo(TComboBox* cb, int mode = 0);
 
 	//-- Daten löschen
 	bool 	deleteByIdent(int ident);

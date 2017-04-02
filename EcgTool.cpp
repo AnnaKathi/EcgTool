@@ -6,8 +6,9 @@ USEFORM("Main.cpp", fmMain);
 USEFORM("EcgView.cpp", fmEcg);
 USEFORM("RequestBox.cpp", fmRequest);
 USEFORM("Details.cpp", fmDetails);
-USEFORM("DbPersonen.cpp", fmData);
 USEFORM("Session.cpp", fmSession);
+USEFORM("database\DbPersonen.cpp", fmData);
+USEFORM("database\Person.cpp", fmPerson);
 USEFORM("algorithms\Alg1.cpp", fmAlg1);
 //---------------------------------------------------------------------------
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
@@ -17,6 +18,8 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->Initialize();
 		SetApplicationMainFormOnTaskBar(Application, true);
 		Application->CreateForm(__classid(TfmMain), &fmMain);
+		Application->CreateForm(__classid(TfmData), &fmData);
+		Application->CreateForm(__classid(TfmPerson), &fmPerson);
 		Application->Run();
 	}
 	catch (Exception &exception)

@@ -133,6 +133,13 @@ object fmSession: TfmSession
     Height = 12
     Shape = bsTopLine
   end
+  object SpeedButton3: TSpeedButton
+    Left = 413
+    Top = 227
+    Width = 33
+    Height = 22
+    Action = acPersonAdd
+  end
   object pnInfo: TPanel
     Left = 0
     Top = 0
@@ -142,7 +149,6 @@ object fmSession: TfmSession
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 592
     DesignSize = (
       467
       41)
@@ -164,7 +170,6 @@ object fmSession: TfmSession
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 576
     end
   end
   object edStamp: TEdit
@@ -197,9 +202,8 @@ object fmSession: TfmSession
   object cbPerson: TComboBox
     Left = 136
     Top = 227
-    Width = 310
+    Width = 271
     Height = 22
-    Style = csDropDownList
     ItemHeight = 14
     TabOrder = 3
     Items.Strings = (
@@ -404,6 +408,10 @@ object fmSession: TfmSession
     object acReset: TAction
       Caption = 'Daten &zur'#252'cksetzen'
       OnExecute = acResetExecute
+    end
+    object acPersonAdd: TAction
+      Caption = 'add'
+      OnExecute = acPersonAddExecute
     end
   end
   object OpenECG: TOpenDialog

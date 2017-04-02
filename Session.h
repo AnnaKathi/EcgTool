@@ -15,13 +15,14 @@
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
 #include "basics/classData.h"
+#include "database/classMySql.h"
 //---------------------------------------------------------------------------
 class TfmSession : public TForm
 {
 private:
 	cTools		ftools;
 	cData		fdata;
-//	cMySql		fsql;	
+	cMySql		fmysql;	
 
 	String		getNow();
 	bool		save(TEdit* ed);
@@ -71,6 +72,8 @@ __published:	// IDE-verwaltete Komponenten
 	TAction *acSave;
 	TAction *acReset;
 	TButton *Button2;
+	TSpeedButton *SpeedButton3;
+	TAction *acPersonAdd;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -86,6 +89,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall edL1KeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall acSaveExecute(TObject *Sender);
 	void __fastcall acResetExecute(TObject *Sender);
+	void __fastcall acPersonAddExecute(TObject *Sender);
 
 public:
 	__fastcall TfmSession(TComponent* Owner);

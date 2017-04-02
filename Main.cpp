@@ -2,7 +2,7 @@
 #include <vcl.h>
 #pragma hdrstop
 
-#include "DbPersonen.h"
+#include "database/DbPersonen.h"
 #include "EcgView.h"
 #include "Session.h"
 #include "Main.h"

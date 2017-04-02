@@ -19,8 +19,13 @@ public:
 	cMySqlDiseases(cMySqlWork& worker);
 	~cMySqlDiseases();
 
+	//-- Daten laden
 	bool	loadTable(); //lädt die ganze Tabelle
 	bool	nextRow();
+
+	//-- Daten speichern
+	bool 	insert(sDiseases data);
+	bool 	update(sDiseases data);
 
 	String 	getNameOf(int disease); //eine Bezeichnugn einer Erkrankung feststellen
 	sarray_t getNamesOf(sarray_t idents); //Liste mit Bez. auffüllen
