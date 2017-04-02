@@ -1,44 +1,38 @@
 //---------------------------------------------------------------------------
-#ifndef classMySql_PeopleH
-#define classMySql_PeopleH
+#ifndef classMySql_DiseasesH
+#define classMySql_DiseasesH
 //---------------------------------------------------------------------------
 #include <classes.hpp>
 //---------------------------------------------------------------------------
-#include "definitions.h"
 #include "../basics/classBase.h"
 #include "classMySql_Work.h"
 //---------------------------------------------------------------------------
-struct sPeople
+struct sDiseases
 	{
 	int			ident;
-	char		vorname[128];
-	char		nachname[128];
-	int			diseases[16]; //Liste von Herzerkrankungen
+	char		bez[128];
 	};
 //---------------------------------------------------------------------------
-class PACKAGE cMySqlPeople : public cBase
+class PACKAGE cMySqlDiseases : public cBase
 	{
 public:
-	cMySqlPeople(cMySqlWork& worker);
-	~cMySqlPeople();
+	cMySqlDiseases(cMySqlWork& worker);
+	~cMySqlDiseases();
 
-	//-- Daten laden
-	bool	loadTable(); //lädt die gesamte Tabelle
+	bool	loadTable(); //lädt die ganze Tabelle
 	bool	nextRow();
 
-	//-- Daten feststellen
-	String	getNameOf(int person);
-	String	getDiseasesOf(int person);
+	String 	getNameOf(int disease); //eine Bezeichnugn einer Erkrankung feststellen
+	sarray_t getNamesOf(sarray_t idents); //Liste mit Bez. auffüllen
 
-	//-- Daten löschen
-	bool 	deleteByIdent(int ident);
+	bool	deleteByIdent(int ident);
 
-__property sPeople row  = { read=get_data };
-__property int num_rows = { read=get_num_rows };
+__property sDiseases row = { read=get_data };
+__property int num_rows  = { read=get_num_rows };
 
 private:
-	sPeople			fdata;
-	sPeople			get_data();
+	sDiseases		fdata;
+	sDiseases   	get_data();
 
 	cMySqlWork*		fwork;
 
@@ -46,7 +40,6 @@ private:
 	MYSQL_ROW		frow;
 	int				get_num_rows();
 
-	bool			doQuery(String q);
 	};
 //---------------------------------------------------------------------------
 #endif

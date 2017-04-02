@@ -2,7 +2,7 @@
 #include <vcl.h>
 #pragma hdrstop
 
-#include "Database.h"
+#include "DbPersonen.h"
 #include "EcgView.h"
 #include "Session.h"
 #include "Main.h"
@@ -60,12 +60,12 @@ void __fastcall TfmMain::acLookIntoECGExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acShowDataExecute(TObject *Sender)
 	{
-	DlgDatabase(this);
+	//
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acPeopleExecute(TObject *Sender)
 	{
-	//
+	DlgDatabasePersonen(this);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acDiseasesExecute(TObject *Sender)

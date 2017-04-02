@@ -16,7 +16,6 @@
 #include "basics/classTools.h"
 #include "basics/classArray.h"
 #include "basics/classMath.h"
-//#include "data/classMySql.h"
 #include "ecg/classEcg.h"
 #include "definitions.h"
 #include "Details.h"

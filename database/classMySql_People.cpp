@@ -59,7 +59,7 @@ bool cMySqlPeople::nextRow()
 	sprintf(fdata.nachname, "%.127s", frow[2]);
 
 	//todo Erkrankungern laden
-	String test = getDiseasesOf(fdata.ident);
+	//String test = getDiseasesOf(fdata.ident);
 
 	return true;
 	}
@@ -89,25 +89,30 @@ String cMySqlPeople::getNameOf(int person)
 	return name;
 	}
 //---------------------------------------------------------------------------
-String cMySqlPeople::getDiseasesOf(int person)
+sarray_t cMySqlPeople::getDiseasesOf(int person)
 	{
 	MYSQL_RES* res_old = fres; //aktuelle Position speichern
 
-	String liste = "";
-	String q = "SELECT * FROM `" + String(SUBDIS) + "` WHERE `PersIdent` = " + String(person);
+	sarray_t arr; arr.clear();
+	String q =
+		"SELECT * FROM `" + String(SUBDIS) +
+		"` WHERE `PersIdent` = " + String(person) +
+		" GROUP BY DisIdent"; //zur Sicherheit, sollte nicht nötig sein
 	if (!fwork->query(q))
 		; //keine Erkankungen vorhanden
 	else
 		{
 		fres = fwork->getResult();
+		int ix = 0;
 		while ((frow = mysql_fetch_row(fres)) != NULL)
 			{
-			liste += String(frow[2]) + ", ";
+			arr[ix].push_back(frow[2]); //DisIdent
+			ix++;
 			}
 		}
 
 	fres = res_old; //Position zurücksetzen
-	return liste;
+	return arr;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

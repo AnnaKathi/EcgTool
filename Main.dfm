@@ -45,7 +45,6 @@ object fmMain: TfmMain
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 822
     DesignSize = (
       1078
       41)
@@ -67,7 +66,6 @@ object fmMain: TfmMain
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 806
     end
   end
   object btLokkIntoEcg: TBitBtn
@@ -1034,10 +1032,9 @@ object fmMain: TfmMain
     Width = 1078
     Height = 19
     Panels = <>
-    ExplicitWidth = 822
   end
   object BitBtn1: TBitBtn
-    Left = 560
+    Left = 280
     Top = 51
     Width = 241
     Height = 97
@@ -1822,7 +1819,7 @@ object fmMain: TfmMain
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000}
   end
   object BitBtn2: TBitBtn
-    Left = 829
+    Left = 549
     Top = 51
     Width = 241
     Height = 97
@@ -4186,8 +4183,8 @@ object fmMain: TfmMain
       FFFFFFFFFFFFFFFF0000}
   end
   object BitBtn5: TBitBtn
-    Left = 280
-    Top = 51
+    Left = 829
+    Top = 179
     Width = 241
     Height = 97
     Action = acShowData

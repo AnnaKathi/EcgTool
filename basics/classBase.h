@@ -6,9 +6,13 @@
 #include <vector>
 #include <classes.hpp>
 //---------------------------------------------------------------------------
-typedef std::vector<float> ilist_t;
+typedef std::vector<float> ilist_t;  //float-map
 typedef std::map<float,ilist_t> iarray_t;
 typedef iarray_t::iterator iarray_itr;
+//---------------------------------------------------------------------------
+typedef std::vector<String> slist_t;  //String-map
+typedef std::map<String,slist_t> sarray_t;
+typedef sarray_t::iterator sarray_itr;
 //---------------------------------------------------------------------------
 /* allgemeingültige Fehler-Codes, evtl weiter ausbauen */
 enum BASE_ERROR_CODES

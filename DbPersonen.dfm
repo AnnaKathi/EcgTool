@@ -53,7 +53,6 @@ object fmData: TfmData
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 800
     DesignSize = (
       1356
       41)
@@ -74,7 +73,6 @@ object fmData: TfmData
       ParentColor = True
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 784
     end
   end
   object Panel1: TPanel
@@ -85,8 +83,6 @@ object fmData: TfmData
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 589
-    ExplicitWidth = 800
     DesignSize = (
       1356
       41)
@@ -98,7 +94,6 @@ object fmData: TfmData
       Action = acClose
       Anchors = [akTop, akRight]
       TabOrder = 0
-      ExplicitLeft = 720
     end
     object Button1: TButton
       Left = 8
@@ -116,7 +111,6 @@ object fmData: TfmData
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 2
       Visible = False
-      ExplicitWidth = 609
     end
   end
   object pnPeople: TPanel
@@ -128,7 +122,7 @@ object fmData: TfmData
     TabOrder = 2
     object Bevel3: TBevel
       Left = 1
-      Top = 113
+      Top = 80
       Width = 271
       Height = 8
       Align = alTop
@@ -141,13 +135,10 @@ object fmData: TfmData
       Left = 1
       Top = 1
       Width = 271
-      Height = 112
+      Height = 79
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = 3
-      ExplicitTop = 6
-      ExplicitWidth = 507
       object Label6: TLabel
         Left = 8
         Top = 6
@@ -182,6 +173,19 @@ object fmData: TfmData
         Height = 13
         Caption = 'Name'
       end
+      object Label14: TLabel
+        Left = 95
+        Top = 59
+        Width = 61
+        Height = 16
+        Caption = 'Personen'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold, fsUnderline]
+        ParentFont = False
+      end
       object edPeopleIdVon: TEdit
         Left = 119
         Top = 5
@@ -213,9 +217,9 @@ object fmData: TfmData
     end
     object lvPeople: TListView
       Left = 1
-      Top = 121
+      Top = 88
       Width = 271
-      Height = 523
+      Height = 556
       Align = alClient
       Columns = <
         item
@@ -238,7 +242,8 @@ object fmData: TfmData
       ViewStyle = vsReport
       OnClick = lvPeopleClick
       OnDblClick = lvPeopleDblClick
-      ExplicitWidth = 311
+      ExplicitTop = 121
+      ExplicitHeight = 523
     end
   end
   object pnEcgData: TPanel
@@ -248,11 +253,9 @@ object fmData: TfmData
     Height = 645
     Align = alLeft
     TabOrder = 3
-    ExplicitLeft = 132
-    ExplicitHeight = 487
     object Bevel2: TBevel
       Left = 1
-      Top = 113
+      Top = 84
       Width = 507
       Height = 8
       Align = alTop
@@ -265,12 +268,10 @@ object fmData: TfmData
       Left = 1
       Top = 1
       Width = 507
-      Height = 112
+      Height = 83
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = 3
-      ExplicitTop = 6
       object Label1: TLabel
         Left = 8
         Top = 6
@@ -306,11 +307,24 @@ object fmData: TfmData
         Caption = 'Name'
       end
       object Label5: TLabel
-        Left = 63
-        Top = 60
+        Left = 279
+        Top = 7
         Width = 37
         Height = 13
         Caption = 'Position'
+      end
+      object Label16: TLabel
+        Left = 223
+        Top = 58
+        Width = 68
+        Height = 16
+        Caption = 'EKG-Daten'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold, fsUnderline]
+        ParentFont = False
       end
       object edIdVon: TEdit
         Left = 119
@@ -341,9 +355,9 @@ object fmData: TfmData
         OnKeyPress = edIdVonKeyPress
       end
       object cbPosition: TComboBox
-        Left = 119
-        Top = 58
-        Width = 145
+        Left = 335
+        Top = 5
+        Width = 106
         Height = 21
         Style = csDropDownList
         ItemHeight = 13
@@ -353,9 +367,9 @@ object fmData: TfmData
     end
     object lvData: TListView
       Left = 1
-      Top = 121
+      Top = 92
       Width = 507
-      Height = 523
+      Height = 552
       Align = alClient
       Columns = <
         item
@@ -394,6 +408,8 @@ object fmData: TfmData
       TabOrder = 1
       ViewStyle = vsReport
       OnClick = lvDataClick
+      ExplicitTop = 121
+      ExplicitHeight = 523
     end
   end
   object Panel3: TPanel
@@ -403,11 +419,9 @@ object fmData: TfmData
     Height = 645
     Align = alLeft
     TabOrder = 4
-    ExplicitLeft = 8
-    ExplicitTop = 57
     object Bevel4: TBevel
       Left = 1
-      Top = 113
+      Top = 82
       Width = 271
       Height = 8
       Align = alTop
@@ -420,7 +434,7 @@ object fmData: TfmData
       Left = 1
       Top = 1
       Width = 271
-      Height = 112
+      Height = 81
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
@@ -458,6 +472,19 @@ object fmData: TfmData
         Height = 13
         Caption = 'Bez.'
       end
+      object Label15: TLabel
+        Left = 88
+        Top = 59
+        Width = 89
+        Height = 16
+        Caption = 'Erkrankungen'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold, fsUnderline]
+        ParentFont = False
+      end
       object edDisIdVon: TEdit
         Left = 119
         Top = 5
@@ -489,9 +516,9 @@ object fmData: TfmData
     end
     object lvDiseases: TListView
       Left = 1
-      Top = 121
+      Top = 90
       Width = 271
-      Height = 523
+      Height = 554
       Align = alClient
       Columns = <
         item
@@ -510,6 +537,8 @@ object fmData: TfmData
       ViewStyle = vsReport
       OnClick = lvPeopleClick
       OnDblClick = lvPeopleDblClick
+      ExplicitTop = 121
+      ExplicitHeight = 523
     end
   end
   object tStartup: TTimer
@@ -533,7 +562,7 @@ object fmData: TfmData
   end
   object PopupMenuEcgData: TPopupMenu
     Left = 592
-    Top = 128
+    Top = 200
     object EKGDatensatzhinzufgen1: TMenuItem
       Action = acEcgAdd
     end
@@ -542,8 +571,8 @@ object fmData: TfmData
     end
   end
   object PopupMenuPeople: TPopupMenu
-    Left = 96
-    Top = 112
+    Left = 48
+    Top = 208
     object Peronhinzufgen1: TMenuItem
       Action = acPeopleAdd
     end
@@ -561,8 +590,8 @@ object fmData: TfmData
     end
   end
   object ActionListPeople: TActionList
-    Left = 64
-    Top = 112
+    Left = 16
+    Top = 208
     object acPeopleDel: TAction
       Caption = 'Person l'#246'schen'
       Enabled = False
@@ -588,7 +617,7 @@ object fmData: TfmData
   end
   object ActionListEcgData: TActionList
     Left = 560
-    Top = 128
+    Top = 200
     object acEcgAdd: TAction
       Caption = 'EKG-Datensatz hinzuf'#252'gen'
       OnExecute = acEcgAddExecute
@@ -604,8 +633,8 @@ object fmData: TfmData
     end
   end
   object ActionListDiseases: TActionList
-    Left = 288
-    Top = 120
+    Left = 296
+    Top = 200
     object acDisFilter: TAction
       Caption = 'Erkrankungen filtern'
       OnExecute = acDisFilterExecute
@@ -625,7 +654,7 @@ object fmData: TfmData
     end
   end
   object PopupMenuDiseases: TPopupMenu
-    Left = 320
-    Top = 120
+    Left = 328
+    Top = 200
   end
 end

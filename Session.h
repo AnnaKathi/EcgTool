@@ -15,7 +15,6 @@
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
 #include "basics/classData.h"
-//#include "data/classMySql.h"
 //---------------------------------------------------------------------------
 class TfmSession : public TForm
 {

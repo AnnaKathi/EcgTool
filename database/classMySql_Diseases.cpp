@@ -34,11 +34,6 @@ bool cMySqlDiseases::loadTable()
 		}
 	}
 //---------------------------------------------------------------------------
-bool cMySqlDiseases::loadByPerson(int person)
-	{
-	//todo
-	}
-//---------------------------------------------------------------------------
 bool cMySqlDiseases::nextRow()
 	{
 	if (!fwork->isReady())
@@ -57,7 +52,7 @@ bool cMySqlDiseases::nextRow()
 /******************   Funktionen: Datenfelder   ****************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-String cMySqlDiseases::getNameOf(int disease)
+String cMySqlDiseases::getNameOf(int disease) //eine Bezeichnugn einer Erkrankung
 	{
 	MYSQL_RES* res_old = fres; //aktuelle Position speichern
 
@@ -76,6 +71,21 @@ String cMySqlDiseases::getNameOf(int disease)
 
 	fres = res_old; //Position zurücksetzen
 	return name;
+	}
+//---------------------------------------------------------------------------
+sarray_t cMySqlDiseases::getNamesOf(sarray_t idents) //Liste mit Bez. auffüllen
+	{
+	sarray_t res; res.clear();
+	int ix = 0;
+	for (sarray_itr itr = idents.begin(); itr != idents.end(); itr++)
+		{
+		slist_t& v = itr->second;
+		res[ix].push_back(v[0]);
+		res[ix].push_back(getNameOf(v[0].ToInt()));
+		ix++;
+		}
+
+	return res;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

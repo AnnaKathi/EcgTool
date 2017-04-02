@@ -9,7 +9,6 @@
 #include "algorithms/features/classAC.h"
 
 #include "RequestBox.h"
-#include "Database.h"
 #include "Details.h"
 #include "EcgView.h"
 //---------------------------------------------------------------------------
@@ -385,7 +384,7 @@ void __fastcall TfmEcg::Beenden1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmEcg::Datenanzeigen1Click(TObject *Sender)
 	{
-	DlgDatabase(this);
+	//todo ?? DlgDatabase(this);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmEcg::estenmitAlg11Click(TObject *Sender)

@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
-#ifndef DatabaseH
-#define DatabaseH
+#ifndef DbPersonenH
+#define DbPersonenH
 //---------------------------------------------------------------------------
 #include <Classes.hpp>
 #include <Controls.hpp>
@@ -14,7 +14,7 @@
 #include <Menus.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
-#include "data/classMySql.h"
+#include "database/classMySql.h"
 //---------------------------------------------------------------------------
 struct sFilterEcg
 	{
@@ -148,6 +148,9 @@ __published:	// IDE-verwaltete Komponenten
 	TAction *acDisDel;
 	TAction *acDisSelect;
 	TAction *acDisSisselect;
+	TLabel *Label14;
+	TLabel *Label15;
+	TLabel *Label16;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -186,6 +189,6 @@ public:
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmData *fmData;
-bool DlgDatabase(TForm* Papa);
+bool DlgDatabasePersonen(TForm* Papa);
 //---------------------------------------------------------------------------
 #endif

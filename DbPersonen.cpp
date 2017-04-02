@@ -2,13 +2,13 @@
 #include <vcl.h>
 #pragma hdrstop
 
-#include "Database.h"
+#include "DbPersonen.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TfmData *fmData;
 //---------------------------------------------------------------------------
-bool DlgDatabase(TForm* Papa)
+bool DlgDatabasePersonen(TForm* Papa)
 	{
 	TfmData* Form = new TfmData(Papa);
 	bool rc = false;
@@ -210,11 +210,29 @@ void TfmData::ShowPeople()
 		if (!CheckPeopleFilter()) continue;
 
 		item = lvPeople->Items->Add();
-		item->Data = (void*) fmysql.people.row.ident;
-		item->Caption = String(fmysql.people.row.ident);
+		int person = fmysql.people.row.ident;
+		item->Data = (void*) person;
+		item->Caption = String(person);
 		name = String(fmysql.people.row.vorname) + " " + String(fmysql.people.row.nachname);
 		item->SubItems->Add(name.c_str());
-		item->SubItems->Add(fmysql.people.getDiseasesOf(fmysql.people.row.ident));
+
+		sarray_t dis;
+		dis = fmysql.people.getDiseasesOf(person);
+		dis = fmysql.diseases.getNamesOf(dis);
+		String liste = ""; 
+		bool first = true;
+		for (sarray_itr itr = dis.begin(); itr != dis.end(); itr++)
+			{
+			slist_t& v = itr->second;
+			if (first)
+				{
+				first = false;
+				liste = v[1];
+				}
+			else
+				liste += ", " + v[1];
+			}
+		item->SubItems->Add(liste);
 		}
 
 	lvPeople->Items->EndUpdate();
@@ -275,12 +293,27 @@ void TfmData::ShowDiseasesOf(int person)
 
 	StartJob(fmysql.diseases.num_rows);
 
+	sarray_t dis;
+	dis = fmysql.people.getDiseasesOf(person);
+
 	TListItem* item;
 	String name;
 	while (fmysql.diseases.nextRow())
 		{
 		TickJob();
 
+		bool found = false;
+		for (sarray_itr itr = dis.begin(); itr != dis.end(); itr++)
+			{
+			slist_t v = itr->second;
+			if (fmysql.diseases.row.ident == v[0].ToInt())
+				{
+				found = true;
+				break;
+				}
+			}
+
+		if (!found) continue;
 		if (!CheckDiseaseFilter()) continue;
 
 		item = lvDiseases->Items->Add();
@@ -459,6 +492,9 @@ void __fastcall TfmData::acPeopleSelectExecute(TObject *Sender)
 	TListItem* item = lvPeople->Selected;
 	int person = (int)item->Data;
 
+	edDisIdVon->Enabled = false;
+	edDisIdBis->Enabled = false;
+	edDisName->Enabled  = false;
 	ShowDiseasesOf(person);
 
 	edEcgName->Text = fmysql.people.getNameOf(person);
@@ -475,9 +511,16 @@ void __fastcall TfmData::acPeopleDisselectExecute(TObject *Sender)
 	{
 	//Auswahl aufheben
 	lvPeople->Selected = false;
-	ShowEcgData();
+
+	edDisIdVon->Enabled = true;
+	edDisIdBis->Enabled = true;
+	edDisName->Enabled  = true;
+
 	edEcgName->Text = "";
 	edEcgName->Enabled = true;
+
+	ShowEcgData();
+	ShowDiseases();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmData::acEcgDelExecute(TObject *Sender)
