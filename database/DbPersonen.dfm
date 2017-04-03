@@ -527,6 +527,14 @@ object fmData: TfmData
       OnDblClick = lvPeopleDblClick
     end
   end
+  object Panel5: TPanel
+    Left = 1061
+    Top = 49
+    Width = 276
+    Height = 645
+    Align = alLeft
+    TabOrder = 5
+  end
   object tStartup: TTimer
     Enabled = False
     Interval = 100
@@ -549,9 +557,6 @@ object fmData: TfmData
   object PopupMenuEcgData: TPopupMenu
     Left = 592
     Top = 200
-    object EKGDatensatzhinzufgen1: TMenuItem
-      Action = acEcgAdd
-    end
     object EkgDatensatzlschen1: TMenuItem
       Action = acEcgDel
     end
@@ -561,6 +566,9 @@ object fmData: TfmData
     Top = 208
     object Peronhinzufgen1: TMenuItem
       Action = acPeopleAdd
+    end
+    object Personndern1: TMenuItem
+      Action = acPeopleChange
     end
     object MenuItem1: TMenuItem
       Action = acPeopleDel
@@ -586,6 +594,11 @@ object fmData: TfmData
     object acPeopleAdd: TAction
       Caption = 'Peron hinzuf'#252'gen'
       OnExecute = acPeopleAddExecute
+    end
+    object acPeopleChange: TAction
+      Caption = 'Person &'#228'ndern'
+      Enabled = False
+      OnExecute = acPeopleChangeExecute
     end
     object acPeopleSelect: TAction
       Caption = 'Person ausw&'#228'hlen'

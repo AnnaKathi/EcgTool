@@ -119,8 +119,6 @@ __published:	// IDE-verwaltete Komponenten
 	TAction *acEcgAdd;
 	TAction *acEcgDel;
 	TMenuItem *Peronhinzufgen1;
-	TMenuItem *EKGDatensatzhinzufgen1;
-	TMenuItem *EkgDatensatzlschen1;
 	TAction *acPeopleSelect;
 	TAction *acPeopleDisselect;
 	TMenuItem *N1;
@@ -150,6 +148,10 @@ __published:	// IDE-verwaltete Komponenten
 	TLabel *Label14;
 	TLabel *Label15;
 	TLabel *Label16;
+	TAction *acPeopleChange;
+	TMenuItem *Personndern1;
+	TMenuItem *EkgDatensatzlschen1;
+	TPanel *Panel5;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -180,6 +182,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall edDisNameChange(TObject *Sender);
 	void __fastcall acDisFilterExecute(TObject *Sender);
 	void __fastcall acDisSelectExecute(TObject *Sender);
+	void __fastcall acPeopleChangeExecute(TObject *Sender);
 
 public:
 	__fastcall TfmData(TComponent* Owner);

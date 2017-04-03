@@ -66,6 +66,7 @@ object fmPerson: TfmPerson
     Width = 33
     Height = 22
     Action = acDisAdd
+    Caption = 'add'
   end
   object SpeedButton2: TSpeedButton
     Left = 49
@@ -73,6 +74,7 @@ object fmPerson: TfmPerson
     Width = 33
     Height = 22
     Action = acDisDel
+    Caption = 'del'
   end
   object pnInfo: TPanel
     Left = 0
@@ -82,7 +84,7 @@ object fmPerson: TfmPerson
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
-    TabOrder = 0
+    TabOrder = 4
     DesignSize = (
       288
       41)
@@ -113,8 +115,7 @@ object fmPerson: TfmPerson
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
-    TabOrder = 1
-    ExplicitTop = 339
+    TabOrder = 3
     DesignSize = (
       288
       41)
@@ -141,14 +142,14 @@ object fmPerson: TfmPerson
     Top = 61
     Width = 180
     Height = 21
-    TabOrder = 2
+    TabOrder = 0
   end
   object edNachname: TEdit
     Left = 96
     Top = 88
     Width = 180
     Height = 21
-    TabOrder = 3
+    TabOrder = 1
   end
   object lvDiseases: TListView
     Left = 96
@@ -166,8 +167,10 @@ object fmPerson: TfmPerson
     GridLines = True
     ReadOnly = True
     RowSelect = True
-    TabOrder = 4
+    PopupMenu = PopupMenu1
+    TabOrder = 5
     ViewStyle = vsReport
+    OnClick = lvDiseasesClick
   end
   object cbDiseases: TComboBox
     Left = 96
@@ -175,7 +178,7 @@ object fmPerson: TfmPerson
     Width = 180
     Height = 21
     ItemHeight = 13
-    TabOrder = 5
+    TabOrder = 2
     OnKeyPress = cbDiseasesKeyPress
   end
   object tStartup: TTimer
@@ -193,16 +196,28 @@ object fmPerson: TfmPerson
       OnExecute = acCloseExecute
     end
     object acSave: TAction
-      Caption = 'Speichern'
+      Caption = 'S&peichern'
+      ShortCut = 16467
       OnExecute = acSaveExecute
     end
     object acDisAdd: TAction
-      Caption = 'add'
+      Caption = 'Erkrankung hinzuf'#252'gen'
       OnExecute = acDisAddExecute
     end
     object acDisDel: TAction
-      Caption = 'del'
+      Caption = 'Erkrankung l'#246'schen'
+      Enabled = False
       OnExecute = acDisDelExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 184
+    Top = 216
+    object add1: TMenuItem
+      Action = acDisAdd
+    end
+    object del1: TMenuItem
+      Action = acDisDel
     end
   end
 end

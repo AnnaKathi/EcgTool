@@ -44,7 +44,7 @@ bool cMySqlPeople::get(int person)
 	frow = mysql_fetch_row(fres);
 	if (frow == NULL) return false;
 
-   	fdata.ident   = atoi(frow[0]);
+	fdata.ident   = atoi(frow[0]);
 	sprintf(fdata.vorname,  "%.127s", frow[1]);
 	sprintf(fdata.nachname, "%.127s", frow[2]);
 
@@ -78,6 +78,23 @@ bool cMySqlPeople::nextRow()
 	return true;
 	}
 //---------------------------------------------------------------------------
+bool cMySqlPeople::getLast()
+	{
+	String q = "SELECT * FROM " + String(TABLE) + " ORDER BY Ident DESC LIMIT 1";
+	if (!fwork->query(q))
+		return false;
+
+	fres = fwork->getResult();
+	frow = mysql_fetch_row(fres);
+	if (frow == NULL) return false;
+
+	fdata.ident   = atoi(frow[0]);
+	sprintf(fdata.vorname,  "%.127s", frow[1]);
+	sprintf(fdata.nachname, "%.127s", frow[2]);
+
+	return true;
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /******************   Funktionen: speichern   ******************************/
 /***************************************************************************/
@@ -95,7 +112,11 @@ bool cMySqlPeople::insert(sPeople data)
 	if (!fwork->send(q))
 		return fail(fwork->error_code, fwork->error_msg);
 	else
-    	return ok();
+		{
+		//Datensatz wieder reinladen, damit aufrufende Komponenten damit
+		//weiterarbeiten können (letzten Datensatz nach Ident laden)
+		return getLast();
+		}
 	}
 //---------------------------------------------------------------------------
 bool cMySqlPeople::update(sPeople data)
@@ -226,7 +247,15 @@ bool cMySqlPeople::deleteByIdent(int ident)
 	if (!fwork->send(q))
 		return fail(fwork->error_code, fwork->error_msg);
 	else
-		return ok();
+		{
+		//Evtl zugehörige Erkrankungen löschen
+		String q = "DELETE FROM " + String(SUBDIS);
+		q+= " WHERE PersIdent = " + String(ident);
+		if (!fwork->send(q))
+			return fail(fwork->error_code, fwork->error_msg);
+		}
+		
+	return ok();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

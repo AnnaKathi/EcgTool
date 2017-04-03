@@ -2,6 +2,8 @@
 #include <vcl.h>
 #pragma hdrstop
 
+#include "baseforms/baseDiseases.h"
+#include "Person.h"
 #include "DbPersonen.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -69,6 +71,9 @@ void __fastcall TfmData::tStartupTimer(TObject *Sender)
 		return;
 		}
 	Cursor = crDefault;
+
+	//TEST SnapTo
+	CreateDiseaseForm(this, Panel5, fmysql);
 
 	ShowPeople();
 	ShowDiseases();
@@ -435,7 +440,12 @@ void __fastcall TfmData::acCloseExecute(TObject *Sender)
 void __fastcall TfmData::acRefreshExecute(TObject *Sender)
 	{
 	if (tStartup->Tag == 0) return; //Init noch nicht ausgeführt oder beendet
+
+	//evtl bestehende Filter abschalten
+	acPeopleDisselectExecute(Sender);
+
 	ShowEcgData();
+	ShowDiseases();
 	ShowPeople();
 	}
 //---------------------------------------------------------------------------
@@ -490,7 +500,18 @@ void __fastcall TfmData::acPeopleDelExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmData::acPeopleAddExecute(TObject *Sender)
 	{
-	//todo
+	if (DlgPersonNew(this))
+		acRefreshExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::acPeopleChangeExecute(TObject *Sender)
+	{
+	if (lvPeople->SelCount <= 0) return;
+	TListItem* item = lvPeople->Selected;
+	int person = (int)item->Data;
+
+	if (DlgPersonChange(this, person))
+		acRefreshExecute(Sender);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmData::acPeopleSelectExecute(TObject *Sender)
@@ -624,13 +645,15 @@ void __fastcall TfmData::lvPeopleClick(TObject *Sender)
 	{
 	if (lvPeople->SelCount <= 0)
 		{
-		acPeopleDel->Enabled = false;
+		acPeopleDel->Enabled    = false;
 		acPeopleSelect->Enabled = false;
+		acPeopleChange->Enabled = false;
 		}
 	else
 		{
-		acPeopleDel->Enabled = true;
+		acPeopleDel->Enabled    = true;
 		acPeopleSelect->Enabled = true;
+		acPeopleChange->Enabled = true;
 
 		if (lvPeople->SelCount == 1) //Single Select
 			acPeopleDel->Caption = "&Personen-Datensatz löschen";
@@ -676,6 +699,4 @@ void __fastcall TfmData::edDisNameChange(TObject *Sender)
 	acDisFilterExecute(Sender);
 	}
 //---------------------------------------------------------------------------
-
-
 

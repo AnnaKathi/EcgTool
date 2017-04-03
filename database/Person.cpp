@@ -134,20 +134,24 @@ bool TfmPerson::SaveData()
 	sprintf(data.vorname,  "%.127s", edVorname->Text.c_str());
 	sprintf(data.nachname, "%.127s", edNachname->Text.c_str());
 
-	if (bNewPerson && !fmysql.people.insert(data))
+	if (bNewPerson)
 		{
-		//todo Fehlermeldung
-		return false;
+		if (!fmysql.people.insert(data))
+			{
+			//todo Fehlermeldung
+			return false;
+			}
+		else
+			iPerson = fmysql.people.row.ident; //wird durch insert gesetzt
 		}
-
+		
 	else if (!bNewPerson && !fmysql.people.update(data))
 		{
 		//todo Fehlermeldung
 		return false;
 		}
 
-	//todo Erkrankungen speichern
-	/*
+	//Erkrankungen speichern
 	int dis;
 	bool fehler = false;
 	TListItem* item;
@@ -162,7 +166,6 @@ bool TfmPerson::SaveData()
 			}
 		}
 	if (fehler) return false;
-	*/
 
 	return true;
 	}
@@ -189,7 +192,14 @@ void __fastcall TfmPerson::acDisAddExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmPerson::acDisDelExecute(TObject *Sender)
 	{
-	//
+	if (lvDiseases->SelCount <= 0)
+		{
+		acDisDel->Enabled = false;
+		return;
+		}
+
+	TListItem* item = lvDiseases->Selected;
+	item->Delete();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -221,6 +231,14 @@ void __fastcall TfmPerson::cbDiseasesKeyPress(TObject *Sender, char &Key)
 		cbDiseases->DeleteSelected();
 		cbDiseases->Text = "";
 		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmPerson::lvDiseasesClick(TObject *Sender)
+	{
+	if (lvDiseases->SelCount > 0)
+		acDisDel->Enabled = true;
+	else
+		acDisDel->Enabled = false;
 	}
 //---------------------------------------------------------------------------
 

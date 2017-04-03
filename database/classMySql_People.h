@@ -27,6 +27,7 @@ public:
 	bool 	get(int person); //einzelnen Datensatz laden
 	bool	loadTable(String order = ""); //lädt die gesamte Tabelle
 	bool	nextRow();
+	bool	getLast();
 
 	//-- Daten speichern
 	bool	insert(sPeople data);
