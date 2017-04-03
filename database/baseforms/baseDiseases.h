@@ -11,13 +11,24 @@
 #include <ActnList.hpp>
 #include <Menus.hpp>
 //---------------------------------------------------------------------------
+struct sFilter
+	{
+	int			identVon;
+	int			identBis;
+	String		name;
+	};
 //---------------------------------------------------------------------------
 class TfmBaseDiseases : public TForm
 {
 private:
 	void 		snapTo(TWinControl* container, TAlign align);
-
 	void 		MsgBox(char* msg, ...);
+
+	bool		bInShow;
+	
+	sFilter     ffilter;
+	bool 		BuildFilter();
+	bool 		CheckFilter();
 
 
 __published:	// IDE-verwaltete Komponenten
@@ -37,20 +48,30 @@ __published:	// IDE-verwaltete Komponenten
 	TAction *acDisDel;
 	TPopupMenu *PopupMenuDiseases;
 	TTimer *tStartup;
+	TAction *acDisChange;
+	TMenuItem *Erkrankunghinzufgen1;
+	TMenuItem *Erkrankungndern1;
+	TMenuItem *Erkrankunglschen1;
 	void __fastcall acDisAddExecute(TObject *Sender);
 	void __fastcall acDisDelExecute(TObject *Sender);
 	void __fastcall acDisFilterExecute(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall tStartupTimer(TObject *Sender);
+	void __fastcall acDisChangeExecute(TObject *Sender);
+	void __fastcall lvDiseasesClick(TObject *Sender);
+	void __fastcall edDisIdVonExit(TObject *Sender);
+	void __fastcall edDisNameChange(TObject *Sender);
+	void __fastcall lvDiseasesDblClick(TObject *Sender);
 
 public:
 	__fastcall TfmBaseDiseases(TComponent* Owner, TWinControl* Container);
 
 	bool		ShowData();
+	bool		ShowDataOfPerson(int person);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmBaseDiseases *fmBaseDiseases;
-bool CreateDiseaseForm(TForm* caller, TWinControl* container);
+TfmBaseDiseases* CreateDiseaseForm(TForm* caller, TWinControl* container);
 //---------------------------------------------------------------------------
 #endif

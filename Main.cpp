@@ -4,6 +4,7 @@
 
 #include "database/classMySql.h"
 #include "database/DbPersonen.h"
+#include "Diseases.h"
 #include "EcgView.h"
 #include "Session.h"
 #include "Main.h"
@@ -83,7 +84,7 @@ void __fastcall TfmMain::acPeopleExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acDiseasesExecute(TObject *Sender)
 	{
-	//
+	DlgDiseases(this);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acCreateTempExecute(TObject *Sender)
@@ -94,7 +95,7 @@ void __fastcall TfmMain::acCreateTempExecute(TObject *Sender)
 void __fastcall TfmMain::acCreateSeesionExecute(TObject *Sender)
 	{
 	if (!DlgNewSession(this))
-    	;
+		;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

@@ -1,52 +1,43 @@
 //---------------------------------------------------------------------------
-#ifndef addDiseasesH
-#define addDiseasesH
+#ifndef DiseasesH
+#define DiseasesH
 //---------------------------------------------------------------------------
 #include <Classes.hpp>
 #include <Controls.hpp>
 #include <StdCtrls.hpp>
 #include <Forms.hpp>
-#include <ActnList.hpp>
 #include <ExtCtrls.hpp>
 //---------------------------------------------------------------------------
-class TfmDis : public TForm
+#include "database/baseforms/baseDiseases.h"
+//---------------------------------------------------------------------------
+class TfmDiseases : public TForm
 {
 private:
-	bool		bNewDisease;
-	int			iDisease;
+	TfmBaseDiseases*	fmDiseases;
 
-	void 		MsgBox(char* msg, ...);
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
 	TMemo *mInfo;
 	TBevel *Bevel1;
+	TBevel *Bevel2;
 	TPanel *Panel1;
 	TButton *Button1;
 	TButton *Button2;
-	TBevel *Bevel2;
+	TPanel *pnDiseases;
 	TTimer *tStartup;
-	TActionList *ActionList1;
-	TAction *acClose;
-	TAction *acSave;
-	TLabel *Label1;
-	TEdit *edIdent;
-	TLabel *Label2;
-	TEdit *edBez;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
-	void __fastcall tStartupTimer(TObject *Sender);
-	void __fastcall acCloseExecute(TObject *Sender);
-	void __fastcall acSaveExecute(TObject *Sender);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
+	void __fastcall tStartupTimer(TObject *Sender);
 
 public:
-	__fastcall TfmDis(TComponent* Owner);
-	bool 	Execute(int ident);
+	__fastcall TfmDiseases(TComponent* Owner);
+	__fastcall ~TfmDiseases();
+	bool 	Execute();
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TfmDis *fmDis;
-bool DlgDiseaseAdd(TForm* Papa);
-bool DlgDiseaseChange(TForm* Papa, int ident);
+extern PACKAGE TfmDiseases *fmDiseases;
+bool DlgDiseases(TForm* Papa);
 //---------------------------------------------------------------------------
 #endif

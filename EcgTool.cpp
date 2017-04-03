@@ -12,6 +12,7 @@ USEFORM("database\Person.cpp", fmPerson);
 USEFORM("database\baseforms\baseDiseases.cpp", fmBaseDiseases);
 USEFORM("database\toolforms\addDiseases.cpp", fmDis);
 USEFORM("algorithms\Alg1.cpp", fmAlg1);
+USEFORM("Diseases.cpp", fmDiseases);
 //---------------------------------------------------------------------------
 #include "database/classMySql.h"
 cMySql fmysql;
@@ -23,6 +24,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->Initialize();
 		SetApplicationMainFormOnTaskBar(Application, true);
 		Application->CreateForm(__classid(TfmMain), &fmMain);
+		Application->CreateForm(__classid(TfmDiseases), &fmDiseases);
 		Application->Run();
 	}
 	catch (Exception &exception)

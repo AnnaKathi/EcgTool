@@ -44,9 +44,11 @@ object fmBaseDiseases: TfmBaseDiseases
     MultiSelect = True
     ReadOnly = True
     RowSelect = True
+    PopupMenu = PopupMenuDiseases
     TabOrder = 0
     ViewStyle = vsReport
-    ExplicitTop = 69
+    OnClick = lvDiseasesClick
+    OnDblClick = lvDiseasesDblClick
   end
   object Panel4: TPanel
     Left = 0
@@ -97,6 +99,7 @@ object fmBaseDiseases: TfmBaseDiseases
       Width = 57
       Height = 21
       TabOrder = 0
+      OnExit = edDisIdVonExit
     end
     object edDisIdBis: TEdit
       Left = 206
@@ -104,6 +107,7 @@ object fmBaseDiseases: TfmBaseDiseases
       Width = 57
       Height = 21
       TabOrder = 1
+      OnExit = edDisIdVonExit
     end
     object edDisName: TEdit
       Left = 119
@@ -111,6 +115,8 @@ object fmBaseDiseases: TfmBaseDiseases
       Width = 144
       Height = 21
       TabOrder = 2
+      OnChange = edDisNameChange
+      OnExit = edDisIdVonExit
     end
   end
   object ActionListDiseases: TActionList
@@ -126,12 +132,27 @@ object fmBaseDiseases: TfmBaseDiseases
     end
     object acDisDel: TAction
       Caption = 'Erkrankung l'#246'schen'
+      Enabled = False
       OnExecute = acDisDelExecute
+    end
+    object acDisChange: TAction
+      Caption = 'Erkrankung &'#228'ndern'
+      Enabled = False
+      OnExecute = acDisChangeExecute
     end
   end
   object PopupMenuDiseases: TPopupMenu
     Left = 176
     Top = 80
+    object Erkrankunghinzufgen1: TMenuItem
+      Action = acDisAdd
+    end
+    object Erkrankungndern1: TMenuItem
+      Action = acDisChange
+    end
+    object Erkrankunglschen1: TMenuItem
+      Action = acDisDel
+    end
   end
   object tStartup: TTimer
     Enabled = False

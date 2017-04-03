@@ -3,7 +3,6 @@
 #pragma hdrstop
 
 #include "database/classMySql.h"
-#include "baseforms/baseDiseases.h"
 #include "Person.h"
 #include "DbPersonen.h"
 //---------------------------------------------------------------------------
@@ -62,11 +61,10 @@ void __fastcall TfmData::tStartupTimer(TObject *Sender)
 	ftools.PositionenToCombo(cbPosition);
 	ftools.FormLoad(this);
 
-	//TEST SnapTo
-	CreateDiseaseForm(this, Panel5);
+	fmDiseases = CreateDiseaseForm(this, pnDiseases);
 
 	ShowPeople();
-	ShowDiseases();
+	fmDiseases->ShowData();
 	ShowEcgData();
 	tStartup->Tag = 1; //Init beendet
 	edIdVon->SetFocus();
@@ -74,6 +72,7 @@ void __fastcall TfmData::tStartupTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmData::FormClose(TObject *Sender, TCloseAction &Action)
 	{
+	delete fmDiseases;
 	ftools.FormSave(this);
 	}
 //---------------------------------------------------------------------------
@@ -237,93 +236,6 @@ void TfmData::ShowPeople()
 	EndJob();
 	}
 //---------------------------------------------------------------------------
-void TfmData::ShowDiseases()
-	{
-	acRefresh->Enabled = false;
-
-	lvDiseases->Items->Clear();
-	lvDiseases->Items->BeginUpdate();
-
-	//Daten aus Datenbank anzeigen
-	if (!fmysql.diseases.loadTable())
-		{
-		Application->MessageBox(fmysql.error_msg.c_str(), "Fehler aufgetreten", MB_OK);
-		lvDiseases->Items->EndUpdate();
-		return;
-		}
-
-	StartJob(fmysql.diseases.num_rows);
-
-	TListItem* item;
-	String name;
-	while (fmysql.diseases.nextRow())
-		{
-		TickJob();
-
-		if (!CheckDiseaseFilter()) continue;
-
-		item = lvDiseases->Items->Add();
-		item->Data = (void*) fmysql.diseases.row.ident;
-		item->Caption = String(fmysql.diseases.row.ident);
-		item->SubItems->Add(fmysql.diseases.row.bez);
-		}
-
-	lvDiseases->Items->EndUpdate();
-	acRefresh->Enabled = true;
-	EndJob();
-	}
-//---------------------------------------------------------------------------
-void TfmData::ShowDiseasesOf(int person)
-	{
-	acRefresh->Enabled = false;
-
-	lvDiseases->Items->Clear();
-	lvDiseases->Items->BeginUpdate();
-
-	//Daten aus Datenbank anzeigen
-	if (!fmysql.diseases.loadTable()) //todo loadByPerson einbauen
-		{
-		Application->MessageBox(fmysql.error_msg.c_str(), "Fehler aufgetreten", MB_OK);
-		lvDiseases->Items->EndUpdate();
-		return;
-		}
-
-	StartJob(fmysql.diseases.num_rows);
-
-	sarray_t dis;
-	dis = fmysql.people.getDiseasesOf(person);
-
-	TListItem* item;
-	String name;
-	while (fmysql.diseases.nextRow())
-		{
-		TickJob();
-
-		bool found = false;
-		for (sarray_itr itr = dis.begin(); itr != dis.end(); itr++)
-			{
-			slist_t v = itr->second;
-			if (fmysql.diseases.row.ident == v[0].ToInt())
-				{
-				found = true;
-				break;
-				}
-			}
-
-		if (!found) continue;
-		if (!CheckDiseaseFilter()) continue;
-
-		item = lvDiseases->Items->Add();
-		item->Data = (void*) fmysql.diseases.row.ident;
-		item->Caption = String(fmysql.diseases.row.ident);
-		item->SubItems->Add(fmysql.diseases.row.bez);
-		}
-
-	lvDiseases->Items->EndUpdate();
-	acRefresh->Enabled = true;
-	EndJob();
-	}
-//---------------------------------------------------------------------------
 //-- build filters ----------------------------------------------------------
 //---------------------------------------------------------------------------
 bool TfmData::BuildEcgFilter()
@@ -344,17 +256,6 @@ bool TfmData::BuildPeopleFilter()
 	ffpeople.identBis = edPeopleIdBis->Text.ToIntDef(-1);
 
 	ffpeople.name = edPeopleName->Text;
-	//...todo
-
-	return true;
-	}
-//---------------------------------------------------------------------------
-bool TfmData::BuildDiseaseFilter()
-	{
-	ffdisease.identVon = edDisIdVon->Text.ToIntDef(-1);
-	ffdisease.identBis = edDisIdBis->Text.ToIntDef(-1);
-
-	ffdisease.name = edDisName->Text;
 	//...todo
 
 	return true;
@@ -400,23 +301,6 @@ bool TfmData::CheckPeopleFilter()
 	return true;
 	}
 //---------------------------------------------------------------------------
-bool TfmData::CheckDiseaseFilter()
-	{
-	int id = fmysql.diseases.row.ident;
-	if (ffdisease.identVon > 0 && id < ffdisease.identVon) return false;
-	if (ffdisease.identBis > 0 && id > ffdisease.identBis) return false;
-
-	if (ffdisease.name != "")
-		{
-		//enthält-Suche
-		String nn = fmysql.diseases.getNameOf(id).LowerCase();
-		if (nn.Pos(ffdisease.name.LowerCase()) <= 0)
-			return false;
-		}
-
-	return true;
-	}
-//---------------------------------------------------------------------------
 /***************************************************************************/
 /********************   Actions   ******************************************/
 /***************************************************************************/
@@ -434,7 +318,7 @@ void __fastcall TfmData::acRefreshExecute(TObject *Sender)
 	acPeopleDisselectExecute(Sender);
 
 	ShowEcgData();
-	ShowDiseases();
+	fmDiseases->ShowData();
 	ShowPeople();
 	}
 //---------------------------------------------------------------------------
@@ -450,13 +334,6 @@ void __fastcall TfmData::acPeopleFilterExecute(TObject *Sender)
 	if (tStartup->Tag == 0) return; //Init noch nicht ausgeführt oder beendet
 	if (BuildPeopleFilter())
 		ShowPeople();
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmData::acDisFilterExecute(TObject *Sender)
-	{
-	if (tStartup->Tag == 0) return; //Init noch nicht ausgeführt oder beendet
-	if (BuildDiseaseFilter())
-		ShowDiseases();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmData::acPeopleDelExecute(TObject *Sender)
@@ -509,10 +386,7 @@ void __fastcall TfmData::acPeopleSelectExecute(TObject *Sender)
 	TListItem* item = lvPeople->Selected;
 	int person = (int)item->Data;
 
-	edDisIdVon->Enabled = false;
-	edDisIdBis->Enabled = false;
-	edDisName->Enabled  = false;
-	ShowDiseasesOf(person);
+	fmDiseases->ShowDataOfPerson(person);
 
 	edEcgName->Text = fmysql.people.getNameOf(person);
 	edEcgName->Enabled = false;
@@ -529,15 +403,11 @@ void __fastcall TfmData::acPeopleDisselectExecute(TObject *Sender)
 	//Auswahl aufheben
 	lvPeople->Selected = false;
 
-	edDisIdVon->Enabled = true;
-	edDisIdBis->Enabled = true;
-	edDisName->Enabled  = true;
-
 	edEcgName->Text = "";
 	edEcgName->Enabled = true;
 
 	ShowEcgData();
-	ShowDiseases();
+	fmDiseases->ShowData();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmData::acEcgDelExecute(TObject *Sender)
@@ -670,22 +540,6 @@ void __fastcall TfmData::edPeopleNameExit(TObject *Sender)
 void __fastcall TfmData::edPeopleNameKeyPress(TObject *Sender, char &Key)
 	{
 	acPeopleFilterExecute(Sender);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmData::edDisIdVonExit(TObject *Sender)
-	{
-	acDisFilterExecute(Sender);
-	}
-//---------------------------------------------------------------------------
-
-void __fastcall TfmData::edDisIdVonKeyPress(TObject *Sender, char &Key)
-	{
-	acDisFilterExecute(Sender);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmData::edDisNameChange(TObject *Sender)
-	{
-	acDisFilterExecute(Sender);
 	}
 //---------------------------------------------------------------------------
 

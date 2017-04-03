@@ -14,6 +14,7 @@
 #include <Menus.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
+#include "baseforms/baseDiseases.h"
 //---------------------------------------------------------------------------
 struct sFilterEcg
 	{
@@ -32,13 +33,6 @@ struct sFilterPeople
 	String		name;
 	};
 //---------------------------------------------------------------------------
-struct sFilterDisease
-	{
-	int			identVon;
-	int			identBis;
-	String		name;
-	};
-//---------------------------------------------------------------------------
 class TfmData : public TForm
 {
 private:
@@ -47,8 +41,8 @@ private:
 
 	sFilterEcg		ffecg;
 	sFilterPeople 	ffpeople;
-	sFilterDisease 	ffdisease;
 
+    TfmBaseDiseases*	fmDiseases;
 
 	inline void StartJob(int max);
 	inline void TickJob(int tick = 1);
@@ -56,9 +50,6 @@ private:
 
 	void		ShowPeople();
 
-	void		ShowDiseases();
-	void		ShowDiseasesOf(int person);
-	
 	void 		ShowEcgData();
 	void		ShowEcgOf(int person);
 
@@ -66,10 +57,8 @@ private:
 	bool		bFilter;
 	bool		BuildEcgFilter();
 	bool		BuildPeopleFilter();
-	bool		BuildDiseaseFilter();
 	bool		CheckEcgFilter();
 	bool		CheckPeopleFilter();
-	bool		CheckDiseaseFilter();
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -124,27 +113,9 @@ __published:	// IDE-verwaltete Komponenten
 	TMenuItem *Auswahlaufheben1;
 	TAction *acPeopleFilter;
 	TAction *acEcgFilter;
-	TPanel *Panel3;
-	TBevel *Bevel4;
-	TPanel *Panel4;
-	TLabel *Label10;
-	TLabel *Label11;
-	TLabel *Label12;
-	TLabel *Label13;
-	TEdit *edDisIdVon;
-	TEdit *edDisIdBis;
-	TEdit *edDisName;
-	TListView *lvDiseases;
+	TPanel *pnDiseases;
 	TSplitter *Splitter2;
-	TActionList *ActionListDiseases;
-	TPopupMenu *PopupMenuDiseases;
-	TAction *acDisFilter;
-	TAction *acDisAdd;
-	TAction *acDisDel;
-	TAction *acDisSelect;
-	TAction *acDisSisselect;
 	TLabel *Label14;
-	TLabel *Label15;
 	TLabel *Label16;
 	TAction *acPeopleChange;
 	TMenuItem *Personndern1;
@@ -175,10 +146,6 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall edPeopleNameKeyPress(TObject *Sender, char &Key);
 	void __fastcall acPeopleFilterExecute(TObject *Sender);
 	void __fastcall acEcgFilterExecute(TObject *Sender);
-	void __fastcall edDisIdVonExit(TObject *Sender);
-	void __fastcall edDisIdVonKeyPress(TObject *Sender, char &Key);
-	void __fastcall edDisNameChange(TObject *Sender);
-	void __fastcall acDisFilterExecute(TObject *Sender);
 	void __fastcall acDisSelectExecute(TObject *Sender);
 	void __fastcall acPeopleChangeExecute(TObject *Sender);
 

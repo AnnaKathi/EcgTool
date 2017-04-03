@@ -350,7 +350,7 @@ object fmData: TfmData
         Width = 106
         Height = 21
         Style = csDropDownList
-        ItemHeight = 0
+        ItemHeight = 13
         TabOrder = 3
         OnChange = cbPositionChange
       end
@@ -400,132 +400,13 @@ object fmData: TfmData
       OnClick = lvDataClick
     end
   end
-  object Panel3: TPanel
+  object pnDiseases: TPanel
     Left = 276
     Top = 49
     Width = 273
     Height = 645
     Align = alLeft
     TabOrder = 4
-    object Bevel4: TBevel
-      Left = 1
-      Top = 82
-      Width = 271
-      Height = 8
-      Align = alTop
-      Shape = bsTopLine
-      ExplicitLeft = 176
-      ExplicitTop = 176
-      ExplicitWidth = 50
-    end
-    object Panel4: TPanel
-      Left = 1
-      Top = 1
-      Width = 271
-      Height = 81
-      Align = alTop
-      BevelOuter = bvNone
-      TabOrder = 0
-      object Label10: TLabel
-        Left = 8
-        Top = 6
-        Width = 29
-        Height = 13
-        Caption = 'Filter'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold, fsUnderline]
-        ParentFont = False
-      end
-      object Label11: TLabel
-        Left = 64
-        Top = 8
-        Width = 47
-        Height = 13
-        Caption = 'Ident von'
-      end
-      object Label12: TLabel
-        Left = 184
-        Top = 8
-        Width = 13
-        Height = 13
-        Caption = 'bis'
-      end
-      object Label13: TLabel
-        Left = 64
-        Top = 34
-        Width = 21
-        Height = 13
-        Caption = 'Bez.'
-      end
-      object Label15: TLabel
-        Left = 88
-        Top = 59
-        Width = 89
-        Height = 16
-        Caption = 'Erkrankungen'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold, fsUnderline]
-        ParentFont = False
-      end
-      object edDisIdVon: TEdit
-        Left = 119
-        Top = 5
-        Width = 57
-        Height = 21
-        TabOrder = 0
-        OnExit = edDisIdVonExit
-        OnKeyPress = edDisIdVonKeyPress
-      end
-      object edDisIdBis: TEdit
-        Left = 206
-        Top = 6
-        Width = 57
-        Height = 21
-        TabOrder = 1
-        OnExit = edDisIdVonExit
-        OnKeyPress = edDisIdVonKeyPress
-      end
-      object edDisName: TEdit
-        Left = 119
-        Top = 32
-        Width = 144
-        Height = 21
-        TabOrder = 2
-        OnChange = edDisNameChange
-        OnExit = edDisIdVonExit
-        OnKeyPress = edDisIdVonKeyPress
-      end
-    end
-    object lvDiseases: TListView
-      Left = 1
-      Top = 90
-      Width = 271
-      Height = 554
-      Align = alClient
-      Columns = <
-        item
-          Caption = 'Ident'
-        end
-        item
-          Caption = 'Bezeichnung'
-          Width = 150
-        end>
-      GridLines = True
-      MultiSelect = True
-      ReadOnly = True
-      RowSelect = True
-      PopupMenu = PopupMenuDiseases
-      TabOrder = 1
-      ViewStyle = vsReport
-      OnClick = lvPeopleClick
-      OnDblClick = lvPeopleDblClick
-    end
   end
   object Panel5: TPanel
     Left = 1061
@@ -630,30 +511,5 @@ object fmData: TfmData
       Caption = 'EKG-Daten filtern'
       OnExecute = acEcgFilterExecute
     end
-  end
-  object ActionListDiseases: TActionList
-    Left = 296
-    Top = 200
-    object acDisFilter: TAction
-      Caption = 'Erkrankungen filtern'
-      OnExecute = acDisFilterExecute
-    end
-    object acDisAdd: TAction
-      Caption = 'Erkrankung hinzuf'#252'gen'
-    end
-    object acDisDel: TAction
-      Caption = 'Erkrankung l'#246'schen'
-    end
-    object acDisSelect: TAction
-      Caption = 'Erkrankungen ausw'#228'hlen'
-      OnExecute = acDisSelectExecute
-    end
-    object acDisSisselect: TAction
-      Caption = 'Auswahl aufheben'
-    end
-  end
-  object PopupMenuDiseases: TPopupMenu
-    Left = 328
-    Top = 200
   end
 end
