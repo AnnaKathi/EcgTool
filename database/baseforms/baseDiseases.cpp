@@ -4,21 +4,22 @@
 
 #include <stdio.h>
 
+#include "../classMySql.h"
 #include "baseDiseases.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TfmBaseDiseases *fmBaseDiseases;
+extern cMySql fmysql;
 //---------------------------------------------------------------------------
-bool CreateDiseaseForm(TForm* caller, TWinControl* container, cMySql& mysql)
+bool CreateDiseaseForm(TForm* caller, TWinControl* container)
 	{
-	return new TfmBaseDiseases(caller, container, mysql);
+	return new TfmBaseDiseases(caller, container);
 	}
 //---------------------------------------------------------------------------
-__fastcall TfmBaseDiseases::TfmBaseDiseases(TComponent* Owner, TWinControl* Container, cMySql& Mysql)
+__fastcall TfmBaseDiseases::TfmBaseDiseases(TComponent* Owner, TWinControl* Container)
 	: TForm(Owner)
 	{
-	fmysql = &Mysql;
 	if (Container)
 		snapTo(Container, alClient);
 	}
@@ -89,22 +90,22 @@ bool TfmBaseDiseases::ShowData()
 	lvDiseases->Items->Clear();
 	lvDiseases->Items->BeginUpdate();
 
-	if (!fmysql->diseases.loadTable("Bez ASC"))
+	if (!fmysql.diseases.loadTable("Bez ASC"))
 		{
 		MsgBox("Die Daten (Erkrankungen) konnten nicht geladen werden. "
-			"Die Datenbank  meldet: %s", fmysql->diseases.error_msg);
+			"Die Datenbank  meldet: %s", fmysql.diseases.error_msg);
 		return false;
 		}
 
 	TListItem* item;
-	while (fmysql->diseases.nextRow())
+	while (fmysql.diseases.nextRow())
 		{
 		//if (!CheckDiseaseFilter()) continue;
 
 		item = lvDiseases->Items->Add();
-		item->Data = (void*) fmysql->diseases.row.ident;
-		item->Caption = String(fmysql->diseases.row.ident);
-		item->SubItems->Add(fmysql->diseases.row.bez);
+		item->Data = (void*) fmysql.diseases.row.ident;
+		item->Caption = String(fmysql.diseases.row.ident);
+		item->SubItems->Add(fmysql.diseases.row.bez);
 		}
 
 	lvDiseases->Items->EndUpdate();

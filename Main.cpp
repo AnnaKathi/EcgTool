@@ -2,6 +2,7 @@
 #include <vcl.h>
 #pragma hdrstop
 
+#include "database/classMySql.h"
 #include "database/DbPersonen.h"
 #include "EcgView.h"
 #include "Session.h"
@@ -10,6 +11,7 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TfmMain *fmMain;
+extern cMySql fmysql;
 //---------------------------------------------------------------------------
 __fastcall TfmMain::TfmMain(TComponent* Owner)
 	: TForm(Owner)
@@ -29,11 +31,22 @@ void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
 	ftools.FormLoad(this);
+
+	if (!fmysql.open())
+		{
+		String msg =
+			"Die MySql-Datenbank 'ecg' konnte nicht geöffnet werden."
+			"Die Funktion meldet: " + fmysql.error_msg;
+		Application->MessageBox(msg.c_str(), "Fehler beim Öffnen der Datenbank", MB_OK);
+		Close();
+		return;
+		}
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::FormClose(TObject *Sender, TCloseAction &Action)
 	{
 	ftools.FormSave(this);
+	fmysql.close();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

@@ -13,6 +13,9 @@ USEFORM("database\baseforms\baseDiseases.cpp", fmBaseDiseases);
 USEFORM("database\toolforms\addDiseases.cpp", fmDis);
 USEFORM("algorithms\Alg1.cpp", fmAlg1);
 //---------------------------------------------------------------------------
+#include "database/classMySql.h"
+cMySql fmysql;
+//---------------------------------------------------------------------------
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	try

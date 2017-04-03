@@ -2,6 +2,7 @@
 #include <vcl.h>
 #pragma hdrstop
 
+#include "database/classMySql.h"
 #include "baseforms/baseDiseases.h"
 #include "Person.h"
 #include "DbPersonen.h"
@@ -9,6 +10,7 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TfmData *fmData;
+extern cMySql fmysql;
 //---------------------------------------------------------------------------
 bool DlgDatabasePersonen(TForm* Papa)
 	{
@@ -60,20 +62,8 @@ void __fastcall TfmData::tStartupTimer(TObject *Sender)
 	ftools.PositionenToCombo(cbPosition);
 	ftools.FormLoad(this);
 
-	Cursor = crHourGlass;
-	if (!fmysql.open())
-		{
-		String msg =
-			"Die MySql-Datenbank 'ecg' konnte nicht geöffnet werden."
-			"Die Funktion meldet: " + fmysql.error_msg;
-		Application->MessageBox(msg.c_str(), "Fehler beim Öffnen der Datenbank", MB_OK);
-		Close();
-		return;
-		}
-	Cursor = crDefault;
-
 	//TEST SnapTo
-	CreateDiseaseForm(this, Panel5, fmysql);
+	CreateDiseaseForm(this, Panel5);
 
 	ShowPeople();
 	ShowDiseases();
@@ -84,7 +74,6 @@ void __fastcall TfmData::tStartupTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmData::FormClose(TObject *Sender, TCloseAction &Action)
 	{
-	fmysql.close();
 	ftools.FormSave(this);
 	}
 //---------------------------------------------------------------------------

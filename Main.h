@@ -10,9 +10,9 @@
 #include <ActnList.hpp>
 #include <Buttons.hpp>
 #include <Menus.hpp>
+#include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
-#include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
 class TfmMain : public TForm
 {

@@ -13,7 +13,6 @@ object fmSession: TfmSession
   KeyPreview = True
   OldCreateOrder = False
   Position = poDesktopCenter
-  OnClose = FormClose
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   PixelsPerInch = 96

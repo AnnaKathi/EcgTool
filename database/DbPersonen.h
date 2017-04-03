@@ -14,7 +14,6 @@
 #include <Menus.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
-#include "database/classMySql.h"
 //---------------------------------------------------------------------------
 struct sFilterEcg
 	{
@@ -45,7 +44,6 @@ class TfmData : public TForm
 private:
 	TIniFile*		Ini;
 	cTools			ftools;
-	cMySql			fmysql;
 
 	sFilterEcg		ffecg;
 	sFilterPeople 	ffpeople;

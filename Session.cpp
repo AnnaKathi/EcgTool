@@ -6,12 +6,14 @@
 #include <systdate.h>
 
 #include "RequestBox.h"
-#include "database/Person.h" 
+#include "database/classMySql.h"
+#include "database/Person.h"
 #include "Session.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TfmSession *fmSession;
+extern cMySql fmysql;
 //---------------------------------------------------------------------------
 bool DlgNewSession(TForm* Papa)
 	{
@@ -50,23 +52,8 @@ void __fastcall TfmSession::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
 
-	if (!fmysql.open())
-		{
-		String msg =
-			"Die MySql-Datenbank 'ecg' konnte nicht geöffnet werden."
-			"Die Funktion meldet: " + fmysql.error_msg;
-		Application->MessageBox(msg.c_str(), "Fehler beim Öffnen der Datenbank", MB_OK);
-		Close();
-		return;
-		}
-
 	edStamp->Text = getNow();
 	fmysql.people.listInCombo(cbPerson, 1);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmSession::FormClose(TObject *Sender, TCloseAction &Action)
-	{
-	fmysql.close();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

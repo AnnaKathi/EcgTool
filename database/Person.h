@@ -10,17 +10,14 @@
 #include <ExtCtrls.hpp>
 #include <Buttons.hpp>
 #include <ComCtrls.hpp>
-//---------------------------------------------------------------------------
-#include "classMySql.h"
 #include <Menus.hpp>
+//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 class TfmPerson : public TForm
 {
 private:
 	bool		bNewPerson;
 	int			iPerson;
-
-	cMySql		fmysql;
 
 	bool		SaveData();
 

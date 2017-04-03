@@ -4,11 +4,13 @@
 
 #include <stdio.h>
 
+#include "classMySql.h"
 #include "Person.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TfmPerson *fmPerson;
+extern cMySql fmysql;
 //---------------------------------------------------------------------------
 bool DlgPersonNew(TForm* Papa)
 	{
@@ -63,16 +65,6 @@ void __fastcall TfmPerson::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
 
-	if (!fmysql.open())
-		{
-		String msg =
-			"Die MySql-Datenbank 'ecg' konnte nicht geöffnet werden."
-			"Die Funktion meldet: " + fmysql.error_msg;
-		Application->MessageBox(msg.c_str(), "Fehler beim Öffnen der Datenbank", MB_OK);
-		Close();
-		return;
-		}
-
 	fmysql.diseases.listInCombo(cbDiseases, 1);
 	
 	lvDiseases->Items->Clear();
@@ -118,7 +110,7 @@ void __fastcall TfmPerson::tStartupTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmPerson::FormClose(TObject *Sender, TCloseAction &Action)
 	{
-	fmysql.close();
+	//
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

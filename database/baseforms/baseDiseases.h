@@ -11,14 +11,11 @@
 #include <ActnList.hpp>
 #include <Menus.hpp>
 //---------------------------------------------------------------------------
-#include "../classMySql.h"
 //---------------------------------------------------------------------------
 class TfmBaseDiseases : public TForm
 {
 private:
 	void 		snapTo(TWinControl* container, TAlign align);
-
-	cMySql*		fmysql;
 
 	void 		MsgBox(char* msg, ...);
 
@@ -48,12 +45,12 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall tStartupTimer(TObject *Sender);
 
 public:
-	__fastcall TfmBaseDiseases(TComponent* Owner, TWinControl* Container, cMySql& Mysql);
+	__fastcall TfmBaseDiseases(TComponent* Owner, TWinControl* Container);
 
 	bool		ShowData();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmBaseDiseases *fmBaseDiseases;
-bool CreateDiseaseForm(TForm* caller, TWinControl* container, cMySql& mysql);
+bool CreateDiseaseForm(TForm* caller, TWinControl* container);
 //---------------------------------------------------------------------------
 #endif
