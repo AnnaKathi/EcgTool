@@ -45,6 +45,7 @@ __published:	// IDE-verwaltete Komponenten
 	TAction *acDisAdd;
 	TAction *acDisDel;
 	TButton *Button2;
+	TComboBox *cbDiseases;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -53,6 +54,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acSaveExecute(TObject *Sender);
 	void __fastcall acDisAddExecute(TObject *Sender);
 	void __fastcall acDisDelExecute(TObject *Sender);
+	void __fastcall cbDiseasesKeyPress(TObject *Sender, char &Key);
 
 public:
 	__fastcall TfmPerson(TComponent* Owner);

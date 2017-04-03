@@ -58,6 +58,7 @@ void __fastcall TfmData::tStartupTimer(TObject *Sender)
 	ftools.PositionenToCombo(cbPosition);
 	ftools.FormLoad(this);
 
+	Cursor = crHourGlass;
 	if (!fmysql.open())
 		{
 		String msg =
@@ -67,10 +68,12 @@ void __fastcall TfmData::tStartupTimer(TObject *Sender)
 		Close();
 		return;
 		}
+	Cursor = crDefault;
 
 	ShowPeople();
 	ShowDiseases();
 	ShowEcgData();
+	tStartup->Tag = 1; //Init beendet
 	edIdVon->SetFocus();
 	}
 //---------------------------------------------------------------------------
@@ -431,24 +434,28 @@ void __fastcall TfmData::acCloseExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmData::acRefreshExecute(TObject *Sender)
 	{
+	if (tStartup->Tag == 0) return; //Init noch nicht ausgeführt oder beendet
 	ShowEcgData();
 	ShowPeople();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmData::acEcgFilterExecute(TObject *Sender)
 	{
+	if (tStartup->Tag == 0) return; //Init noch nicht ausgeführt oder beendet
 	if (BuildEcgFilter())
 		ShowEcgData();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmData::acPeopleFilterExecute(TObject *Sender)
 	{
+	if (tStartup->Tag == 0) return; //Init noch nicht ausgeführt oder beendet
 	if (BuildPeopleFilter())
 		ShowPeople();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmData::acDisFilterExecute(TObject *Sender)
 	{
+	if (tStartup->Tag == 0) return; //Init noch nicht ausgeführt oder beendet
 	if (BuildDiseaseFilter())
 		ShowDiseases();
 	}

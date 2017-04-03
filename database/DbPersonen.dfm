@@ -95,21 +95,13 @@ object fmData: TfmData
       Anchors = [akTop, akRight]
       TabOrder = 0
     end
-    object Button1: TButton
-      Left = 8
-      Top = 6
-      Width = 75
-      Height = 25
-      Action = acRefresh
-      TabOrder = 1
-    end
     object pbJob: TProgressBar
-      Left = 96
+      Left = 8
       Top = 8
-      Width = 1165
+      Width = 1253
       Height = 17
       Anchors = [akLeft, akTop, akRight]
-      TabOrder = 2
+      TabOrder = 1
       Visible = False
     end
   end
@@ -242,8 +234,6 @@ object fmData: TfmData
       ViewStyle = vsReport
       OnClick = lvPeopleClick
       OnDblClick = lvPeopleDblClick
-      ExplicitTop = 121
-      ExplicitHeight = 523
     end
   end
   object pnEcgData: TPanel
@@ -408,8 +398,6 @@ object fmData: TfmData
       TabOrder = 1
       ViewStyle = vsReport
       OnClick = lvDataClick
-      ExplicitTop = 121
-      ExplicitHeight = 523
     end
   end
   object Panel3: TPanel
@@ -537,8 +525,6 @@ object fmData: TfmData
       ViewStyle = vsReport
       OnClick = lvPeopleClick
       OnDblClick = lvPeopleDblClick
-      ExplicitTop = 121
-      ExplicitHeight = 523
     end
   end
   object tStartup: TTimer

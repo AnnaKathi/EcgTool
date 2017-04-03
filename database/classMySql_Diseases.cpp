@@ -22,16 +22,13 @@ cMySqlDiseases::~cMySqlDiseases()
 /******************   Funktionen: laden   **********************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-bool cMySqlDiseases::loadTable()
+bool cMySqlDiseases::loadTable(String order) //order ist vorbesetzt mit ""
 	{
-	String q = "SELECT * FROM " + String(TABLE);
-	if (!fwork->query(q))
+	if (!fwork->loadTable(TABLE, order))
 		return fail(fwork->error_code, fwork->error_msg);
-	else
-		{
-		fres = fwork->getResult();
-		return ok();
-		}
+
+	fres = fwork->getResult();
+	return ok();
 	}
 //---------------------------------------------------------------------------
 bool cMySqlDiseases::nextRow()
@@ -116,6 +113,31 @@ sarray_t cMySqlDiseases::getNamesOf(sarray_t idents) //Liste mit Bez. auffüllen
 		}
 
 	return res;
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   Funktionen: Daten anzeigen   *************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+bool cMySqlDiseases::listInCombo(TComboBox* cb, int mode) //mode ist mit 0 vorbesetzt
+	{
+	//Alle Erkrankungen aus der DB in der ComboBox anzeigen,
+	//der mode bestimmt was angezeigt wird
+	if (!loadTable("Bez ASC"))
+		return fail(fwork->error_code, fwork->error_msg);
+
+	cb->Items->Clear();
+	String dis;
+	while (nextRow())
+		{
+		//todo Kennzeichnung in DB aufnehmen und hier mit einbauen
+		if (mode == 1)  dis = String(fdata.bez) + " (" + String(fdata.ident) + ")";
+		else 			dis = String(fdata.bez);
+
+		cb->Items->AddObject(dis, (TObject*)fdata.ident);
+		}
+
+	return ok();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

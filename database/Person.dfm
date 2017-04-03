@@ -3,7 +3,7 @@ object fmPerson: TfmPerson
   Top = 0
   BorderStyle = bsToolWindow
   Caption = 'Person anlegen'
-  ClientHeight = 380
+  ClientHeight = 421
   ClientWidth = 288
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -31,7 +31,7 @@ object fmPerson: TfmPerson
   end
   object Bevel2: TBevel
     Left = 0
-    Top = 335
+    Top = 376
     Width = 288
     Height = 4
     Align = alBottom
@@ -55,21 +55,21 @@ object fmPerson: TfmPerson
   end
   object Label3: TLabel
     Left = 16
-    Top = 120
+    Top = 137
     Width = 66
     Height = 13
     Caption = 'Erkrankungen'
   end
   object SpeedButton1: TSpeedButton
     Left = 49
-    Top = 144
+    Top = 185
     Width = 33
     Height = 22
     Action = acDisAdd
   end
   object SpeedButton2: TSpeedButton
     Left = 49
-    Top = 172
+    Top = 213
     Width = 33
     Height = 22
     Action = acDisDel
@@ -83,7 +83,6 @@ object fmPerson: TfmPerson
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 467
     DesignSize = (
       288
       41)
@@ -105,20 +104,17 @@ object fmPerson: TfmPerson
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 451
     end
   end
   object Panel1: TPanel
     Left = 0
-    Top = 339
+    Top = 380
     Width = 288
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = 192
-    ExplicitTop = 336
-    ExplicitWidth = 185
+    ExplicitTop = 339
     DesignSize = (
       288
       41)
@@ -130,7 +126,6 @@ object fmPerson: TfmPerson
       Action = acClose
       Anchors = [akTop, akRight]
       TabOrder = 0
-      ExplicitLeft = 420
     end
     object Button2: TButton
       Left = 7
@@ -157,7 +152,7 @@ object fmPerson: TfmPerson
   end
   object lvDiseases: TListView
     Left = 96
-    Top = 120
+    Top = 161
     Width = 180
     Height = 201
     Columns = <
@@ -173,6 +168,15 @@ object fmPerson: TfmPerson
     RowSelect = True
     TabOrder = 4
     ViewStyle = vsReport
+  end
+  object cbDiseases: TComboBox
+    Left = 96
+    Top = 134
+    Width = 180
+    Height = 21
+    ItemHeight = 13
+    TabOrder = 5
+    OnKeyPress = cbDiseasesKeyPress
   end
   object tStartup: TTimer
     Enabled = False

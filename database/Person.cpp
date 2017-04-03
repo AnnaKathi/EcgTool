@@ -73,6 +73,8 @@ void __fastcall TfmPerson::tStartupTimer(TObject *Sender)
 		return;
 		}
 
+	fmysql.diseases.listInCombo(cbDiseases, 1);
+	
 	lvDiseases->Items->Clear();
 	if (bNewPerson)
 		{
@@ -144,8 +146,25 @@ bool TfmPerson::SaveData()
 		return false;
 		}
 
-	else
-		return true;
+	//todo Erkrankungen speichern
+	/*
+	int dis;
+	bool fehler = false;
+	TListItem* item;
+	for (int i = 0; i < lvDiseases->Items->Count; i++)
+		{
+		item = lvDiseases->Items->Item[i];
+		dis = (int)item->Data;
+		if (!fmysql.people.addDisease(iPerson, dis))
+			{
+			//todo Fehlermeldung
+			break;
+			}
+		}
+	if (fehler) return false;
+	*/
+
+	return true;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -183,6 +202,24 @@ void __fastcall TfmPerson::FormKeyPress(TObject *Sender, char &Key)
 		{
 		Key = 0;
 		acCloseExecute(Sender);
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmPerson::cbDiseasesKeyPress(TObject *Sender, char &Key)
+	{
+	if (Key == VK_RETURN)
+		{
+		int n = cbDiseases->ItemIndex;
+
+		int id = (int)cbDiseases->Items->Objects[n];
+		String dis = cbDiseases->Items->Strings[n];
+
+		TListItem* item = lvDiseases->Items->Add();
+		item->Data = (void*) id;
+		item->Caption = String(id);
+		item->SubItems->Add(dis);
+		cbDiseases->DeleteSelected();
+		cbDiseases->Text = "";
 		}
 	}
 //---------------------------------------------------------------------------

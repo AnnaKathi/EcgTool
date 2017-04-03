@@ -79,7 +79,6 @@ __published:	// IDE-verwaltete Komponenten
 	TTimer *tStartup;
 	TPanel *Panel1;
 	TButton *btClose;
-	TButton *Button1;
 	TActionList *ActionList;
 	TAction *acClose;
 	TAction *acRefresh;

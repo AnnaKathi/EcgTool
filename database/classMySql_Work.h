@@ -18,10 +18,13 @@ public:
 	bool 		open();
 	bool		close();
 
-	bool		isReady();
+	bool		isReady();       //wurde open() erfolgreich durchgeführt?
 	bool		query(String q); //führt ein store_result durch
-	bool		send(String q);  //führt nur das Kommando aus (delete) ohne store_result
-	MYSQL_RES*  getResult();
+	bool		send(String q);  //führt nur das Kommando aus (z.B. delete) ohne store_result
+	MYSQL_RES*  getResult();     //Resultate zurückgeben
+
+	//-- Daten laden
+	bool		loadTable(String tab, String order = "");
 
 __property int num_rows = { read=get_num_rows };
 

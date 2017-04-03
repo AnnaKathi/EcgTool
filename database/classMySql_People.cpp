@@ -53,16 +53,11 @@ bool cMySqlPeople::get(int person)
 //---------------------------------------------------------------------------
 bool cMySqlPeople::loadTable(String order) //order ist vorbesetzt mit ""
 	{
-	String q = "SELECT * FROM " + String(TABLE);
-	if (order != "") q += " ORDER BY " + order;
-	
-	if (!fwork->query(q))
+	if (!fwork->loadTable(TABLE, order))
 		return fail(fwork->error_code, fwork->error_msg);
-	else
-		{
-		fres = fwork->getResult();
-		return ok();
-		}
+
+	fres = fwork->getResult();
+	return ok();
 	}
 //---------------------------------------------------------------------------
 bool cMySqlPeople::nextRow()
@@ -100,7 +95,7 @@ bool cMySqlPeople::insert(sPeople data)
 	if (!fwork->send(q))
 		return fail(fwork->error_code, fwork->error_msg);
 	else
-		return ok();
+    	return ok();
 	}
 //---------------------------------------------------------------------------
 bool cMySqlPeople::update(sPeople data)
@@ -115,6 +110,35 @@ bool cMySqlPeople::update(sPeople data)
 		return fail(fwork->error_code, fwork->error_msg);
 	else
 		return ok();
+	}
+//---------------------------------------------------------------------------
+bool cMySqlPeople::addDisease(int person, int disease)
+	{
+	String q = "SELECT * FROM " + String(SUBDIS) + " WHERE";
+	q+= " PersIdent = " + String(person) + " AND ";
+	q+= " DisIdent = "  + String(disease);
+
+	if (!fwork->query(q))
+		return fail(fwork->error_code, fwork->error_msg);
+
+	if (fwork->num_rows > 0)
+		{
+		//die Erkrankung ist bei der person bereits hinterlegt
+		//nichts machen, einfach rausspringen
+		return true;
+		}
+	else
+		{
+		//Erkrankung zur Person abspeichern
+		//insert into subject_disease (PersIdent, DisIdent) VALUES (1, 7)
+		q = "INSERT INTO " + String(SUBDIS) + "(PersIdent, DisIdent) ";
+		q+= "VALUES (" + String(person) + "," + String(disease) + ")";
+
+		if (!fwork->send(q))
+			return fail(fwork->error_code, fwork->error_msg);
+		}
+		
+	return true;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -186,7 +210,7 @@ bool cMySqlPeople::listInCombo(TComboBox* cb, int mode) //mode ist mit 0 vorbese
 		if (mode == 1)  pers = String(fdata.nachname) + ", " + String(fdata.vorname);
 		else 			pers = String(fdata.vorname) + " " + String(fdata.nachname);
 
-		cb->Items->Add(pers);
+		cb->Items->AddObject(pers, (TObject*)fdata.ident);
 		}
 
 	return ok();

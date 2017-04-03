@@ -3,6 +3,7 @@
 #define classMySql_DiseasesH
 //---------------------------------------------------------------------------
 #include <classes.hpp>
+#include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "../basics/classBase.h"
 #include "classMySql_Work.h"
@@ -20,16 +21,21 @@ public:
 	~cMySqlDiseases();
 
 	//-- Daten laden
-	bool	loadTable(); //lädt die ganze Tabelle
+	bool	loadTable(String order = ""); //lädt die ganze Tabelle
 	bool	nextRow();
 
 	//-- Daten speichern
 	bool 	insert(sDiseases data);
 	bool 	update(sDiseases data);
 
+	//-- Daten feststellen
 	String 	getNameOf(int disease); //eine Bezeichnugn einer Erkrankung feststellen
 	sarray_t getNamesOf(sarray_t idents); //Liste mit Bez. auffüllen
 
+	//-- Daten anzeigen
+	bool	listInCombo(TComboBox* cb, int mode = 0);
+
+	//-- Daten löschen
 	bool	deleteByIdent(int ident);
 
 __property sDiseases row = { read=get_data };

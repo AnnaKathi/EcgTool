@@ -31,6 +31,7 @@ public:
 	//-- Daten speichern
 	bool	insert(sPeople data);
 	bool	update(sPeople data);
+	bool	addDisease(int person, int disease);
 	
 	//-- Daten feststellen
 	String	 getNameOf(int person);
