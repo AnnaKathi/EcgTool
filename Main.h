@@ -19,11 +19,13 @@ class TfmMain : public TForm
 private:
 	cTools		ftools;
 
+	void		setStatus(String status, int panel=0);
+	void		setDbInfo();
+
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
 	TMemo *mInfo;
 	TBevel *Bevel1;
-	TBitBtn *btLokkIntoEcg;
 	TMainMenu *MainMenu;
 	TMenuItem *ools1;
 	TMenuItem *EKGuntersuchen1;
@@ -32,16 +34,18 @@ __published:	// IDE-verwaltete Komponenten
 	TAction *acClose;
 	TTimer *tStartup;
 	TStatusBar *sbMain;
-	TBitBtn *BitBtn1;
 	TAction *acPeople;
-	TBitBtn *BitBtn2;
 	TAction *acDiseases;
-	TBevel *Bevel2;
-	TBitBtn *BitBtn3;
 	TAction *acCreateTemp;
-	TBitBtn *BitBtn4;
 	TAction *acCreateSeesion;
 	TAction *acShowData;
+	TPanel *pnMain;
+	TBitBtn *btLokkIntoEcg;
+	TBitBtn *BitBtn1;
+	TBitBtn *BitBtn2;
+	TBitBtn *BitBtn3;
+	TBitBtn *BitBtn4;
+	TBevel *Bevel2;
 	void __fastcall acLookIntoECGExecute(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);

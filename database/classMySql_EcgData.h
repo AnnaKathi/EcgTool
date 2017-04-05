@@ -30,6 +30,10 @@ public:
 
 	bool	deleteByIdent(int ident);
 
+	//-- Datenfelder
+	int 	getSize();
+
+
 __property sEcgData row = { read=get_data };
 __property int num_rows = { read=get_num_rows };
 

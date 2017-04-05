@@ -115,6 +115,17 @@ sarray_t cMySqlDiseases::getNamesOf(sarray_t idents) //Liste mit Bez. auffüllen
 	return res;
 	}
 //---------------------------------------------------------------------------
+int cMySqlDiseases::getSize()
+	{
+	if (!loadTable())
+		{
+		fail(fwork->error_code, fwork->error_msg);
+		return -1;
+		}
+
+	return get_num_rows();
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /******************   Funktionen: Daten anzeigen   *************************/
 /***************************************************************************/

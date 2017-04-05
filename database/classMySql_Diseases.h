@@ -31,6 +31,7 @@ public:
 	//-- Daten feststellen
 	String 	getNameOf(int disease); //eine Bezeichnugn einer Erkrankung feststellen
 	sarray_t getNamesOf(sarray_t idents); //Liste mit Bez. auffüllen
+	int 	getSize();
 
 	//-- Daten anzeigen
 	bool	listInCombo(TComboBox* cb, int mode = 0);

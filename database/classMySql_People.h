@@ -37,6 +37,7 @@ public:
 	//-- Daten feststellen
 	String	 getNameOf(int person);
 	sarray_t getDiseasesOf(int person);
+	int		getSize();
 
 	//-- Daten anzeigen
 	bool	listInCombo(TComboBox* cb, int mode = 0);

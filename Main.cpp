@@ -31,8 +31,7 @@ void __fastcall TfmMain::FormShow(TObject *Sender)
 void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
-	ftools.FormLoad(this);
-
+	setStatus("startup EcgTool...loading MySql-Database");
 	if (!fmysql.open())
 		{
 		String msg =
@@ -42,17 +41,37 @@ void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 		Close();
 		return;
 		}
+
+	//todo Anzahl der versch. Datensätze laden und anzeigen
+	setStatus("startup EcgTool...reading MySql-Database");
+	setDbInfo();
+
+	setStatus("Startup finished - ready to go");
+	pnMain->Enabled = true;
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::FormClose(TObject *Sender, TCloseAction &Action)
 	{
-	ftools.FormSave(this);
 	fmysql.close();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
 /******************   Funktionen   *****************************************/
 /***************************************************************************/
+//---------------------------------------------------------------------------
+void TfmMain::setStatus(String status, int panel) //panel ist vorbesetzt mit 0
+	{
+	sbMain->Panels->Items[panel]->Text = status;
+	}
+//---------------------------------------------------------------------------
+void TfmMain::setDbInfo()
+	{
+	String msg =
+		String(fmysql.people.getSize()) + " Personen, " +
+		String(fmysql.diseases.getSize()) + " Erkrankungen, " +
+		String(fmysql.ecg.getSize()) + " EKG-Datensätze";
+	setStatus(msg, 1);
+	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
 /********************   Actions   ******************************************/
@@ -70,6 +89,7 @@ void __fastcall TfmMain::acLookIntoECGExecute(TObject *Sender)
 	if (!formecg->Execute())
 		;
 	delete formecg;
+	setDbInfo();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acShowDataExecute(TObject *Sender)
@@ -80,11 +100,13 @@ void __fastcall TfmMain::acShowDataExecute(TObject *Sender)
 void __fastcall TfmMain::acPeopleExecute(TObject *Sender)
 	{
 	DlgDatabasePersonen(this);
+	setDbInfo();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acDiseasesExecute(TObject *Sender)
 	{
 	DlgDiseases(this);
+	setDbInfo();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acCreateTempExecute(TObject *Sender)
@@ -96,6 +118,7 @@ void __fastcall TfmMain::acCreateSeesionExecute(TObject *Sender)
 	{
 	if (!DlgNewSession(this))
 		;
+	setDbInfo();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
