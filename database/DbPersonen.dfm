@@ -2,8 +2,8 @@ object fmData: TfmData
   Left = 0
   Top = 0
   Caption = 'Ansicht Datenbank'
-  ClientHeight = 735
-  ClientWidth = 1356
+  ClientHeight = 627
+  ClientWidth = 1063
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object fmData: TfmData
   object Bevel1: TBevel
     Left = 0
     Top = 41
-    Width = 1356
+    Width = 1063
     Height = 8
     Align = alTop
     Shape = bsTopLine
@@ -32,7 +32,7 @@ object fmData: TfmData
   object Splitter1: TSplitter
     Left = 549
     Top = 49
-    Height = 645
+    Height = 537
     ExplicitLeft = 120
     ExplicitTop = 184
     ExplicitHeight = 100
@@ -40,26 +40,28 @@ object fmData: TfmData
   object Splitter2: TSplitter
     Left = 273
     Top = 49
-    Height = 645
+    Height = 537
     ExplicitLeft = 270
     ExplicitTop = 51
+    ExplicitHeight = 645
   end
   object pnInfo: TPanel
     Left = 0
     Top = 0
-    Width = 1356
+    Width = 1063
     Height = 41
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
+    ExplicitWidth = 1356
     DesignSize = (
-      1356
+      1063
       41)
     object mInfo: TMemo
       Left = 8
       Top = 10
-      Width = 1340
+      Width = 1047
       Height = 25
       Anchors = [akLeft, akTop, akRight]
       BorderStyle = bsNone
@@ -73,45 +75,51 @@ object fmData: TfmData
       ParentColor = True
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 1340
     end
   end
   object Panel1: TPanel
     Left = 0
-    Top = 694
-    Width = 1356
+    Top = 586
+    Width = 1063
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 694
+    ExplicitWidth = 1356
     DesignSize = (
-      1356
+      1063
       41)
     object btClose: TButton
-      Left = 1276
+      Left = 983
       Top = 8
       Width = 75
       Height = 25
       Action = acClose
       Anchors = [akTop, akRight]
       TabOrder = 0
+      ExplicitLeft = 1276
     end
     object pbJob: TProgressBar
       Left = 8
       Top = 8
-      Width = 1253
+      Width = 960
       Height = 17
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 1
       Visible = False
+      ExplicitWidth = 1253
     end
   end
   object pnPeople: TPanel
     Left = 0
     Top = 49
     Width = 273
-    Height = 645
+    Height = 537
     Align = alLeft
     TabOrder = 2
+    ExplicitHeight = 645
     object Bevel3: TBevel
       Left = 1
       Top = 80
@@ -211,7 +219,7 @@ object fmData: TfmData
       Left = 1
       Top = 88
       Width = 271
-      Height = 556
+      Height = 448
       Align = alClient
       Columns = <
         item
@@ -234,15 +242,17 @@ object fmData: TfmData
       ViewStyle = vsReport
       OnClick = lvPeopleClick
       OnDblClick = lvPeopleDblClick
+      ExplicitHeight = 556
     end
   end
   object pnEcgData: TPanel
     Left = 552
     Top = 49
     Width = 509
-    Height = 645
+    Height = 537
     Align = alLeft
     TabOrder = 3
+    ExplicitHeight = 645
     object Bevel2: TBevel
       Left = 1
       Top = 84
@@ -359,7 +369,7 @@ object fmData: TfmData
       Left = 1
       Top = 92
       Width = 507
-      Height = 552
+      Height = 444
       Align = alClient
       Columns = <
         item
@@ -398,23 +408,26 @@ object fmData: TfmData
       TabOrder = 1
       ViewStyle = vsReport
       OnClick = lvDataClick
+      ExplicitHeight = 552
     end
   end
   object pnDiseases: TPanel
     Left = 276
     Top = 49
     Width = 273
-    Height = 645
+    Height = 537
     Align = alLeft
     TabOrder = 4
+    ExplicitHeight = 645
   end
   object Panel5: TPanel
     Left = 1061
     Top = 49
     Width = 276
-    Height = 645
+    Height = 537
     Align = alLeft
     TabOrder = 5
+    ExplicitHeight = 645
   end
   object tStartup: TTimer
     Enabled = False

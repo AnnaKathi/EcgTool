@@ -41,7 +41,6 @@ __published:	// IDE-verwaltete Komponenten
 	TAction *acCreateTemp;
 	TBitBtn *BitBtn4;
 	TAction *acCreateSeesion;
-	TBitBtn *BitBtn5;
 	TAction *acShowData;
 	void __fastcall acLookIntoECGExecute(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
