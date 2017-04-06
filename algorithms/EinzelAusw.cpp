@@ -2,18 +2,15 @@
 #include <vcl.h>
 #pragma hdrstop
 
-#include "database/classMySql.h"
-#include "Person.h"
-#include "DbPersonen.h"
+#include "EinzelAusw.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-TfmData *fmData;
-extern cMySql fmysql;
+TfmSingle *fmSingle;
 //---------------------------------------------------------------------------
-bool DlgDatabasePersonen(TForm* Papa)
+bool DlgEinzelAuswertung(TForm* Papa)
 	{
-	TfmData* Form = new TfmData(Papa);
+	TfmSingle* Form = new TfmSingle(Papa);
 	bool rc = false;
 
 	if (Form)
@@ -24,117 +21,71 @@ bool DlgDatabasePersonen(TForm* Papa)
 	return rc;
 	}
 //---------------------------------------------------------------------------
-__fastcall TfmData::TfmData(TComponent* Owner)
-	: TForm(Owner)
-	{
-	char path[MAX_PATH];
-	strcpy(path, Application->ExeName.c_str());
-	char* pt = strrchr(path, '\\');
-	if (pt != 0)
-		*pt = 0;
-
-	String file = String(path) + "\\EcgTool.ini";
-	Ini = new TIniFile(file);
-	}
-//---------------------------------------------------------------------------
-__fastcall TfmData::~TfmData()
-	{
-	delete Ini;
-	}
-//---------------------------------------------------------------------------
-bool TfmData::Execute()
+bool TfmSingle::Execute()
 	{
 	ShowModal();
 	return true;
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmData::FormShow(TObject *Sender)
+__fastcall TfmSingle::TfmSingle(TComponent* Owner)
+	: TForm(Owner)
 	{
-	tStartup->Enabled = true;
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmData::tStartupTimer(TObject *Sender)
+__fastcall TfmSingle::~TfmSingle()
+	{
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmSingle::FormShow(TObject *Sender)
+	{
+    tStartup->Enabled = true;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmSingle::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
 	ftools.FormLoad(this);
+	pnFilterPerson->Caption = "";
+	pnFilterEcg->Caption    = "";
 
-	fmDiseases = CreateDiseaseForm(this, pnDiseases);
-	fmPeople   = CreatePeopleForm(this, pnPeople);
-	fmEcg      = CreateEcgForm(this, pnEcgData);
+	fmPeople  = CreatePeopleForm(this, pnFilterPerson);
+	fmEcgData = CreateEcgForm(this,    pnFilterEcg);
 
 	fmPeople->ShowData();
-	fmDiseases->ShowData();
-	fmEcg->ShowData();
-
-	tStartup->Tag = 1; //Init beendet
+	fmEcgData->ShowData();
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmData::FormClose(TObject *Sender, TCloseAction &Action)
+void __fastcall TfmSingle::FormClose(TObject *Sender, TCloseAction &Action)
 	{
-	delete fmEcg;
-	delete fmPeople;
-	delete fmDiseases;
 	ftools.FormSave(this);
+	delete fmPeople;
+	delete fmEcgData;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
 /******************   Funktionen   *****************************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-inline void TfmData::StartJob(int max)
-	{
-	pbJob->Max = max;
-	pbJob->Position = 0;
-	pbJob->Visible = true;
-	}
-//---------------------------------------------------------------------------
-inline void TfmData::TickJob(int tick) //tick = 1
-	{
-	pbJob->Position += tick;
-	}
-//---------------------------------------------------------------------------
-inline void TfmData::EndJob()
-	{
-	pbJob->Visible = false;
-	}
-//---------------------------------------------------------------------------
 /***************************************************************************/
 /********************   Actions   ******************************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-void __fastcall TfmData::acCloseExecute(TObject *Sender)
+void __fastcall TfmSingle::acCloseExecute(TObject *Sender)
 	{
 	Close();
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmData::acRefreshExecute(TObject *Sender)
-	{
-	if (tStartup->Tag == 0) return; //Init noch nicht ausgeführt oder beendet
-
-	//evtl bestehende Filter abschalten
-	//acPeopleDisselectExecute(Sender);
-
-	fmDiseases->ShowData();
-	fmPeople->ShowData();
-	fmEcg->ShowData();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   Meldungen vom Formular   *********************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-void __fastcall TfmData::FormKeyPress(TObject *Sender, char &Key)
+void __fastcall TfmSingle::FormKeyPress(TObject *Sender, char &Key)
 	{
 	if (Key == VK_ESCAPE)
 		{
 		Key = 0;
 		acCloseExecute(Sender);
 		}
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmData::btCloseClick(TObject *Sender)
-	{
-	acCloseExecute(Sender);
 	}
 //---------------------------------------------------------------------------
 

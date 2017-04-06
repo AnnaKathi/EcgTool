@@ -19,13 +19,13 @@
     <CfgParent>Base</CfgParent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Base)'!=''">
-    <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
     <OutputExt>exe</OutputExt>
-    <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+    <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
     <Defines>NO_STRICT</Defines>
+    <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
     <DynamicRTL>true</DynamicRTL>
-    <ILINK_ObjectSearchPath>TestKlassen;ecg;basics;data;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms</ILINK_ObjectSearchPath>
     <UsePackages>true</UsePackages>
+    <ILINK_ObjectSearchPath>TestKlassen;ecg;basics;data;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms</ILINK_ObjectSearchPath>
     <ProjectType>CppVCLApplication</ProjectType>
     <PackageImports>vcl.bpi;rtl.bpi;bcbie.bpi;vclx.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;dbrtl.bpi;vcldb.bpi;bdertl.bpi;vcldbx.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;websnap.bpi;webdsnap.bpi;inet.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;dsnap.bpi</PackageImports>
     <BCC_wpar>false</BCC_wpar>
@@ -35,10 +35,10 @@
     <Multithreaded>true</Multithreaded>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Cfg_1)'!=''">
-    <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
     <DCC_Optimize>false</DCC_Optimize>
-    <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+    <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
     <Defines>_DEBUG;$(Defines)</Defines>
+    <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
     <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
     <BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
     <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
@@ -49,8 +49,8 @@
     <IntermediateOutputDir>out\debug</IntermediateOutputDir>
     <TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
     <BCC_StackFrames>true</BCC_StackFrames>
-    <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
     <ILINK_LibraryPath>$(BDS)\lib\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+    <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
     <TASM_Debugging>Full</TASM_Debugging>
     <BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
   </PropertyGroup>
@@ -64,18 +64,18 @@
     <Borland.Personality>CPlusPlusBuilder.Personality</Borland.Personality>
     <Borland.ProjectType>CppVCLApplication</Borland.ProjectType>
     <BorlandProject>
-<BorlandProject><CPlusPlusBuilder.Personality><Source><Source Name="MainSource">EcgTool.cpp</Source></Source><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1031</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Debugging><Debugging Name="DebugSourceDirs"></Debugging></Debugging><Parameters><Parameters Name="RunParams"></Parameters><Parameters Name="Launcher"></Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="DebugCWD"></Parameters><Parameters Name="HostApplication"></Parameters><Parameters Name="RemoteHost"></Parameters><Parameters Name="RemotePath"></Parameters><Parameters Name="RemoteParams"></Parameters><Parameters Name="RemoteLauncher"></Parameters><Parameters Name="UseRemoteLauncher">False</Parameters><Parameters Name="RemoteCWD"></Parameters><Parameters Name="RemoteDebug">False</Parameters><Parameters Name="Debug Symbols Search Path"></Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><Linker><Linker Name="LibPrefix"></Linker><Linker Name="LibSuffix"></Linker><Linker Name="LibVersion"></Linker></Linker><ProjectProperties><ProjectProperties Name="AutoShowDeps">False</ProjectProperties><ProjectProperties Name="ManagePaths">True</ProjectProperties><ProjectProperties Name="VerifyPackages">True</ProjectProperties></ProjectProperties><VFOLDERS><VFOLDER ID="{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}" name="basics" /><VFOLDER ID="{F0934E87-5C3D-47C3-8E43-EE413825840D}" name="ecg" /><VFOLDER ID="{29675194-4BE8-44D0-B637-6E502C166B4A}" name="database"><VFOLDER ID="{CED66B0D-F6C4-49A9-AB32-CF9D45A18303}" name="baseforms" /><VFOLDER ID="{A25C5B07-B871-4FB9-82A5-02C2BB655957}" name="toolforms" /></VFOLDER><VFOLDER ID="{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}" name="algorithms"><VFOLDER ID="{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}" name="features" /><VFOLDER ID="{8C884026-4975-44CD-9B90-5B123CC770D7}" name="classifications" /></VFOLDER></VFOLDERS><HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Count">9</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item0">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc\mysql;inc\mysql\mysql</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item1">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item2">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item3">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications;database;database\baseforms</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item4">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications;database</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item5">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item6">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item7">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data</HistoryLists_hlIncludePath>  <HistoryLists_hlIncludePath Name="Item8">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg</HistoryLists_hlIncludePath>
-    </HistoryLists_hlIncludePath><HistoryLists_hlFinalOutputDir><HistoryLists_hlFinalOutputDir Name="Count">1</HistoryLists_hlFinalOutputDir><HistoryLists_hlFinalOutputDir Name="Item0">out</HistoryLists_hlFinalOutputDir></HistoryLists_hlFinalOutputDir><HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Count">2</HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Item0">$(BDS)\lib\debug;$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\lib\psdk;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc;inc\mysql;inc\mysql\mysql</HistoryLists_hlILINK_LibraryPath>  <HistoryLists_hlILINK_LibraryPath Name="Item1">$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\lib\psdk;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc;inc\mysql;inc\mysql\mysql</HistoryLists_hlILINK_LibraryPath>
-    </HistoryLists_hlILINK_LibraryPath><HistoryLists_hlDefines><HistoryLists_hlDefines Name="Count">2</HistoryLists_hlDefines><HistoryLists_hlDefines Name="Item0">_DEBUG;NO_STRICT</HistoryLists_hlDefines>  <HistoryLists_hlDefines Name="Item1">NO_STRICT</HistoryLists_hlDefines>
-    </HistoryLists_hlDefines><HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_MaxErrors Name="Count">1</HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_MaxErrors Name="Item0">0</HistoryLists_hlILINK_MaxErrors></HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_FileAlignment Name="Count">1</HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_FileAlignment Name="Item0">0x200</HistoryLists_hlILINK_FileAlignment></HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_ObjectAlignment><HistoryLists_hlILINK_ObjectAlignment Name="Count">1</HistoryLists_hlILINK_ObjectAlignment><HistoryLists_hlILINK_ObjectAlignment Name="Item0">4096</HistoryLists_hlILINK_ObjectAlignment></HistoryLists_hlILINK_ObjectAlignment><Excluded_Packages>
-      
-      
-      
-      
-      
-      
-      
-      
+<BorlandProject><CPlusPlusBuilder.Personality><Source><Source Name="MainSource">EcgTool.cpp</Source></Source><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1031</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Debugging><Debugging Name="DebugSourceDirs"></Debugging></Debugging><Parameters><Parameters Name="RunParams"></Parameters><Parameters Name="Launcher"></Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="DebugCWD"></Parameters><Parameters Name="HostApplication"></Parameters><Parameters Name="RemoteHost"></Parameters><Parameters Name="RemotePath"></Parameters><Parameters Name="RemoteParams"></Parameters><Parameters Name="RemoteLauncher"></Parameters><Parameters Name="UseRemoteLauncher">False</Parameters><Parameters Name="RemoteCWD"></Parameters><Parameters Name="RemoteDebug">False</Parameters><Parameters Name="Debug Symbols Search Path"></Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><Linker><Linker Name="LibPrefix"></Linker><Linker Name="LibSuffix"></Linker><Linker Name="LibVersion"></Linker></Linker><ProjectProperties><ProjectProperties Name="AutoShowDeps">False</ProjectProperties><ProjectProperties Name="ManagePaths">True</ProjectProperties><ProjectProperties Name="VerifyPackages">True</ProjectProperties></ProjectProperties><VFOLDERS>
+      <VFOLDER ID="{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}" name="basics" />
+      <VFOLDER ID="{F0934E87-5C3D-47C3-8E43-EE413825840D}" name="ecg" />
+      <VFOLDER ID="{29675194-4BE8-44D0-B637-6E502C166B4A}" name="database">
+        <VFOLDER ID="{CED66B0D-F6C4-49A9-AB32-CF9D45A18303}" name="baseforms" />
+        <VFOLDER ID="{A25C5B07-B871-4FB9-82A5-02C2BB655957}" name="toolforms" />
+      </VFOLDER>
+      <VFOLDER ID="{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}" name="algorithms">
+        <VFOLDER ID="{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}" name="features" />
+        <VFOLDER ID="{8C884026-4975-44CD-9B90-5B123CC770D7}" name="classifications" />
+      </VFOLDER>
+    </VFOLDERS><HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Count">9</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item0">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc\mysql;inc\mysql\mysql</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item1">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item2">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item3">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications;database;database\baseforms</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item4">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications;database</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item5">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item6">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item7">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item8">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg</HistoryLists_hlIncludePath></HistoryLists_hlIncludePath><HistoryLists_hlFinalOutputDir><HistoryLists_hlFinalOutputDir Name="Count">1</HistoryLists_hlFinalOutputDir><HistoryLists_hlFinalOutputDir Name="Item0">out</HistoryLists_hlFinalOutputDir></HistoryLists_hlFinalOutputDir><HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Count">2</HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Item0">$(BDS)\lib\debug;$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\lib\psdk;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc;inc\mysql;inc\mysql\mysql</HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Item1">$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\lib\psdk;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc;inc\mysql;inc\mysql\mysql</HistoryLists_hlILINK_LibraryPath></HistoryLists_hlILINK_LibraryPath><HistoryLists_hlDefines><HistoryLists_hlDefines Name="Count">2</HistoryLists_hlDefines><HistoryLists_hlDefines Name="Item0">_DEBUG;NO_STRICT</HistoryLists_hlDefines><HistoryLists_hlDefines Name="Item1">NO_STRICT</HistoryLists_hlDefines></HistoryLists_hlDefines><HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_MaxErrors Name="Count">1</HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_MaxErrors Name="Item0">0</HistoryLists_hlILINK_MaxErrors></HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_FileAlignment Name="Count">1</HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_FileAlignment Name="Item0">0x200</HistoryLists_hlILINK_FileAlignment></HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_ObjectAlignment><HistoryLists_hlILINK_ObjectAlignment Name="Count">1</HistoryLists_hlILINK_ObjectAlignment><HistoryLists_hlILINK_ObjectAlignment Name="Item0">4096</HistoryLists_hlILINK_ObjectAlignment></HistoryLists_hlILINK_ObjectAlignment><Excluded_Packages>
       
       
       
@@ -92,11 +92,7 @@
       
       <Excluded_Packages Name="$(BDS)\bin\bcboffice2k100.bpl">CodeGear C++Builder Office 2000 Servers Package</Excluded_Packages>
       <Excluded_Packages Name="$(BDS)\bin\bcbofficexp100.bpl">CodeGear C++Builder Office XP Servers Package</Excluded_Packages>
-    </Excluded_Packages><HistoryLists_hlDCC_CodePage><HistoryLists_hlDCC_CodePage Name="Count">1</HistoryLists_hlDCC_CodePage><HistoryLists_hlDCC_CodePage Name="Item0">0</HistoryLists_hlDCC_CodePage></HistoryLists_hlDCC_CodePage><HistoryLists_hlBCC_MaxIdentifierLength><HistoryLists_hlBCC_MaxIdentifierLength Name="Count">1</HistoryLists_hlBCC_MaxIdentifierLength><HistoryLists_hlBCC_MaxIdentifierLength Name="Item0">250</HistoryLists_hlBCC_MaxIdentifierLength></HistoryLists_hlBCC_MaxIdentifierLength><HistoryLists_hlTASM_HashTableCapacity><HistoryLists_hlTASM_HashTableCapacity Name="Count">1</HistoryLists_hlTASM_HashTableCapacity><HistoryLists_hlTASM_HashTableCapacity Name="Item0">8192</HistoryLists_hlTASM_HashTableCapacity></HistoryLists_hlTASM_HashTableCapacity><HistoryLists_hlTASM_MaxSymbolLength><HistoryLists_hlTASM_MaxSymbolLength Name="Count">1</HistoryLists_hlTASM_MaxSymbolLength><HistoryLists_hlTASM_MaxSymbolLength Name="Item0">12</HistoryLists_hlTASM_MaxSymbolLength></HistoryLists_hlTASM_MaxSymbolLength><HistoryLists_hlTASM_Passes><HistoryLists_hlTASM_Passes Name="Count">1</HistoryLists_hlTASM_Passes><HistoryLists_hlTASM_Passes Name="Item0">1</HistoryLists_hlTASM_Passes></HistoryLists_hlTASM_Passes><HistoryLists_hlTASM_VersionId><HistoryLists_hlTASM_VersionId Name="Count">1</HistoryLists_hlTASM_VersionId><HistoryLists_hlTASM_VersionId Name="Item0">0</HistoryLists_hlTASM_VersionId></HistoryLists_hlTASM_VersionId>  <HistoryLists_hlIntermediateOutputDir>
-      <HistoryLists_hlIntermediateOutputDir Name="Count">1</HistoryLists_hlIntermediateOutputDir>
-      <HistoryLists_hlIntermediateOutputDir Name="Item0">out\debug</HistoryLists_hlIntermediateOutputDir>
-    </HistoryLists_hlIntermediateOutputDir>
-  </CPlusPlusBuilder.Personality></BorlandProject></BorlandProject>
+    </Excluded_Packages><HistoryLists_hlDCC_CodePage><HistoryLists_hlDCC_CodePage Name="Count">1</HistoryLists_hlDCC_CodePage><HistoryLists_hlDCC_CodePage Name="Item0">0</HistoryLists_hlDCC_CodePage></HistoryLists_hlDCC_CodePage><HistoryLists_hlBCC_MaxIdentifierLength><HistoryLists_hlBCC_MaxIdentifierLength Name="Count">1</HistoryLists_hlBCC_MaxIdentifierLength><HistoryLists_hlBCC_MaxIdentifierLength Name="Item0">250</HistoryLists_hlBCC_MaxIdentifierLength></HistoryLists_hlBCC_MaxIdentifierLength><HistoryLists_hlTASM_HashTableCapacity><HistoryLists_hlTASM_HashTableCapacity Name="Count">1</HistoryLists_hlTASM_HashTableCapacity><HistoryLists_hlTASM_HashTableCapacity Name="Item0">8192</HistoryLists_hlTASM_HashTableCapacity></HistoryLists_hlTASM_HashTableCapacity><HistoryLists_hlTASM_MaxSymbolLength><HistoryLists_hlTASM_MaxSymbolLength Name="Count">1</HistoryLists_hlTASM_MaxSymbolLength><HistoryLists_hlTASM_MaxSymbolLength Name="Item0">12</HistoryLists_hlTASM_MaxSymbolLength></HistoryLists_hlTASM_MaxSymbolLength><HistoryLists_hlTASM_Passes><HistoryLists_hlTASM_Passes Name="Count">1</HistoryLists_hlTASM_Passes><HistoryLists_hlTASM_Passes Name="Item0">1</HistoryLists_hlTASM_Passes></HistoryLists_hlTASM_Passes><HistoryLists_hlTASM_VersionId><HistoryLists_hlTASM_VersionId Name="Count">1</HistoryLists_hlTASM_VersionId><HistoryLists_hlTASM_VersionId Name="Item0">0</HistoryLists_hlTASM_VersionId></HistoryLists_hlTASM_VersionId><HistoryLists_hlIntermediateOutputDir><HistoryLists_hlIntermediateOutputDir Name="Count">1</HistoryLists_hlIntermediateOutputDir><HistoryLists_hlIntermediateOutputDir Name="Item0">out\debug</HistoryLists_hlIntermediateOutputDir></HistoryLists_hlIntermediateOutputDir></CPlusPlusBuilder.Personality></BorlandProject></BorlandProject>
   </ProjectExtensions>
   <Import Project="$(MSBuildBinPath)\Borland.Cpp.Targets" />
   <ItemGroup>
@@ -107,50 +103,56 @@
       <VirtualFolder>{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}</VirtualFolder>
       <Form>fmAlg1</Form>
       <DependentOn>algorithms\Alg1.h</DependentOn>
-      <BuildOrder>30</BuildOrder>
+      <BuildOrder>33</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\classAlg1.cpp">
       <VirtualFolder>{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}</VirtualFolder>
       <DependentOn>algorithms\classAlg1.h</DependentOn>
-      <BuildOrder>31</BuildOrder>
+      <BuildOrder>34</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\classifications\classKPCA.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
       <DependentOn>algorithms\classifications\classKPCA.h</DependentOn>
-      <BuildOrder>37</BuildOrder>
+      <BuildOrder>40</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\classifications\classLDA.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
       <DependentOn>algorithms\classifications\classLDA.h</DependentOn>
-      <BuildOrder>36</BuildOrder>
+      <BuildOrder>39</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\classifications\classMLP.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
-      <BuildOrder>38</BuildOrder>
+      <BuildOrder>41</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\classifications\classSVM.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
-      <BuildOrder>39</BuildOrder>
+      <BuildOrder>42</BuildOrder>
+    </CppCompile>
+    <CppCompile Include="algorithms\EinzelAusw.cpp">
+      <VirtualFolder>{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}</VirtualFolder>
+      <Form>fmSingle</Form>
+      <DependentOn>algorithms\EinzelAusw.h</DependentOn>
+      <BuildOrder>32</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classAC.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classAC.h</DependentOn>
-      <BuildOrder>33</BuildOrder>
+      <BuildOrder>36</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classChoi.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classChoi.h</DependentOn>
-      <BuildOrder>35</BuildOrder>
+      <BuildOrder>38</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classQRS3.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classQRS3.h</DependentOn>
-      <BuildOrder>34</BuildOrder>
+      <BuildOrder>37</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classRandomPoints.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classRandomPoints.h</DependentOn>
-      <BuildOrder>32</BuildOrder>
+      <BuildOrder>35</BuildOrder>
     </CppCompile>
     <CppCompile Include="basics\classArray.cpp">
       <VirtualFolder>{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}</VirtualFolder>
@@ -193,6 +195,18 @@
       <DependentOn>database\baseforms\baseDiseases.h</DependentOn>
       <BuildOrder>28</BuildOrder>
     </CppCompile>
+    <CppCompile Include="database\baseforms\baseEcgData.cpp">
+      <VirtualFolder>{CED66B0D-F6C4-49A9-AB32-CF9D45A18303}</VirtualFolder>
+      <Form>fmBaseEcg</Form>
+      <DependentOn>database\baseforms\baseEcgData.h</DependentOn>
+      <BuildOrder>29</BuildOrder>
+    </CppCompile>
+    <CppCompile Include="database\baseforms\basePeople.cpp">
+      <VirtualFolder>{CED66B0D-F6C4-49A9-AB32-CF9D45A18303}</VirtualFolder>
+      <Form>fmBasePeople</Form>
+      <DependentOn>database\baseforms\basePeople.h</DependentOn>
+      <BuildOrder>27</BuildOrder>
+    </CppCompile>
     <CppCompile Include="database\classMySql.cpp">
       <VirtualFolder>{29675194-4BE8-44D0-B637-6E502C166B4A}</VirtualFolder>
       <DependentOn>database\classMySql.h</DependentOn>
@@ -224,17 +238,17 @@
       <DependentOn>database\DbPersonen.h</DependentOn>
       <BuildOrder>21</BuildOrder>
     </CppCompile>
-    <CppCompile Include="database\Person.cpp">
-      <VirtualFolder>{29675194-4BE8-44D0-B637-6E502C166B4A}</VirtualFolder>
-      <Form>fmPerson</Form>
-      <DependentOn>database\Person.h</DependentOn>
-      <BuildOrder>27</BuildOrder>
-    </CppCompile>
     <CppCompile Include="database\toolforms\addDiseases.cpp">
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
       <Form>fmDis</Form>
       <DependentOn>database\toolforms\addDiseases.h</DependentOn>
-      <BuildOrder>29</BuildOrder>
+      <BuildOrder>31</BuildOrder>
+    </CppCompile>
+    <CppCompile Include="database\toolforms\addPeople.cpp">
+      <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
+      <Form>fmPerson</Form>
+      <DependentOn>database\toolforms\addPeople.h</DependentOn>
+      <BuildOrder>30</BuildOrder>
     </CppCompile>
     <CppCompile Include="Details.cpp">
       <Form>fmDetails</Form>
@@ -299,10 +313,13 @@
       <BuildOrder>8</BuildOrder>
     </None>
     <FormResources Include="algorithms\Alg1.dfm" />
+    <FormResources Include="algorithms\EinzelAusw.dfm" />
     <FormResources Include="database\baseforms\baseDiseases.dfm" />
+    <FormResources Include="database\baseforms\baseEcgData.dfm" />
+    <FormResources Include="database\baseforms\basePeople.dfm" />
     <FormResources Include="database\DbPersonen.dfm" />
-    <FormResources Include="database\Person.dfm" />
     <FormResources Include="database\toolforms\addDiseases.dfm" />
+    <FormResources Include="database\toolforms\addPeople.dfm" />
     <FormResources Include="Details.dfm" />
     <FormResources Include="Diseases.dfm" />
     <FormResources Include="EcgView.dfm" />

@@ -2,6 +2,7 @@
 #include <vcl.h>
 #pragma hdrstop
 
+#include "algorithms/EinzelAusw.h"
 #include "database/classMySql.h"
 #include "database/DbPersonen.h"
 #include "Diseases.h"
@@ -109,16 +110,21 @@ void __fastcall TfmMain::acDiseasesExecute(TObject *Sender)
 	setDbInfo();
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::acCreateTempExecute(TObject *Sender)
-	{
-	//
-	}
-//---------------------------------------------------------------------------
 void __fastcall TfmMain::acCreateSeesionExecute(TObject *Sender)
 	{
 	if (!DlgNewSession(this))
 		;
 	setDbInfo();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acSingleAuswExecute(TObject *Sender)
+	{
+	DlgEinzelAuswertung(this);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acGesAuswExecute(TObject *Sender)
+	{
+	//
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -130,5 +136,4 @@ void __fastcall TfmMain::FormKeyPress(TObject *Sender, char &Key)
 	acCloseExecute(Sender);
 	}
 //---------------------------------------------------------------------------
-
 

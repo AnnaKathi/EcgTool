@@ -36,7 +36,7 @@ __published:	// IDE-verwaltete Komponenten
 	TStatusBar *sbMain;
 	TAction *acPeople;
 	TAction *acDiseases;
-	TAction *acCreateTemp;
+	TAction *acSingleAusw;
 	TAction *acCreateSeesion;
 	TAction *acShowData;
 	TPanel *pnMain;
@@ -46,6 +46,8 @@ __published:	// IDE-verwaltete Komponenten
 	TBitBtn *BitBtn3;
 	TBitBtn *BitBtn4;
 	TBevel *Bevel2;
+	TAction *acGesAusw;
+	TBitBtn *BitBtn5;
 	void __fastcall acLookIntoECGExecute(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -54,9 +56,10 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall acPeopleExecute(TObject *Sender);
 	void __fastcall acDiseasesExecute(TObject *Sender);
-	void __fastcall acCreateTempExecute(TObject *Sender);
+	void __fastcall acSingleAuswExecute(TObject *Sender);
 	void __fastcall acCreateSeesionExecute(TObject *Sender);
 	void __fastcall acShowDataExecute(TObject *Sender);
+	void __fastcall acGesAuswExecute(TObject *Sender);
 
 public:
 	__fastcall TfmMain(TComponent* Owner);

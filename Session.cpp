@@ -7,7 +7,7 @@
 
 #include "RequestBox.h"
 #include "database/classMySql.h"
-#include "database/Person.h"
+#include "database/toolforms/addPeople.h"
 #include "Session.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -140,8 +140,8 @@ void __fastcall TfmSession::acResetExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmSession::acPersonAddExecute(TObject *Sender)
 	{
-	if (DlgPersonNew(this))
-    	fmysql.people.listInCombo(cbPerson, 1);
+	if (DlgPersonAdd(this))
+		fmysql.people.listInCombo(cbPerson, 1);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
