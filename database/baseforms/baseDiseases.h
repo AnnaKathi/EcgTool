@@ -34,7 +34,7 @@ private:
 __published:	// IDE-verwaltete Komponenten
 	TListView *lvDiseases;
 	TBevel *Bevel4;
-	TPanel *Panel4;
+	TPanel *pnFilter;
 	TLabel *Label10;
 	TLabel *Label11;
 	TLabel *Label12;
@@ -65,7 +65,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall lvDiseasesDblClick(TObject *Sender);
 
 public:
-	__fastcall TfmBaseDiseases(TComponent* Owner, TWinControl* Container);
+	__fastcall TfmBaseDiseases(TComponent* Owner, TWinControl* Container, TColor color);
 
 	bool		ShowData();
 	bool		ShowDataOfPerson(int person);

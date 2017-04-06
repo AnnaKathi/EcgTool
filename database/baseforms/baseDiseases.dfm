@@ -4,7 +4,7 @@ object fmBaseDiseases: TfmBaseDiseases
   Caption = 'BaseForm Diseases'
   ClientHeight = 542
   ClientWidth = 405
-  Color = clBtnFace
+  Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -50,13 +50,14 @@ object fmBaseDiseases: TfmBaseDiseases
     OnClick = lvDiseasesClick
     OnDblClick = lvDiseasesDblClick
   end
-  object Panel4: TPanel
+  object pnFilter: TPanel
     Left = 0
     Top = 0
     Width = 405
     Height = 63
     Align = alTop
     BevelOuter = bvNone
+    ParentBackground = False
     ParentColor = True
     TabOrder = 1
     object Label10: TLabel

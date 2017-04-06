@@ -54,7 +54,6 @@ object fmData: TfmData
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 1356
     DesignSize = (
       1063
       41)
@@ -75,7 +74,6 @@ object fmData: TfmData
       ParentColor = True
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1340
     end
   end
   object Panel1: TPanel
@@ -86,8 +84,6 @@ object fmData: TfmData
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 694
-    ExplicitWidth = 1356
     DesignSize = (
       1063
       41)
@@ -99,7 +95,6 @@ object fmData: TfmData
       Action = acClose
       Anchors = [akTop, akRight]
       TabOrder = 0
-      ExplicitLeft = 1276
     end
     object pbJob: TProgressBar
       Left = 8
@@ -109,7 +104,6 @@ object fmData: TfmData
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 1
       Visible = False
-      ExplicitWidth = 1253
     end
   end
   object pnPeople: TPanel
@@ -119,7 +113,6 @@ object fmData: TfmData
     Height = 537
     Align = alLeft
     TabOrder = 2
-    ExplicitHeight = 645
     object Bevel3: TBevel
       Left = 1
       Top = 80
@@ -242,7 +235,6 @@ object fmData: TfmData
       ViewStyle = vsReport
       OnClick = lvPeopleClick
       OnDblClick = lvPeopleDblClick
-      ExplicitHeight = 556
     end
   end
   object pnEcgData: TPanel
@@ -252,7 +244,6 @@ object fmData: TfmData
     Height = 537
     Align = alLeft
     TabOrder = 3
-    ExplicitHeight = 645
     object Bevel2: TBevel
       Left = 1
       Top = 84
@@ -408,7 +399,6 @@ object fmData: TfmData
       TabOrder = 1
       ViewStyle = vsReport
       OnClick = lvDataClick
-      ExplicitHeight = 552
     end
   end
   object pnDiseases: TPanel
@@ -417,8 +407,9 @@ object fmData: TfmData
     Width = 273
     Height = 537
     Align = alLeft
+    Color = clWhite
+    ParentBackground = False
     TabOrder = 4
-    ExplicitHeight = 645
   end
   object Panel5: TPanel
     Left = 1061
@@ -427,7 +418,6 @@ object fmData: TfmData
     Height = 537
     Align = alLeft
     TabOrder = 5
-    ExplicitHeight = 645
   end
   object tStartup: TTimer
     Enabled = False

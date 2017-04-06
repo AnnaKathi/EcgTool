@@ -15,10 +15,10 @@ extern cMySql fmysql;
 //---------------------------------------------------------------------------
 TfmBaseDiseases* CreateDiseaseForm(TForm* caller, TWinControl* container)
 	{
-	return new TfmBaseDiseases(caller, container);
+	return new TfmBaseDiseases(caller, container, caller->Color);
 	}
 //---------------------------------------------------------------------------
-__fastcall TfmBaseDiseases::TfmBaseDiseases(TComponent* Owner, TWinControl* Container)
+__fastcall TfmBaseDiseases::TfmBaseDiseases(TComponent* Owner, TWinControl* Container, TColor color)
 	: TForm(Owner)
 	{
 	if (Container)
@@ -39,6 +39,9 @@ void TfmBaseDiseases::snapTo(TWinControl* container, TAlign align)
 	BorderIcons = TBorderIcons();
 	BorderStyle = bsNone;
 
+	ParentFont  = true;
+	ParentColor = true;
+
 	Height = realHeight;
 	Width  = realWidth;
 	Show();
@@ -48,13 +51,13 @@ void __fastcall TfmBaseDiseases::FormShow(TObject *Sender)
 	{
 	bInShow = false;
 	tStartup->Enabled = true;
-	tStartup->Tag = 1; //signalisiert, dass der Init durchgeführt wurde
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmBaseDiseases::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
 	ShowData();
+	tStartup->Tag = 1; //signalisiert, dass der Init durchgeführt wurde
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmBaseDiseases::FormClose(TObject *Sender,
