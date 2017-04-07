@@ -1,4 +1,10 @@
-//todo: check what's actual needed (in algorithmes to implement) and create class
+/* Autokorrekation: Für die feature extraction wird eine AC verwendet
+ * ================
+ * Der Korrelationskoeffizient ist jeweils die Korrelation der Kurve mit sich
+ * selbst an einem bestimmten Zeitpunkt, d.h. pro Zeitpunkt gibt es einen AC-Coeff.
+ * Als Template (Erkennungswert) wird die AC-Kurve des Standardherzschlages
+ * der zweiten Ableitung verwendet (das kann über einen Modus eingestellt werden).
+ */
 //---------------------------------------------------------------------------
 #pragma hdrstop
 
@@ -13,6 +19,50 @@ cAC::cAC()
 cAC::~cAC()
 	{
 	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   public Funktionen   **********************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+bool cAC::createTemplate(iarray_t herzschlag)
+	{
+	ftemplate = buildAC(herzschlag);
+	if (ftemplate.size() <= 0)
+		return fail(1, "Das Template konnte nicht erstellt werden.");
+	else
+		return ok();
+	}
+//---------------------------------------------------------------------------
+iarray_t cAC::buildAC(iarray_t array)
+	{
+	// Calculate the (un-normalized) autocorrelation for a frame of a signal
+	short order = array.size();
+
+	ilist_t R(order);
+	float sum;
+	int i,j;
+
+	for (i = 1; i < order; i++)
+		{
+		R[i] = array[i][1] * array[i-1][1];
+		}
+
+	iarray_t arr; arr.clear();
+	int siz = R.size();
+	double wert;
+	for (int i = 0; i < siz; i++)
+		{
+		wert = R[i];
+		arr[i].push_back(i);
+		arr[i].push_back(wert);
+		}
+
+	return arr;
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   private Funktionen   *********************************/
+/***************************************************************************/
 //---------------------------------------------------------------------------
 iarray_t cAC::buildACOld(iarray_t array)
 	{
@@ -47,31 +97,8 @@ iarray_t cAC::buildACOld(iarray_t array)
 	return arr;
 	}
 //---------------------------------------------------------------------------
-iarray_t cAC::buildAC(iarray_t array)
+iarray_t cAC::get_template()
 	{
-	// Calculate the (un-normalized) autocorrelation for a frame of a signal
-	short order = array.size();
-
-	ilist_t R(order);
-	float sum;
-	int i,j;
-
-	for (i = 1; i < order; i++)
-		{
-		R[i] = array[i][1] * array[i-1][1];
-		}
-
-	iarray_t arr; arr.clear();
-	int siz = R.size();
-	double wert;
-	for (int i = 0; i < siz; i++)
-		{
-		wert = R[i];
-		arr[i].push_back(i);
-		arr[i].push_back(wert);
-		}
-
-	return arr;
+	return ftemplate;
 	}
 //---------------------------------------------------------------------------
-

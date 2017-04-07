@@ -1,12 +1,15 @@
-/* Testalgorithmus 1: Testet das grundlegende Prinzip
+/* Testalgorithmus 1: Testet das grundlegende Prinzip mit simulierten AC/LDA
  * =================
- * Aus den eingelesenen EKG-Werten wird ein Erkennungs-Wert berechnet, um die
- * grundlegende Funktionsweise des Systems zu validieren. Dazu werden die
- * folgenden Schritte durchgeführt:
+ * Der Algorithmus soll Funktionen für die Template-Bildung und für die spätere
+ * Klassifizerung anbieten:
  *
- * 1) Auf der ersten Ableitung den Standardherzschlag feststellen
- * 2) Aus dem Standardherzschlag die Differenz zwischen dem höchsten und dem
- *		niedrigsten Wert feststellen (= Erkennungswert)
+ * Funktionen
+ * ----------
+ * bool createTemplate(cEcg ecg), erstellt das AC-Template und speichert dieses in der Db ab
+ * bool	singleCheck(temp1, temp2), vergleicht zwei Templates mit LDA
+ * bool intraCheck(temp), erstellt über dem template einen Intraindividuellen Check
+ * bool interCheck(temp), erstellt über dem template einen Interindividuellen Check
+ * bool kreuzCheck(temp), erstellt über dem template einen Kreuz-Check
  */
 //---------------------------------------------------------------------------
 #include <vcl.h>
@@ -20,14 +23,27 @@
 #pragma resource "*.dfm"
 TfmAlg1 *fmAlg1;
 //---------------------------------------------------------------------------
-bool DlgAlgorithmus1(TForm* Papa, cEcg& ecg)
+bool LoadAlgorithmus1(TForm* Papa)
 	{
 	TfmAlg1* Form = new TfmAlg1(Papa);
 	bool rc = false;
 
 	if (Form)
 		{
-		rc = Form->Execute(ecg);
+		rc = Form->Startup();
+		delete Form;
+		}
+	return rc;
+	}
+//---------------------------------------------------------------------------
+bool DlgAlgorithmus1(TForm* Papa, cEcg& ecg1, cEcg& ecg2)
+	{
+	TfmAlg1* Form = new TfmAlg1(Papa);
+	bool rc = false;
+
+	if (Form)
+		{
+		rc = Form->Execute(ecg1, ecg2);
 		delete Form;
 		}
 	return rc;
@@ -46,10 +62,18 @@ double GetAlgorithmus1(TForm* Papa, cEcg& ecg)
 	return rc;
 	}
 //---------------------------------------------------------------------------
-bool TfmAlg1::Execute(cEcg& ecg) //für den Aufruf mit Formular
+bool TfmAlg1::Startup() //für den Aufruf mit Formular aber EKG selber laden
 	{
 	bPrintMsg = true;
-	fecg = &ecg;
+	ShowModal();
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmAlg1::Execute(cEcg& ecg1, cEcg& ecg2) //für den Aufruf mit Formular
+	{
+	bPrintMsg = true;
+	fecg1 = &ecg1;
+	fecg2 = &ecg2;
 	ShowModal();
 	return true;
 	}
@@ -57,18 +81,20 @@ bool TfmAlg1::Execute(cEcg& ecg) //für den Aufruf mit Formular
 double TfmAlg1::GetIdent(cEcg& ecg) //für Direktaufruf von außen, ohne Formular
 	{
 	bPrintMsg = false;
-	fecg = &ecg;
+	fecg1 = &ecg;
 	FindBeat();
-	return CalcRange();
+	//return CalcRange();
 	}
 //---------------------------------------------------------------------------
 __fastcall TfmAlg1::TfmAlg1(TComponent* Owner)
-	: TForm(Owner)
+	: TForm(Owner), fecg1 (new cEcg), fecg2 (new cEcg)
 	{
 	}
 //---------------------------------------------------------------------------
 __fastcall TfmAlg1::~TfmAlg1()
 	{
+	delete fecg1;
+	delete fecg2;
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmAlg1::FormShow(TObject *Sender)
@@ -80,7 +106,10 @@ void __fastcall TfmAlg1::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
 
-	farray.redisplay(fecg->data.data_array, img);
+	/*
+	farray.redisplay(fecg1->data.data_array, img1);
+	farray.redisplay(fecg2->data.data_array, img2);
+	*/
 	Print("Algorithmus 1 ist startbereit");
 	}
 //---------------------------------------------------------------------------
@@ -111,59 +140,105 @@ void TfmAlg1::Print(char* msg, ...)
 	va_end(argptr);
 	}
 //---------------------------------------------------------------------------
+bool TfmAlg1::GetEcgs() //Schritt 0
+	{
+	Print("--------------------------------------------");
+	Print("0 - Lade EKG-Daten...");
+
+	String delim = "\t";
+	if (!fecg1->data.getFile(edInput1->Text, delim, -1, -1))
+		{
+		Print("\t...## Fehler aufgetreten: %d, %s", fecg1->data.error_code, fecg1->data.error_msg);
+		return false;
+		}
+
+	if (!fecg2->data.getFile(edInput2->Text, delim, -1, -1))
+		{
+		Print("\t...## Fehler aufgetreten: %d, %s", fecg2->data.error_code, fecg2->data.error_msg);
+		return false;
+		}
+	Print("\t...EKG-Daten eingelesen");
+
+	if (!fecg1->data.buildDerivates())
+		{
+		Print("## Fehler aufgetreten: %d, %s", fecg1->data.error_code, fecg1->data.error_msg);
+		return false;
+		}
+
+	if (!fecg2->data.buildDerivates())
+		{
+		Print("## Fehler aufgetreten: %d, %s", fecg2->data.error_code, fecg2->data.error_msg);
+		return false;
+		}
+	Print("\t...Ableitungen gebildet");
+
+	farray.redisplay(fecg1->data.data_array, img1);
+	farray.redisplay(fecg2->data.data_array, img2);
+	Print("\t...EKG-Daten dargestellt");
+
+	Print("...EKG-Daten geladen");
+	return true;
+	}
+//---------------------------------------------------------------------------
 bool TfmAlg1::FindBeat() //Schritt 1
 	{
 	Print("--------------------------------------------");
-	Print("1 - Berechne Standardherzschlag auf 1. Ableitung...");
+	Print("1 - Berechne Standardherzschläge auf 1. Ableitung...");
 
-	fecg->heart.calcAvBeat(fecg->data.derivate1.deriv_array);
-	Print("\t...durchschnittlichen Herzschlag ermittelt");
+	fecg1->heart.calcAvBeat(fecg1->data.derivate1.deriv_array);
+	fecg2->heart.calcAvBeat(fecg2->data.derivate1.deriv_array);
+	Print("\t...durchschnittliche Herzschläge ermittelt");
 
-	farray.redisplay(fecg->heart.avBeat, imgBeat);
-	Print("\t...Herzschlag dargestellt");
+	farray.redisplay(fecg1->heart.avBeat, imgBeat1);
+	farray.redisplay(fecg2->heart.avBeat, imgBeat2);
+	Print("\t...Herzschläge dargestellt");
 
 	Print("...Standardherzschlag ermittelt.");
 	return true;
 	}
 //---------------------------------------------------------------------------
-double TfmAlg1::CalcRange() //Schritt 2
+bool TfmAlg1::CreateTemplate() //Schritt 2
 	{
 	Print("--------------------------------------------");
-	Print("2 - Berechne Maximalausschlag...");
+	Print("2 - Erstelle AC-Templates auf Standardherzschlägen...");
 
-	sArrayCha	fc;
-	farray.resetValues(fecg->heart.avBeat, fc);
-	double range = (fc.MaxWert - fc.MinWert) * 1000;
-	Print("\t...Wert berechnet: %.6f", range);
+	if (!fac1.createTemplate(fecg1->heart.avBeat))
+		{
+		Print("\t...## Fehler: Template 1 konnte nicht berechnet werden!");
+		return false;
+		}
+	else
+		Print("\t...Template 1 berechnet");
 
-	edRange->Text = String(range);
-	Print("...Maximalausschlag ermittelt.");
-	return range;
+	if (!fac2.createTemplate(fecg2->heart.avBeat))
+		{
+		Print("\t...## Fehler: Template 2 konnte nicht berechnet werden!");
+		return false;
+		}
+	else
+		Print("\t...Template 2 berechnet");
+
+	farray.redisplay(fac1.temp, imgTemplate1);
+	farray.redisplay(fac2.temp, imgTemplate2);
+	Print("\t...Templates dargestellt");
+
+	Print("...AC-Template erstellt");
+	return true;
 	}
 //---------------------------------------------------------------------------
-void TfmAlg1::DoClass() //Schritt 3
+bool TfmAlg1::Klassifizierung() //Schritt 3
 	{
 	Print("--------------------------------------------");
-	Print("3 - Verwendet Klasse cAlg1...");
+	Print("3 - Klassifizierung durchführen...");
 
-	if (!falg.setupData(*fecg))
-		{
-		Print("\t### FEHLER: %s", falg.error_msg);
-		return;
-		}
+	double conformity = flda.singleCheck(fac1.temp, fac2.temp, cbMode->ItemIndex);
+	Print("\t...Conformity berechnet");
 
-	if (!falg.buildRandomPoints(20))
-		{
-		Print("\t### FEHLER: %s", falg.error_msg);
-		return;
-		}
-	Print("\t...Random Points berechnet");
+	ed3->Text = String(conformity);
+	Print("\t...Conformity = %.4f", conformity);
 
-	String r = falg.getRandomPoints();
-	Print("\t...Random Points: %s", r.c_str());
-
-	edAlg1->Text = r;
-	Print("...Klassenberechnungen abgeschlossen");
+    Print("...Klassifizierung durchgeführt");
+	return true;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -190,6 +265,11 @@ void __fastcall TfmAlg1::FormKeyPress(TObject *Sender, char &Key)
 		}
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmAlg1::btStep0Click(TObject *Sender)
+	{
+	GetEcgs();
+	}
+//---------------------------------------------------------------------------
 void __fastcall TfmAlg1::btStep1Click(TObject *Sender)
 	{
 	FindBeat();
@@ -197,12 +277,24 @@ void __fastcall TfmAlg1::btStep1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmAlg1::btStep2Click(TObject *Sender)
 	{
-	Range = CalcRange();
+	CreateTemplate();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmAlg1::btStep3Click(TObject *Sender)
 	{
-	DoClass();
+	Klassifizierung();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmAlg1::btInputfile1Click(TObject *Sender)
+	{
+	if (OpenDialog->Execute())
+		edInput1->Text = OpenDialog->FileName;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmAlg1::btInputfile2Click(TObject *Sender)
+	{
+	if (OpenDialog->Execute())
+		edInput2->Text = OpenDialog->FileName;
 	}
 //---------------------------------------------------------------------------
 

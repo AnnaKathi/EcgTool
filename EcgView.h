@@ -101,8 +101,6 @@ __published:	// IDE-verwaltete Komponenten
 	TMenuItem *Algorithmen1;
 	TMenuItem *estenmitAlg11;
 	TMenuItem *GetValuefromAlg11;
-	TButton *btAC;
-	TButton *btNeu;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -120,8 +118,6 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall Datenanzeigen1Click(TObject *Sender);
 	void __fastcall estenmitAlg11Click(TObject *Sender);
 	void __fastcall GetValuefromAlg11Click(TObject *Sender);
-	void __fastcall btACClick(TObject *Sender);
-	void __fastcall btNeuClick(TObject *Sender);
 
 
 public:

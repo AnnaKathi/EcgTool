@@ -8,25 +8,37 @@
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
 #include <ActnList.hpp>
+#include <Buttons.hpp>
+#include <Dialogs.hpp>
 //---------------------------------------------------------------------------
 #include "classAlg1.h"
 #include "../ecg/classEcg.h"
+#include "../basics/classData.h"
 #include "../basics/classArray.h"
+#include "features/classAC.h"
+#include "classifications/classLDA.h"
 //---------------------------------------------------------------------------
 class TfmAlg1 : public TForm
 {
 private:
-	cAlg1		falg;
-	cEcg*		fecg;
 	cArray		farray;
+	cAlg1		falg;
+	cEcg*		fecg1;
+	cEcg*		fecg2;
+
+	cAC			fac1;
+	cAC			fac2;
+	cLDA		flda;
+	iarray_t	ac_temp1;
+	iarray_t	ac_temp2;
 
 	bool		bPrintMsg;
 	void 		Print(char* msg, ...);
 
-	double		Range;
+	bool		GetEcgs();
 	bool		FindBeat();
-	double		CalcRange();
-	void		DoClass();
+	bool		CreateTemplate();
+	bool		Klassifizierung();
 
 
 __published:	// IDE-verwaltete Komponenten
@@ -37,14 +49,28 @@ __published:	// IDE-verwaltete Komponenten
 	TActionList *ActionList1;
 	TAction *acClose;
 	TButton *Button1;
-	TImage *img;
 	TMemo *Memo;
 	TButton *btStep1;
-	TImage *imgBeat;
+	TImage *imgBeat1;
 	TButton *btStep2;
-	TEdit *edRange;
 	TButton *btStep3;
-	TEdit *edAlg1;
+	TEdit *ed3;
+	TImage *imgTemplate1;
+	TImage *imgBeat2;
+	TImage *imgTemplate2;
+	TImage *img1;
+	TImage *img2;
+	TComboBox *cbMode;
+	TPanel *Panel3;
+	TLabel *Label1;
+	TSpeedButton *btInputfile1;
+	TEdit *edInput1;
+	TPanel *Panel2;
+	TLabel *Label2;
+	TSpeedButton *btInputfile2;
+	TEdit *edInput2;
+	TButton *btStep0;
+	TOpenDialog *OpenDialog;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -53,16 +79,21 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btStep1Click(TObject *Sender);
 	void __fastcall btStep2Click(TObject *Sender);
 	void __fastcall btStep3Click(TObject *Sender);
+	void __fastcall btInputfile1Click(TObject *Sender);
+	void __fastcall btInputfile2Click(TObject *Sender);
+	void __fastcall btStep0Click(TObject *Sender);
 
 public:
 	__fastcall TfmAlg1(TComponent* Owner);
 	__fastcall ~TfmAlg1();
-	bool 		Execute(cEcg& ecg);
+	bool		Startup();
+	bool 		Execute(cEcg& ecg1, cEcg& ecg2);
 	double		GetIdent(cEcg& ecg); //für Direktaufruf von außen
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmAlg1 *fmAlg1;
-bool DlgAlgorithmus1(TForm* Papa, cEcg& ecg);
+bool LoadAlgorithmus1(TForm* Papa);
+bool DlgAlgorithmus1(TForm* Papa, cEcg& ecg1, cEcg& ecg2);
 double GetAlgorithmus1(TForm* Papa, cEcg& ecg);
 //---------------------------------------------------------------------------
 #endif

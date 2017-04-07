@@ -15,10 +15,29 @@ public:
 	cAC(); //! Konstruktor für cAC
 	~cAC(); //! Destruktor für cAC
 
-	iarray_t	buildACOld(iarray_t array);
+	//! Erstellt über dem übergebenen Array eine AC
+	/*! Über dem übergebenen Array wird eine AC erstellt.
+	 *  /param (std::map) array
+	 *  /raturn (std::map) AC-Array
+	 */
 	iarray_t	buildAC(iarray_t array);
 
+	//! Erstellt das AC-Template
+	/*! Aus dem übergebenen Standardherzschlag wird eine AC gebildet und
+	 *  zurückgegeben. Der aufrufende Algorithmus kümmert sich um Auswertung
+	 *  und Speicherung usw.\r\n
+	 *  Intern ruft createTemplate() die Funktion buildAC() auf.
+	 *  /param (std::map) Standardherzschlag
+	 *  /return (boll) true wenn erfolgreich, sonst false
+	 */
+	bool		createTemplate(iarray_t herzschlag);
+
+__property iarray_t temp = { read=get_template };
 private:
+	iarray_t	ftemplate;
+	iarray_t	get_template();
+
+	iarray_t	buildACOld(iarray_t array);
 	};
 //---------------------------------------------------------------------------
 #endif

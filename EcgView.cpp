@@ -52,12 +52,6 @@ void __fastcall TfmEcg::tStartupTimer(TObject *Sender)
 	tStartup->Enabled = false;
 	ftools.FormLoad(this);
 
-	if (!ftools.IsDebug())
-		{
-		btAC->Visible  = false;
-		btNeu->Visible = false;
-		}
-
 	btRead->SetFocus();
 	}
 //---------------------------------------------------------------------------
@@ -389,51 +383,13 @@ void __fastcall TfmEcg::Datenanzeigen1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmEcg::estenmitAlg11Click(TObject *Sender)
 	{
-	DlgAlgorithmus1(this, ecg);
+	//todo DlgAlgorithmus1(this, ecg);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmEcg::GetValuefromAlg11Click(TObject *Sender)
 	{
 	double val = GetAlgorithmus1(this, ecg);
 	Application->MessageBox(String(val).c_str(), "Erkennungswert", MB_OK);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmEcg::btACClick(TObject *Sender)
-	{
-	//Autokorrelation ALT, Originalalgorithmus von Website
-	btAC->Enabled = false;
-	cAC ac;
-	iarray_t arr = ac.buildACOld(ecg.data.data_array);
-	farray.display(arr, imgEcg);
-	Application->ProcessMessages();
-
-	arr = ac.buildACOld(ecg.data.derivate1.deriv_array);
-	farray.display(arr, imgDeriv1);
-	Application->ProcessMessages();
-
-	arr = ac.buildACOld(ecg.data.derivate2.deriv_array);
-	farray.display(arr, imgDeriv2);
-	Application->ProcessMessages();
-	btAC->Enabled = true;
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmEcg::btNeuClick(TObject *Sender)
-	{
-	//Autokorrelation, eigener Algorithmus
-	btNeu->Enabled = false;
-	cAC ac;
-	iarray_t arr = ac.buildAC(ecg.data.data_array);
-	farray.display(arr, imgEcg);
-	Application->ProcessMessages();
-
-	arr = ac.buildAC(ecg.data.derivate1.deriv_array);
-	farray.display(arr, imgDeriv1);
-	Application->ProcessMessages();
-
-	arr = ac.buildAC(ecg.data.derivate2.deriv_array);
-	farray.display(arr, imgDeriv2);
-	Application->ProcessMessages();
-	btNeu->Enabled = true;
 	}
 //---------------------------------------------------------------------------
 

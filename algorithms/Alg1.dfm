@@ -3,7 +3,7 @@ object fmAlg1: TfmAlg1
   Top = 0
   Caption = 'Algorithmus 1: Grundlagentest'
   ClientHeight = 651
-  ClientWidth = 735
+  ClientWidth = 791
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,33 +18,58 @@ object fmAlg1: TfmAlg1
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object img: TImage
+  object imgBeat1: TImage
     Left = 8
-    Top = 56
-    Width = 457
-    Height = 73
+    Top = 287
+    Width = 257
+    Height = 66
   end
-  object imgBeat: TImage
+  object imgTemplate1: TImage
     Left = 8
-    Top = 215
+    Top = 447
+    Width = 257
+    Height = 66
+  end
+  object imgBeat2: TImage
+    Left = 271
+    Top = 287
+    Width = 257
+    Height = 66
+  end
+  object imgTemplate2: TImage
+    Left = 271
+    Top = 447
+    Width = 257
+    Height = 66
+  end
+  object img1: TImage
+    Left = 8
+    Top = 143
+    Width = 257
+    Height = 66
+  end
+  object img2: TImage
+    Left = 271
+    Top = 143
     Width = 257
     Height = 66
   end
   object pnInfo: TPanel
     Left = 0
     Top = 0
-    Width = 735
+    Width = 791
     Height = 41
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 735
     DesignSize = (
-      735
+      791
       41)
     object mInfo: TMemo
       Left = 8
       Top = 10
-      Width = 719
+      Width = 775
       Height = 25
       Anchors = [akLeft, akTop, akRight]
       BorderStyle = bsNone
@@ -60,16 +85,18 @@ object fmAlg1: TfmAlg1
       ParentColor = True
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 719
     end
   end
   object Panel1: TPanel
     Left = 0
     Top = 610
-    Width = 735
+    Width = 791
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 735
     object Button1: TButton
       Left = 8
       Top = 8
@@ -80,7 +107,7 @@ object fmAlg1: TfmAlg1
     end
   end
   object Memo: TMemo
-    Left = 480
+    Left = 536
     Top = 41
     Width = 255
     Height = 569
@@ -88,47 +115,127 @@ object fmAlg1: TfmAlg1
     ReadOnly = True
     ScrollBars = ssBoth
     TabOrder = 2
+    ExplicitLeft = 480
   end
   object btStep1: TButton
     Left = 8
-    Top = 184
+    Top = 256
     Width = 257
     Height = 25
-    Caption = 'Schritt 1 - Standardherzschlag finden'
+    Caption = 'Schritt 1 - Standardherzschl'#228'ge finden'
     TabOrder = 3
     OnClick = btStep1Click
   end
   object btStep2: TButton
     Left = 8
-    Top = 336
+    Top = 416
     Width = 257
     Height = 25
-    Caption = 'Schritt 2 - Berechne Range'
+    Caption = 'Schritt 2 - Templates bilden'
     TabOrder = 4
     OnClick = btStep2Click
   end
-  object edRange: TEdit
-    Left = 288
-    Top = 338
-    Width = 121
-    Height = 21
-    TabOrder = 5
-  end
   object btStep3: TButton
     Left = 8
-    Top = 408
+    Top = 568
     Width = 257
     Height = 25
-    Caption = 'Schritt 3 - Klasse cAlg1'
-    TabOrder = 6
+    Caption = 'Schritt 3 - Klassifizierung'
+    TabOrder = 5
     OnClick = btStep3Click
   end
-  object edAlg1: TEdit
-    Left = 288
-    Top = 410
+  object ed3: TEdit
+    Left = 407
+    Top = 570
     Width = 121
     Height = 21
+    TabOrder = 6
+  end
+  object cbMode: TComboBox
+    Left = 271
+    Top = 570
+    Width = 130
+    Height = 21
+    Style = csDropDownList
+    ItemHeight = 13
+    ItemIndex = 0
     TabOrder = 7
+    Text = 'Intraindividuell'
+    Items.Strings = (
+      'Intraindividuell'
+      'Interindividuell'
+      'Kreuzvergleich')
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 47
+    Width = 265
+    Height = 49
+    BevelOuter = bvNone
+    TabOrder = 8
+    object Label1: TLabel
+      Left = 9
+      Top = 2
+      Width = 68
+      Height = 13
+      Caption = 'EKG Inputfile1'
+    end
+    object btInputfile1: TSpeedButton
+      Left = 239
+      Top = 14
+      Width = 23
+      Height = 23
+      Caption = '...'
+      OnClick = btInputfile1Click
+    end
+    object edInput1: TEdit
+      Left = 8
+      Top = 15
+      Width = 229
+      Height = 21
+      TabOrder = 0
+      Text = 'edInput1'
+    end
+  end
+  object Panel2: TPanel
+    Left = 268
+    Top = 47
+    Width = 265
+    Height = 49
+    BevelOuter = bvNone
+    TabOrder = 9
+    object Label2: TLabel
+      Left = 3
+      Top = 0
+      Width = 68
+      Height = 13
+      Caption = 'EKG Inputfile2'
+    end
+    object btInputfile2: TSpeedButton
+      Left = 239
+      Top = 14
+      Width = 23
+      Height = 23
+      Caption = '...'
+      OnClick = btInputfile2Click
+    end
+    object edInput2: TEdit
+      Left = 8
+      Top = 15
+      Width = 229
+      Height = 21
+      TabOrder = 0
+      Text = 'edInput2'
+    end
+  end
+  object btStep0: TButton
+    Left = 8
+    Top = 90
+    Width = 257
+    Height = 25
+    Caption = 'Schritt 0 - EKGs einlesen'
+    TabOrder = 10
+    OnClick = btStep0Click
   end
   object tStartup: TTimer
     Enabled = False
@@ -144,5 +251,10 @@ object fmAlg1: TfmAlg1
       Caption = '&Schlie'#223'en'
       OnExecute = acCloseExecute
     end
+  end
+  object OpenDialog: TOpenDialog
+    Filter = 'TXT-Dateien|*.txt|CSV-Dateien|*.csv'
+    Left = 504
+    Top = 8
   end
 end

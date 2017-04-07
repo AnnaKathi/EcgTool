@@ -5,6 +5,7 @@
 #include "algorithms/EinzelAusw.h"
 #include "database/classMySql.h"
 #include "database/DbPersonen.h"
+#include "algorithms/Alg1.h"
 #include "Diseases.h"
 #include "EcgView.h"
 #include "Session.h"
@@ -119,7 +120,8 @@ void __fastcall TfmMain::acCreateSeesionExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acSingleAuswExecute(TObject *Sender)
 	{
-	DlgEinzelAuswertung(this);
+	LoadAlgorithmus1(this);
+	//todo später: DlgEinzelAuswertung(this);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acGesAuswExecute(TObject *Sender)
