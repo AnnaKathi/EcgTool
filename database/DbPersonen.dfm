@@ -135,8 +135,6 @@ object fmData: TfmData
     Color = clWhite
     ParentBackground = False
     TabOrder = 4
-    ExplicitLeft = 279
-    ExplicitTop = 51
   end
   object Panel5: TPanel
     Left = 1061
@@ -164,5 +162,12 @@ object fmData: TfmData
       Caption = '&Neu laden'
       OnExecute = acRefreshExecute
     end
+  end
+  object tCallback: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = tCallbackTimer
+    Left = 472
+    Top = 8
   end
 end

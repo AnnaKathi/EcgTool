@@ -359,37 +359,4 @@ void __fastcall TfmEcg::btMovAvClick(TObject *Sender)
 	sendClick(btMovAv);
 	}
 //---------------------------------------------------------------------------
-//------ Menuklicks --------------------------------------------------------
-//---------------------------------------------------------------------------
-void __fastcall TfmEcg::Importschemata2Click(TObject *Sender)
-	{
-	Importschema();
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmEcg::DateninMySQLDatenbankspeichern1Click(TObject *Sender)
-	{
-	MySqlSave();
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmEcg::Beenden1Click(TObject *Sender)
-	{
-	Close();
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmEcg::Datenanzeigen1Click(TObject *Sender)
-	{
-	//todo ?? DlgDatabase(this);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmEcg::estenmitAlg11Click(TObject *Sender)
-	{
-	//todo DlgAlgorithmus1(this, ecg);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmEcg::GetValuefromAlg11Click(TObject *Sender)
-	{
-	double val = GetAlgorithmus1(this, ecg);
-	Application->MessageBox(String(val).c_str(), "Erkennungswert", MB_OK);
-	}
-//---------------------------------------------------------------------------
 

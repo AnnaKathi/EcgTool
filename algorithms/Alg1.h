@@ -71,6 +71,7 @@ __published:	// IDE-verwaltete Komponenten
 	TEdit *edInput2;
 	TButton *btStep0;
 	TOpenDialog *OpenDialog;
+	TButton *btAlgLib;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -82,6 +83,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btInputfile1Click(TObject *Sender);
 	void __fastcall btInputfile2Click(TObject *Sender);
 	void __fastcall btStep0Click(TObject *Sender);
+	void __fastcall btAlgLibClick(TObject *Sender);
 
 public:
 	__fastcall TfmAlg1(TComponent* Owner);

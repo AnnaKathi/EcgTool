@@ -91,6 +91,16 @@ void TfmBaseDiseases::MsgBox(char* msg, ...)
 /******************   Funktionen: public   *********************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
+void TfmBaseDiseases::LockFilter()
+	{
+	pnFilter->Enabled = false;
+	}
+//---------------------------------------------------------------------------
+void TfmBaseDiseases::DislockFilter()
+	{
+	pnFilter->Enabled = true;
+	}
+//---------------------------------------------------------------------------
 bool TfmBaseDiseases::ShowData()
 	{
 	if (bInShow) return false; //verhindern, dass sich die Funktion selbst überholt

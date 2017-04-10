@@ -90,17 +90,6 @@ __published:	// IDE-verwaltete Komponenten
 	TEdit *edBisSample;
 	TCheckBox *cxDropBegin;
 	TTimer *tDetails;
-	TMainMenu *MainMenu;
-	TMenuItem *Importschemata1;
-	TMenuItem *Importschemata2;
-	TMenuItem *DateninMySQLDatenbankspeichern1;
-	TMenuItem *N1;
-	TMenuItem *Beenden1;
-	TMenuItem *Datenbank1;
-	TMenuItem *Datenanzeigen1;
-	TMenuItem *Algorithmen1;
-	TMenuItem *estenmitAlg11;
-	TMenuItem *GetValuefromAlg11;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -112,12 +101,6 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btMovAvClick(TObject *Sender);
 	void __fastcall btCutClick(TObject *Sender);
 	void __fastcall tDetailsTimer(TObject *Sender);
-	void __fastcall Beenden1Click(TObject *Sender);
-	void __fastcall Importschemata2Click(TObject *Sender);
-	void __fastcall DateninMySQLDatenbankspeichern1Click(TObject *Sender);
-	void __fastcall Datenanzeigen1Click(TObject *Sender);
-	void __fastcall estenmitAlg11Click(TObject *Sender);
-	void __fastcall GetValuefromAlg11Click(TObject *Sender);
 
 
 public:

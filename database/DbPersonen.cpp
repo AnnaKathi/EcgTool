@@ -35,6 +35,8 @@ __fastcall TfmData::TfmData(TComponent* Owner)
 
 	String file = String(path) + "\\EcgTool.ini";
 	Ini = new TIniFile(file);
+
+	bSelected = false;
 	}
 //---------------------------------------------------------------------------
 __fastcall TfmData::~TfmData()
@@ -60,6 +62,8 @@ void __fastcall TfmData::tStartupTimer(TObject *Sender)
 
 	fmDiseases = CreateDiseaseForm(this, pnDiseases);
 	fmPeople   = CreatePeopleForm(this, pnPeople);
+	fmPeople->setCallback(*tCallback);
+
 	fmEcg      = CreateEcgForm(this, pnEcgData);
 
 	fmPeople->ShowData();
@@ -120,6 +124,15 @@ void __fastcall TfmData::acRefreshExecute(TObject *Sender)
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
+/*******   Callback-Funktionen für die baseListen   ************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+void TfmData::OnSelectPerson()
+	{
+	//todo
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
 /**************   Meldungen vom Formular   *********************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
@@ -135,6 +148,35 @@ void __fastcall TfmData::FormKeyPress(TObject *Sender, char &Key)
 void __fastcall TfmData::btCloseClick(TObject *Sender)
 	{
 	acCloseExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmData::tCallbackTimer(TObject *Sender)
+	{
+	//TEST
+	tCallback->Enabled = false;
+	if (!bSelected)
+		{
+		int person = fmPeople->iPerson;
+		if (person <= 0) return;
+
+		//Diseases und EKG-Daten anpassen
+		fmDiseases->LockFilter();
+		fmDiseases->ShowDataOfPerson(person);
+
+		fmEcg->LockFilter();
+		fmEcg->ShowEcgOf(person);
+		bSelected = true;
+		}
+	else
+		{
+		//Auswahl wieder aufheben
+		fmDiseases->DislockFilter();
+		fmDiseases->ShowData();
+
+		fmEcg->DislockFilter();
+		fmEcg->ShowData();
+		bSelected = false;
+		}
 	}
 //---------------------------------------------------------------------------
 

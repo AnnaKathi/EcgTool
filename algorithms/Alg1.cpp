@@ -297,4 +297,9 @@ void __fastcall TfmAlg1::btInputfile2Click(TObject *Sender)
 		edInput2->Text = OpenDialog->FileName;
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmAlg1::btAlgLibClick(TObject *Sender)
+	{
+	flda.testAlgLib();
+	}
+//---------------------------------------------------------------------------
 

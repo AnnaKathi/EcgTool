@@ -24,6 +24,7 @@ private:
 	TIniFile*		Ini;
 	cTools			ftools;
 
+	bool	   			bSelected;
 	TfmBasePeople*		fmPeople;
 	TfmBaseDiseases*	fmDiseases;
 	TfmBaseEcg*			fmEcg;
@@ -31,6 +32,8 @@ private:
 	inline void StartJob(int max);
 	inline void TickJob(int tick = 1);
 	inline void EndJob();
+
+	void 	OnSelectPerson();
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -49,6 +52,7 @@ __published:	// IDE-verwaltete Komponenten
 	TPanel *pnDiseases;
 	TSplitter *Splitter2;
 	TPanel *Panel5;
+	TTimer *tCallback;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -56,11 +60,13 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btCloseClick(TObject *Sender);
 	void __fastcall acCloseExecute(TObject *Sender);
 	void __fastcall acRefreshExecute(TObject *Sender);
+	void __fastcall tCallbackTimer(TObject *Sender);
 
 public:
 	__fastcall TfmData(TComponent* Owner);
 	__fastcall TfmData::~TfmData();
 	bool 		Execute();
+
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmData *fmData;

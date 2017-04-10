@@ -21,6 +21,9 @@ struct sFilterPeople
 class TfmBasePeople : public TForm
 {
 private:
+	TTimer*		tCallback;
+	bool		bSelected;
+	
 	void 		snapTo(TWinControl* container, TAlign align);
 	void 		MsgBox(char* msg, ...);
 
@@ -45,13 +48,16 @@ __published:	// IDE-verwaltete Komponenten
 	TAction *acFilter;
 	TAction *acAdd;
 	TAction *acDel;
-	TPopupMenu *PopupMenuDiseases;
+	TPopupMenu *PopupMenu;
 	TTimer *tStartup;
 	TAction *acChange;
 	TMenuItem *Erkrankunghinzufgen1;
 	TMenuItem *Erkrankungndern1;
 	TMenuItem *Erkrankunglschen1;
 	TListView *lvPeople;
+	TAction *acSelect;
+	TMenuItem *N1;
+	TMenuItem *Personauswhlen1;
 	void __fastcall acAddExecute(TObject *Sender);
 	void __fastcall acDelExecute(TObject *Sender);
 	void __fastcall acFilterExecute(TObject *Sender);
@@ -63,10 +69,14 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall edIdVonExit(TObject *Sender);
 	void __fastcall edNameChange(TObject *Sender);
 	void __fastcall lvPeopleDblClick(TObject *Sender);
+	void __fastcall acSelectExecute(TObject *Sender);
 
 public:
 	__fastcall TfmBasePeople(TComponent* Owner, TWinControl* Container, TColor color);
 
+	int			iPerson;
+	bool		setCallback(TTimer& timer);
+	
 	bool		ShowData();
 };
 //---------------------------------------------------------------------------

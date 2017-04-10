@@ -1,3 +1,5 @@
+//see http://sebastianraschka.com/Articles/2014_pca_step_by_step.html for
+//a step-by-step introduction to PCA
 //---------------------------------------------------------------------------
 #pragma hdrstop
 

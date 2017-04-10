@@ -21,6 +21,8 @@ TfmBasePeople* CreatePeopleForm(TForm* caller, TWinControl* container)
 __fastcall TfmBasePeople::TfmBasePeople(TComponent* Owner, TWinControl* Container, TColor color)
 	: TForm(Owner)
 	{
+	tCallback = NULL;
+	bSelected = false;
 	if (Container)
 		snapTo(Container, alClient);
 	}
@@ -90,6 +92,11 @@ void TfmBasePeople::MsgBox(char* msg, ...)
 /***************************************************************************/
 /******************   Funktionen: public   *********************************/
 /***************************************************************************/
+//---------------------------------------------------------------------------
+bool TfmBasePeople::setCallback(TTimer& timer)
+	{
+	tCallback = &timer;
+	}
 //---------------------------------------------------------------------------
 bool TfmBasePeople::ShowData()
 	{
@@ -199,7 +206,7 @@ void __fastcall TfmBasePeople::acDelExecute(TObject *Sender)
 			"Die Datenbank  meldet: %s", id, fmysql.diseases.error_msg);
 		}
 	else
-    	ShowData();
+		ShowData();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmBasePeople::acFilterExecute(TObject *Sender)
@@ -211,6 +218,23 @@ void __fastcall TfmBasePeople::acFilterExecute(TObject *Sender)
 		}
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmBasePeople::acSelectExecute(TObject *Sender)
+	{
+	//den Ident der ausgewählten Person an das aufrufende Formular zurückgeben
+	//todo: als Callback auslegen
+	if (!tStartup->Tag == 1) return;
+	if (lvPeople->SelCount <= 0) return;
+	if (tCallback == NULL) return;
+	
+	TListItem* item = lvPeople->Selected;
+	int id = (int)item->Data;
+	if (id <= 0) return;
+
+	bSelected = true;
+	iPerson = id;
+	tCallback->Enabled = true;
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   Meldungen vom Formular   *********************************/
 /***************************************************************************/
@@ -220,13 +244,23 @@ void __fastcall TfmBasePeople::lvPeopleClick(TObject *Sender)
 	TListItem* item = lvPeople->Selected;
 	if (item)
 		{
-		acDel->Enabled = true;
+		acDel->Enabled    = true;
 		acChange->Enabled = true;
+		acSelect->Enabled = true;
 		}
 	else
 		{
-		acDel->Enabled = false;
+		acDel->Enabled    = false;
 		acChange->Enabled = false;
+		acSelect->Enabled = false;
+		}
+
+	//ggf. getroffene Auswahl wieder aufheben
+	if (bSelected)
+		{
+		bSelected = false;
+		ShowData();
+		tCallback->Enabled = true;
 		}
 	}
 //---------------------------------------------------------------------------
@@ -244,7 +278,8 @@ void __fastcall TfmBasePeople::lvPeopleDblClick(TObject *Sender)
 	{
 	TListItem* item = lvPeople->Selected;
 	if (item)
-		acChangeExecute(Sender);
+    	acSelectExecute(Sender);
+		//obsolete acChangeExecute(Sender);
 	}
 //---------------------------------------------------------------------------
 

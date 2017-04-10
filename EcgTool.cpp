@@ -9,13 +9,13 @@ USEFORM("Details.cpp", fmDetails);
 USEFORM("Diseases.cpp", fmDiseases);
 USEFORM("Session.cpp", fmSession);
 USEFORM("database\DbPersonen.cpp", fmData);
+USEFORM("database\baseforms\basePeople.cpp", fmBasePeople);
 USEFORM("database\baseforms\baseDiseases.cpp", fmBaseDiseases);
 USEFORM("database\baseforms\baseEcgData.cpp", fmBaseEcg);
 USEFORM("database\toolforms\addPeople.cpp", fmPerson);
 USEFORM("database\toolforms\addDiseases.cpp", fmDis);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\Alg1.cpp", fmAlg1);
-USEFORM("database\baseforms\basePeople.cpp", fmBasePeople);
 //---------------------------------------------------------------------------
 #include "database/classMySql.h"
 cMySql fmysql;

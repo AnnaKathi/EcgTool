@@ -76,6 +76,8 @@ __published:	// IDE-verwaltete Komponenten
 public:
 	__fastcall TfmBaseEcg(TComponent* Owner, TWinControl* Container, TColor color);
 
+	void		LockFilter();
+	void		DislockFilter();
 	bool		ShowData();
 	bool		ShowEcgOf(int person);
 };

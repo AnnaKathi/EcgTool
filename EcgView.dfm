@@ -2,7 +2,7 @@ object fmEcg: TfmEcg
   Left = 0
   Top = 0
   Caption = 'Auswertung EKG-Daten - EcgTool'
-  ClientHeight = 519
+  ClientHeight = 539
   ClientWidth = 1092
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11,7 +11,6 @@ object fmEcg: TfmEcg
   Font.Name = 'Tahoma'
   Font.Style = []
   KeyPreview = True
-  Menu = MainMenu
   OldCreateOrder = False
   Position = poDesktopCenter
   OnClose = FormClose
@@ -34,11 +33,12 @@ object fmEcg: TfmEcg
     Left = 337
     Top = 45
     Width = 4
-    Height = 474
+    Height = 494
     Align = alLeft
     Shape = bsLeftLine
     ExplicitLeft = 456
     ExplicitTop = 51
+    ExplicitHeight = 474
   end
   object pnInfo: TPanel
     Left = 0
@@ -76,13 +76,14 @@ object fmEcg: TfmEcg
     Left = 0
     Top = 45
     Width = 337
-    Height = 474
+    Height = 494
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitHeight = 474
     DesignSize = (
       337
-      474)
+      494)
     object Bevel4: TBevel
       Left = 0
       Top = 49
@@ -214,13 +215,14 @@ object fmEcg: TfmEcg
     end
     object memo: TMemo
       Left = 0
-      Top = 248
+      Top = 268
       Width = 337
       Height = 226
       Align = alBottom
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 12
+      ExplicitTop = 248
     end
     object pbJob: TProgressBar
       Left = 8
@@ -322,12 +324,13 @@ object fmEcg: TfmEcg
     Left = 341
     Top = 45
     Width = 751
-    Height = 474
+    Height = 494
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
+    ExplicitHeight = 474
     object imgEcg: TImage
       Left = 0
       Top = 0
@@ -410,46 +413,5 @@ object fmEcg: TfmEcg
     OnTimer = tDetailsTimer
     Left = 456
     Top = 8
-  end
-  object MainMenu: TMainMenu
-    Left = 488
-    Top = 8
-    object Importschemata1: TMenuItem
-      Caption = 'EKG-Daten'
-      object Importschemata2: TMenuItem
-        Caption = 'Importschemata...'
-        Enabled = False
-        OnClick = Importschemata2Click
-      end
-      object DateninMySQLDatenbankspeichern1: TMenuItem
-        Caption = 'Daten in MySQL-Datenbank speichern...'
-        OnClick = DateninMySQLDatenbankspeichern1Click
-      end
-      object N1: TMenuItem
-        Caption = '-'
-      end
-      object Beenden1: TMenuItem
-        Caption = 'Beenden'
-        OnClick = Beenden1Click
-      end
-    end
-    object Datenbank1: TMenuItem
-      Caption = 'Datenbank'
-      object Datenanzeigen1: TMenuItem
-        Caption = 'Daten anzeigen...'
-        OnClick = Datenanzeigen1Click
-      end
-    end
-    object Algorithmen1: TMenuItem
-      Caption = 'Algorithmen'
-      object estenmitAlg11: TMenuItem
-        Caption = 'Testen mit Alg 1'
-        OnClick = estenmitAlg11Click
-      end
-      object GetValuefromAlg11: TMenuItem
-        Caption = 'Get Value from Alg 1'
-        OnClick = GetValuefromAlg11Click
-      end
-    end
   end
 end

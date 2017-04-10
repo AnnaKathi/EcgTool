@@ -92,6 +92,16 @@ void TfmBaseEcg::MsgBox(char* msg, ...)
 /******************   Funktionen: public   *********************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
+void TfmBaseEcg::LockFilter()
+	{
+	pnFilter->Enabled = false;
+	}
+//---------------------------------------------------------------------------
+void TfmBaseEcg::DislockFilter()
+	{
+	pnFilter->Enabled = true;
+	}
+//---------------------------------------------------------------------------
 bool TfmBaseEcg::ShowData()
 	{
 	if (bInShow) return false; //verhindern, dass sich die Funktion selbst überholt

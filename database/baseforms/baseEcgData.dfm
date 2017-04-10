@@ -152,7 +152,7 @@ object fmBaseEcg: TfmBaseEcg
       Width = 106
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 3
       OnChange = cbPositionChange
     end

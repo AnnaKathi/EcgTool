@@ -69,6 +69,9 @@ public:
 
 	bool		ShowData();
 	bool		ShowDataOfPerson(int person);
+
+	void		LockFilter();
+	void		DislockFilter();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmBaseDiseases *fmBaseDiseases;

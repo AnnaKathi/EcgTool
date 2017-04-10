@@ -118,14 +118,11 @@ object fmBasePeople: TfmBasePeople
     MultiSelect = True
     ReadOnly = True
     RowSelect = True
+    PopupMenu = PopupMenu
     TabOrder = 1
     ViewStyle = vsReport
     OnClick = lvPeopleClick
     OnDblClick = lvPeopleDblClick
-    ExplicitLeft = 1
-    ExplicitTop = 88
-    ExplicitWidth = 271
-    ExplicitHeight = 448
   end
   object ActionListDiseases: TActionList
     Left = 272
@@ -148,8 +145,13 @@ object fmBasePeople: TfmBasePeople
       Enabled = False
       OnExecute = acChangeExecute
     end
+    object acSelect: TAction
+      Caption = 'Person ausw'#228'hlen'
+      Enabled = False
+      OnExecute = acSelectExecute
+    end
   end
-  object PopupMenuDiseases: TPopupMenu
+  object PopupMenu: TPopupMenu
     Left = 304
     Top = 24
     object Erkrankunghinzufgen1: TMenuItem
@@ -160,6 +162,12 @@ object fmBasePeople: TfmBasePeople
     end
     object Erkrankunglschen1: TMenuItem
       Action = acDel
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object Personauswhlen1: TMenuItem
+      Action = acSelect
     end
   end
   object tStartup: TTimer

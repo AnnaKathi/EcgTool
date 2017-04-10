@@ -1,3 +1,5 @@
+//http://sebastianraschka.com/Articles/2014_python_lda.html
+//---------------------------------------------------------------------------
 /* LDA - Linear Discriminant Analysis (Klassifizierungsalg.)
  * ==================================
  * AKTUELL NUR SIMULATION !!
@@ -49,4 +51,12 @@ double cLDA::singleCheck(iarray_t temp1, iarray_t temp2, int mode)
 	return conformity;
 	}
 //---------------------------------------------------------------------------
-
+bool cLDA::testAlgLib()
+	{
+	//Fünf Schritte nach http://sebastianraschka.com/Articles/2014_python_lda.html
+	/* Aim of LDA: The goal is to project a dataset onto a lower-dimensional
+	 * space with good class-separability in order avoid overfitting.
+	 */
+	
+	}
+//---------------------------------------------------------------------------

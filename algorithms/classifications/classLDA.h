@@ -14,6 +14,7 @@ public:
 	~cLDA();
 
 	double		singleCheck(iarray_t temp1, iarray_t temp2, int mode);
+	bool		testAlgLib();
 
 private:
 

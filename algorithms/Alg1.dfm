@@ -62,7 +62,6 @@ object fmAlg1: TfmAlg1
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 735
     DesignSize = (
       791
       41)
@@ -85,7 +84,6 @@ object fmAlg1: TfmAlg1
       ParentColor = True
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 719
     end
   end
   object Panel1: TPanel
@@ -96,7 +94,6 @@ object fmAlg1: TfmAlg1
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 735
     object Button1: TButton
       Left = 8
       Top = 8
@@ -104,6 +101,15 @@ object fmAlg1: TfmAlg1
       Height = 25
       Action = acClose
       TabOrder = 0
+    end
+    object btAlgLib: TButton
+      Left = 536
+      Top = 8
+      Width = 177
+      Height = 25
+      Caption = 'AlgLib - FisherLDA'
+      TabOrder = 1
+      OnClick = btAlgLibClick
     end
   end
   object Memo: TMemo
@@ -115,7 +121,6 @@ object fmAlg1: TfmAlg1
     ReadOnly = True
     ScrollBars = ssBoth
     TabOrder = 2
-    ExplicitLeft = 480
   end
   object btStep1: TButton
     Left = 8
