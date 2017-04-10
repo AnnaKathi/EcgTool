@@ -15,6 +15,7 @@
 #include "../ecg/classEcg.h"
 #include "../basics/classData.h"
 #include "../basics/classArray.h"
+#include "../basics/classTools.h"
 #include "features/classAC.h"
 #include "classifications/classLDA.h"
 //---------------------------------------------------------------------------
@@ -22,6 +23,7 @@ class TfmAlg1 : public TForm
 {
 private:
 	cArray		farray;
+	cTools		ftools;
 	cAlg1		falg;
 	cEcg*		fecg1;
 	cEcg*		fecg2;
@@ -71,7 +73,8 @@ __published:	// IDE-verwaltete Komponenten
 	TEdit *edInput2;
 	TButton *btStep0;
 	TOpenDialog *OpenDialog;
-	TButton *btAlgLib;
+	TBevel *Bevel1;
+	TBevel *Bevel2;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -83,7 +86,6 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btInputfile1Click(TObject *Sender);
 	void __fastcall btInputfile2Click(TObject *Sender);
 	void __fastcall btStep0Click(TObject *Sender);
-	void __fastcall btAlgLibClick(TObject *Sender);
 
 public:
 	__fastcall TfmAlg1(TComponent* Owner);

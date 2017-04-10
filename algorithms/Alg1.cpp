@@ -105,17 +105,13 @@ void __fastcall TfmAlg1::FormShow(TObject *Sender)
 void __fastcall TfmAlg1::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
-
-	/*
-	farray.redisplay(fecg1->data.data_array, img1);
-	farray.redisplay(fecg2->data.data_array, img2);
-	*/
+	ftools.FormLoad(this);
 	Print("Algorithmus 1 ist startbereit");
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmAlg1::FormClose(TObject *Sender, TCloseAction &Action)
 	{
-	//
+	ftools.FormSave(this);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -268,6 +264,7 @@ void __fastcall TfmAlg1::FormKeyPress(TObject *Sender, char &Key)
 void __fastcall TfmAlg1::btStep0Click(TObject *Sender)
 	{
 	GetEcgs();
+	GetEcgs();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmAlg1::btStep1Click(TObject *Sender)
@@ -295,11 +292,6 @@ void __fastcall TfmAlg1::btInputfile2Click(TObject *Sender)
 	{
 	if (OpenDialog->Execute())
 		edInput2->Text = OpenDialog->FileName;
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmAlg1::btAlgLibClick(TObject *Sender)
-	{
-	flda.testAlgLib();
 	}
 //---------------------------------------------------------------------------
 

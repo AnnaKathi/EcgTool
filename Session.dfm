@@ -1,8 +1,8 @@
 object fmSession: TfmSession
   Left = 0
   Top = 0
-  Caption = 'Session anlegen'
-  ClientHeight = 676
+  Caption = 'Session anlegen: SIMULATION'
+  ClientHeight = 487
   ClientWidth = 467
   Color = clInfoBk
   Font.Charset = DEFAULT_CHARSET

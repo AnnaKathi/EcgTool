@@ -1,7 +1,7 @@
 object fmAlg1: TfmAlg1
   Left = 0
   Top = 0
-  Caption = 'Algorithmus 1: Grundlagentest'
+  Caption = 'Algorithmus 1: SIMULATION'
   ClientHeight = 651
   ClientWidth = 791
   Color = clBtnFace
@@ -54,6 +54,23 @@ object fmAlg1: TfmAlg1
     Width = 257
     Height = 66
   end
+  object Bevel1: TBevel
+    Left = 0
+    Top = 41
+    Width = 791
+    Height = 8
+    Align = alTop
+    Shape = bsTopLine
+  end
+  object Bevel2: TBevel
+    Left = 0
+    Top = 602
+    Width = 791
+    Height = 8
+    Align = alBottom
+    Shape = bsBottomLine
+    ExplicitTop = 49
+  end
   object pnInfo: TPanel
     Left = 0
     Top = 0
@@ -102,25 +119,18 @@ object fmAlg1: TfmAlg1
       Action = acClose
       TabOrder = 0
     end
-    object btAlgLib: TButton
-      Left = 536
-      Top = 8
-      Width = 177
-      Height = 25
-      Caption = 'AlgLib - FisherLDA'
-      TabOrder = 1
-      OnClick = btAlgLibClick
-    end
   end
   object Memo: TMemo
     Left = 536
-    Top = 41
+    Top = 49
     Width = 255
-    Height = 569
+    Height = 553
     Align = alRight
     ReadOnly = True
     ScrollBars = ssBoth
     TabOrder = 2
+    ExplicitTop = 41
+    ExplicitHeight = 569
   end
   object btStep1: TButton
     Left = 8

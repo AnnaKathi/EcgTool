@@ -102,6 +102,8 @@ void __fastcall TfmSession::acSaveExecute(TObject *Sender)
 	save(edS1); save(edS2); save(edS3);
 	save(edT1); save(edT2); save(edT3);
 	save(edG1); save(edG2); save(edG3);
+
+	Close();
 	}
 //---------------------------------------------------------------------------
 bool TfmSession::save(TEdit* ed)
