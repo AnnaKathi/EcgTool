@@ -8,6 +8,7 @@
 #include "algorithms/Alg1.h"
 #include "Diseases.h"
 #include "EcgView.h"
+#include "DataAnalysis.h"
 #include "Session.h"
 #include "Main.h"
 //---------------------------------------------------------------------------
@@ -127,6 +128,11 @@ void __fastcall TfmMain::acSingleAuswExecute(TObject *Sender)
 void __fastcall TfmMain::acGesAuswExecute(TObject *Sender)
 	{
 	//
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acLookIntoDataExecute(TObject *Sender)
+	{
+	DlgAnalyseData(this);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

@@ -48,6 +48,8 @@ __published:	// IDE-verwaltete Komponenten
 	TBevel *Bevel2;
 	TAction *acGesAusw;
 	TBitBtn *BitBtn5;
+	TBitBtn *BitBtn6;
+	TAction *acLookIntoData;
 	void __fastcall acLookIntoECGExecute(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -60,6 +62,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acCreateSeesionExecute(TObject *Sender);
 	void __fastcall acShowDataExecute(TObject *Sender);
 	void __fastcall acGesAuswExecute(TObject *Sender);
+	void __fastcall acLookIntoDataExecute(TObject *Sender);
 
 public:
 	__fastcall TfmMain(TComponent* Owner);
