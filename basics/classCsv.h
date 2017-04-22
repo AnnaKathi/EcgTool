@@ -11,13 +11,13 @@
 /* spezielle Fehlercodes von cCsv */
 enum CSV_ERROR_CODES
 	{
-	EC_OK,				// no error, all things done well
-	EC_NOFILE,			// no file specified
-	EC_FNF,				// file not found
-	EC_FPSEEK,			// Filepointer konnte nicht zurückgesetzt werden
-	EC_NOFP,			// Filepointer ist Null
-	EC_NOROW,			// keien (weitere) Zeile vorhanden
-	EC_NOFIELD,			// kein (weiteres) Feld vorhanden
+	EC_OK,		  // no error, all things done well
+	EC_NOFILE,	  // no file specified
+	EC_FNF,		  // file not found
+	EC_FPSEEK,	  // Filepointer konnte nicht zurückgesetzt werden
+	EC_NOFP,	  // Filepointer ist Null
+	EC_NOROW,	  // keien (weitere) Zeile vorhanden
+	EC_NOFIELD,	  // kein (weiteres) Feld vorhanden
 	};
 //---------------------------------------------------------------------------
 /* Struktur für die auszulesenden EKG-Daten */
@@ -49,7 +49,7 @@ public:
 		 *		ist ';'
 		 *  /return (bool) true im Erfolgsfall, sonst false
 		 */
-		bool 		OpenFile(String file, String delim = ';');
+		bool 		OpenFile(String file, eDatFormat format, String delim = ';');
 
 		//! Datei schließen
 		/*! Schließt die Datei und gibt den FilePointer frei, sofern gesetzt.
@@ -150,9 +150,11 @@ private:
 	int			LineCount;
 	char		rowbuf[128];
 	char		Delim[2];
+	eDatFormat	Format;
 	cEcgLine	EcgLine;
 
 	bool 		Skip();
+	bool		SkipRow();
 	bool 		ParseLine();
 	};
 //---------------------------------------------------------------------------

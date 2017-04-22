@@ -80,7 +80,6 @@ object fmEcg: TfmEcg
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitHeight = 474
     DesignSize = (
       337
       494)
@@ -175,7 +174,7 @@ object fmEcg: TfmEcg
         Caption = 'EKG Inputfile'
       end
       object btInputfile: TSpeedButton
-        Left = 265
+        Left = 222
         Top = 14
         Width = 23
         Height = 23
@@ -189,10 +188,17 @@ object fmEcg: TfmEcg
         Height = 13
         Caption = 'Trenner'
       end
+      object Label2: TLabel
+        Left = 255
+        Top = 1
+        Width = 34
+        Height = 13
+        Caption = 'Format'
+      end
       object edInputfile: TEdit
         Left = 8
         Top = 15
-        Width = 256
+        Width = 214
         Height = 21
         TabOrder = 0
         Text = 'edInputfile'
@@ -204,13 +210,23 @@ object fmEcg: TfmEcg
         Height = 21
         Style = csDropDownList
         ItemHeight = 13
-        ItemIndex = 0
-        TabOrder = 1
-        Text = ';'
+        TabOrder = 2
         Items.Strings = (
           ';'
           ','
           '\t')
+      end
+      object cbFormat: TComboBox
+        Left = 253
+        Top = 15
+        Width = 36
+        Height = 21
+        Style = csDropDownList
+        ItemHeight = 13
+        TabOrder = 1
+        Items.Strings = (
+          '---'
+          'ADS')
       end
     end
     object memo: TMemo
@@ -222,7 +238,6 @@ object fmEcg: TfmEcg
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 12
-      ExplicitTop = 248
     end
     object pbJob: TProgressBar
       Left = 8
@@ -330,7 +345,6 @@ object fmEcg: TfmEcg
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
-    ExplicitHeight = 474
     object imgEcg: TImage
       Left = 0
       Top = 0

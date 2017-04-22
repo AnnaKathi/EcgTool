@@ -5,7 +5,6 @@
 #include <classes.hpp>
 #include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
-#include "definitions.h"
 #include "../basics/classBase.h"
 #include "classMySql_Work.h"
 //---------------------------------------------------------------------------

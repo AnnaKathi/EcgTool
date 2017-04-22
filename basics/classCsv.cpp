@@ -20,7 +20,7 @@ cCsv::~cCsv()
 /******************   Funktionen   *****************************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-bool cCsv::OpenFile(String file, String delim)
+bool cCsv::OpenFile(String file, eDatFormat format, String delim) //delim wurde vorbesetzt mit ;
 	{
 	if (file == "")
 		{
@@ -34,6 +34,7 @@ bool cCsv::OpenFile(String file, String delim)
 		}
 
 	strcpy(Delim, delim.c_str());
+	Format = format;
 
 	LineCount = -1;
 
@@ -85,15 +86,42 @@ bool cCsv::StartAt(int sample)
 //---------------------------------------------------------------------------
 bool cCsv::Skip()
 	{
-	//erste Zeile überlesen (Überschriften)
+	//erste(n) Zeilen ggf. überlesen (Überschriften usw.)
 	if (fp == NULL)
 		return fail(EC_NOFP, "(skip) keine Datei vorhanden");
 
+	bool fehler = false;
+	if (Format == formatNone)
+		{
+		if (!SkipRow())
+			fehler = true;
+		}
+
+	else if (Format == formatADS)
+		{
+		//im ADS-Format sind 12 Zeilen zu überlesen
+		//(elf für allg Infos und eine für Überschriften)
+		for (int i = 0; i < 12; i++)
+			{
+			if (!SkipRow())
+				{
+				fehler = true;
+				break;
+				}
+			LineCount++;
+			}
+		}
+
+	return !fehler;
+	}
+//---------------------------------------------------------------------------
+bool cCsv::SkipRow()
+	{
+	//eine Zeile überspringen
 	if (fgets(rowbuf, sizeof(rowbuf)-1, fp) == NULL)
 		return fail(EC_NOROW, "(skip) keine Zeile einzulesen");
-
 	LineCount++;
-	return true;
+	return ok();
 	}
 //---------------------------------------------------------------------------
 bool cCsv::First()
@@ -157,11 +185,28 @@ bool cCsv::ParseLine()
 
 		val = atof(value);
 
-		switch (i)
+		if (Format == formatNone)
 			{
-			case 0: EcgLine.sample = val; break;
-			case 1: EcgLine.i      = val; break;
-			default: break;
+			//1. Spalte = SampleNo, 2. Spalte = LeadI usw.
+			switch (i)
+				{
+				case 0: EcgLine.sample = val; break;
+				case 1: EcgLine.i      = val; break;
+				default: break;
+				}
+			}
+
+		else if (Format == formatADS)
+			{
+			//1. Spalte = LeadI, 2. Spalte = LeadII, usw.
+			switch (i)
+				{
+				case 0: EcgLine.sample = LineCount;
+						EcgLine.i      = val;
+						break;
+				case 1: /*EcgLine.ii = val;*/ break;
+				default: break;
+				}
 			}
 
 		strcpy(rowbuf, pt+1);

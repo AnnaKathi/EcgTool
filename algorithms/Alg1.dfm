@@ -129,8 +129,6 @@ object fmAlg1: TfmAlg1
     ReadOnly = True
     ScrollBars = ssBoth
     TabOrder = 2
-    ExplicitTop = 41
-    ExplicitHeight = 569
   end
   object btStep1: TButton
     Left = 8

@@ -10,7 +10,9 @@
 #include <ActnList.hpp>
 #include <Buttons.hpp>
 #include <Dialogs.hpp>
+#include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
+#include "definitions.h"
 #include "ecg/classEcg.h"
 #include "basics/classTools.h"
 //---------------------------------------------------------------------------
@@ -18,7 +20,17 @@ class TfmAnalysis : public TForm
 {
 private:
 	cTools		ftools;
+	cArray		farray;
 	cEcg		fecg;
+
+	String		Delim;
+	eDatFormat	Format;
+	bool		bFinished;
+
+	bool		DoPath(String verz);
+	bool 		DoFile(String file, String name);
+	void		Values();
+	void		Resort(bool asc);
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -30,18 +42,22 @@ __published:	// IDE-verwaltete Komponenten
 	TBevel *Bevel2;
 	TActionList *ActionList1;
 	TAction *acClose;
-	TPanel *Panel3;
-	TLabel *Label1;
-	TSpeedButton *btInputfile;
-	TLabel *Label3;
-	TEdit *edInputfile;
-	TComboBox *cbDelim;
 	TBevel *Bevel3;
 	TOpenDialog *OpenDialog;
 	TAction *acLoadFile;
 	TAction *acReadFile;
+	TPanel *Panel3;
+	TLabel *Label1;
+	TSpeedButton *btInputfile;
+	TLabel *Label3;
+	TLabel *Label2;
+	TEdit *edInput;
+	TComboBox *cbDelim;
+	TComboBox *cbFormat;
+	TButton *btRead;
+	TListView *lvData;
+	TAction *acExport;
 	TButton *Button2;
-	TImage *imgData;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -50,6 +66,9 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btInputfileClick(TObject *Sender);
 	void __fastcall acLoadFileExecute(TObject *Sender);
 	void __fastcall acReadFileExecute(TObject *Sender);
+	void __fastcall acExportExecute(TObject *Sender);
+	void __fastcall lvDataCompare(TObject *Sender, TListItem *Item1,
+          TListItem *Item2, int Data, int &Compare);
 
 public:
 	__fastcall TfmAnalysis(TComponent* Owner);

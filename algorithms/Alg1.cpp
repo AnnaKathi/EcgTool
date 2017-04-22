@@ -142,13 +142,13 @@ bool TfmAlg1::GetEcgs() //Schritt 0
 	Print("0 - Lade EKG-Daten...");
 
 	String delim = "\t";
-	if (!fecg1->data.getFile(edInput1->Text, delim, -1, -1))
+	if (!fecg1->data.getFile(edInput1->Text, formatADS, delim, -1, -1))
 		{
 		Print("\t...## Fehler aufgetreten: %d, %s", fecg1->data.error_code, fecg1->data.error_msg);
 		return false;
 		}
 
-	if (!fecg2->data.getFile(edInput2->Text, delim, -1, -1))
+	if (!fecg2->data.getFile(edInput2->Text, formatADS, delim, -1, -1))
 		{
 		Print("\t...## Fehler aufgetreten: %d, %s", fecg2->data.error_code, fecg2->data.error_msg);
 		return false;

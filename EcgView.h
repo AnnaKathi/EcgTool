@@ -90,6 +90,8 @@ __published:	// IDE-verwaltete Komponenten
 	TEdit *edBisSample;
 	TCheckBox *cxDropBegin;
 	TTimer *tDetails;
+	TLabel *Label2;
+	TComboBox *cbFormat;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);

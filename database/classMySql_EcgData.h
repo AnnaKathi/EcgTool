@@ -5,7 +5,6 @@
 #include <classes.hpp>
 //---------------------------------------------------------------------------
 #include "../basics/classBase.h"
-#include "definitions.h"
 #include "classMySql_Work.h"
 //---------------------------------------------------------------------------
 struct sEcgData

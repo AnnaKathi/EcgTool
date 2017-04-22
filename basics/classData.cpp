@@ -67,11 +67,11 @@ void cData::resetValues()
 /******************   Grundfunktionen   ************************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-bool cData::getFile(String file, String delim, int vonMsec, int bisMsec)
+bool cData::getFile(String file, eDatFormat format, String delim, int vonMsec, int bisMsec)
 	{
 	farr.clear();
 
-	if (!fcsv->OpenFile(file, delim))
+	if (!fcsv->OpenFile(file, format, delim))
 		return fail(fcsv->error_code, fcsv->error_msg);
 
 	if (!fcsv->StartAt(vonMsec))

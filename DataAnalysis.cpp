@@ -2,6 +2,10 @@
 #include <vcl.h>
 #pragma hdrstop
 
+#include <stdio.h>
+#include <time.h>
+#include <systdate.h>
+
 #include "DataAnalysis.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -30,6 +34,7 @@ bool TfmAnalysis::Execute()
 __fastcall TfmAnalysis::TfmAnalysis(TComponent* Owner)
 	: TForm(Owner)
 	{
+	bFinished = false;
 	}
 //---------------------------------------------------------------------------
 __fastcall TfmAnalysis::~TfmAnalysis()
@@ -56,6 +61,131 @@ void __fastcall TfmAnalysis::FormClose(TObject *Sender, TCloseAction &Action)
 /******************   Funktionen   *****************************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
+bool TfmAnalysis::DoPath(String path)
+	{
+	String search = path + "\\*.*";
+	HANDLE fHandle;
+	WIN32_FIND_DATA wfd;
+
+	//Erste Datei im Verzeichnis holen: aufgrund von "alten Zeiten" ist das
+	//erste immer ein "." kann also ignoriert werden.
+	fHandle=FindFirstFile(search.c_str(), &wfd);
+
+	//Ergebnis Nummer 2 ist auch uninteressant (ist ".."):
+	FindNextFile(fHandle, &wfd);
+
+	char f[MAX_PATH];
+	char e[12];
+	bool fehler = false;
+	while (FindNextFile(fHandle, &wfd))
+		{
+		if (wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+			{
+			//Verzeichnis gefunden, ggf. rekursiver Aufruf
+			//Prüfen, ob es sich nicht um ein zu überspringendes Verzeichnis handelt
+			String newpath = path + "\\" + wfd.cFileName;
+			if (!DoPath(newpath))
+				{
+				fehler = true;
+				break;
+				}
+			}
+		else
+			{
+			strcpy(f, wfd.cFileName);
+			char* pt = strrchr(f, '.');
+			if (pt)
+				*pt = 0;
+			else //kein Punkt vorhanden -> ungültige Datei
+				continue;
+
+			sprintf(e, "%.11s", pt+1);
+
+			if (String(e).LowerCase() != "txt")
+				continue;
+
+			String dat = path + "\\" + wfd.cFileName;
+			if (!DoFile(dat, wfd.cFileName))
+				{
+				fehler = true;
+				break;
+				}
+			}
+		}
+
+	FindClose(fHandle);
+	return !fehler;
+	}
+//---------------------------------------------------------------------------
+bool TfmAnalysis::DoFile(String file, String name)
+	{
+	//Datei einlesen und auswerten
+	cData& data = fecg.data;
+	if (!data.getFile(file, Format, Delim, 1, 3000))
+		{
+		//todo Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
+		return false;
+		}
+
+	//-- Erste und zweite Ableitung
+	if (!data.buildDerivates())
+		{
+		//todo Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
+		return false;
+		}
+
+	farray.resetValues(data.derivate1.deriv_array, data.derivate1.farr_charac);
+	double max = data.derivate1.farr_charac.MaxWert;
+	double min = data.derivate1.farr_charac.MinWert;
+	double rgn = max - min;
+
+	char minval[32]; sprintf(minval, "%.8f", min);
+	char maxval[32]; sprintf(maxval, "%.8f", max);
+	char rgnval[32]; sprintf(rgnval, "%.8f", rgn);
+
+	TListItem* item = lvData->Items->Add();
+	item->Caption = name;
+	item->SubItems->Add(String(minval));
+	item->SubItems->Add(String(maxval));
+	item->SubItems->Add(String(rgnval));
+
+	return true;
+	}
+//---------------------------------------------------------------------------
+void TfmAnalysis::Values()
+	{
+	//Minimum feststellen, dann alle daran messen
+	if (lvData->Items->Count <= 0) return;
+	TListItem* item = lvData->Items->Item[0];
+	double min = atof(item->SubItems->Strings[2].c_str());
+
+	double wert;
+	for (int i = 0; i < lvData->Items->Count; i++)
+		{
+		item = lvData->Items->Item[i];
+		wert = atof(item->SubItems->Strings[2].c_str());
+
+		if (wert < min)
+			min = wert;
+		}
+
+	double faktor; char fak[32];
+	for (int i = 0; i < lvData->Items->Count; i++)
+		{
+		item = lvData->Items->Item[i];
+		wert = atof(item->SubItems->Strings[2].c_str());
+
+		if (wert == min) faktor = 1;
+		else faktor = wert / min;
+		
+		sprintf(fak, "%.3f", faktor);
+		item->SubItems->Add(String(fak));
+		}
+
+	bFinished = true;
+	lvData->AlphaSort();
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /********************   Actions   ******************************************/
 /***************************************************************************/
@@ -68,34 +198,30 @@ void __fastcall TfmAnalysis::acCloseExecute(TObject *Sender)
 void __fastcall TfmAnalysis::acLoadFileExecute(TObject *Sender)
 	{
 	if (OpenDialog->Execute())
-		edInputfile->Text = OpenDialog->FileName;
+		edInput->Text = OpenDialog->FileName;
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmAnalysis::acReadFileExecute(TObject *Sender)
 	{
-	String ecgFile = edInputfile->Text;
-	if (ecgFile == "") return;
+	String ecgPath = edInput->Text;
+	if (ecgPath == "") return;
 
 	//todo, über dyn Importschemata wählen lassen
-	String delim = ";";
 	if (cbDelim->ItemIndex == 1) //Komma
-		delim = ",";
+		Delim = ",";
 	else if (cbDelim->ItemIndex == 2) //Tab
-		delim = "\t";
+		Delim = "\t";
+	else
+		Delim = ";";
 
-	int vonSamp = 1;
-	int bisSamp = 3000;
+	if (cbFormat->ItemIndex == 1)
+		Format = formatADS;
+	else
+		Format = formatNone;
 
-	//-- EKG-Daten
-	cData& data = fecg.data;
-	if (!data.getFile(ecgFile, delim, vonSamp, bisSamp))
-		{
-		//Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
-		int bp = 0;
-		return;
-		}
-
-	data.redisplay(imgData);
+	lvData->Items->Clear();
+	if (DoPath(ecgPath))
+    	Values();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -114,6 +240,26 @@ void __fastcall TfmAnalysis::FormKeyPress(TObject *Sender, char &Key)
 void __fastcall TfmAnalysis::btInputfileClick(TObject *Sender)
 	{
 	acLoadFileExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmAnalysis::acExportExecute(TObject *Sender)
+	{
+	//
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmAnalysis::lvDataCompare(TObject *Sender, TListItem *Item1,
+	  TListItem *Item2, int Data, int &Compare)
+	{
+	if (!bFinished) return;
+	double wert1 = atof(Item1->SubItems->Strings[3].c_str());
+	double wert2 = atof(Item2->SubItems->Strings[3].c_str());
+
+	if (wert1 == wert2)
+		Compare = 0;
+	else if (wert1 < wert2)
+		Compare = -1;
+	else
+    	Compare = 1;
 	}
 //---------------------------------------------------------------------------
 

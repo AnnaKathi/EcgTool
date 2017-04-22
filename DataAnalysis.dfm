@@ -49,12 +49,6 @@ object fmAnalysis: TfmAnalysis
     ExplicitTop = 49
     ExplicitWidth = 539
   end
-  object imgData: TImage
-    Left = 8
-    Top = 152
-    Width = 460
-    Height = 121
-  end
   object pnInfo: TPanel
     Left = 0
     Top = 0
@@ -64,8 +58,6 @@ object fmAnalysis: TfmAnalysis
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitLeft = -10
-    ExplicitWidth = 549
     DesignSize = (
       476
       41)
@@ -87,7 +79,6 @@ object fmAnalysis: TfmAnalysis
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 533
     end
   end
   object Panel1: TPanel
@@ -98,20 +89,26 @@ object fmAnalysis: TfmAnalysis
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = -10
-    ExplicitWidth = 549
     DesignSize = (
       476
       41)
     object Button1: TButton
-      Left = 393
+      Left = 9
       Top = 6
       Width = 75
       Height = 25
       Action = acClose
       Anchors = [akTop, akRight]
       TabOrder = 0
-      ExplicitLeft = 466
+    end
+    object Button2: TButton
+      Left = 393
+      Top = 6
+      Width = 75
+      Height = 25
+      Action = acExport
+      Anchors = [akTop, akRight]
+      TabOrder = 1
     end
   end
   object Panel3: TPanel
@@ -122,18 +119,16 @@ object fmAnalysis: TfmAnalysis
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = -8
-    ExplicitTop = 145
-    ExplicitWidth = 539
+    ExplicitTop = 91
     object Label1: TLabel
       Left = 9
       Top = 2
-      Width = 62
+      Width = 101
       Height = 13
-      Caption = 'EKG Inputfile'
+      Caption = 'EKG Inputverzeichnis'
     end
     object btInputfile: TSpeedButton
-      Left = 407
+      Left = 222
       Top = 14
       Width = 23
       Height = 23
@@ -141,43 +136,102 @@ object fmAnalysis: TfmAnalysis
       OnClick = btInputfileClick
     end
     object Label3: TLabel
-      Left = 433
+      Left = 291
       Top = 1
       Width = 38
       Height = 13
       Caption = 'Trenner'
     end
-    object edInputfile: TEdit
+    object Label2: TLabel
+      Left = 255
+      Top = 1
+      Width = 34
+      Height = 13
+      Caption = 'Format'
+    end
+    object edInput: TEdit
       Left = 8
       Top = 15
-      Width = 397
+      Width = 214
       Height = 21
       TabOrder = 0
-      Text = 'edInputfile'
+      Text = 'edInput'
     end
     object cbDelim: TComboBox
-      Left = 434
+      Left = 292
       Top = 15
       Width = 36
       Height = 21
       Style = csDropDownList
       ItemHeight = 13
-      ItemIndex = 0
-      TabOrder = 1
-      Text = ';'
+      TabOrder = 2
       Items.Strings = (
         ';'
         ','
         '\t')
     end
+    object cbFormat: TComboBox
+      Left = 253
+      Top = 15
+      Width = 36
+      Height = 21
+      Style = csDropDownList
+      ItemHeight = 13
+      TabOrder = 1
+      Items.Strings = (
+        '---'
+        'ADS')
+    end
+    object btRead: TButton
+      Left = 352
+      Top = 13
+      Width = 105
+      Height = 25
+      Action = acReadFile
+      TabOrder = 3
+    end
   end
-  object Button2: TButton
-    Left = 8
-    Top = 104
-    Width = 105
-    Height = 25
-    Action = acReadFile
+  object lvData: TListView
+    Left = 0
+    Top = 98
+    Width = 476
+    Height = 394
+    Align = alClient
+    Columns = <
+      item
+        Caption = 'Datei'
+        Width = 175
+      end
+      item
+        Alignment = taRightJustify
+        Caption = '1. Abl Min'
+        Width = 70
+      end
+      item
+        Alignment = taRightJustify
+        Caption = '1. Abl Max'
+        Width = 70
+      end
+      item
+        Alignment = taRightJustify
+        Caption = '1. Abl Range'
+        Width = 70
+      end
+      item
+        Alignment = taRightJustify
+        Caption = 'Bewertung'
+        Width = 80
+      end>
+    GridLines = True
+    ReadOnly = True
+    RowSelect = True
+    SortType = stBoth
     TabOrder = 3
+    ViewStyle = vsReport
+    OnCompare = lvDataCompare
+    ExplicitTop = 96
+    ExplicitWidth = 305
+    ExplicitHeight = 129
   end
   object tStartup: TTimer
     Enabled = False
@@ -200,6 +254,10 @@ object fmAnalysis: TfmAnalysis
     object acReadFile: TAction
       Caption = 'Datei &einlesen'
       OnExecute = acReadFileExecute
+    end
+    object acExport: TAction
+      Caption = '&Export'
+      OnExecute = acExportExecute
     end
   end
   object OpenDialog: TOpenDialog

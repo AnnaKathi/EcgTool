@@ -28,8 +28,8 @@ bool cArray::resetValues(iarray_t array, sArrayCha& cha)
 	iarray_itr itr = array.begin();
 	int key = itr->first;
 	ilist_t& v = itr->second;
-	float zeit = v[0];
-	float wert = v[1];
+	double zeit = v[0];
+	double wert = v[1];
 
 	cha.VonIdx  = 0;
 	cha.VonMsec = zeit;	cha.BisMsec = zeit;
@@ -120,24 +120,27 @@ bool cArray::display(iarray_t array, TImage* img)
 		return fail(1, "Reset-Values war nicht möglich.");
 
 	//--- Anzahl der x- und y-Werte ausrechnen
-	float range_x = farr_charac.BisIdx  - farr_charac.VonIdx;
-	float range_y = farr_charac.MaxWert - farr_charac.MinWert;
+	double range_x = farr_charac.BisIdx  - farr_charac.VonIdx;
+	double range_y = farr_charac.MaxWert - farr_charac.MinWert;
 
 	if (range_x <= 0) return fail(1, "Die Input-Werte (Index) stimmen nicht");
 	if (range_y <= 0) return fail(1, "Die Input-Werte (Value) stimmen nicht");
 
 	//--- Anpassungfaktoren für x- und y-Achse ausrechnen
-	float factor_x = (float)img->Width / range_x;
-	float factor_y = (float)img->Height / range_y;
+	double factor_x = (double)img->Width / range_x;
+	double factor_y = (double)img->Height / range_y;
 
 	//--> Bild vorbereiten, wird hier nicht gemacht, damit z.B. für den
 	//Standardherzschlag mehrere Kurven übereinander gezeichnet werden können
 	//d.h. das Löschen von gezeichnetem Inhalt liegt in der Verantwortung des
 	//Aufrufenden
 
+	//TEST 22.04.2017 !!
+	bool alteBerechnung = false;
+
 	//--- Map-Werte einzeichnen
 	int x, y1, y2;
-	float val;
+	double val;
 	bool first = true;
 	int count = 0;
 	for (iarray_itr itr = farr.begin(); itr != farr.end(); itr++)
@@ -146,15 +149,35 @@ bool cArray::display(iarray_t array, TImage* img)
 
 		ilist_t& v = itr->second;
 		val = v[1];
-		if (val < 0) val *= -1; //auf positive Werte umrechnen ?
 
-		val -= farr_charac.MinWert; //relativ ausrichten
+		if (alteBerechnung)
+			{
+			if (val < 0) val *= -1; //auf positive Werte umrechnen ?
+			val -= farr_charac.MinWert; //relativ ausrichten
 
-		x  = count * factor_x;
-		y1 = val * factor_y;
+			x  = count * factor_x;
+			y1 = val * factor_y;
 
-		//Y = 0 ist oben am Bildrand !
-		y2 = img->Height - y1;
+			//Y = 0 ist oben am Bildrand !
+			y2 = img->Height - y1;
+			}
+
+		else //neue Berechnung ab dem 22.04.2017
+			{
+			if (farr_charac.MinWert < 0) //es gibt negative Werte in der Kurve
+				{
+				//MinWert muss mit Null gleichgesetzt werden
+				val += (farr_charac.MinWert * -1);
+				}
+			else //es gubt keine negativen Werte in der Kurve
+				{
+				val -= farr_charac.MinWert; //Kurve relativ unten ausrichten
+				}
+
+			x  = count * factor_x;
+			y1 = val * factor_y;
+			y2 = img->Height - y1; //Y = 0 ist oben am Bildrand !
+			}
 
 		if (first)
 			{
