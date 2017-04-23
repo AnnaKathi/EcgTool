@@ -329,24 +329,54 @@ iarray_t cArray::cut(iarray_t array, int vonMsec, int bisMsec)
 	int key, zeit;
 	int count = 0;
 
-	//reverse Iterator, läuft von hinten nach vorne
-	iarray_t::reverse_iterator itr_rev = farr.rbegin();
-	do
-		{
-		key = itr_rev->first;
-		ilist_t& v = itr_rev->second;
-		zeit = v[0];
-		if (zeit < vonMsec) break;    //Wert liegt nach gewünschtem (reverse) Abschnitt
-		if (zeit > bisMsec)
-			{
-			//Wert liegt vor gewünschtem (reverse) Abschnitt
-			itr_rev++;
-			continue;
-			}
+	bool bUseOldCode = false; //Anna 23.04.17
 
-		farr.erase(key);
-		count++;
-		} while (itr_rev != farr.rend());
+	if (bUseOldCode)
+		{
+		//reverse Iterator, läuft von hinten nach vorne
+		iarray_t::reverse_iterator itr_rev = farr.rbegin();
+		do
+			{
+			key = itr_rev->first;
+			ilist_t& v = itr_rev->second;
+			zeit = v[0];
+
+			if (zeit < vonMsec) break;    //Wert liegt nach gewünschtem (reverse) Abschnitt
+			if (zeit > bisMsec)
+				{
+				//Wert liegt vor gewünschtem (reverse) Abschnitt
+				itr_rev++;
+				continue;
+				}
+
+			farr.erase(key);
+			count++;
+			} while (itr_rev != farr.rend());
+		}
+	else
+		{
+		//neues Array bilden statt das bestehende zu manipulieren
+		iarray_t arr; arr.clear();
+		int count = 0;  double wert;
+		for (iarray_itr itr = farr.begin(); itr != farr.end(); itr++)
+			{
+			key = itr->first;
+			ilist_t& v = itr->second;
+			zeit = v[0];
+			wert = v[1];
+
+			if (zeit >= vonMsec && zeit <= bisMsec)
+				{
+				//Wert liegt im abzuschneidendem Abschnitt -> überspringen
+				continue;
+				}
+
+			arr[count].push_back(zeit);
+			arr[count].push_back(wert);
+			count++;
+			}
+		farr = arr;
+		}
 
 	ok();
 	return farr;

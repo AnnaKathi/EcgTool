@@ -34,6 +34,8 @@ __fastcall TfmEcg::TfmEcg(TComponent* Owner)
 
 	bRun  = false;
 	bStop = false;
+
+	bMausMarking = false;
 	}
 //---------------------------------------------------------------------------
 __fastcall TfmEcg::~TfmEcg()
@@ -253,6 +255,69 @@ void TfmEcg::MovingAv()
 	fmDetails->Renew(ecg);
 	}
 //---------------------------------------------------------------------------
+void TfmEcg::SaveData()
+	{
+	//Die Werte aus dem (bearbeitetem Bild) wieder in die txt-Datei zurückspeichern
+	if (!SaveDialog->Execute()) return;
+	String datname = SaveDialog->FileName;
+
+	FILE* fp = fopen(datname.c_str(), "w");
+	if (!SaveDataHeader(fp)) return;
+
+	iarray_t arr;
+	arr = ecg.data.data_array;
+
+	int zeit; double wert;
+	for (iarray_itr itr = arr.begin(); itr != arr.end(); itr++)
+		{
+		ilist_t& v = itr->second;
+		zeit = v[0];
+		wert = v[1];
+
+        fprintf(fp, "%.12f \t%.12f \t%.12f\n", wert, 0, 0);
+		}
+
+	fclose(fp);
+	Application->MessageBox("Datei wurde gespeichert", "Fertig", MB_OK);
+	}
+//---------------------------------------------------------------------------
+bool TfmEcg::SaveDataHeader(FILE* fp)
+	{
+	if (cbFormat->ItemIndex == 1) //ADS-Format
+		{
+		//12 Kopfzeilen aus der Originaldatei übernehmen
+		String odat = edInputfile->Text;
+		if (!FileExists(odat)) return false;
+
+		FILE* fpo = fopen(odat.c_str(), "r");
+		char rowbuf[128];
+		bool fehler = false;
+		for (int i = 0; i < 12; i++)
+			{
+			if (fgets(rowbuf, sizeof(rowbuf)-1, fp) == NULL)
+				{
+				fprintf(fp, "%d\n", i);
+				/*
+				fehler = true;
+				break;
+				*/
+				}
+			else
+				fprintf(fp, rowbuf);
+			}
+		fclose(fpo);
+		if (fehler) return false;
+		else return true;
+		}
+	else
+		{
+		//Überschriften drucken
+		fprintf(fp, "%s \t%s \t%s \t%s \t%s \t%s", "CH1", "CH2", "CH3", "CH4", "CH5", "CH6");
+		}
+
+	return true; //nur zur Sicherheit, sollte eig schon oben entschieden werden
+	}
+//---------------------------------------------------------------------------
 void TfmEcg::Importschema()
 	{
 	//todo implementieren
@@ -316,7 +381,10 @@ void __fastcall TfmEcg::FormKeyDown(TObject *Sender, WORD &Key,
 void __fastcall TfmEcg::btInputfileClick(TObject *Sender)
 	{
 	if (OpenDialog->Execute())
-    	edInputfile->Text = OpenDialog->FileName;
+		{
+		edInputfile->Text = OpenDialog->FileName;
+		sendClick(btRead);
+		}
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmEcg::laClsClick(TObject *Sender)
@@ -338,6 +406,7 @@ void TfmEcg::sendClick(TButton* bt)
 			case  1: ReadFile(); break;
 			case  2: CutCurve(); break;
 			case  3: MovingAv(); break;
+			case  4: SaveData(); break;
 			//default, nicht nötig
 			}
 
@@ -363,6 +432,81 @@ void __fastcall TfmEcg::btCutClick(TObject *Sender)
 void __fastcall TfmEcg::btMovAvClick(TObject *Sender)
 	{
 	sendClick(btMovAv);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmEcg::btSaveClick(TObject *Sender)
+	{
+	sendClick(btSave);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmEcg::imgEcgMouseDown(TObject *Sender, TMouseButton Button,
+	  TShiftState Shift, int X, int Y)
+	{
+	//mit der maus kann man den Bereich markieren, der gelöscht werden soll
+	//welcher Zeitwert steht an dieser Stelle?
+
+	double prozent = (double)X / (double)imgEcg->Width;
+
+	farray.resetValues(ecg.data.data_array, ecg.data.farr_charac);
+	double max = ecg.data.farr_charac.BisMsec;
+	double zz  = max * prozent;
+
+	int zeit = (int)zz;
+	if (zeit < ecg.data.farr_charac.VonMsec)
+		zeit = ecg.data.farr_charac.VonMsec;
+	else if (zeit > ecg.data.farr_charac.BisMsec)
+		zeit = ecg.data.farr_charac.BisMsec;
+
+	edCutVon->Text = (String)zeit;
+	MausPosBegin = X;
+
+	bMausMarking = true;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmEcg::imgEcgMouseUp(TObject *Sender, TMouseButton Button,
+	  TShiftState Shift, int X, int Y)
+	{
+	double prozent = (double)X / (double)imgEcg->Width;
+
+	farray.resetValues(ecg.data.data_array, ecg.data.farr_charac);
+	double max = ecg.data.farr_charac.BisMsec;
+	double zz  = max * prozent;
+
+	int zeit = (int)zz;
+	if (zeit < ecg.data.farr_charac.VonMsec)
+		zeit = ecg.data.farr_charac.VonMsec;
+	else if (zeit > ecg.data.farr_charac.BisMsec)
+		zeit = ecg.data.farr_charac.BisMsec;
+
+	edCutBis->Text = (String)zeit;
+	MausPosEnde = X;
+
+	bMausMarking = false;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmEcg::imgEcgMouseMove(TObject *Sender, TShiftState Shift,
+	  int X, int Y)
+	{
+	if (!bMausMarking) return;
+	MausCurrPos = X;
+
+	if (MausCurrPos > MausPosBegin)
+		{
+		for (int x = MausPosBegin; x <= MausCurrPos; x++)
+			Line(x, clYellow);
+		}
+	}
+//---------------------------------------------------------------------------
+void TfmEcg::Line(int x, TColor cl)
+	{
+	//diese X-Pos in der angegebenen Farbe anmalen ohne dass die Kurve übermalt wird
+	for (int y = 0; y < imgEcg->Height; y++)
+		{
+		if (imgEcg->Canvas->Pixels[x][y] == clBlack)
+			continue;
+		else
+			imgEcg->Canvas->Pixels[x][y] = cl;
+		}
 	}
 //---------------------------------------------------------------------------
 

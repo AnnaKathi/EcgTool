@@ -273,7 +273,6 @@ object fmEcg: TfmEcg
       Width = 125
       Height = 25
       Caption = '&2 - Kurven schneiden'
-      Enabled = False
       TabOrder = 3
       OnClick = btCutClick
     end
@@ -334,6 +333,16 @@ object fmEcg: TfmEcg
       Caption = 'Anfangswerte '#252'berspringen'
       TabOrder = 10
     end
+    object btSave: TButton
+      Tag = 4
+      Left = 9
+      Top = 237
+      Width = 124
+      Height = 25
+      Caption = '4 - Werte speichern'
+      TabOrder = 14
+      OnClick = btSaveClick
+    end
   end
   object pnClient: TPanel
     Left = 341
@@ -351,6 +360,9 @@ object fmEcg: TfmEcg
       Width = 751
       Height = 152
       Align = alTop
+      OnMouseDown = imgEcgMouseDown
+      OnMouseMove = imgEcgMouseMove
+      OnMouseUp = imgEcgMouseUp
       ExplicitLeft = 2
       ExplicitTop = 2
       ExplicitWidth = 728
@@ -426,6 +438,10 @@ object fmEcg: TfmEcg
     Interval = 100
     OnTimer = tDetailsTimer
     Left = 456
+    Top = 8
+  end
+  object SaveDialog: TSaveDialog
+    Left = 488
     Top = 8
   end
 end

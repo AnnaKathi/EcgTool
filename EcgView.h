@@ -26,7 +26,6 @@ private:
 	TIniFile*	Ini;
 	cTools		ftools;
 	cEcg		ecg;
-//todo	cMySql		fmysql;
 	cArray		farray;
 	cMath		fmath;
 	TfmDetails*	fmDetails;
@@ -35,11 +34,19 @@ private:
 	bool		bRun;
 	bool		bStop;
 
+	bool		bMausMarking;
+	int			MausPosBegin;
+	int			MausCurrPos;
+	int			MausPosEnde;
+	void		Line(int x, TColor cl);
+
 	void 		Print(char* msg, ...);
 	
 	void		ReadFile();
 	void		CutCurve();
 	void		MovingAv();
+	void		SaveData();
+	bool		SaveDataHeader(FILE* fp);
 
 	void		Importschema();
 	void		MySqlSave();
@@ -92,6 +99,8 @@ __published:	// IDE-verwaltete Komponenten
 	TTimer *tDetails;
 	TLabel *Label2;
 	TComboBox *cbFormat;
+	TButton *btSave;
+	TSaveDialog *SaveDialog;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -103,6 +112,13 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btMovAvClick(TObject *Sender);
 	void __fastcall btCutClick(TObject *Sender);
 	void __fastcall tDetailsTimer(TObject *Sender);
+	void __fastcall btSaveClick(TObject *Sender);
+	void __fastcall imgEcgMouseDown(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y);
+	void __fastcall imgEcgMouseUp(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y);
+	void __fastcall imgEcgMouseMove(TObject *Sender, TShiftState Shift, int X,
+          int Y);
 
 
 public:
