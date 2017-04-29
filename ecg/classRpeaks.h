@@ -27,11 +27,22 @@ public:
 	 */
 	iarray_t	find(iarray_t array, TImage* img1);
 
+	bool		reset();
+	int			next();
+	int			prev_rpeak();
+	int			next_rpeak();
+
+__property iarray_t rpeaks = { read=get_rpeaks };
+
 private:
 	cMath*		fmath;
 	cArray*		farray;
 
 	sArrayCha	charac; //todo getter und setter machen
+
+	int			findex;
+	iarray_t	frpeaks;
+	iarray_t	get_rpeaks();
 	};
 //---------------------------------------------------------------------------
 #endif

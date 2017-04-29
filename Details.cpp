@@ -123,13 +123,13 @@ void TfmDetails::DoCurves(iarray_t aDaten)
 	{
 	//-- Originaldaten mit R-Peaks
 	iarray_t rp = ecg->rpeaks.find(aDaten, NULL);
-	farray.displayPoints(aDaten, rp, imgData);
+	farray.redisplayPoints(aDaten, rp, imgData);
 	TickJob();
 
 	//-- Autokorrelation mit R-Peaks
 	iarray_t ac   = fac.buildAC(aDaten);
 	iarray_t rpac = ecg->rpeaks.find(ac, NULL);
-	farray.displayPoints(ac, rpac, imgAC);
+	farray.redisplayPoints(ac, rpac, imgAC);
 	TickJob();
 
 	//-- Herzschläge

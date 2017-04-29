@@ -24,7 +24,7 @@ iarray_t cRpeaks::find(iarray_t array, TImage* img1)
 
 	farray->resetValues(desc, charac);
 
-	//Schwellenwert verwenden, der R-Peak macht vom Herzschlag ca. x% aus
+	//Schwellenwert verwenden, der QRS-Bereich macht vom Herzschlag ca. x% aus
 	float anteil_qrs = 0.025; //todo: vom Benutzer einstellen lassen
 
 	iarray_t peaks; peaks.clear();
@@ -90,11 +90,58 @@ iarray_t cRpeaks::find(iarray_t array, TImage* img1)
 		ix++;
 		}
 
-	return rr;
+	frpeaks = rr;
+	reset();
+	return frpeaks;
+	}
+//---------------------------------------------------------------------------
+bool cRpeaks::reset()
+	{
+	if (frpeaks.size() <= 0)
+		return false;
+
+	findex = -1;
+	return true;
+	}
+//---------------------------------------------------------------------------
+int cRpeaks::next()
+	{
+	//liefert den Zeitwert des nächsten R-Peaks zurück
+	findex++;
+
+	if (findex > frpeaks.size()-1)
+		return -1;
+
+	int zeit = frpeaks[findex][0];
+	return zeit;
+	}
+//---------------------------------------------------------------------------
+int cRpeaks::prev_rpeak()
+	{
+	//den Zeitwert des voherigen R-Peak zurückgeben
+	if (findex <= 0)
+		return -1;
+
+	int zeit = frpeaks[findex-1][0];
+	return zeit;
+	}
+//---------------------------------------------------------------------------
+int cRpeaks::next_rpeak()
+	{
+	//den Zeitwert des nächsten R-Peak zurückgeben
+	if (findex >= frpeaks.size()-1)
+		return -1;
+
+	int zeit = frpeaks[findex+1][0];
+	return zeit;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   private Funktionen   *************************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-
+iarray_t cRpeaks::get_rpeaks()
+	{
+	return frpeaks;
+	}
+//---------------------------------------------------------------------------

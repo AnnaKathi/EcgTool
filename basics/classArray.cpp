@@ -7,6 +7,8 @@
 //---------------------------------------------------------------------------
 cArray::cArray()
 	{
+	set_PointWidth(5);
+	set_PointColor(clBlue);
 	}
 //---------------------------------------------------------------------------
 cArray::~cArray()
@@ -71,17 +73,25 @@ void cArray::clearImg(TImage* img)
 	img->Canvas->Pen->Color = clBlack;
 	}
 //---------------------------------------------------------------------------
-bool cArray::displayPoints(iarray_t curve, iarray_t points, TImage* img)
+bool cArray::redisplayPoints(iarray_t curve, iarray_t points, TImage* img)
 	{
 	//erste Kurve zeichnen
 	if (!redisplay(curve, img)) return false;
+	return displayPoints(curve, points, img);
+	}
+//---------------------------------------------------------------------------
+bool cArray::displayPoints(iarray_t curve, iarray_t points, TImage* img)
+	{
+	farr = curve;
+	if (!resetValues(farr_charac))
+		return fail(1, "Reset-Values war nicht möglich.");
 
 	float range_x  = farr_charac.BisIdx  - farr_charac.VonIdx;
 	float range_y  = farr_charac.MaxWert - farr_charac.MinWert;
 	float factor_x = (float)img->Width / range_x;
 	float factor_y = (float)img->Height / range_y;
 
-	img->Canvas->Brush->Color = clBlue;
+	img->Canvas->Brush->Color = fPointColor;
 
 	float zeit, wert;
 	int x, y;
@@ -95,7 +105,7 @@ bool cArray::displayPoints(iarray_t curve, iarray_t points, TImage* img)
 		x  = zeit * factor_x;
 		y = img->Height - (wert * factor_y);
 
-		img->Canvas->FillRect(Rect(x-5, y-5, x+5, y+5));
+		img->Canvas->FillRect(Rect(x-fPointWidth, y-fPointWidth, x+fPointWidth, y+fPointWidth));
 		}
 
 	img->Canvas->Brush->Color = clBlack;
@@ -382,6 +392,54 @@ iarray_t cArray::cut(iarray_t array, int vonMsec, int bisMsec)
 	return farr;
 	}
 //---------------------------------------------------------------------------
+iarray_t cArray::get(iarray_t array, int vonMsec, int bisMsec)
+	{
+	//den angegebenen Bereich rausschneiden und zurückgeben
+	farr.clear();
+	resetValues(array, farr_charac);
+
+	if (vonMsec < farr_charac.VonMsec)
+		{
+		String m = "Der übergebene Wert 'Von' ist kleiner als der "
+			"Anfangswert der Kurve: " + String(farr_charac.VonMsec);
+		fail(1, m);
+		return farr;
+		}
+
+	if (bisMsec > farr_charac.BisMsec)
+		{
+		String m = "Der übergebene Wert 'Bis' ist größer als der "
+			"Endwert der Kurve: " + String(farr_charac.BisMsec);
+		fail(1, m);
+		return farr;
+		}
+
+	farr = array;
+
+	iarray_t arr; arr.clear();
+	int count = 0;  int zeit; double wert;
+	for (iarray_itr itr = farr.begin(); itr != farr.end(); itr++)
+		{
+		ilist_t& v = itr->second;
+		zeit = v[0];
+		wert = v[1];
+
+		if (zeit <= vonMsec || zeit >= bisMsec)
+			{
+			//Wert liegt außerhalb des gewünschten Bereichs -> überspringen
+			continue;
+			}
+
+		arr[count].push_back(zeit);
+		arr[count].push_back(wert);
+		count++;
+		}
+	farr = arr;
+
+	ok();
+	return farr;
+	}
+//---------------------------------------------------------------------------
 double cArray::calcAvWert(iarray_t array)
 	{
 	if (array.size() <= 0) return 0.0;
@@ -397,6 +455,16 @@ double cArray::calcAvWert(iarray_t array)
 
 	double res = sum / array.size();
 	return res;
+	}
+//---------------------------------------------------------------------------
+void cArray::set_PointWidth(int width)
+	{
+	fPointWidth = width;
+	}
+//---------------------------------------------------------------------------
+void cArray::set_PointColor(TColor cl)
+	{
+	fPointColor = cl;
 	}
 //---------------------------------------------------------------------------
 

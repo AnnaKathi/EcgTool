@@ -76,6 +76,8 @@ public:
 	 *  /param (Image) Image in das gezeichnet werden soll
 	 *  /return (bool) true im Erfolgsfall, sonst false
 	 */
+	bool 		redisplayPoints(iarray_t curve, iarray_t points, TImage* img);
+
 	bool 		displayPoints(iarray_t curve, iarray_t points, TImage* img);
 
 	//! Gleitenden Durchschnitt über dem übergebenen Array berechnen
@@ -109,10 +111,21 @@ public:
 	 */
 	iarray_t 	cut(iarray_t array, int vonMsec, int bisMsec);
 
+	iarray_t 	get(iarray_t array, int vonMsec, int bisMsec);
+
+__property int PointWidth = { write=set_PointWidth };
+__property TColor PointColor = { write=set_PointColor };
+
 private:
 	iarray_t	farr;
 
 	bool 		resetValues(sArrayCha& cha);
+
+	int			fPointWidth;
+	void		set_PointWidth(int width);
+
+	TColor		fPointColor;
+	void		set_PointColor(TColor cl);
 	};
 //---------------------------------------------------------------------------
 #endif
