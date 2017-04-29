@@ -26,15 +26,23 @@ private:
 	cArray		farray;
 	cMath		fmath;
 
+	String		fmt(char* msg, ...);
 	void 		Print(char* msg, ...);
 	void		Color(TImage* img, TColor cl, int von, int bis, int max);
 	void 		Line(TImage* img, int x, TColor cl);
 	void		Dot(TImage* img, TColor cl, int zeit, int wert, int max);
 	
 	void		ShowEcg();
-	void		GetBeats();
 	void		GetRpeaks();
-	void		GetRpeaksNeu();
+
+	int			FidPQInt[12];
+	int			FidQSInt[12];
+	int			FidSTInt[12];
+	double 		FidPAmp[12];
+	double 		FidQAmp[12];
+	double 		FidRAmp[12];
+	double 		FidSAmp[12];
+	double 		FidTAmp[12];
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -61,25 +69,7 @@ __published:	// IDE-verwaltete Komponenten
 	TImage *imgEcg;
 	TButton *btRead;
 	TBevel *Bevel6;
-	TPanel *pnBeats;
-	TBevel *Bevel3;
-	TImage *imgBeat1;
-	TButton *btBeats;
-	TImage *imgBeat2;
-	TImage *imgBeat3;
-	TImage *imgBeat4;
-	TImage *imgBeat5;
-	TImage *imgBeat6;
 	TMemo *Memo;
-	TPanel *Panel2;
-	TImage *imgPeak1;
-	TImage *imgPeak2;
-	TImage *imgPeak3;
-	TImage *imgPeak4;
-	TImage *imgPeak5;
-	TImage *imgPeak6;
-	TButton *Button2;
-	TBevel *Bevel5;
 	TPanel *Panel5;
 	TImage *imgNeu1;
 	TImage *imgNeu2;
@@ -89,6 +79,19 @@ __published:	// IDE-verwaltete Komponenten
 	TImage *imgNeu6;
 	TButton *Button4;
 	TBevel *Bevel7;
+	TPanel *pnFid;
+	TBevel *Bevel3;
+	TMemo *m1;
+	TMemo *m2;
+	TMemo *m3;
+	TMemo *m4;
+	TMemo *m5;
+	TMemo *m6;
+	TLabel *Label4;
+	TImage *imgBeat;
+	TLabel *Label5;
+	TMemo *mFid;
+	TLabel *Label6;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -96,8 +99,6 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acCloseExecute(TObject *Sender);
 	void __fastcall btInputfileClick(TObject *Sender);
 	void __fastcall btReadClick(TObject *Sender);
-	void __fastcall btBeatsClick(TObject *Sender);
-	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button4Click(TObject *Sender);
 
 public:		
