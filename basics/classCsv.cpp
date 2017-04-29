@@ -190,8 +190,9 @@ bool cCsv::ParseLine()
 			//1. Spalte = SampleNo, 2. Spalte = LeadI usw.
 			switch (i)
 				{
-				case 0: EcgLine.sample = val; break;
-				case 1: EcgLine.i      = val; break;
+				case 0: EcgLine.sample = LineCount; break;
+				case 1: EcgLine.i      = val;		break;
+				case 2: /*EcgLine.ii = val;*/ 		break;
 				default: break;
 				}
 			}

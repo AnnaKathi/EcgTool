@@ -4,6 +4,7 @@
 //---------------------------------------------------------------------------
 USEFORM("Main.cpp", fmMain);
 USEFORM("EcgView.cpp", fmEcg);
+USEFORM("DataAnalysis.cpp", fmAnalysis);
 USEFORM("RequestBox.cpp", fmRequest);
 USEFORM("Details.cpp", fmDetails);
 USEFORM("Diseases.cpp", fmDiseases);
@@ -16,7 +17,7 @@ USEFORM("database\toolforms\addPeople.cpp", fmPerson);
 USEFORM("database\toolforms\addDiseases.cpp", fmDis);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\Alg1.cpp", fmAlg1);
-USEFORM("DataAnalysis.cpp", fmAnalysis);
+USEFORM("algorithms\AlgChoi.cpp", fmChoi);
 //---------------------------------------------------------------------------
 #include "database/classMySql.h"
 cMySql fmysql;
@@ -33,6 +34,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TfmDis), &fmDis);
 		Application->CreateForm(__classid(TfmBasePeople), &fmBasePeople);
 		Application->CreateForm(__classid(TfmAnalysis), &fmAnalysis);
+		Application->CreateForm(__classid(TfmChoi), &fmChoi);
 		Application->Run();
 	}
 	catch (Exception &exception)

@@ -116,5 +116,13 @@
     <Transaction>2017.04.13 10:34:07.148.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\Analysis.cpp</Transaction>
     <Transaction>2017.04.13 10:34:07.148.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\Analysis.h</Transaction>
     <Transaction>2017.04.13 10:34:07.148.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\Analysis.dfm</Transaction>
+    <Transaction>2017.04.29 10:55:23.551.cpp,D:\src\EcgTool\algorithms\features\classChoi.cpp=</Transaction>
+    <Transaction>2017.04.29 10:55:59.533.cpp,D:\src\EcgTool\algorithms\features\classQRS3.cpp=</Transaction>
+    <Transaction>2017.04.29 10:56:23.258.cpp,D:\src\EcgTool\algorithms\classifications\classKPCA.cpp=</Transaction>
+    <Transaction>2017.04.29 10:56:35.746.cpp,D:\src\EcgTool\algorithms\classifications\classMLP.cpp=</Transaction>
+    <Transaction>2017.04.29 10:56:43.458.cpp,D:\src\EcgTool\algorithms\classifications\classSVM.cpp=</Transaction>
+    <Transaction>2017.04.29 11:01:57.191.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\AlgChoi.cpp</Transaction>
+    <Transaction>2017.04.29 11:01:57.191.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\AlgChoi.h</Transaction>
+    <Transaction>2017.04.29 11:01:57.191.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\algorithms\AlgChoi.dfm</Transaction>
   </Transactions>
 </BorlandProject>

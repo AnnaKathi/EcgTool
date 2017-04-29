@@ -2,6 +2,7 @@
 #include <vcl.h>
 #pragma hdrstop
 
+#include "algorithms/AlgChoi.h"
 #include "algorithms/EinzelAusw.h"
 #include "database/classMySql.h"
 #include "database/DbPersonen.h"
@@ -133,6 +134,11 @@ void __fastcall TfmMain::acGesAuswExecute(TObject *Sender)
 void __fastcall TfmMain::acLookIntoDataExecute(TObject *Sender)
 	{
 	DlgAnalyseData(this);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acChoi2016Execute(TObject *Sender)
+	{
+	DlgAlgChoi(this);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

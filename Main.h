@@ -50,6 +50,8 @@ __published:	// IDE-verwaltete Komponenten
 	TBitBtn *BitBtn5;
 	TBitBtn *BitBtn6;
 	TAction *acLookIntoData;
+	TBitBtn *BitBtn7;
+	TAction *acChoi2016;
 	void __fastcall acLookIntoECGExecute(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -63,6 +65,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acShowDataExecute(TObject *Sender);
 	void __fastcall acGesAuswExecute(TObject *Sender);
 	void __fastcall acLookIntoDataExecute(TObject *Sender);
+	void __fastcall acChoi2016Execute(TObject *Sender);
 
 public:
 	__fastcall TfmMain(TComponent* Owner);

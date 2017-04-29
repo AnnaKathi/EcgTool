@@ -11,13 +11,13 @@ File_8=TSourceModule,'D:\src\EcgTool\basics\classTools.cpp',0,1,1,1,1,0,0,,
 
 [Modules]
 Module0=D:\src\EcgTool\EcgView.cpp
-Module1=D:\src\EcgTool\algorithms\features\classAC.cpp
-Module2=D:\src\EcgTool\Details.cpp
-Module3=D:\src\EcgTool\basics\classArray.cpp
-Module4=D:\src\EcgTool\basics\classCsv.cpp
-Module5=D:\src\EcgTool\RequestBox.cpp
-Module6=D:\src\EcgTool\DataAnalysis.cpp
-Module7=default.htm
+Module1=default.htm
+Module2=D:\src\EcgTool\algorithms\features\classAC.cpp
+Module3=D:\src\EcgTool\Details.cpp
+Module4=D:\src\EcgTool\basics\classArray.cpp
+Module5=D:\src\EcgTool\basics\classCsv.cpp
+Module6=D:\src\EcgTool\RequestBox.cpp
+Module7=D:\src\EcgTool\DataAnalysis.cpp
 Count=8
 EditWindowCount=1
 
@@ -25,6 +25,9 @@ EditWindowCount=1
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
+
+[default.htm]
+ModuleType=TURLModule
 
 [D:\src\EcgTool\algorithms\features\classAC.cpp]
 ModuleType=TSourceModule
@@ -55,9 +58,6 @@ FormOnTop=0
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
-
-[default.htm]
-ModuleType=TURLModule
 
 [EditWindow0]
 ViewCount=8
@@ -246,11 +246,11 @@ State=0
 Left=0
 Top=0
 Width=2104
-Height=8798
+Height=7019
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2104
-ClientHeight=8798
+ClientHeight=7019
 TBDockHeight=5904
 LRDockWidth=2349
 Dockable=1
@@ -265,11 +265,11 @@ State=0
 Left=0
 Top=0
 Width=2104
-Height=6779
+Height=8798
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2104
-ClientHeight=6779
+ClientHeight=8798
 TBDockHeight=7144
 LRDockWidth=2000
 Dockable=1
@@ -499,11 +499,6 @@ LRDockWidth=2005
 Dockable=1
 StayOnTop=0
 SplitPos=176
-
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Align,OnMouseMove
-ExpandedItems=Anchors=0,Constraints=0,Font=0,Margins=0,Options=0,OptionsEx=0
 
 [ModelViewTool]
 PercentageSizes=1
@@ -792,6 +787,6 @@ LRDockWidth=2104
 Dockable=1
 StayOnTop=0
 TabPosition=0
-ActiveTabID=ProjectManager
+ActiveTabID=ToolForm
 TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
 
