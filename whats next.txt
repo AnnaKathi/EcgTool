@@ -1,0 +1,13 @@
+branch		what's next ?
+------		----------------------------------------------------
+preprocessing	cData, Werte runden 
+		Kurve glätten
+		Daten-Teil rausschneiden und darstellen
+		Daten-Teil rausschneiden
+
+turns		Turning Points finden
+		Punkte in der KUrve markieren
+
+minmax
+		Lokale Minima und Maxima finden 
+		Punkte in der Kurve markierenmarkieren
