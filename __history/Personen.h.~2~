@@ -1,0 +1,29 @@
+//---------------------------------------------------------------------------
+#ifndef PersonenH
+#define PersonenH
+//---------------------------------------------------------------------------
+#include <Classes.hpp>
+#include <Controls.hpp>
+#include <StdCtrls.hpp>
+#include <Forms.hpp>
+#include <ExtCtrls.hpp>
+//---------------------------------------------------------------------------
+class TfmPersonen : public TForm
+{
+private:
+
+__published:	// IDE-verwaltete Komponenten
+	TPanel *pnInfo;
+	TMemo *mInfo;
+	TBevel *Bevel1;
+	TPanel *Panel1;
+	TBevel *Bevel2;
+
+public:
+	__fastcall TfmPersonen(TComponent* Owner);
+	__fastcall ~TfmPersonen();
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TfmPersonen *fmPersonen;
+//---------------------------------------------------------------------------
+#endif

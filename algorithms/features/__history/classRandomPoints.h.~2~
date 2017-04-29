@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------
+#ifndef classRandomPointsH
+#define classRandomPointsH
+//---------------------------------------------------------------------------
+#include <classes.hpp>
+//---------------------------------------------------------------------------
+#include "../../basics/classBase.h"
+//---------------------------------------------------------------------------
+//! Die Klasse cRandomPoints wählt x zufällige Punkte im QRS-Bereich
+class PACKAGE cRandomPoints : public cBase
+	{
+public:
+	cRandomPoints();
+	~cRandomPoints();
+
+private:
+	};
+//---------------------------------------------------------------------------
+#endif

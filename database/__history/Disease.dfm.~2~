@@ -1,0 +1,125 @@
+object fmDisease: TfmDisease
+  Left = 0
+  Top = 0
+  Caption = 'Erkrankung'
+  ClientHeight = 576
+  ClientWidth = 387
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Bevel1: TBevel
+    Left = 0
+    Top = 41
+    Width = 387
+    Height = 4
+    Align = alTop
+    Shape = bsTopLine
+    ExplicitLeft = -181
+    ExplicitWidth = 822
+  end
+  object Bevel2: TBevel
+    Left = 0
+    Top = 531
+    Width = 387
+    Height = 4
+    Align = alBottom
+    Shape = bsBottomLine
+    ExplicitTop = 49
+  end
+  object pnInfo: TPanel
+    Left = 0
+    Top = 0
+    Width = 387
+    Height = 41
+    Align = alTop
+    BevelOuter = bvNone
+    ParentColor = True
+    TabOrder = 0
+    ExplicitWidth = 288
+    DesignSize = (
+      387
+      41)
+    object mInfo: TMemo
+      Left = 8
+      Top = 10
+      Width = 371
+      Height = 25
+      Anchors = [akLeft, akTop, akRight]
+      BorderStyle = bsNone
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGreen
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsItalic]
+      Lines.Strings = (
+        'EKG-Tool..., Todo: Text einf'#252'gen')
+      ParentColor = True
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 0
+      ExplicitWidth = 272
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 535
+    Width = 387
+    Height = 41
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 1
+    ExplicitTop = 264
+    ExplicitWidth = 288
+    DesignSize = (
+      387
+      41)
+    object Button1: TButton
+      Left = 304
+      Top = 6
+      Width = 75
+      Height = 25
+      Action = acClose
+      Anchors = [akTop, akRight]
+      TabOrder = 0
+      ExplicitLeft = 205
+    end
+    object Button2: TButton
+      Left = 7
+      Top = 6
+      Width = 75
+      Height = 25
+      Action = acSave
+      TabOrder = 1
+    end
+  end
+  object tStartup: TTimer
+    Enabled = False
+    Interval = 100
+    Left = 200
+    Top = 8
+  end
+  object ActionList1: TActionList
+    Left = 232
+    Top = 8
+    object acClose: TAction
+      Caption = '&Schlie'#223'en'
+    end
+    object acSave: TAction
+      Caption = 'S&peichern'
+      ShortCut = 16467
+    end
+    object acDisAdd: TAction
+      Caption = 'Erkrankung hinzuf'#252'gen'
+    end
+    object acDisDel: TAction
+      Caption = 'Erkrankung l'#246'schen'
+      Enabled = False
+    end
+  end
+end

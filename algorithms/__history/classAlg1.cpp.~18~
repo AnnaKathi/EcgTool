@@ -1,0 +1,59 @@
+//---------------------------------------------------------------------------
+#pragma hdrstop
+
+#include "classAlg1.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+cAlg1::cAlg1()
+	: fecg (new cEcg), frp (new cRandomPoints)
+	{
+	}
+//---------------------------------------------------------------------------
+cAlg1::~cAlg1()
+	{
+	if (fecg) delete fecg;
+	if (frp)  delete frp;
+	}
+//---------------------------------------------------------------------------
+bool cAlg1::setupData(cEcg& ecg)
+	{
+	fecg = &ecg;
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool cAlg1::buildRandomPoints(int anzahl)
+	{
+	return frp->getRandomPoints(fecg->heart.calcAvBeat(fecg->data.data_array) , anzahl);
+	}
+//---------------------------------------------------------------------------
+String cAlg1::getRandomPoints()
+	{
+	String res = "";
+	frp->reset();
+	bool first = true;
+	char help[16];
+	while (frp->next())
+		{
+		sprintf(help, "%.4f", frp->randomPoint);
+		if first)
+			{
+			res = String(help);
+			first = false;
+			}
+		else
+			{
+			res += "|";
+			res += String(help);
+			}
+		}
+
+	return res;
+	}
+//---------------------------------------------------------------------------
+cRandomPoints& cAlg1::get_rp()
+	{
+	return *frp;
+	}
+//---------------------------------------------------------------------------
+
+

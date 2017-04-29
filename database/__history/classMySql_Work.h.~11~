@@ -1,0 +1,35 @@
+//---------------------------------------------------------------------------
+#ifndef classMySql_WorkH
+#define classMySql_WorkH
+//---------------------------------------------------------------------------
+#include <classes.hpp>
+#include <IniFiles.hpp>
+#include <Forms.hpp>
+//---------------------------------------------------------------------------
+#include "../basics/classBase.h"
+#include "../inc/mysql/mysql.h"
+//---------------------------------------------------------------------------
+class PACKAGE cMySqlWork : public cBase
+	{
+public:
+	cMySqlWork();
+	~cMySqlWork();
+
+	bool 	open();
+	bool	close();
+
+	bool	isReady();	
+	bool	query(String q);
+
+private:
+	//SQL-Daten
+	MYSQL*      	fsql;
+	MYSQL*      	fcon;
+	MYSQL_RES*  	fres;
+	MYSQL_ROW		frow;
+
+	bool			bMySqlConnected;
+
+	};
+//---------------------------------------------------------------------------
+#endif

@@ -1,0 +1,35 @@
+//---------------------------------------------------------------------------
+#ifndef classMySqlH
+#define classMySqlH
+//---------------------------------------------------------------------------
+#include <classes.hpp>
+//---------------------------------------------------------------------------
+#include "classMySql_EcgData.h"
+#include "../basics/classBase.h"
+#include "../inc/mysql/mysql.h"
+//---------------------------------------------------------------------------
+class PACKAGE cMySql : public cBase
+	{
+public:
+	cMySql();
+	~cMySql();
+
+	bool 	open();
+	bool	close();
+
+__property cMySqlEcgData& ecg = { read=get_ecg };
+
+private:
+	cMySqlEcgData*	fecg;
+	cMySqlEcgData&  get_ecg();
+
+	//SQL-Daten
+	MYSQL*      	fsql;
+	MYSQL*      	fcon;
+	MYSQL_RES*  	fres;
+	MYSQL_ROW		frow;
+
+	bool			bMySqlConnected;
+	};
+//---------------------------------------------------------------------------
+#endif

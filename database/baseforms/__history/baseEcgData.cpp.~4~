@@ -1,0 +1,277 @@
+//---------------------------------------------------------------------------
+#include <vcl.h>
+#pragma hdrstop
+
+#include <stdio.h>
+
+#include "../classMySql.h"
+#include "addEcgData.h"
+#include "baseEcgData.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TfmBaseEcg *fmBaseEcg;
+extern cMySql fmysql;
+//---------------------------------------------------------------------------
+TfmBaseEcg* CreateEcgForm(TForm* caller, TWinControl* container)
+	{
+	return new TfmBaseEcg(caller, container, caller->Color);
+	}
+//---------------------------------------------------------------------------
+__fastcall TfmBaseEcg::TfmBaseEcg(TComponent* Owner, TWinControl* Container, TColor color)
+	: TForm(Owner)
+	{
+	if (Container)
+		snapTo(Container, alClient);
+	}
+//---------------------------------------------------------------------------
+void TfmBaseEcg::snapTo(TWinControl* container, TAlign align)
+	{
+	int realHeight = ClientHeight;
+	int realWidth  = ClientWidth;
+
+	Parent  = container;
+	Hint    = Caption;
+	Caption = "";
+	Left    = 0;
+	Top     = 0;
+	if (align != alNone) Align = align;
+	BorderIcons = TBorderIcons();
+	BorderStyle = bsNone;
+
+	ParentFont  = true;
+	ParentColor = true;
+
+	Height = realHeight;
+	Width  = realWidth;
+	Show();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmBaseEcg::FormShow(TObject *Sender)
+	{
+	bInShow = false;
+	tStartup->Enabled = true;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmBaseEcg::tStartupTimer(TObject *Sender)
+	{
+	tStartup->Enabled = false;
+	ShowData();
+	tStartup->Tag = 1; //signalisiert, dass der Init durchgeführt wurde
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmBaseEcg::FormClose(TObject *Sender,
+	  TCloseAction &Action)
+	{
+	//
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   Funktionen: private   ********************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+void TfmBaseEcg::MsgBox(char* msg, ...)
+	{
+	char    buffer[512];
+	int     nsiz;
+	va_list argptr;
+
+	va_start(argptr, msg);
+	nsiz = vsnprintf(0, 0, msg, argptr);
+	if (nsiz >= sizeof(buffer)-2) nsiz = sizeof(buffer)-2;
+
+	vsnprintf(buffer, nsiz, msg, argptr);
+	buffer[nsiz] = 0;
+
+	Application->MessageBox(String(buffer).c_str(), "Fehler", MB_OK);
+	va_end(argptr);
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   Funktionen: public   *********************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+bool TfmBaseEcg::ShowData()
+	{
+	if (bInShow) return false; //verhindern, dass sich die Funktion selbst überholt
+	bInShow = true;
+	lvData->Items->Clear();
+	lvData->Items->BeginUpdate();
+
+	//Daten aus Datenbank anzeigen
+	if (!fmysql.ecg.loadTable())
+		{
+		MsgBox("Die Daten (EKG) konnten nicht geladen werden. "
+			"Die Datenbank  meldet: %s", fmysql.diseases.error_msg);
+		return false;
+		}
+
+	TListItem* item;
+	while (fmysql.ecg.nextRow())
+		{
+		if (!ChecFilter()) continue;
+
+		item = lvData->Items->Add();
+		item->Data = (void*) fmysql.ecg.row.ident;
+		item->Caption = String(fmysql.ecg.row.ident);
+
+		String name = fmysql.people.getNameOf(fmysql.ecg.row.person);
+		item->SubItems->Add(name);
+
+		item->SubItems->Add(fmysql.ecg.row.session);
+		item->SubItems->Add(ftools.GetPosition(fmysql.ecg.row.pos));
+		for (int i = 0; i < 5; i++)
+			item->SubItems->Add(String(fmysql.ecg.row.werte[i]));
+		}
+
+	lvData->Items->EndUpdate();
+	bInShow = false;
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmBaseEcg::ShowEcgOf(int person)
+	{
+	lvData->Items->Clear();
+	lvData->Items->BeginUpdate();
+
+	//Daten aus Datenbank anzeigen
+	if (!fmysql.ecg.loadByPerson(person))
+		{
+		MsgBox("Die Daten (EKG) konnten nicht geladen werden. "
+			"Die Datenbank  meldet: %s", fmysql.diseases.error_msg);
+		return false;
+		}
+
+	TListItem* item;
+	while (fmysql.ecg.nextRow())
+		{
+		if (!CheckFilter()) continue;
+
+		item = lvData->Items->Add();
+		item->Data = (void*) fmysql.ecg.row.ident;
+		item->Caption = String(fmysql.ecg.row.ident);
+
+		item->SubItems->Add(fmysql.people.getNameOf(fmysql.ecg.row.person));
+
+		item->SubItems->Add(fmysql.ecg.row.session);
+		item->SubItems->Add(ftools.GetPosition(fmysql.ecg.row.pos));
+		for (int i = 0; i < 5; i++)
+			item->SubItems->Add(String(fmysql.ecg.row.werte[i]));
+		}
+
+	lvData->Items->EndUpdate();
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmBaseEcg::BuildFilter()
+	{
+	ffilter.identVon = edIdVon->Text.ToIntDef(-1);
+	ffilter.identBis = edIdBis->Text.ToIntDef(-1);
+
+	ffilter.name = edEcgName->Text;
+	ffilter.pos  = (ePosition)cbPosition->ItemIndex;
+
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmBaseEcg::CheckFilter()
+	{
+	if (ffilter.identVon > 0 && fmysql.ecg.row.ident < ffilter.identVon) return false;
+	if (ffilter.identBis > 0 && fmysql.ecg.row.ident > ffilter.identBis) return false;
+
+	if (ffilter.name != "")
+		{
+		//enthält-Suche
+		String nn = fmysql.people.getNameOf(fmysql.ecg.row.person).LowerCase();
+		if (nn.Pos(ffilter.name.LowerCase()) <= 0)
+			return false;
+		}
+
+	if (ffilter.pos > posNone)
+		{
+		if (fmysql.ecg.row.pos != ffilter.pos)
+			return false;
+		}
+
+	return true;
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/********************   Actions   ******************************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+void __fastcall TfmBaseEcg::acAddExecute(TObject *Sender)
+	{
+	if (DlgEcgAdd(this))
+		ShowData();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmBaseEcg::acChangeExecute(TObject *Sender)
+	{
+	if (lvData->SelCount <= 0) return;
+	TListItem* item = lvData->Selected;
+	int id = (int)item->Data;
+	if (DlgEcgChange(this, id))
+		ShowData();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmBaseEcg::acDelExecute(TObject *Sender)
+	{
+	if (lvData->SelCount <= 0) return;
+	TListItem* item = lvData->Selected;
+	int id = (int)item->Data;
+	if (!fmysql.ecg.deleteByIdent(id))
+		{
+		MsgBox("Das EKG <%d> konnten nicht gelöscht werden. "
+			"Die Datenbank  meldet: %s", id, fmysql.diseases.error_msg);
+		}
+	else
+    	ShowData();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmBaseEcg::acFilterExecute(TObject *Sender)
+	{
+	if (tStartup->Tag == 1) //Init wurde schon durchgeführt
+		{
+		BuildFilter();
+		ShowData();
+		}
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/**************   Meldungen vom Formular   *********************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+void __fastcall TfmBaseEcg::lvDataClick(TObject *Sender)
+	{
+	TListItem* item = lvData->Selected;
+	if (item)
+		{
+		acDel->Enabled = true;
+		acChange->Enabled = true;
+		}
+	else
+		{
+		acDel->Enabled = false;
+		acChange->Enabled = false;
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmBaseEcg::edIdVonExit(TObject *Sender)
+	{
+	acFilterExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmBaseEcg::edNameChange(TObject *Sender)
+	{
+	acFilterExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmBaseEcg::lvDataDblClick(TObject *Sender)
+	{
+	TListItem* item = lvData->Selected;
+	if (item)
+		acChangeExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+

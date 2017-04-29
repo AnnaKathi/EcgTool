@@ -1,0 +1,38 @@
+//---------------------------------------------------------------------------
+#ifndef DiseaseH
+#define DiseaseH
+//---------------------------------------------------------------------------
+#include <Classes.hpp>
+#include <Controls.hpp>
+#include <StdCtrls.hpp>
+#include <Forms.hpp>
+#include <ActnList.hpp>
+#include <ExtCtrls.hpp>
+//---------------------------------------------------------------------------
+class TfmDisease : public TForm
+{
+private:
+
+__published:	// IDE-verwaltete Komponenten
+	TPanel *pnInfo;
+	TMemo *mInfo;
+	TBevel *Bevel1;
+	TPanel *Panel1;
+	TButton *Button1;
+	TButton *Button2;
+	TTimer *tStartup;
+	TActionList *ActionList1;
+	TAction *acClose;
+	TAction *acSave;
+	TAction *acDisAdd;
+	TAction *acDisDel;
+	TBevel *Bevel2;
+
+public:		// Benutzer Deklarationen
+	__fastcall TfmDisease(TComponent* Owner);
+	__fastcall ~TfmDisease();
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TfmDisease *fmDisease;
+//---------------------------------------------------------------------------
+#endif

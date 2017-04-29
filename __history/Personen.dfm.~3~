@@ -1,0 +1,85 @@
+object fmPersonen: TfmPersonen
+  Left = 0
+  Top = 0
+  Caption = 'Personen'
+  ClientHeight = 518
+  ClientWidth = 542
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  OnClose = FormClose
+  OnKeyPress = FormKeyPress
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Bevel1: TBevel
+    Left = 0
+    Top = 41
+    Width = 542
+    Height = 4
+    Align = alTop
+    Shape = bsTopLine
+    ExplicitLeft = -181
+    ExplicitWidth = 822
+  end
+  object Bevel2: TBevel
+    Left = 0
+    Top = 473
+    Width = 542
+    Height = 4
+    Align = alBottom
+    Shape = bsBottomLine
+    ExplicitTop = 49
+  end
+  object pnInfo: TPanel
+    Left = 0
+    Top = 0
+    Width = 542
+    Height = 41
+    Align = alTop
+    BevelOuter = bvNone
+    ParentColor = True
+    TabOrder = 0
+    ExplicitWidth = 467
+    DesignSize = (
+      542
+      41)
+    object mInfo: TMemo
+      Left = 8
+      Top = 10
+      Width = 526
+      Height = 25
+      Anchors = [akLeft, akTop, akRight]
+      BorderStyle = bsNone
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGreen
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsItalic]
+      Lines.Strings = (
+        'EKG-Tool..., Todo: Text einf'#252'gen')
+      ParentColor = True
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 0
+      ExplicitWidth = 451
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 477
+    Width = 542
+    Height = 41
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 1
+    ExplicitLeft = 216
+    ExplicitTop = 352
+    ExplicitWidth = 185
+  end
+end

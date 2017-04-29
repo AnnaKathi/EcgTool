@@ -1,0 +1,170 @@
+//---------------------------------------------------------------------------
+#pragma hdrstop
+
+#include <stdio.h>
+
+#include "classMySql_Diseases.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+//---------------------------------------------------------------------------
+#define TABLE "diseases"
+//---------------------------------------------------------------------------
+cMySqlDiseases::cMySqlDiseases(cMySqlWork& worker)
+	{
+	fwork = &worker;
+	}
+//---------------------------------------------------------------------------
+cMySqlDiseases::~cMySqlDiseases()
+	{
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   Funktionen: laden   **********************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+bool cMySqlDiseases::loadTable(String order) //order ist vorbesetzt mit ""
+	{
+	if (!fwork->loadTable(TABLE, order))
+		return fail(fwork->error_code, fwork->error_msg);
+
+	fres = fwork->getResult();
+	return ok();
+	}
+//---------------------------------------------------------------------------
+bool cMySqlDiseases::nextRow()
+	{
+	if (!fwork->isReady())
+		return fail(1, "MySql-Verbindung wurde nicht initialisiert");
+
+	frow = mysql_fetch_row(fres);
+	if (frow == NULL) return false;
+
+	fdata.ident   = atoi(frow[0]);
+	sprintf(fdata.bez, "%.127s", frow[1]);
+
+	return true;
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   Funktionen: speichern   ******************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+bool cMySqlDiseases::insert(sDiseases data)
+	{
+	String q = "INSERT INTO " + String(TABLE) + " ";
+	q+= "(`Bez`) VALUES ";
+	q+= "(";
+	q+= "'" + String(data.bez) + "'";
+	q+= ")";
+
+	if (!fwork->send(q))
+		return fail(fwork->error_code, fwork->error_msg);
+	else
+		return ok();
+	}
+//---------------------------------------------------------------------------
+bool cMySqlDiseases::update(sDiseases data)
+	{
+	String q = "UPDATE " + String(TABLE) + " SET ";
+	q+= "Bez='" + String(data.bez) + "' ";
+	q+= "WHERE Ident=" + String(data.ident);
+
+	if (!fwork->send(q))
+		return fail(fwork->error_code, fwork->error_msg);
+	else
+		return ok();
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   Funktionen: Datenfelder   ****************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+String cMySqlDiseases::getNameOf(int disease) //eine Bezeichnugn einer Erkrankung
+	{
+	MYSQL_RES* res_old = fres; //aktuelle Position speichern
+
+	String name = "";
+	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE `Ident` = " + String(disease);
+	if (!fwork->query(q))
+		name = "- nicht gefunden (" + String(disease) + ") -";
+	else
+		{
+		fres = fwork->getResult();
+		frow = mysql_fetch_row(fres);
+		if (frow == NULL) return "";
+
+		name = String(frow[1]);
+		}
+
+	fres = res_old; //Position zurücksetzen
+	return name;
+	}
+//---------------------------------------------------------------------------
+sarray_t cMySqlDiseases::getNamesOf(sarray_t idents) //Liste mit Bez. auffüllen
+	{
+	sarray_t res; res.clear();
+	int ix = 0;
+	for (sarray_itr itr = idents.begin(); itr != idents.end(); itr++)
+		{
+		slist_t& v = itr->second;
+		res[ix].push_back(v[0]);
+		res[ix].push_back(getNameOf(v[0].ToInt()));
+		ix++;
+		}
+
+	return res;
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   Funktionen: Daten anzeigen   *************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+bool cMySqlDiseases::listInCombo(TComboBox* cb, int mode) //mode ist mit 0 vorbesetzt
+	{
+	//Alle Erkrankungen aus der DB in der ComboBox anzeigen,
+	//der mode bestimmt was angezeigt wird
+	if (!loadTable("Bez ASC"))
+		return fail(fwork->error_code, fwork->error_msg);
+
+	cb->Items->Clear();
+	String dis;
+	while (nextRow())
+		{
+		//todo Kennzeichnung in DB aufnehmen und hier mit einbauen
+		if (mode == 1)  dis = String(fdata.bez) + " (" + String(fdata.ident) + ")";
+		else 			dis = String(fdata.bez);
+
+		cb->Items->AddObject(dis, (TObject*)fdata.ident)
+		}
+
+	return ok();
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   Funktionen: löschen   ********************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+bool cMySqlDiseases::deleteByIdent(int ident)
+	{
+	//DELETE FROM `ecg`.`ecgdata` WHERE  `Ident`=51;
+	String q = "DELETE FROM `" + String(TABLE) + "` WHERE `Ident` = " + String(ident);
+	if (!fwork->send(q))
+		return fail(fwork->error_code, fwork->error_msg);
+	else
+		return ok();
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/********************   getter und setter   ********************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+sDiseases cMySqlDiseases::get_data()
+	{
+	return fdata;
+	}
+//---------------------------------------------------------------------------
+int cMySqlDiseases::get_num_rows()
+	{
+	return mysql_num_rows(fres);
+	}
+//---------------------------------------------------------------------------

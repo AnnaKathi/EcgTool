@@ -1,0 +1,58 @@
+//---------------------------------------------------------------------------
+#ifndef EinzelAuswH
+#define EinzelAuswH
+//---------------------------------------------------------------------------
+#include <Classes.hpp>
+#include <Controls.hpp>
+#include <StdCtrls.hpp>
+#include <Forms.hpp>
+#include <ExtCtrls.hpp>
+#include <ActnList.hpp>
+#include <Buttons.hpp>
+#include <Dialogs.hpp>
+//---------------------------------------------------------------------------
+#include "baseforms/baseDiseases.h"
+#include "baseforms/basePeople.h"
+//---------------------------------------------------------------------------
+class TfmSingle : public TForm
+{
+private:
+
+	TfmBasePeople*		fmPeople;
+	TfmBaseDiseases*	fmDiseases;
+
+__published:	// IDE-verwaltete Komponenten
+	TPanel *pnInfo;
+	TMemo *mInfo;
+	TBevel *Bevel1;
+	TPanel *Panel1;
+	TButton *Button1;
+	TBevel *Bevel2;
+	TTimer *tStartup;
+	TActionList *ActionList1;
+	TAction *acClose;
+	TPanel *pnFilter;
+	TPanel *pnAuswertung;
+	TLabel *Label4;
+	TMemo *Memo1;
+	TPanel *pnFilterPerson;
+	TSplitter *Splitter1;
+	TPanel *pnFilterEcg;
+	TSplitter *Splitter2;
+	void __fastcall FormShow(TObject *Sender);
+	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+	void __fastcall FormKeyPress(TObject *Sender, char &Key);
+	void __fastcall tStartupTimer(TObject *Sender);
+	void __fastcall acCloseExecute(TObject *Sender);
+
+public:
+	__fastcall TfmSingle(TComponent* Owner);
+	__fastcall ~TfmSingle();
+	bool 	Execute();
+	
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TfmSingle *fmSingle;
+bool DlgEinzelAuswertung(TForm* Papa);
+//---------------------------------------------------------------------------
+#endif

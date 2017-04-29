@@ -1,0 +1,44 @@
+//---------------------------------------------------------------------------
+#include <vcl.h>
+#pragma hdrstop
+
+#include "Personen.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TfmPersonen *fmPersonen;
+//---------------------------------------------------------------------------
+__fastcall TfmPersonen::TfmPersonen(TComponent* Owner)
+	: TForm(Owner)
+	{
+	}
+//---------------------------------------------------------------------------
+__fastcall TfmPersonen::~TfmPersonen()
+	{
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmPersonen::FormShow(TObject *Sender)
+	{
+    tStartup->Enabled = true;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmPersonen::tStartupTimer(TObject *Sender)
+	{
+	tStartup->Enabled = false;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmPersonen::FormClose(TObject *Sender, TCloseAction &Action)
+	{
+	//
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmPersonen::FormKeyPress(TObject *Sender, char &Key)
+	{
+	if (Key == VK_ESCAPE)
+		{
+		Key = 0;
+		acCloseExecute(Sender);
+		}
+	}
+//---------------------------------------------------------------------------
+

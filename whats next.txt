@@ -1,5 +1,0 @@
-branch		what's next ?
-------------	----------------------------------------------------
-importschema	Dynamisch Importschemata für die csv-Dateien anlegen lassen
-
-MySQL		csv-Daten in MySQL-Datenbank umlesen
