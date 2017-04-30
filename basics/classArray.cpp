@@ -440,6 +440,47 @@ iarray_t cArray::get(iarray_t array, int vonMsec, int bisMsec)
 	return farr;
 	}
 //---------------------------------------------------------------------------
+iarray_t cArray::remove(iarray_t source, iarray_t remove, int val_index) //val_index ist mit 0 vorbesetzt
+	{
+	//aus dem Array "source" alle Einträge entfernen, die auch in "remove"
+	//enthalten sind, identifiziert werden sollen Übereinstimmungen anhand des
+	//second-Feld "val_index"
+
+	iarray_t res; res.clear();
+	double vals, valr, wert;
+	int zeit;
+	int count = 0;
+	for (iarray_itr src = source.begin(); src != source.end(); src++)
+		{
+		ilist_t& vs = src->second;
+		vals = vs[val_index];
+
+		bool found = false;
+		for (iarray_itr rev = remove.begin(); rev != remove.end(); rev++)
+			{
+			ilist_t& vr = rev->second;
+			valr = vr[val_index];
+
+			if (valr == vals)
+				{
+				found = true;
+				break;
+				}
+			}
+
+		if (!found)
+			{
+			zeit = vs[0];
+			wert = vs[1];
+			res[count].push_back(zeit);
+			res[count].push_back(wert);
+			count++;
+			}
+		}
+
+	return res;
+	}
+//---------------------------------------------------------------------------
 double cArray::calcAvWert(iarray_t array)
 	{
 	if (array.size() <= 0) return 0.0;

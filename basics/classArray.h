@@ -113,6 +113,8 @@ public:
 
 	iarray_t 	get(iarray_t array, int vonMsec, int bisMsec);
 
+	iarray_t	remove(iarray_t source, iarray_t remove, int val_index = 0);
+
 __property int PointWidth = { write=set_PointWidth };
 __property TColor PointColor = { write=set_PointColor };
 

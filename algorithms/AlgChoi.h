@@ -33,7 +33,12 @@ private:
 	void		Dot(TImage* img, TColor cl, int zeit, int wert, int max);
 	
 	void		ShowEcg();
-	void		GetRpeaks();
+	void		GetRpeaksAnna();
+	void		GetRpeaksChoi();
+	void		DoChoi(cRpeaks& r);
+	void		DoChoi2(iarray_t rpeaks);
+	iarray_t 	FindOverlapsChoi(iarray_t candidates, int overlap_time);
+	iarray_t 	FindOverlapsAnna(iarray_t candidates, int overlap_time);
 
 	int			FidPQInt[12];
 	int			FidQSInt[12];
@@ -92,6 +97,11 @@ __published:	// IDE-verwaltete Komponenten
 	TLabel *Label5;
 	TMemo *mFid;
 	TLabel *Label6;
+	TButton *Button2;
+	TLabel *Label7;
+	TEdit *edThreshold;
+	TLabel *Label8;
+	TEdit *edOverlap;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -100,6 +110,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btInputfileClick(TObject *Sender);
 	void __fastcall btReadClick(TObject *Sender);
 	void __fastcall Button4Click(TObject *Sender);
+	void __fastcall Button2Click(TObject *Sender);
 
 public:		
 	__fastcall TfmChoi(TComponent* Owner);

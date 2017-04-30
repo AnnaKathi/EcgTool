@@ -79,7 +79,6 @@ object fmChoi: TfmChoi
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 1075
     DesignSize = (
       916
       41)
@@ -102,7 +101,6 @@ object fmChoi: TfmChoi
       ParentColor = True
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1059
     end
   end
   object Panel1: TPanel
@@ -113,7 +111,6 @@ object fmChoi: TfmChoi
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 1075
     object Button1: TButton
       Left = 8
       Top = 8
@@ -131,7 +128,6 @@ object fmChoi: TfmChoi
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitWidth = 1075
     object Label1: TLabel
       Left = 9
       Top = 2
@@ -208,8 +204,6 @@ object fmChoi: TfmChoi
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 3
-    ExplicitLeft = 2
-    ExplicitTop = 104
     object Bevel6: TBevel
       Left = 0
       Top = 153
@@ -241,6 +235,20 @@ object fmChoi: TfmChoi
       Height = 13
       Caption = 'Fiducial Points Averages'
     end
+    object Label7: TLabel
+      Left = 384
+      Top = 176
+      Width = 47
+      Height = 13
+      Caption = 'Threshold'
+    end
+    object Label8: TLabel
+      Left = 384
+      Top = 203
+      Width = 59
+      Height = 13
+      Caption = 'Overlap(ms)'
+    end
     object pnEcgGes: TPanel
       Left = 0
       Top = 0
@@ -249,7 +257,6 @@ object fmChoi: TfmChoi
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 472
       object imgEcg: TImage
         Left = 10
         Top = 37
@@ -261,7 +268,7 @@ object fmChoi: TfmChoi
         Top = 6
         Width = 137
         Height = 25
-        Caption = '1 - ECG-Daten einlesen'
+        Caption = '&ECG-Daten einlesen'
         TabOrder = 0
         OnClick = btReadClick
       end
@@ -274,7 +281,6 @@ object fmChoi: TfmChoi
       Align = alBottom
       ReadOnly = True
       TabOrder = 1
-      ExplicitWidth = 472
     end
     object mFid: TMemo
       Left = 193
@@ -289,6 +295,20 @@ object fmChoi: TfmChoi
       ParentFont = False
       ReadOnly = True
       TabOrder = 2
+    end
+    object edThreshold: TEdit
+      Left = 445
+      Top = 173
+      Width = 60
+      Height = 21
+      TabOrder = 3
+    end
+    object edOverlap: TEdit
+      Left = 445
+      Top = 200
+      Width = 60
+      Height = 21
+      TabOrder = 4
     end
   end
   object Panel5: TPanel
@@ -338,11 +358,20 @@ object fmChoi: TfmChoi
     object Button4: TButton
       Left = 6
       Top = 1
-      Width = 137
+      Width = 90
       Height = 25
-      Caption = '2 - Get R-Peaks NEU'
+      Caption = 'R-Peaks &Anna'
       TabOrder = 0
       OnClick = Button4Click
+    end
+    object Button2: TButton
+      Left = 95
+      Top = 1
+      Width = 90
+      Height = 25
+      Caption = 'R-Peaks &Choi'
+      TabOrder = 1
+      OnClick = Button2Click
     end
   end
   object pnFid: TPanel
@@ -353,8 +382,6 @@ object fmChoi: TfmChoi
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 5
-    ExplicitLeft = 729
-    ExplicitTop = 104
     object Label4: TLabel
       Left = 8
       Top = 8
