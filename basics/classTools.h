@@ -94,7 +94,9 @@ public:
 		 *  /return true wenn es sich beim ausführenden Rechner um einen Heimrechner
 		 *		handelt, sonst false
 		 */
-    	bool		IsDebug();
+		bool		IsDebug();
+
+		String		fmt(char* msg, ...);
 
 private:
 

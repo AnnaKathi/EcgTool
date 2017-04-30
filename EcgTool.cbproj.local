@@ -124,5 +124,7 @@
     <Transaction>2017.04.29 11:01:57.191.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\AlgChoi.cpp</Transaction>
     <Transaction>2017.04.29 11:01:57.191.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\AlgChoi.h</Transaction>
     <Transaction>2017.04.29 11:01:57.191.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\algorithms\AlgChoi.dfm</Transaction>
+    <Transaction>2017.04.30 14:06:57.140.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp</Transaction>
+    <Transaction>2017.04.30 14:06:57.140.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\features\classChoiFeatures.h</Transaction>
   </Transactions>
 </BorlandProject>

@@ -18,6 +18,8 @@
 #include "../basics/classArray.h"
 #include "../basics/classMath.h"
 //---------------------------------------------------------------------------
+#include "features/classChoiFeatures.h"
+//---------------------------------------------------------------------------
 class TfmChoi : public TForm
 {
 private:
@@ -25,6 +27,8 @@ private:
 	cTools		ftools;
 	cArray		farray;
 	cMath		fmath;
+
+	cChoiFeat	fChoiFeat;
 
 	String		fmt(char* msg, ...);
 	void 		Print(char* msg, ...);
@@ -35,19 +39,7 @@ private:
 	void		ShowEcg();
 	void		GetRpeaksAnna();
 	void		GetRpeaksChoi();
-	void		DoChoi(cRpeaks& r);
-	void		DoChoi2(iarray_t rpeaks);
-	iarray_t 	FindOverlapsChoi(iarray_t candidates, int overlap_time);
-	iarray_t 	FindOverlapsAnna(iarray_t candidates, int overlap_time);
-
-	int			FidPQInt[12];
-	int			FidQSInt[12];
-	int			FidSTInt[12];
-	double 		FidPAmp[12];
-	double 		FidQAmp[12];
-	double 		FidRAmp[12];
-	double 		FidSAmp[12];
-	double 		FidTAmp[12];
+	void		DoChoi();
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -75,33 +67,17 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *btRead;
 	TBevel *Bevel6;
 	TMemo *Memo;
-	TPanel *Panel5;
-	TImage *imgNeu1;
-	TImage *imgNeu2;
-	TImage *imgNeu3;
-	TImage *imgNeu4;
-	TImage *imgNeu5;
-	TImage *imgNeu6;
-	TButton *Button4;
-	TBevel *Bevel7;
-	TPanel *pnFid;
-	TBevel *Bevel3;
-	TMemo *m1;
-	TMemo *m2;
-	TMemo *m3;
-	TMemo *m4;
-	TMemo *m5;
-	TMemo *m6;
-	TLabel *Label4;
 	TImage *imgBeat;
 	TLabel *Label5;
 	TMemo *mFid;
 	TLabel *Label6;
-	TButton *Button2;
 	TLabel *Label7;
 	TEdit *edThreshold;
 	TLabel *Label8;
 	TEdit *edOverlap;
+	TButton *Button4;
+	TButton *Button2;
+	TButton *Button3;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -111,6 +87,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btReadClick(TObject *Sender);
 	void __fastcall Button4Click(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
+	void __fastcall Button3Click(TObject *Sender);
 
 public:		
 	__fastcall TfmChoi(TComponent* Owner);
