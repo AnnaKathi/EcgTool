@@ -131,5 +131,7 @@
     <Transaction>2017.05.03 13:08:12.866.c,D:\src\EcgTool\algorithms\classifications\libSVM\svm-scale.c=</Transaction>
     <Transaction>2017.05.03 13:08:12.892.cpp,D:\src\EcgTool\algorithms\classifications\libSVM\svm.cpp=</Transaction>
     <Transaction>2017.05.04 13:50:11.968.cpp,D:\libSVM\libsvm test library\svm.cpp=</Transaction>
+    <Transaction>2017.05.04 13:53:09.596.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp</Transaction>
+    <Transaction>2017.05.04 13:53:09.596.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\classifications\classChoiSVM.h</Transaction>
   </Transactions>
 </BorlandProject>

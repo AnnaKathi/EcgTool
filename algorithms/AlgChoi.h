@@ -20,6 +20,7 @@
 #include "../basics/classMath.h"
 //---------------------------------------------------------------------------
 #include "features/classChoiFeatures.h"
+#include "classifications/classChoiSVM.h"
 //---------------------------------------------------------------------------
 #include "../inc/libsvm/svm.h"
 //---------------------------------------------------------------------------
@@ -32,6 +33,7 @@ private:
 	cMath		fmath;
 
 	cChoiFeat	fChoiFeat;
+	cChoiSVM	fChoiSVM;
 
 	String		fmt(char* msg, ...);
 	void 		Print(char* msg, ...);
@@ -99,7 +101,7 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *btTestSVM;
 	TLabel *Label4;
 	TEdit *edLabel;
-	TCheckBox *cbCrossvalidation;
+	TCheckBox *cxCrossvalidation;
 	TLabel *laFold;
 	TEdit *edFold;
 	void __fastcall FormShow(TObject *Sender);

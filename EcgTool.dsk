@@ -9,15 +9,42 @@ File_6=TSourceModule,'D:\src\EcgTool\basics\classTools.cpp',0,1,1,1,1,0,0,,
 File_7=TSourceModule,'D:\libSVM\libsvm-3.22\Makefile.win',0,1,1,96,26,0,0,,
 
 [Modules]
-Module0=D:\src\EcgTool\inc\libsvm\svm.cpp
-Module1=D:\libSVM\libsvm test library\svm-train.c
-Module2=D:\src\EcgTool\algorithms\AlgChoi.cpp
-Module3=default.htm
+Module0=D:\src\EcgTool\algorithms\AlgChoi.cpp
+Module1=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp
+Module2=D:\src\EcgTool\Details.cpp
+Module3=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
 Module4=D:\libSVM\libsvm test library\svm.h
-Module5=D:\libSVM\libsvm test library\README
-Module6=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
-Count=7
+Module5=D:\src\EcgTool\inc\libsvm\svm.cpp
+Module6=D:\libSVM\libsvm test library\svm-train.c
+Module7=D:\libSVM\libsvm test library\README
+Module8=default.htm
+Count=9
 EditWindowCount=1
+
+[D:\src\EcgTool\algorithms\AlgChoi.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\Details.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\libSVM\libsvm test library\svm.h]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
 
 [D:\src\EcgTool\inc\libsvm\svm.cpp]
 ModuleType=TSourceModule
@@ -29,30 +56,15 @@ ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[D:\src\EcgTool\algorithms\AlgChoi.cpp]
+[D:\libSVM\libsvm test library\README]
 ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
 
 [default.htm]
 ModuleType=TURLModule
 
-[D:\libSVM\libsvm test library\svm.h]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\libSVM\libsvm test library\README]
-ModuleType=TSourceModule
-
-[D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
 [EditWindow0]
-ViewCount=7
-CurrentEditView=D:\src\EcgTool\inc\libsvm\svm.cpp
+ViewCount=9
+CurrentEditView=D:\src\EcgTool\algorithms\AlgChoi.cpp
 View0=0
 View1=1
 View2=2
@@ -60,6 +72,8 @@ View3=3
 View4=4
 View5=5
 View6=6
+View7=7
+View8=8
 PercentageSizes=1
 Create=1
 Visible=1
@@ -108,15 +122,48 @@ EditViewName=D:\libSVM\libsvm test library\README
 [View2]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\algorithms\AlgChoi.cpp
-CursorX=57
-CursorY=682
-TopLine=564
+CursorX=5
+CursorY=331
+TopLine=296
 LeftCol=1
 Elisions=
-Bookmarks={1,359,46}{2,691,15}{9,750,1}
+Bookmarks={1,250,1}{2,659,15}{9,718,1}
 EditViewName=D:\src\EcgTool\algorithms\AlgChoi.cpp
 
 [View3]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp
+CursorX=1
+CursorY=395
+TopLine=375
+LeftCol=1
+Elisions=
+Bookmarks={2,371,1}
+EditViewName=D:\src\EcgTool\algorithms\classifications\classChoiSVM.h
+
+[View4]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\Details.cpp
+CursorX=24
+CursorY=45
+TopLine=23
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\Details.cpp
+
+[View5]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
+CursorX=1
+CursorY=85
+TopLine=54
+LeftCol=1
+Elisions=
+Bookmarks={1,170,1}{2,326,1}{3,207,1}
+EditViewName=D:\src\EcgTool\algorithms\features\classChoiFeatures.h
+
+[View6]
 CustomEditViewType=TEditView
 Module=D:\libSVM\libsvm test library\svm-train.c
 CursorX=43
@@ -127,7 +174,7 @@ Elisions=
 Bookmarks={1,105,12}{2,130,51}
 EditViewName=D:\libSVM\libsvm test library\svm-train.c
 
-[View4]
+[View7]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\inc\libsvm\svm.cpp
 CursorX=1
@@ -138,7 +185,7 @@ Elisions=
 Bookmarks=
 EditViewName=D:\src\EcgTool\inc\libsvm\svm.cpp
 
-[View5]
+[View8]
 CustomEditViewType=TEditView
 Module=D:\libSVM\libsvm test library\svm.h
 CursorX=34
@@ -148,17 +195,6 @@ LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=D:\libSVM\libsvm test library\svm.h
-
-[View6]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
-CursorX=1
-CursorY=268
-TopLine=246
-LeftCol=1
-Elisions=
-Bookmarks={1,170,1}{2,326,1}{3,207,1}
-EditViewName=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
 
 [Watches]
 Count=0
@@ -473,6 +509,11 @@ Dockable=1
 StayOnTop=0
 SplitPos=176
 
+[PropInspDesignerSelection]
+ArrangeBy=Name
+SelectedItem=Name,
+ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,Font=0,GlassFrame=0,HorzScrollBar=0,Margins=0,Padding=0,BevelEdges=0
+
 [ModelViewTool]
 PercentageSizes=1
 Create=1
@@ -761,5 +802,5 @@ Dockable=1
 StayOnTop=0
 TabPosition=0
 ActiveTabID=ProjectManager
-TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
+TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
 

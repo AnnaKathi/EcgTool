@@ -91,7 +91,6 @@ object fmChoi: TfmChoi
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 540
     object Button1: TButton
       Left = 8
       Top = 8
@@ -185,7 +184,6 @@ object fmChoi: TfmChoi
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 3
-    ExplicitHeight = 430
     object Bevel6: TBevel
       Left = 0
       Top = 153
@@ -287,7 +285,6 @@ object fmChoi: TfmChoi
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 1
-      ExplicitTop = 259
     end
     object mFid: TMemo
       Left = 191
@@ -351,7 +348,7 @@ object fmChoi: TfmChoi
       Height = 21
       TabOrder = 8
     end
-    object cbCrossvalidation: TCheckBox
+    object cxCrossvalidation: TCheckBox
       Left = 384
       Top = 232
       Width = 97

@@ -229,20 +229,24 @@ void TfmChoi::DoChoi()
 //---------------------------------------------------------------------------
 void TfmChoi::DoSvm()
 	{
-	Print("libSVM-Version: %d", libsvm_version);
-
-	//--> see readme, 'library usage' ------------------------------
-	//see svm-train.c and svm-predict.c on how to use the library
-
-	/*--> 1. get/construct training data */
-	iarray_t train_data = getTrainingData(fecg.data.data_array);
-	if (train_data.size() <= 0)
+	Print("\n------- Startup SVM Choi -----------------------------------");
+	Print("libSVM-Version: %d", fChoiSVM.version);
+	if (!fChoiSVM.startSvm(fecg))
 		{
-		//todo Fehlermdlung
+		Print("# Fehler, SVM konnte nicht gestartet werden");
+		Print("# ChoiSVM meldet: %d, %s", fChoiSVM.error_code, fChoiSVM.error_msg);
 		return;
 		}
 
 	Print("\n------- Trainingsdata --------------------------------------");
+	if (!fChoiSVM.doTrainingData(56))
+		{
+		Print("# Fehler, Trainingdaten konnten nicht gebildet werden");
+		Print("# ChoiSVM meldet: %d, %s", fChoiSVM.error_code, fChoiSVM.error_msg);
+		return;
+		}
+
+	iarray_t train_data = fChoiSVM.train_data;
 	for (iarray_itr itr = train_data.begin(); itr != train_data.end(); itr++)
 		{
 		ilist_t& v = itr->second;
@@ -250,117 +254,81 @@ void TfmChoi::DoSvm()
 			(int)v[0], (int)v[1], (int)v[2], (int)v[3], v[4], v[5], v[6], v[7], v[8]);
 		}
 
-	/*--> 2. construct SVM model (svm_model) using training data
-			a model can also be saved in a file for later use.*/
-
-			/*--> 2a. construct a problem */
-			svm_problem problem;
-			if (!getProblem(train_data, problem))
-				{
-				//todo Fehlermeldung
-				return;
-				}
-
-			Print("\n------- Problem --------------------------------------------");
-			int max = problem.l;
-			Print("l = %d", max);
-
-			String line = "";
-			int label;
-			for (int i = 0; i < max; i++)
-				{
-				label = problem.y[i];
-				line = line + String(label) + " ";
-				}
-			Print("y -> %s", line.c_str());
-
-			int idx; double wert;
-			for (int i = 0; i < max; i++)
-				{
-				line = ftools.fmt("x -> [%d] -> ", i); 
-				svm_node* node = problem.x[i];
-				for (int j = 0; j < 8; j++)
-					{
-					idx  = node[j].index;
-					wert = node[j].value;
-					line = line + ftools.fmt("(%d,%.4f) ", idx, wert);
-					}
-				Print("%s", line.c_str());
-				}
-			/*
-			struct svm_problem describes the problem:
-			struct svm_problem
-				{
-				int l;  //no. of training data (rows)
-				double *y;  //array of target values (int in classification)
-				struct svm_node **x; //array of pointers to one training vector each
-				};
-
-			where `l' is the number of training data, and `y' is an array containing
-			their target values. (integers in classification, real numbers in
-			regression) `x' is an array of pointers, each of which points to a sparse
-			representation (array of svm_node) of one training vector.
-
-			For example, if we have the following training data:
-
-			LABEL    ATTR1    ATTR2    ATTR3    ATTR4    ATTR5
-			-----    -----    -----    -----    -----    -----
-			  1        0        0.1      0.2      0        0
-			  2        0        0.1      0.3     -1.2      0
-			  1        0.4      0        0        0        0
-			  2        0        0.1      0        1.4      0.5
-			  3       -0.1     -0.2      0.1      1.1      0.1
-
-			then the components of svm_problem are:
-
-				l = 5 //no of training data (rows)
-				y -> 1 2 1 2 3 //array of target values (int in classification)
-				x -> [ ] -> (2,0.1) (3,0.2) (-1,?) //array of pointers to one training vector each
-					 [ ] -> (2,0.1) (3,0.3) (4,-1.2) (-1,?)
-					 [ ] -> (1,0.4) (-1,?)
-					 [ ] -> (2,0.1) (4,1.4) (5,0.5) (-1,?)
-					 [ ] -> (1,-0.1) (2,-0.2) (3,0.1) (4,1.1) (5,0.1) (-1,?)
-
-			where (index,value) is stored in the structure `svm_node':
-
-			struct svm_node
-			{
-				int index;
-				double value;
-			};
-
-			index = -1 indicates the end of one vector. Note that indices must
-			be in ASCENDING order.
-            */
-			/*--> 2b. construct svm parameters */
-			svm_parameter param;
-			if (!getParameter(problem, param))
-				{
-				//todo Fehlermedludng
-				return;
-				}
-
-			Print("\n------- Parameter gesetzt ----------------------------------");
-			Print("okay");
-
-
-	/*--> 3. use model to classify new data */
-	if (bCrossvalidation)
+	Print("\n------- Problem --------------------------------------------");
+	if (!fChoiSVM.doProblem(train_data))
 		{
-		if (!doCrossvalidation(problem, param, iCrossvalidation_NrFold))
+		Print("# Fehler, Trainingdaten konnten nicht gebildet werden");
+		Print("# ChoiSVM meldet: %d, %s", fChoiSVM.error_code, fChoiSVM.error_msg);
+		return;
+		}
+
+	svm_problem problem = fChoiSVM.problem;
+
+	int max = problem.l;
+	Print("l = %d", max);
+
+	String line = "";
+	int label;
+	for (int i = 0; i < max; i++)
+		{
+		label = problem.y[i];
+		line = line + String(label) + " ";
+		}
+	Print("y -> %s", line.c_str());
+
+	int idx; double wert;
+	for (int i = 0; i < max; i++)
+		{
+		line = ftools.fmt("x -> [%d] -> ", i);
+		svm_node* node = problem.x[i];
+		for (int j = 0; j < 8; j++)
 			{
-			//todo Fehlermeldung
+			idx  = node[j].index;
+			wert = node[j].value;
+			line = line + ftools.fmt("(%d,%.4f) ", idx, wert);
+			}
+		Print("%s", line.c_str());
+		}
+
+	Print("\n------- Parameter ------------------------------------------");
+	if (!fChoiSVM.doParameter(problem))
+		{
+		Print("# Fehler, Parameter konnten nicht gesetzt werden");
+		Print("# ChoiSVM meldet: %d, %s", fChoiSVM.error_code, fChoiSVM.error_msg);
+		return;
+		}
+
+	svm_parameter param = fChoiSVM.param;
+	Print("okay");
+
+	if (cxCrossvalidation->Checked)
+		{
+		Print("\n------- Crossvalidation ------------------------------------");
+		if (!fChoiSVM.doCrossvalidation(problem, param, edFold->Text.ToInt()))
+			{
+			Print("# Fehler, Crossvalidation konnte nicht durchgeführt werden");
+			Print("# ChoiSVM meldet: %d, %s", fChoiSVM.error_code, fChoiSVM.error_msg);
 			return;
 			}
+
+		if (param.svm_type == EPSILON_SVR || param.svm_type == NU_SVR)
+			{
+			Print("Mean Sqaured Error: %.4f", fChoiSVM.iMeanSquaredError);
+			Print("Squared Corr. Coeff.: %.4f", fChoiSVM.iSquredCorrCoeff);
+			}
+		else
+			Print("Crossvalidation accuracy: %.2f %", fChoiSVM.iAccuracy);
 		}
 	else
 		{
-		svm_model* model;
-		if (!getModel(problem, param, model))
+		Print("\n------- Save Model -----------------------------------------");
+		if (!fChoiSVM.doModel(problem, param))
 			{
-			//todo Fehlermeldung
+			Print("# Fehler, Model konnte nicht gespeichert werden");
+			Print("# ChoiSVM meldet: %d, %s", fChoiSVM.error_code, fChoiSVM.error_msg);
 			return;
 			}
+		Print("okay");
 		}
 
 	svm_destroy_param(&param);
@@ -569,7 +537,7 @@ bool TfmChoi::getParameter(svm_problem problem, svm_parameter& param)
 	param.weight_label 	= NULL; //todo, ist array: ini->ReadInteger("SVM-Parameter", "Weight-Label", NULL);
 	param.weight 		= NULL; //todo, ist array: ini->ReadFloat("SVM-Parameter", "Weight", NULL);
 
-	bCrossvalidation    = cbCrossvalidation->Checked;
+	bCrossvalidation    = cxCrossvalidation->Checked;
 	if (bCrossvalidation)
 		{
 		iCrossvalidation_NrFold = edFold->Text.ToInt();

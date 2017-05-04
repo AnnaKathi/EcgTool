@@ -1,26 +1,27 @@
 [Closed Files]
-File_0=TSourceModule,'D:\src\EcgTool\ecg\classRpeaks.cpp',0,1,95,1,115,0,0,,
-File_1=TSourceModule,'D:\src\EcgTool\Main.cpp',0,1,53,9,79,0,0,,
-File_2=TSourceModule,'D:\src\EcgTool\RequestBox.cpp',0,1,1,28,26,0,0,,
-File_3=TSourceModule,'D:\src\EcgTool\database\classMySql_Work.cpp',0,1,102,23,107,0,0,,
-File_4=TSourceModule,'D:\src\EcgTool\database\toolforms\addPeople.cpp',0,1,58,25,82,0,0,,
-File_5=TSourceModule,'D:\src\EcgTool\basics\classTools.cpp',0,1,1,1,1,0,0,,
-File_6=TSourceModule,'D:\libSVM\libsvm-3.22\Makefile.win',0,1,1,96,26,0,0,,
+File_0=TSourceModule,'D:\libSVM\libsvm test library\svm.cpp',0,1,2445,1,2468,0,0,,
+File_1=TSourceModule,'D:\src\EcgTool\ecg\classRpeaks.cpp',0,1,95,1,115,0,0,,
+File_2=TSourceModule,'D:\src\EcgTool\Main.cpp',0,1,53,9,79,0,0,,
+File_3=TSourceModule,'D:\src\EcgTool\RequestBox.cpp',0,1,1,28,26,0,0,,
+File_4=TSourceModule,'D:\src\EcgTool\database\classMySql_Work.cpp',0,1,102,23,107,0,0,,
+File_5=TSourceModule,'D:\src\EcgTool\database\toolforms\addPeople.cpp',0,1,58,25,82,0,0,,
+File_6=TSourceModule,'D:\src\EcgTool\basics\classTools.cpp',0,1,1,1,1,0,0,,
+File_7=TSourceModule,'D:\libSVM\libsvm-3.22\Makefile.win',0,1,1,96,26,0,0,,
 
 [Modules]
-Module0=D:\src\EcgTool\algorithms\AlgChoi.cpp
+Module0=D:\src\EcgTool\inc\libsvm\svm.cpp
 Module1=D:\libSVM\libsvm test library\svm-train.c
-Module2=D:\libSVM\libsvm test library\svm.cpp
-Module3=D:\libSVM\libsvm test library\svm.h
-Module4=D:\libSVM\libsvm test library\README
-Module5=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
-Module6=default.htm
+Module2=D:\src\EcgTool\algorithms\AlgChoi.cpp
+Module3=default.htm
+Module4=D:\libSVM\libsvm test library\svm.h
+Module5=D:\libSVM\libsvm test library\README
+Module6=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
 Count=7
 EditWindowCount=1
 
-[D:\src\EcgTool\algorithms\AlgChoi.cpp]
+[D:\src\EcgTool\inc\libsvm\svm.cpp]
 ModuleType=TSourceModule
-FormState=1
+FormState=0
 FormOnTop=0
 
 [D:\libSVM\libsvm test library\svm-train.c]
@@ -28,10 +29,13 @@ ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[D:\libSVM\libsvm test library\svm.cpp]
+[D:\src\EcgTool\algorithms\AlgChoi.cpp]
 ModuleType=TSourceModule
-FormState=0
+FormState=1
 FormOnTop=0
+
+[default.htm]
+ModuleType=TURLModule
 
 [D:\libSVM\libsvm test library\svm.h]
 ModuleType=TSourceModule
@@ -46,12 +50,9 @@ ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[default.htm]
-ModuleType=TURLModule
-
 [EditWindow0]
 ViewCount=7
-CurrentEditView=D:\src\EcgTool\algorithms\AlgChoi.cpp
+CurrentEditView=D:\src\EcgTool\inc\libsvm\svm.cpp
 View0=0
 View1=1
 View2=2
@@ -128,14 +129,14 @@ EditViewName=D:\libSVM\libsvm test library\svm-train.c
 
 [View4]
 CustomEditViewType=TEditView
-Module=D:\libSVM\libsvm test library\svm.cpp
+Module=D:\src\EcgTool\inc\libsvm\svm.cpp
 CursorX=1
-CursorY=2468
-TopLine=2445
+CursorY=1
+TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=D:\libSVM\libsvm test library\svm.cpp
+EditViewName=D:\src\EcgTool\inc\libsvm\svm.cpp
 
 [View5]
 CustomEditViewType=TEditView
@@ -760,5 +761,5 @@ Dockable=1
 StayOnTop=0
 TabPosition=0
 ActiveTabID=ProjectManager
-TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
+TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
 
