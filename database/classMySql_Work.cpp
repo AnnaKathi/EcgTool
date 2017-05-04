@@ -87,22 +87,13 @@ bool cMySqlWork::query(String q)
 		return fail(2, "Datenbank wurde nicht initialisiert");
 
 	if (mysql_real_query(fcon, q.c_str(), q.Length()) != 0)
-		{
-		String msg = "Fehler in QUERY : " + String(mysql_error(fcon));
-		return fail(2, msg.c_str());
-		}
+		return fail(2, ftools.fmt("Fehler in QUERY: %d", mysql_error(fcon)));
 
 	if ((fres = mysql_store_result(fcon)) == NULL)
-		{
-		String msg = "Fehler in STORE_RESULT : " + String(mysql_error(fcon));
-		return fail(2, msg.c_str());
-		}
+		return fail(2, ftools.fmt("Fehler in STORE_RESULT: %d", mysql_error(fcon)));
 
 	if (mysql_num_rows(fres) == 0)
-		{
-		String msg = "keine Daten gefunden";
 		return ok(); //not: fail(2, msg.c_str());
-		}
 	else
 		return ok();
 	}
@@ -113,10 +104,7 @@ bool cMySqlWork::send(String q)
 		return fail(3, "Datenbank wurde nicht initialisiert");
 
 	if (mysql_real_query(fcon, q.c_str(), q.Length()) != 0)
-		{
-		String msg = "Fehler in QUERY : " + String(mysql_error(fcon));
-		return fail(3, msg.c_str());
-		}
+		return fail(3, ftools.fmt("Fehler in QUERY: %d", mysql_error(fcon)));
 
 	return ok();
 	}

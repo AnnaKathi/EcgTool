@@ -1,62 +1,44 @@
 [Closed Files]
-File_0=TSourceModule,'D:\src\EcgTool\inc\libsvm\svm.def',0,1,1,21,21,0,0,,
-File_1=TSourceModule,'D:\src\EcgTool\algorithms\classifications\libSVM\svm.cpp',0,1,1,56,26,0,0,,
-File_2=TSourceModule,'D:\src\EcgTool\algorithms\classifications\libSVM\svm-predict.c',0,1,1,1,1,0,0,,
-File_3=TSourceModule,'D:\src\EcgTool\algorithms\classifications\libSVM\svm-train.c',0,1,1,1,1,0,0,,
-File_4=TSourceModule,'D:\src\EcgTool\algorithms\classifications\libSVM\svm-scale.c',0,1,1,1,1,0,0,,
-File_5=TSourceModule,'D:\libSVM\libsvm-3.22\svm-toy\windows\svm-toy.cpp',0,1,1,22,29,0,0,,
-File_6=TSourceModule,'d:\dev\rad\include\dinkumware\xtree',0,1,422,1,452,0,0,,
-File_7=TSourceModule,'D:\src\EcgTool\ecg\classEcg.cpp',0,1,1,1,28,0,0,,
-File_8=TSourceModule,'D:\src\EcgTool\algorithms\features\classAC.cpp',0,1,78,15,104,0,0,,
-File_9=TSourceModule,'D:\src\EcgTool\algorithms\features\classRandomPoints.cpp',0,1,4,1,1,0,0,,
+File_0=TSourceModule,'D:\src\EcgTool\ecg\classRpeaks.cpp',0,1,95,1,115,0,0,,
+File_1=TSourceModule,'D:\src\EcgTool\Main.cpp',0,1,53,9,79,0,0,,
+File_2=TSourceModule,'D:\src\EcgTool\RequestBox.cpp',0,1,1,28,26,0,0,,
+File_3=TSourceModule,'D:\src\EcgTool\database\classMySql_Work.cpp',0,1,102,23,107,0,0,,
+File_4=TSourceModule,'D:\src\EcgTool\database\toolforms\addPeople.cpp',0,1,58,25,82,0,0,,
+File_5=TSourceModule,'D:\src\EcgTool\basics\classTools.cpp',0,1,1,1,1,0,0,,
+File_6=TSourceModule,'D:\libSVM\libsvm-3.22\Makefile.win',0,1,1,96,26,0,0,,
 
 [Modules]
-Module0=D:\libSVM\libsvm-3.22\README
-Module1=D:\src\EcgTool\algorithms\AlgChoi.cpp
-Module2=D:\src\EcgTool\algorithms\classifications\libSVM\svm.h
-Module3=D:\src\EcgTool\database\classMySql_Work.cpp
-Module4=default.htm
-Module5=D:\libSVM\libsvm-3.22\svm.def
-Module6=D:\libSVM\libsvm-3.22\Makefile.win
-Module7=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
-Module8=D:\src\EcgTool\basics\classArray.cpp
-Module9=D:\src\EcgTool\basics\classTools.cpp
-Module10=D:\src\EcgTool\algorithms\classAlg1.cpp
-Module11=D:\src\EcgTool\Details.cpp
-Module12=D:\src\EcgTool\ecg\classHeartbeat.cpp
-Module13=D:\src\EcgTool\basics\classData.cpp
-Module14=D:\src\EcgTool\Main.cpp
-Module15=D:\src\EcgTool\basics\classCsv.cpp
-Module16=D:\src\EcgTool\EcgView.cpp
-Module17=D:\src\EcgTool\algorithms\Alg1.cpp
-Count=18
+Module0=D:\src\EcgTool\algorithms\AlgChoi.cpp
+Module1=D:\libSVM\libsvm test library\svm-train.c
+Module2=D:\libSVM\libsvm test library\svm.cpp
+Module3=D:\libSVM\libsvm test library\svm.h
+Module4=D:\libSVM\libsvm test library\README
+Module5=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
+Module6=default.htm
+Count=7
 EditWindowCount=1
-
-[D:\libSVM\libsvm-3.22\README]
-ModuleType=TSourceModule
 
 [D:\src\EcgTool\algorithms\AlgChoi.cpp]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[D:\src\EcgTool\algorithms\classifications\libSVM\svm.h]
+[D:\libSVM\libsvm test library\svm-train.c]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[D:\src\EcgTool\database\classMySql_Work.cpp]
+[D:\libSVM\libsvm test library\svm.cpp]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[default.htm]
-ModuleType=TURLModule
-
-[D:\libSVM\libsvm-3.22\svm.def]
+[D:\libSVM\libsvm test library\svm.h]
 ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
 
-[D:\libSVM\libsvm-3.22\Makefile.win]
+[D:\libSVM\libsvm test library\README]
 ModuleType=TSourceModule
 
 [D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp]
@@ -64,59 +46,12 @@ ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[D:\src\EcgTool\basics\classArray.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\src\EcgTool\basics\classTools.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\src\EcgTool\algorithms\classAlg1.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\src\EcgTool\Details.cpp]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[D:\src\EcgTool\ecg\classHeartbeat.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\src\EcgTool\basics\classData.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\src\EcgTool\Main.cpp]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[D:\src\EcgTool\basics\classCsv.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\src\EcgTool\EcgView.cpp]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[D:\src\EcgTool\algorithms\Alg1.cpp]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
+[default.htm]
+ModuleType=TURLModule
 
 [EditWindow0]
-ViewCount=18
-CurrentEditView=D:\libSVM\libsvm-3.22\README
+ViewCount=7
+CurrentEditView=D:\src\EcgTool\algorithms\AlgChoi.cpp
 View0=0
 View1=1
 View2=2
@@ -124,17 +59,6 @@ View3=3
 View4=4
 View5=5
 View6=6
-View7=7
-View8=8
-View9=9
-View10=10
-View11=11
-View12=12
-View13=13
-View14=14
-View15=15
-View16=16
-View17=17
 PercentageSizes=1
 Create=1
 Visible=1
@@ -171,197 +95,72 @@ WelcomePageURL=bds:/default.htm
 
 [View1]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\Main.cpp
-CursorX=22
-CursorY=141
-TopLine=80
+Module=D:\libSVM\libsvm test library\README
+CursorX=29
+CursorY=432
+TopLine=414
 LeftCol=1
 Elisions=
-Bookmarks={1,141,22}{9,141,22}
-EditViewName=D:\src\EcgTool\Main.cpp
+Bookmarks={1,432,29}
+EditViewName=D:\libSVM\libsvm test library\README
 
 [View2]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\algorithms\AlgChoi.cpp
-CursorX=70
-CursorY=306
-TopLine=284
+CursorX=57
+CursorY=682
+TopLine=564
 LeftCol=1
 Elisions=
-Bookmarks={1,304,1}{3,232,1}{9,288,1}
+Bookmarks={1,359,46}{2,691,15}{9,750,1}
 EditViewName=D:\src\EcgTool\algorithms\AlgChoi.cpp
 
 [View3]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\database\classMySql_Work.cpp
-CursorX=1
-CursorY=7
-TopLine=1
+Module=D:\libSVM\libsvm test library\svm-train.c
+CursorX=43
+CursorY=117
+TopLine=77
 LeftCol=1
 Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\database\classMySql_Work.h
+Bookmarks={1,105,12}{2,130,51}
+EditViewName=D:\libSVM\libsvm test library\svm-train.c
 
 [View4]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\algorithms\classifications\libSVM\svm.h
-CursorX=49
-CursorY=18
-TopLine=58
+Module=D:\libSVM\libsvm test library\svm.cpp
+CursorX=1
+CursorY=2468
+TopLine=2445
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=D:\src\EcgTool\algorithms\classifications\libSVM\svm.h
+EditViewName=D:\libSVM\libsvm test library\svm.cpp
 
 [View5]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
-CursorX=68
-CursorY=261
-TopLine=242
+Module=D:\libSVM\libsvm test library\svm.h
+CursorX=34
+CursorY=59
+TopLine=59
 LeftCol=1
 Elisions=
-Bookmarks={1,316,1}{2,159,1}
-EditViewName=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
+Bookmarks=
+EditViewName=D:\libSVM\libsvm test library\svm.h
 
 [View6]
 CustomEditViewType=TEditView
-Module=D:\libSVM\libsvm-3.22\Makefile.win
-CursorX=96
-CursorY=26
-TopLine=1
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\libSVM\libsvm-3.22\Makefile.win
-
-[View7]
-CustomEditViewType=TEditView
-Module=D:\libSVM\libsvm-3.22\svm.def
-CursorX=32
-CursorY=21
-TopLine=1
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\libSVM\libsvm-3.22\svm.def
-
-[View8]
-CustomEditViewType=TEditView
-Module=D:\libSVM\libsvm-3.22\README
-CursorX=62
-CursorY=425
-TopLine=418
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\libSVM\libsvm-3.22\README
-
-[View9]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\basics\classTools.cpp
-CursorX=27
-CursorY=193
-TopLine=173
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\basics\classTools.cpp
-
-[View10]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\algorithms\classAlg1.cpp
+Module=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
 CursorX=1
-CursorY=1
-TopLine=1
+CursorY=268
+TopLine=246
 LeftCol=1
 Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\algorithms\classAlg1.cpp
-
-[View11]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\basics\classArray.cpp
-CursorX=28
-CursorY=76
-TopLine=108
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\basics\classArray.h
-
-[View12]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\Details.cpp
-CursorX=14
-CursorY=132
-TopLine=104
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\Details.cpp
-
-[View13]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\ecg\classHeartbeat.cpp
-CursorX=1
-CursorY=24
-TopLine=4
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\ecg\classHeartbeat.cpp
-
-[View14]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\basics\classData.cpp
-CursorX=1
-CursorY=252
-TopLine=229
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\basics\classData.cpp
-
-[View15]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\basics\classCsv.cpp
-CursorX=1
-CursorY=188
-TopLine=168
-LeftCol=1
-Elisions=
-Bookmarks={1,194,1}
-EditViewName=D:\src\EcgTool\basics\classCsv.cpp
-
-[View16]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\EcgView.cpp
-CursorX=1
-CursorY=127
-TopLine=96
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\EcgView.cpp
-
-[View17]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\algorithms\Alg1.cpp
-CursorX=1
-CursorY=1
-TopLine=1
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=Borland.FormDesignerView
+Bookmarks={1,170,1}{2,326,1}{3,207,1}
+EditViewName=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
 
 [Watches]
-Count=4
-Watch0='prev',256,0,18,1,0,'Überwachte Ausdrücke'
-Watch1='zeit',256,0,18,1,0,'Überwachte Ausdrücke'
-Watch2='next',256,0,18,1,0,'Überwachte Ausdrücke'
-Watch3='round',256,0,18,1,0,'Überwachte Ausdrücke'
+Count=0
 
 [WatchWindow]
 WatchColumnWidth=120
@@ -913,7 +712,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel

@@ -7,6 +7,7 @@
 #include <Forms.hpp>
 //---------------------------------------------------------------------------
 #include "../basics/classBase.h"
+#include "../basics/classTools.h"
 #include "../inc/mysql/mysql.h"
 //---------------------------------------------------------------------------
 class PACKAGE cMySqlWork : public cBase
@@ -35,6 +36,8 @@ private:
 	MYSQL_RES*  	fres;
 	MYSQL_ROW		frow;
 	int				get_num_rows();
+
+	cTools			ftools;
 
 	bool			bMySqlConnected;
 

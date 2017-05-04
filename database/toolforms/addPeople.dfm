@@ -177,7 +177,7 @@ object fmPerson: TfmPerson
     Top = 134
     Width = 180
     Height = 21
-    ItemHeight = 0
+    ItemHeight = 13
     TabOrder = 2
     OnKeyPress = cbDiseasesKeyPress
   end

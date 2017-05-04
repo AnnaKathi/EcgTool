@@ -77,8 +77,9 @@ void __fastcall TfmPerson::tStartupTimer(TObject *Sender)
 		{
 		if (!fmysql.people.get(iPerson))
 			{
-			String msg = "Die Person <" + String(iPerson) + "> konnte nicht gefunden werden.";
-			Application->MessageBox(msg.c_str(), "Fehler beim Laden", MB_OK);
+			Application->MessageBox(
+				ftools.fmt("Die Person <%d> konnte nicht gefunden werden.", iPerson).c_str(),
+				"Fehler beim Laden", MB_OK);
 			Close();
 			return;
 			}

@@ -38,10 +38,12 @@ void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 	setStatus("startup EcgTool...loading MySql-Database");
 	if (!fmysql.open())
 		{
-		String msg =
-			"Die MySql-Datenbank 'ecg' konnte nicht geöffnet werden."
-			"Die Funktion meldet: " + fmysql.error_msg;
-		Application->MessageBox(msg.c_str(), "Fehler beim Öffnen der Datenbank", MB_OK);
+		Application->MessageBox(
+			ftools.fmt(
+				"Die MySql-Datenbank 'ecg' konnte nicht geöffnet werden. "
+				"Die Funktion meldet: %s", fmysql.error_msg).c_str(),
+			"Fehler beim Öffnen der Datenbank",
+			MB_OK);
 		Close();
 		return;
 		}
@@ -70,11 +72,11 @@ void TfmMain::setStatus(String status, int panel) //panel ist vorbesetzt mit 0
 //---------------------------------------------------------------------------
 void TfmMain::setDbInfo()
 	{
-	String msg =
-		String(fmysql.people.getSize()) + " Personen, " +
-		String(fmysql.diseases.getSize()) + " Erkrankungen, " +
-		String(fmysql.ecg.getSize()) + " EKG-Datensätze";
-	setStatus(msg, 1);
+	setStatus(
+		ftools.fmt("%d Personen, %d Erkrankenungen, %d EKG-Datensätze",
+		fmysql.people.getSize(),
+		fmysql.diseases.getSize(),
+		fmysql.ecg.getSize()), 1);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

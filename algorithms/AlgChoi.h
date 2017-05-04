@@ -10,6 +10,7 @@
 #include <Buttons.hpp>
 #include <Dialogs.hpp>
 #include <ExtCtrls.hpp>
+#include <IniFiles.hpp>
 //---------------------------------------------------------------------------
 #include "../ecg/classEcg.h"
 #include "../ecg/classHeartbeat.h"
@@ -19,6 +20,8 @@
 #include "../basics/classMath.h"
 //---------------------------------------------------------------------------
 #include "features/classChoiFeatures.h"
+//---------------------------------------------------------------------------
+#include "../inc/libsvm/svm.h"
 //---------------------------------------------------------------------------
 class TfmChoi : public TForm
 {
@@ -44,6 +47,17 @@ private:
 
 	void		DoSvm();
 	iarray_t 	getTrainingData(iarray_t ecg);
+
+	svm_node* 	x_space;
+	bool 		getProblem(iarray_t training, svm_problem& problem);
+
+	bool		bCrossvalidation;
+	int			iCrossvalidation_NrFold;
+	bool		getParameter(svm_problem problem, svm_parameter& param);
+	void		setParameterDefault(svm_parameter& param);
+
+	bool		doCrossvalidation(svm_problem problem, svm_parameter param, int nr_fold);
+	bool		getModel(svm_problem problem, svm_parameter param, svm_model* model);
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -83,6 +97,11 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *Button2;
 	TButton *Button3;
 	TButton *btTestSVM;
+	TLabel *Label4;
+	TEdit *edLabel;
+	TCheckBox *cbCrossvalidation;
+	TLabel *laFold;
+	TEdit *edFold;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);

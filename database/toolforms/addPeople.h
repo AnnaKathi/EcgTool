@@ -12,10 +12,12 @@
 #include <ComCtrls.hpp>
 #include <Menus.hpp>
 //---------------------------------------------------------------------------
+#include "../../basics/classTools.h"
 //---------------------------------------------------------------------------
 class TfmPerson : public TForm
 {
 private:
+	cTools		ftools;
 	bool		bNewPerson;
 	int			iPerson;
 

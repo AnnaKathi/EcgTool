@@ -2,7 +2,7 @@ object fmChoi: TfmChoi
   Left = 0
   Top = 0
   Caption = 'Choi 2016: Feature Extraction'
-  ClientHeight = 581
+  ClientHeight = 669
   ClientWidth = 516
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -31,7 +31,7 @@ object fmChoi: TfmChoi
   end
   object Bevel2: TBevel
     Left = 0
-    Top = 532
+    Top = 620
     Width = 516
     Height = 8
     Align = alBottom
@@ -85,12 +85,13 @@ object fmChoi: TfmChoi
   end
   object Panel1: TPanel
     Left = 0
-    Top = 540
+    Top = 628
     Width = 516
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 540
     object Button1: TButton
       Left = 8
       Top = 8
@@ -179,11 +180,12 @@ object fmChoi: TfmChoi
     Left = 0
     Top = 102
     Width = 516
-    Height = 430
+    Height = 518
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 3
+    ExplicitHeight = 430
     object Bevel6: TBevel
       Left = 0
       Top = 153
@@ -216,18 +218,32 @@ object fmChoi: TfmChoi
       Caption = 'Fiducial Points Averages'
     end
     object Label7: TLabel
-      Left = 384
-      Top = 176
+      Left = 380
+      Top = 161
       Width = 47
       Height = 13
       Caption = 'Threshold'
     end
     object Label8: TLabel
-      Left = 384
-      Top = 203
+      Left = 380
+      Top = 185
       Width = 59
       Height = 13
       Caption = 'Overlap(ms)'
+    end
+    object Label4: TLabel
+      Left = 380
+      Top = 209
+      Width = 52
+      Height = 13
+      Caption = 'Label Train'
+    end
+    object laFold: TLabel
+      Left = 380
+      Top = 258
+      Width = 50
+      Height = 13
+      Caption = 'Cross Fold'
     end
     object pnEcgGes: TPanel
       Left = 0
@@ -264,13 +280,14 @@ object fmChoi: TfmChoi
     end
     object Memo: TMemo
       Left = 0
-      Top = 261
+      Top = 347
       Width = 516
-      Height = 169
+      Height = 171
       Align = alBottom
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 1
+      ExplicitTop = 259
     end
     object mFid: TMemo
       Left = 191
@@ -288,14 +305,14 @@ object fmChoi: TfmChoi
     end
     object edThreshold: TEdit
       Left = 445
-      Top = 173
+      Top = 158
       Width = 60
       Height = 21
       TabOrder = 3
     end
     object edOverlap: TEdit
       Left = 445
-      Top = 200
+      Top = 182
       Width = 60
       Height = 21
       TabOrder = 4
@@ -320,12 +337,34 @@ object fmChoi: TfmChoi
     end
     object btTestSVM: TButton
       Left = 384
-      Top = 230
+      Top = 316
       Width = 121
       Height = 25
       Caption = 'Test libSVM'
       TabOrder = 7
       OnClick = btTestSVMClick
+    end
+    object edLabel: TEdit
+      Left = 445
+      Top = 206
+      Width = 60
+      Height = 21
+      TabOrder = 8
+    end
+    object cbCrossvalidation: TCheckBox
+      Left = 384
+      Top = 232
+      Width = 97
+      Height = 17
+      Caption = 'Crossvalidation'
+      TabOrder = 9
+    end
+    object edFold: TEdit
+      Left = 445
+      Top = 255
+      Width = 60
+      Height = 21
+      TabOrder = 10
     end
   end
   object tStartup: TTimer

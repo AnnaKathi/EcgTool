@@ -138,7 +138,7 @@ bool cChoiFeat::FindRPeaks(iarray_t curve)
 	iarray_t rloc = farray.remove(candidates, overlaps, 0);
 
 	if (rloc.size() <= 0)
-		return fail(2, "Es konnten keine R-Peaks gefunden werden.");
+		return fail(1, "Es konnten keine R-Peaks gefunden werden.");
 	else
 		{
 		fArray_Rpeaks = rloc;
@@ -151,18 +151,15 @@ bool cChoiFeat::FindFeatures(iarray_t curve)
 	fArray_Features.clear();
 
 	if (curve.size() <= 0)
-		return fail(1, "Es wurde keine Kurve übergeben");
+		return fail(2, "Es wurde keine Kurve übergeben");
 
 	if (fArray_Rpeaks.size() <= 0)
-		return fail(3, "Es wurden keine R-Peaks gesetzt");
+		return fail(2, "Es wurden keine R-Peaks gesetzt");
 
 	//Sicherheitsabfrage: Maximale Anzahl Herzschläge (= R-Peaks) bei Puls 200
 	double max_beats = (curve.size() / 1000) * 200/60;
 	if (fArray_Rpeaks.size() > max_beats)
-		{
-		String msg = ftools.fmt("Zuviele R-Peaks gefunden: %d (max erlaubt %d)", fArray_Rpeaks.size(), (int)max_beats);
-		return fail(4, msg.c_str());
-		}
+		return fail(2, ftools.fmt("Zuviele R-Peaks gefunden: %d (max erlaubt %d)", fArray_Rpeaks.size(), (int)max_beats));
 
 	int round = 0;
 	int zeit, prev, next;
@@ -172,7 +169,8 @@ bool cChoiFeat::FindFeatures(iarray_t curve)
 	double p_von, p_bis, q_von, q_bis, s_von, s_bis, t_von, t_bis;
 	iarray_t features; features.clear();
 
-	bool first = true;
+	bool first  = true;
+	bool fehler = false;
 	for (iarray_itr itr_rpeaks = fArray_Rpeaks.begin(); itr_rpeaks != fArray_Rpeaks.end(); itr_rpeaks++)
 		{
 		ilist_t& v = itr_rpeaks->second;
@@ -192,7 +190,10 @@ bool cChoiFeat::FindFeatures(iarray_t curve)
 		itr_rpeaks--;
 
 		if (!getSingleFeatures(curve, prev, zeit, next))
+			{
+			fehler = true;
 			break;
+			}
 
 		features[round].push_back(fArray_Single_Features[0][0]);
 		features[round].push_back(fArray_Single_Features[1][0]);
@@ -205,6 +206,12 @@ bool cChoiFeat::FindFeatures(iarray_t curve)
 		round++;
 
 		prev = zeit;
+		}
+
+	if (fehler)
+		{
+		//fail wurde von getSingleFeatures gesetzt
+		return false;
 		}
 
 	int    i_pq = 0;   int    i_qs = 0; 	int    i_st = 0;
@@ -240,6 +247,18 @@ bool cChoiFeat::FindFeatures(iarray_t curve)
 bool cChoiFeat::getSingleFeatures(iarray_t ecg, int prev_zeit, int curr_zeit, int next_zeit)
 	{
 	//in diesem Herzschlag die Features aus dem QRS-Bereich finden
+	if (ecg.size() <= 0)
+		return fail(3, "Es wurden keine EKG-Daten übergeben");
+
+	if (prev_zeit < 0 || curr_zeit < 0 || next_zeit < 0)
+		return fail(3, ftools.fmt("Es wurden keine R-Peak-Zeiten gesetzt: %d, %d, %d", prev_zeit, curr_zeit, next_zeit));
+
+	if (prev_zeit >= curr_zeit)
+		return fail(3, ftools.fmt("Die R-Peak-Zeiten stimmen nicht (prev): %d, %d, %d", prev_zeit, curr_zeit, next_zeit));
+
+	if (curr_zeit >= next_zeit)
+		return fail(3, ftools.fmt("Die R-Peak-Zeiten stimmen nicht (curr): %d, %d, %d", prev_zeit, curr_zeit, next_zeit));
+
 	fArray_Single_Features.clear();
 	double PAmp, QAmp, RAmp, SAmp, TAmp;
 	int PLoc, QLoc, SLoc, TLoc;
@@ -251,6 +270,8 @@ bool cChoiFeat::getSingleFeatures(iarray_t ecg, int prev_zeit, int curr_zeit, in
 
 	//-- QRS-Bereich finden
 	iarray_t qrs = farray.get(ecg, prev_zeit, next_zeit);
+	if (qrs.size() <= 0)
+		return fail(3, "Der QRS-Bereich konnte nicht gefunden werden");
 
 	//RR-Intervalle feststellen
 	int rr_left = curr_zeit - prev_zeit;
@@ -303,7 +324,7 @@ bool cChoiFeat::getSingleFeatures(iarray_t ecg, int prev_zeit, int curr_zeit, in
 	fArray_Single_Features[6].push_back(SAmp);
 	fArray_Single_Features[7].push_back(TAmp);
 
-	return true;
+	return ok();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
