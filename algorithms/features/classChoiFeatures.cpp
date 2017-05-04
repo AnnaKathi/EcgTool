@@ -164,21 +164,13 @@ bool cChoiFeat::FindFeatures(iarray_t curve)
 		return fail(4, msg.c_str());
 		}
 
-	iarray_t qrs;
-
-	int round = -1;
+	int round = 0;
 	int zeit, prev, next;
 	int rr_left, rr_rigt;
 	int von, bis;
 
 	double p_von, p_bis, q_von, q_bis, s_von, s_bis, t_von, t_bis;
-
-	iarray_t points; points.clear();
-	int pcount = 0;
-
-	int PLoc, QLoc, SLoc, TLoc; 
-	int int_pq, int_qs, int_st;
-	double PAmp, QAmp, RAmp, SAmp, TAmp; 
+	iarray_t features; features.clear();
 
 	bool first = true;
 	for (iarray_itr itr_rpeaks = fArray_Rpeaks.begin(); itr_rpeaks != fArray_Rpeaks.end(); itr_rpeaks++)
@@ -199,7 +191,169 @@ bool cChoiFeat::FindFeatures(iarray_t curve)
 		next = v[0];
 		itr_rpeaks--;
 
-    	round++;
+		if (!getSingleFeatures(curve, prev, zeit, next))
+			break;
+
+		features[round].push_back(fArray_Single_Features[0][0]);
+		features[round].push_back(fArray_Single_Features[1][0]);
+		features[round].push_back(fArray_Single_Features[2][0]);
+		features[round].push_back(fArray_Single_Features[3][0]);
+		features[round].push_back(fArray_Single_Features[4][0]);
+		features[round].push_back(fArray_Single_Features[5][0]);
+		features[round].push_back(fArray_Single_Features[6][0]);
+		features[round].push_back(fArray_Single_Features[7][0]);
+		round++;
+
+		prev = zeit;
+		}
+
+	int    i_pq = 0;   int    i_qs = 0; 	int    i_st = 0;
+	double PAmp = 0.0; double QAmp = 0.0;	double RAmp = 0.0;
+	double SAmp = 0.0; double TAmp = 0.0;
+
+	for (iarray_itr itr = features.begin(); itr != features.end(); itr++)
+		{
+		ilist_t& v = itr->second;
+
+		i_pq += v[0];
+		i_qs += v[1];
+		i_st += v[2];
+		PAmp += v[3];
+		QAmp += v[4];
+		RAmp += v[5];
+		SAmp += v[6];
+		TAmp += v[7];
+		}
+
+	int anz = features.size();
+	fArray_Features[0].push_back(i_pq / anz);
+	fArray_Features[1].push_back(i_qs / anz);
+	fArray_Features[2].push_back(i_st / anz);
+	fArray_Features[3].push_back(PAmp / anz);
+	fArray_Features[4].push_back(QAmp / anz);
+	fArray_Features[5].push_back(RAmp / anz);
+	fArray_Features[6].push_back(SAmp / anz);
+	fArray_Features[7].push_back(TAmp / anz);
+	return ok();
+	}
+//---------------------------------------------------------------------------
+bool cChoiFeat::getSingleFeatures(iarray_t ecg, int prev_zeit, int curr_zeit, int next_zeit)
+	{
+	//in diesem Herzschlag die Features aus dem QRS-Bereich finden
+	fArray_Single_Features.clear();
+	double PAmp, QAmp, RAmp, SAmp, TAmp;
+	int PLoc, QLoc, SLoc, TLoc;
+	double p_von, p_bis, q_von, q_bis, s_von, s_bis, t_von, t_bis;
+
+	iarray_itr itr_curve = ecg.find(curr_zeit);
+	ilist_t& v = itr_curve->second;
+	RAmp = v[1];
+
+	//-- QRS-Bereich finden
+	iarray_t qrs = farray.get(ecg, prev_zeit, next_zeit);
+
+	//RR-Intervalle feststellen
+	int rr_left = curr_zeit - prev_zeit;
+	int rr_rigt = next_zeit - curr_zeit;
+
+	//-- Bereich und Minimun/Maximum feststellen
+	//----- P-Welle
+	p_von = (double)rr_left * 1/6; 		p_bis = (double)rr_left * 1/10;
+	iarray_t arr = farray.get(qrs, (curr_zeit - p_von), (curr_zeit - p_bis));
+	arr = fmath.resort(arr, false);
+	iarray_itr itr = arr.begin();
+	v = itr->second;
+	PLoc = v[0];
+	PAmp = v[1];
+
+	//----- Q-Bereich
+	q_von = (double)rr_left * 1/10;		q_bis = 0;
+	arr = farray.get(qrs, (curr_zeit - q_von), (curr_zeit - q_bis));
+	arr = fmath.resort(arr, true);
+	itr = arr.begin();
+	v = itr->second;
+	QLoc = v[0];
+	QAmp = v[1];
+
+	//----- S-Bereich
+	s_von = 0;							s_bis = (double)rr_rigt * 1/10;
+	arr = farray.get(qrs, (curr_zeit + s_von), (curr_zeit + s_bis));
+	arr = fmath.resort(arr, true);
+	itr = arr.begin();
+	v = itr->second;
+	SLoc = v[0];
+	SAmp = v[1];
+
+	//----- T-Welle
+	t_von = (double)rr_rigt * 1/10;		t_bis = (double)rr_rigt * 1/2;
+	arr = farray.get(qrs, (curr_zeit + t_von), (curr_zeit + t_bis));
+	arr = fmath.resort(arr, false);
+	itr = arr.begin();
+	v = itr->second;
+	TLoc = v[0];
+	TAmp = v[1];
+
+	fArray_Single_Features[0].push_back(QLoc - PLoc); //intervall pq
+	fArray_Single_Features[1].push_back(SLoc - QLoc); //intervall sq
+	fArray_Single_Features[2].push_back(TLoc - SLoc); //intervall st
+
+	fArray_Single_Features[3].push_back(PAmp);
+	fArray_Single_Features[4].push_back(QAmp);
+	fArray_Single_Features[5].push_back(RAmp);
+	fArray_Single_Features[6].push_back(SAmp);
+	fArray_Single_Features[7].push_back(TAmp);
+
+	return true;
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/**************   getter und setter   **************************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+void cChoiFeat::set_Threshold(double threshold)
+	{
+	if (threshold < 0 || threshold > 1) return;
+	fParameter_Threshold = threshold;
+	}
+//---------------------------------------------------------------------------
+double cChoiFeat::get_Threshold()
+	{
+	return fParameter_Threshold;
+	}
+//---------------------------------------------------------------------------
+void cChoiFeat::set_Overlap(int time)
+	{
+	if (time <= 0) return;
+	fParameter_Overlap_Time = time;
+	}
+//---------------------------------------------------------------------------
+int cChoiFeat::get_Overlap()
+	{
+	return fParameter_Overlap_Time;
+	}
+//---------------------------------------------------------------------------
+void cChoiFeat::set_Array_Rpeaks(iarray_t rpeaks)
+	{
+	fArray_Rpeaks = rpeaks;
+	}
+//---------------------------------------------------------------------------
+iarray_t cChoiFeat::get_Array_Rpeaks()
+	{
+	return fArray_Rpeaks;
+	}
+//---------------------------------------------------------------------------
+iarray_t cChoiFeat::get_Array_Features()
+	{
+	return fArray_Features;
+	}
+//---------------------------------------------------------------------------
+iarray_t cChoiFeat::get_Array_Single_Features()
+	{
+	return fArray_Single_Features;
+	}
+//---------------------------------------------------------------------------
+
+		/* obsolete: Berechnung der Features in FindFeatures()
 		iarray_itr itr_curve = curve.find(zeit);
 		v = itr_curve->second;
 		RAmp = v[1];
@@ -264,95 +418,4 @@ bool cChoiFeat::FindFeatures(iarray_t curve)
 		int int_pq = QLoc - PLoc; //PQ-Interval
 		int int_qs = SLoc - QLoc; //QS-Interval
 		int int_st = TLoc - SLoc; //ST-Interval
-
-		if (round < 128) //alle weiteren Werte ignorieren
-			{
-			FidPQInt[round] = int_pq;
-			FidQSInt[round] = int_qs;
-			FidSTInt[round] = int_st;
-			FidPAmp[round]  = PAmp;
-			FidQAmp[round]  = QAmp;
-			FidRAmp[round]  = RAmp;
-			FidSAmp[round]  = SAmp;
-			FidTAmp[round]  = TAmp;
-			}
-
-		prev = zeit;
-		}
-
-	int_pq = int_qs = int_st = 0;
-	PAmp = QAmp = RAmp = SAmp = TAmp = 0.00;
-	for (int i = 0; i < round; i++)
-		{
-		int_pq += FidPQInt[i];
-		int_qs += FidQSInt[i];
-		int_st += FidSTInt[i];
-		PAmp += FidPAmp[i];
-		QAmp += FidQAmp[i];
-		RAmp += FidRAmp[i];
-		SAmp += FidSAmp[i];
-		TAmp += FidTAmp[i];
-		}
-
-	int_pq = int_pq / (round);
-	int_qs = int_qs / (round);
-	int_st = int_st / (round);
-	PAmp = PAmp / (round);
-	QAmp = QAmp / (round);
-	RAmp = RAmp / (round);
-	SAmp = SAmp / (round);
-	TAmp = TAmp / (round);
-
-	fArray_Features[0].push_back(int_pq);
-	fArray_Features[1].push_back(int_qs);
-	fArray_Features[2].push_back(int_st);
-
-	fArray_Features[3].push_back(PAmp);
-	fArray_Features[4].push_back(QAmp);
-	fArray_Features[5].push_back(RAmp);
-	fArray_Features[6].push_back(SAmp);
-	fArray_Features[7].push_back(TAmp);
-	return ok();
-	}
-//---------------------------------------------------------------------------
-/***************************************************************************/
-/**************   getter und setter   **************************************/
-/***************************************************************************/
-//---------------------------------------------------------------------------
-void cChoiFeat::set_Threshold(double threshold)
-	{
-	if (threshold < 0 || threshold > 1) return;
-	fParameter_Threshold = threshold;
-	}
-//---------------------------------------------------------------------------
-double cChoiFeat::get_Threshold()
-	{
-	return fParameter_Threshold;
-	}
-//---------------------------------------------------------------------------
-void cChoiFeat::set_Overlap(int time)
-	{
-	if (time <= 0) return;
-	fParameter_Overlap_Time = time;
-	}
-//---------------------------------------------------------------------------
-int cChoiFeat::get_Overlap()
-	{
-	return fParameter_Overlap_Time;
-	}
-//---------------------------------------------------------------------------
-void cChoiFeat::set_Array_Rpeaks(iarray_t rpeaks)
-	{
-	fArray_Rpeaks = rpeaks;
-	}
-//---------------------------------------------------------------------------
-iarray_t cChoiFeat::get_Array_Rpeaks()
-	{
-	return fArray_Rpeaks;
-	}
-//---------------------------------------------------------------------------
-iarray_t cChoiFeat::get_Array_Features()
-	{
-	return fArray_Features;
-	}
-//---------------------------------------------------------------------------
+		*/

@@ -13,15 +13,18 @@ public:
 	cChoiFeat();
 	~cChoiFeat();
 
-	iarray_t	getFeatures(iarray_t curve); //ruft FindRPeaks und FindFeatures auf
+	iarray_t	getFeatures(iarray_t curve); //ruft FindRPeaks und FindFeatures auf, setzt die übergreifenden Durchschnittssfeatures
 	bool		FindRPeaks(iarray_t curve);
 	bool		FindFeatures(iarray_t curve);
+
+	bool		getSingleFeatures(iarray_t ecg, int prev_zeit, int curr_zeit, int next_zeit);
 
 __property double   Threshold = { read=get_Threshold, write=set_Threshold };
 __property int	    Overlap   = { read=get_Overlap,   write=set_Overlap   };
 
 __property iarray_t Rpeaks    = { read=get_Array_Rpeaks, write=set_Array_Rpeaks   };
-__property iarray_t Features  = { read=get_Array_Features };
+__property iarray_t Features  = { read=get_Array_Features }; //Durchschnittsfeatures des ges. EKG-Streams
+__property iarray_t SingleFeatures = { read=get_Array_Single_Features }; //Features eines Herzschlags
 
 private:
 	cArray		farray;
@@ -40,8 +43,11 @@ private:
 	void		set_Array_Rpeaks(iarray_t rpeaks); //falls man sich R-Peaks selber setzen will
 	iarray_t	get_Array_Rpeaks();
 
-	iarray_t 	fArray_Features;
+	iarray_t 	fArray_Features;  //enthält die Durchschnittsfeatures des ges. EKG-Streams, gesetzt von getFeatures()
 	iarray_t	get_Array_Features();
+
+	iarray_t	fArray_Single_Features; //enthält die Features eines Herzschlags, gesetzt von getSingleFeatures()
+	iarray_t	get_Array_Single_Features();
 
 	int			FidPQInt[128];
 	int			FidQSInt[128];

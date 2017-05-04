@@ -59,7 +59,6 @@ object fmChoi: TfmChoi
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 916
     DesignSize = (
       516
       41)
@@ -82,7 +81,6 @@ object fmChoi: TfmChoi
       ParentColor = True
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 900
     end
   end
   object Panel1: TPanel
@@ -93,8 +91,6 @@ object fmChoi: TfmChoi
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 648
-    ExplicitWidth = 916
     object Button1: TButton
       Left = 8
       Top = 8
@@ -112,7 +108,6 @@ object fmChoi: TfmChoi
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitWidth = 916
     object Label1: TLabel
       Left = 9
       Top = 2
@@ -189,8 +184,6 @@ object fmChoi: TfmChoi
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 3
-    ExplicitWidth = 528
-    ExplicitHeight = 538
     object Bevel6: TBevel
       Left = 0
       Top = 153
@@ -244,7 +237,6 @@ object fmChoi: TfmChoi
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 528
       object imgEcg: TImage
         Left = 10
         Top = 37
@@ -277,9 +269,8 @@ object fmChoi: TfmChoi
       Height = 169
       Align = alBottom
       ReadOnly = True
+      ScrollBars = ssBoth
       TabOrder = 1
-      ExplicitTop = 369
-      ExplicitWidth = 528
     end
     object mFid: TMemo
       Left = 191
@@ -326,6 +317,15 @@ object fmChoi: TfmChoi
       Caption = 'R-Peaks &Choi'
       TabOrder = 6
       OnClick = Button2Click
+    end
+    object btTestSVM: TButton
+      Left = 384
+      Top = 230
+      Width = 121
+      Height = 25
+      Caption = 'Test libSVM'
+      TabOrder = 7
+      OnClick = btTestSVMClick
     end
   end
   object tStartup: TTimer

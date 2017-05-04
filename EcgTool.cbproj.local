@@ -126,5 +126,9 @@
     <Transaction>2017.04.29 11:01:57.191.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\algorithms\AlgChoi.dfm</Transaction>
     <Transaction>2017.04.30 14:06:57.140.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp</Transaction>
     <Transaction>2017.04.30 14:06:57.140.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\features\classChoiFeatures.h</Transaction>
+    <Transaction>2017.05.03 13:08:12.861.c,D:\src\EcgTool\algorithms\classifications\libSVM\svm-predict.c=</Transaction>
+    <Transaction>2017.05.03 13:08:12.864.c,D:\src\EcgTool\algorithms\classifications\libSVM\svm-train.c=</Transaction>
+    <Transaction>2017.05.03 13:08:12.866.c,D:\src\EcgTool\algorithms\classifications\libSVM\svm-scale.c=</Transaction>
+    <Transaction>2017.05.03 13:08:12.892.cpp,D:\src\EcgTool\algorithms\classifications\libSVM\svm.cpp=</Transaction>
   </Transactions>
 </BorlandProject>

@@ -4,10 +4,13 @@
 
 #include <stdio.h>
 
+#include "../inc/libsvm/svm.h"
+
 #include "AlgChoi.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
+#pragma link "inc/libsvm/libsvm.lib"
 TfmChoi *fmChoi;
 //---------------------------------------------------------------------------
 bool DlgAlgChoi(TForm* Papa)
@@ -226,6 +229,114 @@ void TfmChoi::DoChoi()
 	Print("...features done");
 	}
 //---------------------------------------------------------------------------
+void TfmChoi::DoSvm()
+	{
+	Print("libSVM-Version: %d", libsvm_version);
+
+	//--> see readme, 'library usage' ------------------------------
+	//see svm-train.c and svm-predict.c on how to use the library
+
+	/*--> 1. get/construct training data */
+	iarray_t train_data = getTrainingData(fecg.data.data_array);
+	
+	/*--> 2. construct SVM model (svm_model) using training data
+			a model can also be saved in a file for later use.*/
+
+			/*--> 2a. construct a problem */
+			/*
+			struct svm_problem describes the problem:
+			struct svm_problem
+				{
+				int l;  //no. of training data (rows)
+				double *y;  //array of target values (int in classification)
+				struct svm_node **x; //array of pointers to one training vector each
+				};
+
+			where `l' is the number of training data, and `y' is an array containing
+			their target values. (integers in classification, real numbers in
+			regression) `x' is an array of pointers, each of which points to a sparse
+			representation (array of svm_node) of one training vector.
+
+			For example, if we have the following training data:
+
+			LABEL    ATTR1    ATTR2    ATTR3    ATTR4    ATTR5
+			-----    -----    -----    -----    -----    -----
+			  1        0        0.1      0.2      0        0
+			  2        0        0.1      0.3     -1.2      0
+			  1        0.4      0        0        0        0
+			  2        0        0.1      0        1.4      0.5
+			  3       -0.1     -0.2      0.1      1.1      0.1
+
+			then the components of svm_problem are:
+
+				l = 5 //no of training data (rows)
+				y -> 1 2 1 2 3 //array of target values (int in classification)
+				x -> [ ] -> (2,0.1) (3,0.2) (-1,?) //array of pointers to one training vector each
+					 [ ] -> (2,0.1) (3,0.3) (4,-1.2) (-1,?)
+					 [ ] -> (1,0.4) (-1,?)
+					 [ ] -> (2,0.1) (4,1.4) (5,0.5) (-1,?)
+					 [ ] -> (1,-0.1) (2,-0.2) (3,0.1) (4,1.1) (5,0.1) (-1,?)
+
+			where (index,value) is stored in the structure `svm_node':
+
+			struct svm_node
+			{
+				int index;
+				double value;
+			};
+
+			index = -1 indicates the end of one vector. Note that indices must
+			be in ASCENDING order.
+            */
+			/*--> 2b. construct svm parameters */
+
+	/*--> 3. use model to classify new data */
+	}
+//---------------------------------------------------------------------------
+iarray_t TfmChoi::getTrainingData(iarray_t ecg)
+	{
+	/* aus dem ECG-Stream ein Array der folgenden Form erstellen:
+	 *    LABEL    ATTR1    ATTR2    ATTR3    ATTR4    ATTR5
+	 *    -----    -----    -----    -----    -----    -----
+	 *      1        0        0.1      0.2      0        0
+	 *      2        0        0.1      0.3     -1.2      0
+	 *      1        0.4      0        0        0        0
+	 *      2        0        0.1      0        1.4      0.5
+	 *      3       -0.1     -0.2      0.1      1.1      0.1
+	 *
+	 * dabei wird für jeweils einen Herzschlag im EKG-Strom eine Zeile im
+	 * Trainingsarray erzeugt mit den fiducial points nach Choi
+	 */
+
+	iarray_t training; training.clear();
+
+	cRpeaks& r = fecg.rpeaks;
+	r.find(ecg, NULL);
+	r.reset();
+
+	int prev_zeit, curr_zeit, next_zeit;
+	while ((curr_zeit = r.next()) != -1)
+		{
+		if ((prev_zeit = r.prev_rpeak()) == -1) continue;
+		if ((next_zeit = r.next_rpeak()) == -1) continue;
+
+		if (!fChoiFeat.getSingleFeatures(ecg, prev_zeit, curr_zeit, next_zeit))
+			{
+			//todo Print...
+			continue; //oder break???
+			}
+
+		iarray_t features = fChoiFeat.SingleFeatures;
+		Print("\t------------------------------");
+		Print("\t%d / %d / %d", (int)features[0][0], (int)features[1][0], (int)features[2][0]);
+		Print("\t%.4f / %.4f", features[3][0], features[4][0]);
+		Print("\t%.4f / %.4f", features[5][0], features[6][0]);
+		Print("\t%.4f", features[7][0]);
+		}
+
+	return training;
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /********************   Actions   ******************************************/
 /***************************************************************************/
@@ -293,6 +404,11 @@ void __fastcall TfmChoi::Button3Click(TObject *Sender)
 
 		Print("\t%.6f", feat);
 		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi::btTestSVMClick(TObject *Sender)
+	{
+	DoSvm();
 	}
 //---------------------------------------------------------------------------
 

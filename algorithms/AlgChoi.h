@@ -39,7 +39,11 @@ private:
 	void		ShowEcg();
 	void		GetRpeaksAnna();
 	void		GetRpeaksChoi();
+
 	void		DoChoi();
+
+	void		DoSvm();
+	iarray_t 	getTrainingData(iarray_t ecg);
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -78,6 +82,7 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *Button4;
 	TButton *Button2;
 	TButton *Button3;
+	TButton *btTestSVM;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -88,6 +93,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall Button4Click(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
+	void __fastcall btTestSVMClick(TObject *Sender);
 
 public:		
 	__fastcall TfmChoi(TComponent* Owner);
