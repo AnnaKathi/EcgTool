@@ -22,8 +22,6 @@
 #include "features/classChoiFeatures.h"
 #include "classifications/classChoiSVM.h"
 //---------------------------------------------------------------------------
-#include "../inc/libsvm/svm.h"
-//---------------------------------------------------------------------------
 class TfmChoi : public TForm
 {
 private:
@@ -45,21 +43,8 @@ private:
 	void		GetRpeaksAnna();
 	void		GetRpeaksChoi();
 
-	void		DoChoi();
-
+	void		DoFeat();
 	void		DoSvm();
-	iarray_t 	getTrainingData(iarray_t ecg);
-
-	svm_node* 	x_space;
-	bool 		getProblem(iarray_t training, svm_problem& problem);
-
-	bool		bCrossvalidation;
-	int			iCrossvalidation_NrFold;
-	bool		getParameter(svm_problem problem, svm_parameter& param);
-	void		setParameterDefault(svm_parameter& param);
-
-	bool		doCrossvalidation(svm_problem problem, svm_parameter param, int nr_fold);
-	bool		getModel(svm_problem problem, svm_parameter param, svm_model* model);
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -104,6 +89,7 @@ __published:	// IDE-verwaltete Komponenten
 	TCheckBox *cxCrossvalidation;
 	TLabel *laFold;
 	TEdit *edFold;
+	TButton *Button5;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -115,6 +101,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
 	void __fastcall btTestSVMClick(TObject *Sender);
+	void __fastcall Button5Click(TObject *Sender);
 
 public:		
 	__fastcall TfmChoi(TComponent* Owner);

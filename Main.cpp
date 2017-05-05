@@ -7,10 +7,10 @@
 #include "database/classMySql.h"
 #include "database/DbPersonen.h"
 #include "algorithms/Alg1.h"
-#include "Diseases.h"
 #include "EcgView.h"
 #include "DataAnalysis.h"
 #include "Session.h"
+#include "Testform.h"
 #include "Main.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -35,24 +35,22 @@ void __fastcall TfmMain::FormShow(TObject *Sender)
 void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
+	pnMain->Enabled = false;
+	Cursor = crHourGlass;
+
 	setStatus("startup EcgTool...loading MySql-Database");
-	if (!fmysql.open())
+
+	if (!setupDatabase())
 		{
-		Application->MessageBox(
-			ftools.fmt(
-				"Die MySql-Datenbank 'ecg' konnte nicht geöffnet werden. "
-				"Die Funktion meldet: %s", fmysql.error_msg).c_str(),
-			"Fehler beim Öffnen der Datenbank",
-			MB_OK);
 		Close();
 		return;
 		}
 
-	//todo Anzahl der versch. Datensätze laden und anzeigen
 	setStatus("startup EcgTool...reading MySql-Database");
 	setDbInfo();
 
 	setStatus("Startup finished - ready to go");
+	Cursor = crDefault;
 	pnMain->Enabled = true;
 	}
 //---------------------------------------------------------------------------
@@ -64,6 +62,59 @@ void __fastcall TfmMain::FormClose(TObject *Sender, TCloseAction &Action)
 /***************************************************************************/
 /******************   Funktionen   *****************************************/
 /***************************************************************************/
+//---------------------------------------------------------------------------
+bool TfmMain::setupDatabase()
+	{
+	//falls die Datenbank nicht vorhanden ist, anlegen
+	setStatus("startup Database...checking existance");
+	if (!fmysql.openWithoutDb())
+		{
+		Application->MessageBox(
+			ftools.fmt(
+				"Die MySql-Datenbankverbindung konnte nicht initialisiert werden. "
+				"Die Funktion meldet: %s", fmysql.error_msg).c_str(),
+			"Fehler beim Öffnen der Datenbank",
+			MB_OK);
+		Close();
+		return false;
+		}
+
+	if (!fmysql.dbExists())
+		{
+		setStatus("startup Database...creating databse");
+		if (!fmysql.create())
+			{
+			Application->MessageBox(
+				ftools.fmt(
+					"Die MySql-Datenbank 'ecg' konnte nicht initialisiert werden. "
+					"Die Funktion meldet: %s", fmysql.error_msg).c_str(),
+				"Fehler beim Öffnen der Datenbank",
+				MB_OK);
+			Close();
+			return false;
+			}
+		}
+
+	if (!fmysql.close())
+		;
+
+	//Datenbank öffnen
+	setStatus("startup Database...opening database");
+	if (!fmysql.open())
+		{
+		Application->MessageBox(
+			ftools.fmt(
+				"Die MySql-Datenbank 'ecg' konnte nicht geöffnet werden. "
+				"Die Funktion meldet: %s", fmysql.error_msg).c_str(),
+			"Fehler beim Öffnen der Datenbank",
+			MB_OK);
+		Close();
+		return false;
+		}
+
+	setStatus("startup Database...ready");
+	return true;
+	}
 //---------------------------------------------------------------------------
 void TfmMain::setStatus(String status, int panel) //panel ist vorbesetzt mit 0
 	{
@@ -109,12 +160,6 @@ void __fastcall TfmMain::acPeopleExecute(TObject *Sender)
 	setDbInfo();
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::acDiseasesExecute(TObject *Sender)
-	{
-	DlgDiseases(this);
-	setDbInfo();
-	}
-//---------------------------------------------------------------------------
 void __fastcall TfmMain::acCreateSeesionExecute(TObject *Sender)
 	{
 	if (!DlgNewSession(this))
@@ -150,6 +195,11 @@ void __fastcall TfmMain::acChoi2016Execute(TObject *Sender)
 void __fastcall TfmMain::FormKeyPress(TObject *Sender, char &Key)
 	{
 	acCloseExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btMySqlTestClick(TObject *Sender)
+	{
+	DlgTestform(this);
 	}
 //---------------------------------------------------------------------------
 

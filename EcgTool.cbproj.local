@@ -133,5 +133,29 @@
     <Transaction>2017.05.04 13:50:11.968.cpp,D:\libSVM\libsvm test library\svm.cpp=</Transaction>
     <Transaction>2017.05.04 13:53:09.596.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp</Transaction>
     <Transaction>2017.05.04 13:53:09.596.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\classifications\classChoiSVM.h</Transaction>
+    <Transaction>2017.05.05 10:07:27.869.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\Testform.cpp</Transaction>
+    <Transaction>2017.05.05 10:07:27.869.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\Testform.h</Transaction>
+    <Transaction>2017.05.05 10:07:27.869.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\Testform.dfm</Transaction>
+    <Transaction>2017.05.05 10:18:05.944.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\classMySql_Ecg.cpp</Transaction>
+    <Transaction>2017.05.05 10:18:05.944.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\classMySql_Ecg.h</Transaction>
+    <Transaction>2017.05.05 11:14:13.090.sql,D:\src\EcgTool\database\scripts\create_scripts.sql=</Transaction>
+    <Transaction>2017.05.05 14:24:15.155.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\classMySql_DescDb.cpp</Transaction>
+    <Transaction>2017.05.05 14:24:15.155.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\classMySql_DescDb.h</Transaction>
+    <Transaction>2017.05.05 14:34:14.854.cpp,D:\src\EcgTool\database\classMySql_Diseases.cpp=</Transaction>
+    <Transaction>2017.05.05 14:38:57.617.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\baseforms\baseDescDb.cpp</Transaction>
+    <Transaction>2017.05.05 14:38:57.617.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\baseforms\baseDescDb.h</Transaction>
+    <Transaction>2017.05.05 14:38:57.617.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\database\baseforms\baseDescDb.dfm</Transaction>
+    <Transaction>2017.05.05 14:45:49.402.cpp,D:\src\EcgTool\database\baseforms\baseDescDb.cpp=</Transaction>
+    <Transaction>2017.05.05 14:45:49.402.dfm,D:\src\EcgTool\database\baseforms\baseDescDb.dfm=</Transaction>
+    <Transaction>2017.05.05 14:47:59.036.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\baseforms\baseDesc.cpp</Transaction>
+    <Transaction>2017.05.05 14:47:59.037.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\baseforms\baseDesc.h</Transaction>
+    <Transaction>2017.05.05 14:47:59.037.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\database\baseforms\baseDesc.dfm</Transaction>
+    <Transaction>2017.05.05 15:32:27.821.cpp,D:\src\EcgTool\database\baseforms\baseDiseases.cpp=</Transaction>
+    <Transaction>2017.05.05 15:32:27.821.dfm,D:\src\EcgTool\database\baseforms\baseDiseases.dfm=</Transaction>
+    <Transaction>2017.05.05 15:38:59.458.cpp,D:\src\EcgTool\Diseases.cpp=</Transaction>
+    <Transaction>2017.05.05 15:38:59.458.dfm,D:\src\EcgTool\Diseases.dfm=</Transaction>
+    <Transaction>2017.05.05 15:43:23.593.cpp,D:\src\EcgTool\database\toolforms\addDiseases.cpp=D:\src\EcgTool\database\toolforms\addDesc.cpp</Transaction>
+    <Transaction>2017.05.05 15:43:23.593.h,D:\src\EcgTool\database\toolforms\addDiseases.h=D:\src\EcgTool\database\toolforms\addDesc.h</Transaction>
+    <Transaction>2017.05.05 15:43:23.593.dfm,D:\src\EcgTool\database\toolforms\addDiseases.dfm=D:\src\EcgTool\database\toolforms\addDesc.dfm</Transaction>
   </Transactions>
 </BorlandProject>

@@ -53,6 +53,13 @@ public:
 	//-------------------------------------------------------------------------
 	//--- Formulare laden und speichern ---------------------------------------
 	//-------------------------------------------------------------------------
+
+		//! Dateipfad der Exe-Datei finden
+		/*! Gibt den Pfad der Exe-Datei zurück.
+		 *  \return (String) Pfad der Exe-Datei
+		 */
+		String		GetPath();
+
 		//! Dateiname der Projekt-Inifile erstellen
 		/*! Gibt den Namen der Projekt-Inifile zurück. Diese liegt im gleichen
 		 *  Verzeichnis wie die exe-Datei.
@@ -97,6 +104,8 @@ public:
 		bool		IsDebug();
 
 		String		fmt(char* msg, ...);
+		int			replace(String& str, String old, String neu);
+
 
 private:
 

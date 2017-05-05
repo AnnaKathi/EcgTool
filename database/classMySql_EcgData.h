@@ -10,10 +10,12 @@
 struct sEcgData
 	{
 	int			ident;
-	int			person;
 	int			session;
+	int			person;
+	int			platzierung;
+	int			state;
 	ePosition	pos;
-	double		werte[5];
+	double		werte[3000];
 	};
 //---------------------------------------------------------------------------
 class PACKAGE cMySqlEcgData : public cBase

@@ -1,70 +1,57 @@
 [Closed Files]
-File_0=TSourceModule,'D:\libSVM\libsvm test library\svm.cpp',0,1,2445,1,2468,0,0,,
-File_1=TSourceModule,'D:\src\EcgTool\ecg\classRpeaks.cpp',0,1,95,1,115,0,0,,
-File_2=TSourceModule,'D:\src\EcgTool\Main.cpp',0,1,53,9,79,0,0,,
-File_3=TSourceModule,'D:\src\EcgTool\RequestBox.cpp',0,1,1,28,26,0,0,,
-File_4=TSourceModule,'D:\src\EcgTool\database\classMySql_Work.cpp',0,1,102,23,107,0,0,,
-File_5=TSourceModule,'D:\src\EcgTool\database\toolforms\addPeople.cpp',0,1,58,25,82,0,0,,
-File_6=TSourceModule,'D:\src\EcgTool\basics\classTools.cpp',0,1,1,1,1,0,0,,
-File_7=TSourceModule,'D:\libSVM\libsvm-3.22\Makefile.win',0,1,1,96,26,0,0,,
+File_0=TSourceModule,'D:\src\EcgTool\Diseases.cpp',0,1,7,1,1,0,0,,
+File_1=TSourceModule,'D:\src\EcgTool\database\baseforms\baseDiseases.cpp',0,1,247,1,282,0,0,,
+File_2=TSourceModule,'D:\src\EcgTool\database\classMySql.cpp',0,1,1,33,30,0,0,,
+File_3=TSourceModule,'D:\src\EcgTool\Details.cpp',0,1,19,1,1,0,0,,
+File_4=TSourceModule,'D:\src\EcgTool\EcgView.cpp',0,1,1,1,1,0,0,,
 
 [Modules]
-Module0=D:\src\EcgTool\algorithms\AlgChoi.cpp
-Module1=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp
-Module2=D:\src\EcgTool\Details.cpp
-Module3=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
-Module4=D:\libSVM\libsvm test library\svm.h
-Module5=D:\src\EcgTool\inc\libsvm\svm.cpp
-Module6=D:\libSVM\libsvm test library\svm-train.c
-Module7=D:\libSVM\libsvm test library\README
-Module8=default.htm
-Count=9
+Module0=D:\src\EcgTool\database\baseforms\baseDesc.cpp
+Module1=default.htm
+Module2=D:\src\EcgTool\database\toolforms\addDesc.cpp
+Module3=D:\src\EcgTool\Main.cpp
+Module4=D:\src\EcgTool\database\DbPersonen.cpp
+Module5=D:\src\EcgTool\Testform.cpp
+Module6=D:\src\EcgTool\database\classMySql_DescDb.cpp
+Count=7
 EditWindowCount=1
 
-[D:\src\EcgTool\algorithms\AlgChoi.cpp]
+[D:\src\EcgTool\database\baseforms\baseDesc.cpp]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
-
-[D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\src\EcgTool\Details.cpp]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\libSVM\libsvm test library\svm.h]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\src\EcgTool\inc\libsvm\svm.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\libSVM\libsvm test library\svm-train.c]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\libSVM\libsvm test library\README]
-ModuleType=TSourceModule
 
 [default.htm]
 ModuleType=TURLModule
 
+[D:\src\EcgTool\database\toolforms\addDesc.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[D:\src\EcgTool\Main.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[D:\src\EcgTool\database\DbPersonen.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[D:\src\EcgTool\Testform.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[D:\src\EcgTool\database\classMySql_DescDb.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
 [EditWindow0]
-ViewCount=9
-CurrentEditView=D:\src\EcgTool\algorithms\AlgChoi.cpp
+ViewCount=7
+CurrentEditView=D:\src\EcgTool\database\baseforms\baseDesc.cpp
 View0=0
 View1=1
 View2=2
@@ -72,8 +59,6 @@ View3=3
 View4=4
 View5=5
 View6=6
-View7=7
-View8=8
 PercentageSizes=1
 Create=1
 Visible=1
@@ -110,97 +95,80 @@ WelcomePageURL=bds:/default.htm
 
 [View1]
 CustomEditViewType=TEditView
-Module=D:\libSVM\libsvm test library\README
-CursorX=29
-CursorY=432
-TopLine=414
+Module=D:\src\EcgTool\Testform.cpp
+CursorX=1
+CursorY=66
+TopLine=60
 LeftCol=1
 Elisions=
-Bookmarks={1,432,29}
-EditViewName=D:\libSVM\libsvm test library\README
+Bookmarks={1,66,1}
+EditViewName=D:\src\EcgTool\Testform.h
 
 [View2]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\algorithms\AlgChoi.cpp
-CursorX=5
-CursorY=331
-TopLine=296
+Module=D:\src\EcgTool\database\toolforms\addDesc.cpp
+CursorX=1
+CursorY=45
+TopLine=22
 LeftCol=1
 Elisions=
-Bookmarks={1,250,1}{2,659,15}{9,718,1}
-EditViewName=D:\src\EcgTool\algorithms\AlgChoi.cpp
+Bookmarks=
+EditViewName=D:\src\EcgTool\database\toolforms\addDiseases.cpp
 
 [View3]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp
-CursorX=1
-CursorY=395
-TopLine=375
+Module=D:\src\EcgTool\database\DbPersonen.cpp
+CursorX=11
+CursorY=164
+TopLine=145
 LeftCol=1
 Elisions=
-Bookmarks={2,371,1}
-EditViewName=D:\src\EcgTool\algorithms\classifications\classChoiSVM.h
+Bookmarks=
+EditViewName=D:\src\EcgTool\database\DbPersonen.cpp
 
 [View4]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\Details.cpp
-CursorX=24
-CursorY=45
-TopLine=23
+Module=D:\src\EcgTool\Main.cpp
+CursorX=1
+CursorY=165
+TopLine=146
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=D:\src\EcgTool\Details.cpp
+EditViewName=Borland.FormDesignerView
 
 [View5]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
-CursorX=1
-CursorY=85
-TopLine=54
-LeftCol=1
-Elisions=
-Bookmarks={1,170,1}{2,326,1}{3,207,1}
-EditViewName=D:\src\EcgTool\algorithms\features\classChoiFeatures.h
-
-[View6]
-CustomEditViewType=TEditView
-Module=D:\libSVM\libsvm test library\svm-train.c
-CursorX=43
-CursorY=117
-TopLine=77
-LeftCol=1
-Elisions=
-Bookmarks={1,105,12}{2,130,51}
-EditViewName=D:\libSVM\libsvm test library\svm-train.c
-
-[View7]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\inc\libsvm\svm.cpp
-CursorX=1
-CursorY=1
+Module=D:\src\EcgTool\database\baseforms\baseDesc.cpp
+CursorX=77
+CursorY=31
 TopLine=1
 LeftCol=1
 Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\inc\libsvm\svm.cpp
+Bookmarks={1,117,53}
+EditViewName=D:\src\EcgTool\database\baseforms\baseDesc.cpp
 
-[View8]
+[View6]
 CustomEditViewType=TEditView
-Module=D:\libSVM\libsvm test library\svm.h
-CursorX=34
-CursorY=59
-TopLine=59
+Module=D:\src\EcgTool\database\classMySql_DescDb.cpp
+CursorX=32
+CursorY=117
+TopLine=179
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=D:\libSVM\libsvm test library\svm.h
+EditViewName=D:\src\EcgTool\database\classMySql_DescDb.cpp
 
 [Watches]
-Count=0
+Count=5
+Watch0='rowbuf',256,0,18,1,0,'Überwachte Ausdrücke'
+Watch1='line',256,0,18,1,0,'Überwachte Ausdrücke'
+Watch2='q',256,0,18,1,0,'Überwachte Ausdrücke'
+Watch3='fwork',256,0,18,1,0,'Überwachte Ausdrücke'
+Watch4='fTabelle',256,0,18,1,0,'Überwachte Ausdrücke'
 
 [WatchWindow]
-WatchColumnWidth=120
+WatchColumnWidth=89
 WatchShowColumnHeaders=1
 PercentageSizes=1
 Create=1
@@ -274,11 +242,11 @@ State=0
 Left=0
 Top=0
 Width=2104
-Height=6779
+Height=8798
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2104
-ClientHeight=6779
+ClientHeight=8798
 TBDockHeight=7144
 LRDockWidth=2000
 Dockable=1
@@ -508,11 +476,6 @@ LRDockWidth=2005
 Dockable=1
 StayOnTop=0
 SplitPos=176
-
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Name,
-ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,Font=0,GlassFrame=0,HorzScrollBar=0,Margins=0,Padding=0,BevelEdges=0
 
 [ModelViewTool]
 PercentageSizes=1
@@ -754,7 +717,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
 
 [DockSite1]
 HostDockSite=DockBottomPanel

@@ -96,6 +96,7 @@ void TfmBasePeople::MsgBox(char* msg, ...)
 bool TfmBasePeople::setCallback(TTimer& timer)
 	{
 	tCallback = &timer;
+	return true;
 	}
 //---------------------------------------------------------------------------
 bool TfmBasePeople::ShowData()

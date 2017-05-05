@@ -3,7 +3,7 @@ object fmMain: TfmMain
   Top = 0
   BorderStyle = bsToolWindow
   Caption = 'EcgTool'
-  ClientHeight = 315
+  ClientHeight = 349
   ClientWidth = 1076
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
@@ -64,7 +64,7 @@ object fmMain: TfmMain
   end
   object sbMain: TStatusBar
     Left = 0
-    Top = 296
+    Top = 330
     Width = 1076
     Height = 19
     Panels = <
@@ -80,14 +80,14 @@ object fmMain: TfmMain
     Left = 0
     Top = 45
     Width = 1076
-    Height = 251
+    Height = 285
     Align = alClient
     BevelOuter = bvNone
     Enabled = False
     TabOrder = 2
     DesignSize = (
       1076
-      251)
+      285)
     object Bevel2: TBevel
       Left = 8
       Top = 117
@@ -1842,10 +1842,9 @@ object fmMain: TfmMain
     end
     object BitBtn2: TBitBtn
       Left = 818
-      Top = 14
+      Top = 6
       Width = 250
       Height = 97
-      Action = acDiseases
       BiDiMode = bdLeftToRight
       Caption = '&Erkrankungen'
       Font.Charset = ANSI_CHARSET
@@ -6639,6 +6638,15 @@ object fmMain: TfmMain
         C0C000C0C000C0C000C0C000C0C000C0C000C0C000C0C000C0C000C0C000C0C0
         00C0C000C0C000C0C000}
     end
+    object btMySqlTest: TButton
+      Left = 8
+      Top = 254
+      Width = 97
+      Height = 25
+      Caption = 'Pre-Test MySql'
+      TabOrder = 8
+      OnClick = btMySqlTestClick
+    end
   end
   object MainMenu: TMainMenu
     Left = 288
@@ -6664,10 +6672,6 @@ object fmMain: TfmMain
     object acPeople: TAction
       Caption = '&Personen'
       OnExecute = acPeopleExecute
-    end
-    object acDiseases: TAction
-      Caption = '&Erkrankungen'
-      OnExecute = acDiseasesExecute
     end
     object acSingleAusw: TAction
       Caption = '&Einzel-Auswertung'

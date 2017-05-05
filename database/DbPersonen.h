@@ -14,9 +14,9 @@
 #include <Menus.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
-#include "baseforms/baseDiseases.h"
 #include "baseforms/basePeople.h"
 #include "baseforms/baseEcgData.h"
+#include "baseforms/baseDesc.h"
 //---------------------------------------------------------------------------
 class TfmData : public TForm
 {
@@ -26,7 +26,7 @@ private:
 
 	bool	   			bSelected;
 	TfmBasePeople*		fmPeople;
-	TfmBaseDiseases*	fmDiseases;
+	TfmBaseDesc*		fmDiseases;
 	TfmBaseEcg*			fmEcg;
 
 	inline void StartJob(int max);

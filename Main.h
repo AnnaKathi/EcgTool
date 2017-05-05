@@ -19,6 +19,8 @@ class TfmMain : public TForm
 private:
 	cTools		ftools;
 
+	bool		setupDatabase();
+	
 	void		setStatus(String status, int panel=0);
 	void		setDbInfo();
 
@@ -35,7 +37,6 @@ __published:	// IDE-verwaltete Komponenten
 	TTimer *tStartup;
 	TStatusBar *sbMain;
 	TAction *acPeople;
-	TAction *acDiseases;
 	TAction *acSingleAusw;
 	TAction *acCreateSeesion;
 	TAction *acShowData;
@@ -52,6 +53,7 @@ __published:	// IDE-verwaltete Komponenten
 	TAction *acLookIntoData;
 	TBitBtn *BitBtn7;
 	TAction *acChoi2016;
+	TButton *btMySqlTest;
 	void __fastcall acLookIntoECGExecute(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -59,13 +61,13 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acCloseExecute(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall acPeopleExecute(TObject *Sender);
-	void __fastcall acDiseasesExecute(TObject *Sender);
 	void __fastcall acSingleAuswExecute(TObject *Sender);
 	void __fastcall acCreateSeesionExecute(TObject *Sender);
 	void __fastcall acShowDataExecute(TObject *Sender);
 	void __fastcall acGesAuswExecute(TObject *Sender);
 	void __fastcall acLookIntoDataExecute(TObject *Sender);
 	void __fastcall acChoi2016Execute(TObject *Sender);
+	void __fastcall btMySqlTestClick(TObject *Sender);
 
 public:
 	__fastcall TfmMain(TComponent* Owner);

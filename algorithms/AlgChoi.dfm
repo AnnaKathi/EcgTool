@@ -363,6 +363,15 @@ object fmChoi: TfmChoi
       Height = 21
       TabOrder = 10
     end
+    object Button5: TButton
+      Left = 80
+      Top = 280
+      Width = 75
+      Height = 25
+      Caption = 'Button5'
+      TabOrder = 11
+      OnClick = Button5Click
+    end
   end
   object tStartup: TTimer
     Enabled = False

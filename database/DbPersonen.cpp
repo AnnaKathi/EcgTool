@@ -60,7 +60,7 @@ void __fastcall TfmData::tStartupTimer(TObject *Sender)
 	tStartup->Enabled = false;
 	ftools.FormLoad(this);
 
-	fmDiseases = CreateDiseaseForm(this, pnDiseases);
+	fmDiseases = CreateDescForm(this, pnDiseases, fmysql.diseases);
 	fmPeople   = CreatePeopleForm(this, pnPeople);
 	fmPeople->setCallback(*tCallback);
 
@@ -161,7 +161,7 @@ void __fastcall TfmData::tCallbackTimer(TObject *Sender)
 
 		//Diseases und EKG-Daten anpassen
 		fmDiseases->LockFilter();
-		fmDiseases->ShowDataOfPerson(person);
+		//fmDiseases->ShowDataOfPerson(person);
 
 		fmEcg->LockFilter();
 		fmEcg->ShowEcgOf(person);

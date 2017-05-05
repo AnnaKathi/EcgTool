@@ -51,7 +51,7 @@ void cTools::PositionenToCombo(TComboBox* cb)
 /**************   Formulardaten laden und speichern   **********************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-String cTools::GetIniFile()
+String cTools::GetPath()
 	{
 	char path[MAX_PATH];
 	strcpy(path, Application->ExeName.c_str());
@@ -59,7 +59,12 @@ String cTools::GetIniFile()
 	if (pt != 0)
 		*pt = 0;
 
-	String dat = String(path) + "\\EcgTool.ini";
+	return String(path);
+	}
+//---------------------------------------------------------------------------
+String cTools::GetIniFile()
+	{
+	String dat = GetPath() + "\\EcgTool.ini";
 	return dat;
 	}
 //---------------------------------------------------------------------------
@@ -193,3 +198,26 @@ String cTools::fmt(char* msg, ...)
 	return String(buffer);
 	}
 //---------------------------------------------------------------------------
+int cTools::replace(String& str, String old, String neu)
+	{
+	if (str == "") return 0;
+	int count = 0;
+
+	int pos;
+	String left, right;
+	while ((pos = str.Pos(old)) > 0)
+		{
+		left  = str.SubString(0, pos-1);
+		right = str.SubString(pos + old.Length(), 999);
+
+		str = left + neu + right;
+		count++;
+
+		if (count > 100) //sicherheitsabfrage
+			break;
+		}
+
+	return count;
+	}
+//---------------------------------------------------------------------------
+
