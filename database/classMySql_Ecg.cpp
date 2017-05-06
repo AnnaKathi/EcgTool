@@ -110,7 +110,7 @@ bool cMySqlEcg::nextRow()
 //---------------------------------------------------------------------------
 bool cMySqlEcg::getLast()
 	{
-	String q = "SELECT * FROM " + String(TABLE) + " ORDER BY Ident DESC LIMIT 1";
+	String q = "SELECT * FROM `" + String(TABLE) + "` ORDER BY Ident DESC LIMIT 1";
 	if (!fwork->query(q))
 		return false;
 

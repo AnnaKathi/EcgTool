@@ -41,7 +41,7 @@ object fmBaseEcg: TfmBaseEcg
         Caption = 'Session'
       end
       item
-        Caption = 'Position'
+        Caption = 'Lage'
       end
       item
         Caption = 'T1'
@@ -65,10 +65,6 @@ object fmBaseEcg: TfmBaseEcg
     TabOrder = 0
     ViewStyle = vsReport
     OnClick = lvDataClick
-    ExplicitLeft = 203
-    ExplicitTop = 262
-    ExplicitWidth = 365
-    ExplicitHeight = 272
   end
   object pnFilter: TPanel
     Left = 0
@@ -78,8 +74,6 @@ object fmBaseEcg: TfmBaseEcg
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 155
     object Label6: TLabel
       Left = 8
       Top = 6
@@ -117,9 +111,9 @@ object fmBaseEcg: TfmBaseEcg
     object Label10: TLabel
       Left = 279
       Top = 7
-      Width = 37
+      Width = 23
       Height = 13
-      Caption = 'Position'
+      Caption = 'Lage'
     end
     object edIdVon: TEdit
       Left = 119
@@ -146,15 +140,15 @@ object fmBaseEcg: TfmBaseEcg
       OnChange = edNameChange
       OnExit = edIdVonExit
     end
-    object cbPosition: TComboBox
+    object cbLage: TComboBox
       Left = 335
       Top = 5
       Width = 106
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 3
-      OnChange = cbPositionChange
+      OnChange = cbLageChange
     end
   end
   object ActionListDiseases: TActionList

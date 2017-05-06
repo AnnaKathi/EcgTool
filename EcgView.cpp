@@ -513,7 +513,7 @@ void TfmEcg::Line(int x, TColor cl)
 void __fastcall TfmEcg::Button1Click(TObject *Sender)
 	{
 	//NEUE ECG WERTE ABSPEICHERN
-	sEcg data;
+	sEcgData data;
 	data.session  = 1;
 	data.person   = 2;
 	data.position = 1;
@@ -533,7 +533,13 @@ void __fastcall TfmEcg::Button1Click(TObject *Sender)
 		if (ix >= 3000) break;
 		}
 
-	fmysql.ecgneu.save(data, memo);
+	if (!fmysql.ecg.save(data))
+		{
+		Application->MessageBox(
+			ftools.fmt("Daten konnten nicht gespeichert werden. Die Datenbank meldet:\n\n%s", fmysql.ecg.error_msg).c_str(),
+			"FEHLER",
+			MB_OK);
+		}
 	}
 //---------------------------------------------------------------------------
 

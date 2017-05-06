@@ -5,6 +5,7 @@
 #include <classes.hpp>
 //---------------------------------------------------------------------------
 #include "../basics/classBase.h"
+#include "../basics/classTools.h"
 #include "classMySql_Work.h"
 //---------------------------------------------------------------------------
 struct sEcgData
@@ -12,9 +13,9 @@ struct sEcgData
 	int			ident;
 	int			session;
 	int			person;
-	int			platzierung;
+	int			position;
 	int			state;
-	ePosition	pos;
+	int			lage;
 	double		werte[3000];
 	};
 //---------------------------------------------------------------------------
@@ -24,8 +25,11 @@ public:
 	cMySqlEcgData(cMySqlWork& worker);
 	~cMySqlEcgData();
 
+	bool 	save(sEcgData data);
+
 	bool	loadTable(); //lädt die ganze Tabelle
 	bool	loadByPerson(int person); //lädt nur die Daten von Person
+	bool 	getLast();
 
 	bool	nextRow();
 
@@ -33,12 +37,14 @@ public:
 
 	//-- Datenfelder
 	int 	getSize();
+	bool 	getRow();
 
 
 __property sEcgData row = { read=get_data };
 __property int num_rows = { read=get_num_rows };
 
 private:
+	cTools			ftools;
 	sEcgData		fdata;
 	sEcgData		get_data();
 

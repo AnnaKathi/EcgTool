@@ -18,7 +18,7 @@ struct sFilterEcg
 	int			identVon;
 	int			identBis;
 	String		name;
-	ePosition   pos;
+	eLage   	lage;
 	double		wertVon;
 	double		wertBis;
 	};
@@ -58,7 +58,7 @@ __published:	// IDE-verwaltete Komponenten
 	TEdit *edIdVon;
 	TEdit *edIdBis;
 	TEdit *edName;
-	TComboBox *cbPosition;
+	TComboBox *cbLage;
 	TBevel *Bevel1;
 	void __fastcall acAddExecute(TObject *Sender);
 	void __fastcall acDelExecute(TObject *Sender);
@@ -71,7 +71,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall edIdVonExit(TObject *Sender);
 	void __fastcall edNameChange(TObject *Sender);
 	void __fastcall lvDataDblClick(TObject *Sender);
-	void __fastcall cbPositionChange(TObject *Sender);
+	void __fastcall cbLageChange(TObject *Sender);
 
 public:
 	__fastcall TfmBaseEcg(TComponent* Owner, TWinControl* Container, TColor color);

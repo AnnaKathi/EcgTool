@@ -56,7 +56,7 @@ void __fastcall TfmBaseEcg::FormShow(TObject *Sender)
 void __fastcall TfmBaseEcg::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
-	ftools.PositionenToCombo(cbPosition);
+	ftools.LagenToCombo(cbLage);
 	ShowData();
 	tStartup->Tag = 1; //signalisiert, dass der Init durchgeführt wurde
 	}
@@ -130,7 +130,7 @@ bool TfmBaseEcg::ShowData()
 		item->SubItems->Add(name);
 
 		item->SubItems->Add(fmysql.ecg.row.session);
-		item->SubItems->Add(ftools.GetPosition(fmysql.ecg.row.pos));
+		item->SubItems->Add(ftools.GetLage(fmysql.ecg.row.lage));
 		for (int i = 0; i < 5; i++)
 			item->SubItems->Add(String(fmysql.ecg.row.werte[i]));
 		}
@@ -165,7 +165,7 @@ bool TfmBaseEcg::ShowEcgOf(int person)
 		item->SubItems->Add(fmysql.people.getNameOf(fmysql.ecg.row.person));
 
 		item->SubItems->Add(fmysql.ecg.row.session);
-		item->SubItems->Add(ftools.GetPosition(fmysql.ecg.row.pos));
+		item->SubItems->Add(ftools.GetLage(fmysql.ecg.row.lage));
 		for (int i = 0; i < 5; i++)
 			item->SubItems->Add(String(fmysql.ecg.row.werte[i]));
 		}
@@ -180,7 +180,7 @@ bool TfmBaseEcg::BuildFilter()
 	ffilter.identBis = edIdBis->Text.ToIntDef(-1);
 
 	ffilter.name = edName->Text;
-	ffilter.pos  = (ePosition)cbPosition->ItemIndex;
+	ffilter.lage = (eLage)cbLage->ItemIndex;
 
 	return true;
 	}
@@ -198,9 +198,9 @@ bool TfmBaseEcg::CheckFilter()
 			return false;
 		}
 
-	if (ffilter.pos > posNone)
+	if (ffilter.lage > lageNone)
 		{
-		if (fmysql.ecg.row.pos != ffilter.pos)
+		if (fmysql.ecg.row.lage != ffilter.lage)
 			return false;
 		}
 
@@ -289,7 +289,7 @@ void __fastcall TfmBaseEcg::lvDataDblClick(TObject *Sender)
 		acChangeExecute(Sender);
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmBaseEcg::cbPositionChange(TObject *Sender)
+void __fastcall TfmBaseEcg::cbLageChange(TObject *Sender)
 	{
 	acFilterExecute(Sender);
 	}

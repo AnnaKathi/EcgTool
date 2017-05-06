@@ -1,6 +1,8 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
 
+#include <stdio.h>
+
 #include "classMySql_EcgData.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -27,6 +29,43 @@ bool cMySqlEcgData::doQuery(String q)
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
+/******************   Funktionen: speichern   ******************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+bool cMySqlEcgData::save(sEcgData data)
+	{
+	//Row muss vorher gesetzt sein
+	String s = "";
+	char feld[64]; double wert;
+	for (int i = 0; i < 10; i++)
+		{
+		wert = data.werte[i];
+		sprintf(feld, "%.8f", wert);
+		if (i == 0)
+			s = String(feld);
+		else
+			s += ";" + String(feld);
+		}
+
+	//INSERT INTO `ecg`.`ecgdata` (`Sessions_ID`, `Subjects_ID`, `Positions_ID`, `States_ID`, `Lagen_ID`, `Werte`) VALUES (1, 1, 1, 1, 1, '0,8723645897623');
+	String q = ftools.fmt(
+		"INSERT INTO `%s` "
+		"(`Sessions_ID`, `Subjects_ID`, `Positions_ID`, `States_ID`, `Lagen_ID`, `Werte`) "
+		"VALUES (%d, %d, %d, %d, %d, '%s')",
+		String(TABLE),
+		data.session, data.person, data.position, data.state, data.lage, s.c_str());
+
+	if (!fwork->send(q))
+		return fail(fwork->error_code, fwork->error_msg);
+	else
+		{
+		//Datensatz wieder reinladen, damit aufrufende Komponenten damit
+		//weiterarbeiten können 
+		return getLast();
+		}
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
 /******************   Funktionen: laden   **********************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
@@ -49,17 +88,21 @@ bool cMySqlEcgData::nextRow()
 
 	frow = mysql_fetch_row(fres);
 	if (frow == NULL) return false;
+	if (!getRow())    return false;
 
-	fdata.ident   = atoi(frow[0]);
-	fdata.person  = atoi(frow[1]);
-	fdata.session = atoi(frow[2]);
-	fdata.pos = (ePosition) atoi(frow[3]); //todo ePosition umwandeln in Text
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool cMySqlEcgData::getLast()
+	{
+	String q = "SELECT * FROM `" + String(TABLE) + "` ORDER BY Ident DESC LIMIT 1";
+	if (!fwork->query(q))
+		return false;
 
-	fdata.werte[0] = atof(frow[4]);
-	fdata.werte[1] = atof(frow[5]);
-	fdata.werte[2] = atof(frow[6]);
-	fdata.werte[3] = atof(frow[7]);
-	fdata.werte[4] = atof(frow[8]);
+	fres = fwork->getResult();
+	frow = mysql_fetch_row(fres);
+	if (frow == NULL) return false;
+	if (!getRow())    return false;
 
 	return true;
 	}
@@ -91,6 +134,34 @@ int cMySqlEcgData::getSize()
 		}
 
 	return get_num_rows();
+	}
+//---------------------------------------------------------------------------
+bool cMySqlEcgData::getRow()
+	{
+	//aus row die fdata-Werte lesen
+	if (frow == NULL) return false;
+
+	fdata.ident    = atoi(frow[0]);
+	fdata.session  = atoi(frow[1]);
+	fdata.person   = atoi(frow[2]);
+	fdata.position = atoi(frow[3]);
+	fdata.state    = atoi(frow[4]);
+	fdata.lage     = atoi(frow[5]);
+
+	//Die EKG-Werte sind als semikolon-getrennter Longtext gespeichert
+	String longwerte = String(frow[6]);
+	int pos; String ww;
+	int ix = 0;
+	while ((pos = longwerte.Pos(";")) > 0)
+		{
+		ww = longwerte.SubString(0, pos-1);
+		longwerte = longwerte.SubString(pos+1, 9999);
+
+		fdata.werte[ix] = ww.ToDouble();
+		ix++;
+		}
+
+	return true;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

@@ -15,36 +15,36 @@ cTools::cTools()
 /**************   Datenkonverter   *****************************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-String cTools::GetPosition(ePosition pos)
+String cTools::GetLage(eLage lage)
 	{
-		 if (pos == posLiegend) return "liegend";
-	else if (pos == posSitzend) return "sitzend";
-	else if (pos == posStehend) return "stehend";
-	else if (pos == posGehend)  return "gehend";
+		 if (lage == lageLiegend) return "liegend";
+	else if (lage == lageSitzend) return "sitzend";
+	else if (lage == lageStehend) return "stehend";
+	else if (lage == lageGehend)  return "gehend";
 	else return "";
 	}
 //---------------------------------------------------------------------------
-ePosition cTools::GetPosition(String pos)
+eLage cTools::GetLage(String lage)
 	{
-		 if (pos == "liegend") return posLiegend;
-	else if (pos == "sitzend") return posSitzend;
-	else if (pos == "stehend") return posStehend;
-	else if (pos == "gehend")  return posGehend;
-	else return posNone;
+		 if (lage == "liegend") return lageLiegend;
+	else if (lage == "sitzend") return lageSitzend;
+	else if (lage == "stehend") return lageStehend;
+	else if (lage == "gehend")  return lageGehend;
+	else return lageNone;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   Comboboxen   *********************************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-void cTools::PositionenToCombo(TComboBox* cb)
+void cTools::LagenToCombo(TComboBox* cb)
 	{
 	cb->Items->Clear();
-	cb->Items->AddObject("- alle Positionen -"  , (TObject*)posNone);
-	cb->Items->AddObject(GetPosition(posLiegend), (TObject*)posLiegend);
-	cb->Items->AddObject(GetPosition(posSitzend), (TObject*)posSitzend);
-	cb->Items->AddObject(GetPosition(posStehend), (TObject*)posStehend);
-	cb->Items->AddObject(GetPosition(posGehend) , (TObject*)posGehend);
+	cb->Items->AddObject("- alle Positionen -"  , (TObject*)lageNone);
+	cb->Items->AddObject(GetLage(lageLiegend), (TObject*)lageLiegend);
+	cb->Items->AddObject(GetLage(lageSitzend), (TObject*)lageSitzend);
+	cb->Items->AddObject(GetLage(lageStehend), (TObject*)lageStehend);
+	cb->Items->AddObject(GetLage(lageGehend) , (TObject*)lageGehend);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

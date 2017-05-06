@@ -23,32 +23,32 @@ public:
 	//-------------------------------------------------------------------------
 	//--- Datenkonverter ------------------------------------------------------
 	//-------------------------------------------------------------------------
-		//! Aus einem Positions-Enum den zugehörigen String erstellen
-		/*! Aus dem übergebenen enum der Position (ePosition) wird der zugehörige
-		 *  String generiert (z.B. posLiegend -> "liegend").
-		 *  \param (ePosition) Auflistung der Position
-		 *	\return (String) Bezeichnung der Position
+		//! Aus einem Lagen-Enum den zugehörigen String erstellen
+		/*! Aus dem übergebenen enum der Lage (eLage) wird der zugehörige
+		 *  String generiert (z.B. lageLiegend -> "liegend").
+		 *  \param (eLage) Auflistung der Lage
+		 *	\return (String) Bezeichnung der Lage
 		 */
-		String		GetPosition(ePosition pos);
+		String		GetLage(eLage lage);
 
-		//! Aus einem String den zugehörigen Positions-Enum erstellen
-		/*! Aus dem übergebenen String der Position wird der zugehörige
-		 *  enum-Wert generiert (z.B. "liegend" -> posLiegend).
-		 *  \param (String) Bezeichnung der Position
-		 *	\return (ePosition) Auflistung der Position
+		//! Aus einem String den zugehörigen Lagen-Enum erstellen
+		/*! Aus dem übergebenen String der Lage wird der zugehörige
+		 *  enum-Wert generiert (z.B. "liegend" -> lageLiegend).
+		 *  \param (String) Bezeichnung der Lage
+		 *	\return (eLage) Auflistung der Lage
 		 */
-		ePosition   GetPosition(String pos);
+		eLage   GetLage(String lage);
 
 	//-------------------------------------------------------------------------
 	//--- Comboboxen ----------------------------------------------------------
 	//-------------------------------------------------------------------------
-		//! Die Strings der verfügbaren Positionen in eine ComboBox laden
-		/*! Die Bezeichnungen aller verfügbaren Positionen (enum ePosition)
+		//! Die Strings der verfügbaren Lagen in eine ComboBox laden
+		/*! Die Bezeichnungen aller verfügbaren Lagen (enum eLagen)
 		 *  werden in die übergebene ComboBox geladen, der zugehörige enum-Wert
 		 *  wird dabei jeweils als Object abgespeichert.
 		 *  \param (TComboBox) ComboBox
 		 */
-		void 		PositionenToCombo(TComboBox* cb);
+		void 		LagenToCombo(TComboBox* cb);
 
 	//-------------------------------------------------------------------------
 	//--- Formulare laden und speichern ---------------------------------------

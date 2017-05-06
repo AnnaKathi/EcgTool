@@ -5,14 +5,14 @@
 //----- Datenbank-Handling --------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
-/* Position in der ein EKG aufgenommen wurde, z.B. liegend oder stehend */
-enum ePosition
+/* Lage in der ein EKG aufgenommen wurde, z.B. liegend oder stehend */
+enum eLage
 	{
-	posNone = 0,
-	posLiegend,
-	posSitzend,
-	posStehend,
-	posGehend
+	lageNone = 0,
+	lageLiegend,
+	lageSitzend,
+	lageStehend,
+	lageGehend
 	};
 //---------------------------------------------------------------------------
 /* Format der einzulesenden Datei */
