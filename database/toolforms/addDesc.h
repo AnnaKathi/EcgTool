@@ -43,6 +43,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acCloseExecute(TObject *Sender);
 	void __fastcall acSaveExecute(TObject *Sender);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
+	void __fastcall edBezKeyPress(TObject *Sender, char &Key);
 
 public:
 	__fastcall TfmDescAdd(TComponent* Owner);

@@ -223,6 +223,18 @@ void TfmChoi::DoFeat()
 	mFid->Lines->Add(fmt("%.5f", features[5][0]));
 	mFid->Lines->Add(fmt("%.5f - %.5f", features[6][0], features[7][0]));
 
+	String s = "";
+	for (int i = 0; i < 8; i++)
+		{
+		if (i == 0)
+			s = String(features[i][0]);
+		else
+			s += ";" + String(features[i][0]);
+		}
+	Print("");
+	Print("%s", s);
+	Print("");
+
 	Print("...features done");
 	}
 //---------------------------------------------------------------------------
@@ -409,9 +421,7 @@ void __fastcall TfmChoi::btTestSVMClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmChoi::Button5Click(TObject *Sender)
 	{
-	//T1...T3000 DOUBLE NULL,
-	for (int i = 1; i <= 3000; i++)
-		Print("T%d DOUBLE NULL,", i);
+    //
 	}
 //---------------------------------------------------------------------------
 

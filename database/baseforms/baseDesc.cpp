@@ -58,6 +58,10 @@ void __fastcall TfmBaseDesc::FormShow(TObject *Sender)
 void __fastcall TfmBaseDesc::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
+	laTabelle->Caption =
+		fdesc->myName.SubString(1,1).UpperCase() +
+		fdesc->myName.SubString(2, 999).LowerCase();
+		
 	ShowData();
 	tStartup->Tag = 1; //signalisiert, dass der Init durchgeführt wurde
 	}

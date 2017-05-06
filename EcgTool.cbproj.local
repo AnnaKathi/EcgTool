@@ -157,5 +157,6 @@
     <Transaction>2017.05.05 15:43:23.593.cpp,D:\src\EcgTool\database\toolforms\addDiseases.cpp=D:\src\EcgTool\database\toolforms\addDesc.cpp</Transaction>
     <Transaction>2017.05.05 15:43:23.593.h,D:\src\EcgTool\database\toolforms\addDiseases.h=D:\src\EcgTool\database\toolforms\addDesc.h</Transaction>
     <Transaction>2017.05.05 15:43:23.593.dfm,D:\src\EcgTool\database\toolforms\addDiseases.dfm=D:\src\EcgTool\database\toolforms\addDesc.dfm</Transaction>
+    <Transaction>2017.05.06 12:19:19.574.sql,D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data.sql=D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_basic.sql</Transaction>
   </Transactions>
 </BorlandProject>

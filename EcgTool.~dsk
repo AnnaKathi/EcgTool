@@ -1,57 +1,74 @@
 [Closed Files]
-File_0=TSourceModule,'D:\src\EcgTool\Diseases.cpp',0,1,7,1,1,0,0,,
-File_1=TSourceModule,'D:\src\EcgTool\database\baseforms\baseDiseases.cpp',0,1,247,1,282,0,0,,
-File_2=TSourceModule,'D:\src\EcgTool\database\classMySql.cpp',0,1,1,33,30,0,0,,
-File_3=TSourceModule,'D:\src\EcgTool\Details.cpp',0,1,19,1,1,0,0,,
-File_4=TSourceModule,'D:\src\EcgTool\EcgView.cpp',0,1,1,1,1,0,0,,
+File_0=TSourceModule,'D:\src\EcgTool\Testform.cpp',0,1,35,20,61,0,0,,{1,68,1}
+File_1=TSourceModule,'D:\src\EcgTool\database\toolforms\addDesc.cpp',0,1,142,1,164,0,0,,{1,161,1}
+File_2=TSourceModule,'D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_basic.sql',0,1,1,57,17,0,0,,
+File_3=TSourceModule,'D:\src\EcgTool\out\mysql_scripts\script_create_all_databases.sql',0,1,1,1,1,0,0,,
+File_4=TSourceModule,'D:\src\EcgTool\database\toolforms\addPeople.cpp',0,1,1,1,1,0,0,,
+File_5=TSourceModule,'D:\src\EcgTool\database\DbPersonen.cpp',0,1,145,11,164,0,0,,
 
 [Modules]
-Module0=D:\src\EcgTool\database\baseforms\baseDesc.cpp
-Module1=D:\src\EcgTool\database\toolforms\addDesc.cpp
-Module2=D:\src\EcgTool\Main.cpp
-Module3=D:\src\EcgTool\database\DbPersonen.cpp
-Module4=D:\src\EcgTool\Testform.cpp
-Module5=default.htm
-Module6=D:\src\EcgTool\database\classMySql_DescDb.cpp
-Count=7
+Module0=D:\src\EcgTool\Main.cpp
+Module1=D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_sessions.sql
+Module2=D:\src\EcgTool\algorithms\AlgChoi.cpp
+Module3=D:\src\EcgTool\database\classMySql_Ecg.cpp
+Module4=D:\src\EcgTool\EcgView.cpp
+Module5=D:\src\EcgTool\database\classMySql_Work.cpp
+Module6=D:\src\EcgTool\database\classMySql.cpp
+Module7=D:\src\EcgTool\database\classMySql_People.cpp
+Module8=D:\src\EcgTool\database\classMySql_EcgData.cpp
+Module9=default.htm
+Count=10
 EditWindowCount=1
-
-[D:\src\EcgTool\database\baseforms\baseDesc.cpp]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[D:\src\EcgTool\database\toolforms\addDesc.cpp]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
 
 [D:\src\EcgTool\Main.cpp]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
-[D:\src\EcgTool\database\DbPersonen.cpp]
+[D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_sessions.sql]
+ModuleType=TSourceModule
+
+[D:\src\EcgTool\algorithms\AlgChoi.cpp]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[D:\src\EcgTool\Testform.cpp]
+[D:\src\EcgTool\database\classMySql_Ecg.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\EcgView.cpp]
 ModuleType=TSourceModule
 FormState=1
+FormOnTop=0
+
+[D:\src\EcgTool\database\classMySql_Work.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\database\classMySql.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\database\classMySql_People.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\database\classMySql_EcgData.cpp]
+ModuleType=TSourceModule
+FormState=0
 FormOnTop=0
 
 [default.htm]
 ModuleType=TURLModule
 
-[D:\src\EcgTool\database\classMySql_DescDb.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
 [EditWindow0]
-ViewCount=7
-CurrentEditView=D:\src\EcgTool\database\baseforms\baseDesc.cpp
+ViewCount=10
+CurrentEditView=D:\src\EcgTool\Main.cpp
 View0=0
 View1=1
 View2=2
@@ -59,6 +76,9 @@ View3=3
 View4=4
 View5=5
 View6=6
+View7=7
+View8=8
+View9=9
 PercentageSizes=1
 Create=1
 Visible=1
@@ -85,7 +105,7 @@ RightPanelData=00000800010000000000B022000000000000006B0A0000000000000100000000B
 BottomPanelSize=0
 BottomPanelClients=DockSite1
 BottomPanelData=0000080001000100000009000000446F636B5369746531153400000000000000CC03000000000000FFFFFFFF
-BottomMiddlePanelSize=2176
+BottomMiddlePanelSize=1435
 BottomMiddlePanelClients=DockSite0,MessageView@EditWindow0
 BottomMiddelPanelData=0000080001000100000009000000446F636B53697465303619000000000000007D1B0000000000000100000000361900000B0000004D65737361676556696577FFFFFFFF
 
@@ -95,80 +115,108 @@ WelcomePageURL=bds:/default.htm
 
 [View1]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\Testform.cpp
+Module=D:\src\EcgTool\EcgView.cpp
 CursorX=1
-CursorY=66
-TopLine=60
+CursorY=536
+TopLine=504
 LeftCol=1
 Elisions=
-Bookmarks={1,66,1}
-EditViewName=D:\src\EcgTool\Testform.h
+Bookmarks={1,536,36}{9,18,22}
+EditViewName=D:\src\EcgTool\EcgView.cpp
 
 [View2]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\database\toolforms\addDesc.cpp
-CursorX=1
-CursorY=45
-TopLine=22
+Module=D:\src\EcgTool\database\classMySql_Ecg.cpp
+CursorX=9
+CursorY=42
+TopLine=30
 LeftCol=1
 Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\database\toolforms\addDiseases.cpp
+Bookmarks={1,52,1}
+EditViewName=D:\src\EcgTool\database\classMySql_Ecg.cpp
 
 [View3]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\database\DbPersonen.cpp
-CursorX=11
-CursorY=164
-TopLine=145
+Module=D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_sessions.sql
+CursorX=98
+CursorY=46
+TopLine=4
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=D:\src\EcgTool\database\DbPersonen.cpp
+EditViewName=D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_sessions.sql
 
 [View4]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\Main.cpp
 CursorX=1
-CursorY=165
-TopLine=146
+CursorY=81
+TopLine=53
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=D:\src\EcgTool\Main.cpp
 
 [View5]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\database\baseforms\baseDesc.cpp
-CursorX=31
-CursorY=7
-TopLine=1
+Module=D:\src\EcgTool\algorithms\AlgChoi.cpp
+CursorX=15
+CursorY=236
+TopLine=204
 LeftCol=1
 Elisions=
-Bookmarks={1,117,53}
-EditViewName=D:\src\EcgTool\database\baseforms\baseDesc.cpp
+Bookmarks={1,424,7}
+EditViewName=D:\src\EcgTool\algorithms\AlgChoi.cpp
 
 [View6]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\database\classMySql_DescDb.cpp
-CursorX=32
-CursorY=117
-TopLine=179
+Module=D:\src\EcgTool\database\classMySql_Work.cpp
+CursorX=21
+CursorY=174
+TopLine=168
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=D:\src\EcgTool\database\classMySql_DescDb.cpp
+EditViewName=D:\src\EcgTool\database\classMySql_Work.cpp
+
+[View7]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\database\classMySql_EcgData.cpp
+CursorX=1
+CursorY=1
+TopLine=76
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\database\classMySql_EcgData.h
+
+[View8]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\database\classMySql_People.cpp
+CursorX=23
+CursorY=118
+TopLine=96
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\database\classMySql_People.cpp
+
+[View9]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\database\classMySql.cpp
+CursorX=1
+CursorY=161
+TopLine=138
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\database\classMySql.cpp
 
 [Watches]
-Count=5
-Watch0='rowbuf',256,0,18,1,0,'Überwachte Ausdrücke'
-Watch1='line',256,0,18,1,0,'Überwachte Ausdrücke'
-Watch2='q',256,0,18,1,0,'Überwachte Ausdrücke'
-Watch3='fwork',256,0,18,1,0,'Überwachte Ausdrücke'
-Watch4='fTabelle',256,0,18,1,0,'Überwachte Ausdrücke'
+Count=0
 
 [WatchWindow]
-WatchColumnWidth=89
+WatchColumnWidth=64
 WatchShowColumnHeaders=1
 PercentageSizes=1
 Create=1
@@ -503,7 +551,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-805
+Top=-885
 Width=3562
 Height=4827
 MaxLeft=-1
@@ -522,7 +570,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-805
+Top=-885
 Width=13604
 Height=212
 MaxLeft=-1
@@ -541,7 +589,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-805
+Top=-885
 Width=3562
 Height=4827
 MaxLeft=-1
@@ -560,7 +608,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-805
+Top=-885
 Width=3562
 Height=2298
 MaxLeft=-1
@@ -663,12 +711,12 @@ State=0
 Left=0
 Top=23
 Width=5859
-Height=2038
+Height=1269
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=5859
-ClientHeight=2038
-TBDockHeight=2038
+ClientHeight=1269
+TBDockHeight=1269
 LRDockWidth=4323
 Dockable=1
 StayOnTop=0
@@ -717,7 +765,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
@@ -765,5 +813,5 @@ Dockable=1
 StayOnTop=0
 TabPosition=0
 ActiveTabID=ProjectManager
-TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
+TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
 

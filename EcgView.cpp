@@ -15,6 +15,7 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TfmEcg *fmEcg;
+extern cMySql fmysql;
 //---------------------------------------------------------------------------
 __fastcall TfmEcg::TfmEcg(TComponent* Owner)
 	: TForm(Owner)
@@ -507,6 +508,32 @@ void TfmEcg::Line(int x, TColor cl)
 		else
 			imgEcg->Canvas->Pixels[x][y] = cl;
 		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmEcg::Button1Click(TObject *Sender)
+	{
+	//NEUE ECG WERTE ABSPEICHERN
+	sEcg data;
+	data.session  = 1;
+	data.person   = 2;
+	data.position = 1;
+	data.state    = 1;
+	data.lage     = 1;
+
+	int ix = 0; double wert;
+	iarray_t array = ecg.data.data_array;
+	for (iarray_itr itr = array.begin(); itr != array.end(); itr++)
+		{
+		ilist_t& v = itr->second;
+		wert = v[1];
+
+		data.werte[ix] = wert;
+		ix++;
+
+		if (ix >= 3000) break;
+		}
+
+	fmysql.ecgneu.save(data, memo);
 	}
 //---------------------------------------------------------------------------
 

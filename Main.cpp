@@ -75,12 +75,23 @@ bool TfmMain::setupDatabase()
 				"Die Funktion meldet: %s", fmysql.error_msg).c_str(),
 			"Fehler beim Öffnen der Datenbank",
 			MB_OK);
-		Close();
 		return false;
 		}
 
 	if (!fmysql.dbExists())
 		{
+		if (Application->MessageBox(
+			ftools.fmt(
+				"Die MySql-Datenbank 'ecg' ist nicht vorhanden. "
+				"Soll sie nun vom Programm erstellt werden ?\n\n"
+				"Ansonsten wird das Programm abgebrochen.").c_str(),
+			"Datenbank erstellen ?",
+			MB_YESNO) == IDNO)
+			{
+			//todo?? fmysql.close();
+			return false;
+			}
+
 		setStatus("startup Database...creating databse");
 		if (!fmysql.create())
 			{
@@ -90,7 +101,6 @@ bool TfmMain::setupDatabase()
 					"Die Funktion meldet: %s", fmysql.error_msg).c_str(),
 				"Fehler beim Öffnen der Datenbank",
 				MB_OK);
-			Close();
 			return false;
 			}
 		}
@@ -108,7 +118,6 @@ bool TfmMain::setupDatabase()
 				"Die Funktion meldet: %s", fmysql.error_msg).c_str(),
 			"Fehler beim Öffnen der Datenbank",
 			MB_OK);
-		Close();
 		return false;
 		}
 

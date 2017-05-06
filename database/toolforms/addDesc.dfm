@@ -92,7 +92,7 @@ object fmDescAdd: TfmDescAdd
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
-    TabOrder = 1
+    TabOrder = 3
     DesignSize = (
       293
       41)
@@ -103,7 +103,7 @@ object fmDescAdd: TfmDescAdd
       Height = 25
       Action = acClose
       Anchors = [akTop, akRight]
-      TabOrder = 0
+      TabOrder = 1
     end
     object Button2: TButton
       Left = 7
@@ -111,7 +111,7 @@ object fmDescAdd: TfmDescAdd
       Width = 75
       Height = 25
       Action = acSave
-      TabOrder = 1
+      TabOrder = 0
     end
   end
   object edIdent: TEdit
@@ -120,14 +120,15 @@ object fmDescAdd: TfmDescAdd
     Width = 121
     Height = 21
     Enabled = False
-    TabOrder = 2
+    TabOrder = 1
   end
   object edBez: TEdit
     Left = 96
     Top = 93
     Width = 185
     Height = 21
-    TabOrder = 3
+    TabOrder = 2
+    OnKeyPress = edBezKeyPress
   end
   object tStartup: TTimer
     Enabled = False

@@ -18,7 +18,7 @@ object fmBaseDesc: TfmBaseDesc
   TextHeight = 13
   object Bevel4: TBevel
     Left = 0
-    Top = 63
+    Top = 97
     Width = 453
     Height = 8
     Align = alTop
@@ -29,9 +29,9 @@ object fmBaseDesc: TfmBaseDesc
   end
   object lvData: TListView
     Left = 0
-    Top = 71
+    Top = 105
     Width = 453
-    Height = 587
+    Height = 553
     Align = alClient
     Columns = <
       item
@@ -50,12 +50,14 @@ object fmBaseDesc: TfmBaseDesc
     ViewStyle = vsReport
     OnClick = lvDataClick
     OnDblClick = lvDataDblClick
+    ExplicitTop = 71
+    ExplicitHeight = 587
   end
   object pnFilter: TPanel
     Left = 0
     Top = 0
     Width = 453
-    Height = 63
+    Height = 97
     Align = alTop
     BevelOuter = bvNone
     ParentBackground = False
@@ -63,7 +65,7 @@ object fmBaseDesc: TfmBaseDesc
     TabOrder = 1
     object Label10: TLabel
       Left = 8
-      Top = 6
+      Top = 31
       Width = 29
       Height = 13
       Caption = 'Filter'
@@ -76,28 +78,41 @@ object fmBaseDesc: TfmBaseDesc
     end
     object Label11: TLabel
       Left = 64
-      Top = 8
+      Top = 33
       Width = 47
       Height = 13
       Caption = 'Ident von'
     end
     object Label12: TLabel
       Left = 184
-      Top = 8
+      Top = 33
       Width = 13
       Height = 13
       Caption = 'bis'
     end
     object Label13: TLabel
       Left = 64
-      Top = 34
+      Top = 59
       Width = 21
       Height = 13
       Caption = 'Bez.'
     end
+    object laTabelle: TLabel
+      Left = 64
+      Top = 7
+      Width = 47
+      Height = 14
+      Caption = 'laTabelle'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsUnderline]
+      ParentFont = False
+    end
     object edIdVon: TEdit
       Left = 119
-      Top = 5
+      Top = 30
       Width = 57
       Height = 21
       TabOrder = 0
@@ -105,7 +120,7 @@ object fmBaseDesc: TfmBaseDesc
     end
     object edIdBis: TEdit
       Left = 206
-      Top = 6
+      Top = 31
       Width = 57
       Height = 21
       TabOrder = 1
@@ -113,7 +128,7 @@ object fmBaseDesc: TfmBaseDesc
     end
     object edBez: TEdit
       Left = 119
-      Top = 32
+      Top = 57
       Width = 144
       Height = 21
       TabOrder = 2

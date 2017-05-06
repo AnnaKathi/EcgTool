@@ -11,6 +11,11 @@
 struct sEcg
 	{
 	int			ident;
+	int			session;
+	int			person;
+	int			position;
+	int			state;
+	int			lage;
 	double		werte[3000];
 	};
 //---------------------------------------------------------------------------
@@ -22,6 +27,7 @@ public:
 
 	bool	loadTable(); //lädt die ganze Tabelle
 	bool	loadByIdent(int ident); //lädt nur einen Datensatz
+	bool 	getLast();
 
 	bool	nextRow();
 

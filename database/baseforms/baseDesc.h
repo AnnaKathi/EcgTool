@@ -58,6 +58,7 @@ __published:	// IDE-verwaltete Komponenten
 	TMenuItem *Erkrankungndern1;
 	TMenuItem *Erkrankunglschen1;
 	TTimer *tStartup;
+	TLabel *laTabelle;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall tStartupTimer(TObject *Sender);

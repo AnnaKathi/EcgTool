@@ -171,16 +171,28 @@ bool cMySqlWork::script(String script_name)
 
 	String q = "";
 	String line;
-	char rowbuf[1024];
+	char rowbuf[2048];
 	bool fehler = false;
 	while (fgets(rowbuf, sizeof(rowbuf)-1, fp) != NULL)
 		{
 		line = String(rowbuf);
 		ftools.replace(line, "\n", "");
 		line = line.Trim();
+
+		if (line.SubString(1,1) == "#") //Kommentar
+			continue;
+
+		if (line.SubString(line.Length(), 1) == ";") //Leerzeile faken
+			{
+			q+= line;
+			line = "";
+			}
+
 		if (line == "")
 			{
 			//Befehl zuende -> absenden
+			if (q == "") continue;
+			
 			if (!send(q))
 				{
 				fehler = true;

@@ -31,8 +31,13 @@ __property cMySqlEcgData&  ecg      = { read=get_ecg };
 __property cMySqlEcg&      ecgneu   = { read=get_ecg_neu  };
 __property cMySqlPeople&   people   = { read=get_people   };
 
-__property cMySqlDescDb&   diseases = { read=get_diseases };
-__property cMySqlDescDb&   orte     = { read=get_orte };
+__property cMySqlDescDb&   researchers = { read=get_researchers };
+__property cMySqlDescDb&   algorithms  = { read=get_algorithms  };
+__property cMySqlDescDb&   positions   = { read=get_positions   };
+__property cMySqlDescDb&   diseases    = { read=get_diseases    };
+__property cMySqlDescDb&   states      = { read=get_states      };
+__property cMySqlDescDb&   lagen       = { read=get_lagen       };
+__property cMySqlDescDb&   orte        = { read=get_orte        };
 
 private:
 	cTools			ftools;
@@ -47,11 +52,14 @@ private:
 	cMySqlPeople*	fpeople;
 	cMySqlPeople&	get_people();
 
-	cMySqlDescDb*	fdiseases;
-	cMySqlDescDb&	get_diseases();
-
-	cMySqlDescDb*	forte;
-	cMySqlDescDb&	get_orte();
+	//description databases
+	cMySqlDescDb*	fdiseases;     cMySqlDescDb&	get_diseases();
+	cMySqlDescDb*	forte;         cMySqlDescDb&	get_orte();
+	cMySqlDescDb*	fresearchers;  cMySqlDescDb&	get_researchers();
+	cMySqlDescDb*	flagen;        cMySqlDescDb&	get_lagen();
+	cMySqlDescDb*	fstates;       cMySqlDescDb&	get_states();
+	cMySqlDescDb*	fpositions;    cMySqlDescDb&	get_positions();
+	cMySqlDescDb*	falgorithms;   cMySqlDescDb&	get_algorithms();
 	};
 //---------------------------------------------------------------------------
 #endif

@@ -343,6 +343,15 @@ object fmEcg: TfmEcg
       TabOrder = 14
       OnClick = btSaveClick
     end
+    object Button1: TButton
+      Left = 152
+      Top = 240
+      Width = 75
+      Height = 25
+      Caption = 'Save Neu'
+      TabOrder = 15
+      OnClick = Button1Click
+    end
   end
   object pnClient: TPanel
     Left = 341

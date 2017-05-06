@@ -14,10 +14,13 @@ cMySql::cMySql()
 	fecgneu	  = new cMySqlEcg(*fwork);
 	fpeople   = new cMySqlPeople(*fwork);
 
-	fdiseases = new cMySqlDescDb(*fwork, "diseases");
-	forte     = new cMySqlDescDb(*fwork, "orte");
-
-	//old: fdiseases = new cMySqlDiseases(*fwork);
+	fdiseases    = new cMySqlDescDb(*fwork, "diseases");
+	forte        = new cMySqlDescDb(*fwork, "orte");
+	fresearchers = new cMySqlDescDb(*fwork, "researchers");
+	flagen       = new cMySqlDescDb(*fwork, "lagen");
+	fstates      = new cMySqlDescDb(*fwork, "states");
+	fpositions   = new cMySqlDescDb(*fwork, "positions");
+	falgorithms  = new cMySqlDescDb(*fwork, "algorithms");
 	}
 //---------------------------------------------------------------------------
 cMySql::~cMySql()
@@ -26,17 +29,45 @@ cMySql::~cMySql()
 	if (fecg)      delete fecg;
 	if (fecgneu)   delete fecgneu;
 	if (fpeople)   delete fpeople;
-	if (fdiseases) delete fdiseases;
-	if (forte)	   delete forte;
+
+	if (fdiseases)    delete fdiseases; 		if (forte)	 delete forte;
+	if (fresearchers) delete fresearchers;		if (flagen)  delete flagen;
+	if (fpositions)   delete fpositions;		if (fstates) delete fstates;
+	if (falgorithms)  delete (falgorithms);
 	}
 //---------------------------------------------------------------------------
 bool cMySql::create()
 	{
-	//erstellt die komplette Datenbank
+	//erstellt die komplette (leere) Datenbank
 	if (!fwork->script("create_all_databases"))
 		return fail(fwork->error_code, fwork->error_msg);
-	else
-		return ok();
+
+	if (Application->MessageBox(
+		ftools.fmt(
+			"Möchtest Du die Datenbank mit Dummy-Daten für die Grunddefinitionen "
+			"füllen lassen (Erkrankungen, Orte, Untersuchender, Lagen, Stati, "
+			"Positionen und Algorithmen) ?").c_str(),
+		"Datenbank füllen ?",
+		MB_YESNO) == IDYES)
+		{
+		//füllt die Datenbank mit Dummy-Datensätzen
+		if (!fwork->script("insert_dummy_data_basic"))
+			return fail(fwork->error_code, fwork->error_msg);
+		}
+
+	if (Application->MessageBox(
+		ftools.fmt(
+			"Möchtest Du die Datenbank mit Dummy-Daten für Sessions "
+			"füllen lassen (Personen, Seesions, EKG-Daten) ?").c_str(),
+		"Datenbank füllen ?",
+		MB_YESNO) == IDYES)
+		{
+		//füllt die Datenbank mit Dummy-Datensätzen
+		if (!fwork->script("insert_dummy_data_sessions"))
+			return fail(fwork->error_code, fwork->error_msg);
+		}
+
+	return ok();
 	}
 //---------------------------------------------------------------------------
 bool cMySql::drop()
@@ -134,6 +165,8 @@ cMySqlPeople& cMySql::get_people()
 	return *fpeople;
 	}
 //---------------------------------------------------------------------------
+//-- description databases --------------------------------------------------
+//---------------------------------------------------------------------------
 cMySqlDescDb& cMySql::get_diseases()
 	{
 	return *fdiseases;
@@ -142,6 +175,31 @@ cMySqlDescDb& cMySql::get_diseases()
 cMySqlDescDb& cMySql::get_orte()
 	{
 	return *forte;
+	}
+//---------------------------------------------------------------------------
+cMySqlDescDb& cMySql::get_researchers()
+	{
+	return *fresearchers;
+	}
+//---------------------------------------------------------------------------
+cMySqlDescDb& cMySql::get_lagen()
+	{
+	return *flagen;
+	}
+//---------------------------------------------------------------------------
+cMySqlDescDb& cMySql::get_states()
+	{
+	return *fstates;
+	}
+//---------------------------------------------------------------------------
+cMySqlDescDb& cMySql::get_positions()
+	{
+	return *fpositions;
+	}
+//---------------------------------------------------------------------------
+cMySqlDescDb& cMySql::get_algorithms()
+	{
+	return *falgorithms;
 	}
 //---------------------------------------------------------------------------
 

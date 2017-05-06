@@ -51,12 +51,14 @@ void __fastcall TfmTest::tStartupTimer(TObject *Sender)
 
 	fmDiseases = CreateDescForm(this, pnDesc1, fmysql.diseases);
 	fmOrte     = CreateDescForm(this, pnDesc2, fmysql.orte);
+	fmLagen    = CreateDescForm(this, pnDesc3, fmysql.lagen);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmTest::FormClose(TObject *Sender, TCloseAction &Action)
 	{
 	delete fmDiseases;
 	delete fmOrte;
+	delete fmLagen;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

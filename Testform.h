@@ -17,6 +17,7 @@ private:
 
 	TfmBaseDesc*	fmDiseases;
 	TfmBaseDesc*	fmOrte;
+	TfmBaseDesc*	fmLagen;
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;

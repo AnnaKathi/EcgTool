@@ -63,14 +63,21 @@ void __fastcall TfmDescAdd::FormShow(TObject *Sender)
 void __fastcall TfmDescAdd::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
+
+	String db =
+		fdesc->myName.SubString(1,1).UpperCase() +
+		fdesc->myName.SubString(2, 999).LowerCase();
+
 	if (bNewData)
 		{
+		Caption = "Datensatz anlegen: " + db;
 		edIdent->Text = "- noch nicht gesetzt -";
 		edBez->Text = "";
 		}
 
 	else
 		{
+		Caption = "Datensatz ändern: " + db;
 		edIdent->Text = String(iData);
 		edBez->Text = fdesc->getNameOf(iData);
 		}
@@ -142,6 +149,15 @@ void __fastcall TfmDescAdd::FormKeyPress(TObject *Sender, char &Key)
 		{
 		Key = 0;
 		acCloseExecute(Sender);
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmDescAdd::edBezKeyPress(TObject *Sender, char &Key)
+	{
+	if (Key == VK_RETURN)
+		{
+		Key = 0;
+		acSaveExecute(Sender);
 		}
 	}
 //---------------------------------------------------------------------------

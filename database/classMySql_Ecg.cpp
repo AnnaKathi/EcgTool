@@ -1,10 +1,12 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
 
+#include <stdio.h>
+
 #include "classMySql_Ecg.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#define TABLE "ecg"
+#define TABLE "ecgdata"
 //---------------------------------------------------------------------------
 cMySqlEcg::cMySqlEcg(cMySqlWork& worker)
 	{
@@ -34,21 +36,24 @@ bool cMySqlEcg::save(sEcg data, TMemo* memo)
 	{
 	//Row muss vorher gesetzt sein
 	String s = "";
-	for (int i = 0; i < 10; i++)
+	char feld[64]; double wert;
+	for (int i = 0; i < 100; i++)
 		{
-		double wert = data.werte[i];
+		wert = data.werte[i];
+		sprintf(feld, "%.8f", wert);
 		if (i == 0)
-			s = String(wert);
+			s = String(feld);
 		else
-			s += ";" + String(wert);
+			s += ";" + String(feld);
 		}
 
-	//INSERT INTO `ecg`.`ecg` (`Ident`, `Werte`) VALUES (1, 0x557074696D6500006500630074006500);
+	//INSERT INTO `ecg`.`ecgdata` (`Sessions_ID`, `Subjects_ID`, `Positions_ID`, `States_ID`, `Lagen_ID`, `Werte`) VALUES (1, 1, 1, 1, 1, '0,8723645897623');
 	String q = ftools.fmt(
 		"INSERT INTO `%s` "
-		"(`Ident`, `Werte`) "
-		"VALUES (%d, '%s')",
-		String(TABLE), data.ident, s.c_str());
+		"(`Sessions_ID`, `Subjects_ID`, `Positions_ID`, `States_ID`, `Lagen_ID`, `Werte`) "
+		"VALUES (%d, %d, %d, %d, %d, '%s')",
+		String(TABLE),
+		data.session, data.person, data.position, data.state, data.lage, s.c_str());
 
 	memo->Lines->Add("");
 	memo->Lines->Add(q);
@@ -60,7 +65,7 @@ bool cMySqlEcg::save(sEcg data, TMemo* memo)
 		{
 		//Datensatz wieder reinladen, damit aufrufende Komponenten damit
 		//weiterarbeiten können 
-		return loadByIdent(data.ident);
+		return getLast();
 		}
 	}
 //---------------------------------------------------------------------------
@@ -99,6 +104,27 @@ bool cMySqlEcg::nextRow()
 	fdata.werte[3] = atof(frow[7]);
 	fdata.werte[4] = atof(frow[8]);
 	*/
+
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool cMySqlEcg::getLast()
+	{
+	String q = "SELECT * FROM " + String(TABLE) + " ORDER BY Ident DESC LIMIT 1";
+	if (!fwork->query(q))
+		return false;
+
+	fres = fwork->getResult();
+	frow = mysql_fetch_row(fres);
+	if (frow == NULL) return false;
+
+	fdata.ident    = atoi(frow[0]);
+	fdata.session  = atoi(frow[1]);
+	fdata.person   = atoi(frow[2]);
+	fdata.position = atoi(frow[3]);
+	fdata.state    = atoi(frow[4]);
+	fdata.lage     = atoi(frow[5]);
+	//todo fdata.werte
 
 	return true;
 	}
