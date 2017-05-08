@@ -691,15 +691,10 @@ void __fastcall TfmChoi2::btExeFilesClick(TObject *Sender)
 	String path = ftools.GetPath();
 
 	String svm_train   = path + "\\libSVM\\svm-train.exe";
-	String svm_predict = path + "\\libSVM\\svm-predict.exe";
 	String a1a_train   = path + "\\libSVM\\a1a.train";
-	String a1a_test    = path + "\\libSVM\\a1a.test";
-
 	String a1a_model   = path + "\\libSVM\\a1a.train.model";
-	String a1a_out     = path + "\\libSVM\\a1a.out";
 
-	if (!FileExists(svm_train) || !FileExists(svm_predict) ||
-		!FileExists(a1a_train) || !FileExists(a1a_test))
+	if (!FileExists(svm_train) || !FileExists(a1a_train))
 		{
 		; //todo Fehlermeldung
 		return;
@@ -714,8 +709,45 @@ void __fastcall TfmChoi2::btExeFilesClick(TObject *Sender)
 		path.c_str(),		//Directory
 		SW_SHOW);   		//Show-Command
 
+	if (!FileExists(a1a_model))
+		{
+		; //todo Fehlermeldung
+		return;
+		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::Button4Click(TObject *Sender)
+	{
+	String path = ftools.GetPath();
 
+	String svm_predict = path + "\\libSVM\\svm-predict.exe";
+	String a1a_test    = path + "\\libSVM\\a1a.test";
+	String a1a_model   = path + "\\libSVM\\a1a.train.model";
+	String a1a_out     = path + "\\libSVM\\a1a.out";
 
+	if (!FileExists(svm_predict) ||
+		!FileExists(a1a_test)	 ||
+		!FileExists(a1a_model))
+		{
+		; //todo Fehlermeldung
+		return;
+		}
+
+	//svm-predict.exe a1a.test a1a.train.model a1a.out
+	String params = ftools.fmt("%s %s %s", a1a_test, a1a_model, a1a_out);
+	ShellExecute(
+		this,    			//hwnd
+		"open",     		//Operation
+		svm_predict.c_str(),//File
+		params.c_str(),		//Parameters
+		path.c_str(),		//Directory
+		SW_SHOW);   		//Show-Command
+
+	if (!FileExists(a1a_out))
+		{
+		; //todo Fehlermeldung
+		return;
+		}
 	}
 //---------------------------------------------------------------------------
 

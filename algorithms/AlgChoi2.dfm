@@ -110,6 +110,24 @@ object fmChoi2: TfmChoi2
       Action = acReset
       TabOrder = 1
     end
+    object btExeFiles: TButton
+      Left = 440
+      Top = 6
+      Width = 153
+      Height = 25
+      Caption = 'Use svm-train.exe'
+      TabOrder = 2
+      OnClick = btExeFilesClick
+    end
+    object Button4: TButton
+      Left = 599
+      Top = 6
+      Width = 153
+      Height = 25
+      Caption = 'Use svm-predict.exe'
+      TabOrder = 3
+      OnClick = Button4Click
+    end
   end
   object Panel3: TPanel
     Left = 0
@@ -208,15 +226,6 @@ object fmChoi2: TfmChoi2
       Caption = 'EKGs einlesen ALT'
       TabOrder = 6
       OnClick = btAltClick
-    end
-    object btExeFiles: TButton
-      Left = 568
-      Top = 10
-      Width = 153
-      Height = 25
-      Caption = 'Use EXE-Files'
-      TabOrder = 7
-      OnClick = btExeFilesClick
     end
   end
   object pnClassification: TPanel

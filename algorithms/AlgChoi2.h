@@ -91,6 +91,7 @@ __published:	// IDE-verwaltete Komponenten
 	TEdit *edFold;
 	TButton *btAlt;
 	TButton *btExeFiles;
+	TButton *Button4;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -105,6 +106,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acDoEcgsExecute(TObject *Sender);
 	void __fastcall btAltClick(TObject *Sender);
 	void __fastcall btExeFilesClick(TObject *Sender);
+	void __fastcall Button4Click(TObject *Sender);
 	
 public:
 	__fastcall TfmChoi2(TComponent* Owner);
