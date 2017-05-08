@@ -144,11 +144,16 @@ void TfmChoi2::AddFile(TListView* lv, String file, int count, int id)
 bool TfmChoi2::CompareResult(String testfile, String outfile)
 	{
 	FILE* fptest = fopen(testfile.c_str(), "r");
-	if (fptest == NULL) return false;
+	if (fptest == NULL)
+		{
+		Print("# Fehler, Die Testfile konnte nicht geöffnet werden <%s>", testfile);
+		return false;
+		}
 
 	FILE* fpout = fopen(outfile.c_str(), "r");
 	if (fpout == NULL)
 		{
+		Print("# Fehler, Die Ausgabefile konnte nicht geöffnet werden <%s>", outfile);
 		fclose(fptest);
 		return false;
 		}
@@ -191,11 +196,15 @@ bool TfmChoi2::CompareResult(String testfile, String outfile)
 	fclose(fptest);
 	fclose(fpout);
 
-	if (fehler) return false;
+	if (fehler)
+		{
+		Print("# Fehler aufgetreten");
+		return false;
+		}
 
 	double classification = (double)right / (double)count * 100;
 	Print("Accuracy: %.2f", classification);
-    return true;
+	return true;
 	}
 //---------------------------------------------------------------------------
 bool TfmChoi2::WriteFile(bool train, String filename)
@@ -394,13 +403,19 @@ void __fastcall TfmChoi2::btExeFilesClick(TObject *Sender)
 
 	String path = ftools.GetPath();
 
-	String svm_train   = path + "\\libSVM\\svm-train.exe";
-	String a1a_train   = path + "\\libSVM\\a1a.train";
-	String a1a_model   = path + "\\libSVM\\a1a.train.model";
+	String svm_train  = path + "\\libSVM\\svm-train.exe";
+	String anna_train = path + "\\libSVM\\anna.train";
+	String anna_model = path + "\\libSVM\\anna.train.model";
 
-	if (!FileExists(svm_train) || !FileExists(a1a_train))
+	if (!FileExists(svm_train))
 		{
-		; //todo Fehlermeldung
+		Print("# Die Train-Datei existiert nicht <%s>", svm_train);
+		return;
+		}
+
+	 if (!FileExists(anna_train))
+		{
+		Print("# Die Trainings-Daten existieren nicht <%s>", anna_train);
 		return;
 		}
 
@@ -409,26 +424,65 @@ void __fastcall TfmChoi2::btExeFilesClick(TObject *Sender)
 		this,    			//hwnd
 		"open",     		//Operation
 		svm_train.c_str(),	//File
-		a1a_train.c_str(),	//Parameters
+		anna_train.c_str(),	//Parameters
 		path.c_str(),		//Directory
 		SW_SHOW);   		//Show-Command
 
-	if (!FileExists(a1a_model))
+	if (!FileExists(anna_model))
 		{
-		; //todo Fehlermeldung
+		Print("# Das Modell konnte nicht erstellt werden <%s>", anna_model);
 		return;
 		}
+
+	String svm_predict = path + "\\libSVM\\svm-predict.exe";
+	String anna_test   = path + "\\libSVM\\anna.test";
+	String anna_out    = path + "\\libSVM\\anna.out";
+
+	if (!FileExists(svm_predict))
+		{
+		Print("# Die Predict-Datei existiert nicht <%s>", svm_predict);
+		return;
+		}
+
+	if (!FileExists(anna_test))
+		{
+		Print("# Die Testdatei existiert nicht<%s>", anna_test);
+		return;
+		}
+
+	//svm-predict.exe a1a.test a1a.train.model a1a.out
+	String params = ftools.fmt("%s %s %s", anna_test, anna_model, anna_out);
+	ShellExecute(
+		this,    			//hwnd
+		"open",     		//Operation
+		svm_predict.c_str(),	//File
+		params.c_str(),	//Parameters
+		path.c_str(),		//Directory
+		SW_SHOW);   		//Show-Command
+
+
+	if (!FileExists(anna_out))
+		{
+		Print("# Die Ausgabedatei konnte nicht erstellt werden <%s>", anna_out);
+		return;
+		}
+
+	Print("Dateien erfolgreich erstellt");
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmChoi2::btCreateFilesClick(TObject *Sender)
 	{
-	if (!WriteFile(true, "d:\\anna.train"))
+	String path = ftools.GetPath();
+	String trainfile = path + "\\libSVM\\anna.train";
+	String testfile  = path + "\\libSVM\\anna.test";
+
+	if (!WriteFile(true, trainfile))
 		{
 		Application->MessageBox("Train: Fehler aufgetreten", "Fehler", MB_OK);
 		return;
 		}
 
-	if (!WriteFile(false, "d:\\anna.test"))
+	if (!WriteFile(false, testfile))
 		{
 		Application->MessageBox("Test: Fehler aufgetreten", "Fehler", MB_OK);
 		return;
@@ -439,8 +493,9 @@ void __fastcall TfmChoi2::btCreateFilesClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmChoi2::btCompareFilesClick(TObject *Sender)
 	{
-	String testfile = "d:\\anna.test";
-	String outfile  = "d:\\anna.out";
+	String path = ftools.GetPath();
+	String testfile = path + "\\libSVM\\anna.test";
+	String outfile  = path + "\\libSVM\\anna.out";
 
 	CompareResult(testfile, outfile);
 	}

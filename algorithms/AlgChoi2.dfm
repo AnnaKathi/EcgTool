@@ -193,7 +193,6 @@ object fmChoi2: TfmChoi2
     ReadOnly = True
     ScrollBars = ssBoth
     TabOrder = 2
-    ExplicitHeight = 557
   end
   object Panel6: TPanel
     Left = 0
@@ -203,10 +202,6 @@ object fmChoi2: TfmChoi2
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 3
-    ExplicitLeft = 376
-    ExplicitTop = 520
-    ExplicitWidth = 321
-    ExplicitHeight = 102
     object Bevel1: TBevel
       Left = 0
       Top = 382
@@ -225,9 +220,6 @@ object fmChoi2: TfmChoi2
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = -479
-      ExplicitTop = -118
-      ExplicitHeight = 220
       object Panel2: TPanel
         Left = 0
         Top = 0
@@ -312,7 +304,6 @@ object fmChoi2: TfmChoi2
         GridLines = True
         TabOrder = 1
         ViewStyle = vsReport
-        ExplicitHeight = 155
       end
     end
     object Panel4: TPanel
@@ -323,8 +314,6 @@ object fmChoi2: TfmChoi2
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = -306
-      ExplicitTop = 30
       object Panel5: TPanel
         Left = 0
         Top = 0
@@ -333,7 +322,6 @@ object fmChoi2: TfmChoi2
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitLeft = 1
         object Label4: TLabel
           Left = 376
           Top = 6
@@ -414,8 +402,6 @@ object fmChoi2: TfmChoi2
         GridLines = True
         TabOrder = 1
         ViewStyle = vsReport
-        ExplicitLeft = 112
-        ExplicitTop = 116
       end
     end
   end
