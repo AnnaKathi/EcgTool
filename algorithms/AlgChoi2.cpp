@@ -32,7 +32,8 @@ bool TfmChoi2::Execute()
 __fastcall TfmChoi2::TfmChoi2(TComponent* Owner)
 	: TForm(Owner)
 	{
-	CountAnna = CountManni = CountManu = CountMartin = 0;
+	Count1Anna = Count1Manni = Count1Manu = Count1Martin = 0;
+	Count2Anna = Count2Manni = Count2Manu = Count2Martin = 0;
 	}
 //---------------------------------------------------------------------------
 __fastcall TfmChoi2::~TfmChoi2()
@@ -49,14 +50,16 @@ void __fastcall TfmChoi2::tStartupTimer(TObject *Sender)
 	tStartup->Enabled = false;
 
 	ftools.FormLoad(this);
-	ftools.ListViewLoad(this, lvData);
+	ftools.ListViewLoad(this, lvData1);
+	ftools.ListViewLoad(this, lvData2);
 	SetValues();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmChoi2::FormClose(TObject *Sender, TCloseAction &Action)
 	{
 	ftools.FormSave(this);
-	ftools.ListViewSave(this, lvData);
+	ftools.ListViewSave(this, lvData1);
+	ftools.ListViewSave(this, lvData2);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -82,16 +85,26 @@ void TfmChoi2::Print(char* msg, ...)
 //---------------------------------------------------------------------------
 void TfmChoi2::SetValues()
 	{
-	CountAnna = CountManni = CountManu = CountMartin = 0;
+	Count1Anna = Count1Manni = Count1Manu = Count1Martin = 0;
+	Count2Anna = Count2Manni = Count2Manu = Count2Martin = 0;
 
 	TListItem* item;
-	for (int i = 0; i < lvData->Items->Count; i++)
+	for (int i = 0; i < lvData1->Items->Count; i++)
 		{
-		item = lvData->Items->Item[i];
-		if (item->SubItems->Strings[0] != "") CountAnna++;
-		if (item->SubItems->Strings[1] != "") CountManni++;
-		if (item->SubItems->Strings[2] != "") CountManu++;
-		if (item->SubItems->Strings[3] != "") CountMartin++;
+		item = lvData1->Items->Item[i];
+		if (item->SubItems->Strings[0] != "") Count1Anna++;
+		if (item->SubItems->Strings[1] != "") Count1Manni++;
+		if (item->SubItems->Strings[2] != "") Count1Manu++;
+		if (item->SubItems->Strings[3] != "") Count1Martin++;
+		}
+
+	for (int i = 0; i < lvData2->Items->Count; i++)
+		{
+		item = lvData2->Items->Item[i];
+		if (item->SubItems->Strings[0] != "") Count2Anna++;
+		if (item->SubItems->Strings[2] != "") Count2Manni++;
+		if (item->SubItems->Strings[2] != "") Count2Manu++;
+		if (item->SubItems->Strings[3] != "") Count2Martin++;
 		}
 	}
 //---------------------------------------------------------------------------
@@ -110,187 +123,85 @@ String TfmChoi2::GetFile(String dat)
     	return dat;
 	}
 //---------------------------------------------------------------------------
-void TfmChoi2::AddFile(String file, int count, int id)
+void TfmChoi2::AddFile(TListView* lv, String file, int count, int id)
 	{
-	if (count > lvData->Items->Count)
+	if (count > lv->Items->Count)
 		{
-		TListItem* item = lvData->Items->Add();
-		item->Caption = String(lvData->Items->Count);
-		item->Data = (void*)lvData->Items->Count;
+		TListItem* item = lv->Items->Add();
+		item->Caption = String(lv->Items->Count);
+		item->Data = (void*)lv->Items->Count;
 
 		for (int i = 0; i < 4; i++)
 			item->SubItems->Add("");
 		}
 
-	TListItem* item = lvData->Items->Item[count-1];
+	TListItem* item = lv->Items->Item[count-1];
 	item->SubItems->Strings[id] = file;
 
 	Print("+ %s", GetFile(file));
 	}
 //---------------------------------------------------------------------------
-bool TfmChoi2::CheckEcg()
+bool TfmChoi2::CompareResult(String testfile, String outfile)
 	{
-	//prüfen ob alle Daten eingelsen werden können und ob keine Datei doppelt vorhanden ist
-	TStringList* files = new TStringList();
+	FILE* fptest = fopen(testfile.c_str(), "r");
+	if (fptest == NULL) return false;
 
-	Print("-----------------------------------------------");
-	Print("-- EKGs prüfen --------------------------------");
-	Print("-----------------------------------------------");
-	String delim = ";";
-	if (cbDelim->ItemIndex == 1) //Komma
-		delim = ",";
-	else if (cbDelim->ItemIndex == 2) //Tab
-		delim = "\t";
-
-	eDatFormat format;
-	if (cbFormat->ItemIndex == 1)
-		format = formatADS;
-	else
-		format = formatNone;
-
-	String file;
-	TListItem* item;
-	bool fehler = false;
-	for (int row = 0; row < lvData->Items->Count; row++)
+	FILE* fpout = fopen(outfile.c_str(), "r");
+	if (fpout == NULL)
 		{
-		item = lvData->Items->Item[row];
-		for (int col = 0; col < (lvData->Columns->Count-1); col++)
-			{
-			file = item->SubItems->Strings[col];
-			if (file == "") continue;
-
-			if (files->IndexOf(file) > -1) //file ist bereits enthalten
-				{
-				fehler = true;
-				Print("Eine Datei ist mehrfach enthalten: %s", file);
-				break;
-				}
-
-			files->Add(file);
-
-			if (!fecg.data.getFile(file, format, delim, 1, 3000))
-				{
-				fehler = true;
-				Print("# Eine Datei kann nicht eingelesen werden: %s", file);
-				Print("# ECG meldet: %s", fecg.data.error_msg);
-				break;
-				}
-
-			Print("- %s", GetFile(file));
-			}
-
-		if (fehler) break;
-		}
-
-	if (fehler) Print("# Fehler aufgetreten, Vorgang abgebrochen");
-	else Print("done sucessfully");
-	Print("-----------------------------------------------");
-	delete files;
-	return !fehler;
-	}
-//---------------------------------------------------------------------------
-void TfmChoi2::DoSvm()
-	{
-	Print("-----------------------------------------------");
-	Print("-- SVM erstellen ------------------------------");
-	Print("-----------------------------------------------");
-	Print("");
-	Print("---- Startup SVM Choi");
-	Print("\tlibSVM-Version: %d", fChoiSVM.version);
-	if (!fChoiSVM.startSvm())
-		{
-		Print("# Fehler, SVM konnte nicht gestartet werden");
-		Print("# ChoiSVM meldet: %d, %s", fChoiSVM.error_code, fChoiSVM.error_msg);
-		return;
-		}
-	Print("\tokay");
-
-	Print("---- Build Trainingsdata");
-	if (!BuildTrainingData()) return;
-	Print("\tokay");
-
-	Print("---- Build Problem");
-	if (!fChoiSVM.doProblem(fChoiSVM.train_data))
-		{
-		Print("# Fehler, Trainingdaten konnten nicht gebildet werden");
-		Print("# ChoiSVM meldet: %d, %s", fChoiSVM.error_code, fChoiSVM.error_msg);
-		return;
-		}
-	Print("\tokay");
-
-svm_problem problem = fChoiSVM.problem;
-int max = problem.l;
-int idx; double wert;
-for (int i = 0; i < max; i++)
-{
-//line = ftools.fmt("x -> [%d] -> ", i);
-svm_node* node = problem.x[i];
-for (int j = 0; j < 8; j++)
-{
-idx  = node[j].index;
-wert = node[j].value;
-//line = line + ftools.fmt("(%d,%.4f) ", idx, wert);
-}
-//Print("%s", line.c_str());
-}
-
-fChoiSVM.outProblem("d:\\problem_neu.txt");
-
-	Print("---- Build Parameter");
-	if (!fChoiSVM.doParameter(fChoiSVM.problem))
-		{
-		Print("# Fehler, Parameter konnten nicht gesetzt werden");
-		Print("# ChoiSVM meldet: %d, %s", fChoiSVM.error_code, fChoiSVM.error_msg);
-		return;
-		}
-	Print("\tokay");
-svm_parameter param = fChoiSVM.param;
-
-	if (cxCrossvalidation->Checked)
-		{
-
-		int no = edFold->Text.ToInt();
-		Print("---- Crossvalidation");
-		if (!fChoiSVM.doCrossvalidation(problem, param, no))
-			{
-			Print("# Fehler, Crossvalidation konnte nicht durchgeführt werden");
-			Print("# ChoiSVM meldet: %d, %s", fChoiSVM.error_code, fChoiSVM.error_msg);
-			return;
-			}
-
-		if (param.svm_type == EPSILON_SVR || param.svm_type == NU_SVR)
-			{
-			Print("\tMean Sqaured Error: %.4f", fChoiSVM.iMeanSquaredError);
-			Print("\tSquared Corr. Coeff.: %.4f", fChoiSVM.iSquredCorrCoeff);
-			}
-		else
-			Print("\tCrossvalidation accuracy: %.2f %", fChoiSVM.iAccuracy);
-		}
-	else
-		{
-		Print("---- Save Model");
-		if (!fChoiSVM.doModel(fChoiSVM.problem, fChoiSVM.param))
-			{
-			Print("# Fehler, Model konnte nicht gespeichert werden");
-			Print("# ChoiSVM meldet: %d, %s", fChoiSVM.error_code, fChoiSVM.error_msg);
-			return;
-			}
-		Print("\tsaved to d:\\TestAnna.model");
-		}
-	Print("\tokay");
-
-	Print("\n-- SVM-Train beendet ---------------------------");
-	}
-//---------------------------------------------------------------------------
-bool TfmChoi2::BuildTrainingData()
-	{
-	if (!fChoiSVM.clearTrainingData())
-		{
-		Print("# Fehler, Trainingdaten konnten nicht gelöscht werden");
-		Print("# ChoiSVM meldet: %d, %s", fChoiSVM.error_code, fChoiSVM.error_msg);
+		fclose(fptest);
 		return false;
 		}
 
+	char rowbuf1[1024];  char rowbuf2[1024];
+	int testlabel;		 int outlabel;
+	bool fehler = false;
+
+	int right = 0;
+	int wrong = 0;
+	int count = 0;
+	while ((fgets(rowbuf1, sizeof(rowbuf1)-1, fptest)) != NULL)
+		{
+		char* pt = strchr(rowbuf1, ' ');
+		if (pt == NULL)
+			{
+			fehler = true;
+			break;
+			}
+		*pt = 0;
+		testlabel = atoi(rowbuf1);
+
+		if (fgets(rowbuf2, sizeof(rowbuf2)-1, fpout) == NULL)
+			{
+			fehler = true;
+			break;
+			}
+
+		pt = strchr(rowbuf2, ' ');
+		outlabel = atoi(rowbuf2);
+
+		if (testlabel == outlabel)
+			right++;
+		else
+			wrong++;
+
+		count++;
+		}
+
+	fclose(fptest);
+	fclose(fpout);
+
+	if (fehler) return false;
+
+	double classification = (double)right / (double)count * 100;
+	Print("Accuracy: %.2f", classification);
+    return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmChoi2::WriteFile(bool train, String filename)
+	{
+	iarray_t array; array.clear();
+
 	String delim = ";";
 	if (cbDelim->ItemIndex == 1) //Komma
 		delim = ",";
@@ -303,162 +214,31 @@ bool TfmChoi2::BuildTrainingData()
 	else
 		format = formatNone;
 
-	String file;
-	TListItem* item;
-	for (int row = 0; row < lvData->Items->Count; row++)
-		{
-		item = lvData->Items->Item[row];
-		for (int col = 0; col < (lvData->Columns->Count-1); col++)
-			{
-			file = item->SubItems->Strings[col];
-			if (file == "") continue;
-
-			if (!fecg.data.getFile(file, format, delim, 1, 3000))
-				{
-				Print("# Eine Datei kann nicht eingelesen werden: %s", file);
-				Print("# ECG meldet: %s", fecg.data.error_msg);
-				break;
-				}
-
-			int label = 56;
-			if (!fChoiSVM.addTrainingData(fecg, label))
-				{
-				Print("# Fehler, Trainingdaten konnten nicht hinzugefügt werden");
-				Print("# ChoiSVM meldet: %d, %s", fChoiSVM.error_code, fChoiSVM.error_msg);
-				return false;
-				}
-			}
-		}
-
-	return true;
-	}
-//---------------------------------------------------------------------------
-/***************************************************************************/
-/******************   Actions   ********************************************/
-/***************************************************************************/
-//---------------------------------------------------------------------------
-void __fastcall TfmChoi2::acCloseExecute(TObject *Sender)
-	{
-	Close();
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmChoi2::acResetExecute(TObject *Sender)
-	{
-	if (Application->MessageBox(
-		"Bist Du sicher, dass Du alle Daten zurücksetzen möchtest?",
-		"Daten zurücksetzen",
-		MB_YESNO) == IDNO) return;
-
-	lvData->Items->Clear();
-	SetValues();
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmChoi2::acAddAnnaExecute(TObject *Sender)
-	{
-	if (!OpenDialog->Execute()) return;
-	CountAnna++;
-	AddFile(OpenDialog->FileName, CountAnna, 0);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmChoi2::acAddManniExecute(TObject *Sender)
-	{
-	if (!OpenDialog->Execute()) return;
-	CountManni++;
-	AddFile(OpenDialog->FileName, CountManni, 1);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmChoi2::acAddManuExecute(TObject *Sender)
-	{
-	if (!OpenDialog->Execute()) return;
-	CountManu++;
-	AddFile(OpenDialog->FileName, CountManu, 2);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmChoi2::acAddMartinExecute(TObject *Sender)
-	{
-	if (!OpenDialog->Execute()) return;
-	CountMartin++;
-	AddFile(OpenDialog->FileName, CountMartin, 3);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmChoi2::acCheckEcgsExecute(TObject *Sender)
-	{
-	CheckEcg();
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmChoi2::acDoEcgsExecute(TObject *Sender)
-	{
-	DoSvm();
-	}
-//---------------------------------------------------------------------------
-/***************************************************************************/
-/**************   Meldungen vom Formular   *********************************/
-/***************************************************************************/
-//---------------------------------------------------------------------------
-void __fastcall TfmChoi2::FormKeyPress(TObject *Sender, char &Key)
-	{
-	if (Key == VK_ESCAPE)
-		{
-		Key = 0;
-		acCloseExecute(Sender);
-		}
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmChoi2::btAltClick(TObject *Sender)
-	{
-	Test();
-	}
-//---------------------------------------------------------------------------
-#define Malloc(type,n) (type *)malloc((n)*sizeof(type))
-void TfmChoi2::Test()
-	{
-	//--- Trainingdaten bilden
-	/* aus dem ECG-Stream ein Array der folgenden Form erstellen:
-	 *    LABEL    ATTR1    ATTR2    ATTR3    ATTR4    ATTR5
-	 *    -----    -----    -----    -----    -----    -----
-	 *      1        0        0.1      0.2      0        0
-	 *      2        0        0.1      0.3     -1.2      0
-	 *      1        0.4      0        0        0        0
-	 *      2        0        0.1      0        1.4      0.5
-	 *      3       -0.1     -0.2      0.1      1.1      0.1
-	 *
-	 * dabei wird für jeweils einen Herzschlag im EKG-Strom eine Zeile im
-	 * Trainingsarray erzeugt mit den fiducial points nach Choi
-	 */
-
-	int label = 56;
-	iarray_t TrainingsDaten; TrainingsDaten.clear();
-
-		String delim = ";";
-	if (cbDelim->ItemIndex == 1) //Komma
-		delim = ",";
-	else if (cbDelim->ItemIndex == 2) //Tab
-		delim = "\t";
-
-	eDatFormat format;
-	if (cbFormat->ItemIndex == 1)
-		format = formatADS;
+	TListView* lv;
+	if (train)
+		lv = lvData1;
 	else
-		format = formatNone;
+		lv = lvData2;
+
+	String lvData1; String lvData2; //TEST
 
 	bool fehler = false;
-
-	String file;
+	String datei;
 	TListItem* item;
 	int count = 0;
-	for (int row = 0; row < lvData->Items->Count; row++)
+	for (int row = 0; row < lv->Items->Count; row++)
 		{
-		item = lvData->Items->Item[row];
-		for (int col = 0; col < (lvData->Columns->Count-1); col++)
+		item = lv->Items->Item[row];
+		for (int col = 0; col < (lv->Columns->Count-1); col++)
 			{
-			file = item->SubItems->Strings[col];
-			if (file == "") continue;
+			datei = item->SubItems->Strings[col];
+			if (datei == "") continue;
 
 			//Datei einlesen
-			if (!fecg.data.getFile(file, format, delim, 1, 3000))
+			if (!fecg.data.getFile(datei, format, delim, 1, 3000))
 				{
 				fehler = true;
-				Print("# Eine Datei kann nicht eingelesen werden: %s", file);
+				Print("# Eine Datei kann nicht eingelesen werden: %s", datei);
 				Print("# ECG meldet: %s", fecg.data.error_msg);
 				break;
 				}
@@ -484,204 +264,128 @@ void TfmChoi2::Test()
 					}
 
 				iarray_t features = fChoiFeat.SingleFeatures;
-				TrainingsDaten[count].push_back(label);
-				TrainingsDaten[count].push_back(features[0][0]);
-				TrainingsDaten[count].push_back(features[1][0]);
-				TrainingsDaten[count].push_back(features[2][0]);
-				TrainingsDaten[count].push_back(features[3][0]);
-				TrainingsDaten[count].push_back(features[4][0]);
-				TrainingsDaten[count].push_back(features[5][0]);
-				TrainingsDaten[count].push_back(features[6][0]);
-				TrainingsDaten[count].push_back(features[7][0]);
+				array[count].push_back(col+1);  //label
+				array[count].push_back(features[0][0]);
+				array[count].push_back(features[1][0]);
+				array[count].push_back(features[2][0]);
+				array[count].push_back(features[3][0]);
+				array[count].push_back(features[4][0]);
+				array[count].push_back(features[5][0]);
+				array[count].push_back(features[6][0]);
+				array[count].push_back(features[7][0]);
 				count++;
 				}
 			}
 		}
 
-	int sz = TrainingsDaten.size();
-	if (fehler) return;
+	int sz = array.size();
+	if (fehler) return false;
 
-	//--- Problem erstellen
-	/* aus den Trainingsdaten ein SVM-Problem forumlieren:
-	 *	struct svm_problem
-	 *		{
-	 *		int l;  //no. of training data (rows)
-	 *		double *y;  //array of target values (int in classification)
-	 *		struct svm_node **x; //array of pointers to one training vector each
-	 *		};
-	 *
-	 *	For example, if we have the following training data:
-	 *
-	 *	LABEL    ATTR1    ATTR2    ATTR3    ATTR4    ATTR5
-	 *	-----    -----    -----    -----    -----    -----
-	 *	  1        0        0.1      0.2      0        0
-	 *	  2        0        0.1      0.3     -1.2      0
-	 *	  1        0.4      0        0        0        0
-	 *	  2        0        0.1      0        1.4      0.5
-	 *	  3       -0.1     -0.2      0.1      1.1      0.1
-	 *
-	 *	then the components of svm_problem are:
-	 *
-	 *		l = 5 //no of training data (rows)
-	 *		y -> 1 2 1 2 3 //array of target values (int in classification)
-	 *		x -> [ ] -> (2,0.1) (3,0.2) (-1,?) //array of pointers to one training vector each
-	 *			 [ ] -> (2,0.1) (3,0.3) (4,-1.2) (-1,?)
-	 *			 [ ] -> (1,0.4) (-1,?)
-	 *			 [ ] -> (2,0.1) (4,1.4) (5,0.5) (-1,?)
-	 *			 [ ] -> (1,-0.1) (2,-0.2) (3,0.1) (4,1.1) (5,0.1) (-1,?)
-	 *
-	 *	where (index,value) is stored in the structure `svm_node':
-	 *
-	 *	struct svm_node
-	 *		{
-	 *		int index;
-	 *		double value;
-	 *		};
-	 *
-	 *  index = -1 indicates the end of one vector. Note that indices must
-	 *	be in ASCENDING order.
-	 */
+	FILE* fp = fopen(filename.c_str(), "w");
+	if (fp == NULL)
+		return false;
 
-
-	//Speicherplatz allokieren
-	svm_problem	fProblem;
-	fProblem.l = TrainingsDaten.size();
-	fProblem.y = Malloc(double, fProblem.l);
-	fProblem.x = Malloc(struct svm_node*, fProblem.l);
-
-	svm_node* 	x_space;
-	int elements = fProblem.l * 8; //8 features pro Herzschlag
-	x_space = Malloc(struct svm_node, elements);
-
-	int i = 0;
-	int j = 0;
-	for (iarray_itr itr = TrainingsDaten.begin(); itr != TrainingsDaten.end(); itr++)
+	for (iarray_itr itr = array.begin(); itr != array.end(); itr++)
 		{
+		//<label> <index1>:<value1> <index2>:<value2> ...
 		ilist_t& v = itr->second;
-
-		fProblem.y[i] = v[0]; //Label
-		fProblem.x[i] = &x_space[j];
-
-		x_space[j].index =  1; 	x_space[j].value = v[1]; 	j++;
-		x_space[j].index =  2; 	x_space[j].value = v[2]; 	j++;
-		x_space[j].index =  3; 	x_space[j].value = v[3]; 	j++;
-		x_space[j].index =  4; 	x_space[j].value = v[4]; 	j++;
-		x_space[j].index =  5; 	x_space[j].value = v[5]; 	j++;
-		x_space[j].index =  6; 	x_space[j].value = v[6]; 	j++;
-		x_space[j].index =  7; 	x_space[j].value = v[7]; 	j++;
-		x_space[j].index =  8; 	x_space[j].value = v[8]; 	j++;
-		x_space[j].index = -1;  x_space[j].value = 0.00; 	j++; //end of vector
-
-		i++;
-		}
-
-	outProblem(fProblem, "D:\\Problem_080517.txt");
-
-	//--- Parameter setzen
-	/* struct svm_parameter describes the parameters of an SVM model:
-	 *
-	 *	struct svm_parameter
-	 *		{
-	 *		int svm_type;
-	 *		int kernel_type;
-	 *		int degree;	   // for poly
-	 *		double gamma;  // for poly/rbf/sigmoid
-	 *		double coef0;  // for poly/sigmoid
-	 *
-	 *		// these are for training only
-	 *		double cache_size;  // in MB
-	 *		double eps;			// stopping criteria
-	 *		double C;			// for C_SVC, EPSILON_SVR, and NU_SVR
-	 *		int nr_weight;		// for C_SVC
-	 *		int *weight_label;	// for C_SVC
-	 *		double* weight;		// for C_SVC
-	 *		double nu;			// for NU_SVC, ONE_CLASS, and NU_SVR
-	 *		double p;			// for EPSILON_SVR
-	 *		int shrinking;		// use the shrinking heuristics
-	 *		int probability; 	// do probability estimates
-	 *		};
-	 *
-	 * Die gesetzten Eigenschaften wurden aus svm-train.c übernommen, die aus-
-	 * drücklich zur Nachahmung empfohlen wurde.
-	 */
-	svm_parameter	fParam;
-
-	fParam.svm_type 	= C_SVC;
-	fParam.kernel_type  = RBF;
-	fParam.degree 		= 3;
-	fParam.gamma 		= 0;
-	fParam.coef0 		= 0;
-
-	fParam.cache_size 	= 500; //default ist 100
-	fParam.eps 		    = 1e-3;
-	fParam.C 		    = 1;
-	fParam.nr_weight    = 0;
-	fParam.weight_label = NULL;
-	fParam.weight 	    = NULL;
-	fParam.nu 		    = 0.5;
-	fParam.p 		    = 0.1;
-	fParam.shrinking    = 1;
-	fParam.probability  = 0;
-
-	//--- Crossvalidation
-	int fold = 2;
-
-	int total_correct = 0;
-	double total_error = 0;
-	double sumv = 0, sumy = 0, sumvv = 0, sumyy = 0, sumvy = 0;
-	double *target = Malloc(double, fProblem.l);
-
-	svm_cross_validation(&fProblem, &fParam, fold, target);
-	for(int i = 0; i < fProblem.l; i++) //SVM-Type !=  EPSILON_SVR || NU_SVR
-		{
-		if(target[i] == fProblem.y[i])
-			++total_correct;
-		}
-	double Accuracy = 100.0 * total_correct / fProblem.l;
-	free(target);
-
-	Application->MessageBox(ftools.fmt("Result Crossvalidation: %.2f Accuracy", Accuracy).c_str(), "Crossvalidation", MB_OK);
-	}
-//---------------------------------------------------------------------------
-bool TfmChoi2::outProblem(svm_problem& problem, String file)
-	{
-	//das problem in die übergebene Datei schreiben
-	if (file == "") return false;
-	FILE* fp = fopen(file.c_str(), "w");
-	if (fp == NULL) return false;
-
-	int max = problem.l;
-	fprintf(fp, "l = %d\n\n", max);
-
-	String line = "";
-	int label;
-	for (int i = 0; i < max; i++)
-		{
-		label = problem.y[i];
-		fprintf(fp, "\t%d\n", label);
-		//line = line + String(label) + " ";
-		}
-	//fprintf(fp, "y -> %s\n\n", line.c_str());
-	fprintf(fp, "\n");
-
-	int idx; double wert;
-	for (int i = 0; i < max; i++)
-		{
-		line = ftools.fmt("x -> [%d] -> ", i);
-		svm_node* node = problem.x[i];
-		for (int j = 0; j < 9; j++)
-			{
-			idx  = node[j].index;
-			wert = node[j].value;
-			//line = line + ftools.fmt("(%d,%.4f) ", idx, wert);
-			fprintf(fp, "(%d,%.4f) ", idx, wert);
-			}
-		fprintf(fp, "\n");
-		//fprintf(fp, "%s\n", line.c_str());
+		fprintf(fp, "%d 1:%d 2:%d 3:%d 4:%.8f 5:%.8f 6:%.8f 7:%.8f 8:%.8f\n",
+			(int)v[0], (int)v[1], (int)v[2], (int)v[3],
+			v[4], v[5], v[6], v[7], v[8]);
 		}
 
 	fclose(fp);
 	return true;
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   Actions   ********************************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::acCloseExecute(TObject *Sender)
+	{
+	Close();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::acResetExecute(TObject *Sender)
+	{
+	if (Application->MessageBox(
+		"Bist Du sicher, dass Du alle Daten zurücksetzen möchtest?",
+		"Daten zurücksetzen",
+		MB_YESNO) == IDNO) return;
+
+	lvData1->Items->Clear();
+	lvData2->Items->Clear();
+	SetValues();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::acAddAnnaExecute(TObject *Sender)
+	{
+	if (!OpenDialog->Execute()) return;
+	Count1Anna++;
+	AddFile(lvData1, OpenDialog->FileName, Count1Anna, 0);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::acAddManniExecute(TObject *Sender)
+	{
+	if (!OpenDialog->Execute()) return;
+	Count1Manni++;
+	AddFile(lvData1, OpenDialog->FileName, Count1Manni, 1);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::acAddManuExecute(TObject *Sender)
+	{
+	if (!OpenDialog->Execute()) return;
+	Count1Manu++;
+	AddFile(lvData1, OpenDialog->FileName, Count1Manu, 2);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::acAddMartinExecute(TObject *Sender)
+	{
+	if (!OpenDialog->Execute()) return;
+	Count1Martin++;
+	AddFile(lvData1, OpenDialog->FileName, Count1Martin, 3);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::Button6Click(TObject *Sender)
+	{
+	if (!OpenDialog->Execute()) return;
+	Count2Anna++;
+	AddFile(lvData2, OpenDialog->FileName, Count2Anna, 0);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::Button7Click(TObject *Sender)
+	{
+	if (!OpenDialog->Execute()) return;
+	Count2Manni++;
+	AddFile(lvData2, OpenDialog->FileName, Count2Manni, 1);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::Button8Click(TObject *Sender)
+	{
+	if (!OpenDialog->Execute()) return;
+	Count2Manu++;
+	AddFile(lvData2, OpenDialog->FileName, Count2Manu, 2);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::Button9Click(TObject *Sender)
+	{
+	if (!OpenDialog->Execute()) return;
+	Count2Martin++;
+	AddFile(lvData2, OpenDialog->FileName, Count2Martin, 3);
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/**************   Meldungen vom Formular   *********************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::FormKeyPress(TObject *Sender, char &Key)
+	{
+	if (Key == VK_ESCAPE)
+		{
+		Key = 0;
+		acCloseExecute(Sender);
+		}
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmChoi2::btExeFilesClick(TObject *Sender)
@@ -716,38 +420,29 @@ void __fastcall TfmChoi2::btExeFilesClick(TObject *Sender)
 		}
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmChoi2::Button4Click(TObject *Sender)
+void __fastcall TfmChoi2::btCreateFilesClick(TObject *Sender)
 	{
-	String path = ftools.GetPath();
-
-	String svm_predict = path + "\\libSVM\\svm-predict.exe";
-	String a1a_test    = path + "\\libSVM\\a1a.test";
-	String a1a_model   = path + "\\libSVM\\a1a.train.model";
-	String a1a_out     = path + "\\libSVM\\a1a.out";
-
-	if (!FileExists(svm_predict) ||
-		!FileExists(a1a_test)	 ||
-		!FileExists(a1a_model))
+	if (!WriteFile(true, "d:\\anna.train"))
 		{
-		; //todo Fehlermeldung
+		Application->MessageBox("Train: Fehler aufgetreten", "Fehler", MB_OK);
 		return;
 		}
 
-	//svm-predict.exe a1a.test a1a.train.model a1a.out
-	String params = ftools.fmt("%s %s %s", a1a_test, a1a_model, a1a_out);
-	ShellExecute(
-		this,    			//hwnd
-		"open",     		//Operation
-		svm_predict.c_str(),//File
-		params.c_str(),		//Parameters
-		path.c_str(),		//Directory
-		SW_SHOW);   		//Show-Command
-
-	if (!FileExists(a1a_out))
+	if (!WriteFile(false, "d:\\anna.test"))
 		{
-		; //todo Fehlermeldung
+		Application->MessageBox("Test: Fehler aufgetreten", "Fehler", MB_OK);
 		return;
 		}
+
+	Application->MessageBox("Dateien erzeugt", "ok", MB_OK);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::btCompareFilesClick(TObject *Sender)
+	{
+	String testfile = "d:\\anna.test";
+	String outfile  = "d:\\anna.out";
+
+	CompareResult(testfile, outfile);
 	}
 //---------------------------------------------------------------------------
 

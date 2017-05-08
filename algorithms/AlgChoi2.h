@@ -27,23 +27,24 @@ private:
 	cChoiFeat	fChoiFeat;
 	cChoiSVM	fChoiSVM;
 
-	int			CountAnna;
-	int			CountManni;
-	int			CountManu;
-	int			CountMartin;
+	int			Count1Anna;
+	int			Count1Manni;
+	int			Count1Manu;
+	int			Count1Martin;
+
+	int			Count2Anna;
+	int			Count2Manni;
+	int			Count2Manu;
+	int			Count2Martin;
 
 	void 		Print(char* msg, ...);
 	void		SetValues();
 	String		GetFile(String dat);
-	void		AddFile(String file, int count, int id);
+	void		AddFile(TListView* lv, String file, int count, int id);
 
-	bool 		CheckEcg();
-	void 		DoSvm();
-	bool		BuildTrainingData();
-	bool		BuildProblem();
+	bool 		WriteFile(bool train, String filename);
+	bool 		CompareResult(String testfile, String outfile);
 
-	void		Test();
-	bool 		outProblem(svm_problem& problem, String file);
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -51,13 +52,9 @@ __published:	// IDE-verwaltete Komponenten
 	TBevel *Bevel4;
 	TPanel *Panel1;
 	TButton *Button1;
-	TBevel *Bevel2;
 	TTimer *tStartup;
 	TOpenDialog *OpenDialog;
-	TPanel *Panel3;
-	TPanel *pnClassification;
 	TBevel *Bevel5;
-	TListView *lvData;
 	TButton *btReset;
 	TActionList *ActionList1;
 	TAction *acAddAnna;
@@ -71,27 +68,35 @@ __published:	// IDE-verwaltete Komponenten
 	TAction *acDelMartin;
 	TAction *acClose;
 	TAction *acReset;
+	TAction *acCheckEcgs;
+	TMemo *memo;
+	TAction *acDoEcgs;
+	TButton *btCreateFiles;
+	TButton *btCompareFiles;
+	TPanel *Panel6;
+	TPanel *pnClassification;
 	TPanel *Panel2;
 	TLabel *Label1;
 	TButton *btAddAnna;
 	TButton *btAddManni;
 	TButton *btAddManu;
 	TButton *btAddMartin;
+	TListView *lvData1;
+	TPanel *Panel4;
+	TPanel *Panel5;
+	TLabel *Label4;
+	TButton *Button6;
+	TButton *Button7;
+	TButton *Button8;
+	TButton *Button9;
+	TListView *lvData2;
+	TBevel *Bevel1;
+	TButton *Button2;
 	TComboBox *cbDelim;
 	TLabel *Label3;
-	TComboBox *cbFormat;
 	TLabel *Label2;
-	TButton *Button2;
-	TAction *acCheckEcgs;
-	TMemo *memo;
-	TAction *acDoEcgs;
-	TButton *Button3;
-	TCheckBox *cxCrossvalidation;
-	TLabel *laFold;
-	TEdit *edFold;
-	TButton *btAlt;
+	TComboBox *cbFormat;
 	TButton *btExeFiles;
-	TButton *Button4;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -102,11 +107,13 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acAddMartinExecute(TObject *Sender);
 	void __fastcall acCloseExecute(TObject *Sender);
 	void __fastcall acResetExecute(TObject *Sender);
-	void __fastcall acCheckEcgsExecute(TObject *Sender);
-	void __fastcall acDoEcgsExecute(TObject *Sender);
-	void __fastcall btAltClick(TObject *Sender);
 	void __fastcall btExeFilesClick(TObject *Sender);
-	void __fastcall Button4Click(TObject *Sender);
+	void __fastcall btCreateFilesClick(TObject *Sender);
+	void __fastcall Button6Click(TObject *Sender);
+	void __fastcall Button7Click(TObject *Sender);
+	void __fastcall Button8Click(TObject *Sender);
+	void __fastcall Button9Click(TObject *Sender);
+	void __fastcall btCompareFilesClick(TObject *Sender);
 	
 public:
 	__fastcall TfmChoi2(TComponent* Owner);

@@ -170,31 +170,30 @@ void cTools::ListViewLoad(TForm* fm, TListView* lv)
 	{
 	if (lv == NULL) return;
 	TIniFile* Ini = new TIniFile(GetIniFile());
-	if (!Ini->SectionExists("FormListViews." + fm->Name))
+	String sec = "FormListView." + fm->Name + "." + lv->Name;
+	if (!Ini->SectionExists(sec))
 		{
 		delete Ini;
 		return;
 		}
 
-	String basekey = lv->Name + ".";
 	String rowkey; String key;
-
 	TListItem* item;
 	int row = 0;
 	while (row < 9999)
 		{
-		rowkey = basekey + String(row) + ".";
-		if (!Ini->ValueExists("FormListViews." + fm->Name, rowkey + "caption"))
+		rowkey = String(row) + ".";
+		if (!Ini->ValueExists(sec, rowkey + "caption"))
 			break;
 
 		item = lv->Items->Add();
-		item->Data    = (void*)Ini->ReadInteger("FormListViews." + fm->Name, rowkey + "data", 0);
-		item->Caption = Ini->ReadString("FormListViews." + fm->Name, rowkey + "caption", "");
+		item->Data    = (void*)Ini->ReadInteger(sec, rowkey + "data", 0);
+		item->Caption = Ini->ReadString(sec, rowkey + "caption", "");
 
 		for (int col = 0; col < (lv->Columns->Count-1); col++)
 			{
 			key = rowkey + "col" + String(col);
-			item->SubItems->Add(Ini->ReadString("FormListViews." + fm->Name, key, ""));
+			item->SubItems->Add(Ini->ReadString(sec, key, ""));
 			}
 
 		row++;
@@ -209,22 +208,22 @@ void cTools::ListViewSave(TForm* fm, TListView* lv)
 	if (lv == NULL) return;
 	TIniFile* Ini = new TIniFile(GetIniFile());
 
-	Ini->EraseSection("FormListViews." + fm->Name);
+	String sec = "FormListView." + fm->Name + "." + lv->Name;
+	Ini->EraseSection(sec);
 
-	String basekey = lv->Name + ".";
 	String rowkey; String key;
 	for (int row = 0; row < lv->Items->Count; row++)
 		{
 		TListItem* item = lv->Items->Item[row];
-		rowkey = basekey + String(row) + ".";
+		rowkey = String(row) + ".";
 
-		Ini->WriteInteger("FormListViews." + fm->Name, rowkey + "data",    (int)item->Data);
-		Ini->WriteString("FormListViews." + fm->Name, rowkey + "caption", item->Caption);
+		Ini->WriteInteger(sec, rowkey + "data",    (int)item->Data);
+		Ini->WriteString(sec, rowkey + "caption", item->Caption);
 
 		for (int col = 0; col < (lv->Columns->Count-1); col++)
 			{
 			key = rowkey + "col" + String(col);
-			Ini->WriteString("FormListViews." + fm->Name, key, item->SubItems->Strings[col]);
+			Ini->WriteString(sec, key, item->SubItems->Strings[col]);
 			}
 		}
 
