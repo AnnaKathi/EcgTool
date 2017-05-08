@@ -178,7 +178,7 @@ object fmChoi2: TfmChoi2
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 543
+      Left = 416
       Top = 10
       Width = 146
       Height = 25
@@ -201,13 +201,22 @@ object fmChoi2: TfmChoi2
       TabOrder = 5
     end
     object btAlt: TButton
-      Left = 344
+      Left = 217
       Top = 10
       Width = 179
       Height = 25
       Caption = 'EKGs einlesen ALT'
       TabOrder = 6
       OnClick = btAltClick
+    end
+    object btExeFiles: TButton
+      Left = 568
+      Top = 10
+      Width = 153
+      Height = 25
+      Caption = 'Use EXE-Files'
+      TabOrder = 7
+      OnClick = btExeFilesClick
     end
   end
   object pnClassification: TPanel

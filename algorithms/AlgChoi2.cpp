@@ -612,7 +612,7 @@ void TfmChoi2::Test()
 	fParam.gamma 		= 0;
 	fParam.coef0 		= 0;
 
-	fParam.cache_size 	= 100;
+	fParam.cache_size 	= 500; //default ist 100
 	fParam.eps 		    = 1e-3;
 	fParam.C 		    = 1;
 	fParam.nr_weight    = 0;
@@ -682,6 +682,40 @@ bool TfmChoi2::outProblem(svm_problem& problem, String file)
 
 	fclose(fp);
 	return true;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmChoi2::btExeFilesClick(TObject *Sender)
+	{
+	//EXE-Dateien mit a1a-Daten aufrufen
+
+	String path = ftools.GetPath();
+
+	String svm_train   = path + "\\libSVM\\svm-train.exe";
+	String svm_predict = path + "\\libSVM\\svm-predict.exe";
+	String a1a_train   = path + "\\libSVM\\a1a.train";
+	String a1a_test    = path + "\\libSVM\\a1a.test";
+
+	String a1a_model   = path + "\\libSVM\\a1a.train.model";
+	String a1a_out     = path + "\\libSVM\\a1a.out";
+
+	if (!FileExists(svm_train) || !FileExists(svm_predict) ||
+		!FileExists(a1a_train) || !FileExists(a1a_test))
+		{
+		; //todo Fehlermeldung
+		return;
+		}
+
+	//svm-train.exe a1a.train
+	ShellExecute(
+		this,    			//hwnd
+		"open",     		//Operation
+		svm_train.c_str(),	//File
+		a1a_train.c_str(),	//Parameters
+		path.c_str(),		//Directory
+		SW_SHOW);   		//Show-Command
+
+
+
 	}
 //---------------------------------------------------------------------------
 
