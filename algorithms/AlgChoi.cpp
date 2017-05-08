@@ -301,6 +301,8 @@ void TfmChoi::DoSvm()
 		Print("%s", line.c_str());
 		}
 
+fChoiSVM.outProblem("d:\\problem_alt.txt");
+
 	Print("\n------- Parameter ------------------------------------------");
 	if (!fChoiSVM.doParameter(problem))
 		{

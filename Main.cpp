@@ -3,6 +3,7 @@
 #pragma hdrstop
 
 #include "algorithms/AlgChoi.h"
+#include "algorithms/AlgChoi2.h"
 #include "algorithms/EinzelAusw.h"
 #include "database/classMySql.h"
 #include "database/DbPersonen.h"
@@ -194,7 +195,8 @@ void __fastcall TfmMain::acLookIntoDataExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acChoi2016Execute(TObject *Sender)
 	{
-	DlgAlgChoi(this);
+	//DlgAlgChoi(this);
+	DlgAlgChoi2(this);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -209,6 +211,16 @@ void __fastcall TfmMain::FormKeyPress(TObject *Sender, char &Key)
 void __fastcall TfmMain::btMySqlTestClick(TObject *Sender)
 	{
 	DlgTestform(this);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::BitBtn7Click(TObject *Sender)
+	{
+	DlgAlgChoi(this);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::BitBtn8Click(TObject *Sender)
+	{
+	DlgAlgChoi2(this);
 	}
 //---------------------------------------------------------------------------
 

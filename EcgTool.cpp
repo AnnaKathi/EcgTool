@@ -18,6 +18,7 @@ USEFORM("database\toolforms\addDesc.cpp", fmDescAdd);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\Alg1.cpp", fmAlg1);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
+USEFORM("algorithms\AlgChoi2.cpp", fmChoi2);
 //---------------------------------------------------------------------------
 #include "database/classMySql.h"
 cMySql fmysql;
@@ -36,6 +37,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TfmChoi), &fmChoi);
 		Application->CreateForm(__classid(TfmTest), &fmTest);
 		Application->CreateForm(__classid(TfmBaseDesc), &fmBaseDesc);
+		Application->CreateForm(__classid(TfmChoi2), &fmChoi2);
 		Application->Run();
 	}
 	catch (Exception &exception)

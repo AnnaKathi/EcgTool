@@ -158,5 +158,8 @@
     <Transaction>2017.05.05 15:43:23.593.h,D:\src\EcgTool\database\toolforms\addDiseases.h=D:\src\EcgTool\database\toolforms\addDesc.h</Transaction>
     <Transaction>2017.05.05 15:43:23.593.dfm,D:\src\EcgTool\database\toolforms\addDiseases.dfm=D:\src\EcgTool\database\toolforms\addDesc.dfm</Transaction>
     <Transaction>2017.05.06 12:19:19.574.sql,D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data.sql=D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_basic.sql</Transaction>
+    <Transaction>2017.05.07 10:15:01.940.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\AlgChoi2.cpp</Transaction>
+    <Transaction>2017.05.07 10:15:01.940.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\AlgChoi2.h</Transaction>
+    <Transaction>2017.05.07 10:15:01.940.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\algorithms\AlgChoi2.dfm</Transaction>
   </Transactions>
 </BorlandProject>

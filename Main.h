@@ -54,6 +54,7 @@ __published:	// IDE-verwaltete Komponenten
 	TBitBtn *BitBtn7;
 	TAction *acChoi2016;
 	TButton *btMySqlTest;
+	TBitBtn *BitBtn8;
 	void __fastcall acLookIntoECGExecute(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -68,6 +69,8 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acLookIntoDataExecute(TObject *Sender);
 	void __fastcall acChoi2016Execute(TObject *Sender);
 	void __fastcall btMySqlTestClick(TObject *Sender);
+	void __fastcall BitBtn7Click(TObject *Sender);
+	void __fastcall BitBtn8Click(TObject *Sender);
 
 public:
 	__fastcall TfmMain(TComponent* Owner);

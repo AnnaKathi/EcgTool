@@ -4,6 +4,7 @@
 //---------------------------------------------------------------------------
 #include <Forms.hpp>
 #include <StdCtrls.hpp>
+#include <ComCtrls.hpp>
 #include <IniFiles.hpp>
 //---------------------------------------------------------------------------
 #include "..\definitions.h"
@@ -88,6 +89,9 @@ public:
 		 *  \param (TForm) Formular das gespeichert werden soll
 		 */
 		void 		FormSave(TForm* fm);
+
+		void		ListViewLoad(TForm* fm, TListView* lv);
+		void		ListViewSave(TForm* fm, TListView* lv);
 
 	//-------------------------------------------------------------------------
 	//--- Sonstige Funktionen -------------------------------------------------

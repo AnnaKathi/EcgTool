@@ -49,6 +49,12 @@ bool cChoiSVM::startSvm(cEcg& ecg)
 	return ok();
 	}
 //---------------------------------------------------------------------------
+bool cChoiSVM::startSvm()
+	{
+	bStarted = true;
+	return ok();
+	}
+//---------------------------------------------------------------------------
 bool cChoiSVM::doTrainingData(int label)
 	{
 	if (!bStarted) return fail(2, "SVM ist nicht initialisiert");
@@ -68,7 +74,7 @@ bool cChoiSVM::doTrainingData(int label)
 
 	fArray_Train_Data.clear();
 
-	//todo: Das Label des EKG soll nciht übergeben werden, sondern im EKG enthalten sein
+	//todo: Das Label des EKG soll nicht übergeben werden, sondern im EKG enthalten sein
 	if (label <= 0)
 		return fail(1, "Es wurde kein EKG-Label übergeben");
 
@@ -108,6 +114,77 @@ bool cChoiSVM::doTrainingData(int label)
 		return fail(2, ftools.fmt("SingleFeat meldet: %d, %s", fChoiFeat.error_code, fChoiFeat.error_msg));
 	else if (fArray_Train_Data.size() <= 0)
     	return fail(2, "Es konnten keine Trainingsdaten gebildet werden");
+	else
+		return ok();
+	}
+//---------------------------------------------------------------------------
+bool cChoiSVM::clearTrainingData()
+	{
+	if (!bStarted) return fail(2, "SVM ist nicht initialisiert");
+
+	fArray_Train_Data.clear();
+	return ok();
+	}
+//---------------------------------------------------------------------------
+bool cChoiSVM::addTrainingData(cEcg& singleEcg, int label)
+	{
+	if (!bStarted) return fail(2, "SVM ist nicht initialisiert");
+
+	/* aus dem ECG-Stream ein Array der folgenden Form erstellen:
+	 *    LABEL    ATTR1    ATTR2    ATTR3    ATTR4    ATTR5
+	 *    -----    -----    -----    -----    -----    -----
+	 *      1        0        0.1      0.2      0        0
+	 *      2        0        0.1      0.3     -1.2      0
+	 *      1        0.4      0        0        0        0
+	 *      2        0        0.1      0        1.4      0.5
+	 *      3       -0.1     -0.2      0.1      1.1      0.1
+	 *
+	 * dabei wird für jeweils einen Herzschlag im EKG-Strom eine Zeile im
+	 * Trainingsarray erzeugt mit den fiducial points nach Choi
+	 */
+
+	//todo: Das Label des EKG soll nicht übergeben werden, sondern im EKG enthalten sein
+	fecg = &singleEcg;
+	
+	if (label < 0)
+		return fail(1, "Es wurde kein EKG-Label übergeben");
+
+	iarray_t ecg = fecg->data.data_array;
+	cRpeaks& r   = fecg->rpeaks;
+	r.find(ecg, NULL);
+	r.reset();
+
+	int prev_zeit, curr_zeit, next_zeit;
+	int count = fArray_Train_Data.size();
+	bool fehler = false;
+	while ((curr_zeit = r.next()) != -1)
+		{
+		if ((prev_zeit = r.prev_rpeak()) == -1) continue;
+		if ((next_zeit = r.next_rpeak()) == -1) continue;
+
+		if (!fChoiFeat.getSingleFeatures(ecg, prev_zeit, curr_zeit, next_zeit))
+			{
+			fehler = true;
+			break;
+			}
+
+		iarray_t features = fChoiFeat.SingleFeatures;
+		fArray_Train_Data[count].push_back(label);
+		fArray_Train_Data[count].push_back(features[0][0]);
+		fArray_Train_Data[count].push_back(features[1][0]);
+		fArray_Train_Data[count].push_back(features[2][0]);
+		fArray_Train_Data[count].push_back(features[3][0]);
+		fArray_Train_Data[count].push_back(features[4][0]);
+		fArray_Train_Data[count].push_back(features[5][0]);
+		fArray_Train_Data[count].push_back(features[6][0]);
+		fArray_Train_Data[count].push_back(features[7][0]);
+		count++;
+		}
+
+	if (fehler)
+		return fail(2, ftools.fmt("SingleFeat meldet: %d, %s", fChoiFeat.error_code, fChoiFeat.error_msg));
+	else if (fArray_Train_Data.size() <= 0)
+		return fail(2, "Es konnten keine Trainingsdaten hinzugefügt werden");
 	else
 		return ok();
 	}
@@ -189,6 +266,47 @@ bool cChoiSVM::doProblem(iarray_t training)
 		}
 
 	return ok();
+	}
+//---------------------------------------------------------------------------
+bool cChoiSVM::outProblem(String file)
+	{
+	//das problem in die übergebene Datei schreiben
+	if (file == "") return false;
+	FILE* fp = fopen(file.c_str(), "w");
+	if (fp == NULL) return false;
+
+	int max = problem.l;
+	fprintf(fp, "l = %d\n\n", max);
+
+	String line = "";
+	int label;
+	for (int i = 0; i < max; i++)
+		{
+		label = problem.y[i];
+		fprintf(fp, "\t%d\n", label);
+		//line = line + String(label) + " ";
+		}
+	//fprintf(fp, "y -> %s\n\n", line.c_str());
+	fprintf(fp, "\n");
+
+	int idx; double wert;
+	for (int i = 0; i < max; i++)
+		{
+		line = ftools.fmt("x -> [%d] -> ", i);
+		svm_node* node = problem.x[i];
+		for (int j = 0; j < 9; j++)
+			{
+			idx  = node[j].index;
+			wert = node[j].value;
+			//line = line + ftools.fmt("(%d,%.4f) ", idx, wert);
+			fprintf(fp, "(%d,%.4f) ", idx, wert);
+			}
+		fprintf(fp, "\n");
+		//fprintf(fp, "%s\n", line.c_str());
+		}
+
+	fclose(fp);
+	return true;
 	}
 //---------------------------------------------------------------------------
 void cChoiSVM::setParameterDefault()

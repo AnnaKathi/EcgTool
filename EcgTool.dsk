@@ -1,29 +1,41 @@
 [Closed Files]
-File_0=TSourceModule,'D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_sessions.sql',0,1,4,98,46,0,0,,
-File_1=TSourceModule,'D:\src\EcgTool\Main.cpp',0,1,53,87,76,0,0,,
-File_2=TSourceModule,'D:\src\EcgTool\algorithms\AlgChoi.cpp',0,1,204,15,236,0,0,,{1
-File_3=TSourceModule,'D:\src\EcgTool\database\classMySql_Work.cpp',0,1,168,21,174,0,0,,
-File_4=TSourceModule,'D:\src\EcgTool\database\classMySql_People.cpp',0,1,96,23,118,0,0,,
-File_5=TSourceModule,'D:\src\EcgTool\database\classMySql.cpp',0,1,138,1,161,0,0,,
-File_6=TSourceModule,'D:\src\EcgTool\Testform.cpp',0,1,35,20,61,0,0,,{1
+File_0=TSourceModule,'D:\src\EcgTool\basics\classTools.cpp',0,1,160,1,212,0,0,,
+File_1=TSourceModule,'d:\dev\rad\include\dinkumware\xmemory',0,1,109,61,117,0,0,,
+File_2=TSourceModule,'d:\dev\rad\include\dinkumware\xtree',0,1,422,1,452,0,0,,
+File_3=TSourceModule,'d:\dev\rad\include\vcl\dstring.h',0,1,48,1,68,0,0,,
+File_4=TSourceModule,'D:\src\EcgTool\database\classMySql_EcgData.cpp',0,1,34,1,58,0,0,,{1
+File_5=TSourceModule,'D:\src\EcgTool\database\baseforms\baseEcgData.cpp',0,1,184,67,199,0,0,,
+File_6=TSourceModule,'D:\src\EcgTool\definitions.h',0,1,1,9,9,0,0,,
+File_7=TSourceModule,'D:\src\EcgTool\database\classMySql_Ecg.cpp',0,1,39,1,72,0,0,,{1
+File_8=TSourceModule,'D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_sessions.sql',0,1,4,98,46,0,0,,
 
 [Modules]
-Module0=D:\src\EcgTool\database\classMySql_EcgData.cpp
-Module1=D:\src\EcgTool\EcgView.cpp
-Module2=default.htm
-Module3=D:\src\EcgTool\database\classMySql_Ecg.cpp
-Module4=D:\src\EcgTool\database\baseforms\baseEcgData.cpp
-Module5=D:\src\EcgTool\basics\classTools.cpp
-Module6=D:\src\EcgTool\definitions.h
+Module0=D:\src\EcgTool\inc\libsvm\svm.cpp
+Module1=D:\src\EcgTool\algorithms\AlgChoi2.cpp
+Module2=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp
+Module3=D:\src\EcgTool\algorithms\AlgChoi.cpp
+Module4=default.htm
+Module5=D:\src\EcgTool\EcgView.cpp
+Module6=D:\src\EcgTool\Main.cpp
 Count=7
 EditWindowCount=1
 
-[D:\src\EcgTool\database\classMySql_EcgData.cpp]
+[D:\src\EcgTool\inc\libsvm\svm.cpp]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[D:\src\EcgTool\EcgView.cpp]
+[D:\src\EcgTool\algorithms\AlgChoi2.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\algorithms\AlgChoi.cpp]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
@@ -31,29 +43,19 @@ FormOnTop=0
 [default.htm]
 ModuleType=TURLModule
 
-[D:\src\EcgTool\database\classMySql_Ecg.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\src\EcgTool\database\baseforms\baseEcgData.cpp]
+[D:\src\EcgTool\EcgView.cpp]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[D:\src\EcgTool\basics\classTools.cpp]
+[D:\src\EcgTool\Main.cpp]
 ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\src\EcgTool\definitions.h]
-ModuleType=TSourceModule
-FormState=0
+FormState=1
 FormOnTop=0
 
 [EditWindow0]
 ViewCount=7
-CurrentEditView=D:\src\EcgTool\database\classMySql_EcgData.cpp
+CurrentEditView=D:\src\EcgTool\inc\libsvm\svm.cpp
 View0=0
 View1=1
 View2=2
@@ -97,75 +99,76 @@ WelcomePageURL=bds:/default.htm
 
 [View1]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\database\classMySql_EcgData.cpp
-CursorX=32
-CursorY=47
-TopLine=34
+Module=D:\src\EcgTool\algorithms\AlgChoi.cpp
+CursorX=65
+CursorY=302
+TopLine=293
 LeftCol=1
 Elisions=
-Bookmarks={1,107,1}{2,164,17}
-EditViewName=D:\src\EcgTool\database\classMySql_EcgData.cpp
+Bookmarks=
+EditViewName=D:\src\EcgTool\algorithms\AlgChoi.cpp
 
 [View2]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\database\baseforms\baseEcgData.cpp
-CursorX=67
-CursorY=199
-TopLine=184
+Module=D:\src\EcgTool\Main.cpp
+CursorX=23
+CursorY=223
+TopLine=200
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=D:\src\EcgTool\database\baseforms\baseEcgData.cpp
+EditViewName=D:\src\EcgTool\Main.cpp
 
 [View3]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\definitions.h
-CursorX=9
-CursorY=9
+Module=D:\src\EcgTool\algorithms\AlgChoi2.cpp
+CursorX=1
+CursorY=1
 TopLine=1
 LeftCol=1
 Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\definitions.h
+Bookmarks={1,644,1}{2,287,1}{9,687,1}
+EditViewName=D:\src\EcgTool\algorithms\AlgChoi2.cpp
 
 [View4]
 CustomEditViewType=TEditView
+Module=D:\src\EcgTool\inc\libsvm\svm.cpp
+CursorX=1
+CursorY=2106
+TopLine=2086
+LeftCol=1
+Elisions=
+Bookmarks={1,2115,42}
+EditViewName=D:\src\EcgTool\inc\libsvm\svm.cpp
+
+[View5]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp
+CursorX=67
+CursorY=430
+TopLine=444
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\algorithms\classifications\classChoiSVM.h
+
+[View6]
+CustomEditViewType=TEditView
 Module=D:\src\EcgTool\EcgView.cpp
-CursorX=20
-CursorY=540
-TopLine=512
+CursorX=62
+CursorY=121
+TopLine=89
 LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=D:\src\EcgTool\EcgView.cpp
 
-[View5]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\basics\classTools.cpp
-CursorX=6
-CursorY=27
-TopLine=10
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\basics\classTools.cpp
-
-[View6]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\database\classMySql_Ecg.cpp
-CursorX=1
-CursorY=72
-TopLine=39
-LeftCol=1
-Elisions=
-Bookmarks={1,52,1}
-EditViewName=D:\src\EcgTool\database\classMySql_Ecg.cpp
-
 [Watches]
-Count=0
+Count=1
+Watch0='testanna',256,0,18,1,0,'Überwachte Ausdrücke'
 
 [WatchWindow]
-WatchColumnWidth=64
+WatchColumnWidth=114
 WatchShowColumnHeaders=1
 PercentageSizes=1
 Create=1
@@ -186,9 +189,10 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=2
+Count=3
 Breakpoint0='D:\src\EcgTool\database\classMySql_EcgData.cpp',152,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint1='D:\src\EcgTool\database\classMySql_EcgData.cpp',58,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint1='D:\src\EcgTool\algorithms\AlgChoi.cpp',320,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint2='D:\src\EcgTool\inc\libsvm\svm.cpp',2106,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
@@ -222,11 +226,11 @@ State=0
 Left=0
 Top=0
 Width=2104
-Height=7019
+Height=8798
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2104
-ClientHeight=7019
+ClientHeight=8798
 TBDockHeight=5904
 LRDockWidth=2349
 Dockable=1
@@ -241,11 +245,11 @@ State=0
 Left=0
 Top=0
 Width=2104
-Height=8798
+Height=6779
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2104
-ClientHeight=8798
+ClientHeight=6779
 TBDockHeight=7144
 LRDockWidth=2000
 Dockable=1
@@ -716,7 +720,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
@@ -763,6 +767,6 @@ LRDockWidth=2104
 Dockable=1
 StayOnTop=0
 TabPosition=0
-ActiveTabID=ToolForm
+ActiveTabID=ProjectManager
 TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
 

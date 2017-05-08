@@ -18,10 +18,15 @@ public:
 	~cChoiSVM();
 
 	bool		startSvm(cEcg& ecg);
+	bool		startSvm(); //für addTrainingData
 	bool		doTrainingData(int label); //setzt fArray_Train_Data
+
+	bool		clearTrainingData();
+	bool		addTrainingData(cEcg& singleEcg, int label);
 
 	svm_node* 	x_space;
 	bool		doProblem(iarray_t training);
+	bool		outProblem(String file);
 
 	void		setParameterDefault();
 	bool		doParameter(svm_problem problem);
