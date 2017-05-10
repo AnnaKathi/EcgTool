@@ -11,8 +11,8 @@ cMySql::cMySql()
 	{
 	fwork     = new cMySqlWork();
 	fecg      = new cMySqlEcgData(*fwork);
-	fecgneu	  = new cMySqlEcg(*fwork);
 	fpeople   = new cMySqlPeople(*fwork);
+	fsessions = new cMySqlSession(*fwork);
 
 	fdiseases    = new cMySqlDescDb(*fwork, "diseases");
 	forte        = new cMySqlDescDb(*fwork, "orte");
@@ -27,8 +27,8 @@ cMySql::~cMySql()
 	{
 	if (fwork)     delete fwork;
 	if (fecg)      delete fecg;
-	if (fecgneu)   delete fecgneu;
 	if (fpeople)   delete fpeople;
+	if (fsessions) delete fsessions;
 
 	if (fdiseases)    delete fdiseases; 		if (forte)	 delete forte;
 	if (fresearchers) delete fresearchers;		if (flagen)  delete flagen;
@@ -155,14 +155,14 @@ cMySqlEcgData& cMySql::get_ecg()
 	return *fecg;
 	}
 //---------------------------------------------------------------------------
-cMySqlEcg& cMySql::get_ecg_neu()
-	{
-	return *fecgneu;
-	}
-//---------------------------------------------------------------------------
 cMySqlPeople& cMySql::get_people()
 	{
 	return *fpeople;
+	}
+//---------------------------------------------------------------------------
+cMySqlSession& cMySql::get_sessions()
+	{
+	return *fsessions;
 	}
 //---------------------------------------------------------------------------
 //-- description databases --------------------------------------------------

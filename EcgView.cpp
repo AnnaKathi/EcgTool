@@ -510,10 +510,25 @@ void TfmEcg::Line(int x, TColor cl)
 		}
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmEcg::Button1Click(TObject *Sender)
+void __fastcall TfmEcg::btSave2Click(TObject *Sender)
 	{
-	//NEUE ECG WERTE ABSPEICHERN
+	btSave2->Enabled = false;
+
 	sEcgData data;
+	BuildData(data);
+	if (!fmysql.ecg.save(data))
+		{
+		Application->MessageBox(
+			ftools.fmt("Daten konnten nicht gespeichert werden. Die Datenbank meldet:\n\n%s", fmysql.ecg.error_msg).c_str(),
+			"FEHLER",
+			MB_OK);
+		}
+
+	btSave2->Enabled = true;
+	}
+//---------------------------------------------------------------------------
+void TfmEcg::BuildData(sEcgData& data)
+	{
 	data.session  = 1;
 	data.person   = 2;
 	data.position = 1;
@@ -531,14 +546,6 @@ void __fastcall TfmEcg::Button1Click(TObject *Sender)
 		ix++;
 
 		if (ix >= 3000) break;
-		}
-
-	if (!fmysql.ecg.save(data))
-		{
-		Application->MessageBox(
-			ftools.fmt("Daten konnten nicht gespeichert werden. Die Datenbank meldet:\n\n%s", fmysql.ecg.error_msg).c_str(),
-			"FEHLER",
-			MB_OK);
 		}
 	}
 //---------------------------------------------------------------------------

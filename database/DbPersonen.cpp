@@ -60,7 +60,7 @@ void __fastcall TfmData::tStartupTimer(TObject *Sender)
 	tStartup->Enabled = false;
 	ftools.FormLoad(this);
 
-	fmDiseases = CreateDescForm(this, pnDiseases, fmysql.diseases);
+	fmDiseases = CreateDescForm(this, pnDiseases, fmysql.diseases, eShow);
 	fmPeople   = CreatePeopleForm(this, pnPeople);
 	fmPeople->setCallback(*tCallback);
 

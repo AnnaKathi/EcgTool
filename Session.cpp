@@ -7,7 +7,8 @@
 
 #include "RequestBox.h"
 #include "database/classMySql.h"
-#include "database/toolforms/addPeople.h"
+#include "database/toolforms/selectDescDb.h"
+#include "database/toolforms/addEcg.h"
 #include "Session.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -53,7 +54,7 @@ void __fastcall TfmSession::tStartupTimer(TObject *Sender)
 	tStartup->Enabled = false;
 
 	edStamp->Text = getNow();
-	fmysql.people.listInCombo(cbPerson, 1);
+	fmysql.orte.listInCombo(cbOrte);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -64,6 +65,28 @@ String TfmSession::getNow()
 	{
 	TDateTime dt;
 	return dt.CurrentDateTime().DateTimeString();
+	}
+//---------------------------------------------------------------------------
+void TfmSession::GetEcgData()
+	{
+	int person; int state; int lage;
+	if (!fmAddEcg->GetEcgHeader(person, state, lage)) return;
+
+	int anz; int pos; String file;
+	TListItem* item;
+	while (fmAddEcg->GetNextEcgRow(anz, pos, file))
+		{
+		item = lvEcg->Items->Add();
+		item->Caption = String(lvEcg->Items->Count);
+		item->SubItems->Add(String(anz));
+		item->SubItems->Add(String(person));
+		item->SubItems->Add(String(state));
+		item->SubItems->Add(String(lage));
+		item->SubItems->Add(String(pos));
+		item->SubItems->Add(file);
+		}
+
+	fmAddEcg->Close();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -77,73 +100,82 @@ void __fastcall TfmSession::acCloseExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmSession::acReAddExecute(TObject *Sender)
 	{
-	//todo: richtig lösen, Researcher aus DB laden und anzeigen
-	//jetzt erstmal quick and dirty
-	String name = DlgRequest(this, "Name des Untersuchenden");
-	if (name != "")
+	//Reseracher laden
+	String idents = DlgSelectDesc(this, fmysql.researchers);
+	if (idents == "") return;
+
+	int pos; int id; String name; TListItem* item;
+	while ((pos = idents.Pos(";")) > 0)
 		{
-		TListItem* item = lvResearchers->Items->Add();
-		item->Caption = lvResearchers->Items->Count;
+		id = idents.SubString(0, pos-1).ToInt();
+		name = fmysql.researchers.getNameOf(id);
+		idents = idents.SubString(pos+1, 9999);
+
+		item = lvResearchers->Items->Add();
+		item->Data = (void*)id;
+		item->Caption = String(id);
+		item->SubItems->Add(name);
+		}
+
+	if (idents != "")
+		{
+		id = idents.ToInt();
+		name = fmysql.researchers.getNameOf(id);
+
+		item = lvResearchers->Items->Add();
+		item->Data = (void*)id;
+		item->Caption = String(id);
 		item->SubItems->Add(name);
 		}
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmSession::acReDelExecute(TObject *Sender)
 	{
+	//einen Researcher löschen
 	if (lvResearchers->SelCount <= 0) return;
 	TListItem* item = lvResearchers->Selected;
 	item->Delete();
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmSession::acEcgAddExecute(TObject *Sender)
+	{
+	fmAddEcg = new TfmAddEcg(this);
+
+	fmAddEcg->SetCallbackTimer(TimerCallback);
+	fmAddEcg->ShowModal();
+
+	delete fmAddEcg;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmSession::acEcgDelExecute(TObject *Sender)
+	{
+	if (lvResearchers->SelCount <= 0) return;
+	TListItem* item;
+	for (int i = lvEcg->Items->Count-1; i >= 0; i--)
+		{
+		item = lvEcg->Items->Item[i];
+		if (!item->Selected) continue;
+		item->Delete();
+		}
+	}
+//---------------------------------------------------------------------------
 void __fastcall TfmSession::acSaveExecute(TObject *Sender)
 	{
-	//EKG-Daten zur Person abspeichern
-	save(edL1); save(edL2); save(edL3);
-	save(edS1); save(edS2); save(edS3);
-	save(edT1); save(edT2); save(edT3);
-	save(edG1); save(edG2); save(edG3);
+	//todo: Daten speichern
+	sSession data;
+	data.ort = (int)cbOrte->Items->Objects[cbOrte->ItemIndex];
+	data.stamp = edStamp->Text;
+	data.kommentar = mKommentar->Text;
 
-	Close();
-	}
-//---------------------------------------------------------------------------
-bool TfmSession::save(TEdit* ed)
-	{
-	/*
-	if (ed->Text == "") return true;
-	if (!fdata.getFile(edL1->Hint, "\t", 0, 3000))
-		; //todo
-
-	fsql.mysql_data.array = fdata.data_array;
-	sprintf(fsql.mysql_data.name, "%.63s", cbPerson->Text);
-
-		 if (ed->Tag == 1) fsql.mysql_data.pos = posLiegend;
-	else if (ed->Tag == 2) fsql.mysql_data.pos = posSitzend;
-	else if (ed->Tag == 3) fsql.mysql_data.pos = posStehend;
-	else if (ed->Tag == 2) fsql.mysql_data.pos = posGehend;
-	else return false;
-
-	if (!fsql.saveToDbase())
-		; //todo
-
-	*/
-	return true;
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmSession::acResetExecute(TObject *Sender)
-	{
-	edL1->Text = ""; edL2->Text = ""; edL3->Text = "";
-	edS1->Text = ""; edS2->Text = ""; edS3->Text = "";
-	edT1->Text = ""; edT2->Text = ""; edT3->Text = "";
-	edG1->Text = ""; edG2->Text = ""; edG3->Text = "";
-
-	cbPerson->ItemIndex = 0;
-	cbPerson->SetFocus();
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmSession::acPersonAddExecute(TObject *Sender)
-	{
-	if (DlgPersonAdd(this))
-		fmysql.people.listInCombo(cbPerson, 1);
+	if (!fmysql.sessions.insert(data))
+		{
+		Application->MessageBox(
+			ftools.fmt(
+				"Die Session konnte nicht gespeichert werden. "
+				"Die Datenbank meldet: %s", fmysql.sessions.error_msg).c_str(),
+			"Fehler beim Speichern",
+			MB_OK);
+		}
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -163,68 +195,24 @@ void __fastcall TfmSession::btNowClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmSession::lvResearchersClick(TObject *Sender)
 	{
-	if (lvResearchers->SelCount <= 0)
-		acReDel->Enabled = false;
-	else
+	if (lvResearchers->SelCount > 0)
 		acReDel->Enabled = true;
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmSession::edL1DblClick(TObject *Sender)
-	{
-	TEdit* ed = (TEdit*)Sender;
-	if (OpenECG->Execute())
-		{
-		ed->Hint  = OpenECG->FileName;
-		ed->Text  = "geladen";
-		ed->Color = clMoneyGreen;
-		}
 	else
-		{
-		ed->Hint  = "";
-		ed->Text  = "";
-		ed->Color = clWhite;
-		}
+		acReDel->Enabled = false;
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmSession::edL1MouseDown(TObject *Sender, TMouseButton Button,
-	  TShiftState Shift, int X, int Y)
+void __fastcall TfmSession::lvEcgClick(TObject *Sender)
 	{
-	//beim Rechtsklick löschen
-	if (Button == mbRight)
-		{
-		TEdit* ed = (TEdit*)Sender;
-		ed->Hint  = "";
-		ed->Text  = "";
-		ed->Color = clWhite;
-		}
+	if (lvEcg->SelCount > 0)
+		acEcgDel->Enabled = true;
+	else
+		acEcgDel->Enabled = false;
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmSession::edL1KeyDown(TObject *Sender, WORD &Key,
-	  TShiftState Shift)
+void __fastcall TfmSession::TimerCallbackTimer(TObject *Sender)
 	{
-	if (Key == VK_INSERT)
-		{
-		TEdit* ed = (TEdit*)Sender;
-		if (OpenECG->Execute())
-			{
-			ed->Text  = "geladen";
-			ed->Color = clMoneyGreen;
-			}
-		else
-			{
-			ed->Text  = "";
-			ed->Color = clWhite;
-			}
-		ed->SetFocus();
-		}
-	else if (Key == VK_DELETE)
-		{
-		TEdit* ed = (TEdit*)Sender;
-		ed->Hint  = "";
-		ed->Text  = "";
-		ed->Color = clWhite;
-		}
+	TimerCallback->Enabled = false;
+	GetEcgData();
 	}
 //---------------------------------------------------------------------------
-
 

@@ -15,6 +15,8 @@
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
 #include "basics/classData.h"
+#include "database/classMySql_Session.h"
+#include "database/toolforms/addEcg.h"
 //---------------------------------------------------------------------------
 class TfmSession : public TForm
 {
@@ -23,7 +25,9 @@ private:
 	cData		fdata;
 
 	String		getNow();
-	bool		save(TEdit* ed);
+
+	TfmAddEcg*	fmAddEcg;
+	void		GetEcgData();
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -32,46 +36,34 @@ __published:	// IDE-verwaltete Komponenten
 	TTimer *tStartup;
 	TActionList *ActionList1;
 	TAction *acClose;
-	TLabel *Label1;
-	TEdit *edStamp;
-	TSpeedButton *btNow;
-	TLabel *Label2;
-	TSpeedButton *SpeedButton1;
-	TSpeedButton *SpeedButton2;
-	TListView *lvResearchers;
 	TAction *acReAdd;
 	TAction *acReDel;
+	TPanel *pnSession;
+	TLabel *Label1;
+	TSpeedButton *btNow;
+	TEdit *edStamp;
+	TLabel *Label2;
+	TComboBox *cbOrte;
 	TLabel *Label3;
-	TComboBox *cbPerson;
-	TLabel *Label4;
-	TLabel *Label5;
-	TLabel *Label6;
-	TLabel *Label7;
-	TLabel *Label8;
-	TLabel *Label9;
-	TLabel *Label10;
-	TEdit *edL1;
-	TEdit *edL2;
-	TEdit *edL3;
-	TEdit *edS1;
-	TEdit *edS2;
-	TEdit *edS3;
-	TEdit *edT1;
-	TEdit *edT2;
-	TEdit *edT3;
-	TEdit *edG1;
-	TEdit *edG2;
-	TEdit *edG3;
-	TOpenDialog *OpenECG;
+	TListView *lvResearchers;
+	TSpeedButton *SpeedButton1;
+	TSpeedButton *SpeedButton2;
+	TBevel *Bevel2;
+	TListView *lvEcg;
+	TPopupMenu *PopupMenu;
+	TActionList *ActionList2;
 	TAction *acEcgAdd;
 	TAction *acEcgDel;
-	TBevel *Bevel2;
+	TMenuItem *EKGhinzufgen1;
+	TMenuItem *EKGlschen1;
+	TTimer *TimerCallback;
+	TPanel *pnBottom;
 	TButton *Button1;
-	TAction *acSave;
-	TAction *acReset;
+	TBevel *Bevel3;
 	TButton *Button2;
-	TSpeedButton *SpeedButton3;
-	TAction *acPersonAdd;
+	TAction *acSave;
+	TMemo *mKommentar;
+	TLabel *Label4;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -80,13 +72,11 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acReAddExecute(TObject *Sender);
 	void __fastcall acReDelExecute(TObject *Sender);
 	void __fastcall lvResearchersClick(TObject *Sender);
-	void __fastcall edL1DblClick(TObject *Sender);
-	void __fastcall edL1MouseDown(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y);
-	void __fastcall edL1KeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall acEcgAddExecute(TObject *Sender);
+	void __fastcall acEcgDelExecute(TObject *Sender);
+	void __fastcall lvEcgClick(TObject *Sender);
+	void __fastcall TimerCallbackTimer(TObject *Sender);
 	void __fastcall acSaveExecute(TObject *Sender);
-	void __fastcall acResetExecute(TObject *Sender);
-	void __fastcall acPersonAddExecute(TObject *Sender);
 
 public:
 	__fastcall TfmSession(TComponent* Owner);

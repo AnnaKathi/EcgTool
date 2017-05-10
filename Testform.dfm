@@ -102,7 +102,6 @@ object fmTest: TfmTest
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
-    ExplicitLeft = 192
   end
   object pnDesc2: TPanel
     Left = 725
@@ -113,7 +112,6 @@ object fmTest: TfmTest
     Color = clWhite
     ParentBackground = False
     TabOrder = 3
-    ExplicitLeft = 540
   end
   object pnDesc3: TPanel
     Left = 0
@@ -124,10 +122,6 @@ object fmTest: TfmTest
     Color = clWhite
     ParentBackground = False
     TabOrder = 4
-    ExplicitLeft = -209
-    ExplicitTop = 2
-    ExplicitWidth = 348
-    ExplicitHeight = 498
   end
   object tStartup: TTimer
     Enabled = False
@@ -135,5 +129,12 @@ object fmTest: TfmTest
     OnTimer = tStartupTimer
     Left = 264
     Top = 16
+  end
+  object TimerCallback: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = TimerCallbackTimer
+    Left = 136
+    Top = 48
   end
 end

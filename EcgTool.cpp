@@ -15,6 +15,9 @@ USEFORM("database\baseforms\baseEcgData.cpp", fmBaseEcg);
 USEFORM("database\baseforms\baseDesc.cpp", fmBaseDesc);
 USEFORM("database\toolforms\addPeople.cpp", fmPerson);
 USEFORM("database\toolforms\addDesc.cpp", fmDescAdd);
+USEFORM("database\toolforms\addEcg.cpp", fmAddEcg);
+USEFORM("database\toolforms\addEcgFiles.cpp", fmEcgFiles);
+USEFORM("database\toolforms\selectDescDb.cpp", fmSelectDesc);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\Alg1.cpp", fmAlg1);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
@@ -38,6 +41,9 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TfmTest), &fmTest);
 		Application->CreateForm(__classid(TfmBaseDesc), &fmBaseDesc);
 		Application->CreateForm(__classid(TfmChoi2), &fmChoi2);
+		Application->CreateForm(__classid(TfmSelectDesc), &fmSelectDesc);
+		Application->CreateForm(__classid(TfmAddEcg), &fmAddEcg);
+		Application->CreateForm(__classid(TfmEcgFiles), &fmEcgFiles);
 		Application->Run();
 	}
 	catch (Exception &exception)

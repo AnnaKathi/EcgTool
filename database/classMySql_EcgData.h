@@ -45,6 +45,11 @@ __property int num_rows = { read=get_num_rows };
 
 private:
 	cTools			ftools;
+
+    bool			LongstrToData(String str, sEcgData& data);
+	String 			DataToLongtext(sEcgData data);
+
+	//-- MySql-Variablen und -Funktionen
 	sEcgData		fdata;
 	sEcgData		get_data();
 

@@ -95,8 +95,8 @@ object fmEcg: TfmEcg
       ExplicitWidth = 50
     end
     object laCls: TLabel
-      Left = 313
-      Top = 232
+      Left = 317
+      Top = 249
       Width = 18
       Height = 13
       Anchors = [akTop, akRight]
@@ -337,20 +337,20 @@ object fmEcg: TfmEcg
       Tag = 4
       Left = 9
       Top = 237
-      Width = 124
+      Width = 150
       Height = 25
-      Caption = '4 - Werte speichern'
+      Caption = '4 - Werte in Datei speichern'
       TabOrder = 14
       OnClick = btSaveClick
     end
-    object Button1: TButton
-      Left = 152
-      Top = 240
-      Width = 75
+    object btSave2: TButton
+      Left = 158
+      Top = 237
+      Width = 158
       Height = 25
-      Caption = 'Save Neu'
+      Caption = '5 - EKG in DB speichern (Test)'
       TabOrder = 15
-      OnClick = Button1Click
+      OnClick = btSave2Click
     end
   end
   object pnClient: TPanel

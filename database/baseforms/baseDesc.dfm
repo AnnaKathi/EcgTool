@@ -3,7 +3,7 @@ object fmBaseDesc: TfmBaseDesc
   Top = 0
   Caption = 'BaseForm DescDb'
   ClientHeight = 658
-  ClientWidth = 453
+  ClientWidth = 416
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object fmBaseDesc: TfmBaseDesc
   object Bevel4: TBevel
     Left = 0
     Top = 97
-    Width = 453
+    Width = 416
     Height = 8
     Align = alTop
     Shape = bsTopLine
@@ -30,7 +30,7 @@ object fmBaseDesc: TfmBaseDesc
   object lvData: TListView
     Left = 0
     Top = 105
-    Width = 453
+    Width = 416
     Height = 553
     Align = alClient
     Columns = <
@@ -50,19 +50,19 @@ object fmBaseDesc: TfmBaseDesc
     ViewStyle = vsReport
     OnClick = lvDataClick
     OnDblClick = lvDataDblClick
-    ExplicitTop = 71
-    ExplicitHeight = 587
+    ExplicitWidth = 453
   end
   object pnFilter: TPanel
     Left = 0
     Top = 0
-    Width = 453
+    Width = 416
     Height = 97
     Align = alTop
     BevelOuter = bvNone
     ParentBackground = False
     ParentColor = True
     TabOrder = 1
+    ExplicitWidth = 453
     object Label10: TLabel
       Left = 8
       Top = 31
@@ -157,6 +157,10 @@ object fmBaseDesc: TfmBaseDesc
       Enabled = False
       OnExecute = acEditExecute
     end
+    object acSelect: TAction
+      Caption = 'Datensatz ausw'#228'hlen'
+      OnExecute = acSelectExecute
+    end
   end
   object PopupMenu: TPopupMenu
     Left = 176
@@ -169,6 +173,12 @@ object fmBaseDesc: TfmBaseDesc
     end
     object Erkrankunglschen1: TMenuItem
       Action = acDel
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object Datensatzauswhlen1: TMenuItem
+      Action = acSelect
     end
   end
   object tStartup: TTimer

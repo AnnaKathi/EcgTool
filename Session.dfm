@@ -2,8 +2,8 @@ object fmSession: TfmSession
   Left = 0
   Top = 0
   Caption = 'Session anlegen: SIMULATION'
-  ClientHeight = 487
-  ClientWidth = 467
+  ClientHeight = 707
+  ClientWidth = 834
   Color = clInfoBk
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,141 +20,47 @@ object fmSession: TfmSession
   object Bevel1: TBevel
     Left = 0
     Top = 41
-    Width = 467
+    Width = 834
     Height = 4
     Align = alTop
     Shape = bsTopLine
     ExplicitLeft = -181
     ExplicitWidth = 822
   end
-  object Label1: TLabel
-    Left = 16
-    Top = 64
-    Width = 96
-    Height = 14
-    Caption = 'Date-Time-Stamp'
-  end
-  object btNow: TSpeedButton
-    Left = 413
-    Top = 60
-    Width = 33
-    Height = 24
-    Caption = 'now'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-    OnClick = btNowClick
-  end
-  object Label2: TLabel
-    Left = 16
-    Top = 96
-    Width = 65
-    Height = 14
-    Caption = 'Researchers'
-  end
-  object SpeedButton1: TSpeedButton
-    Left = 413
-    Top = 96
-    Width = 33
-    Height = 22
-    Action = acReAdd
-  end
-  object SpeedButton2: TSpeedButton
-    Left = 413
-    Top = 124
-    Width = 33
-    Height = 22
-    Action = acReDel
-  end
-  object Label3: TLabel
-    Left = 16
-    Top = 230
-    Width = 84
-    Height = 14
-    Caption = 'Erfasste Person'
-  end
-  object Label4: TLabel
-    Left = 16
-    Top = 316
-    Width = 90
-    Height = 14
-    Caption = 'Handgelenk links'
-  end
-  object Label5: TLabel
-    Left = 16
-    Top = 356
-    Width = 90
-    Height = 14
-    Caption = 'Kopf rechts/links'
-  end
-  object Label6: TLabel
-    Left = 16
-    Top = 396
-    Width = 104
-    Height = 14
-    Caption = 'Finger/Hand rechts'
-  end
-  object Label7: TLabel
-    Left = 152
-    Top = 284
-    Width = 39
-    Height = 14
-    Caption = 'liegend'
-  end
-  object Label8: TLabel
-    Left = 232
-    Top = 284
-    Width = 38
-    Height = 14
-    Caption = 'sitzend'
-  end
-  object Label9: TLabel
-    Left = 308
-    Top = 284
-    Width = 45
-    Height = 14
-    Caption = 'stehend'
-  end
-  object Label10: TLabel
-    Left = 388
-    Top = 284
-    Width = 42
-    Height = 14
-    Caption = 'gehend'
-  end
   object Bevel2: TBevel
-    Left = 8
-    Top = 208
-    Width = 438
-    Height = 12
+    Left = 0
+    Top = 233
+    Width = 834
+    Height = 8
+    Align = alTop
     Shape = bsTopLine
   end
-  object SpeedButton3: TSpeedButton
-    Left = 413
-    Top = 227
-    Width = 33
-    Height = 22
-    Action = acPersonAdd
+  object Bevel3: TBevel
+    Left = 0
+    Top = 662
+    Width = 834
+    Height = 4
+    Align = alBottom
+    Shape = bsBottomLine
+    ExplicitTop = 49
+    ExplicitWidth = 664
   end
   object pnInfo: TPanel
     Left = 0
     Top = 0
-    Width = 467
+    Width = 834
     Height = 41
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
     DesignSize = (
-      467
+      834
       41)
     object mInfo: TMemo
       Left = 8
       Top = 10
-      Width = 451
+      Width = 818
       Height = 25
       Anchors = [akLeft, akTop, akRight]
       BorderStyle = bsNone
@@ -171,204 +77,196 @@ object fmSession: TfmSession
       TabOrder = 0
     end
   end
-  object edStamp: TEdit
-    Left = 136
-    Top = 61
-    Width = 271
-    Height = 22
+  object pnSession: TPanel
+    Left = 0
+    Top = 45
+    Width = 834
+    Height = 188
+    Align = alTop
+    BevelOuter = bvNone
     TabOrder = 1
+    object Label1: TLabel
+      Left = 16
+      Top = 16
+      Width = 96
+      Height = 14
+      Caption = 'Date-Time-Stamp'
+    end
+    object btNow: TSpeedButton
+      Left = 374
+      Top = 12
+      Width = 33
+      Height = 24
+      Caption = 'now'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      OnClick = btNowClick
+    end
+    object Label2: TLabel
+      Left = 16
+      Top = 45
+      Width = 84
+      Height = 14
+      Caption = 'Ort der Session'
+    end
+    object Label3: TLabel
+      Left = 16
+      Top = 80
+      Width = 65
+      Height = 14
+      Caption = 'Researchers'
+    end
+    object SpeedButton1: TSpeedButton
+      Left = 374
+      Top = 80
+      Width = 33
+      Height = 24
+      Action = acReAdd
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object SpeedButton2: TSpeedButton
+      Left = 374
+      Top = 110
+      Width = 33
+      Height = 24
+      Action = acReDel
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 432
+      Top = 22
+      Width = 127
+      Height = 14
+      Caption = 'Kommentar zur Session'
+    end
+    object edStamp: TEdit
+      Left = 136
+      Top = 13
+      Width = 237
+      Height = 22
+      TabOrder = 0
+    end
+    object cbOrte: TComboBox
+      Left = 136
+      Top = 42
+      Width = 271
+      Height = 22
+      Style = csDropDownList
+      ItemHeight = 14
+      TabOrder = 1
+    end
+    object lvResearchers: TListView
+      Left = 136
+      Top = 80
+      Width = 237
+      Height = 97
+      Columns = <
+        item
+          Caption = 'Nr'
+        end
+        item
+          Caption = 'Researcher'
+          Width = 175
+        end>
+      GridLines = True
+      ReadOnly = True
+      TabOrder = 2
+      ViewStyle = vsReport
+      OnClick = lvResearchersClick
+    end
+    object mKommentar: TMemo
+      Left = 432
+      Top = 42
+      Width = 345
+      Height = 135
+      ScrollBars = ssBoth
+      TabOrder = 3
+    end
   end
-  object lvResearchers: TListView
-    Left = 136
-    Top = 96
-    Width = 271
-    Height = 97
+  object lvEcg: TListView
+    Left = 8
+    Top = 247
+    Width = 769
+    Height = 346
     Columns = <
       item
         Caption = 'Nr'
       end
       item
-        Caption = 'Researcher'
-        Width = 150
+        Caption = 'Anz. Werte'
+        Width = 75
+      end
+      item
+        Caption = 'Person'
+        Width = 90
+      end
+      item
+        Caption = 'State'
+        Width = 90
+      end
+      item
+        Caption = 'Lage'
+        Width = 90
+      end
+      item
+        Caption = 'Position'
+        Width = 90
+      end
+      item
+        Caption = 'File'
+        Width = 250
       end>
     GridLines = True
     ReadOnly = True
-    RowSelect = True
+    PopupMenu = PopupMenu
     TabOrder = 2
     ViewStyle = vsReport
-    OnClick = lvResearchersClick
+    OnClick = lvEcgClick
   end
-  object cbPerson: TComboBox
-    Left = 136
-    Top = 227
-    Width = 271
-    Height = 22
-    ItemHeight = 14
+  object pnBottom: TPanel
+    Left = 0
+    Top = 666
+    Width = 834
+    Height = 41
+    Align = alBottom
+    BevelOuter = bvNone
     TabOrder = 3
-    Items.Strings = (
-      'Anna Stratmann, 10.12.1981'
-      'Max Mustermann, 01.04.1960'
-      'Diana Hansen, 09.06.1998')
-  end
-  object edL1: TEdit
-    Tag = 1
-    Left = 136
-    Top = 313
-    Width = 73
-    Height = 22
-    ReadOnly = True
-    TabOrder = 4
-    OnDblClick = edL1DblClick
-    OnKeyDown = edL1KeyDown
-    OnMouseDown = edL1MouseDown
-  end
-  object edL2: TEdit
-    Tag = 1
-    Left = 136
-    Top = 353
-    Width = 73
-    Height = 22
-    ReadOnly = True
-    TabOrder = 5
-    OnDblClick = edL1DblClick
-    OnKeyDown = edL1KeyDown
-    OnMouseDown = edL1MouseDown
-  end
-  object edL3: TEdit
-    Tag = 1
-    Left = 136
-    Top = 393
-    Width = 73
-    Height = 22
-    ReadOnly = True
-    TabOrder = 6
-    OnDblClick = edL1DblClick
-    OnKeyDown = edL1KeyDown
-    OnMouseDown = edL1MouseDown
-  end
-  object edS1: TEdit
-    Tag = 2
-    Left = 215
-    Top = 313
-    Width = 73
-    Height = 22
-    ReadOnly = True
-    TabOrder = 7
-    OnDblClick = edL1DblClick
-    OnKeyDown = edL1KeyDown
-    OnMouseDown = edL1MouseDown
-  end
-  object edS2: TEdit
-    Tag = 2
-    Left = 215
-    Top = 353
-    Width = 73
-    Height = 22
-    ReadOnly = True
-    TabOrder = 8
-    OnDblClick = edL1DblClick
-    OnKeyDown = edL1KeyDown
-    OnMouseDown = edL1MouseDown
-  end
-  object edS3: TEdit
-    Tag = 2
-    Left = 215
-    Top = 393
-    Width = 73
-    Height = 22
-    ReadOnly = True
-    TabOrder = 9
-    OnDblClick = edL1DblClick
-    OnKeyDown = edL1KeyDown
-    OnMouseDown = edL1MouseDown
-  end
-  object edT1: TEdit
-    Tag = 3
-    Left = 294
-    Top = 313
-    Width = 73
-    Height = 22
-    ReadOnly = True
-    TabOrder = 10
-    OnDblClick = edL1DblClick
-    OnKeyDown = edL1KeyDown
-    OnMouseDown = edL1MouseDown
-  end
-  object edT2: TEdit
-    Tag = 3
-    Left = 294
-    Top = 353
-    Width = 73
-    Height = 22
-    ReadOnly = True
-    TabOrder = 11
-    OnDblClick = edL1DblClick
-    OnKeyDown = edL1KeyDown
-    OnMouseDown = edL1MouseDown
-  end
-  object edT3: TEdit
-    Tag = 3
-    Left = 294
-    Top = 393
-    Width = 73
-    Height = 22
-    ReadOnly = True
-    TabOrder = 12
-    OnDblClick = edL1DblClick
-    OnKeyDown = edL1KeyDown
-    OnMouseDown = edL1MouseDown
-  end
-  object edG1: TEdit
-    Tag = 4
-    Left = 373
-    Top = 313
-    Width = 73
-    Height = 22
-    ReadOnly = True
-    TabOrder = 13
-    OnDblClick = edL1DblClick
-    OnKeyDown = edL1KeyDown
-    OnMouseDown = edL1MouseDown
-  end
-  object edG2: TEdit
-    Tag = 4
-    Left = 373
-    Top = 353
-    Width = 73
-    Height = 22
-    ReadOnly = True
-    TabOrder = 14
-    OnDblClick = edL1DblClick
-    OnKeyDown = edL1KeyDown
-    OnMouseDown = edL1MouseDown
-  end
-  object edG3: TEdit
-    Tag = 4
-    Left = 373
-    Top = 393
-    Width = 73
-    Height = 22
-    ReadOnly = True
-    TabOrder = 15
-    OnDblClick = edL1DblClick
-    OnKeyDown = edL1KeyDown
-    OnMouseDown = edL1MouseDown
-  end
-  object Button1: TButton
-    Left = 136
-    Top = 448
-    Width = 152
-    Height = 25
-    Action = acSave
-    TabOrder = 16
-  end
-  object Button2: TButton
-    Left = 294
-    Top = 448
-    Width = 152
-    Height = 25
-    Action = acReset
-    TabOrder = 17
+    ExplicitTop = 606
+    ExplicitWidth = 499
+    DesignSize = (
+      834
+      41)
+    object Button1: TButton
+      Left = 751
+      Top = 6
+      Width = 75
+      Height = 25
+      Action = acClose
+      Anchors = [akRight, akBottom]
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 8
+      Top = 8
+      Width = 75
+      Height = 25
+      Action = acSave
+      TabOrder = 1
+    end
   end
   object tStartup: TTimer
     Enabled = False
@@ -393,28 +291,39 @@ object fmSession: TfmSession
       Enabled = False
       OnExecute = acReDelExecute
     end
-    object acEcgAdd: TAction
-      Caption = 'laden'
-    end
-    object acEcgDel: TAction
-      Caption = 'l'#246'schen'
-      Enabled = False
-    end
     object acSave: TAction
-      Caption = 'Daten &speichern'
+      Caption = 'Speichern'
       OnExecute = acSaveExecute
     end
-    object acReset: TAction
-      Caption = 'Daten &zur'#252'cksetzen'
-      OnExecute = acResetExecute
+  end
+  object PopupMenu: TPopupMenu
+    Left = 80
+    Top = 328
+    object EKGhinzufgen1: TMenuItem
+      Action = acEcgAdd
     end
-    object acPersonAdd: TAction
-      Caption = 'add'
-      OnExecute = acPersonAddExecute
+    object EKGlschen1: TMenuItem
+      Action = acEcgDel
     end
   end
-  object OpenECG: TOpenDialog
-    Left = 96
-    Top = 284
+  object ActionList2: TActionList
+    Left = 80
+    Top = 296
+    object acEcgAdd: TAction
+      Caption = 'EKG hinzuf'#252'gen'
+      OnExecute = acEcgAddExecute
+    end
+    object acEcgDel: TAction
+      Caption = 'EKG l'#246'schen'
+      Enabled = False
+      OnExecute = acEcgDelExecute
+    end
+  end
+  object TimerCallback: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = TimerCallbackTimer
+    Left = 112
+    Top = 296
   end
 end

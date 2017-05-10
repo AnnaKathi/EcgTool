@@ -11,15 +11,16 @@
 #pragma resource "*.dfm"
 TfmBaseDesc *fmBaseDesc;
 //---------------------------------------------------------------------------
-TfmBaseDesc* CreateDescForm(TForm* caller, TWinControl* container, cMySqlDescDb& desc)
+TfmBaseDesc* CreateDescForm(TForm* caller, TWinControl* container, cMySqlDescDb& desc, eListMode mode)
 	{
-	return new TfmBaseDesc(caller, container, desc);
+	return new TfmBaseDesc(caller, container, desc, mode);
 	}
 //---------------------------------------------------------------------------
-__fastcall TfmBaseDesc::TfmBaseDesc(TComponent* Owner, TWinControl* Container, cMySqlDescDb& desc)
+__fastcall TfmBaseDesc::TfmBaseDesc(TComponent* Owner, TWinControl* Container, cMySqlDescDb& desc, eListMode mode)
 	: TForm(Owner)
 	{
 	fdesc = &desc;
+	eMode = mode;
 	if (Container)
 		snapTo(Container, alClient);
 	}
@@ -164,6 +165,17 @@ bool TfmBaseDesc::CheckFilter()
 	return true;
 	}
 //---------------------------------------------------------------------------
+void TfmBaseDesc::SetCallbackTimer(TTimer* timer)
+	{
+	CallbackTimer = timer;
+	CallbackTimer->Enabled = false;
+	}
+//---------------------------------------------------------------------------
+String TfmBaseDesc::GetSelectedIdents()
+	{
+	return SelectedIdents;
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /********************   Actions   ******************************************/
 /***************************************************************************/
@@ -206,6 +218,27 @@ void __fastcall TfmBaseDesc::acEditExecute(TObject *Sender)
 		ShowData();
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmBaseDesc::acSelectExecute(TObject *Sender)
+	{
+	if (eMode != eSelect) return;
+	if (lvData->SelCount <= 0) return;
+
+	TListItem* item; SelectedIdents = "";
+	for (int i = 0; i < lvData->Items->Count; i++)
+		{
+		item = lvData->Items->Item[i];
+		if (!item->Selected) continue;
+
+		int id = (int)item->Data;
+		if (SelectedIdents == "")
+			SelectedIdents = String(id);
+		else
+			SelectedIdents += ";" + String(id);
+		}
+
+	CallbackTimer->Enabled = true;
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   Meldungen vom Formular   *********************************/
 /***************************************************************************/
@@ -215,14 +248,25 @@ void __fastcall TfmBaseDesc::lvDataClick(TObject *Sender)
 	TListItem* item = lvData->Selected;
 	if (item)
 		{
-		acDel->Enabled  = true;
-		acEdit->Enabled = true;
+		acDel->Enabled    = true;
+		acEdit->Enabled   = true;
+
+		if (eMode != eSelect)
+			acSelect->Enabled = false;
+		else
+			acSelect->Enabled = true;
 		}
 	else
 		{
-		acDel->Enabled  = false;
-		acEdit->Enabled = false;
+		acDel->Enabled    = false;
+		acEdit->Enabled   = false;
+		acSelect->Enabled = false;
 		}
+
+	if (lvData->SelCount > 1)
+		acSelect->Caption = "Datensätze auswählen";
+	else
+		acSelect->Caption = "Datensatz auswählen";
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmBaseDesc::edIdVonExit(TObject *Sender)
@@ -238,8 +282,12 @@ void __fastcall TfmBaseDesc::edBezChange(TObject *Sender)
 void __fastcall TfmBaseDesc::lvDataDblClick(TObject *Sender)
 	{
 	TListItem* item = lvData->Selected;
-	if (item)
+	if (!item) return;
+
+	if (eMode == eShow)
 		acEditExecute(Sender);
+	else if (eMode == eSelect)
+    	acSelectExecute(Sender);
 	}
 //---------------------------------------------------------------------------
 

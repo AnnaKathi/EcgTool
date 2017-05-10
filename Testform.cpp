@@ -49,9 +49,11 @@ void __fastcall TfmTest::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
 
-	fmDiseases = CreateDescForm(this, pnDesc1, fmysql.diseases);
-	fmOrte     = CreateDescForm(this, pnDesc2, fmysql.orte);
-	fmLagen    = CreateDescForm(this, pnDesc3, fmysql.lagen);
+	fmDiseases = CreateDescForm(this, pnDesc1, fmysql.diseases, eShow);
+	fmOrte     = CreateDescForm(this, pnDesc2, fmysql.orte,     eShow);
+
+	fmLagen    = CreateDescForm(this, pnDesc3, fmysql.lagen,    eSelect);
+	fmLagen->SetCallbackTimer(TimerCallback);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmTest::FormClose(TObject *Sender, TCloseAction &Action)
@@ -76,6 +78,16 @@ void __fastcall TfmTest::FormKeyPress(TObject *Sender, char &Key)
 		Key = 0;
 		Close();
 		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmTest::TimerCallbackTimer(TObject *Sender)
+	{
+	TimerCallback->Enabled = false;
+	String idents = fmLagen->GetSelectedIdents();
+	Application->MessageBox(
+		ftools.fmt("Es wurden Datensätze ausgewählt: %s", idents).c_str(),
+		"Auswahl",
+		MB_OK);
 	}
 //---------------------------------------------------------------------------
 

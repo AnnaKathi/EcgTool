@@ -35,32 +35,21 @@ bool cMySqlEcgData::doQuery(String q)
 bool cMySqlEcgData::save(sEcgData data)
 	{
 	//Row muss vorher gesetzt sein
-	String s = "";
-	char feld[64]; double wert;
-	for (int i = 0; i < 10; i++)
-		{
-		wert = data.werte[i];
-		sprintf(feld, "%.8f", wert);
-		if (i == 0)
-			s = String(feld);
-		else
-			s += ";" + String(feld);
-		}
-
-	//INSERT INTO `ecg`.`ecgdata` (`Sessions_ID`, `Subjects_ID`, `Positions_ID`, `States_ID`, `Lagen_ID`, `Werte`) VALUES (1, 1, 1, 1, 1, '0,8723645897623');
-	String q = ftools.fmt(
-		"INSERT INTO `%s` "
-		"(`Sessions_ID`, `Subjects_ID`, `Positions_ID`, `States_ID`, `Lagen_ID`, `Werte`) "
-		"VALUES (%d, %d, %d, %d, %d, '%s')",
-		String(TABLE),
-		data.session, data.person, data.position, data.state, data.lage, s.c_str());
+	String s = DataToLongtext(data);
+	String q =
+		"INSERT INTO `ecgdata` (`Sessions_ID`, `Subjects_ID`, `Positions_ID`, `States_ID`, `Lagen_ID`, `Werte`) VALUES (" +
+		String(data.session)  + ", " +
+		String(data.person)   + ", " +
+		String(data.position) + ", " +
+		String(data.state)    + ", " +
+		String(data.lage)     + ", '" +  s + "')";
 
 	if (!fwork->send(q))
 		return fail(fwork->error_code, fwork->error_msg);
 	else
 		{
 		//Datensatz wieder reinladen, damit aufrufende Komponenten damit
-		//weiterarbeiten können 
+		//weiterarbeiten können
 		return getLast();
 		}
 	}
@@ -77,7 +66,7 @@ bool cMySqlEcgData::loadTable()
 //---------------------------------------------------------------------------
 bool cMySqlEcgData::loadByPerson(int person)
 	{
-	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE PersIdent = " + String(person);
+	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE Subjects_ID = " + String(person);
 	return doQuery(q);
 	}
 //---------------------------------------------------------------------------
@@ -95,7 +84,7 @@ bool cMySqlEcgData::nextRow()
 //---------------------------------------------------------------------------
 bool cMySqlEcgData::getLast()
 	{
-	String q = "SELECT * FROM `" + String(TABLE) + "` ORDER BY Ident DESC LIMIT 1";
+	String q = "SELECT * FROM `" + String(TABLE) + "` ORDER BY ID DESC LIMIT 1";
 	if (!fwork->query(q))
 		return false;
 
@@ -114,7 +103,7 @@ bool cMySqlEcgData::getLast()
 bool cMySqlEcgData::deleteByIdent(int ident)
 	{
 	//DELETE FROM `ecg`.`ecgdata` WHERE  `Ident`=51;
-	String q = "DELETE FROM `" + String(TABLE) + "` WHERE `Ident` = " + String(ident);
+	String q = "DELETE FROM `" + String(TABLE) + "` WHERE `ID` = " + String(ident);
 	if (!fwork->send(q))
 		return fail(fwork->error_code, fwork->error_msg);
 	else
@@ -149,19 +138,49 @@ bool cMySqlEcgData::getRow()
 	fdata.lage     = atoi(frow[5]);
 
 	//Die EKG-Werte sind als semikolon-getrennter Longtext gespeichert
-	String longwerte = String(frow[6]);
+	if (!LongstrToData(String(frow[6]), fdata))
+		return fail(6, "Das Longtext-Feld 'Werte' konnte nicht eingelsen werden");
+
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool cMySqlEcgData::LongstrToData(String str, sEcgData& data)
+	{
 	int pos; String ww;
 	int ix = 0;
-	while ((pos = longwerte.Pos(";")) > 0)
+	char feld[32];
+	while ((pos = str.Pos(";")) > 0)
 		{
-		ww = longwerte.SubString(0, pos-1);
-		longwerte = longwerte.SubString(pos+1, 9999);
+		sprintf(feld, "%s", str.SubString(0, pos-1));
+		str = str.SubString(pos+1, 99999);
 
-		fdata.werte[ix] = ww.ToDouble();
+		data.werte[ix] = atof(feld);
 		ix++;
 		}
 
+	if (str != "")
+		{
+		sprintf(feld, "%s", str);
+		data.werte[ix] = atof(feld);
+		}
+
 	return true;
+	}
+//---------------------------------------------------------------------------
+String cMySqlEcgData::DataToLongtext(sEcgData data)
+	{
+	String s = "";
+	char feld[64]; double wert;
+	for (int i = 0; i < 3000; i++)
+		{
+		sprintf(feld, "%.8f", data.werte[i]);
+		if (i == 0)
+			s = String(feld);
+		else
+			s += ";" + String(feld);
+		}
+		
+	return s;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

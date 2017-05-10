@@ -14,6 +14,12 @@
 #include "../../basics/classTools.h"
 #include "../classMySql_DescDb.h"
 //---------------------------------------------------------------------------
+enum eListMode
+	{
+	eShow = 0,  //Datensätze anzeigen, DblClick = Datensatz ändern
+	eSelect,	//Datensätze anzeigen, DblClick = Datensatz auswählen
+	};
+//---------------------------------------------------------------------------
 struct sDescFilter
 	{
 	int			identVon;
@@ -24,6 +30,10 @@ struct sDescFilter
 class TfmBaseDesc : public TForm
 {
 private:
+	eListMode			eMode;
+	TTimer*				CallbackTimer;
+	String				SelectedIdents;
+
 	cTools				ftools;
 	cMySqlDescDb*		fdesc;
 
@@ -59,6 +69,9 @@ __published:	// IDE-verwaltete Komponenten
 	TMenuItem *Erkrankunglschen1;
 	TTimer *tStartup;
 	TLabel *laTabelle;
+	TAction *acSelect;
+	TMenuItem *N1;
+	TMenuItem *Datensatzauswhlen1;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall tStartupTimer(TObject *Sender);
@@ -70,9 +83,10 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall edIdVonExit(TObject *Sender);
 	void __fastcall edBezChange(TObject *Sender);
 	void __fastcall lvDataDblClick(TObject *Sender);
+	void __fastcall acSelectExecute(TObject *Sender);
 
 public:
-	__fastcall TfmBaseDesc(TComponent* Owner, TWinControl* Container,cMySqlDescDb& desc);
+	__fastcall TfmBaseDesc(TComponent* Owner, TWinControl* Container,cMySqlDescDb& desc, eListMode mode);
 	__fastcall ~TfmBaseDesc();
 
 	void		LockFilter();
@@ -80,9 +94,12 @@ public:
 
 	bool		ShowData();
 
+	void		SetCallbackTimer(TTimer* timer);
+	String		GetSelectedIdents();
+
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmBaseDesc *fmBaseDesc;
-TfmBaseDesc* CreateDescForm(TForm* caller, TWinControl* container, cMySqlDescDb& desc);
+TfmBaseDesc* CreateDescForm(TForm* caller, TWinControl* container, cMySqlDescDb& desc, eListMode mode);
 //---------------------------------------------------------------------------
 #endif

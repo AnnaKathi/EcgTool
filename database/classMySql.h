@@ -7,9 +7,9 @@
 #include "../basics/classBase.h"
 #include "../basics/classTools.h"
 #include "classMySql_Work.h"
-#include "classMySql_EcgData.h" //alte EKG-Klasse
-#include "classMySql_Ecg.h"     //neue EKG-Klasse
+#include "classMySql_EcgData.h"
 #include "classMySql_People.h"
+#include "classMySql_Session.h"
 #include "classMySql_DescDb.h"
 //---------------------------------------------------------------------------
 class PACKAGE cMySql : public cBase
@@ -28,8 +28,8 @@ public:
 	bool	close();
 
 __property cMySqlEcgData&  ecg      = { read=get_ecg };
-__property cMySqlEcg&      ecgneu   = { read=get_ecg_neu  };
 __property cMySqlPeople&   people   = { read=get_people   };
+__property cMySqlSession&  sessions = { read=get_sessions };
 
 __property cMySqlDescDb&   researchers = { read=get_researchers };
 __property cMySqlDescDb&   algorithms  = { read=get_algorithms  };
@@ -46,11 +46,11 @@ private:
 	cMySqlEcgData*	fecg;
 	cMySqlEcgData&  get_ecg();
 
-	cMySqlEcg*		fecgneu;
-	cMySqlEcg&		get_ecg_neu();
-
 	cMySqlPeople*	fpeople;
 	cMySqlPeople&	get_people();
+
+	cMySqlSession*	fsessions;
+	cMySqlSession&	get_sessions();
 
 	//description databases
 	cMySqlDescDb*	fdiseases;     cMySqlDescDb&	get_diseases();

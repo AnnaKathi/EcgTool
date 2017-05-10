@@ -52,6 +52,7 @@ private:
 
 	void		Importschema();
 	void		MySqlSave();
+	void 		BuildData(sEcgData& data);
 
 	void		sendClick(TButton* bt);
 
@@ -103,7 +104,7 @@ __published:	// IDE-verwaltete Komponenten
 	TComboBox *cbFormat;
 	TButton *btSave;
 	TSaveDialog *SaveDialog;
-	TButton *Button1;
+	TButton *btSave2;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -122,7 +123,7 @@ __published:	// IDE-verwaltete Komponenten
           TShiftState Shift, int X, int Y);
 	void __fastcall imgEcgMouseMove(TObject *Sender, TShiftState Shift, int X,
           int Y);
-	void __fastcall Button1Click(TObject *Sender);
+	void __fastcall btSave2Click(TObject *Sender);
 
 
 public:

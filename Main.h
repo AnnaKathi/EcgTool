@@ -51,7 +51,6 @@ __published:	// IDE-verwaltete Komponenten
 	TBitBtn *BitBtn5;
 	TBitBtn *BitBtn6;
 	TAction *acLookIntoData;
-	TBitBtn *BitBtn7;
 	TAction *acChoi2016;
 	TButton *btMySqlTest;
 	TBitBtn *BitBtn8;
