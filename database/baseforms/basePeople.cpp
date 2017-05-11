@@ -69,27 +69,6 @@ void __fastcall TfmBasePeople::FormClose(TObject *Sender,
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
-/******************   Funktionen: private   ********************************/
-/***************************************************************************/
-//---------------------------------------------------------------------------
-void TfmBasePeople::MsgBox(char* msg, ...)
-	{
-	char    buffer[512];
-	int     nsiz;
-	va_list argptr;
-
-	va_start(argptr, msg);
-	nsiz = vsnprintf(0, 0, msg, argptr);
-	if (nsiz >= sizeof(buffer)-2) nsiz = sizeof(buffer)-2;
-
-	vsnprintf(buffer, nsiz, msg, argptr);
-	buffer[nsiz] = 0;
-
-	Application->MessageBox(String(buffer).c_str(), "Fehler", MB_OK);
-	va_end(argptr);
-	}
-//---------------------------------------------------------------------------
-/***************************************************************************/
 /******************   Funktionen: public   *********************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
@@ -108,8 +87,8 @@ bool TfmBasePeople::ShowData()
 
 	if (!fmysql.people.loadTable(""))
 		{
-		MsgBox("Die Daten (Personen) konnten nicht geladen werden. "
-			"Die Datenbank  meldet: %s", fmysql.diseases.error_msg);
+		ftools.ErrBox("Die Daten (Personen) konnten nicht geladen werden. "
+			"Die Datenbank  meldet: %s", fmysql.people.error_msg);
 		return false;
 		}
 
@@ -203,8 +182,8 @@ void __fastcall TfmBasePeople::acDelExecute(TObject *Sender)
 	int id = (int)item->Data;
 	if (!fmysql.people.deleteByIdent(id))
 		{
-		MsgBox("Die Person <%d> konnten nicht gelöscht werden. "
-			"Die Datenbank  meldet: %s", id, fmysql.diseases.error_msg);
+		ftools.ErrBox("Die Person <%d> konnten nicht gelöscht werden. "
+			"Die Datenbank  meldet: %s", id, fmysql.people.error_msg);
 		}
 	else
 		ShowData();

@@ -107,6 +107,8 @@ public:
 		 */
 		bool		IsDebug();
 
+		void		ErrBox(char* msg, ...);
+		void		MsgBox(char* msg, ...);
 		String		fmt(char* msg, ...);
 		int			replace(String& str, String old, String neu);
 

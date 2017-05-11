@@ -13,6 +13,7 @@
 
 #include "EcgView.h"
 #include "DataAnalysis.h"
+#include "Sessions.h"
 #include "Testform.h"
 #include "Main.h"
 //---------------------------------------------------------------------------
@@ -184,8 +185,7 @@ void __fastcall TfmMain::acPeopleExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acCreateSeesionExecute(TObject *Sender)
 	{
-	if (!DlgNewSession(this))
-		;
+	DlgShowSessions(this);
 	setDbInfo();
 	}
 //---------------------------------------------------------------------------

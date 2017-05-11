@@ -179,5 +179,11 @@
     <Transaction>2017.05.11 11:06:48.004.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\toolforms\addSession.cpp</Transaction>
     <Transaction>2017.05.11 11:06:48.004.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\toolforms\addSession.h</Transaction>
     <Transaction>2017.05.11 11:06:48.004.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\database\toolforms\addSession.dfm</Transaction>
+    <Transaction>2017.05.11 11:20:59.260.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\Sessions.cpp</Transaction>
+    <Transaction>2017.05.11 11:20:59.260.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\Sessions.h</Transaction>
+    <Transaction>2017.05.11 11:20:59.260.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\Sessions.dfm</Transaction>
+    <Transaction>2017.05.11 11:25:41.923.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\baseforms\baseSession.cpp</Transaction>
+    <Transaction>2017.05.11 11:25:41.923.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\baseforms\baseSession.h</Transaction>
+    <Transaction>2017.05.11 11:25:41.923.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\database\baseforms\baseSession.dfm</Transaction>
   </Transactions>
 </BorlandProject>

@@ -149,7 +149,7 @@ bool TfmBaseEcg::ShowEcgOf(int person)
 	if (!fmysql.ecg.loadByPerson(person))
 		{
 		MsgBox("Die Daten (EKG) konnten nicht geladen werden. "
-			"Die Datenbank  meldet: %s", fmysql.diseases.error_msg);
+			"Die Datenbank  meldet: %s", fmysql.ecg.error_msg);
 		return false;
 		}
 

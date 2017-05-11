@@ -4,6 +4,7 @@
 //---------------------------------------------------------------------------
 USEFORM("Main.cpp", fmMain);
 USEFORM("EcgView.cpp", fmEcg);
+USEFORM("Sessions.cpp", fmSessions);
 USEFORM("DataAnalysis.cpp", fmAnalysis);
 USEFORM("RequestBox.cpp", fmRequest);
 USEFORM("Details.cpp", fmDetails);
@@ -12,12 +13,13 @@ USEFORM("database\DbPersonen.cpp", fmData);
 USEFORM("database\baseforms\basePeople.cpp", fmBasePeople);
 USEFORM("database\baseforms\baseEcgData.cpp", fmBaseEcg);
 USEFORM("database\baseforms\baseDesc.cpp", fmBaseDesc);
+USEFORM("database\baseforms\baseSession.cpp", fmBaseSession);
 USEFORM("database\toolforms\addPeople.cpp", fmPerson);
 USEFORM("database\toolforms\addDesc.cpp", fmDescAdd);
+USEFORM("database\toolforms\addSession.cpp", fmSessionAdd);
 USEFORM("database\toolforms\addEcg.cpp", fmAddEcg);
 USEFORM("database\toolforms\addEcgFiles.cpp", fmEcgFiles);
 USEFORM("database\toolforms\selectDescDb.cpp", fmSelectDesc);
-USEFORM("database\toolforms\addSession.cpp", fmSessionAdd);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\Alg1.cpp", fmAlg1);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
@@ -45,6 +47,8 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TfmAddEcg), &fmAddEcg);
 		Application->CreateForm(__classid(TfmEcgFiles), &fmEcgFiles);
 		Application->CreateForm(__classid(TfmSessionAdd), &fmSessionAdd);
+		Application->CreateForm(__classid(TfmSessions), &fmSessions);
+		Application->CreateForm(__classid(TfmBaseSession), &fmBaseSession);
 		Application->Run();
 	}
 	catch (Exception &exception)

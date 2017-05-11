@@ -11,6 +11,8 @@
 #include <ActnList.hpp>
 #include <Menus.hpp>
 //---------------------------------------------------------------------------
+#include "../../basics/classTools.h"
+//---------------------------------------------------------------------------
 struct sFilterPeople
 	{
 	int			identVon;
@@ -21,11 +23,11 @@ struct sFilterPeople
 class TfmBasePeople : public TForm
 {
 private:
+	cTools		ftools;
 	TTimer*		tCallback;
 	bool		bSelected;
 	
 	void 		snapTo(TWinControl* container, TAlign align);
-	void 		MsgBox(char* msg, ...);
 
 	bool		bInShow;
 

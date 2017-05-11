@@ -29,6 +29,7 @@ public:
 
 	bool	loadTable(); //lädt die ganze Tabelle
 	bool	loadByPerson(int person); //lädt nur die Daten von Person
+	bool	loadBySession(int session);
 	bool 	getLast();
 
 	bool	nextRow();

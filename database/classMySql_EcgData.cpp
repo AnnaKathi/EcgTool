@@ -70,6 +70,12 @@ bool cMySqlEcgData::loadByPerson(int person)
 	return doQuery(q);
 	}
 //---------------------------------------------------------------------------
+bool cMySqlEcgData::loadBySession(int session)
+	{
+	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE Sessions_ID = " + String(session);
+	return doQuery(q);
+	}
+//---------------------------------------------------------------------------
 bool cMySqlEcgData::nextRow()
 	{
 	if (!fwork->isReady())
