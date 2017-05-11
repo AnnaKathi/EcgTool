@@ -6,11 +6,13 @@
 #include "algorithms/AlgChoi2.h"
 #include "algorithms/EinzelAusw.h"
 #include "algorithms/Alg1.h"
+
 #include "database/classMySql.h"
 #include "database/DbPersonen.h"
+#include "database/toolforms/addSession.h"
+
 #include "EcgView.h"
 #include "DataAnalysis.h"
-#include "Session.h"
 #include "Testform.h"
 #include "Main.h"
 //---------------------------------------------------------------------------
@@ -39,6 +41,11 @@ void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 	pnMain->Enabled = false;
 	Cursor = crHourGlass;
 
+	//Testschalter NoMySql berücksichtigen, ermöglichst einen Testbetrieb ohne MySql
+	TIniFile* Ini = new TIniFile(ftools.GetIniFile());
+	bNoMySql = Ini->ReadBool("MySql", "NoMySql", false);
+	delete Ini;
+
 	setStatus("startup EcgTool...loading MySql-Database");
 
 	if (!setupDatabase())
@@ -66,6 +73,8 @@ void __fastcall TfmMain::FormClose(TObject *Sender, TCloseAction &Action)
 //---------------------------------------------------------------------------
 bool TfmMain::setupDatabase()
 	{
+	if (bNoMySql) return true; //simulieren, die DB wär geöffnet worden
+
 	//falls die Datenbank nicht vorhanden ist, anlegen
 	setStatus("startup Database...checking existance");
 	if (!fmysql.openWithoutDb())
@@ -133,10 +142,13 @@ void TfmMain::setStatus(String status, int panel) //panel ist vorbesetzt mit 0
 //---------------------------------------------------------------------------
 void TfmMain::setDbInfo()
 	{
-	setStatus(
-		ftools.fmt("%d Personen, %d Erkrankenungen, %d EKG-Datensätze",
+	if (bNoMySql)
+		setStatus("### MySql-Datenbank wird nicht verwendet ###", 1);
+	else
+		setStatus(
+		ftools.fmt("%d Personen, %d Sessions, %d EKG-Datensätze",
 		fmysql.people.getSize(),
-		fmysql.diseases.getSize(),
+		fmysql.sessions.getSize(),
 		fmysql.ecg.getSize()), 1);
 	}
 //---------------------------------------------------------------------------

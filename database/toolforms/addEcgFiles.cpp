@@ -72,7 +72,7 @@ bool TfmEcgFiles::GetHeader(int& pos)
 	return true;
 	}
 //---------------------------------------------------------------------------
-bool TfmEcgFiles::GetNextEcg(int& anz, String& file)
+bool TfmEcgFiles::GetNextEcg(int& anz, String& file, int& format, String& delim)
 	{
 	fRow++;
 	if (fRow >= lvEcg->Items->Count) return false;
@@ -84,6 +84,19 @@ bool TfmEcgFiles::GetNextEcg(int& anz, String& file)
 	file = item->SubItems->Strings[1];
 	if (file == "") return false;
 
+	format = item->SubItems->Strings[2].ToInt();
+	if (format < 0) return false;
+
+	delim = item->SubItems->Strings[3];
+	if (delim == "") return false;
+
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmEcgFiles::CheckForm()
+	{
+	if (cbPosition->ItemIndex < 0) return false;
+	if (lvEcg->Items->Count  <= 0) return false;
 	return true;
 	}
 //---------------------------------------------------------------------------
@@ -100,20 +113,21 @@ void __fastcall TfmEcgFiles::acAddExecute(TObject *Sender)
 	{
 	if (!OpenDialog->Execute()) return;
 
-	fDelim = ";";
+	String delim = ";";
 	if (cbDelim->ItemIndex == 1) //Komma
-		fDelim = ",";
+		delim = ",";
 	else if (cbDelim->ItemIndex == 2) //Tab
-		fDelim = "\t";
+		delim = "\t";
 
+	eDatFormat format;
 	if (cbFormat->ItemIndex == 1)
-		fFormat = formatADS;
+		format = formatADS;
 	else
-		fFormat = formatNone;
+		format = formatNone;
 
 	String file = OpenDialog->FileName;
 
-	if (!fecg.data.getFile(file, fFormat, fDelim, 0, 3000))
+	if (!fecg.data.getFile(file, format, delim, 0, 3000))
 		{
 		; //todo Fehlermeludng
 		return;
@@ -125,6 +139,8 @@ void __fastcall TfmEcgFiles::acAddExecute(TObject *Sender)
 	item->Caption = lvEcg->Items->Count;
 	item->SubItems->Add(String(anz));
 	item->SubItems->Add(file);
+	item->SubItems->Add(String(format));
+	item->SubItems->Add(delim);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmEcgFiles::acDelExecute(TObject *Sender)
@@ -155,6 +171,17 @@ void __fastcall TfmEcgFiles::FormKeyPress(TObject *Sender, char &Key)
 		Key = 0;
 		acCloseExecute(Sender);
 		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmEcgFiles::cbPositionChange(TObject *Sender)
+	{
+	acEnd->Enabled = CheckForm();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmEcgFiles::lvEcgChange(TObject *Sender, TListItem *Item,
+	  TItemChange Change)
+	{
+	acEnd->Enabled = CheckForm();
 	}
 //---------------------------------------------------------------------------
 

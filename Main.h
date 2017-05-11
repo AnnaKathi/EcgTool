@@ -19,6 +19,7 @@ class TfmMain : public TForm
 private:
 	cTools		ftools;
 
+	bool		bNoMySql;
 	bool		setupDatabase();
 	
 	void		setStatus(String status, int panel=0);

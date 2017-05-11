@@ -83,7 +83,7 @@ bool TfmAddEcg::GetEcgHeader(int& person, int& state, int& lage)
 	return true;
 	}
 //---------------------------------------------------------------------------
-bool TfmAddEcg::GetNextEcgRow(int& anz, int& pos, String& file)
+bool TfmAddEcg::GetNextEcgRow(int& anz, int& pos, String& file, int& format, String& delim)
 	{
 	fRow++;
 	if (fRow >= lvEcg->Items->Count) return false;
@@ -98,6 +98,12 @@ bool TfmAddEcg::GetNextEcgRow(int& anz, int& pos, String& file)
 	file = item->SubItems->Strings[2];
 	if (file == "") return false;
 
+	format = item->SubItems->Strings[3].ToInt();
+	if (format < 0) return false;
+
+	delim = item->SubItems->Strings[4];
+	if (delim == "") return false;
+
 	return true;
 	}
 //---------------------------------------------------------------------------
@@ -107,18 +113,29 @@ void TfmAddEcg::GetEcgFiles()
 	if (!fmFiles->GetHeader(pos)) return;
 	if (pos <= 0) return;
 
-	int anz; String file;
+	int anz; int format; String file; String delim;
 	TListItem* item;
-	while (fmFiles->GetNextEcg(anz, file))
+	while (fmFiles->GetNextEcg(anz, file, format, delim))
 		{
 		item = lvEcg->Items->Add();
 		item->Caption = lvEcg->Items->Count;
 		item->SubItems->Add(String(anz));
 		item->SubItems->Add(String(pos));
 		item->SubItems->Add(file);
+		item->SubItems->Add(String(format));
+		item->SubItems->Add(delim);
 		}
 
 	fmFiles->Close();
+	}
+//---------------------------------------------------------------------------
+bool TfmAddEcg::CheckForm()
+	{
+	if (cbPerson->ItemIndex  < 0) return false;
+	if (cbState->ItemIndex   < 0) return false;
+	if (cbLage->ItemIndex    < 0) return false;
+	if (lvEcg->Items->Count <= 0) return false;
+	return true;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -184,5 +201,15 @@ void __fastcall TfmAddEcg::TimerCallbackTimer(TObject *Sender)
 	GetEcgFiles();
 	}
 //---------------------------------------------------------------------------
-
+void __fastcall TfmAddEcg::cbPersonChange(TObject *Sender)
+	{
+	acSelect->Enabled = CheckForm();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmAddEcg::lvEcgChange(TObject *Sender, TListItem *Item,
+	  TItemChange Change)
+	{
+	acSelect->Enabled = CheckForm();
+	}
+//---------------------------------------------------------------------------
 

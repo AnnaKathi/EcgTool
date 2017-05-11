@@ -31,6 +31,7 @@ public:
 	//-- Daten speichern
 	bool	insert(sSession data);
 	bool	update(sSession data);
+	bool	insertResearcher(int session, int researcher);
 
 	//-- Daten feststellen
 	int		getSize();

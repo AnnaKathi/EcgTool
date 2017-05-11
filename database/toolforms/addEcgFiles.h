@@ -23,8 +23,7 @@ private:
 	int				fRow;
 	TTimer*			fCallbackTimer;
 
-	eDatFormat 		fFormat;
-	String			fDelim;
+	bool 			CheckForm();
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -62,6 +61,9 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall tStartupTimer(TObject *Sender);
+	void __fastcall cbPositionChange(TObject *Sender);
+	void __fastcall lvEcgChange(TObject *Sender, TListItem *Item,
+          TItemChange Change);
 	
 public:
 	__fastcall TfmEcgFiles(TComponent* Owner);
@@ -69,7 +71,7 @@ public:
 
 	bool		SetCallbackTimer(TTimer* timer);
 	bool		GetHeader(int& pos);
-	bool		GetNextEcg(int& anz, String& file);
+	bool		GetNextEcg(int& anz, String& file, int& format, String& delim);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmEcgFiles *fmEcgFiles;

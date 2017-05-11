@@ -122,6 +122,23 @@ bool cMySqlSession::update(sSession data)
 		return ok();
 	}
 //---------------------------------------------------------------------------
+bool cMySqlSession::insertResearcher(int session, int researcher)
+	{
+	if (session <= 0 || researcher <= 0) return false;
+
+	String q = "INSERT INTO `" + String(SESRE) + "` ";
+	q += "(`Sessions_ID`, `Researchers_ID`) VALUES ";
+	q += "(";
+	q += "'" + String(session)    + "', ";
+	q += "'" + String(researcher) + "'";
+	q += ")";
+
+	if (!fwork->send(q))
+		return fail(fwork->error_code, fwork->error_msg);
+	else
+		return ok();
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /******************   Funktionen: Datenfelder   ****************************/
 /***************************************************************************/

@@ -23,6 +23,8 @@ private:
 	TfmEcgFiles*	fmFiles;
 	void			GetEcgFiles();
 
+	bool			CheckForm();
+
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
 	TMemo *mInfo;
@@ -60,6 +62,9 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall lvEcgClick(TObject *Sender);
 	void __fastcall acSelectExecute(TObject *Sender);
 	void __fastcall TimerCallbackTimer(TObject *Sender);
+	void __fastcall cbPersonChange(TObject *Sender);
+	void __fastcall lvEcgChange(TObject *Sender, TListItem *Item,
+          TItemChange Change);
 
 public:	   
 	__fastcall TfmAddEcg(TComponent* Owner);
@@ -67,7 +72,7 @@ public:
 
 	bool		SetCallbackTimer(TTimer* timer);
 	bool		GetEcgHeader(int& person, int& state, int& lage);
-	bool		GetNextEcgRow(int& anz, int& pos, String& file);
+	bool		GetNextEcgRow(int& anz, int& pos, String& file, int& format, String& delim);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmAddEcg *fmAddEcg;

@@ -1,7 +1,7 @@
 object fmAddEcg: TfmAddEcg
   Left = 0
   Top = 0
-  Caption = 'EKG hinzuf'#252'gen'
+  Caption = 'Personen-EKG hinzuf'#252'gen'
   ClientHeight = 647
   ClientWidth = 499
   Color = clBtnFace
@@ -143,6 +143,7 @@ object fmAddEcg: TfmAddEcg
       Style = csDropDownList
       ItemHeight = 13
       TabOrder = 0
+      OnChange = cbPersonChange
     end
     object cbState: TComboBox
       Left = 136
@@ -152,6 +153,7 @@ object fmAddEcg: TfmAddEcg
       Style = csDropDownList
       ItemHeight = 13
       TabOrder = 1
+      OnChange = cbPersonChange
     end
     object cbLage: TComboBox
       Left = 136
@@ -161,6 +163,7 @@ object fmAddEcg: TfmAddEcg
       Style = csDropDownList
       ItemHeight = 13
       TabOrder = 2
+      OnChange = cbPersonChange
     end
   end
   object lvEcg: TListView
@@ -184,6 +187,14 @@ object fmAddEcg: TfmAddEcg
       item
         Caption = 'File'
         Width = 250
+      end
+      item
+        Caption = 'Format'
+        Width = 0
+      end
+      item
+        Caption = 'Delim'
+        Width = 0
       end>
     GridLines = True
     MultiSelect = True
@@ -192,6 +203,7 @@ object fmAddEcg: TfmAddEcg
     PopupMenu = PopupMenu
     TabOrder = 3
     ViewStyle = vsReport
+    OnChange = lvEcgChange
     OnClick = lvEcgClick
   end
   object tStartup: TTimer
@@ -209,16 +221,17 @@ object fmAddEcg: TfmAddEcg
       OnExecute = acCloseExecute
     end
     object acAdd: TAction
-      Caption = 'EKG &hinzuf'#252'gen'
+      Caption = 'EKG-Dateien &hinzuf'#252'gen'
       OnExecute = acAddExecute
     end
     object acDel: TAction
-      Caption = 'EKG &l'#246'schen'
+      Caption = 'EKG-Dateien &l'#246'schen'
       Enabled = False
       OnExecute = acDelExecute
     end
     object acSelect: TAction
-      Caption = '&Session-Daten hinzuf'#252'gen'
+      Caption = '&Personen-Daten hinzuf'#252'gen'
+      Enabled = False
       OnExecute = acSelectExecute
     end
   end

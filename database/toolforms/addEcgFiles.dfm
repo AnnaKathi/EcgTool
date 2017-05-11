@@ -58,7 +58,6 @@ object fmEcgFiles: TfmEcgFiles
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 499
     DesignSize = (
       418
       41)
@@ -80,7 +79,6 @@ object fmEcgFiles: TfmEcgFiles
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 483
     end
   end
   object pnBottom: TPanel
@@ -91,8 +89,6 @@ object fmEcgFiles: TfmEcgFiles
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 264
-    ExplicitWidth = 499
     DesignSize = (
       418
       41)
@@ -104,7 +100,6 @@ object fmEcgFiles: TfmEcgFiles
       Action = acClose
       Anchors = [akRight, akBottom]
       TabOrder = 0
-      ExplicitLeft = 558
     end
     object Button2: TButton
       Left = 8
@@ -159,6 +154,7 @@ object fmEcgFiles: TfmEcgFiles
       Style = csDropDownList
       ItemHeight = 13
       TabOrder = 0
+      OnChange = cbPositionChange
     end
     object cbFormat: TComboBox
       Left = 182
@@ -203,6 +199,14 @@ object fmEcgFiles: TfmEcgFiles
       item
         Caption = 'File'
         Width = 250
+      end
+      item
+        Caption = 'Format'
+        Width = 0
+      end
+      item
+        Caption = 'Delim'
+        Width = 0
       end>
     GridLines = True
     MultiSelect = True
@@ -211,9 +215,7 @@ object fmEcgFiles: TfmEcgFiles
     PopupMenu = PopupMenu
     TabOrder = 3
     ViewStyle = vsReport
-    ExplicitTop = -1
-    ExplicitWidth = 499
-    ExplicitHeight = 457
+    OnChange = lvEcgChange
   end
   object tStartup: TTimer
     Enabled = False
@@ -230,16 +232,17 @@ object fmEcgFiles: TfmEcgFiles
       OnExecute = acCloseExecute
     end
     object acAdd: TAction
-      Caption = 'EKG &hinzuf'#252'gen'
+      Caption = 'EKG-Datei &hinzuf'#252'gen'
       OnExecute = acAddExecute
     end
     object acDel: TAction
-      Caption = 'EKG &l'#246'schen'
+      Caption = 'EKG-Datei &l'#246'schen'
       Enabled = False
       OnExecute = acDelExecute
     end
     object acEnd: TAction
       Caption = 'EKG-Dateien &ausw'#228'hlen'
+      Enabled = False
       OnExecute = acEndExecute
     end
   end
