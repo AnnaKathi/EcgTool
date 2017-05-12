@@ -14,14 +14,14 @@ CREATE TABLE Diseases (
   PRIMARY KEY(ID)
 )
 
-CREATE TABLE Erkennungswerte (
+CREATE TABLE Features (
   ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   ECGData_ID INTEGER UNSIGNED NOT NULL,
   Algorithms_ID INTEGER UNSIGNED NOT NULL,
-  Erkennungswert VARCHAR(1024) NOT NULL,
+  Features VARCHAR(1024) NOT NULL,
   PRIMARY KEY(ID),
-  INDEX Erkennungswerte_FKIndex1(Algorithms_ID),
-  INDEX Erkennungswerte_FKIndex2(ECGData_ID)
+  INDEX Features_FKIndex1(Algorithms_ID),
+  INDEX Features_FKIndex2(ECGData_ID)
 )
 
 CREATE TABLE Lagen (

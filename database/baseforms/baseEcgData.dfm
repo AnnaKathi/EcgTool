@@ -65,6 +65,7 @@ object fmBaseEcg: TfmBaseEcg
     TabOrder = 0
     ViewStyle = vsReport
     OnClick = lvDataClick
+    OnDblClick = lvDataDblClick
   end
   object pnFilter: TPanel
     Left = 0
@@ -146,7 +147,7 @@ object fmBaseEcg: TfmBaseEcg
       Width = 106
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 3
       OnChange = cbLageChange
     end

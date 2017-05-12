@@ -5,7 +5,6 @@
 #include "algorithms/AlgChoi.h"
 #include "algorithms/AlgChoi2.h"
 #include "algorithms/EinzelAusw.h"
-#include "algorithms/Alg1.h"
 
 #include "database/classMySql.h"
 #include "database/DbPersonen.h"
@@ -15,6 +14,7 @@
 #include "DataAnalysis.h"
 #include "Sessions.h"
 #include "Testform.h"
+#include "ChoiFeatures.h"
 #include "Main.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -147,10 +147,11 @@ void TfmMain::setDbInfo()
 		setStatus("### MySql-Datenbank wird nicht verwendet ###", 1);
 	else
 		setStatus(
-		ftools.fmt("%d Personen, %d Sessions, %d EKG-Datensätze",
+		ftools.fmt("%d Personen, %d Sessions, %d EKG-Datensätze, %d Features",
 		fmysql.people.getSize(),
 		fmysql.sessions.getSize(),
-		fmysql.ecg.getSize()), 1);
+		fmysql.ecg.getSize(),
+		fmysql.features.getSize()), 1);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -191,8 +192,8 @@ void __fastcall TfmMain::acCreateSeesionExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acSingleAuswExecute(TObject *Sender)
 	{
-	LoadAlgorithmus1(this);
-	//todo später: DlgEinzelAuswertung(this);
+	DlgChoiFeatures(this);
+	setDbInfo();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acGesAuswExecute(TObject *Sender)

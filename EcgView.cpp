@@ -5,7 +5,6 @@
 
 #include <stdio.h>
 
-#include "algorithms/Alg1.h"
 #include "algorithms/features/classAC.h"
 
 #include "RequestBox.h"

@@ -2631,7 +2631,7 @@ object fmMain: TfmMain
       Height = 97
       Action = acSingleAusw
       BiDiMode = bdLeftToRight
-      Caption = '&Einzel-Auswertung'
+      Caption = 'Choi-Templates bilden'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -13

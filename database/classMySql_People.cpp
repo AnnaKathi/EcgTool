@@ -8,7 +8,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 #define TABLE  "subjects"
-#define SUBDIS "subject_disease"
+#define SUBDIS "subdiseases"
 //---------------------------------------------------------------------------
 cMySqlPeople::cMySqlPeople(cMySqlWork& worker)
 	{
@@ -36,7 +36,7 @@ bool cMySqlPeople::doQuery(String q)
 //---------------------------------------------------------------------------
 bool cMySqlPeople::get(int person)
 	{
-	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE `Ident` = " + String(person);
+	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE `ID` = " + String(person);
 	if (!fwork->query(q))
 		return false;
 
@@ -80,7 +80,7 @@ bool cMySqlPeople::nextRow()
 //---------------------------------------------------------------------------
 bool cMySqlPeople::getLast()
 	{
-	String q = "SELECT * FROM " + String(TABLE) + " ORDER BY Ident DESC LIMIT 1";
+	String q = "SELECT * FROM " + String(TABLE) + " ORDER BY ID DESC LIMIT 1";
 	if (!fwork->query(q))
 		return false;
 
@@ -125,7 +125,7 @@ bool cMySqlPeople::update(sPeople data)
 	String q = "UPDATE " + String(TABLE) + " SET ";
 	q+= "Vorname='"  + String(data.vorname)  + "',";
 	q+= "Nachname='" + String(data.nachname) + "' ";
-	q+= "WHERE Ident=" + String(data.ident);
+	q+= "WHERE ID=" + String(data.ident);
 
 	if (!fwork->send(q))
 		return fail(fwork->error_code, fwork->error_msg);
@@ -136,8 +136,8 @@ bool cMySqlPeople::update(sPeople data)
 bool cMySqlPeople::addDisease(int person, int disease)
 	{
 	String q = "SELECT * FROM " + String(SUBDIS) + " WHERE";
-	q+= " PersIdent = " + String(person) + " AND ";
-	q+= " DisIdent = "  + String(disease);
+	q+= " Subjetcs_ID = " + String(person) + " AND ";
+	q+= " Diseases_ID = "  + String(disease);
 
 	if (!fwork->query(q))
 		return fail(fwork->error_code, fwork->error_msg);
@@ -152,7 +152,7 @@ bool cMySqlPeople::addDisease(int person, int disease)
 		{
 		//Erkrankung zur Person abspeichern
 		//insert into subject_disease (PersIdent, DisIdent) VALUES (1, 7)
-		q = "INSERT INTO " + String(SUBDIS) + "(PersIdent, DisIdent) ";
+		q = "INSERT INTO " + String(SUBDIS) + "(Subjects_ID, Diseases_ID) ";
 		q+= "VALUES (" + String(person) + "," + String(disease) + ")";
 
 		if (!fwork->send(q))
@@ -171,7 +171,7 @@ String cMySqlPeople::getNameOf(int person)
 	MYSQL_RES* res_old = fres; //aktuelle Position speichern
 
 	String name = "";
-	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE `Ident` = " + String(person);
+	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE `ID` = " + String(person);
 	if (!fwork->query(q))
 		name = "- nicht gefunden (" + String(person) + ") -";
 	else
@@ -194,8 +194,8 @@ sarray_t cMySqlPeople::getDiseasesOf(int person)
 	sarray_t arr; arr.clear();
 	String q =
 		"SELECT * FROM `" + String(SUBDIS) +
-		"` WHERE `PersIdent` = " + String(person) +
-		" GROUP BY DisIdent"; //zur Sicherheit, sollte nicht nötig sein
+		"` WHERE `Subjects_ID` = " + String(person) +
+		" GROUP BY Dieases_ID"; //zur Sicherheit, sollte nicht nötig sein
 	if (!fwork->query(q))
 		; //keine Erkankungen vorhanden
 	else
@@ -254,7 +254,7 @@ bool cMySqlPeople::listInCombo(TComboBox* cb, int mode) //mode ist mit 0 vorbese
 //---------------------------------------------------------------------------
 bool cMySqlPeople::deleteByIdent(int ident)
 	{
-	String q = "DELETE FROM `" + String(TABLE) + "` WHERE `Ident` = " + String(ident);
+	String q = "DELETE FROM `" + String(TABLE) + "` WHERE `ID` = " + String(ident);
 	if (!fwork->send(q))
 		return fail(fwork->error_code, fwork->error_msg);
 	else

@@ -28,13 +28,16 @@ class TfmBaseEcg : public TForm
 private:
 	cTools		ftools;
 	void 		snapTo(TWinControl* container, TAlign align);
-	void 		MsgBox(char* msg, ...);
 
 	bool		bInShow;
 
 	sFilterEcg  ffilter;
 	bool 		BuildFilter();
 	bool 		CheckFilter();
+
+	bool		bSelectEcg;
+	int			iSelectedEcg;
+	TTimer*		CallbackSelected;
 
 
 __published:	// IDE-verwaltete Komponenten
@@ -80,6 +83,8 @@ public:
 	void		DislockFilter();
 	bool		ShowData();
 	bool		ShowEcgOf(int person);
+	void		SelectEcg(TTimer* timer);
+	int			GetSelectedEcg();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmBaseEcg *fmBaseEcg;

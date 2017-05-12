@@ -64,6 +64,12 @@ bool cMySqlEcgData::loadTable()
 	return doQuery(q);
 	}
 //---------------------------------------------------------------------------
+bool cMySqlEcgData::loadByIdent(int ecg)
+	{
+	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE ID = " + String(ecg);
+	return doQuery(q);
+	}
+//---------------------------------------------------------------------------
 bool cMySqlEcgData::loadByPerson(int person)
 	{
 	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE Subjects_ID = " + String(person);

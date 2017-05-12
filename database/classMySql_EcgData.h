@@ -28,6 +28,7 @@ public:
 	bool 	save(sEcgData data);
 
 	bool	loadTable(); //lädt die ganze Tabelle
+	bool	loadByIdent(int ecg);
 	bool	loadByPerson(int person); //lädt nur die Daten von Person
 	bool	loadBySession(int session);
 	bool 	getLast();

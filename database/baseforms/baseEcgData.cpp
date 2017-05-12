@@ -21,6 +21,8 @@ TfmBaseEcg* CreateEcgForm(TForm* caller, TWinControl* container)
 __fastcall TfmBaseEcg::TfmBaseEcg(TComponent* Owner, TWinControl* Container, TColor color)
 	: TForm(Owner)
 	{
+	bSelectEcg = false;
+
 	if (Container)
 		snapTo(Container, alClient);
 	}
@@ -71,23 +73,6 @@ void __fastcall TfmBaseEcg::FormClose(TObject *Sender,
 /******************   Funktionen: private   ********************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-void TfmBaseEcg::MsgBox(char* msg, ...)
-	{
-	char    buffer[512];
-	int     nsiz;
-	va_list argptr;
-
-	va_start(argptr, msg);
-	nsiz = vsnprintf(0, 0, msg, argptr);
-	if (nsiz >= sizeof(buffer)-2) nsiz = sizeof(buffer)-2;
-
-	vsnprintf(buffer, nsiz, msg, argptr);
-	buffer[nsiz] = 0;
-
-	Application->MessageBox(String(buffer).c_str(), "Fehler", MB_OK);
-	va_end(argptr);
-	}
-//---------------------------------------------------------------------------
 /***************************************************************************/
 /******************   Funktionen: public   *********************************/
 /***************************************************************************/
@@ -112,7 +97,7 @@ bool TfmBaseEcg::ShowData()
 	//Daten aus Datenbank anzeigen
 	if (!fmysql.ecg.loadTable())
 		{
-		MsgBox("Die Daten (EKG) konnten nicht geladen werden. "
+		ftools.ErrBox("Die Daten (EKG) konnten nicht geladen werden. "
 			"Die Datenbank  meldet: %s", fmysql.diseases.error_msg);
 		return false;
 		}
@@ -148,7 +133,7 @@ bool TfmBaseEcg::ShowEcgOf(int person)
 	//Daten aus Datenbank anzeigen
 	if (!fmysql.ecg.loadByPerson(person))
 		{
-		MsgBox("Die Daten (EKG) konnten nicht geladen werden. "
+		ftools.ErrBox("Die Daten (EKG) konnten nicht geladen werden. "
 			"Die Datenbank  meldet: %s", fmysql.ecg.error_msg);
 		return false;
 		}
@@ -207,6 +192,17 @@ bool TfmBaseEcg::CheckFilter()
 	return true;
 	}
 //---------------------------------------------------------------------------
+void TfmBaseEcg::SelectEcg(TTimer* timer)
+	{
+	bSelectEcg = true;
+	CallbackSelected = timer;
+	}
+//---------------------------------------------------------------------------
+int TfmBaseEcg::GetSelectedEcg()
+	{
+	return iSelectedEcg;
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /********************   Actions   ******************************************/
 /***************************************************************************/
@@ -237,7 +233,7 @@ void __fastcall TfmBaseEcg::acDelExecute(TObject *Sender)
 	int id = (int)item->Data;
 	if (!fmysql.ecg.deleteByIdent(id))
 		{
-		MsgBox("Das EKG <%d> konnten nicht gelöscht werden. "
+		ftools.ErrBox("Das EKG <%d> konnten nicht gelöscht werden. "
 			"Die Datenbank  meldet: %s", id, fmysql.diseases.error_msg);
 		}
 	else
@@ -285,7 +281,14 @@ void __fastcall TfmBaseEcg::edNameChange(TObject *Sender)
 void __fastcall TfmBaseEcg::lvDataDblClick(TObject *Sender)
 	{
 	TListItem* item = lvData->Selected;
-	if (item)
+	if (!item) return;
+
+	if (bSelectEcg)
+		{
+		iSelectedEcg = (int)item->Data;
+		CallbackSelected->Enabled = true;
+		}
+	else
 		acChangeExecute(Sender);
 	}
 //---------------------------------------------------------------------------

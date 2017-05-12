@@ -10,6 +10,7 @@
 #include "classMySql_EcgData.h"
 #include "classMySql_People.h"
 #include "classMySql_Session.h"
+#include "classMySql_Features.h"
 #include "classMySql_DescDb.h"
 //---------------------------------------------------------------------------
 class PACKAGE cMySql : public cBase
@@ -30,6 +31,7 @@ public:
 __property cMySqlEcgData&  ecg      = { read=get_ecg };
 __property cMySqlPeople&   people   = { read=get_people   };
 __property cMySqlSession&  sessions = { read=get_sessions };
+__property cMySqlFeature&  features = { read=get_features };
 
 __property cMySqlDescDb&   researchers = { read=get_researchers };
 __property cMySqlDescDb&   algorithms  = { read=get_algorithms  };
@@ -51,6 +53,9 @@ private:
 
 	cMySqlSession*	fsessions;
 	cMySqlSession&	get_sessions();
+
+	cMySqlFeature*	ffeatures;
+	cMySqlFeature&	get_features();
 
 	//description databases
 	cMySqlDescDb*	fdiseases;     cMySqlDescDb&	get_diseases();

@@ -185,5 +185,13 @@
     <Transaction>2017.05.11 11:25:41.923.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\baseforms\baseSession.cpp</Transaction>
     <Transaction>2017.05.11 11:25:41.923.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\baseforms\baseSession.h</Transaction>
     <Transaction>2017.05.11 11:25:41.923.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\database\baseforms\baseSession.dfm</Transaction>
+    <Transaction>2017.05.12 10:51:04.292.cpp,D:\src\EcgTool\algorithms\classAlg1.cpp=</Transaction>
+    <Transaction>2017.05.12 10:52:19.842.cpp,D:\src\EcgTool\algorithms\Alg1.cpp=</Transaction>
+    <Transaction>2017.05.12 10:52:19.842.dfm,D:\src\EcgTool\algorithms\Alg1.dfm=</Transaction>
+    <Transaction>2017.05.12 10:53:56.623.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\ChoiFeatures.cpp</Transaction>
+    <Transaction>2017.05.12 10:53:56.623.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\ChoiFeatures.h</Transaction>
+    <Transaction>2017.05.12 10:53:56.623.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\ChoiFeatures.dfm</Transaction>
+    <Transaction>2017.05.12 10:56:18.825.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\classMySql_Features.cpp</Transaction>
+    <Transaction>2017.05.12 10:56:18.825.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\classMySql_Features.h</Transaction>
   </Transactions>
 </BorlandProject>
