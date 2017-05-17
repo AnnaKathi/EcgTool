@@ -522,6 +522,7 @@ void __fastcall TfmEcg::btSave2Click(TObject *Sender)
 			"FEHLER",
 			MB_OK);
 		}
+	Print("Daten erfolgreich gespeichert, Ident = %d", fmysql.ecg.row.ident);
 
 	btSave2->Enabled = true;
 	}

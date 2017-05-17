@@ -10,6 +10,7 @@
 #include <ExtCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
+#include "ecg/classEcg.h"
 #include "database/baseforms/baseEcgData.h"
 #include "algorithms/features/classChoiFeatures.h"
 //---------------------------------------------------------------------------
@@ -24,6 +25,7 @@ private:
 
 	cChoiFeat		fChoi;
 	void			GetFeatures();
+	void			GetAllFeatures();
 
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
@@ -39,6 +41,7 @@ __published:	// IDE-verwaltete Komponenten
 	TTimer *CallbackEcg;
 	TMemo *memo;
 	TButton *btFeatures;
+	TButton *btBuildAll;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -46,6 +49,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acCloseExecute(TObject *Sender);
 	void __fastcall CallbackEcgTimer(TObject *Sender);
 	void __fastcall btFeaturesClick(TObject *Sender);
+	void __fastcall btBuildAllClick(TObject *Sender);
 
 public:		
 	__fastcall TfmChoiFeatures(TComponent* Owner);

@@ -190,7 +190,7 @@ void TfmChoi::GetRpeaksChoi()
 	fChoiFeat.Threshold = edThreshold->Text.ToDouble();
 	fChoiFeat.Overlap   = edOverlap->Text.ToInt();
 
-	if (!fChoiFeat.FindRPeaks(fecg.data.data_array))
+	if (!fChoiFeat.FindRPeaks1(fecg.data.data_array))
 		{
 		Print("\t## Fehler aufgetreten: %d - %s", fChoiFeat.error_code, fChoiFeat.error_msg);
 		return;
@@ -401,7 +401,7 @@ void __fastcall TfmChoi::Button3Click(TObject *Sender)
 
 	fChoiFeat.Threshold = edThreshold->Text.ToDouble();
 	fChoiFeat.Overlap   = edOverlap->Text.ToInt();
-	iarray_t features = fChoiFeat.getFeatures(fecg.data.data_array);
+	iarray_t features = fChoiFeat.getFeatures1(fecg.data.data_array);
 
 	Print("");
 	Print("FEATURES");

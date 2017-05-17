@@ -79,18 +79,36 @@ iarray_t cChoiFeat::FindOverlaps(iarray_t candidates)
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
-/******************   public functions   ***********************************/
+/******************   function as described in paper   *********************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-iarray_t cChoiFeat::getFeatures(iarray_t curve)
+iarray_t cChoiFeat::getFeatures1(iarray_t curve)
 	{
 	fArray_Features.clear();
-	if (!FindRPeaks(curve))   return fArray_Features;
+	if (!FindRPeaks1(curve))  return fArray_Features;
 	if (!FindFeatures(curve)) return fArray_Features;
 	return fArray_Features;
 	}
 //---------------------------------------------------------------------------
-bool cChoiFeat::FindRPeaks(iarray_t curve)
+String cChoiFeat::getFeaturesStr1(iarray_t curve)
+	{
+	String features = "";
+	if (!FindRPeaks1(curve))  return "";
+	if (!FindFeatures(curve)) return "";
+
+	for (iarray_itr itr = fArray_Features.begin(); itr != fArray_Features.end(); itr++)
+		{
+		ilist_t& v = itr->second;
+		if (features == "")
+			features = String(v[0]);
+		else
+			features += ";" + String(v[0]);
+		}
+
+	return features;
+	}
+//---------------------------------------------------------------------------
+bool cChoiFeat::FindRPeaks1(iarray_t curve)
 	{
 	//Die R-Peaks anhand des Schwellenwerts finden und zurückgeben
 	fArray_Rpeaks.clear();
@@ -145,6 +163,55 @@ bool cChoiFeat::FindRPeaks(iarray_t curve)
 		return ok();
 		}
 	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   amendment: use Anna's R-Peak-class *******************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+iarray_t cChoiFeat::getFeatures2(iarray_t curve)
+	{
+	fArray_Features.clear();
+	if (!FindRPeaks2(curve))  return fArray_Features;
+	if (!FindFeatures(curve)) return fArray_Features;
+	return fArray_Features;
+	}
+//---------------------------------------------------------------------------
+String cChoiFeat::getFeaturesStr2(iarray_t curve)
+	{
+	String features = "";
+	if (!FindRPeaks2(curve))  return "";
+	if (!FindFeatures(curve)) return "";
+
+	for (iarray_itr itr = fArray_Features.begin(); itr != fArray_Features.end(); itr++)
+		{
+		ilist_t& v = itr->second;
+		if (features == "")
+			features = String(v[0]);
+		else
+			features += ";" + String(v[0]);
+		}
+
+	return features;
+	}
+//---------------------------------------------------------------------------
+bool cChoiFeat::FindRPeaks2(iarray_t curve)
+	{
+	fArray_Rpeaks.clear();
+
+	if (curve.size() <= 0)
+		return fail(2, "Es wurde keine Kurve übergeben");
+
+	iarray_t arr = fecg.rpeaks.find(curve, NULL);
+	if (arr.size() <= 0)
+		return fail(2, "Die R-Peaks konnten nicht gesetzt werden");
+
+	fArray_Rpeaks = arr;
+	return ok();
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   find all features from curve   ***********************/
+/***************************************************************************/
 //---------------------------------------------------------------------------
 bool cChoiFeat::FindFeatures(iarray_t curve)
 	{
@@ -243,6 +310,10 @@ bool cChoiFeat::FindFeatures(iarray_t curve)
 	fArray_Features[7].push_back(TAmp / anz);
 	return ok();
 	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/******************   find one single feature-set   ************************/
+/***************************************************************************/
 //---------------------------------------------------------------------------
 bool cChoiFeat::getSingleFeatures(iarray_t ecg, int prev_zeit, int curr_zeit, int next_zeit)
 	{

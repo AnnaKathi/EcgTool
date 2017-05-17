@@ -25,6 +25,7 @@ public:
 	//-- Daten laden
 	bool 	get(int feature); //einzelnen Datensatz laden
 	bool	loadTable(String order = ""); //lädt die gesamte Tabelle
+	bool 	select(int ecg, int alg);
 	bool	nextRow();
 	bool	getLast();
 

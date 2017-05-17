@@ -55,6 +55,22 @@ bool cMySqlFeature::loadTable(String order) //order ist vorbesetzt mit ""
 	return ok();
 	}
 //---------------------------------------------------------------------------
+bool cMySqlFeature::select(int ecg, int alg)
+	{
+	if (ecg <= 0) return fail(2, "Es wurde kein EKG-Ident übergeben");
+	if (alg <= 0) return fail(2, "Es wurde kein Algorithmus-Ident übergeben");
+
+	String q = "SELECT * FROM `" + String(TABLE) + "` ";
+	q+= "WHERE `ECGData_ID` = " + String(ecg) + " AND ";
+	q+= "`Algorithms_ID` = " + String(alg);
+
+	if (!fwork->query(q))
+		return fail(fwork->error_code, fwork->error_msg);
+
+	fres = fwork->getResult();
+	return ok();
+	}
+//---------------------------------------------------------------------------
 bool cMySqlFeature::nextRow()
 	{
 	if (!fwork->isReady())

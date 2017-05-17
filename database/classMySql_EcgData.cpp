@@ -60,26 +60,41 @@ bool cMySqlEcgData::save(sEcgData data)
 //---------------------------------------------------------------------------
 bool cMySqlEcgData::loadTable()
 	{
-	String q = "SELECT * FROM " + String(TABLE);
+	String q = "SELECT * FROM `" + String(TABLE) + "`";
 	return doQuery(q);
 	}
 //---------------------------------------------------------------------------
 bool cMySqlEcgData::loadByIdent(int ecg)
 	{
-	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE ID = " + String(ecg);
-	return doQuery(q);
+	String condition = "ID = " + String(ecg);
+	return load(condition);
 	}
 //---------------------------------------------------------------------------
 bool cMySqlEcgData::loadByPerson(int person)
 	{
-	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE Subjects_ID = " + String(person);
-	return doQuery(q);
+	String condition = "Subjects_ID = " + String(person);
+	return load(condition);
 	}
 //---------------------------------------------------------------------------
 bool cMySqlEcgData::loadBySession(int session)
 	{
-	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE Sessions_ID = " + String(session);
-	return doQuery(q);
+	String condition = "Sessions_ID = " + String(session);
+	return load(condition);
+	}
+//---------------------------------------------------------------------------
+bool cMySqlEcgData::load(String condition)
+	{
+	if (condition == "") return fail(1, "Es wurde keine Bedingung übergeben");
+	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE " + condition;
+		
+	if (!doQuery(q))
+		return fail(fwork->error_code, fwork->error_msg);
+
+	if (fres == NULL) return fail(fwork->error_code, fwork->error_msg);
+	frow = mysql_fetch_row(fres);
+	if (frow == NULL) return fail(fwork->error_code, fwork->error_msg);
+	if (!getRow())    return fail(1, "Die Datenzeile konnte nicht eingelesen werden.");
+	return ok();
 	}
 //---------------------------------------------------------------------------
 bool cMySqlEcgData::nextRow()
@@ -151,7 +166,7 @@ bool cMySqlEcgData::getRow()
 
 	//Die EKG-Werte sind als semikolon-getrennter Longtext gespeichert
 	if (!LongstrToData(String(frow[6]), fdata))
-		return fail(6, "Das Longtext-Feld 'Werte' konnte nicht eingelsen werden");
+		return fail(6, "Das Longtext-Feld 'Werte' konnte nicht eingelesen werden");
 
 	return true;
 	}
@@ -167,6 +182,8 @@ bool cMySqlEcgData::LongstrToData(String str, sEcgData& data)
 		str = str.SubString(pos+1, 99999);
 
 		data.werte[ix] = atof(feld);
+		data.array_werte[ix].push_back(ix); //ix = zeit
+		data.array_werte[ix].push_back(atof(feld));
 		ix++;
 		}
 
@@ -174,6 +191,8 @@ bool cMySqlEcgData::LongstrToData(String str, sEcgData& data)
 		{
 		sprintf(feld, "%s", str);
 		data.werte[ix] = atof(feld);
+		data.array_werte[ix].push_back(ix); //ix = zeit
+		data.array_werte[ix].push_back(atof(feld));
 		}
 
 	return true;

@@ -16,6 +16,9 @@ object fmChoiFeatures: TfmChoiFeatures
   OnClose = FormClose
   OnKeyPress = FormKeyPress
   OnShow = FormShow
+  DesignSize = (
+    658
+    603)
   PixelsPerInch = 96
   TextHeight = 13
   object Bevel1: TBevel
@@ -48,7 +51,6 @@ object fmChoiFeatures: TfmChoiFeatures
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 569
     DesignSize = (
       658
       41)
@@ -70,7 +72,6 @@ object fmChoiFeatures: TfmChoiFeatures
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 553
     end
   end
   object Panel1: TPanel
@@ -81,7 +82,6 @@ object fmChoiFeatures: TfmChoiFeatures
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 569
     DesignSize = (
       658
       41)
@@ -93,7 +93,6 @@ object fmChoiFeatures: TfmChoiFeatures
       Action = acClose
       Anchors = [akRight, akBottom]
       TabOrder = 0
-      ExplicitLeft = 486
     end
   end
   object pnEcg: TPanel
@@ -109,6 +108,7 @@ object fmChoiFeatures: TfmChoiFeatures
     Top = 47
     Width = 185
     Height = 242
+    Anchors = [akLeft, akTop, akRight]
     ReadOnly = True
     ScrollBars = ssBoth
     TabOrder = 3
@@ -121,6 +121,15 @@ object fmChoiFeatures: TfmChoiFeatures
     Caption = 'Features berechnen'
     TabOrder = 4
     OnClick = btFeaturesClick
+  end
+  object btBuildAll: TButton
+    Left = 463
+    Top = 344
+    Width = 187
+    Height = 25
+    Caption = 'Alle Features erstellen'
+    TabOrder = 5
+    OnClick = btBuildAllClick
   end
   object tStartup: TTimer
     Enabled = False

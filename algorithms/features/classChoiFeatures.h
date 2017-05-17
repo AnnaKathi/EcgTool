@@ -6,6 +6,7 @@
 #include "../../basics/classArray.h"
 #include "../../basics/classTools.h"
 #include "../../basics/classMath.h"
+#include "../../ecg/classEcg.h"
 //---------------------------------------------------------------------------
 class PACKAGE cChoiFeat : public cBase
 	{
@@ -13,11 +14,17 @@ public:
 	cChoiFeat();
 	~cChoiFeat();
 
-	iarray_t	getFeatures(iarray_t curve); //ruft FindRPeaks und FindFeatures auf, setzt die übergreifenden Durchschnittssfeatures
-	bool		FindRPeaks(iarray_t curve);
-	bool		FindFeatures(iarray_t curve);
+	iarray_t	getFeatures1(iarray_t curve); //ruft FindRPeaks und FindFeatures auf, setzt die übergreifenden Durchschnittssfeatures
+	String		getFeaturesStr1(iarray_t curve);
+	bool		FindRPeaks1(iarray_t curve);
 
+	iarray_t	getFeatures2(iarray_t curve); //Annas Klassen zum R-Peak-Handling verwenden
+	String		getFeaturesStr2(iarray_t curve);
+	bool		FindRPeaks2(iarray_t curve);
+
+	bool		FindFeatures(iarray_t curve);
 	bool		getSingleFeatures(iarray_t ecg, int prev_zeit, int curr_zeit, int next_zeit);
+
 
 __property double   Threshold = { read=get_Threshold, write=set_Threshold };
 __property int	    Overlap   = { read=get_Overlap,   write=set_Overlap   };
@@ -30,6 +37,7 @@ private:
 	cArray		farray;
 	cTools		ftools;
 	cMath		fmath;
+	cEcg		fecg;
 
 	double		fParameter_Threshold;
 	void		set_Threshold(double threshold);
