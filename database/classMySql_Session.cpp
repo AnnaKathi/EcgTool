@@ -198,7 +198,7 @@ bool cMySqlSession::deleteByIdent(int ident)
 		return fail(fwork->error_code, fwork->error_msg);
 	else
 		{
-		//todo: Session_Researchers löschen
+		//Session_Researchers löschen
 		q = "DELETE FROM `" + String(SESRE) + "` WHERE `Sessions_ID` = " + String(ident);
 		if (!fwork->send(q))
 			return fail(fwork->error_code, fwork->error_msg);

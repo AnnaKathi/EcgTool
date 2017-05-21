@@ -38,7 +38,7 @@ public:
 
 	bool		doModel(svm_problem problem, svm_parameter param);
 
-
+__property int AlgNr   = { read=get_algdbnr };
 __property int version = { read=get_LibSVM_Version };
 
 __property iarray_t train_data = { read=get_train_data };
@@ -46,6 +46,9 @@ __property svm_problem problem = { read=get_problem };
 __property svm_parameter param = { read=get_param };
 
 private:
+	int			fAlg_DbNr;
+	int			get_algdbnr();
+
 	cEcg*		fecg;
 	cTools		ftools;
 	cChoiFeat	fChoiFeat;

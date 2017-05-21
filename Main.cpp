@@ -134,7 +134,7 @@ bool TfmMain::setupDatabase()
 			"Datenbank erstellen ?",
 			MB_YESNO) == IDNO)
 			{
-			//todo?? fmysql.close();
+			fmysql.close();
 			return false;
 			}
 

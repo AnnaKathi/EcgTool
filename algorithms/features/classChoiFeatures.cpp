@@ -9,6 +9,7 @@
 //---------------------------------------------------------------------------
 cChoiFeat::cChoiFeat()
 	{
+	fAlg_DbNr = 2;
 	fParameter_Threshold    = 0.4;
 	fParameter_Overlap_Time = 100;
 	}
@@ -444,7 +445,11 @@ iarray_t cChoiFeat::get_Array_Single_Features()
 	return fArray_Single_Features;
 	}
 //---------------------------------------------------------------------------
-
+int cChoiFeat::get_algdbnr()
+	{
+	return fAlg_DbNr;
+	}
+//---------------------------------------------------------------------------
 		/* obsolete: Berechnung der Features in FindFeatures()
 		iarray_itr itr_curve = curve.find(zeit);
 		v = itr_curve->second;

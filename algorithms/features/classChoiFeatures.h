@@ -25,6 +25,7 @@ public:
 	bool		FindFeatures(iarray_t curve);
 	bool		getSingleFeatures(iarray_t ecg, int prev_zeit, int curr_zeit, int next_zeit);
 
+__property int		AlgNr     = { read=get_algdbnr };
 
 __property double   Threshold = { read=get_Threshold, write=set_Threshold };
 __property int	    Overlap   = { read=get_Overlap,   write=set_Overlap   };
@@ -34,6 +35,9 @@ __property iarray_t Features  = { read=get_Array_Features }; //Durchschnittsfeat
 __property iarray_t SingleFeatures = { read=get_Array_Single_Features }; //Features eines Herzschlags
 
 private:
+	int			fAlg_DbNr;
+	int			get_algdbnr();
+
 	cArray		farray;
 	cTools		ftools;
 	cMath		fmath;

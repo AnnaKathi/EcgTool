@@ -13,12 +13,14 @@
 #include "ecg/classEcg.h"
 #include "database/classMySql.h"
 #include "database/baseforms/baseEcgData.h"
+#include "algorithms/classifications/classChoiSVM.h"
 //---------------------------------------------------------------------------
 class TfmChoiClassification : public TForm
 {
 private:
 	cTools			ftools;
 	cEcg			fecg;
+	cChoiSVM		fChoiSvm;
 	void 			Print(char* msg, ...);
 
 	TfmBaseEcg*		TfmEcg;

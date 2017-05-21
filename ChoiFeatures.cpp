@@ -115,7 +115,7 @@ void TfmChoiFeatures::GetFeatures()
 
 	sFeature data;
 	data.ecgId = fmysql.ecg.row.ident;
-	data.algId = 2; //todo
+	data.algId = fChoi.AlgNr;
 	data.features = features;
 
 	if (!fmysql.features.insert(data))
@@ -163,7 +163,7 @@ void TfmChoiFeatures::GetAllFeatures()
 		Print("EKG %d (%s)", data.ident, fmysql.people.getNameOf(data.person));
 
 		bool vorhanden = false;
-		if (!fmysql.features.select(data.ident, 2))
+		if (!fmysql.features.select(data.ident, fChoi.AlgNr))
 			{
 			Print("\# Fehler in Feature-Select, DB meldet: %s", fmysql.features.error_msg);
 			break;
@@ -202,7 +202,7 @@ void TfmChoiFeatures::GetAllFeatures()
 			}
 
 		featdata.ecgId = data.ident;
-		featdata.algId = 2; //todo
+		featdata.algId = fChoi.AlgNr;
 		featdata.features = features;
 
 		if (vorhanden)
