@@ -374,37 +374,49 @@ String cTools::ArrayToText(iarray_t array, String delim)
 bool cTools::IsDebug()
 	{
 	TIniFile* Ini = new TIniFile(GetIniFile());
-	int found = Ini->ReadInteger("HomeStations", cpData.CompName, 0);
+	int found = Ini->ReadInteger("HomeStations", GetComputer(), 0);
 	delete Ini;
 	return found == 1 ? true : false;
 	}
 //---------------------------------------------------------------------------
-bool cTools::GetComputerDaten()
+String cTools::GetComputer()
 	{
 	char comp[64];
 	DWORD nSize = sizeof(comp);
 	GetComputerName(comp, &nSize);
-	fcpData.CompName = String(comp);
-
+	return String(comp);
+	}
+//---------------------------------------------------------------------------
+String cTools::GetComputerBS()
+	{
 #ifdef LINUX
-	fcpData.BS = "Linux";
+	return "Linux";
 
 #elif defined(WIN32)
-	fcpData.BS = "Windows";
-	fcpData.BSProzessor = "32Bit";
+	return "Windows";
 
 #elif defined(WIN64)
-	fcpData.BS = "Windows";
+	return "Windows";
 	fcpData.BSProzessor = "64Bit";
+#endif
+
+	return "";
+	}
+//---------------------------------------------------------------------------
+String cTools::GetComputerProzessor()
+	{
+#ifdef LINUX
+	return "Linux";
+
+#elif defined(WIN32)
+	return "32Bit";
+
+#elif defined(WIN64)
+	return "64Bit"; //TODO funktioniert nicht !!
 
 #endif
 
-	return true;
-	}
-//---------------------------------------------------------------------------
-cpComputerData cTools::get_cpdata()
-	{
-	return fcpData;
+	return "";
 	}
 //---------------------------------------------------------------------------
 

@@ -30,13 +30,9 @@ bool cMySqlWork::open()
 	bMySqlConnected = false;
 
 	//erst einmal als Klartext aus Ini-Datei lesen, todo: umstellen auf Dialog?
-	char comp[64];
-	DWORD nSize = sizeof(comp);
-	GetComputerName(comp, &nSize);
-
 	String serv = Ini->ReadString("MySql", "Server", "");
 	String user = Ini->ReadString("MySql", "User",   "");
-	String pass = Ini->ReadString("MySql", "Pwd" + ftools.cpData.CompName, "");
+	String pass = Ini->ReadString("MySql", "Pwd" + ftools.GetComputer(), "");
 	String data = Ini->ReadString("MySql", "Data",   "");
 
 	int port = Ini->ReadInteger("MySql", "Port", 0);
@@ -86,7 +82,7 @@ bool cMySqlWork::openWithoutDb()
 	//erst einmal als Klartext aus Ini-Datei lesen, todo: umstellen auf Dialog?
 	String serv = Ini->ReadString("MySql", "Server", "");
 	String user = Ini->ReadString("MySql", "User",   "");
-	String pass = Ini->ReadString("MySql", "Pwd" + ftools.cpData.CompName, "");
+	String pass = Ini->ReadString("MySql", "Pwd" + ftools.GetComputer(), "");
 	//String data = Ini->ReadString("MySql", "Data",   "");
 
 	int port = Ini->ReadInteger("MySql", "Port", 0);

@@ -50,8 +50,7 @@ void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 
 	setStatus("startup EcgTool...loading MySql-Database");
 
-	ftools.GetComputerDaten();
-	if (ftools.cpData.BS != "Windows")
+	if (ftools.GetComputerBS() != "Windows")
 		{
 		if (Application->MessageBox(
 			ftools.fmt(
@@ -59,7 +58,8 @@ void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 				"Das Programm ist (vorläufig) auf ein Windows-Betriebssystem ausgelegt. "
 				"Einige Funktionen sind mit anderen Betriebssystemem unter Umständen "
 				"nicht verfügbar.\r\n\r\n"
-				"Soll das EcgTool-Programm abgebrochen werden?", ftools.cpData.BS).c_str(),
+				"Soll das EcgTool-Programm abgebrochen werden?",
+				ftools.GetComputerBS()).c_str(),
 			"Falsches Betriebssystem", MB_YESNO) == ID_YES)
 			{
 			Close();
@@ -67,7 +67,7 @@ void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 			}
 		}
 
-	if (ftools.cpData.BSProzessor != "64Bit")
+	if (ftools.GetComputerProzessor() != "64Bit")
 		{
 		/*
 		Application->MessageBox(
