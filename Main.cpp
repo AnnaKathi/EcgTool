@@ -15,6 +15,7 @@
 #include "Sessions.h"
 #include "Testform.h"
 #include "ChoiFeatures.h"
+#include "ChoiKlassifizierung.h"
 #include "Main.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -198,7 +199,7 @@ void __fastcall TfmMain::acSingleAuswExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acGesAuswExecute(TObject *Sender)
 	{
-	//
+	DlgChoiClassification(this);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acLookIntoDataExecute(TObject *Sender)

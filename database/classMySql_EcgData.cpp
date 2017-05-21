@@ -173,6 +173,7 @@ bool cMySqlEcgData::getRow()
 //---------------------------------------------------------------------------
 bool cMySqlEcgData::LongstrToData(String str, sEcgData& data)
 	{
+	//todo use fTools-Funktionen
 	int pos; String ww;
 	int ix = 0;
 	char feld[32];
@@ -200,6 +201,7 @@ bool cMySqlEcgData::LongstrToData(String str, sEcgData& data)
 //---------------------------------------------------------------------------
 String cMySqlEcgData::DataToLongtext(sEcgData data)
 	{
+	//todo use fTools-Funktionen
 	String s = "";
 	char feld[64]; double wert;
 	for (int i = 0; i < 3000; i++)

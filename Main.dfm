@@ -4210,7 +4210,7 @@ object fmMain: TfmMain
       Height = 97
       Action = acGesAusw
       BiDiMode = bdLeftToRight
-      Caption = '&Gesamt-Auswertung'
+      Caption = '&Klassifizierung Choi'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -13

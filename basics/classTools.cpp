@@ -232,19 +232,8 @@ void cTools::ListViewSave(TForm* fm, TListView* lv)
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
-/**************   Sonstige Funktionen   ************************************/
+/**************   Bildschirm- und Printmeldungen   *************************/
 /***************************************************************************/
-//---------------------------------------------------------------------------
-bool cTools::IsDebug()
-	{
-	TIniFile* Ini = new TIniFile(GetIniFile());
-	char comp[64];
-	DWORD nSize = sizeof(comp);
-	GetComputerName(comp, &nSize);
-	int found = Ini->ReadInteger("HomeStations", comp, 0);
-	delete Ini;
-	return found == 1 ? true : false;
-	}
 //---------------------------------------------------------------------------
 void cTools::ErrBox(char* msg, ...)
 	{
@@ -279,6 +268,10 @@ void cTools::MsgBox(char* msg, ...)
 
 	Application->MessageBox(buffer, "Meldung", MB_OK);
 	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/**************   String-Funktionen   **************************************/
+/***************************************************************************/
 //---------------------------------------------------------------------------
 String cTools::fmt(char* msg, ...)
 	{
@@ -317,6 +310,75 @@ int cTools::replace(String& str, String old, String neu)
 		}
 
 	return count;
+	}
+//---------------------------------------------------------------------------
+iarray_t cTools::TextToArray(String text, String delim)
+	{
+	iarray_t result; result.clear();
+	if (text == "" || delim == "") return result;
+
+	int pos; String ww;
+	int ix = 0;
+	String feld;
+	double wert;
+	while ((pos = text.Pos(delim)) > 0)
+		{
+		feld = text.SubString(0, pos-1);
+		text = text.SubString(pos+1, 99999);
+
+		replace(feld, ",", ".");
+		result[ix].push_back(ix);
+		result[ix].push_back(atof(feld.c_str()));
+		ix++;
+
+		if (ix >= 4000) break; //Schutz vor Endlosschleifen
+		}
+
+	if (text != "")
+		{
+		replace(text, ",", ".");
+		result[ix].push_back(ix);
+		result[ix].push_back(atof(text.c_str()));
+		}
+
+	return result;
+	}
+//---------------------------------------------------------------------------
+String cTools::ArrayToText(iarray_t array, String delim)
+	{
+	//Erwartet ein Array der Form:
+	//		ix: Wert (double)
+	String s = "";
+	if (array.size() <= 0 || delim == "") return s;
+
+	char feld[64]; double wert;
+
+	for (iarray_itr itr = array.begin(); itr != array.end(); itr++)
+		{
+		ilist_t& v = itr->second;
+
+		if (s == "")
+			s = String(v[1]);
+		else
+			s += delim + String(v[1]);
+		}
+
+	return s;
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/**************   Sonstige Funktionen   ************************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+bool cTools::IsDebug()
+	{
+	TIniFile* Ini = new TIniFile(GetIniFile());
+	char comp[64];
+	DWORD nSize = sizeof(comp);
+	GetComputerName(comp, &nSize);
+	int found = Ini->ReadInteger("HomeStations", comp, 0);
+	delete Ini;
+	return found == 1 ? true : false;
 	}
 //---------------------------------------------------------------------------
 

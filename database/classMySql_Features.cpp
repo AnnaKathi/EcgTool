@@ -67,7 +67,14 @@ bool cMySqlFeature::select(int ecg, int alg)
 	if (!fwork->query(q))
 		return fail(fwork->error_code, fwork->error_msg);
 
+	//todo return fail() ??
 	fres = fwork->getResult();
+	if (fres == NULL) return false;
+
+	frow = mysql_fetch_row(fres);
+	if (frow == NULL) return false;
+	if (!ParseRow()) return false;
+
 	return ok();
 	}
 //---------------------------------------------------------------------------

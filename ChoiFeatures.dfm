@@ -3,7 +3,7 @@ object fmChoiFeatures: TfmChoiFeatures
   Top = 0
   Caption = 'Choi-Features bilden'
   ClientHeight = 603
-  ClientWidth = 658
+  ClientWidth = 789
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,14 +17,14 @@ object fmChoiFeatures: TfmChoiFeatures
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   DesignSize = (
-    658
+    789
     603)
   PixelsPerInch = 96
   TextHeight = 13
   object Bevel1: TBevel
     Left = 0
     Top = 41
-    Width = 658
+    Width = 789
     Height = 4
     Align = alTop
     Shape = bsTopLine
@@ -34,7 +34,7 @@ object fmChoiFeatures: TfmChoiFeatures
   object Bevel2: TBevel
     Left = 0
     Top = 558
-    Width = 658
+    Width = 789
     Height = 4
     Align = alBottom
     Shape = bsBottomLine
@@ -45,19 +45,20 @@ object fmChoiFeatures: TfmChoiFeatures
   object pnInfo: TPanel
     Left = 0
     Top = 0
-    Width = 658
+    Width = 789
     Height = 41
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
+    ExplicitWidth = 658
     DesignSize = (
-      658
+      789
       41)
     object mInfo: TMemo
       Left = 8
       Top = 10
-      Width = 642
+      Width = 773
       Height = 25
       Anchors = [akLeft, akTop, akRight]
       BorderStyle = bsNone
@@ -72,27 +73,30 @@ object fmChoiFeatures: TfmChoiFeatures
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
+      ExplicitWidth = 642
     end
   end
   object Panel1: TPanel
     Left = 0
     Top = 562
-    Width = 658
+    Width = 789
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 658
     DesignSize = (
-      658
+      789
       41)
     object btClose: TButton
-      Left = 575
+      Left = 706
       Top = 6
       Width = 75
       Height = 25
       Action = acClose
       Anchors = [akRight, akBottom]
       TabOrder = 0
+      ExplicitLeft = 575
     end
   end
   object pnEcg: TPanel
@@ -106,12 +110,13 @@ object fmChoiFeatures: TfmChoiFeatures
   object memo: TMemo
     Left = 463
     Top = 47
-    Width = 185
+    Width = 316
     Height = 242
     Anchors = [akLeft, akTop, akRight]
     ReadOnly = True
     ScrollBars = ssBoth
     TabOrder = 3
+    ExplicitWidth = 185
   end
   object btFeatures: TButton
     Left = 463

@@ -7,7 +7,8 @@
 #include <ComCtrls.hpp>
 #include <IniFiles.hpp>
 //---------------------------------------------------------------------------
-#include "..\definitions.h"
+#include "../definitions.h"
+#include "../basics/classBase.h"
 //---------------------------------------------------------------------------
 //! bietet verschiedene Grundfunktionalitäten an
 /*! Die Klasse cTools bietet verschiedenen Grundfunktionalitäten an:\r\n
@@ -94,6 +95,21 @@ public:
 		void		ListViewSave(TForm* fm, TListView* lv);
 
 	//-------------------------------------------------------------------------
+	//--- Bildschirm- und Printmeldungen --------------------------------------
+	//-------------------------------------------------------------------------
+
+		void		ErrBox(char* msg, ...);
+		void		MsgBox(char* msg, ...);
+
+	//-------------------------------------------------------------------------
+	//--- String-Funktionen ---------------------------------------------------
+	//-------------------------------------------------------------------------
+
+		String		fmt(char* msg, ...);
+		int			replace(String& str, String old, String neu);
+		iarray_t	TextToArray(String text, String delim);
+		String		ArrayToText(iarray_t array, String delim);
+	//-------------------------------------------------------------------------
 	//--- Sonstige Funktionen -------------------------------------------------
 	//-------------------------------------------------------------------------
 
@@ -106,12 +122,6 @@ public:
 		 *		handelt, sonst false
 		 */
 		bool		IsDebug();
-
-		void		ErrBox(char* msg, ...);
-		void		MsgBox(char* msg, ...);
-		String		fmt(char* msg, ...);
-		int			replace(String& str, String old, String neu);
-
 
 private:
 

@@ -1,6 +1,12 @@
 # Others 
 *.dia~
 
+# SVM TEst- und Trainfiles
+*.out
+*.test
+*.train
+*.train.model
+
 # Doxygen Files
 html/
 latex/
