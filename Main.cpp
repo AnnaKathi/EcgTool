@@ -50,6 +50,40 @@ void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 
 	setStatus("startup EcgTool...loading MySql-Database");
 
+	ftools.GetComputerDaten();
+	if (ftools.cpData.BS != "Windows")
+		{
+		if (Application->MessageBox(
+			ftools.fmt(
+				"Es wurde das Betriebssystem '%s' erkannt.\r\n\r\n"
+				"Das Programm ist (vorläufig) auf ein Windows-Betriebssystem ausgelegt. "
+				"Einige Funktionen sind mit anderen Betriebssystemem unter Umständen "
+				"nicht verfügbar.\r\n\r\n"
+				"Soll das EcgTool-Programm abgebrochen werden?", ftools.cpData.BS).c_str(),
+			"Falsches Betriebssystem", MB_YESNO) == ID_YES)
+			{
+			Close();
+			return;
+			}
+		}
+
+	if (ftools.cpData.BSProzessor != "64Bit")
+		{
+		/*
+		Application->MessageBox(
+			ftools.fmt(
+				"Es wurde der Systemtyp '%s' erkannt.\r\n\r\n"
+				"Das Programm ist auf ein 64Bit-Windows-Betriebssystem ausgelegt. "
+				"Einige Funktionen sind mit anderen Betriebssystemem unter Umständen "
+				"nicht verfügbar, z.B. die Choi-SVM-Klassifizierung.\r\n\r\n",
+				ftools.cpData.BSProzessor).c_str(),
+			"Warnung 64Bit-System", MB_OK);
+		*/
+		setStatus("## 32Bit-System ggf. nicht ausreichend ##", 2);
+		}
+	else
+		setStatus("64Bit-System  - ok", 2);
+
 	if (!setupDatabase())
 		{
 		Close();

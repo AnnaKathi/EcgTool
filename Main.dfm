@@ -73,6 +73,9 @@ object fmMain: TfmMain
         Width = 250
       end
       item
+        Width = 450
+      end
+      item
         Width = 50
       end>
   end

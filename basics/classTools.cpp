@@ -2,6 +2,7 @@
 #pragma hdrstop
 
 #include <stdio.h>
+#include <windows.h>
 
 #include "classTools.h"
 //---------------------------------------------------------------------------
@@ -373,12 +374,37 @@ String cTools::ArrayToText(iarray_t array, String delim)
 bool cTools::IsDebug()
 	{
 	TIniFile* Ini = new TIniFile(GetIniFile());
+	int found = Ini->ReadInteger("HomeStations", cpData.CompName, 0);
+	delete Ini;
+	return found == 1 ? true : false;
+	}
+//---------------------------------------------------------------------------
+bool cTools::GetComputerDaten()
+	{
 	char comp[64];
 	DWORD nSize = sizeof(comp);
 	GetComputerName(comp, &nSize);
-	int found = Ini->ReadInteger("HomeStations", comp, 0);
-	delete Ini;
-	return found == 1 ? true : false;
+	fcpData.CompName = String(comp);
+
+#ifdef LINUX
+	fcpData.BS = "Linux";
+
+#elif defined(WIN32)
+	fcpData.BS = "Windows";
+	fcpData.BSProzessor = "32Bit";
+
+#elif defined(WIN64)
+	fcpData.BS = "Windows";
+	fcpData.BSProzessor = "64Bit";
+
+#endif
+
+	return true;
+	}
+//---------------------------------------------------------------------------
+cpComputerData cTools::get_cpdata()
+	{
+	return fcpData;
 	}
 //---------------------------------------------------------------------------
 

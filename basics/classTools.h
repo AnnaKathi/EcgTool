@@ -10,6 +10,13 @@
 #include "../definitions.h"
 #include "../basics/classBase.h"
 //---------------------------------------------------------------------------
+struct cpComputerData
+	{
+	String		CompName;
+	String		BS;
+	String		BSProzessor;
+	};
+//---------------------------------------------------------------------------
 //! bietet verschiedene Grundfunktionalitäten an
 /*! Die Klasse cTools bietet verschiedenen Grundfunktionalitäten an:\r\n
  * <ul><li>Datenkonverter 'Position' (String <-> enum ePosition)
@@ -123,8 +130,13 @@ public:
 		 */
 		bool		IsDebug();
 
-private:
+		bool		GetComputerDaten();
 
+__property cpComputerData cpData = { read=get_cpdata };
+
+private:
+	cpComputerData		fcpData;
+	cpComputerData		get_cpdata();
 	};
 //---------------------------------------------------------------------------
 #endif
