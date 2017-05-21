@@ -24,6 +24,7 @@ private:
 	TfmBaseEcg*		TfmEcg;
 
 	bool 			WriteFile(bool bWriteTraining, String filename);
+	bool 			CompareResult(String testfile, String outfile);
 
 
 __published:	// IDE-verwaltete Komponenten

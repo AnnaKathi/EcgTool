@@ -141,6 +141,72 @@ bool TfmChoiClassification::WriteFile(bool bWriteTraining, String filename)
 	return true;
 	}
 //---------------------------------------------------------------------------
+bool TfmChoiClassification::CompareResult(String testfile, String outfile)
+	{
+	FILE* fptest = fopen(testfile.c_str(), "r");
+	if (fptest == NULL)
+		{
+		Print("# Fehler, Die Testfile konnte nicht geöffnet werden <%s>", testfile);
+		return false;
+		}
+
+	FILE* fpout = fopen(outfile.c_str(), "r");
+	if (fpout == NULL)
+		{
+		Print("# Fehler, Die Ausgabefile konnte nicht geöffnet werden <%s>", outfile);
+		fclose(fptest);
+		return false;
+		}
+
+	char rowbuf1[1024];  char rowbuf2[1024];
+	int testlabel;		 int outlabel;
+	bool fehler = false;
+
+	int right = 0;
+	int wrong = 0;
+	int count = 0;
+	while ((fgets(rowbuf1, sizeof(rowbuf1)-1, fptest)) != NULL)
+		{
+		char* pt = strchr(rowbuf1, ' ');
+		if (pt == NULL)
+			{
+			fehler = true;
+			break;
+			}
+		*pt = 0;
+		testlabel = atoi(rowbuf1);
+
+		if (fgets(rowbuf2, sizeof(rowbuf2)-1, fpout) == NULL)
+			{
+			fehler = true;
+			break;
+			}
+
+		pt = strchr(rowbuf2, ' ');
+		outlabel = atoi(rowbuf2);
+
+		if (testlabel == outlabel)
+			right++;
+		else
+			wrong++;
+
+		count++;
+		}
+
+	fclose(fptest);
+	fclose(fpout);
+
+	if (fehler)
+		{
+		Print("# Fehler aufgetreten");
+		return false;
+		}
+
+	double classification = (double)right / (double)count * 100;
+	Print("Accuracy: %.2f", classification);
+	return true;
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /********************   Actions   ******************************************/
 /***************************************************************************/
@@ -246,6 +312,8 @@ void __fastcall TfmChoiClassification::acClassifyExecute(TObject *Sender)
 	Print("Dateien erfolgreich erstellt");
 
 	//-- Ergebnisse vergleichen
+	String outfile  = path + "\\libSVM\\choi.out";
+	CompareResult(testfile, outfile);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
