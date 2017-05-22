@@ -196,5 +196,15 @@
     <Transaction>2017.05.21 09:36:40.382.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\ChoiKlassifizierung.cpp</Transaction>
     <Transaction>2017.05.21 09:36:40.382.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\ChoiKlassifizierung.h</Transaction>
     <Transaction>2017.05.21 09:36:40.382.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\ChoiKlassifizierung.dfm</Transaction>
+    <Transaction>2017.05.22 13:58:09.996.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\RandomPointsFeatures.cpp</Transaction>
+    <Transaction>2017.05.22 13:58:09.996.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\RandomPointsFeatures.h</Transaction>
+    <Transaction>2017.05.22 13:58:09.996.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\RandomPointsFeatures.dfm</Transaction>
+    <Transaction>2017.05.22 14:35:47.192.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\Features.cpp</Transaction>
+    <Transaction>2017.05.22 14:35:47.192.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\Features.h</Transaction>
+    <Transaction>2017.05.22 14:35:47.192.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\Features.dfm</Transaction>
+    <Transaction>2017.05.22 15:27:57.258.cpp,D:\src\EcgTool\RandomPointsFeatures.cpp=</Transaction>
+    <Transaction>2017.05.22 15:27:57.258.dfm,D:\src\EcgTool\RandomPointsFeatures.dfm=</Transaction>
+    <Transaction>2017.05.22 15:28:54.005.cpp,D:\src\EcgTool\ChoiFeatures.cpp=</Transaction>
+    <Transaction>2017.05.22 15:28:54.005.dfm,D:\src\EcgTool\ChoiFeatures.dfm=</Transaction>
   </Transactions>
 </BorlandProject>

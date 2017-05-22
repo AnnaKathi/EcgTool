@@ -1,3 +1,8 @@
+/*
+todo: Print-Funktionen aus allen Formularen in cTools verlagern
+todo: include stdio.h aus allen Formularen in cTools verlagern
+todo: extern cMySql fmysql in definitions.h verlagern?
+*/
 //---------------------------------------------------------------------------
 #include <vcl.h>
 #pragma hdrstop
@@ -14,7 +19,8 @@
 #include "DataAnalysis.h"
 #include "Sessions.h"
 #include "Testform.h"
-#include "ChoiFeatures.h"
+
+#include "Features.h"
 #include "ChoiKlassifizierung.h"
 #include "Main.h"
 //---------------------------------------------------------------------------
@@ -227,8 +233,7 @@ void __fastcall TfmMain::acCreateSeesionExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acSingleAuswExecute(TObject *Sender)
 	{
-	DlgChoiFeatures(this);
-	setDbInfo();
+	//
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acGesAuswExecute(TObject *Sender)
@@ -263,12 +268,18 @@ void __fastcall TfmMain::btMySqlTestClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::BitBtn7Click(TObject *Sender)
 	{
-	DlgAlgChoi(this);
+	DlgFeatures(this);
+	setDbInfo();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::BitBtn8Click(TObject *Sender)
 	{
-	DlgAlgChoi2(this);
+	//old: DlgAlgChoi2(this); //todo
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::BitBtn5Click(TObject *Sender)
+	{
+	DlgChoiClassification(this);
 	}
 //---------------------------------------------------------------------------
 

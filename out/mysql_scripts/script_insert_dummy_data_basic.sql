@@ -50,4 +50,5 @@ INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('Schläfen');
 # //-- Algorithmen
 INSERT INTO `ecg`.`algorithms` (`Bez`) VALUES ('Vorabtest Anna 1');
 INSERT INTO `ecg`.`algorithms` (`Bez`) VALUES ('Choi 2016');
+INSERT INTO `ecg`.`algorithms` (`Bez`) VALUES ('Random Points');
 

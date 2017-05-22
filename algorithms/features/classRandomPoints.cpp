@@ -7,13 +7,14 @@
 //---------------------------------------------------------------------------
 cRandomPoints::cRandomPoints()
 	{
+	fAlg_DbNr = 3;
 	}
 //---------------------------------------------------------------------------
 cRandomPoints::~cRandomPoints()
 	{
 	}
 //---------------------------------------------------------------------------
-bool cRandomPoints::getRandomPoints(iarray_t beat, int anzahl)
+bool cRandomPoints::getRandomPointsFromBeat(iarray_t beat, int anzahl)
 	{
 	if (beat.size() <= 0)
 		return fail(1, "Es wurde ein leeres Array übergeben");
@@ -83,14 +84,14 @@ bool cRandomPoints::getRandomPoints(iarray_t beat, int anzahl)
 		return ok();
 	}
 //---------------------------------------------------------------------------
-bool cRandomPoints::reset()
+bool cRandomPoints::resetBeatPoints()
 	{
 	rvIndex = -1;
 	randomP = 0.0;
 	return true;
 	}
 //---------------------------------------------------------------------------
-bool cRandomPoints::next()
+bool cRandomPoints::nextPointInBeat()
 	{
 	rvIndex++;
 	if (rvIndex >= randomValues.size())
@@ -100,3 +101,9 @@ bool cRandomPoints::next()
 	return true;
 	}
 //---------------------------------------------------------------------------
+int cRandomPoints::get_algdbnr()
+	{
+	return fAlg_DbNr;
+	}
+//---------------------------------------------------------------------------
+

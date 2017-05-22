@@ -20,13 +20,18 @@ public:
 	 *  /param (int) Anzahl der gewünschten Werte
 	 *  /return (bbol) true wenn erfolgreich, sonst false
 	 */
-	bool		getRandomPoints(iarray_t beat, int anzahl);
-	bool		reset();
-	bool		next();
+	bool		getRandomPointsFromBeat(iarray_t beat, int anzahl);
+	bool		resetBeatPoints();
+	bool		nextPointInBeat();
+
+__property int		AlgNr     = { read=get_algdbnr };
 
 __property double randomPoint = { read=randomP };
 
 private:
+	int			fAlg_DbNr;
+	int			get_algdbnr();
+
 	int			rvIndex;
 	iarray_t	randomValues;
 

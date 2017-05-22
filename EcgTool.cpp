@@ -8,7 +8,8 @@ USEFORM("Sessions.cpp", fmSessions);
 USEFORM("DataAnalysis.cpp", fmAnalysis);
 USEFORM("RequestBox.cpp", fmRequest);
 USEFORM("Details.cpp", fmDetails);
-USEFORM("ChoiFeatures.cpp", fmChoiFeatures);
+USEFORM("Features.cpp", fmFeatures);
+USEFORM("ChoiKlassifizierung.cpp", fmChoiClassification);
 USEFORM("Testform.cpp", fmTest);
 USEFORM("database\DbPersonen.cpp", fmData);
 USEFORM("database\baseforms\basePeople.cpp", fmBasePeople);
@@ -24,7 +25,6 @@ USEFORM("database\toolforms\selectDescDb.cpp", fmSelectDesc);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
 USEFORM("algorithms\AlgChoi2.cpp", fmChoi2);
-USEFORM("ChoiKlassifizierung.cpp", fmChoiClassification);
 //---------------------------------------------------------------------------
 #include "database/classMySql.h"
 cMySql fmysql;
@@ -50,8 +50,8 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TfmSessionAdd), &fmSessionAdd);
 		Application->CreateForm(__classid(TfmSessions), &fmSessions);
 		Application->CreateForm(__classid(TfmBaseSession), &fmBaseSession);
-		Application->CreateForm(__classid(TfmChoiFeatures), &fmChoiFeatures);
 		Application->CreateForm(__classid(TfmChoiClassification), &fmChoiClassification);
+		Application->CreateForm(__classid(TfmFeatures), &fmFeatures);
 		Application->Run();
 	}
 	catch (Exception &exception)
