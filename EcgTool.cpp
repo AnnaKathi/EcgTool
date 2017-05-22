@@ -25,6 +25,7 @@ USEFORM("database\toolforms\selectDescDb.cpp", fmSelectDesc);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
 USEFORM("algorithms\AlgChoi2.cpp", fmChoi2);
+USEFORM("VergleichAlg.cpp", fmVergleich);
 //---------------------------------------------------------------------------
 #include "database/classMySql.h"
 cMySql fmysql;
@@ -52,6 +53,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TfmBaseSession), &fmBaseSession);
 		Application->CreateForm(__classid(TfmChoiClassification), &fmChoiClassification);
 		Application->CreateForm(__classid(TfmFeatures), &fmFeatures);
+		Application->CreateForm(__classid(TfmVergleich), &fmVergleich);
 		Application->Run();
 	}
 	catch (Exception &exception)

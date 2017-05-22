@@ -21,6 +21,7 @@ todo: extern cMySql fmysql in definitions.h verlagern?
 #include "Testform.h"
 
 #include "Features.h"
+#include "VergleichAlg.h"
 #include "ChoiKlassifizierung.h"
 #include "Main.h"
 //---------------------------------------------------------------------------
@@ -280,6 +281,11 @@ void __fastcall TfmMain::BitBtn8Click(TObject *Sender)
 void __fastcall TfmMain::BitBtn5Click(TObject *Sender)
 	{
 	DlgChoiClassification(this);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::BitBtn3Click(TObject *Sender)
+	{
+	DlgAlgVergleich(this);
 	}
 //---------------------------------------------------------------------------
 
