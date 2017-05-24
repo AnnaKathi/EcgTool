@@ -85,10 +85,6 @@ private:
 	void 			DoVergleichNeu();
 
 	bool			DoSvm();
-	bool 			SvmAccuracy(double& accuracy, String label, int alg);
-	bool 			SvmWriteFile(bool bWriteTraining, String filename, int alg, int ecgvon, int ecgbis);
-	bool 			SvmCompareResult(double& accuracy, String testfile, String outfile);
-
 	bool			DoXyz();
 
 

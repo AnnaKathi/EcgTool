@@ -51,8 +51,6 @@ public:
 
 	//-- neu, 24.05.2017
 	bool 		SvmAccuracy(double& accuracy, sChoiSvmData data);
-	bool 		SvmWriteFile(bool bWriteTraining, String filename, int alg, int ecgvon, int ecgbis);
-	bool 		SvmCompareResult(double& accuracy, String testfile, String outfile);
 
 
 __property int AlgNr   = { read=get_algdbnr };
@@ -85,6 +83,9 @@ private:
 
 	int			libSVM_Version;
 	int			get_LibSVM_Version();
+
+	bool 		SvmWriteFile(bool bWriteTraining, String filename, int alg, int ecgvon, int ecgbis);
+	bool 		SvmCompareResult(double& accuracy, String testfile, String outfile);
 	};
 //---------------------------------------------------------------------------
 #endif
