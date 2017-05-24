@@ -1,23 +1,23 @@
 [Closed Files]
 File_0=TSourceModule,'D:\src\EcgTool\ecg\classHeartbeat.cpp',0,1,142,1,170,0,0,,
-File_1=TSourceModule,'D:\src\EcgTool\algorithms\features\classRandomPoints.cpp',0,1,84,1,107,0,0,,
-File_2=TSourceModule,'D:\src\EcgTool\ChoiFeatures.cpp',0,1,91,1,107,0,0,,
-File_3=TSourceModule,'D:\src\EcgTool\RandomPointsFeatures.cpp',0,1,261,1,283,0,0,,{1
-File_4=TSourceModule,'D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp',0,1,428,1,451,0,0,,
-File_5=TSourceModule,'d:\dev\rad\include\dinkumware\xtree',0,1,422,1,452,0,0,,
-File_6=TSourceModule,'D:\src\EcgTool\basics\classTools.cpp',0,1,111,1,131,0,0,,
-File_7=TSourceModule,'d:\dev\rad\include\vcl\dstring.h',0,1,48,1,68,0,0,,
-File_8=TSourceModule,'D:\src\EcgTool\database\classMySql.cpp',0,1,150,1,173,0,0,,
+File_1=TSourceModule,'D:\src\EcgTool\ChoiFeatures.cpp',0,1,91,1,107,0,0,,
+File_2=TSourceModule,'D:\src\EcgTool\RandomPointsFeatures.cpp',0,1,261,1,283,0,0,,{1
+File_3=TSourceModule,'d:\dev\rad\include\dinkumware\xtree',0,1,422,1,452,0,0,,
+File_4=TSourceModule,'D:\src\EcgTool\basics\classTools.cpp',0,1,111,1,131,0,0,,
+File_5=TSourceModule,'d:\dev\rad\include\vcl\dstring.h',0,1,48,1,68,0,0,,
+File_6=TSourceModule,'D:\src\EcgTool\database\classMySql.cpp',0,1,150,1,173,0,0,,
 
 [Modules]
 Module0=D:\src\EcgTool\VergleichAlg.cpp
 Module1=D:\src\EcgTool\ChoiKlassifizierung.cpp
-Module2=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp
-Module3=D:\src\EcgTool\database\classMySql_EcgData.cpp
-Module4=D:\src\EcgTool\Main.cpp
-Module5=D:\src\EcgTool\Features.cpp
-Module6=default.htm
-Count=7
+Module2=D:\src\EcgTool\algorithms\features\classRandomPoints.cpp
+Module3=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
+Module4=default.htm
+Module5=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp
+Module6=D:\src\EcgTool\database\classMySql_EcgData.cpp
+Module7=D:\src\EcgTool\Main.cpp
+Module8=D:\src\EcgTool\Features.cpp
+Count=9
 EditWindowCount=1
 
 [D:\src\EcgTool\VergleichAlg.cpp]
@@ -29,6 +29,19 @@ FormOnTop=0
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
+
+[D:\src\EcgTool\algorithms\features\classRandomPoints.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[default.htm]
+ModuleType=TURLModule
 
 [D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp]
 ModuleType=TSourceModule
@@ -48,13 +61,10 @@ FormOnTop=0
 [D:\src\EcgTool\Features.cpp]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
-
-[default.htm]
-ModuleType=TURLModule
+FormOnTop=0
 
 [EditWindow0]
-ViewCount=7
+ViewCount=9
 CurrentEditView=D:\src\EcgTool\VergleichAlg.cpp
 View0=0
 View1=1
@@ -63,6 +73,8 @@ View3=3
 View4=4
 View5=5
 View6=6
+View7=7
+View8=8
 PercentageSizes=1
 Create=1
 Visible=1
@@ -112,25 +124,47 @@ EditViewName=D:\src\EcgTool\Main.cpp
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\ChoiKlassifizierung.cpp
 CursorX=1
-CursorY=221
-TopLine=170
+CursorY=210
+TopLine=177
 LeftCol=1
 Elisions=
-Bookmarks=
+Bookmarks={1,82,38}{9,233,35}
 EditViewName=D:\src\EcgTool\ChoiKlassifizierung.cpp
 
 [View3]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\VergleichAlg.cpp
-CursorX=49
-CursorY=157
-TopLine=130
+CursorX=35
+CursorY=155
+TopLine=124
 LeftCol=1
 Elisions=
-Bookmarks=
+Bookmarks={1,320,5}{2,254,1}
 EditViewName=D:\src\EcgTool\VergleichAlg.cpp
 
 [View4]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\algorithms\features\classRandomPoints.cpp
+CursorX=18
+CursorY=104
+TopLine=84
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\algorithms\features\classRandomPoints.cpp
+
+[View5]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
+CursorX=14
+CursorY=448
+TopLine=428
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp
+
+[View6]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp
 CursorX=1
@@ -141,7 +175,7 @@ Elisions=
 Bookmarks=
 EditViewName=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp
 
-[View5]
+[View7]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\database\classMySql_EcgData.cpp
 CursorX=1
@@ -152,7 +186,7 @@ Elisions=
 Bookmarks=
 EditViewName=D:\src\EcgTool\database\classMySql_EcgData.cpp
 
-[View6]
+[View8]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\Features.cpp
 CursorX=14
@@ -247,11 +281,11 @@ State=0
 Left=0
 Top=0
 Width=2104
-Height=6779
+Height=8798
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2104
-ClientHeight=6779
+ClientHeight=8798
 TBDockHeight=7144
 LRDockWidth=2000
 Dockable=1
@@ -481,11 +515,6 @@ LRDockWidth=2005
 Dockable=1
 StayOnTop=0
 SplitPos=176
-
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Caption,OnContextPopup
-ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,Font=0,GlassFrame=0,HorzScrollBar=0,Margins=0,Padding=0,BevelEdges=0,VertScrollBar=0,Action=0
 
 [ModelViewTool]
 PercentageSizes=1
@@ -727,7 +756,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
 
 [DockSite1]
 HostDockSite=DockBottomPanel

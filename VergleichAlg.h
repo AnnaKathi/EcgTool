@@ -8,13 +8,15 @@
 #include <Forms.hpp>
 #include <ActnList.hpp>
 #include <ExtCtrls.hpp>
+#include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
 #include "ecg/classEcg.h"
 #include "database/classMySql.h"
 #include "database/baseforms/baseEcgData.h"
 #include "algorithms/classifications/classChoiSVM.h"
-#include <ComCtrls.hpp>
+#include "algorithms/features/classChoiFeatures.h"
+#include "algorithms/features/classRandomPoints.h"
 //---------------------------------------------------------------------------
 class TfmVergleich : public TForm
 {
@@ -68,6 +70,8 @@ private:
 	cTools			ftools;
 	cEcg			fecg;
 	cChoiSVM		fChoiSvm;
+	cChoiFeat		fChoiFeat;
+	cRandomPoints	fRandomFeat;
 
 	TfmBaseEcg*		TfmEcg;
 	void 			Print(char* msg, ...);
@@ -78,7 +82,12 @@ private:
 
 	double			Accuracy[2][2];  //zwei Klassifizierungen mal zwei Feature-Extracrtion
 	void			DoVergleich();
+
 	bool			DoSvm();
+	bool 			SvmAccuracy(double& accuracy, String label, int alg);
+	bool 			SvmWriteFile(bool bWriteTraining, String filename, int alg, int ecgvon, int ecgbis);
+	bool 			SvmCompareResult(double& accuracy, String testfile, String outfile);
+
 	bool			DoXyz();
 
 
