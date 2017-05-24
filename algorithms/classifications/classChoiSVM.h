@@ -8,8 +8,19 @@
 #include "../../basics/classTools.h"
 #include "../../ecg/classEcg.h"
 #include "../../ecg/classRpeaks.h"
+#include "../../database/classMySql.h"
 //---------------------------------------------------------------------------
 #include "../features/classChoiFeatures.h"
+//---------------------------------------------------------------------------
+struct sChoiSvmData
+	{
+	String		label;
+	int			alg;
+	int			training_von;
+	int			training_bis;
+	int			classify_von;
+	int			classify_bis;
+	};
 //---------------------------------------------------------------------------
 class PACKAGE cChoiSVM : public cBase
 	{
@@ -37,6 +48,12 @@ public:
 	bool		doCrossvalidation(svm_problem problem, svm_parameter param, int fold);
 
 	bool		doModel(svm_problem problem, svm_parameter param);
+
+	//-- neu, 24.05.2017
+	bool 		SvmAccuracy(double& accuracy, sChoiSvmData data);
+	bool 		SvmWriteFile(bool bWriteTraining, String filename, int alg, int ecgvon, int ecgbis);
+	bool 		SvmCompareResult(double& accuracy, String testfile, String outfile);
+
 
 __property int AlgNr   = { read=get_algdbnr };
 __property int version = { read=get_LibSVM_Version };

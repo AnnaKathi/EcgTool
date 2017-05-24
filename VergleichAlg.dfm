@@ -131,6 +131,8 @@ object fmVergleich: TfmVergleich
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitLeft = 423
+    ExplicitTop = 51
     object Bevel3: TBevel
       Left = 0
       Top = 115

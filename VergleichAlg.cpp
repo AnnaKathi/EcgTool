@@ -142,6 +142,22 @@ bool TfmVergleich::DoSvm()
 			return false;
 			}
 
+		double test;
+		sChoiSvmData data;
+		data.label = "choi";
+		data.alg   = fChoiFeat.AlgNr;
+		data.training_von = edTrainingVon->Text.ToIntDef(0);
+		data.training_bis = edTrainingBis->Text.ToIntDef(0);
+		data.classify_von = edClassifyVon->Text.ToIntDef(0);
+		data.classify_bis = edClassifyBis->Text.ToIntDef(0);
+
+		if (!fChoiSvm.SvmAccuracy(test, data))
+			{
+			Print("## Fehler bei der KLASSEN-SVM-Berechnung für die Choi-Features");
+			return false;
+			}
+
+		int bp = 0;
 		Accuracy[0][0] = accuracy;
 		}
 
@@ -440,3 +456,4 @@ void __fastcall TfmVergleich::btVergleichClick(TObject *Sender)
     DoVergleich();
 	}
 //---------------------------------------------------------------------------
+

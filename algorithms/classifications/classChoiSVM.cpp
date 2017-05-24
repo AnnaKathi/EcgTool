@@ -20,6 +20,7 @@
 #pragma package(smart_init)
 #pragma link "inc/libsvm/libsvm.lib"
 #define Malloc(type,n) (type *)malloc((n)*sizeof(type))
+extern cMySql fmysql;
 //---------------------------------------------------------------------------
 cChoiSVM::cChoiSVM()
 	{
@@ -479,11 +480,207 @@ bool cChoiSVM::doModel(svm_problem problem, svm_parameter param)
 
 	char model_file_name[1024];
 	sprintf(model_file_name, "D://TestAnna.model"); //todo übergeben lassen
-	
+
 	if(svm_save_model(model_file_name, fModel))
 		return fail(6, "can't save model to file " + String(model_file_name));
 
 	svm_free_and_destroy_model(&fModel);
+	return ok();
+	}
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+bool cChoiSVM::SvmAccuracy(double& accuracy, sChoiSvmData data)
+	{
+	if (data.label == "") return fail(6, "Es wurde keine Algorithmus-Kennung übergeben");
+	if (data.alg <= 0)    return fail(6, "Es wurde keine Algorithmus-Nummer übergeben");
+
+	if (data.training_von <= 0) return fail(6, "Trainingdaten sind nicht korrekt (von)");
+	if (data.training_bis <= 0) return fail(6, "Trainingdaten sind nicht korrekt (bis)");
+	if (data.classify_von <= 0) return fail(6, "Classifydaten sind nicht korrekt (von)");
+	if (data.classify_bis <= 0) return fail(6, "Classifydaten sind nicht korrekt (bis)");
+
+	//todo: Sicherheitsprüfung Bereiche, auf Überlappung prüfen
+
+	//-- Used files
+	String path = ftools.GetPath();
+	String svm_train   = path + "\\libSVM\\svm-train.exe";
+	String svm_predict = path + "\\libSVM\\svm-predict.exe";
+	if (!FileExists(svm_train))
+		return fail(6, ftools.fmt("Die Train-Datei existiert nicht <%s>", svm_train).c_str());
+
+	if (!FileExists(svm_predict))
+		return fail(6, ftools.fmt("Die Predict-Datei existiert nicht <%s>", svm_train).c_str());
+
+	String trainfile = ftools.fmt("%s\\libSVM\\%s.train",       path, data.label);
+	String testfile  = ftools.fmt("%s\\libSVM\\%s.test",        path, data.label);
+	String modelfile = ftools.fmt("%s\\libSVM\\%s.train.model", path, data.label);
+	String outfile   = ftools.fmt("%s\\libSVM\\%s.out",         path, data.label);
+
+	//-- Create Train + Test
+	if (!SvmWriteFile(true, trainfile, data.alg, data.training_von, data.training_bis))
+		return fail(6, ftools.fmt("Train <%s>: Fehler aufgetreten: %s", data.label, error_msg).c_str());
+
+	if (!SvmWriteFile(false, testfile, data.alg, data.classify_von, data.classify_bis))
+		return fail(6, ftools.fmt("Test <%s>: Fehler aufgetreten: %s", data.label, error_msg).c_str());
+
+	//-- Exe-Files aufrufen
+	 if (!FileExists(trainfile))
+		return fail(6, ftools.fmt("Die Trainings-Daten existieren nicht <%s>", trainfile).c_str());
+
+	//svm-train.exe a1a.train
+	ShellExecute(
+		this,    			//hwnd
+		"open",     		//Operation
+		svm_train.c_str(),	//File
+		trainfile.c_str(),	//Parameters
+		path.c_str(),		//Directory
+		SW_SHOW);   		//Show-Command
+
+	if (!FileExists(modelfile))
+		return fail(6, ftools.fmt("Das Modell konnte nicht erstellt werden <%s>", modelfile).c_str());
+
+	if (!FileExists(testfile))
+		return fail(6, ftools.fmt("Die Testdatei existiert nicht<%s>", testfile).c_str());
+
+	//svm-predict.exe a1a.test a1a.train.model a1a.out
+	String params = ftools.fmt("%s %s %s", testfile, modelfile, outfile);
+	ShellExecute(
+		this,    			 //hwnd
+		"open",     		 //Operation
+		svm_predict.c_str(), //File
+		params.c_str(),	     //Parameters
+		path.c_str(),		 //Directory
+		SW_SHOW);   		 //Show-Command
+
+
+	if (!FileExists(outfile))
+		return fail(6, ftools.fmt("Die Ausgabedatei konnte nicht erstellt werden <%s>", outfile).c_str());
+
+	//-- Ergebnisse vergleichen
+	if (!SvmCompareResult(accuracy, testfile, outfile))
+		return fail(6, ftools.fmt("Ausgabevergleich konnte nicht durchgeführt werden: %s", error_msg).c_str());
+	else
+		return ok();
+	}
+//---------------------------------------------------------------------------
+bool cChoiSVM::SvmWriteFile(bool bWriteTraining, String filename, int alg, int ecgvon, int ecgbis)
+	{
+	iarray_t array; array.clear();
+
+	if (filename == "") return fail(7, "Es wurde kein Dateiname übergeben");;
+	FILE* fp = fopen(filename.c_str(), "w");
+	if (fp == NULL)
+		return fail(7, ftools.fmt("Die Datei konnte nicht geöffnet werden (%s)", filename).c_str());
+
+	if (ecgvon <= 0 || ecgbis <= 0) return fail(7, ftools.fmt("Die Einschränkung stimmen nicht (%d-%d)", ecgvon, ecgbis).c_str());
+	if (ecgvon > ecgbis) return fail(7, ftools.fmt("Die Einschränkung stimmen nicht (%d-%d)", ecgvon, ecgbis).c_str());
+
+	int count = 0;
+	int count_featmissing = 0;
+	int count_datamissing = 0;
+	for (int i = ecgvon; i <= ecgbis; i++)
+		{
+		//Features laden
+		if (!fmysql.features.select(i, alg))
+			{
+			//keine Features für dieses EKG vorhanden
+			count_featmissing++;
+			continue;
+			}
+
+		//ECG reinladen
+		if (!fmysql.ecg.loadByIdent(i))
+			{
+			//Original-EKG-Daten fehlen
+			count_datamissing++;
+			continue;
+			}
+
+		//Features in Array schreiben
+		iarray_t feat = ftools.TextToArray(fmysql.features.row.features, ";");
+
+		//Features zum Gesamt-Array hinzufügen
+		array[count].push_back(fmysql.ecg.row.person);  //label = Person
+		array[count].push_back(feat[0][1]);
+		array[count].push_back(feat[1][1]);
+		array[count].push_back(feat[2][1]);
+		array[count].push_back(feat[3][1]);
+		array[count].push_back(feat[4][1]);
+		array[count].push_back(feat[5][1]);
+		array[count].push_back(feat[6][1]);
+		array[count].push_back(feat[7][1]);
+		count++;
+		}
+
+	for (iarray_itr itr = array.begin(); itr != array.end(); itr++)
+		{
+		//<label> <index1>:<value1> <index2>:<value2> ...
+		ilist_t& v = itr->second;
+		fprintf(fp, "%d 1:%d 2:%d 3:%d 4:%.8f 5:%.8f 6:%.8f 7:%.8f 8:%.8f\n",
+			(int)v[0], (int)v[1], (int)v[2], (int)v[3],
+			v[4], v[5], v[6], v[7], v[8]);
+		}
+
+	fclose(fp);
+	return ok();
+	}
+//---------------------------------------------------------------------------
+bool cChoiSVM::SvmCompareResult(double& accuracy, String testfile, String outfile)
+	{
+	FILE* fptest = fopen(testfile.c_str(), "r");
+	if (fptest == NULL)
+		return fail(8, ftools.fmt("Fehler, Die Testfile konnte nicht geöffnet werden <%s>", testfile).c_str());
+
+	FILE* fpout = fopen(outfile.c_str(), "r");
+	if (fpout == NULL)
+		{
+		fclose(fptest);
+		return fail(8, ftools.fmt("Fehler, Die Ausgabefile konnte nicht geöffnet werden <%s>", outfile).c_str());
+		}
+
+	char rowbuf1[1024];  char rowbuf2[1024];
+	int testlabel;		 int outlabel;
+	bool fehler = false;
+
+	int right = 0;
+	int wrong = 0;
+	int count = 0;
+	while ((fgets(rowbuf1, sizeof(rowbuf1)-1, fptest)) != NULL)
+		{
+		char* pt = strchr(rowbuf1, ' ');
+		if (pt == NULL)
+			{
+			fehler = true;
+			break;
+			}
+		*pt = 0;
+		testlabel = atoi(rowbuf1);
+
+		if (fgets(rowbuf2, sizeof(rowbuf2)-1, fpout) == NULL)
+			{
+			fehler = true;
+			break;
+			}
+
+		pt = strchr(rowbuf2, ' ');
+		outlabel = atoi(rowbuf2);
+
+		if (testlabel == outlabel)
+			right++;
+		else
+			wrong++;
+
+		count++;
+		}
+
+	fclose(fptest);
+	fclose(fpout);
+
+	if (fehler)
+		return fail(8, ftools.fmt("Fehler aufgetreten").c_str());
+
+	accuracy = (double)right / (double)count * 100;
 	return ok();
 	}
 //---------------------------------------------------------------------------

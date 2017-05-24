@@ -19,13 +19,13 @@
     <CfgParent>Base</CfgParent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Base)'!=''">
-    <OutputExt>exe</OutputExt>
     <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
-    <Defines>NO_STRICT</Defines>
+    <OutputExt>exe</OutputExt>
     <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+    <Defines>NO_STRICT</Defines>
     <DynamicRTL>true</DynamicRTL>
-    <UsePackages>true</UsePackages>
     <ILINK_ObjectSearchPath>TestKlassen;ecg;basics;data;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc\opencv-master\lda\src;algorithms\classifications\libSVM;D:\libSVM\libsvm test library;inc\libsvm</ILINK_ObjectSearchPath>
+    <UsePackages>true</UsePackages>
     <ProjectType>CppVCLApplication</ProjectType>
     <PackageImports>vcl.bpi;rtl.bpi;bcbie.bpi;vclx.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;dbrtl.bpi;vcldb.bpi;bdertl.bpi;vcldbx.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;websnap.bpi;webdsnap.bpi;inet.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;dsnap.bpi</PackageImports>
     <BCC_wpar>false</BCC_wpar>
@@ -35,10 +35,10 @@
     <Multithreaded>true</Multithreaded>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Cfg_1)'!=''">
-    <DCC_Optimize>false</DCC_Optimize>
     <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
-    <Defines>_DEBUG;$(Defines)</Defines>
+    <DCC_Optimize>false</DCC_Optimize>
     <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+    <Defines>_DEBUG;$(Defines)</Defines>
     <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
     <BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
     <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
@@ -49,8 +49,8 @@
     <IntermediateOutputDir>out\debug</IntermediateOutputDir>
     <TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
     <BCC_StackFrames>true</BCC_StackFrames>
-    <ILINK_LibraryPath>$(BDS)\lib\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+    <ILINK_LibraryPath>$(BDS)\lib\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     <TASM_Debugging>Full</TASM_Debugging>
     <BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
   </PropertyGroup>
@@ -78,79 +78,79 @@
       <VirtualFolder>{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}</VirtualFolder>
       <Form>fmChoi</Form>
       <DependentOn>algorithms\AlgChoi.h</DependentOn>
-      <BuildOrder>46</BuildOrder>
+      <BuildOrder>47</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\AlgChoi2.cpp">
       <VirtualFolder>{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}</VirtualFolder>
       <Form>fmChoi2</Form>
       <DependentOn>algorithms\AlgChoi2.h</DependentOn>
-      <BuildOrder>47</BuildOrder>
+      <BuildOrder>48</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\classifications\classChoiSVM.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
       <DependentOn>algorithms\classifications\classChoiSVM.h</DependentOn>
-      <BuildOrder>53</BuildOrder>
+      <BuildOrder>54</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\classifications\classLDA.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
       <DependentOn>algorithms\classifications\classLDA.h</DependentOn>
-      <BuildOrder>51</BuildOrder>
+      <BuildOrder>52</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\EinzelAusw.cpp">
       <VirtualFolder>{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}</VirtualFolder>
       <Form>fmSingle</Form>
       <DependentOn>algorithms\EinzelAusw.h</DependentOn>
-      <BuildOrder>45</BuildOrder>
+      <BuildOrder>46</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classAC.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classAC.h</DependentOn>
-      <BuildOrder>49</BuildOrder>
+      <BuildOrder>50</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classChoiFeatures.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classChoiFeatures.h</DependentOn>
-      <BuildOrder>50</BuildOrder>
+      <BuildOrder>51</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classRandomPoints.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classRandomPoints.h</DependentOn>
-      <BuildOrder>48</BuildOrder>
+      <BuildOrder>49</BuildOrder>
     </CppCompile>
     <CppCompile Include="basics\classArray.cpp">
       <VirtualFolder>{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}</VirtualFolder>
       <DependentOn>basics\classArray.h</DependentOn>
-      <BuildOrder>18</BuildOrder>
+      <BuildOrder>19</BuildOrder>
     </CppCompile>
     <CppCompile Include="basics\classBase.cpp">
       <VirtualFolder>{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}</VirtualFolder>
       <DependentOn>basics\classBase.h</DependentOn>
-      <BuildOrder>13</BuildOrder>
+      <BuildOrder>14</BuildOrder>
     </CppCompile>
     <CppCompile Include="basics\classCsv.cpp">
       <VirtualFolder>{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}</VirtualFolder>
       <DependentOn>basics\classCsv.h</DependentOn>
-      <BuildOrder>14</BuildOrder>
+      <BuildOrder>15</BuildOrder>
     </CppCompile>
     <CppCompile Include="basics\classData.cpp">
       <VirtualFolder>{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}</VirtualFolder>
       <DependentOn>basics\classData.h</DependentOn>
-      <BuildOrder>16</BuildOrder>
+      <BuildOrder>17</BuildOrder>
     </CppCompile>
     <CppCompile Include="basics\classDerivate.cpp">
       <VirtualFolder>{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}</VirtualFolder>
       <DependentOn>basics\classDerivate.h</DependentOn>
-      <BuildOrder>17</BuildOrder>
+      <BuildOrder>18</BuildOrder>
     </CppCompile>
     <CppCompile Include="basics\classMath.cpp">
       <VirtualFolder>{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}</VirtualFolder>
       <DependentOn>basics\classMath.h</DependentOn>
-      <BuildOrder>15</BuildOrder>
+      <BuildOrder>16</BuildOrder>
     </CppCompile>
     <CppCompile Include="basics\classTools.cpp">
       <VirtualFolder>{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}</VirtualFolder>
       <DependentOn>basics\classTools.h</DependentOn>
-      <BuildOrder>12</BuildOrder>
+      <BuildOrder>13</BuildOrder>
     </CppCompile>
     <CppCompile Include="ChoiKlassifizierung.cpp">
       <Form>fmChoiClassification</Form>
@@ -166,101 +166,101 @@
       <VirtualFolder>{CED66B0D-F6C4-49A9-AB32-CF9D45A18303}</VirtualFolder>
       <Form>fmBaseDesc</Form>
       <DependentOn>database\baseforms\baseDesc.h</DependentOn>
-      <BuildOrder>35</BuildOrder>
+      <BuildOrder>36</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\baseforms\baseEcgData.cpp">
       <VirtualFolder>{CED66B0D-F6C4-49A9-AB32-CF9D45A18303}</VirtualFolder>
       <Form>fmBaseEcg</Form>
       <DependentOn>database\baseforms\baseEcgData.h</DependentOn>
-      <BuildOrder>33</BuildOrder>
+      <BuildOrder>34</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\baseforms\basePeople.cpp">
       <VirtualFolder>{CED66B0D-F6C4-49A9-AB32-CF9D45A18303}</VirtualFolder>
       <Form>fmBasePeople</Form>
       <DependentOn>database\baseforms\basePeople.h</DependentOn>
-      <BuildOrder>32</BuildOrder>
+      <BuildOrder>33</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\baseforms\baseSession.cpp">
       <VirtualFolder>{CED66B0D-F6C4-49A9-AB32-CF9D45A18303}</VirtualFolder>
       <Form>fmBaseSession</Form>
       <DependentOn>database\baseforms\baseSession.h</DependentOn>
-      <BuildOrder>34</BuildOrder>
+      <BuildOrder>35</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\classMySql.cpp">
       <VirtualFolder>{29675194-4BE8-44D0-B637-6E502C166B4A}</VirtualFolder>
       <DependentOn>database\classMySql.h</DependentOn>
-      <BuildOrder>25</BuildOrder>
+      <BuildOrder>26</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\classMySql_DescDb.cpp">
       <VirtualFolder>{29675194-4BE8-44D0-B637-6E502C166B4A}</VirtualFolder>
       <DependentOn>database\classMySql_DescDb.h</DependentOn>
-      <BuildOrder>27</BuildOrder>
+      <BuildOrder>28</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\classMySql_EcgData.cpp">
       <VirtualFolder>{29675194-4BE8-44D0-B637-6E502C166B4A}</VirtualFolder>
       <DependentOn>database\classMySql_EcgData.h</DependentOn>
-      <BuildOrder>28</BuildOrder>
+      <BuildOrder>29</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\classMySql_Features.cpp">
       <VirtualFolder>{29675194-4BE8-44D0-B637-6E502C166B4A}</VirtualFolder>
       <DependentOn>database\classMySql_Features.h</DependentOn>
-      <BuildOrder>31</BuildOrder>
+      <BuildOrder>32</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\classMySql_People.cpp">
       <VirtualFolder>{29675194-4BE8-44D0-B637-6E502C166B4A}</VirtualFolder>
       <DependentOn>database\classMySql_People.h</DependentOn>
-      <BuildOrder>29</BuildOrder>
+      <BuildOrder>30</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\classMySql_Session.cpp">
       <VirtualFolder>{29675194-4BE8-44D0-B637-6E502C166B4A}</VirtualFolder>
-      <BuildOrder>30</BuildOrder>
+      <BuildOrder>31</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\classMySql_Work.cpp">
       <VirtualFolder>{29675194-4BE8-44D0-B637-6E502C166B4A}</VirtualFolder>
       <DependentOn>database\classMySql_Work.h</DependentOn>
-      <BuildOrder>26</BuildOrder>
+      <BuildOrder>27</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\DbPersonen.cpp">
       <VirtualFolder>{29675194-4BE8-44D0-B637-6E502C166B4A}</VirtualFolder>
       <Form>fmData</Form>
       <DependentOn>database\DbPersonen.h</DependentOn>
-      <BuildOrder>24</BuildOrder>
+      <BuildOrder>25</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\toolforms\addDesc.cpp">
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
       <Form>fmDescAdd</Form>
       <DependentOn>database\toolforms\addDesc.h</DependentOn>
-      <BuildOrder>37</BuildOrder>
+      <BuildOrder>38</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\toolforms\addEcg.cpp">
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
       <Form>fmAddEcg</Form>
       <DependentOn>database\toolforms\addEcg.h</DependentOn>
-      <BuildOrder>39</BuildOrder>
+      <BuildOrder>40</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\toolforms\addEcgFiles.cpp">
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
       <Form>fmEcgFiles</Form>
       <DependentOn>database\toolforms\addEcgFiles.h</DependentOn>
-      <BuildOrder>40</BuildOrder>
+      <BuildOrder>41</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\toolforms\addPeople.cpp">
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
       <Form>fmPerson</Form>
       <DependentOn>database\toolforms\addPeople.h</DependentOn>
-      <BuildOrder>36</BuildOrder>
+      <BuildOrder>37</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\toolforms\addSession.cpp">
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
       <Form>fmSessionAdd</Form>
       <DependentOn>database\toolforms\addSession.h</DependentOn>
-      <BuildOrder>38</BuildOrder>
+      <BuildOrder>39</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\toolforms\selectDescDb.cpp">
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
       <Form>fmSelectDesc</Form>
       <DependentOn>database\toolforms\selectDescDb.h</DependentOn>
-      <BuildOrder>41</BuildOrder>
+      <BuildOrder>42</BuildOrder>
     </CppCompile>
     <CppCompile Include="Details.cpp">
       <Form>fmDetails</Form>
@@ -278,27 +278,27 @@
     <CppCompile Include="ecg\classEcg.cpp">
       <VirtualFolder>{F0934E87-5C3D-47C3-8E43-EE413825840D}</VirtualFolder>
       <DependentOn>ecg\classEcg.h</DependentOn>
-      <BuildOrder>19</BuildOrder>
+      <BuildOrder>20</BuildOrder>
     </CppCompile>
     <CppCompile Include="ecg\classHeartbeat.cpp">
       <VirtualFolder>{F0934E87-5C3D-47C3-8E43-EE413825840D}</VirtualFolder>
       <DependentOn>ecg\classHeartbeat.h</DependentOn>
-      <BuildOrder>22</BuildOrder>
+      <BuildOrder>23</BuildOrder>
     </CppCompile>
     <CppCompile Include="ecg\classQrs.cpp">
       <VirtualFolder>{F0934E87-5C3D-47C3-8E43-EE413825840D}</VirtualFolder>
       <DependentOn>ecg\classQrs.h</DependentOn>
-      <BuildOrder>23</BuildOrder>
+      <BuildOrder>24</BuildOrder>
     </CppCompile>
     <CppCompile Include="ecg\classRpeaks.cpp">
       <VirtualFolder>{F0934E87-5C3D-47C3-8E43-EE413825840D}</VirtualFolder>
       <DependentOn>ecg\classRpeaks.h</DependentOn>
-      <BuildOrder>20</BuildOrder>
+      <BuildOrder>21</BuildOrder>
     </CppCompile>
     <CppCompile Include="ecg\classTurns.cpp">
       <VirtualFolder>{F0934E87-5C3D-47C3-8E43-EE413825840D}</VirtualFolder>
       <DependentOn>ecg\classTurns.h</DependentOn>
-      <BuildOrder>21</BuildOrder>
+      <BuildOrder>22</BuildOrder>
     </CppCompile>
     <CppCompile Include="Features.cpp">
       <Form>fmFeatures</Form>
@@ -307,7 +307,7 @@
     </CppCompile>
     <CppCompile Include="inc\libsvm\svm.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
-      <BuildOrder>52</BuildOrder>
+      <BuildOrder>53</BuildOrder>
     </CppCompile>
     <CppCompile Include="Main.cpp">
       <Form>fmMain</Form>
@@ -327,28 +327,28 @@
     <CppCompile Include="Testform.cpp">
       <Form>fmTest</Form>
       <DependentOn>Testform.h</DependentOn>
-      <BuildOrder>10</BuildOrder>
+      <BuildOrder>11</BuildOrder>
     </CppCompile>
     <CppCompile Include="VergleichAlg.cpp">
       <Form>fmVergleich</Form>
       <DependentOn>VergleichAlg.h</DependentOn>
-      <BuildOrder>54</BuildOrder>
+      <BuildOrder>10</BuildOrder>
     </CppCompile>
     <None Include="definitions.h">
       <VirtualFolder>{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}</VirtualFolder>
-      <BuildOrder>11</BuildOrder>
+      <BuildOrder>12</BuildOrder>
     </None>
     <None Include="out\mysql_scripts\script_create_all_databases.sql">
       <VirtualFolder>{95507C37-82F7-42D0-AAB7-ABB7E192732B}</VirtualFolder>
-      <BuildOrder>42</BuildOrder>
+      <BuildOrder>43</BuildOrder>
     </None>
     <None Include="out\mysql_scripts\script_insert_dummy_data_basic.sql">
       <VirtualFolder>{95507C37-82F7-42D0-AAB7-ABB7E192732B}</VirtualFolder>
-      <BuildOrder>43</BuildOrder>
+      <BuildOrder>44</BuildOrder>
     </None>
     <None Include="out\mysql_scripts\script_insert_dummy_data_sessions.sql">
       <VirtualFolder>{95507C37-82F7-42D0-AAB7-ABB7E192732B}</VirtualFolder>
-      <BuildOrder>44</BuildOrder>
+      <BuildOrder>45</BuildOrder>
     </None>
     <FormResources Include="algorithms\AlgChoi.dfm" />
     <FormResources Include="algorithms\AlgChoi2.dfm" />

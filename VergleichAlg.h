@@ -82,6 +82,7 @@ private:
 
 	double			Accuracy[2][2];  //zwei Klassifizierungen mal zwei Feature-Extracrtion
 	void			DoVergleich();
+	void 			DoVergleichNeu();
 
 	bool			DoSvm();
 	bool 			SvmAccuracy(double& accuracy, String label, int alg);
