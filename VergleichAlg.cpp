@@ -103,7 +103,7 @@ void TfmVergleich::DoVergleich()
 	if (cxRandom->Checked)      t++;
 	if (cxClassifySvm->Checked) t; //nur der Vollständigkeit halber aufgeführt
 
-	Print("------------------------------------------------------------------");
+	Print("-----------------------------------------------------");
 
 	if (!fmysql.ecg.loadTable())
 		{
@@ -113,16 +113,18 @@ void TfmVergleich::DoVergleich()
 
 	JobStart(t * fmysql.ecg.getSize());
 
-	if (!DoSvm()) return; //Fehglemrldung hat die Funktion schon ausgegeben
-	if (!DoXyz()) return; //Fehglemrldung hat die Funktion schon ausgegeben
+	if (!DoSvm()) return; //Fehlermeldung hat die Funktion schon ausgegeben
+	if (!DoXyz()) return; //Fehlermeldung hat die Funktion schon ausgegeben
 
-	Print("------------------------------------------------------------------");
+	Print("-----------------------------------------------------");
 	Print("");
 	Print("Auswertung Ergebnisse:");
-	Print("Klassifizierung \t\tSVM \t\txyz");
-	Print("------------------------------------------------------------------");
-	Print("Feat. Choi \t\t%.2f \t\t%.2f ",  Accuracy[0][0], Accuracy[1][0]);
-	Print("Feat. Random \t\t%.2f \t\t%.2f", Accuracy[0][1], Accuracy[1][1]);
+	Print("Klassifizierung \t\t  SVM \t  xyz");
+	Print("-----------------------------------------------------");
+	if (cxChoi->Checked)
+		Print("Feat. Choi \t\t\t%.2f \t%.2f ",  Accuracy[0][0], Accuracy[1][0]);
+	if (cxRandom->Checked)
+		Print("Feat. Random \t\t\t%.2f \t%.2f", Accuracy[0][1], Accuracy[1][1]);
 	JobEnd();
 	}
 //---------------------------------------------------------------------------

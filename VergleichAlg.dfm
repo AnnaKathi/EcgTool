@@ -69,7 +69,6 @@ object fmVergleich: TfmVergleich
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 777
     DesignSize = (
       1190
       41)
@@ -93,7 +92,6 @@ object fmVergleich: TfmVergleich
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 761
     end
   end
   object Panel1: TPanel
@@ -104,8 +102,6 @@ object fmVergleich: TfmVergleich
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 646
-    ExplicitWidth = 777
     DesignSize = (
       1190
       41)
@@ -117,7 +113,6 @@ object fmVergleich: TfmVergleich
       Action = acClose
       Anchors = [akRight, akBottom]
       TabOrder = 0
-      ExplicitLeft = 694
     end
     object pbJob: TProgressBar
       Left = 8
@@ -136,8 +131,6 @@ object fmVergleich: TfmVergleich
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = 427
-    ExplicitTop = 47
     object Bevel3: TBevel
       Left = 0
       Top = 115
@@ -349,6 +342,12 @@ object fmVergleich: TfmVergleich
     Width = 382
     Height = 609
     Align = alRight
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Courier New'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 4
   end
   object tStartup: TTimer
