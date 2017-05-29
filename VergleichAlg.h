@@ -81,7 +81,7 @@ private:
 	void			JobEnd();
 	void			JobTick(int tick = 1);
 
-	double			Accuracy[2][2];  //zwei Klassifizierungen mal zwei Feature-Extracrtion
+	double			Accuracy[2][3];  //zwei Klassifizierungen mal zwei Feature-Extracrtion
 	void			DoVergleich();
 	void 			DoVergleichNeu();
 

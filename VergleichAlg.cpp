@@ -123,11 +123,11 @@ void TfmVergleich::DoVergleich()
 	Print("Klassifizierung \t\t  SVM \t  xyz");
 	Print("-----------------------------------------------------");
 	if (cxChoi1->Checked)
-		Print("Feat. Choi (Original) \t\t\t%.2f \t%.2f ",  Accuracy[0][0], Accuracy[1][0]);
+		Print("Feat. Choi (Original) \t\t%.2f \t%.2f ",  Accuracy[0][0], Accuracy[1][0]);
 	if (cxChoi2->Checked)
-		Print("Feat. Choi (Anna) \t\t\t%.2f \t%.2f ",  Accuracy[0][0], Accuracy[1][0]);
+		Print("Feat. Choi (Anna) \t\t%.2f \t%.2f ",  Accuracy[0][1], Accuracy[1][1]);
 	if (cxRandom->Checked)
-		Print("Feat. Random \t\t\t%.2f \t%.2f", Accuracy[0][1], Accuracy[1][1]);
+		Print("Feat. Random \t\t\t%.2f \t%.2f", Accuracy[0][2], Accuracy[1][2]);
 	JobEnd();
 	}
 //---------------------------------------------------------------------------
@@ -145,12 +145,13 @@ bool TfmVergleich::DoSvm()
 	if (cxChoi1->Checked)
 		{
 		//-- Do Svm für Choi-Features
-		data.label = "choi";
+		data.label = "choioriginal";
 		data.alg   = fChoiFeat.AlgNr;
 
 		if (!fChoiSvm.SvmAccuracy(accuracy, data))
 			{
-			Print("## Fehler bei der SVM-Berechnung für die Choi-Features");
+			Print("## Fehler bei der SVM-Berechnung für die Choi-Features (Original)");
+			Print("## Die Klasse cChoiSvm meldet: %s", fChoiSvm.error_msg);
 			return false;
 			}
 
@@ -160,16 +161,17 @@ bool TfmVergleich::DoSvm()
 	if (cxChoi2->Checked)
 		{
 		//-- Do Svm für Choi-Features
-		data.label = "choi";
+		data.label = "choianna";
 		data.alg   = fChoiFeat.AlgNr+1;
 
 		if (!fChoiSvm.SvmAccuracy(accuracy, data))
 			{
-			Print("## Fehler bei der SVM-Berechnung für die Choi-Features");
+			Print("## Fehler bei der SVM-Berechnung für die Choi-Features (Anna)");
+			Print("## Die Klasse cChoiSvm meldet: %s", fChoiSvm.error_msg);
 			return false;
 			}
 
-		Accuracy[0][0] = accuracy;
+		Accuracy[0][1] = accuracy;
 		}
 
 	if (cxRandom->Checked)
@@ -181,10 +183,11 @@ bool TfmVergleich::DoSvm()
 		if (!fChoiSvm.SvmAccuracy(accuracy, data))
 			{
 			Print("## Fehler bei der SVM-Berechnung für die Random-Features");
+			Print("## Die Klasse cChoiSvm meldet: %s", fChoiSvm.error_msg);
 			return false;
 			}
 
-		Accuracy[0][1] = accuracy;
+		Accuracy[0][2] = accuracy;
 		}
 
 	return true;

@@ -680,7 +680,10 @@ bool cChoiSVM::SvmCompareResult(double& accuracy, String testfile, String outfil
 	if (fehler)
 		return fail(8, ftools.fmt("Fehler aufgetreten").c_str());
 
-	accuracy = (double)right / (double)count * 100;
+	if (count <= 0)
+		accuracy = 0.0;
+	else
+		accuracy = (double)right / (double)count * 100;
 	return ok();
 	}
 //---------------------------------------------------------------------------
