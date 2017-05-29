@@ -131,11 +131,9 @@ object fmVergleich: TfmVergleich
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = 423
-    ExplicitTop = 51
     object Bevel3: TBevel
       Left = 0
-      Top = 115
+      Top = 109
       Width = 375
       Height = 8
       Align = alTop
@@ -146,17 +144,16 @@ object fmVergleich: TfmVergleich
     end
     object Bevel6: TBevel
       Left = 0
-      Top = 238
+      Top = 232
       Width = 375
       Height = 8
       Align = alTop
       Shape = bsTopLine
       ExplicitLeft = -2
-      ExplicitTop = 232
     end
     object Bevel7: TBevel
       Left = 0
-      Top = 361
+      Top = 355
       Width = 375
       Height = 8
       Align = alTop
@@ -168,7 +165,7 @@ object fmVergleich: TfmVergleich
       Left = 0
       Top = 0
       Width = 375
-      Height = 115
+      Height = 109
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
@@ -185,33 +182,43 @@ object fmVergleich: TfmVergleich
         Font.Style = [fsUnderline]
         ParentFont = False
       end
-      object cxChoi: TCheckBox
+      object cxChoi1: TCheckBox
         Left = 16
-        Top = 32
-        Width = 193
+        Top = 28
+        Width = 313
         Height = 17
-        Caption = 'Choi 2016, acht fiduzielle Punkte'
+        Caption = 'Choi 2016, acht fiduzielle Punkte, Original R-Peak Detection'
         TabOrder = 0
         OnClick = cxClassifySvmClick
       end
       object cxRandom: TCheckBox
         Left = 16
-        Top = 55
+        Top = 74
         Width = 281
         Height = 17
         Caption = 'Random Points, 20 verteilte Punkte im QRS-Komplex'
         TabOrder = 1
         OnClick = cxClassifySvmClick
       end
+      object cxChoi2: TCheckBox
+        Left = 16
+        Top = 51
+        Width = 313
+        Height = 17
+        Caption = 'Choi 2016, acht fiduzielle Punkte, R-Peak-Verbesserung Anna'
+        TabOrder = 2
+        OnClick = cxClassifySvmClick
+      end
     end
     object pnClassify: TPanel
       Left = 0
-      Top = 123
+      Top = 117
       Width = 375
       Height = 115
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
+      ExplicitTop = 123
       object Label2: TLabel
         Left = 120
         Top = 6
@@ -247,13 +254,14 @@ object fmVergleich: TfmVergleich
     end
     object pnSvm: TPanel
       Left = 0
-      Top = 246
+      Top = 240
       Width = 375
       Height = 115
       Align = alTop
       BevelOuter = bvNone
       Enabled = False
       TabOrder = 3
+      ExplicitTop = 246
       object Label3: TLabel
         Left = 120
         Top = 6

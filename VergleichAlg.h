@@ -35,7 +35,7 @@ __published:	// IDE-verwaltete Komponenten
 	TBevel *Bevel3;
 	TPanel *pnAlg;
 	TLabel *Label1;
-	TCheckBox *cxChoi;
+	TCheckBox *cxChoi1;
 	TCheckBox *cxRandom;
 	TBevel *Bevel4;
 	TPanel *pnEcg;
@@ -58,6 +58,7 @@ __published:	// IDE-verwaltete Komponenten
 	TLabel *Label9;
 	TEdit *edClassifyBis;
 	TProgressBar *pbJob;
+	TCheckBox *cxChoi2;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);

@@ -38,11 +38,12 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *btBuildAll;
 	TPanel *pnAlg;
 	TBevel *Bevel3;
-	TCheckBox *cxChoi;
+	TCheckBox *cxChoi1;
 	TLabel *Label1;
 	TCheckBox *cxRandom;
 	TBevel *Bevel4;
 	TProgressBar *pbJob;
+	TCheckBox *cxChoi2;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);

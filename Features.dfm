@@ -59,7 +59,6 @@ object fmFeatures: TfmFeatures
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 789
     DesignSize = (
       934
       41)
@@ -83,7 +82,6 @@ object fmFeatures: TfmFeatures
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 773
     end
   end
   object Panel1: TPanel
@@ -94,8 +92,6 @@ object fmFeatures: TfmFeatures
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 562
-    ExplicitWidth = 789
     DesignSize = (
       934
       41)
@@ -107,7 +103,6 @@ object fmFeatures: TfmFeatures
       Action = acClose
       Anchors = [akRight, akBottom]
       TabOrder = 0
-      ExplicitLeft = 718
     end
     object pbJob: TProgressBar
       Left = 8
@@ -126,8 +121,6 @@ object fmFeatures: TfmFeatures
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = 2
-    ExplicitTop = 43
   end
   object pnAuswahl: TPanel
     Left = 465
@@ -137,26 +130,21 @@ object fmFeatures: TfmFeatures
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 3
-    ExplicitLeft = 576
-    ExplicitTop = 47
-    ExplicitWidth = 350
-    ExplicitHeight = 597
     object Bevel3: TBevel
       Left = 0
-      Top = 507
+      Top = 516
       Width = 469
       Height = 8
       Align = alTop
       Shape = bsTopLine
-      ExplicitLeft = 112
-      ExplicitTop = 424
-      ExplicitWidth = 50
+      ExplicitLeft = -2
+      ExplicitTop = 514
     end
     object memo: TMemo
       Left = 0
       Top = 0
       Width = 469
-      Height = 427
+      Height = 417
       Align = alTop
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -167,8 +155,6 @@ object fmFeatures: TfmFeatures
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 0
-      ExplicitLeft = 6
-      ExplicitWidth = 477
     end
     object btFeatures: TButton
       Left = 59
@@ -190,14 +176,13 @@ object fmFeatures: TfmFeatures
     end
     object pnAlg: TPanel
       Left = 0
-      Top = 427
+      Top = 417
       Width = 469
-      Height = 80
+      Height = 99
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitTop = 313
-      ExplicitWidth = 477
+      ExplicitTop = 408
       object Label1: TLabel
         Left = 184
         Top = 6
@@ -211,21 +196,29 @@ object fmFeatures: TfmFeatures
         Font.Style = [fsUnderline]
         ParentFont = False
       end
-      object cxChoi: TCheckBox
+      object cxChoi1: TCheckBox
         Left = 16
         Top = 32
-        Width = 193
+        Width = 385
         Height = 17
-        Caption = 'Choi 2016, acht fiduzielle Punkte'
+        Caption = 'Choi 2016, acht fiduzielle Punkte, Original R-Peak-Detection'
         TabOrder = 0
       end
       object cxRandom: TCheckBox
         Left = 16
-        Top = 55
+        Top = 76
         Width = 281
         Height = 17
         Caption = 'Random Points, 20 verteilte Punkte im QRS-Komplex'
         TabOrder = 1
+      end
+      object cxChoi2: TCheckBox
+        Left = 16
+        Top = 53
+        Width = 385
+        Height = 17
+        Caption = 'Choi 2016, acht fiduzielle Punkte, R-Peak-Verbesserung Anna'
+        TabOrder = 2
       end
     end
   end

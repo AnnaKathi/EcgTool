@@ -8,8 +8,8 @@ File_5=TSourceModule,'d:\dev\rad\include\vcl\dstring.h',0,1,48,1,68,0,0,,
 File_6=TSourceModule,'D:\src\EcgTool\database\classMySql.cpp',0,1,150,1,173,0,0,,
 
 [Modules]
-Module0=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp
-Module1=D:\src\EcgTool\VergleichAlg.cpp
+Module0=D:\src\EcgTool\VergleichAlg.cpp
+Module1=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp
 Module2=default.htm
 Module3=D:\src\EcgTool\algorithms\features\classRandomPoints.cpp
 Module4=D:\src\EcgTool\ChoiKlassifizierung.cpp
@@ -20,14 +20,14 @@ Module8=D:\src\EcgTool\Features.cpp
 Count=9
 EditWindowCount=1
 
-[D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
 [D:\src\EcgTool\VergleichAlg.cpp]
 ModuleType=TSourceModule
 FormState=1
+FormOnTop=0
+
+[D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp]
+ModuleType=TSourceModule
+FormState=0
 FormOnTop=0
 
 [default.htm]
@@ -65,7 +65,7 @@ FormOnTop=0
 
 [EditWindow0]
 ViewCount=9
-CurrentEditView=D:\src\EcgTool\algorithms\classifications\classChoiSVM.cpp
+CurrentEditView=D:\src\EcgTool\VergleichAlg.cpp
 View0=0
 View1=1
 View2=2
@@ -136,11 +136,11 @@ CustomEditViewType=TEditView
 Module=D:\src\EcgTool\VergleichAlg.cpp
 CursorX=1
 CursorY=175
-TopLine=163
+TopLine=145
 LeftCol=1
 Elisions=
 Bookmarks={1,99,19}{2,175,1}
-EditViewName=D:\src\EcgTool\VergleichAlg.h
+EditViewName=D:\src\EcgTool\VergleichAlg.cpp
 
 [View4]
 CustomEditViewType=TEditView
@@ -262,11 +262,11 @@ State=0
 Left=0
 Top=0
 Width=2104
-Height=8798
+Height=8779
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2104
-ClientHeight=8798
+ClientHeight=8779
 TBDockHeight=5904
 LRDockWidth=2349
 Dockable=1
@@ -421,11 +421,11 @@ State=0
 Left=0
 Top=0
 Width=2339
-Height=1000
+Height=1231
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2339
-ClientHeight=1000
+ClientHeight=1231
 TBDockHeight=2317
 LRDockWidth=2833
 Dockable=1
@@ -645,11 +645,11 @@ State=0
 Left=0
 Top=0
 Width=2104
-Height=6779
+Height=8779
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2104
-ClientHeight=6779
+ClientHeight=8779
 TBDockHeight=3673
 LRDockWidth=1896
 Dockable=1
@@ -756,7 +756,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
@@ -767,7 +767,7 @@ Visible=0
 Docked=1
 State=0
 Left=0
-Top=23
+Top=0
 Width=3833
 Height=1673
 MaxLeft=-1
@@ -803,6 +803,6 @@ LRDockWidth=2104
 Dockable=1
 StayOnTop=0
 TabPosition=0
-ActiveTabID=ProjectManager
+ActiveTabID=ToolForm
 TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
 

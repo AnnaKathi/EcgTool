@@ -148,9 +148,15 @@ void TfmFeatures::GetFeatures()
 	Print("Features bilden für EKG <%d> %s",
 		data.ident, fmysql.people.getNameOf(data.person));
 
-	if (cxChoi->Checked)
+	if (cxChoi1->Checked)
 		{
 		if (!DoFeatures(fmysql.ecg.row, fChoi.AlgNr, true))
+			return;
+		}
+
+	if (cxChoi2->Checked)
+		{
+		if (!DoFeatures(fmysql.ecg.row, fChoi.AlgNr+1, true))
 			return;
 		}
 
@@ -207,7 +213,8 @@ bool TfmFeatures::DoFeatures(sEcgData ecgdata, int alg, bool replace)
 	if (alg < 0) 		   return false;
 
 	String features;
-		 if (alg == fChoi.AlgNr) 		 features = fChoi.getFeaturesStr2(array);
+		 if (alg == fChoi.AlgNr) 		 features = fChoi.getFeaturesStr1(array);
+	else if (alg == (fChoi.AlgNr+1)) 	 features = fChoi.getFeaturesStr2(array);
 	else if (alg == fRandomPoints.AlgNr) features = BuildRandomFeatures(array);
 	else return false;
 
@@ -273,7 +280,8 @@ void TfmFeatures::GetAllFeatures()
 	//Print("Datenbank ecgdata geladen, %d Datensätze", fmysql.ecg.getSize());
 
 	int max = 0;
-	if (cxChoi->Checked)   max += fmysql.ecg.getSize();
+	if (cxChoi1->Checked)  max += fmysql.ecg.getSize();
+	if (cxChoi2->Checked)  max += fmysql.ecg.getSize();
 	if (cxRandom->Checked) max += fmysql.ecg.getSize();
 	pbJob->Max = max;
 	pbJob->Position = 0;
@@ -289,9 +297,15 @@ void TfmFeatures::GetAllFeatures()
 		data = fmysql.ecg.row;
 		Print("EKG %d (%s)", data.ident, fmysql.people.getNameOf(data.person));
 
-		if (cxChoi->Checked)
+		if (cxChoi1->Checked)
 			{
 			if (!DoFeatures(data, fChoi.AlgNr, bReplace))
+				break;
+			}
+
+		if (cxChoi2->Checked)
+			{
+			if (!DoFeatures(data, fChoi.AlgNr+1, bReplace))
 				break;
 			}
 

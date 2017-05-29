@@ -99,7 +99,8 @@ void TfmVergleich::JobTick(int tick) //tick ist mit 1 vorbesetzt
 void TfmVergleich::DoVergleich()
 	{
 	int t = 0;
-	if (cxChoi->Checked)        t++;
+	if (cxChoi1->Checked)       t++;
+	if (cxChoi2->Checked)       t++;
 	if (cxRandom->Checked)      t++;
 	if (cxClassifySvm->Checked) t; //nur der Vollständigkeit halber aufgeführt
 
@@ -121,8 +122,10 @@ void TfmVergleich::DoVergleich()
 	Print("Auswertung Ergebnisse:");
 	Print("Klassifizierung \t\t  SVM \t  xyz");
 	Print("-----------------------------------------------------");
-	if (cxChoi->Checked)
-		Print("Feat. Choi \t\t\t%.2f \t%.2f ",  Accuracy[0][0], Accuracy[1][0]);
+	if (cxChoi1->Checked)
+		Print("Feat. Choi (Original) \t\t\t%.2f \t%.2f ",  Accuracy[0][0], Accuracy[1][0]);
+	if (cxChoi2->Checked)
+		Print("Feat. Choi (Anna) \t\t\t%.2f \t%.2f ",  Accuracy[0][0], Accuracy[1][0]);
 	if (cxRandom->Checked)
 		Print("Feat. Random \t\t\t%.2f \t%.2f", Accuracy[0][1], Accuracy[1][1]);
 	JobEnd();
@@ -139,11 +142,26 @@ bool TfmVergleich::DoSvm()
 	data.classify_von = edClassifyVon->Text.ToIntDef(0);
 	data.classify_bis = edClassifyBis->Text.ToIntDef(0);
 
-	if (cxChoi->Checked)
+	if (cxChoi1->Checked)
 		{
 		//-- Do Svm für Choi-Features
 		data.label = "choi";
 		data.alg   = fChoiFeat.AlgNr;
+
+		if (!fChoiSvm.SvmAccuracy(accuracy, data))
+			{
+			Print("## Fehler bei der SVM-Berechnung für die Choi-Features");
+			return false;
+			}
+
+		Accuracy[0][0] = accuracy;
+		}
+
+	if (cxChoi2->Checked)
+		{
+		//-- Do Svm für Choi-Features
+		data.label = "choi";
+		data.alg   = fChoiFeat.AlgNr+1;
 
 		if (!fChoiSvm.SvmAccuracy(accuracy, data))
 			{
@@ -176,10 +194,16 @@ bool TfmVergleich::DoSvm()
 //---------------------------------------------------------------------------
 bool TfmVergleich::DoXyz()
 	{
-	if (cxChoi->Checked)
+	if (cxChoi1->Checked)
 		{
 		//-- Do Svm für Choi-Features
 		Accuracy[1][0] = 45.45;
+		}
+
+	if (cxChoi2->Checked)
+		{
+		//-- Do Svm für Choi-Features
+		Accuracy[1][0] = 77.12;
 		}
 
 	if (cxRandom->Checked)
@@ -217,7 +241,7 @@ void __fastcall TfmVergleich::cxClassifySvmClick(TObject *Sender)
 	{
 	pnSvm->Enabled = cxClassifySvm->Checked;
 
-	btVergleich->Enabled = (cxChoi->Checked || cxRandom->Checked) &&
+	btVergleich->Enabled = (cxChoi1->Checked || cxChoi2->Checked || cxRandom->Checked) &&
 							cxClassifySvm->Checked &&
 							edTrainingVon->Text != "" &&
 							edTrainingBis->Text != "" &&
