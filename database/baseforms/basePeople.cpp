@@ -13,16 +13,17 @@
 TfmBasePeople *fmBasePeople;
 extern cMySql fmysql;
 //---------------------------------------------------------------------------
-TfmBasePeople* CreatePeopleForm(TForm* caller, TWinControl* container)
+TfmBasePeople* CreatePeopleForm(TForm* caller, TWinControl* container, eListMode mode)
 	{
-	return new TfmBasePeople(caller, container, caller->Color);
+	return new TfmBasePeople(caller, container, mode);
 	}
 //---------------------------------------------------------------------------
-__fastcall TfmBasePeople::TfmBasePeople(TComponent* Owner, TWinControl* Container, TColor color)
+__fastcall TfmBasePeople::TfmBasePeople(TComponent* Owner, TWinControl* Container, eListMode mode)
 	: TForm(Owner)
 	{
 	tCallback = NULL;
 	bSelected = false;
+	eMode = mode;
 	if (Container)
 		snapTo(Container, alClient);
 	}
@@ -58,6 +59,7 @@ void __fastcall TfmBasePeople::FormShow(TObject *Sender)
 void __fastcall TfmBasePeople::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
+	laTabelle->Caption = "Personen (subjects)";
 	ShowData();
 	tStartup->Tag = 1; //signalisiert, dass der Init durchgeführt wurde
 	}
@@ -94,6 +96,7 @@ bool TfmBasePeople::ShowData()
 
 	TListItem* item;
 	String name;
+	int s;
 	while (fmysql.people.nextRow())
 		{
 		if (!CheckFilter()) continue;
@@ -102,26 +105,14 @@ bool TfmBasePeople::ShowData()
 		int person = fmysql.people.row.ident;
 		item->Data = (void*) person;
 		item->Caption = String(person);
-		name = String(fmysql.people.row.vorname) + " " + String(fmysql.people.row.nachname);
-		item->SubItems->Add(name.c_str());
-
-		sarray_t dis;
-		dis = fmysql.people.getDiseasesOf(person);
-		dis = fmysql.diseases.getNamesOf(dis);
-		String liste = ""; 
-		bool first = true;
-		for (sarray_itr itr = dis.begin(); itr != dis.end(); itr++)
-			{
-			slist_t& v = itr->second;
-			if (first)
-				{
-				first = false;
-				liste = v[1];
-				}
-			else
-				liste += ", " + v[1];
-			}
-		item->SubItems->Add(liste);
+		item->SubItems->Add(fmysql.people.row.vorname);
+		item->SubItems->Add(fmysql.people.row.nachname);
+		item->SubItems->Add(String(fmysql.people.row.age));
+		s = fmysql.people.row.sex;
+		if (s == 1)
+			item->SubItems->Add("w");
+		else
+			item->SubItems->Add("m");
 		}
 
 	lvPeople->Items->EndUpdate();
@@ -135,6 +126,11 @@ bool TfmBasePeople::BuildFilter()
 	ffilter.identBis = edIdBis->Text.ToIntDef(-1);
 
 	ffilter.name = edName->Text;
+
+	ffilter.ageVon = edAgeVon->Text.ToIntDef(-1);
+	ffilter.ageBis = edAgeBis->Text.ToIntDef(-1);
+
+	ffilter.sex = cbSex->ItemIndex;
 
 	return true;
 	}
@@ -151,6 +147,15 @@ bool TfmBasePeople::CheckFilter()
 		String nn = fmysql.people.getNameOf(id).LowerCase();
 		if (nn.Pos(ffilter.name.LowerCase()) <= 0)
 			return false;
+		}
+
+	if (ffilter.ageVon > 0 && fmysql.people.row.age < ffilter.ageVon) return false;
+	if (ffilter.ageBis > 0 && fmysql.people.row.age > ffilter.ageBis) return false;
+
+	if (ffilter.sex > 0)
+		{
+		if (ffilter.sex == 1 && fmysql.people.row.sex != 0) return false;
+		if (ffilter.sex == 2 && fmysql.people.row.sex != 1) return false;
 		}
 
 	return true;
@@ -257,9 +262,14 @@ void __fastcall TfmBasePeople::edNameChange(TObject *Sender)
 void __fastcall TfmBasePeople::lvPeopleDblClick(TObject *Sender)
 	{
 	TListItem* item = lvPeople->Selected;
-	if (item)
-    	acSelectExecute(Sender);
-		//obsolete acChangeExecute(Sender);
+	if (!item) return;
+
+	if (eMode == eShow)
+		acChangeExecute(Sender);
+	else if (eMode == eSingleSelect)
+		acSelectExecute(Sender);
+	else if (eMode == eMultiSelect)
+		; //todo
 	}
 //---------------------------------------------------------------------------
 

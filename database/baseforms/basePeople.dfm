@@ -3,7 +3,7 @@ object fmBasePeople: TfmBasePeople
   Top = 0
   Caption = 'BaseForm People'
   ClientHeight = 542
-  ClientWidth = 405
+  ClientWidth = 442
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,8 +17,8 @@ object fmBasePeople: TfmBasePeople
   TextHeight = 13
   object Bevel4: TBevel
     Left = 0
-    Top = 63
-    Width = 405
+    Top = 97
+    Width = 442
     Height = 8
     Align = alTop
     Shape = bsTopLine
@@ -29,16 +29,18 @@ object fmBasePeople: TfmBasePeople
   object pnFilter: TPanel
     Left = 0
     Top = 0
-    Width = 405
-    Height = 63
+    Width = 442
+    Height = 97
     Align = alTop
     BevelOuter = bvNone
     ParentBackground = False
     ParentColor = True
     TabOrder = 0
+    ExplicitTop = 2
+    ExplicitWidth = 576
     object Label10: TLabel
       Left = 8
-      Top = 6
+      Top = 33
       Width = 29
       Height = 13
       Caption = 'Filter'
@@ -50,69 +52,143 @@ object fmBasePeople: TfmBasePeople
       ParentFont = False
     end
     object Label11: TLabel
-      Left = 64
-      Top = 8
+      Left = 56
+      Top = 35
       Width = 47
       Height = 13
       Caption = 'Ident von'
     end
     object Label12: TLabel
-      Left = 184
-      Top = 8
+      Left = 164
+      Top = 35
       Width = 13
       Height = 13
       Caption = 'bis'
     end
     object Label13: TLabel
-      Left = 64
-      Top = 34
+      Left = 56
+      Top = 61
       Width = 27
       Height = 13
       Caption = 'Name'
     end
+    object laTabelle: TLabel
+      Left = 56
+      Top = 7
+      Width = 47
+      Height = 14
+      Caption = 'laTabelle'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsUnderline]
+      ParentFont = False
+    end
+    object Label1: TLabel
+      Left = 256
+      Top = 35
+      Width = 44
+      Height = 13
+      Caption = 'Alter von'
+    end
+    object Label2: TLabel
+      Left = 368
+      Top = 35
+      Width = 13
+      Height = 13
+      Caption = 'bis'
+    end
+    object Label3: TLabel
+      Left = 256
+      Top = 61
+      Width = 52
+      Height = 13
+      Caption = 'Geschlecht'
+    end
     object edIdVon: TEdit
-      Left = 119
-      Top = 5
-      Width = 57
+      Left = 111
+      Top = 32
+      Width = 45
       Height = 21
       TabOrder = 0
       OnExit = edIdVonExit
     end
     object edIdBis: TEdit
-      Left = 206
-      Top = 6
-      Width = 57
+      Left = 186
+      Top = 33
+      Width = 45
       Height = 21
       TabOrder = 1
       OnExit = edIdVonExit
     end
     object edName: TEdit
-      Left = 119
-      Top = 32
-      Width = 144
+      Left = 111
+      Top = 59
+      Width = 120
       Height = 21
       TabOrder = 2
       OnChange = edNameChange
       OnExit = edIdVonExit
     end
+    object edAgeVon: TEdit
+      Left = 315
+      Top = 32
+      Width = 45
+      Height = 21
+      TabOrder = 3
+      OnExit = edIdVonExit
+    end
+    object edAgeBis: TEdit
+      Left = 390
+      Top = 33
+      Width = 45
+      Height = 21
+      TabOrder = 4
+      OnExit = edIdVonExit
+    end
+    object cbSex: TComboBox
+      Left = 315
+      Top = 60
+      Width = 120
+      Height = 21
+      Style = csDropDownList
+      ItemHeight = 13
+      ItemIndex = 0
+      TabOrder = 5
+      Text = '- alle -'
+      OnChange = edNameChange
+      Items.Strings = (
+        '- alle -'
+        'm'#228'nnlich'
+        'weiblich')
+    end
   end
   object lvPeople: TListView
     Left = 0
-    Top = 71
-    Width = 405
-    Height = 471
+    Top = 105
+    Width = 442
+    Height = 437
     Align = alClient
     Columns = <
       item
         Caption = 'Ident'
       end
       item
-        Caption = 'Name'
+        Caption = 'Vorname'
         Width = 120
       end
       item
-        Caption = 'Erkrankungen'
-        Width = 90
+        Caption = 'Nachname'
+        Width = 120
+      end
+      item
+        Alignment = taCenter
+        Caption = 'Alter'
+      end
+      item
+        Alignment = taCenter
+        Caption = 'Sex'
       end>
     GridLines = True
     MultiSelect = True
@@ -123,10 +199,10 @@ object fmBasePeople: TfmBasePeople
     ViewStyle = vsReport
     OnClick = lvPeopleClick
     OnDblClick = lvPeopleDblClick
+    ExplicitWidth = 405
   end
   object ActionListDiseases: TActionList
-    Left = 272
-    Top = 24
+    Left = 160
     object acFilter: TAction
       Caption = 'Personen filtern'
       OnExecute = acFilterExecute
@@ -152,8 +228,7 @@ object fmBasePeople: TfmBasePeople
     end
   end
   object PopupMenu: TPopupMenu
-    Left = 304
-    Top = 24
+    Left = 192
     object Erkrankunghinzufgen1: TMenuItem
       Action = acAdd
     end
@@ -175,6 +250,6 @@ object fmBasePeople: TfmBasePeople
     Interval = 100
     OnTimer = tStartupTimer
     Left = 8
-    Top = 24
+    Top = 56
   end
 end

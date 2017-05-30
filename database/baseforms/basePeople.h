@@ -11,6 +11,7 @@
 #include <ActnList.hpp>
 #include <Menus.hpp>
 //---------------------------------------------------------------------------
+#include "../../definitions.h"
 #include "../../basics/classTools.h"
 //---------------------------------------------------------------------------
 struct sFilterPeople
@@ -18,11 +19,15 @@ struct sFilterPeople
 	int			identVon;
 	int			identBis;
 	String		name;
+	int			ageVon;
+	int			ageBis;
+	int			sex;
 	};
 //---------------------------------------------------------------------------
 class TfmBasePeople : public TForm
 {
 private:
+	eListMode	eMode;
 	cTools		ftools;
 	TTimer*		tCallback;
 	bool		bSelected;
@@ -60,6 +65,13 @@ __published:	// IDE-verwaltete Komponenten
 	TAction *acSelect;
 	TMenuItem *N1;
 	TMenuItem *Personauswhlen1;
+	TLabel *laTabelle;
+	TLabel *Label1;
+	TEdit *edAgeVon;
+	TLabel *Label2;
+	TEdit *edAgeBis;
+	TLabel *Label3;
+	TComboBox *cbSex;
 	void __fastcall acAddExecute(TObject *Sender);
 	void __fastcall acDelExecute(TObject *Sender);
 	void __fastcall acFilterExecute(TObject *Sender);
@@ -74,15 +86,15 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acSelectExecute(TObject *Sender);
 
 public:
-	__fastcall TfmBasePeople(TComponent* Owner, TWinControl* Container, TColor color);
+	__fastcall TfmBasePeople(TComponent* Owner, TWinControl* Container, eListMode mode);
 
 	int			iPerson;
 	bool		setCallback(TTimer& timer);
-	
+
 	bool		ShowData();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmBasePeople *fmBasePeople;
-TfmBasePeople* CreatePeopleForm(TForm* caller, TWinControl* container);
+TfmBasePeople* CreatePeopleForm(TForm* caller, TWinControl* container, eListMode mode);
 //---------------------------------------------------------------------------
 #endif

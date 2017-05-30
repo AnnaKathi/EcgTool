@@ -52,7 +52,7 @@ void __fastcall TfmTest::tStartupTimer(TObject *Sender)
 	fmDiseases = CreateDescForm(this, pnDesc1, fmysql.diseases, eShow);
 	fmOrte     = CreateDescForm(this, pnDesc2, fmysql.orte,     eShow);
 
-	fmLagen    = CreateDescForm(this, pnDesc3, fmysql.lagen,    eSelect);
+	fmLagen    = CreateDescForm(this, pnDesc3, fmysql.lagen,    eSingleSelect);
 	fmLagen->SetCallbackTimer(TimerCallback);
 	}
 //---------------------------------------------------------------------------

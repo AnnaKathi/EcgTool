@@ -44,7 +44,7 @@ void __fastcall TfmSelectDesc::tStartupTimer(TObject *Sender)
 	tStartup->Enabled = false;
 
 	Caption = "select " + fdesc->myName;
-	fmDesc= CreateDescForm(this, pnListe, *fdesc, eSelect);
+	fmDesc= CreateDescForm(this, pnListe, *fdesc, eSingleSelect);
 	fmDesc->SetCallbackTimer(TimerCallback);
 	}
 //---------------------------------------------------------------------------

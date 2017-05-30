@@ -34,6 +34,17 @@ bool cMySqlPeople::doQuery(String q)
 /******************   Funktionen: laden   **********************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
+bool cMySqlPeople::parse()
+	{
+	if (frow == NULL) return false;
+	fdata.ident   = atoi(frow[0]);
+	sprintf(fdata.vorname,  "%.127s", frow[1]);
+	sprintf(fdata.nachname, "%.127s", frow[2]);
+	fdata.age = atoi(frow[3]);
+	fdata.sex = atoi(frow[4]);
+	return true;
+	}
+//---------------------------------------------------------------------------
 bool cMySqlPeople::get(int person)
 	{
 	String q = "SELECT * FROM `" + String(TABLE) + "` WHERE `ID` = " + String(person);
@@ -42,13 +53,7 @@ bool cMySqlPeople::get(int person)
 
 	fres = fwork->getResult();
 	frow = mysql_fetch_row(fres);
-	if (frow == NULL) return false;
-
-	fdata.ident   = atoi(frow[0]);
-	sprintf(fdata.vorname,  "%.127s", frow[1]);
-	sprintf(fdata.nachname, "%.127s", frow[2]);
-
-	return true;
+	return parse();
 	}
 //---------------------------------------------------------------------------
 bool cMySqlPeople::loadTable(String order) //order ist vorbesetzt mit ""
@@ -66,16 +71,7 @@ bool cMySqlPeople::nextRow()
 		return fail(1, "MySql-Verbindung wurde nicht initialisiert");
 
 	frow = mysql_fetch_row(fres);
-	if (frow == NULL) return false;
-
-	fdata.ident   = atoi(frow[0]);
-	sprintf(fdata.vorname,  "%.127s", frow[1]);
-	sprintf(fdata.nachname, "%.127s", frow[2]);
-
-	//todo Erkrankungern laden
-	//String test = getDiseasesOf(fdata.ident);
-
-	return true;
+	return parse();
 	}
 //---------------------------------------------------------------------------
 bool cMySqlPeople::getLast()
@@ -86,13 +82,7 @@ bool cMySqlPeople::getLast()
 
 	fres = fwork->getResult();
 	frow = mysql_fetch_row(fres);
-	if (frow == NULL) return false;
-
-	fdata.ident   = atoi(frow[0]);
-	sprintf(fdata.vorname,  "%.127s", frow[1]);
-	sprintf(fdata.nachname, "%.127s", frow[2]);
-
-	return true;
+	return parse();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -103,10 +93,12 @@ bool cMySqlPeople::insert(sPeople data)
 	{
 	//INSERT INTO `ecg`.`subjects` (`Vorname`, `Nachname`) VALUES ('Otto', 'Mustermann');
 	String q = "INSERT INTO " + String(TABLE) + " ";
-	q+= "(`Vorname`, `Nachname`) VALUES ";
+	q+= "(`Vorname`, `Nachname`, `Age`, `Sex`) VALUES ";
 	q+= "(";
-	q+= "'" + String(data.vorname) + "', ";
-	q+= "'" + String(data.nachname) + "'";
+	q+= "'" + String(data.vorname)  + "', ";
+	q+= "'" + String(data.nachname) + "', ";
+	q+= "'" + String(data.age)		+ "', ";
+	q+= "'" + String(data.sex)		+ "'";
 	q+= ")";
 
 	if (!fwork->send(q))
@@ -124,42 +116,15 @@ bool cMySqlPeople::update(sPeople data)
 	//UPDATE `ecg`.`subjects` SET `Vorname`='Otto', `Nachname`='Mustermann' WHERE  `Ident`=7;
 	String q = "UPDATE " + String(TABLE) + " SET ";
 	q+= "Vorname='"  + String(data.vorname)  + "',";
-	q+= "Nachname='" + String(data.nachname) + "' ";
+	q+= "Nachname='" + String(data.nachname) + "',";
+	q+= "Age='" + String(data.age) + "',";
+	q+= "Sex='" + String(data.sex) + "'";
 	q+= "WHERE ID=" + String(data.ident);
 
 	if (!fwork->send(q))
 		return fail(fwork->error_code, fwork->error_msg);
 	else
 		return ok();
-	}
-//---------------------------------------------------------------------------
-bool cMySqlPeople::addDisease(int person, int disease)
-	{
-	String q = "SELECT * FROM " + String(SUBDIS) + " WHERE";
-	q+= " Subjetcs_ID = " + String(person) + " AND ";
-	q+= " Diseases_ID = "  + String(disease);
-
-	if (!fwork->query(q))
-		return fail(fwork->error_code, fwork->error_msg);
-
-	if (fwork->num_rows > 0)
-		{
-		//die Erkrankung ist bei der person bereits hinterlegt
-		//nichts machen, einfach rausspringen
-		return true;
-		}
-	else
-		{
-		//Erkrankung zur Person abspeichern
-		//insert into subject_disease (PersIdent, DisIdent) VALUES (1, 7)
-		q = "INSERT INTO " + String(SUBDIS) + "(Subjects_ID, Diseases_ID) ";
-		q+= "VALUES (" + String(person) + "," + String(disease) + ")";
-
-		if (!fwork->send(q))
-			return fail(fwork->error_code, fwork->error_msg);
-		}
-		
-	return true;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -185,32 +150,6 @@ String cMySqlPeople::getNameOf(int person)
 
 	fres = res_old; //Position zurücksetzen
 	return name;
-	}
-//---------------------------------------------------------------------------
-sarray_t cMySqlPeople::getDiseasesOf(int person)
-	{
-	MYSQL_RES* res_old = fres; //aktuelle Position speichern
-
-	sarray_t arr; arr.clear();
-	String q =
-		"SELECT * FROM `" + String(SUBDIS) +
-		"` WHERE `Subjects_ID` = " + String(person) +
-		" GROUP BY Dieases_ID"; //zur Sicherheit, sollte nicht nötig sein
-	if (!fwork->query(q))
-		; //keine Erkankungen vorhanden
-	else
-		{
-		fres = fwork->getResult();
-		int ix = 0;
-		while ((frow = mysql_fetch_row(fres)) != NULL)
-			{
-			arr[ix].push_back(frow[2]); //DisIdent
-			ix++;
-			}
-		}
-
-	fres = res_old; //Position zurücksetzen
-	return arr;
 	}
 //---------------------------------------------------------------------------
 int cMySqlPeople::getSize()
@@ -258,15 +197,7 @@ bool cMySqlPeople::deleteByIdent(int ident)
 	if (!fwork->send(q))
 		return fail(fwork->error_code, fwork->error_msg);
 	else
-		{
-		//Evtl zugehörige Erkrankungen löschen
-		String q = "DELETE FROM " + String(SUBDIS);
-		q+= " WHERE PersIdent = " + String(ident);
-		if (!fwork->send(q))
-			return fail(fwork->error_code, fwork->error_msg);
-		}
-		
-	return ok();
+		return ok();
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

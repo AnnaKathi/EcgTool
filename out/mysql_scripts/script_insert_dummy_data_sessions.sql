@@ -1,10 +1,10 @@
 # //Dummy-Daten in alle Datenbank eintragen: Session-Daten
 #
 # //-- Subjects, 1=weiblich, 0=männlich
-INSERT INTO `ecg`.`subjects` (`Vorname`, `Nachname`, `Age`, `Geschlecht`) VALUES ('Anna', 'Stratmann', 35, 1);
-INSERT INTO `ecg`.`subjects` (`Vorname`, `Nachname`, `Age`, `Geschlecht`) VALUES ('Manfred', 'Umlauff', 63, 0);
-INSERT INTO `ecg`.`subjects` (`Vorname`, `Nachname`, `Age`, `Geschlecht`) VALUES ('Manuela', 'Stratmann', 56, 1);
-INSERT INTO `ecg`.`subjects` (`Vorname`, `Nachname`, `Age`, `Geschlecht`) VALUES ('Martin', 'Stratmann', 58, 0);
+INSERT INTO `ecg`.`subjects` (`Vorname`, `Nachname`, `Age`, `Sex`) VALUES ('Anna', 'Stratmann', 35, 1);
+INSERT INTO `ecg`.`subjects` (`Vorname`, `Nachname`, `Age`, `Sex`) VALUES ('Manfred', 'Umlauff', 63, 0);
+INSERT INTO `ecg`.`subjects` (`Vorname`, `Nachname`, `Age`, `Sex`) VALUES ('Manuela', 'Stratmann', 56, 1);
+INSERT INTO `ecg`.`subjects` (`Vorname`, `Nachname`, `Age`, `Sex`) VALUES ('Martin', 'Stratmann', 58, 0);
 
 # //-- Sub-Diseases, Diseases 1-8, Subjects 1-4
 # //Anna ist gesund, bei Manfred, Martin und Manuela Krankheiten simulieren

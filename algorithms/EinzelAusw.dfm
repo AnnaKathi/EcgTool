@@ -67,7 +67,6 @@ object fmSingle: TfmSingle
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 549
     DesignSize = (
       1067
       41)
@@ -91,7 +90,6 @@ object fmSingle: TfmSingle
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 533
     end
   end
   object Panel1: TPanel
@@ -102,8 +100,6 @@ object fmSingle: TfmSingle
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 631
-    ExplicitWidth = 951
     DesignSize = (
       1067
       41)
@@ -115,7 +111,6 @@ object fmSingle: TfmSingle
       Action = acClose
       Anchors = [akTop, akRight]
       TabOrder = 0
-      ExplicitLeft = 466
     end
   end
   object pnAuswertung: TPanel
@@ -134,10 +129,6 @@ object fmSingle: TfmSingle
     ParentBackground = False
     ParentFont = False
     TabOrder = 2
-    ExplicitLeft = 709
-    ExplicitTop = 47
-    ExplicitWidth = 289
-    ExplicitHeight = 196
     object Label4: TLabel
       Left = 16
       Top = 24
@@ -196,7 +187,6 @@ object fmSingle: TfmSingle
     Color = clWhite
     ParentBackground = False
     TabOrder = 3
-    ExplicitLeft = 270
   end
   object pnFilterPerson: TPanel
     Left = 0

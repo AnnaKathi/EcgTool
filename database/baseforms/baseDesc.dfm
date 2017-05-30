@@ -50,7 +50,6 @@ object fmBaseDesc: TfmBaseDesc
     ViewStyle = vsReport
     OnClick = lvDataClick
     OnDblClick = lvDataDblClick
-    ExplicitWidth = 453
   end
   object pnFilter: TPanel
     Left = 0
@@ -62,7 +61,6 @@ object fmBaseDesc: TfmBaseDesc
     ParentBackground = False
     ParentColor = True
     TabOrder = 1
-    ExplicitWidth = 453
     object Label10: TLabel
       Left = 8
       Top = 31
@@ -186,6 +184,6 @@ object fmBaseDesc: TfmBaseDesc
     Interval = 100
     OnTimer = tStartupTimer
     Left = 8
-    Top = 24
+    Top = 48
   end
 end

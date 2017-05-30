@@ -13,7 +13,8 @@ struct sPeople
 	int			ident;
 	char		vorname[128];
 	char		nachname[128];
-	int			diseases[16]; //Liste von Herzerkrankungen
+	int			age;
+	int			sex; //1 = weiblich, 0 = männlich
 	};
 //---------------------------------------------------------------------------
 class PACKAGE cMySqlPeople : public cBase
@@ -31,11 +32,9 @@ public:
 	//-- Daten speichern
 	bool	insert(sPeople data);
 	bool	update(sPeople data);
-	bool	addDisease(int person, int disease);
-	
+
 	//-- Daten feststellen
-	String	 getNameOf(int person);
-	sarray_t getDiseasesOf(int person);
+	String 	getNameOf(int person);
 	int		getSize();
 
 	//-- Daten anzeigen
@@ -48,9 +47,10 @@ __property sPeople row  = { read=get_data };
 __property int num_rows = { read=get_num_rows };
 
 private:
+	bool			parse();
+	
 	sPeople			fdata;
 	sPeople			get_data();
-
 
 	cMySqlWork*		fwork;
 

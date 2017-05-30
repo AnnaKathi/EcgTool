@@ -88,6 +88,7 @@ void __fastcall TfmPerson::tStartupTimer(TObject *Sender)
 			edVorname->Text  = fmysql.people.row.vorname;
 			edNachname->Text = fmysql.people.row.nachname;
 
+			/* TODO
 			sarray_t dis;
 			dis = fmysql.people.getDiseasesOf(iPerson);
 			dis = fmysql.diseases.getNamesOf(dis);
@@ -101,6 +102,7 @@ void __fastcall TfmPerson::tStartupTimer(TObject *Sender)
 				item->Caption = v[0];
 				item->SubItems->Add(v[1]);
 				}
+			*/
 			}
 		}
 
@@ -152,11 +154,13 @@ bool TfmPerson::SaveData()
 		{
 		item = lvDiseases->Items->Item[i];
 		dis = (int)item->Data;
+		/* TODO
 		if (!fmysql.people.addDisease(iPerson, dis))
 			{
 			//todo Fehlermeldung
 			break;
 			}
+		*/
 		}
 	if (fehler) return false;
 

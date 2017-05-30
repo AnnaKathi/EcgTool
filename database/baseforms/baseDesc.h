@@ -11,14 +11,9 @@
 #include <ExtCtrls.hpp>
 #include <Menus.hpp>
 //---------------------------------------------------------------------------
+#include "../../definitions.h"
 #include "../../basics/classTools.h"
 #include "../classMySql_DescDb.h"
-//---------------------------------------------------------------------------
-enum eListMode
-	{
-	eShow = 0,  //Datensätze anzeigen, DblClick = Datensatz ändern
-	eSelect,	//Datensätze anzeigen, DblClick = Datensatz auswählen
-	};
 //---------------------------------------------------------------------------
 struct sDescFilter
 	{

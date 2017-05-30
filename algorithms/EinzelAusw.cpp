@@ -48,7 +48,7 @@ void __fastcall TfmSingle::tStartupTimer(TObject *Sender)
 	pnFilterPerson->Caption = "";
 	pnFilterEcg->Caption    = "";
 
-	fmPeople  = CreatePeopleForm(this, pnFilterPerson);
+	fmPeople  = CreatePeopleForm(this, pnFilterPerson, eShow);
 	fmEcgData = CreateEcgForm(this,    pnFilterEcg);
 
 	fmPeople->ShowData();

@@ -220,7 +220,7 @@ void __fastcall TfmBaseDesc::acEditExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmBaseDesc::acSelectExecute(TObject *Sender)
 	{
-	if (eMode != eSelect) return;
+	if (eMode != eSingleSelect) return;
 	if (lvData->SelCount <= 0) return;
 
 	TListItem* item; SelectedIdents = "";
@@ -251,7 +251,7 @@ void __fastcall TfmBaseDesc::lvDataClick(TObject *Sender)
 		acDel->Enabled    = true;
 		acEdit->Enabled   = true;
 
-		if (eMode != eSelect)
+		if (eMode != eSingleSelect)
 			acSelect->Enabled = false;
 		else
 			acSelect->Enabled = true;
@@ -286,8 +286,10 @@ void __fastcall TfmBaseDesc::lvDataDblClick(TObject *Sender)
 
 	if (eMode == eShow)
 		acEditExecute(Sender);
-	else if (eMode == eSelect)
-    	acSelectExecute(Sender);
+	else if (eMode == eSingleSelect)
+		acSelectExecute(Sender);
+	else if (eMode == eMultiSelect)
+    	; //todo
 	}
 //---------------------------------------------------------------------------
 

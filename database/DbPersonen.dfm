@@ -30,7 +30,7 @@ object fmData: TfmData
     ExplicitWidth = 50
   end
   object Splitter1: TSplitter
-    Left = 549
+    Left = 731
     Top = 49
     Height = 537
     ExplicitLeft = 120
@@ -38,7 +38,7 @@ object fmData: TfmData
     ExplicitHeight = 100
   end
   object Splitter2: TSplitter
-    Left = 273
+    Left = 455
     Top = 49
     Height = 537
     ExplicitLeft = 270
@@ -109,7 +109,7 @@ object fmData: TfmData
   object pnPeople: TPanel
     Left = 0
     Top = 49
-    Width = 273
+    Width = 455
     Height = 537
     Align = alLeft
     Color = clWhite
@@ -117,7 +117,7 @@ object fmData: TfmData
     TabOrder = 2
   end
   object pnEcgData: TPanel
-    Left = 552
+    Left = 734
     Top = 49
     Width = 509
     Height = 537
@@ -125,9 +125,10 @@ object fmData: TfmData
     Color = clWhite
     ParentBackground = False
     TabOrder = 3
+    ExplicitLeft = 552
   end
   object pnDiseases: TPanel
-    Left = 276
+    Left = 458
     Top = 49
     Width = 273
     Height = 537
@@ -135,14 +136,16 @@ object fmData: TfmData
     Color = clWhite
     ParentBackground = False
     TabOrder = 4
+    ExplicitLeft = 276
   end
   object Panel5: TPanel
-    Left = 1061
+    Left = 1243
     Top = 49
     Width = 276
     Height = 537
     Align = alLeft
     TabOrder = 5
+    ExplicitLeft = 1061
   end
   object tStartup: TTimer
     Enabled = False
