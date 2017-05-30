@@ -205,8 +205,16 @@ void __fastcall TfmMain::acCloseExecute(TObject *Sender)
 	Close();
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::acLookIntoECGExecute(TObject *Sender)
+void __fastcall TfmMain::acTestExecute(TObject *Sender)
 	{
+	DlgTestform(this);
+	}
+//---------------------------------------------------------------------------
+//--- Analysis-Actions ------------------------------------------------------
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acAnalyseEcgExecute(TObject *Sender)
+	{
+	//todo move
 	//Formular EcgView aufrufen, ein bestimmtes EKG untersuchen
 	TfmEcg* formecg = new TfmEcg(this);
 	if (!formecg->Execute())
@@ -215,42 +223,70 @@ void __fastcall TfmMain::acLookIntoECGExecute(TObject *Sender)
 	setDbInfo();
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::acShowDataExecute(TObject *Sender)
+//--- Datenbank-Actions -----------------------------------------------------
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acDatabaseAllExecute(TObject *Sender)
 	{
 	//
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::acPeopleExecute(TObject *Sender)
+void __fastcall TfmMain::acDatabaseEcgDataExecute(TObject *Sender)
+	{
+	//
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acDatabasePeopleExecute(TObject *Sender)
 	{
 	DlgDatabasePersonen(this);
 	setDbInfo();
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::acCreateSeesionExecute(TObject *Sender)
+//--- Session-Actions -------------------------------------------------------
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acSessionAddExecute(TObject *Sender)
 	{
 	DlgShowSessions(this);
 	setDbInfo();
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::acSingleAuswExecute(TObject *Sender)
+void __fastcall TfmMain::acSessionShowExecute(TObject *Sender)
 	{
 	//
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::acGesAuswExecute(TObject *Sender)
+//--- Feature-Actions -------------------------------------------------------
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acFeaturesShowExecute(TObject *Sender)
+	{
+	//
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acFeaturesBuildAllExecute(TObject *Sender)
+	{
+	DlgFeatures(this);
+	setDbInfo();
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acFeaturesChoiExecute(TObject *Sender)
+	{
+	//
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acFeaturesRandomExecute(TObject *Sender)
+	{
+	//
+	}
+//---------------------------------------------------------------------------
+//--- Klassifizierungs-Actions ----------------------------------------------
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acClassifyAllExecute(TObject *Sender)
+	{
+	DlgAlgVergleich(this);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acClassifySvmExecute(TObject *Sender)
 	{
 	DlgChoiClassification(this);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::acLookIntoDataExecute(TObject *Sender)
-	{
-	DlgAnalyseData(this);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::acChoi2016Execute(TObject *Sender)
-	{
-	//DlgAlgChoi(this);
-	DlgAlgChoi2(this);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -262,30 +298,20 @@ void __fastcall TfmMain::FormKeyPress(TObject *Sender, char &Key)
 	acCloseExecute(Sender);
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::btMySqlTestClick(TObject *Sender)
+void __fastcall TfmMain::btAnalysisSelectClick(TObject *Sender)
 	{
-	DlgTestform(this);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::BitBtn7Click(TObject *Sender)
-	{
-	DlgFeatures(this);
-	setDbInfo();
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::BitBtn8Click(TObject *Sender)
-	{
-	//old: DlgAlgChoi2(this); //todo
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::BitBtn5Click(TObject *Sender)
-	{
-	DlgChoiClassification(this);
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::BitBtn3Click(TObject *Sender)
-	{
-	DlgAlgVergleich(this);
+	String cl = Sender->ClassName();
+	if (cl != "TBitBtn") return;
+	TComponent* comp = (TComponent*)Sender;
+
+	POINT pt;
+	GetCursorPos(&pt);
+
+		 if (comp->Name == "btAnalysisSelect") PopupMenuAnalysis->Popup(pt.x, pt.y);
+	else if (comp->Name == "btDatabaseSelect") PopupMenuDatabase->Popup(pt.x, pt.y);
+	else if (comp->Name == "btSessionsSelect") PopupMenuSessions->Popup(pt.x, pt.y);
+	else if (comp->Name == "btFeaturesSelect") PopupMenuFeatures->Popup(pt.x, pt.y);
+	else if (comp->Name == "btClassifySelect") PopupMenuClassify->Popup(pt.x, pt.y);
 	}
 //---------------------------------------------------------------------------
 

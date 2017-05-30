@@ -220,7 +220,13 @@ bool TfmFeatures::DoFeatures(sEcgData ecgdata, int alg, bool replace)
 
 	if (features == "")
 		{
+		String err;
+			 if (alg == fChoi.AlgNr) 		 err = fChoi.error_msg;
+		else if (alg == (fChoi.AlgNr+1)) 	 err = fChoi.error_msg;
+		else if (alg == fRandomPoints.AlgNr) err = fRandomPoints.error_msg;
+
 		Print("## Fehler beim Erstellen der Features");
+		Print("## Meldung: %s", err);
 		return false;
 		}
 

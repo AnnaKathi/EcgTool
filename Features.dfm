@@ -182,7 +182,6 @@ object fmFeatures: TfmFeatures
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitTop = 408
       object Label1: TLabel
         Left = 184
         Top = 6
