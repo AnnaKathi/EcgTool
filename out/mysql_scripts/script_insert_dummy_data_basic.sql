@@ -37,15 +37,16 @@ INSERT INTO `ecg`.`lagen` (`Bez`) VALUES ('gehend');
 
 # //-- States
 INSERT INTO `ecg`.`states` (`Bez`) VALUES ('in Ruhe');
-INSERT INTO `ecg`.`states` (`Bez`) VALUES ('beim Sport');
-INSERT INTO `ecg`.`states` (`Bez`) VALUES ('direkt nach Sport');
+INSERT INTO `ecg`.`states` (`Bez`) VALUES ('in Bewegung');
+INSERT INTO `ecg`.`states` (`Bez`) VALUES ('nach leichter Bewegung');
+INSERT INTO `ecg`.`states` (`Bez`) VALUES ('nach mäßiger Bewegung');
+INSERT INTO `ecg`.`states` (`Bez`) VALUES ('nach viel Bewegung');
 
 # //-- Positionens
 INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('Brust normal');
 INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('Brust eng');
-INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('Handgelenke innen');
-INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('linkes Handgelenk');
-INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('Schläfen');
+INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('Handrücken');
+INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('Rücken');
 
 # //-- Algorithmen
 INSERT INTO `ecg`.`algorithms` (`Bez`) VALUES ('Vorabtest Anna 1');

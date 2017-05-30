@@ -35,6 +35,7 @@ public:
 
 	//-- Daten feststellen
 	String 	getNameOf(int person);
+	String	getDiseasesOf(int person);
 	int		getSize();
 
 	//-- Daten anzeigen
@@ -48,7 +49,7 @@ __property int num_rows = { read=get_num_rows };
 
 private:
 	bool			parse();
-	
+
 	sPeople			fdata;
 	sPeople			get_data();
 

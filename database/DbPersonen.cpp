@@ -159,12 +159,14 @@ void __fastcall TfmData::tCallbackTimer(TObject *Sender)
 		int person = fmPeople->iPerson;
 		if (person <= 0) return;
 
-		//Diseases und EKG-Daten anpassen
+		//Diseases anpassen
+		String diseases = fmysql.people.getDiseasesOf(person);
 		fmDiseases->LockFilter();
-		//fmDiseases->ShowDataOfPerson(person);
+		fmDiseases->ShowFilteredData(diseases);
 
+		//EKG-Daten anpassen
 		fmEcg->LockFilter();
-		fmEcg->ShowEcgOf(person);
+		//TODO fmEcg->ShowEcgOf(person);
 		bSelected = true;
 		}
 	else

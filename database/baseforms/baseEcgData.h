@@ -32,6 +32,7 @@ private:
 	bool		bInShow;
 
 	sFilterEcg  ffilter;
+	void 		AddLine();
 	bool 		BuildFilter();
 	bool 		CheckFilter();
 
@@ -63,6 +64,7 @@ __published:	// IDE-verwaltete Komponenten
 	TEdit *edName;
 	TComboBox *cbLage;
 	TBevel *Bevel1;
+	TLabel *laTabelle;
 	void __fastcall acAddExecute(TObject *Sender);
 	void __fastcall acDelExecute(TObject *Sender);
 	void __fastcall acFilterExecute(TObject *Sender);

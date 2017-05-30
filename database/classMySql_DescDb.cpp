@@ -32,6 +32,22 @@ cMySqlDescDb::~cMySqlDescDb()
 /******************   Funktionen: laden   **********************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
+bool cMySqlDescDb::get(int ident)
+	{
+	String q = "SELECT * FROM `" + String(fTabelle) + "` WHERE `ID` = " + String(ident);
+	if (!fwork->query(q))
+		return false;
+
+	fres = fwork->getResult();
+	frow = mysql_fetch_row(fres);
+	if (frow == NULL) return false;
+
+	fdata.ident   = atoi(frow[0]);
+	sprintf(fdata.bez, "%.127s", frow[1]);
+
+	return true;
+	}
+//---------------------------------------------------------------------------
 bool cMySqlDescDb::loadTable(String order) //order ist vorbesetzt mit ""
 	{
 	if (!fwork->loadTable(fTabelle, order))
@@ -149,6 +165,7 @@ bool cMySqlDescDb::listInCombo(TComboBox* cb, int mode) //mode ist mit 0 vorbese
 
 	cb->Items->Clear();
 	String dis;
+	cb->Items->AddObject("- alle Daten -", (TObject*)0);
 	while (nextRow())
 		{
 		//todo Kennzeichnung in DB aufnehmen und hier mit einbauen

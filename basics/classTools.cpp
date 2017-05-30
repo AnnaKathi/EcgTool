@@ -13,42 +13,6 @@ cTools::cTools()
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
-/**************   Datenkonverter   *****************************************/
-/***************************************************************************/
-//---------------------------------------------------------------------------
-String cTools::GetLage(eLage lage)
-	{
-		 if (lage == lageLiegend) return "liegend";
-	else if (lage == lageSitzend) return "sitzend";
-	else if (lage == lageStehend) return "stehend";
-	else if (lage == lageGehend)  return "gehend";
-	else return "";
-	}
-//---------------------------------------------------------------------------
-eLage cTools::GetLage(String lage)
-	{
-		 if (lage == "liegend") return lageLiegend;
-	else if (lage == "sitzend") return lageSitzend;
-	else if (lage == "stehend") return lageStehend;
-	else if (lage == "gehend")  return lageGehend;
-	else return lageNone;
-	}
-//---------------------------------------------------------------------------
-/***************************************************************************/
-/**************   Comboboxen   *********************************************/
-/***************************************************************************/
-//---------------------------------------------------------------------------
-void cTools::LagenToCombo(TComboBox* cb)
-	{
-	cb->Items->Clear();
-	cb->Items->AddObject("- alle Positionen -"  , (TObject*)lageNone);
-	cb->Items->AddObject(GetLage(lageLiegend), (TObject*)lageLiegend);
-	cb->Items->AddObject(GetLage(lageSitzend), (TObject*)lageSitzend);
-	cb->Items->AddObject(GetLage(lageStehend), (TObject*)lageStehend);
-	cb->Items->AddObject(GetLage(lageGehend) , (TObject*)lageGehend);
-	}
-//---------------------------------------------------------------------------
-/***************************************************************************/
 /**************   Formulardaten laden und speichern   **********************/
 /***************************************************************************/
 //---------------------------------------------------------------------------

@@ -1,33 +1,61 @@
 [Closed Files]
-File_0=TSourceModule,'D:\src\EcgTool\database\classMySql.cpp',0,1,135,1,158,0,0,,
-File_1=TSourceModule,'D:\src\EcgTool\database\classMySql_EcgData.cpp',0,1,53,1,77,0,0,,
-File_2=TSourceModule,'D:\src\EcgTool\out\mysql_scripts\script_create_all_databases.sql',0,1,52,6,87,0,0,,
-File_3=TSourceModule,'D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_basic.sql',0,1,1,1,1,0,0,,
-File_4=TSourceModule,'D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_sessions.sql',0,1,1,82,4,0,0,,
-File_5=TSourceModule,'D:\src\EcgTool\Main.cpp',0,1,211,11,240,0,0,,{1,317,1}{9,292,1}
-File_6=TSourceModule,'D:\src\EcgTool\Testform.cpp',0,1,33,72,55,0,0,,
-File_7=TSourceModule,'D:\src\EcgTool\database\baseforms\baseDesc.cpp',0,1,232,29,254,0,0,,
-File_8=TSourceModule,'D:\src\EcgTool\database\toolforms\selectDescDb.cpp',0,1,25,58,47,0,0,,
-File_9=TSourceModule,'D:\src\EcgTool\algorithms\EinzelAusw.cpp',0,1,29,61,51,0,0,,
+File_0=TSourceModule,'D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_basic.sql',0,1,18,122,43,0,0,,
+File_1=TSourceModule,'D:\src\EcgTool\database\classMySql.cpp',0,1,135,1,158,0,0,,
+File_2=TSourceModule,'d:\dev\rad\include\vcl\dstring.h',0,1,48,1,68,0,0,,
+File_3=TSourceModule,'d:\dev\rad\include\stdlib.h',0,1,223,1,243,0,0,,
+File_4=TSourceModule,'D:\src\EcgTool\database\baseforms\baseSession.cpp',0,1,1,1,1,0,0,,
+File_5=TSourceModule,'D:\src\EcgTool\out\mysql_scripts\script_create_all_databases.sql',0,1,52,6,87,0,0,,
+File_6=TSourceModule,'D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_sessions.sql',0,1,1,82,4,0,0,,
+File_7=TSourceModule,'D:\src\EcgTool\Main.cpp',0,1,211,11,240,0,0,,{1
 
 [Modules]
-Module0=D:\src\EcgTool\database\baseforms\baseEcgData.cpp
-Module1=D:\src\EcgTool\database\DbPersonen.cpp
-Module2=D:\src\EcgTool\database\baseforms\basePeople.cpp
-Module3=D:\src\EcgTool\database\classMySql_People.cpp
-Module4=D:\src\EcgTool\database\toolforms\addPeople.cpp
-Module5=default.htm
-Count=6
+Module0=D:\src\EcgTool\database\classMySql_DescDb.cpp
+Module1=D:\src\EcgTool\database\baseforms\baseEcgData.cpp
+Module2=D:\src\EcgTool\database\classMySql_EcgData.cpp
+Module3=D:\src\EcgTool\database\baseforms\baseDesc.cpp
+Module4=D:\src\EcgTool\basics\classTools.cpp
+Module5=D:\src\EcgTool\database\DbPersonen.cpp
+Module6=D:\src\EcgTool\definitions.h
+Module7=D:\src\EcgTool\database\baseforms\basePeople.cpp
+Module8=D:\src\EcgTool\database\classMySql_People.cpp
+Module9=default.htm
+Module10=D:\src\EcgTool\database\toolforms\addPeople.cpp
+Count=11
 EditWindowCount=1
+
+[D:\src\EcgTool\database\classMySql_DescDb.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
 
 [D:\src\EcgTool\database\baseforms\baseEcgData.cpp]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
+[D:\src\EcgTool\database\classMySql_EcgData.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\database\baseforms\baseDesc.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[D:\src\EcgTool\basics\classTools.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
 [D:\src\EcgTool\database\DbPersonen.cpp]
 ModuleType=TSourceModule
 FormState=1
+FormOnTop=1
+
+[D:\src\EcgTool\definitions.h]
+ModuleType=TSourceModule
+FormState=0
 FormOnTop=0
 
 [D:\src\EcgTool\database\baseforms\basePeople.cpp]
@@ -40,23 +68,28 @@ ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
+[default.htm]
+ModuleType=TURLModule
+
 [D:\src\EcgTool\database\toolforms\addPeople.cpp]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[default.htm]
-ModuleType=TURLModule
-
 [EditWindow0]
-ViewCount=6
-CurrentEditView=D:\src\EcgTool\database\baseforms\baseEcgData.cpp
+ViewCount=11
+CurrentEditView=D:\src\EcgTool\database\classMySql_DescDb.cpp
 View0=0
 View1=1
 View2=2
 View3=3
 View4=4
 View5=5
+View6=6
+View7=7
+View8=8
+View9=9
+View10=10
 PercentageSizes=1
 Create=1
 Visible=1
@@ -94,20 +127,20 @@ WelcomePageURL=bds:/default.htm
 [View1]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\database\DbPersonen.cpp
-CursorX=1
-CursorY=167
-TopLine=133
+CursorX=9
+CursorY=165
+TopLine=148
 LeftCol=1
 Elisions=
-Bookmarks={1,64,64}
-EditViewName=D:\src\EcgTool\database\DbPersonen.cpp
+Bookmarks={1,166,1}
+EditViewName=Borland.FormDesignerView
 
 [View2]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\database\baseforms\baseEcgData.cpp
-CursorX=71
-CursorY=112
-TopLine=45
+CursorX=1
+CursorY=169
+TopLine=147
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -115,27 +148,82 @@ EditViewName=D:\src\EcgTool\database\baseforms\baseEcgData.cpp
 
 [View3]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\database\classMySql_People.cpp
-CursorX=28
-CursorY=44
-TopLine=27
+Module=D:\src\EcgTool\database\classMySql_EcgData.cpp
+CursorX=1
+CursorY=11
+TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=D:\src\EcgTool\database\classMySql_People.cpp
+EditViewName=D:\src\EcgTool\database\classMySql_EcgData.cpp
 
 [View4]
 CustomEditViewType=TEditView
+Module=D:\src\EcgTool\basics\classTools.cpp
+CursorX=1
+CursorY=7
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\basics\classTools.h
+
+[View5]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\definitions.h
+CursorX=72
+CursorY=22
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\definitions.h
+
+[View6]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\database\baseforms\baseDesc.cpp
+CursorX=69
+CursorY=189
+TopLine=24
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\database\baseforms\baseDesc.cpp
+
+[View7]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\database\classMySql_DescDb.cpp
+CursorX=116
+CursorY=161
+TopLine=139
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\database\classMySql_DescDb.cpp
+
+[View8]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\database\classMySql_People.cpp
+CursorX=1
+CursorY=56
+TopLine=25
+LeftCol=1
+Elisions=
+Bookmarks={1,163,64}
+EditViewName=D:\src\EcgTool\database\classMySql_People.cpp
+
+[View9]
+CustomEditViewType=TEditView
 Module=D:\src\EcgTool\database\baseforms\basePeople.cpp
 CursorX=1
-CursorY=264
-TopLine=246
+CursorY=63
+TopLine=40
 LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=D:\src\EcgTool\database\baseforms\basePeople.cpp
 
-[View5]
+[View10]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\database\toolforms\addPeople.cpp
 CursorX=11
@@ -147,9 +235,8 @@ Bookmarks=
 EditViewName=D:\src\EcgTool\database\toolforms\addPeople.cpp
 
 [Watches]
-Count=2
-Watch0='accuracy',256,0,18,1,0,'Überwachte Ausdrücke'
-Watch1='test',256,0,18,1,0,'Überwachte Ausdrücke'
+Count=1
+Watch0='id',256,0,18,1,0,'Überwachte Ausdrücke'
 
 [WatchWindow]
 WatchColumnWidth=120
@@ -173,13 +260,12 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=6
+Count=5
 Breakpoint0='D:\src\EcgTool\algorithms\AlgChoi.cpp',320,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint1='D:\src\EcgTool\inc\libsvm\svm.cpp',2106,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint2='D:\src\EcgTool\SessionAdd.cpp',151,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint3='D:\src\EcgTool\VergleichAlg.cpp',167,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint4='D:\src\EcgTool\VergleichAlg.cpp',151,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint5='D:\src\EcgTool\database\DbPersonen.cpp',160,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
@@ -466,11 +552,6 @@ LRDockWidth=2000
 Dockable=1
 StayOnTop=0
 SplitPos=176
-
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Action,OnDblClick
-ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,Font=0,GlassFrame=0,HorzScrollBar=0,Margins=0,Padding=0,Action=0,Menu=0,PopupMenu=0,MenuAnimation=0,BevelEdges=0,HotTrackStyles=0,IconOptions=0
 
 [ModelViewTool]
 PercentageSizes=1
@@ -760,5 +841,5 @@ Dockable=1
 StayOnTop=0
 TabPosition=0
 ActiveTabID=ProjectManager
-TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
+TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
 

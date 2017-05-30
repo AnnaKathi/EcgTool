@@ -23,36 +23,6 @@ public:
 	cTools();
 
 	//-------------------------------------------------------------------------
-	//--- Datenkonverter ------------------------------------------------------
-	//-------------------------------------------------------------------------
-		//! Aus einem Lagen-Enum den zugehörigen String erstellen
-		/*! Aus dem übergebenen enum der Lage (eLage) wird der zugehörige
-		 *  String generiert (z.B. lageLiegend -> "liegend").
-		 *  \param (eLage) Auflistung der Lage
-		 *	\return (String) Bezeichnung der Lage
-		 */
-		String		GetLage(eLage lage);
-
-		//! Aus einem String den zugehörigen Lagen-Enum erstellen
-		/*! Aus dem übergebenen String der Lage wird der zugehörige
-		 *  enum-Wert generiert (z.B. "liegend" -> lageLiegend).
-		 *  \param (String) Bezeichnung der Lage
-		 *	\return (eLage) Auflistung der Lage
-		 */
-		eLage   GetLage(String lage);
-
-	//-------------------------------------------------------------------------
-	//--- Comboboxen ----------------------------------------------------------
-	//-------------------------------------------------------------------------
-		//! Die Strings der verfügbaren Lagen in eine ComboBox laden
-		/*! Die Bezeichnungen aller verfügbaren Lagen (enum eLagen)
-		 *  werden in die übergebene ComboBox geladen, der zugehörige enum-Wert
-		 *  wird dabei jeweils als Object abgespeichert.
-		 *  \param (TComboBox) ComboBox
-		 */
-		void 		LagenToCombo(TComboBox* cb);
-
-	//-------------------------------------------------------------------------
 	//--- Formulare laden und speichern ---------------------------------------
 	//-------------------------------------------------------------------------
 

@@ -152,6 +152,31 @@ String cMySqlPeople::getNameOf(int person)
 	return name;
 	}
 //---------------------------------------------------------------------------
+String cMySqlPeople::getDiseasesOf(int person)
+	{
+	if (person <= 0) return "";
+	MYSQL_RES* res_old = fres; //aktuelle Position speichern
+
+	String result = "";
+	String q = "SELECT * FROM `" + String(SUBDIS) + "` WHERE `Subjects_ID` = " + String(person);
+	if (!fwork->query(q))
+		result = "- nicht gefunden (" + String(person) + ") -";
+	else
+		{
+		fres = fwork->getResult();
+		while ((frow = mysql_fetch_row(fres)) != NULL)
+			{
+			if (result == "")
+				result = String(frow[1]);
+			else
+				result += ";" + String(frow[1]);
+			}
+		}
+
+	fres = res_old; //Position zurücksetzen
+	return result;
+	}
+//---------------------------------------------------------------------------
 int cMySqlPeople::getSize()
 	{
 	if (!loadTable())

@@ -58,7 +58,8 @@ void __fastcall TfmBaseEcg::FormShow(TObject *Sender)
 void __fastcall TfmBaseEcg::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
-	ftools.LagenToCombo(cbLage);
+	laTabelle->Caption = "EKG-Daten (ecgdata)";
+	fmysql.lagen.listInCombo(cbLage);
 	ShowData();
 	tStartup->Tag = 1; //signalisiert, dass der Init durchgeführt wurde
 	}
@@ -106,18 +107,7 @@ bool TfmBaseEcg::ShowData()
 	while (fmysql.ecg.nextRow())
 		{
 		if (!CheckFilter()) continue;
-
-		item = lvData->Items->Add();
-		item->Data = (void*) fmysql.ecg.row.ident;
-		item->Caption = String(fmysql.ecg.row.ident);
-
-		String name = fmysql.people.getNameOf(fmysql.ecg.row.person);
-		item->SubItems->Add(name);
-
-		item->SubItems->Add(fmysql.ecg.row.session);
-		item->SubItems->Add(ftools.GetLage(fmysql.ecg.row.lage));
-		for (int i = 0; i < 5; i++)
-			item->SubItems->Add(String(fmysql.ecg.row.werte[i]));
+		AddLine();
 		}
 
 	lvData->Items->EndUpdate();
@@ -142,21 +132,32 @@ bool TfmBaseEcg::ShowEcgOf(int person)
 	while (fmysql.ecg.nextRow())
 		{
 		if (!CheckFilter()) continue;
-
-		item = lvData->Items->Add();
-		item->Data = (void*) fmysql.ecg.row.ident;
-		item->Caption = String(fmysql.ecg.row.ident);
-
-		item->SubItems->Add(fmysql.people.getNameOf(fmysql.ecg.row.person));
-
-		item->SubItems->Add(fmysql.ecg.row.session);
-		item->SubItems->Add(ftools.GetLage(fmysql.ecg.row.lage));
-		for (int i = 0; i < 5; i++)
-			item->SubItems->Add(String(fmysql.ecg.row.werte[i]));
+		AddLine();
 		}
 
 	lvData->Items->EndUpdate();
 	return true;
+	}
+//---------------------------------------------------------------------------
+void TfmBaseEcg::AddLine()
+	{
+	TListItem* item = lvData->Items->Add();
+	item->Data = (void*) fmysql.ecg.row.ident;
+	item->Caption = String(fmysql.ecg.row.ident);
+
+	fmysql.sessions.get(fmysql.ecg.row.session);
+	String s = ftools.fmt("%s - %s",
+		fmysql.sessions.row.stamp,
+		fmysql.orte.getNameOf(fmysql.sessions.row.ort));
+
+	item->SubItems->Add(s);
+
+	String name = fmysql.people.getNameOf(fmysql.ecg.row.person);
+	item->SubItems->Add(name);
+
+	item->SubItems->Add(fmysql.positions.getNameOf(fmysql.ecg.row.position));
+	item->SubItems->Add(fmysql.states.getNameOf(fmysql.ecg.row.state));
+	item->SubItems->Add(fmysql.lagen.getNameOf(fmysql.ecg.row.lage));
 	}
 //---------------------------------------------------------------------------
 bool TfmBaseEcg::BuildFilter()
@@ -165,7 +166,7 @@ bool TfmBaseEcg::BuildFilter()
 	ffilter.identBis = edIdBis->Text.ToIntDef(-1);
 
 	ffilter.name = edName->Text;
-	ffilter.lage = (eLage)cbLage->ItemIndex;
+	ffilter.lage = (int)cbLage->Items->Objects[cbLage->ItemIndex];
 
 	return true;
 	}
@@ -183,7 +184,7 @@ bool TfmBaseEcg::CheckFilter()
 			return false;
 		}
 
-	if (ffilter.lage > lageNone)
+	if (ffilter.lage > 0)
 		{
 		if (fmysql.ecg.row.lage != ffilter.lage)
 			return false;
@@ -233,7 +234,7 @@ void __fastcall TfmBaseEcg::acDelExecute(TObject *Sender)
 	int id = (int)item->Data;
 	if (!fmysql.ecg.deleteByIdent(id))
 		{
-		ftools.ErrBox("Das EKG <%d> konnten nicht gelöscht werden. "
+		ftools.ErrBox("Das EKG <%d> konnte nicht gelöscht werden. "
 			"Die Datenbank  meldet: %s", id, fmysql.diseases.error_msg);
 		}
 	else

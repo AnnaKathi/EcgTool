@@ -88,6 +88,7 @@ public:
 	void		DislockFilter();
 
 	bool		ShowData();
+	bool		ShowFilteredData(String idents);
 
 	void		SetCallbackTimer(TTimer* timer);
 	String		GetSelectedIdents();

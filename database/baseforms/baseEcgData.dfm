@@ -3,7 +3,7 @@ object fmBaseEcg: TfmBaseEcg
   Top = 0
   Caption = 'BaseForm EcgData'
   ClientHeight = 542
-  ClientWidth = 568
+  ClientWidth = 587
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,46 +17,43 @@ object fmBaseEcg: TfmBaseEcg
   TextHeight = 13
   object Bevel1: TBevel
     Left = 0
-    Top = 65
-    Width = 568
+    Top = 97
+    Width = 587
     Height = 8
     Align = alTop
     Shape = bsTopLine
+    ExplicitTop = 65
+    ExplicitWidth = 568
   end
   object lvData: TListView
     Left = 0
-    Top = 73
-    Width = 568
-    Height = 469
+    Top = 105
+    Width = 587
+    Height = 437
     Align = alClient
     Columns = <
       item
         Caption = 'Ident'
       end
       item
-        Caption = 'Person'
-        Width = 150
+        Caption = 'Session'
+        Width = 125
       end
       item
-        Caption = 'Session'
+        Caption = 'Person'
+        Width = 100
+      end
+      item
+        Caption = 'Position'
+        Width = 100
+      end
+      item
+        Caption = 'State'
+        Width = 100
       end
       item
         Caption = 'Lage'
-      end
-      item
-        Caption = 'T1'
-      end
-      item
-        Caption = 'T2'
-      end
-      item
-        Caption = 'T3'
-      end
-      item
-        Caption = 'T4'
-      end
-      item
-        Caption = 'T5'
+        Width = 100
       end>
     GridLines = True
     MultiSelect = True
@@ -66,18 +63,20 @@ object fmBaseEcg: TfmBaseEcg
     ViewStyle = vsReport
     OnClick = lvDataClick
     OnDblClick = lvDataDblClick
+    ExplicitWidth = 568
   end
   object pnFilter: TPanel
     Left = 0
     Top = 0
-    Width = 568
-    Height = 65
+    Width = 587
+    Height = 97
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 568
     object Label6: TLabel
       Left = 8
-      Top = 6
+      Top = 33
       Width = 29
       Height = 13
       Caption = 'Filter'
@@ -90,35 +89,48 @@ object fmBaseEcg: TfmBaseEcg
     end
     object Label7: TLabel
       Left = 64
-      Top = 8
+      Top = 35
       Width = 47
       Height = 13
       Caption = 'Ident von'
     end
     object Label8: TLabel
       Left = 184
-      Top = 8
+      Top = 35
       Width = 13
       Height = 13
       Caption = 'bis'
     end
     object Label9: TLabel
       Left = 64
-      Top = 34
+      Top = 61
       Width = 27
       Height = 13
       Caption = 'Name'
     end
     object Label10: TLabel
       Left = 279
-      Top = 7
+      Top = 34
       Width = 23
       Height = 13
       Caption = 'Lage'
     end
+    object laTabelle: TLabel
+      Left = 64
+      Top = 7
+      Width = 47
+      Height = 14
+      Caption = 'laTabelle'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsUnderline]
+      ParentFont = False
+    end
     object edIdVon: TEdit
       Left = 119
-      Top = 5
+      Top = 32
       Width = 57
       Height = 21
       TabOrder = 0
@@ -126,7 +138,7 @@ object fmBaseEcg: TfmBaseEcg
     end
     object edIdBis: TEdit
       Left = 206
-      Top = 6
+      Top = 33
       Width = 57
       Height = 21
       TabOrder = 1
@@ -134,7 +146,7 @@ object fmBaseEcg: TfmBaseEcg
     end
     object edName: TEdit
       Left = 119
-      Top = 31
+      Top = 58
       Width = 144
       Height = 21
       TabOrder = 2
@@ -143,7 +155,7 @@ object fmBaseEcg: TfmBaseEcg
     end
     object cbLage: TComboBox
       Left = 335
-      Top = 5
+      Top = 32
       Width = 106
       Height = 21
       Style = csDropDownList
@@ -192,6 +204,6 @@ object fmBaseEcg: TfmBaseEcg
     Interval = 100
     OnTimer = tStartupTimer
     Left = 8
-    Top = 32
+    Top = 56
   end
 end

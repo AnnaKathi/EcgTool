@@ -139,6 +139,56 @@ bool TfmBaseDesc::ShowData()
 	return true;
 	}
 //---------------------------------------------------------------------------
+bool TfmBaseDesc::ShowFilteredData(String idents)
+	{
+	if (bInShow) return false; //verhindern, dass sich die Funktion selbst überholt
+	bInShow = true;
+	lvData->Items->Clear();
+	lvData->Items->BeginUpdate();
+
+	if (!fdesc->loadTable("Bez ASC"))
+		{
+		MsgBox(ftools.fmt(
+			"Die Daten (%s) konnten nicht geladen werden. "
+			"Die Datenbank  meldet: %s",
+			fdesc->myName, fdesc->error_msg).c_str());
+		return false;
+		}
+
+	iarray_t idFilter; idFilter.clear();
+	int pos; int id;
+	int count = 0;
+	while ((pos = idents.Pos(";")) > 0)
+		{
+		id     = idents.SubString(0, pos-1).ToInt();
+		idents = idents.SubString(pos+1, 99999);
+		idFilter[count].push_back(id);
+		count++;
+		}
+
+	if (idents != "")
+		idFilter[count].push_back(idents.ToInt());
+
+	TListItem* item;
+	for (iarray_itr itr = idFilter.begin(); itr != idFilter.end(); itr++)
+		{
+		ilist_t& v = itr->second;
+		int id = v[0];
+		if (!fdesc->get(id)) continue;
+
+		if (!CheckFilter()) continue;
+
+		item = lvData->Items->Add();
+		item->Data = (void*) fdesc->row.ident;
+		item->Caption = String(fdesc->row.ident);
+		item->SubItems->Add(fdesc->row.bez);
+		}
+
+	lvData->Items->EndUpdate();
+	bInShow = false;
+	return true;
+	}
+//---------------------------------------------------------------------------
 bool TfmBaseDesc::BuildFilter()
 	{
 	ffilter.identVon = edIdVon->Text.ToIntDef(-1);

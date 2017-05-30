@@ -21,6 +21,7 @@ public:
 	~cMySqlDescDb();
 
 	//-- Daten laden
+	bool	get(int ident);
 	bool	loadTable(String order = ""); //lädt die ganze Tabelle
 	bool	nextRow();
 

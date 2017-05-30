@@ -3,7 +3,7 @@ object fmData: TfmData
   Top = 0
   Caption = 'Ansicht Datenbank'
   ClientHeight = 627
-  ClientWidth = 1063
+  ClientWidth = 1290
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object fmData: TfmData
   object Bevel1: TBevel
     Left = 0
     Top = 41
-    Width = 1063
+    Width = 1290
     Height = 8
     Align = alTop
     Shape = bsTopLine
@@ -48,19 +48,20 @@ object fmData: TfmData
   object pnInfo: TPanel
     Left = 0
     Top = 0
-    Width = 1063
+    Width = 1290
     Height = 41
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
+    ExplicitWidth = 1063
     DesignSize = (
-      1063
+      1290
       41)
     object mInfo: TMemo
       Left = 8
       Top = 10
-      Width = 1047
+      Width = 1274
       Height = 25
       Anchors = [akLeft, akTop, akRight]
       BorderStyle = bsNone
@@ -74,36 +75,40 @@ object fmData: TfmData
       ParentColor = True
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 1047
     end
   end
   object Panel1: TPanel
     Left = 0
     Top = 586
-    Width = 1063
+    Width = 1290
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 1063
     DesignSize = (
-      1063
+      1290
       41)
     object btClose: TButton
-      Left = 983
+      Left = 1210
       Top = 8
       Width = 75
       Height = 25
       Action = acClose
       Anchors = [akTop, akRight]
       TabOrder = 0
+      ExplicitLeft = 983
     end
     object pbJob: TProgressBar
       Left = 8
       Top = 8
-      Width = 960
+      Width = 1187
       Height = 17
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 1
       Visible = False
+      ExplicitWidth = 960
     end
   end
   object pnPeople: TPanel
@@ -125,7 +130,6 @@ object fmData: TfmData
     Color = clWhite
     ParentBackground = False
     TabOrder = 3
-    ExplicitLeft = 552
   end
   object pnDiseases: TPanel
     Left = 458
@@ -136,7 +140,6 @@ object fmData: TfmData
     Color = clWhite
     ParentBackground = False
     TabOrder = 4
-    ExplicitLeft = 276
   end
   object Panel5: TPanel
     Left = 1243
@@ -145,7 +148,6 @@ object fmData: TfmData
     Height = 537
     Align = alLeft
     TabOrder = 5
-    ExplicitLeft = 1061
   end
   object tStartup: TTimer
     Enabled = False
