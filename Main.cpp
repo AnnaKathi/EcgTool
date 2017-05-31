@@ -74,9 +74,10 @@ void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 			}
 		}
 
+	setStatus(ftools.GetComputer(), 2);
+	/* TODO
 	if (ftools.GetComputerProzessor() != "64Bit")
 		{
-		/*
 		Application->MessageBox(
 			ftools.fmt(
 				"Es wurde der Systemtyp '%s' erkannt.\r\n\r\n"
@@ -85,11 +86,11 @@ void __fastcall TfmMain::tStartupTimer(TObject *Sender)
 				"nicht verfügbar, z.B. die Choi-SVM-Klassifizierung.\r\n\r\n",
 				ftools.cpData.BSProzessor).c_str(),
 			"Warnung 64Bit-System", MB_OK);
-		*/
 		setStatus("## 32Bit-System ggf. nicht ausreichend ##", 2);
 		}
 	else
 		setStatus("64Bit-System  - ok", 2);
+	*/
 
 	if (!setupDatabase())
 		{
@@ -116,7 +117,8 @@ void __fastcall TfmMain::FormClose(TObject *Sender, TCloseAction &Action)
 //---------------------------------------------------------------------------
 bool TfmMain::setupDatabase()
 	{
-	if (bNoMySql) return true; //simulieren, die DB wär geöffnet worden
+	if (bNoMySql)
+		return true; //simulieren, die DB wär geöffnet worden
 
 	//falls die Datenbank nicht vorhanden ist, anlegen
 	setStatus("startup Database...checking existance");
@@ -131,6 +133,7 @@ bool TfmMain::setupDatabase()
 		return false;
 		}
 
+	setStatus("startup Database...checking existance, MySql found");
 	if (!fmysql.dbExists())
 		{
 		if (Application->MessageBox(
@@ -145,7 +148,7 @@ bool TfmMain::setupDatabase()
 			return false;
 			}
 
-		setStatus("startup Database...creating databse");
+		setStatus("startup Database...creating database");
 		if (!fmysql.create())
 			{
 			Application->MessageBox(
@@ -158,6 +161,7 @@ bool TfmMain::setupDatabase()
 			}
 		}
 
+	setStatus("startup Database...checking existance, DB found");
 	if (!fmysql.close())
 		;
 

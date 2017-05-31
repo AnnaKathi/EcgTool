@@ -227,6 +227,11 @@ void __fastcall TfmVergleich::acCloseExecute(TObject *Sender)
 	Close();
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmVergleich::acCompareExecute(TObject *Sender)
+	{
+	DoVergleich();
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   Meldungen vom Formular   *********************************/
 /***************************************************************************/
@@ -250,11 +255,6 @@ void __fastcall TfmVergleich::cxClassifySvmClick(TObject *Sender)
 							edTrainingBis->Text != "" &&
 							edClassifyVon->Text != "" &&
 							edClassifyBis->Text != "";
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmVergleich::btVergleichClick(TObject *Sender)
-	{
-    DoVergleich();
 	}
 //---------------------------------------------------------------------------
 

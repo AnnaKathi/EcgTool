@@ -383,4 +383,14 @@ String cTools::GetComputerProzessor()
 	return "";
 	}
 //---------------------------------------------------------------------------
+bool cTools::Log(String msg)
+	{
+	String dat = GetPath() + "\\ecg.log";
+	FILE* fp = fopen(dat.c_str(), "a+");
+	if (fp == NULL) return false;
 
+	fprintf(fp, "%s\r\n", msg.c_str());
+	fclose(fp);
+	return true;
+	}
+//---------------------------------------------------------------------------

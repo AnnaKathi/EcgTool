@@ -17,6 +17,7 @@
 #include "algorithms/classifications/classChoiSVM.h"
 #include "algorithms/features/classChoiFeatures.h"
 #include "algorithms/features/classRandomPoints.h"
+#include <Menus.hpp>
 //---------------------------------------------------------------------------
 class TfmVergleich : public TForm
 {
@@ -59,13 +60,17 @@ __published:	// IDE-verwaltete Komponenten
 	TEdit *edClassifyBis;
 	TProgressBar *pbJob;
 	TCheckBox *cxChoi2;
+	TMainMenu *MainMenu1;
+	TMenuItem *Funktionen1;
+	TMenuItem *Klassifizierungdurchfhren1;
+	TAction *acCompare;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall acCloseExecute(TObject *Sender);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall cxClassifySvmClick(TObject *Sender);
-	void __fastcall btVergleichClick(TObject *Sender);
+	void __fastcall acCompareExecute(TObject *Sender);
 
 private:
 	cTools			ftools;

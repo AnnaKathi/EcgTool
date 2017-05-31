@@ -97,6 +97,8 @@ public:
 		String		GetComputerBS();
 		String 		GetComputerProzessor();
 
+		bool 		Log(String msg);
+
 private:
 	};
 //---------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 # Others 
 *.dia~
 
-# SVM TEst- und Trainfiles
+# SVM Test- und Trainfiles
 *.out
 *.test
 *.train
@@ -24,6 +24,7 @@ __recovery/
 win32
 win64
 debug
+out/debug
 
 # third party delphi
 #

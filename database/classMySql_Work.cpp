@@ -33,6 +33,7 @@ bool cMySqlWork::open()
 	String serv = Ini->ReadString("MySql", "Server", "");
 	String user = Ini->ReadString("MySql", "User",   "");
 	String pass = Ini->ReadString("MySql", "Pwd" + ftools.GetComputer(), "");
+	if (pass == "") Ini->ReadString("MySql", "Pwd", "");
 	String data = Ini->ReadString("MySql", "Data",   "");
 
 	int port = Ini->ReadInteger("MySql", "Port", 0);
@@ -83,6 +84,7 @@ bool cMySqlWork::openWithoutDb()
 	String serv = Ini->ReadString("MySql", "Server", "");
 	String user = Ini->ReadString("MySql", "User",   "");
 	String pass = Ini->ReadString("MySql", "Pwd" + ftools.GetComputer(), "");
+	if (pass == "") Ini->ReadString("MySql", "Pwd", "");
 	//String data = Ini->ReadString("MySql", "Data",   "");
 
 	int port = Ini->ReadInteger("MySql", "Port", 0);
@@ -107,7 +109,7 @@ bool cMySqlWork::openWithoutDb()
 		0);
 
 	if (fcon == NULL)
-		return fail(1, "Fehler beim Verbindungsaufbau! MYSQL meldet: " + String(mysql_error(fsql)));
+		return fail(1, pass + "Fehler beim Verbindungsaufbau! MYSQL meldet: " + String(mysql_error(fsql)));
 	else
 		{
 		bMySqlConnected = true;

@@ -11,6 +11,7 @@ object fmVergleich: TfmVergleich
   Font.Name = 'Tahoma'
   Font.Style = []
   KeyPreview = True
+  Menu = MainMenu1
   OldCreateOrder = False
   Position = poDesktopCenter
   OnClose = FormClose
@@ -218,7 +219,6 @@ object fmVergleich: TfmVergleich
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitTop = 123
       object Label2: TLabel
         Left = 120
         Top = 6
@@ -247,10 +247,8 @@ object fmVergleich: TfmVergleich
       Top = 578
       Width = 169
       Height = 25
-      Caption = 'Vergleich starten'
-      Enabled = False
+      Action = acCompare
       TabOrder = 2
-      OnClick = btVergleichClick
     end
     object pnSvm: TPanel
       Left = 0
@@ -261,7 +259,6 @@ object fmVergleich: TfmVergleich
       BevelOuter = bvNone
       Enabled = False
       TabOrder = 3
-      ExplicitTop = 246
       object Label3: TLabel
         Left = 120
         Top = 6
@@ -376,6 +373,20 @@ object fmVergleich: TfmVergleich
     end
     object acClassify: TAction
       Caption = '&Klassifizierung durchf'#252'hren'
+    end
+    object acCompare: TAction
+      Caption = 'Vergleich starten'
+      OnExecute = acCompareExecute
+    end
+  end
+  object MainMenu1: TMainMenu
+    Left = 320
+    Top = 8
+    object Funktionen1: TMenuItem
+      Caption = 'Funktionen'
+      object Klassifizierungdurchfhren1: TMenuItem
+        Action = acCompare
+      end
     end
   end
 end
