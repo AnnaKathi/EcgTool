@@ -8,13 +8,13 @@ File_5=TSourceModule,'D:\src\EcgTool\database\toolforms\addPeople.cpp',0,1,135,1
 
 [Modules]
 Module0=D:\src\EcgTool\Features.cpp
-Module1=D:\src\EcgTool\basics\classTools.cpp
-Module2=D:\src\EcgTool\database\baseforms\baseEcgData.cpp
-Module3=D:\src\EcgTool\database\classMySql_Session.cpp
-Module4=D:\src\EcgTool\database\classMySql_DescDb.cpp
-Module5=D:\src\EcgTool\database\classMySql_EcgData.cpp
-Module6=D:\src\EcgTool\definitions.h
-Module7=default.htm
+Module1=default.htm
+Module2=D:\src\EcgTool\basics\classTools.cpp
+Module3=D:\src\EcgTool\database\baseforms\baseEcgData.cpp
+Module4=D:\src\EcgTool\database\classMySql_Session.cpp
+Module5=D:\src\EcgTool\database\classMySql_DescDb.cpp
+Module6=D:\src\EcgTool\database\classMySql_EcgData.cpp
+Module7=D:\src\EcgTool\definitions.h
 Module8=D:\src\EcgTool\Main.cpp
 Count=9
 EditWindowCount=1
@@ -23,6 +23,9 @@ EditWindowCount=1
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
+
+[default.htm]
+ModuleType=TURLModule
 
 [D:\src\EcgTool\basics\classTools.cpp]
 ModuleType=TSourceModule
@@ -53,9 +56,6 @@ FormOnTop=0
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
-
-[default.htm]
-ModuleType=TURLModule
 
 [D:\src\EcgTool\Main.cpp]
 ModuleType=TSourceModule
@@ -122,9 +122,9 @@ EditViewName=D:\src\EcgTool\Main.cpp
 [View2]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\Features.cpp
-CursorX=21
-CursorY=317
-TopLine=287
+CursorX=59
+CursorY=350
+TopLine=323
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -213,24 +213,23 @@ State=0
 Left=0
 Top=0
 Width=3833
-Height=1365
+Height=1433
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1365
+ClientHeight=1433
 TBDockHeight=212
 LRDockWidth=13604
 Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=6
+Count=5
 Breakpoint0='D:\src\EcgTool\algorithms\AlgChoi.cpp',320,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint1='D:\src\EcgTool\inc\libsvm\svm.cpp',2106,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint2='D:\src\EcgTool\SessionAdd.cpp',151,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint3='D:\src\EcgTool\VergleichAlg.cpp',167,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint4='D:\src\EcgTool\VergleichAlg.cpp',151,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint5='D:\src\EcgTool\Features.cpp',263,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
@@ -324,11 +323,11 @@ State=0
 Left=0
 Top=0
 Width=3833
-Height=1365
+Height=1433
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1365
+ClientHeight=1433
 TBDockHeight=413
 LRDockWidth=4948
 Dockable=1
@@ -343,11 +342,11 @@ State=0
 Left=0
 Top=0
 Width=3833
-Height=1365
+Height=1433
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1365
+ClientHeight=1433
 TBDockHeight=212
 LRDockWidth=7406
 Dockable=1
@@ -366,11 +365,11 @@ State=0
 Left=0
 Top=0
 Width=3833
-Height=1365
+Height=1433
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1365
+ClientHeight=1433
 TBDockHeight=1538
 LRDockWidth=3490
 Dockable=1
@@ -385,11 +384,11 @@ State=0
 Left=0
 Top=0
 Width=3833
-Height=1365
+Height=1433
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1365
+ClientHeight=1433
 TBDockHeight=2067
 LRDockWidth=3490
 Dockable=1
@@ -518,11 +517,6 @@ Dockable=1
 StayOnTop=0
 SplitPos=176
 
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Font,
-ExpandedItems=Anchors=0,Constraints=0,Margins=0,BorderIcons=0,Font=0,GlassFrame=0,HorzScrollBar=0,Padding=0,BevelEdges=0,HotTrackStyles=0,IconOptions=0
-
 [ModelViewTool]
 PercentageSizes=1
 Create=1
@@ -627,11 +621,11 @@ State=0
 Left=0
 Top=0
 Width=3833
-Height=1365
+Height=1433
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1365
+ClientHeight=1433
 TBDockHeight=1548
 LRDockWidth=8745
 Dockable=1
@@ -763,7 +757,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
@@ -776,17 +770,17 @@ State=0
 Left=0
 Top=23
 Width=3833
-Height=1606
+Height=1673
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1606
-TBDockHeight=1606
+ClientHeight=1673
+TBDockHeight=1673
 LRDockWidth=3833
 Dockable=1
 StayOnTop=0
 TabPosition=1
-ActiveTabID=WatchWindow
+ActiveTabID=DebugLogView
 TabDockClients=DebugLogView,BreakpointWindow,ThreadStatusWindow,CallStackWindow,WatchWindow,LocalVarsWindow
 
 [DockSite2]
