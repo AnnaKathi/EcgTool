@@ -37,7 +37,6 @@ object fmBaseSession: TfmBaseSession
     ParentBackground = False
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 405
     object Label10: TLabel
       Left = 8
       Top = 6
@@ -151,7 +150,6 @@ object fmBaseSession: TfmBaseSession
     ViewStyle = vsReport
     OnClick = lvSessionClick
     OnDblClick = lvSessionDblClick
-    ExplicitTop = 69
   end
   object ActionListDiseases: TActionList
     Left = 272

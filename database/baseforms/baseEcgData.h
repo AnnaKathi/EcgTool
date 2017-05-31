@@ -17,7 +17,11 @@ struct sFilterEcg
 	{
 	int			identVon;
 	int			identBis;
+	int			session;
+	int			ort;
 	String		name;
+	ePosition	position;
+	eState		state;
 	eLage   	lage;
 	double		wertVon;
 	double		wertBis;
@@ -65,6 +69,15 @@ __published:	// IDE-verwaltete Komponenten
 	TComboBox *cbLage;
 	TBevel *Bevel1;
 	TLabel *laTabelle;
+	TComboBox *cbPosition;
+	TLabel *Label1;
+	TComboBox *cbState;
+	TLabel *Label2;
+	TComboBox *cbSession;
+	TLabel *Label3;
+	TLabel *Label4;
+	TComboBox *cbOrt;
+	TLabel *laAuswahl;
 	void __fastcall acAddExecute(TObject *Sender);
 	void __fastcall acDelExecute(TObject *Sender);
 	void __fastcall acFilterExecute(TObject *Sender);
@@ -87,6 +100,7 @@ public:
 	bool		ShowEcgOf(int person);
 	void		SelectEcg(TTimer* timer);
 	int			GetSelectedEcg();
+	String		GetListedEcg();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmBaseEcg *fmBaseEcg;

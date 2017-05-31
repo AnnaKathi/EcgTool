@@ -39,7 +39,6 @@ object fmMain: TfmMain
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 1076
     DesignSize = (
       1026
       41)
@@ -61,7 +60,6 @@ object fmMain: TfmMain
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 1060
     end
   end
   object sbMain: TStatusBar
@@ -80,8 +78,6 @@ object fmMain: TfmMain
       item
         Width = 50
       end>
-    ExplicitTop = 312
-    ExplicitWidth = 1076
   end
   object pnMain: TPanel
     Left = 0
@@ -92,9 +88,6 @@ object fmMain: TfmMain
     BevelOuter = bvNone
     Enabled = False
     TabOrder = 2
-    ExplicitTop = 47
-    ExplicitWidth = 1076
-    ExplicitHeight = 598
     object btAnalysis: TBitBtn
       Left = 8
       Top = 6
@@ -1084,7 +1077,7 @@ object fmMain: TfmMain
       Top = 109
       Width = 281
       Height = 97
-      Action = acDatabaseAll
+      Action = acDatabasePeople
       BiDiMode = bdLeftToRight
       Caption = #220'bersicht Datenbank '#39'ecg'#39
       Font.Charset = ANSI_CHARSET
@@ -2715,7 +2708,7 @@ object fmMain: TfmMain
       Top = 6
       Width = 281
       Height = 97
-      Action = acFeaturesShow
+      Action = acFeaturesBuildAll
       BiDiMode = bdLeftToRight
       Caption = 'Tools zur Feature-Bildung'
       Font.Charset = ANSI_CHARSET

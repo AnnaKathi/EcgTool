@@ -26,6 +26,16 @@ enum eState
 	stateInBew           //während der Bewegung
 	};
 //---------------------------------------------------------------------------
+/* Position (Platzierung der Elektroden) zu denen ein EKG-Signal gehört */
+enum ePosition
+	{
+	posNone = 0,
+	posBrustNormal, //Brust rechts und links, "normale" Position
+	posBrustEng,	//Brustbein oben eng ("Kettenanhänger")
+	posHandBack,	//Handrücken
+	posBack			//Rücken unter den Schulterblättern
+	};
+//---------------------------------------------------------------------------
 /* Format der einzulesenden Datei */
 enum eDatFormat
 	{

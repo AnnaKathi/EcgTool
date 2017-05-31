@@ -169,17 +169,18 @@ bool cMySqlSession::ParseRow()
 //---------------------------------------------------------------------------
 bool cMySqlSession::listInCombo(TComboBox* cb, int mode) //mode ist mit 0 vorbesetzt
 	{
-	//Alle Personen aus der DB in der ComboBox anzeigen, der mode bestimmt
+	//Alle Sessions aus der DB in der ComboBox anzeigen, der mode bestimmt
 	//was angezeigt wird
 	if (!loadTable(""))
 		return fail(fwork->error_code, fwork->error_msg);
 
 	cb->Items->Clear();
 	String str;
+	cb->Items->AddObject("- alle Daten -", (TObject*)0);
 	while (nextRow())
 		{
-		if (mode == 1)  str = ""; //String(fdata.nachname) + ", " + String(fdata.vorname);
-		else 			str = ""; //pers = String(fdata.vorname) + " " + String(fdata.nachname);
+		if (mode == 1)  str = fdata.stamp; //2017-05-31 11:03:41
+		else 			str = fdata.stamp; //todo Datum umdrehen
 
 		cb->Items->AddObject(str, (TObject*)fdata.ident);
 		}

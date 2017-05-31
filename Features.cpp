@@ -260,12 +260,25 @@ bool TfmFeatures::DoFeatures(sEcgData ecgdata, int alg, bool replace)
 //---------------------------------------------------------------------------
 void TfmFeatures::GetAllFeatures()
 	{
+	String EcgIdents = TfmEcg->GetListedEcg();
+	if (EcgIdents == "")
+		{
+		ftools.ErrBox("Es wurden keine EKG-Daten ausgewählt.");
+		return;
+		}
+
+	iarray_t idents = ftools.TextToArray(EcgIdents, ";");
+	if (idents.size() <= 0)
+		{
+		ftools.ErrBox("Die ausgewählten EKG-Datensätze konnten nicht umgesetzt werden.");
+		return;
+		}
+
 	bool bReplace = false;
 	if (Application->MessageBox(
-		"Es werden Features für alle in der Datenbank "
-		"vorhandenen EKG-Daten gebildet.\r\n"
-		"Sollen bestehende Feature-Sets dabei überschrieben werden ?",
-		"RandomPoint-Features für alle EKG bilden",
+		"Es werden Features für die ausgewählten EKG-Datensätze gebildet.\r\n"
+		"Sollen eventuell bestehende Feature-Sets dabei überschrieben werden ?",
+		"Features für EKG bilden",
 		MB_YESNO) == ID_YES)
 		bReplace = true;
 
@@ -297,9 +310,19 @@ void TfmFeatures::GetAllFeatures()
 	Count_Edit = 0;
 
 	sEcgData data;
-	while (fmysql.ecg.nextRow())
+	int count = 0;
+	for (iarray_itr itr = idents.begin(); itr != idents.end(); itr++)
 		{
 		pbJob->Position++;
+		ilist_t& v = itr->second;
+		int id = v[1];
+		if (!fmysql.ecg.loadByIdent(id))
+			{
+			Print("## EKG <%d> nicht gefunden", id);
+			continue;
+			}
+
+		count++;
 		data = fmysql.ecg.row;
 		Print("EKG %d (%s)", data.ident, fmysql.people.getNameOf(data.person));
 
@@ -324,7 +347,7 @@ void TfmFeatures::GetAllFeatures()
 		
 	pbJob->Visible = false;
 	Print("--------------------------------------------------");
-	Print("Es wurden %d EKG-Datensätze bearbeitet", fmysql.ecg.getSize());
+	Print("Es wurden %d EKG-Datensätze bearbeitet", count);
 	Print("\tDatensätze neu anleget\t: %d", Count_Neu);
 	Print("\tDatensätze geändert\t: %d", Count_Edit);
 	}

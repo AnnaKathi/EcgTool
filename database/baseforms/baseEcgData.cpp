@@ -59,7 +59,21 @@ void __fastcall TfmBaseEcg::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
 	laTabelle->Caption = "EKG-Daten (ecgdata)";
+	int anz = fmysql.ecg.getSize();
+	laAuswahl->Caption = ftools.fmt("Auswahl: %d/%d EKG", anz, anz);
+
+	fmysql.sessions.listInCombo(cbSession);
+	fmysql.orte.listInCombo(cbOrt);
+	fmysql.positions.listInCombo(cbPosition);
+	fmysql.states.listInCombo(cbState);
 	fmysql.lagen.listInCombo(cbLage);
+
+	if (cbSession->Items->Count  > 0) cbSession->ItemIndex  = 0;
+	if (cbOrt->Items->Count      > 0) cbOrt->ItemIndex      = 0;
+	if (cbPosition->Items->Count > 0) cbPosition->ItemIndex = 0;
+	if (cbState->Items->Count    > 0) cbState->ItemIndex    = 0;
+	if (cbLage->Items->Count     > 0) cbLage->ItemIndex     = 0;
+
 	ShowData();
 	tStartup->Tag = 1; //signalisiert, dass der Init durchgeführt wurde
 	}
@@ -104,12 +118,18 @@ bool TfmBaseEcg::ShowData()
 		}
 
 	TListItem* item;
+	int count = 0;
+	int auswahl = 0;
 	while (fmysql.ecg.nextRow())
 		{
+		count++;
 		if (!CheckFilter()) continue;
+
 		AddLine();
+		auswahl++;
 		}
 
+	laAuswahl->Caption = ftools.fmt("Auswahl: %d/%d EKG", auswahl, count);
 	lvData->Items->EndUpdate();
 	bInShow = false;
 	return true;
@@ -146,11 +166,8 @@ void TfmBaseEcg::AddLine()
 	item->Caption = String(fmysql.ecg.row.ident);
 
 	fmysql.sessions.get(fmysql.ecg.row.session);
-	String s = ftools.fmt("%s - %s",
-		fmysql.sessions.row.stamp,
-		fmysql.orte.getNameOf(fmysql.sessions.row.ort));
-
-	item->SubItems->Add(s);
+	item->SubItems->Add(fmysql.sessions.row.stamp);
+	item->SubItems->Add(fmysql.orte.getNameOf(fmysql.sessions.row.ort));
 
 	String name = fmysql.people.getNameOf(fmysql.ecg.row.person);
 	item->SubItems->Add(name);
@@ -166,7 +183,21 @@ bool TfmBaseEcg::BuildFilter()
 	ffilter.identBis = edIdBis->Text.ToIntDef(-1);
 
 	ffilter.name = edName->Text;
-	ffilter.lage = (int)cbLage->Items->Objects[cbLage->ItemIndex];
+
+	if (cbSession->ItemIndex < 0) ffilter.session = 0;
+	else ffilter.session = (int)cbSession->Items->Objects[cbSession->ItemIndex];
+
+	if (cbOrt->ItemIndex < 0) ffilter.ort = 0;
+	else ffilter.ort = (int)cbOrt->Items->Objects[cbOrt->ItemIndex];
+
+	if (cbPosition->ItemIndex < 0) ffilter.position = 0;
+	else ffilter.position = (int)cbPosition->Items->Objects[cbPosition->ItemIndex];
+
+	if (cbState->ItemIndex < 0) ffilter.state = 0;
+	else ffilter.state = (int)cbState->Items->Objects[cbState->ItemIndex];
+
+	if (cbLage->ItemIndex < 0) ffilter.lage = 0;
+	else ffilter.lage = (int)cbLage->Items->Objects[cbLage->ItemIndex];
 
 	return true;
 	}
@@ -184,11 +215,16 @@ bool TfmBaseEcg::CheckFilter()
 			return false;
 		}
 
-	if (ffilter.lage > 0)
+	if (ffilter.ort > 0)
 		{
-		if (fmysql.ecg.row.lage != ffilter.lage)
-			return false;
+		if (!fmysql.sessions.get(fmysql.ecg.row.session)) return false;
+		if (fmysql.sessions.row.ort != ffilter.ort) return false;
 		}
+
+	if (ffilter.session  > 0 && fmysql.ecg.row.session  != ffilter.session)  return false;
+	if (ffilter.position > 0 && fmysql.ecg.row.position != ffilter.position) return false;
+	if (ffilter.state    > 0 && fmysql.ecg.row.state    != ffilter.state)    return false;
+	if (ffilter.lage     > 0 && fmysql.ecg.row.lage     != ffilter.lage)     return false;
 
 	return true;
 	}
@@ -202,6 +238,25 @@ void TfmBaseEcg::SelectEcg(TTimer* timer)
 int TfmBaseEcg::GetSelectedEcg()
 	{
 	return iSelectedEcg;
+	}
+//---------------------------------------------------------------------------
+String TfmBaseEcg::GetListedEcg()
+	{
+	//gibt die IDs aller Datensätze zurück, die gerade in der ListView
+	//aufgeführt werden, d.h. Filter werden berücksichtigt
+	String idents = "";
+	TListItem* item; int id;
+	for (int i = 0; i < lvData->Items->Count; i++)
+		{
+		item = lvData->Items->Item[i];
+		id = (int)item->Data;
+
+		if (idents == "")
+			idents = String(id);
+		else
+        	idents += ";" + String(id);
+		}
+	return idents;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

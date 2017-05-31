@@ -60,8 +60,7 @@ void __fastcall TfmBaseSession::tStartupTimer(TObject *Sender)
 	tStartup->Enabled = false;
 
 	fmysql.orte.listInCombo(cbOrt);
-	cbOrt->Items->Insert(0, "- alle anzeigen -");
-	cbOrt->ItemIndex = 0;
+	if (cbOrt->Items->Count > 0) cbOrt->ItemIndex = 0;
 
 	ShowData();
 	tStartup->Tag = 1; //signalisiert, dass der Init durchgeführt wurde
