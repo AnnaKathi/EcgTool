@@ -8,8 +8,8 @@ File_5=TSourceModule,'D:\src\EcgTool\Features.cpp',0,1,323,71,346,0,0,,
 
 [Modules]
 Module0=D:\src\EcgTool\VergleichAlg.cpp
-Module1=D:\src\EcgTool\database\classMySql_EcgData.cpp
-Module2=default.htm
+Module1=default.htm
+Module2=D:\src\EcgTool\database\classMySql_EcgData.cpp
 Module3=D:\src\EcgTool\Main.cpp
 Module4=D:\src\EcgTool\database\classMySql_Work.cpp
 Module5=D:\src\EcgTool\basics\classTools.cpp
@@ -21,13 +21,13 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
+[default.htm]
+ModuleType=TURLModule
+
 [D:\src\EcgTool\database\classMySql_EcgData.cpp]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
-
-[default.htm]
-ModuleType=TURLModule
 
 [D:\src\EcgTool\Main.cpp]
 ModuleType=TSourceModule
@@ -79,7 +79,7 @@ RightPanelData=00000800010000000000B022000000000000006B0A0000000000000100000000B
 BottomPanelSize=0
 BottomPanelClients=DockSite1
 BottomPanelData=0000080001000100000009000000446F636B5369746531153400000000000000CC03000000000000FFFFFFFF
-BottomMiddlePanelSize=1370
+BottomMiddlePanelSize=1435
 BottomMiddlePanelClients=DockSite0,MessageView@EditWindow0
 BottomMiddelPanelData=0000080001000100000009000000446F636B53697465303619000000000000007D1B0000000000000100000000361900000B0000004D65737361676556696577FFFFFFFF
 
@@ -208,11 +208,11 @@ State=0
 Left=0
 Top=0
 Width=2104
-Height=8798
+Height=7019
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2104
-ClientHeight=8798
+ClientHeight=7019
 TBDockHeight=5904
 LRDockWidth=2349
 Dockable=1
@@ -462,11 +462,6 @@ Dockable=1
 StayOnTop=0
 SplitPos=176
 
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Name,
-ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,Font=0,GlassFrame=0,HorzScrollBar=0,Margins=0,Menu=0,Padding=0
-
 [ModelViewTool]
 PercentageSizes=1
 Create=1
@@ -493,7 +488,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-892
+Top=-885
 Width=3562
 Height=4827
 MaxLeft=-1
@@ -512,7 +507,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-892
+Top=-885
 Width=13604
 Height=212
 MaxLeft=-1
@@ -531,7 +526,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-892
+Top=-885
 Width=3562
 Height=4827
 MaxLeft=-1
@@ -550,7 +545,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-892
+Top=-885
 Width=3562
 Height=2298
 MaxLeft=-1
@@ -653,12 +648,12 @@ State=0
 Left=0
 Top=23
 Width=5859
-Height=1202
+Height=1269
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=5859
-ClientHeight=1202
-TBDockHeight=1202
+ClientHeight=1269
+TBDockHeight=1269
 LRDockWidth=4323
 Dockable=1
 StayOnTop=0
@@ -707,7 +702,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
@@ -755,5 +750,5 @@ Dockable=1
 StayOnTop=0
 TabPosition=0
 ActiveTabID=ToolForm
-TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
+TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
 
