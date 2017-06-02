@@ -178,7 +178,7 @@ bool TfmVergleich::DoSvm()
 		{
 		//-- Do Svm für Random Features
 		data.label = "random";
-		data.alg   = fRandomFeat.AlgNr;
+		data.alg   = fRandomFeat.AlgIdent;
 
 		if (!fChoiSvm.SvmAccuracy(accuracy, data))
 			{

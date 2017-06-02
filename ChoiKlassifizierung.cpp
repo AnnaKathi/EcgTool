@@ -110,7 +110,7 @@ bool TfmChoiClassification::WriteFile(bool bWriteTraining, String filename)
 		if (!fmysql.ecg.loadByIdent(i)) continue;
 
 		//Features laden
-		if (!fmysql.features.select(i, fChoiSvm.AlgNr)) continue;
+		//TODO if (!fmysql.features.select(i, fChoiSvm.AlgNr)) continue;
 
 		//Features in Array schreiben
 		iarray_t feat = ftools.TextToArray(fmysql.features.row.features, ";");

@@ -93,7 +93,6 @@ object fmChoiClassification: TfmChoiClassification
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 658
     DesignSize = (
       777
       41)
@@ -115,7 +114,6 @@ object fmChoiClassification: TfmChoiClassification
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 642
     end
   end
   object Panel1: TPanel
@@ -126,8 +124,6 @@ object fmChoiClassification: TfmChoiClassification
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 562
-    ExplicitWidth = 658
     DesignSize = (
       777
       41)
@@ -139,7 +135,6 @@ object fmChoiClassification: TfmChoiClassification
       Action = acClose
       Anchors = [akRight, akBottom]
       TabOrder = 0
-      ExplicitLeft = 575
     end
   end
   object pnEcg: TPanel
@@ -149,7 +144,6 @@ object fmChoiClassification: TfmChoiClassification
     Height = 597
     Align = alLeft
     TabOrder = 2
-    ExplicitHeight = 513
   end
   object memo: TMemo
     Left = 463
@@ -160,7 +154,6 @@ object fmChoiClassification: TfmChoiClassification
     ReadOnly = True
     ScrollBars = ssBoth
     TabOrder = 3
-    ExplicitWidth = 250
   end
   object edTrainingVon: TEdit
     Left = 487

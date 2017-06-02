@@ -21,7 +21,8 @@ cMySql::cMySql()
 	flagen       = new cMySqlDescDb(*fwork, "lagen");
 	fstates      = new cMySqlDescDb(*fwork, "states");
 	fpositions   = new cMySqlDescDb(*fwork, "positions");
-	falgorithms  = new cMySqlDescDb(*fwork, "algorithms");
+	falgrpeaks   = new cMySqlDescDb(*fwork, "algrpeaks");
+	falgfeatures = new cMySqlDescDb(*fwork, "algfeatures");
 	}
 //---------------------------------------------------------------------------
 cMySql::~cMySql()
@@ -32,10 +33,10 @@ cMySql::~cMySql()
 	if (fsessions) delete fsessions;
 	if (ffeatures) delete ffeatures;
 
-	if (fdiseases)    delete fdiseases; 		if (forte)	 delete forte;
-	if (fresearchers) delete fresearchers;		if (flagen)  delete flagen;
-	if (fpositions)   delete fpositions;		if (fstates) delete fstates;
-	if (falgorithms)  delete (falgorithms);
+	if (fdiseases)    delete fdiseases; 		if (forte)	    delete forte;
+	if (fresearchers) delete fresearchers;		if (flagen)     delete flagen;
+	if (fpositions)   delete fpositions;		if (fstates)    delete fstates;
+	if (falgfeatures) delete falgfeatures;		if (falgrpeaks) delete (falgrpeaks);
 	}
 //---------------------------------------------------------------------------
 bool cMySql::create()
@@ -204,9 +205,14 @@ cMySqlDescDb& cMySql::get_positions()
 	return *fpositions;
 	}
 //---------------------------------------------------------------------------
-cMySqlDescDb& cMySql::get_algorithms()
+cMySqlDescDb& cMySql::get_alg_rpeaks()
 	{
-	return *falgorithms;
+	return *falgrpeaks;
+	}
+//---------------------------------------------------------------------------
+cMySqlDescDb& cMySql::get_alg_features()
+	{
+	return *falgfeatures;
 	}
 //---------------------------------------------------------------------------
 

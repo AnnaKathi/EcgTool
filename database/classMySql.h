@@ -33,13 +33,14 @@ __property cMySqlPeople&   people   = { read=get_people   };
 __property cMySqlSession&  sessions = { read=get_sessions };
 __property cMySqlFeature&  features = { read=get_features };
 
-__property cMySqlDescDb&   researchers = { read=get_researchers };
-__property cMySqlDescDb&   algorithms  = { read=get_algorithms  };
-__property cMySqlDescDb&   positions   = { read=get_positions   };
-__property cMySqlDescDb&   diseases    = { read=get_diseases    };
-__property cMySqlDescDb&   states      = { read=get_states      };
-__property cMySqlDescDb&   lagen       = { read=get_lagen       };
-__property cMySqlDescDb&   orte        = { read=get_orte        };
+__property cMySqlDescDb&   researchers = { read=get_researchers  };
+__property cMySqlDescDb&   algrpeaks   = { read=get_alg_rpeaks   };
+__property cMySqlDescDb&   algfeatures = { read=get_alg_features };
+__property cMySqlDescDb&   positions   = { read=get_positions    };
+__property cMySqlDescDb&   diseases    = { read=get_diseases     };
+__property cMySqlDescDb&   states      = { read=get_states       };
+__property cMySqlDescDb&   lagen       = { read=get_lagen        };
+__property cMySqlDescDb&   orte        = { read=get_orte         };
 
 private:
 	cTools			ftools;
@@ -64,7 +65,8 @@ private:
 	cMySqlDescDb*	flagen;        cMySqlDescDb&	get_lagen();
 	cMySqlDescDb*	fstates;       cMySqlDescDb&	get_states();
 	cMySqlDescDb*	fpositions;    cMySqlDescDb&	get_positions();
-	cMySqlDescDb*	falgorithms;   cMySqlDescDb&	get_algorithms();
+	cMySqlDescDb*	falgrpeaks;    cMySqlDescDb&	get_alg_rpeaks();
+	cMySqlDescDb*	falgfeatures;  cMySqlDescDb&	get_alg_features();
 	};
 //---------------------------------------------------------------------------
 #endif

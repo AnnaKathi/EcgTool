@@ -209,5 +209,9 @@
     <Transaction>2017.05.22 15:48:37.501.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\VergleichAlg.cpp</Transaction>
     <Transaction>2017.05.22 15:48:37.501.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\VergleichAlg.h</Transaction>
     <Transaction>2017.05.22 15:48:37.501.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\VergleichAlg.dfm</Transaction>
+    <Transaction>2017.06.02 11:24:35.626.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\features\classFeaturesChoi.cpp</Transaction>
+    <Transaction>2017.06.02 11:24:35.626.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\features\classFeaturesChoi.h</Transaction>
+    <Transaction>2017.06.02 11:33:31.748.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\rpeak-detection\classRpeaksChoi.cpp</Transaction>
+    <Transaction>2017.06.02 11:33:31.748.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\rpeak-detection\classRpeaksChoi.h</Transaction>
   </Transactions>
 </BorlandProject>

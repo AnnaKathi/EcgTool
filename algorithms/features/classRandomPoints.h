@@ -24,13 +24,12 @@ public:
 	bool		resetBeatPoints();
 	bool		nextPointInBeat();
 
-__property int		AlgNr     = { read=get_algdbnr };
-
+__property int	  AlgIdent    = { read=get_alg_ident };
 __property double randomPoint = { read=randomP };
 
 private:
-	int			fAlg_DbNr;
-	int			get_algdbnr();
+	int			fAlgIdent;
+	int			get_alg_ident();
 
 	int			rvIndex;
 	iarray_t	randomValues;

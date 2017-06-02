@@ -6,13 +6,15 @@
 #include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "../basics/classBase.h"
+#include "../basics/classTools.h"
 #include "classMySql_Work.h"
 //---------------------------------------------------------------------------
 struct sFeature
 	{
 	int			ident;
 	int			ecgId;
-	int			algId;
+	int			algIdRpeaks;
+	int			algIdFeatures;
 	String		features;
 	};
 //---------------------------------------------------------------------------
@@ -25,7 +27,7 @@ public:
 	//-- Daten laden
 	bool 	get(int feature); //einzelnen Datensatz laden
 	bool	loadTable(String order = ""); //lädt die gesamte Tabelle
-	bool 	select(int ecg, int alg);
+	bool 	select(int ecg, int rpeaksId, int featId);
 	bool	nextRow();
 	bool	getLast();
 
@@ -46,6 +48,7 @@ __property sFeature row = { read=get_data };
 __property int num_rows = { read=get_num_rows };
 
 private:
+	cTools			ftools;
 	bool			ParseRow();
 
 	sFeature 		fdata;

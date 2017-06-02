@@ -59,7 +59,6 @@ object fmFeatures: TfmFeatures
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 934
     DesignSize = (
       1089
       41)
@@ -83,7 +82,6 @@ object fmFeatures: TfmFeatures
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 918
     end
   end
   object Panel1: TPanel
@@ -94,7 +92,6 @@ object fmFeatures: TfmFeatures
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 934
     DesignSize = (
       1089
       41)
@@ -106,7 +103,6 @@ object fmFeatures: TfmFeatures
       Action = acClose
       Anchors = [akRight, akBottom]
       TabOrder = 0
-      ExplicitLeft = 851
     end
     object pbJob: TProgressBar
       Left = 8
@@ -134,11 +130,9 @@ object fmFeatures: TfmFeatures
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 3
-    ExplicitLeft = 465
-    ExplicitWidth = 469
     object Bevel3: TBevel
       Left = 0
-      Top = 516
+      Top = 506
       Width = 360
       Height = 8
       Align = alTop
@@ -147,11 +141,21 @@ object fmFeatures: TfmFeatures
       ExplicitTop = 514
       ExplicitWidth = 469
     end
+    object Bevel5: TBevel
+      Left = 0
+      Top = 411
+      Width = 360
+      Height = 8
+      Align = alTop
+      Shape = bsTopLine
+      ExplicitLeft = -2
+      ExplicitTop = 189
+    end
     object memo: TMemo
       Left = 0
       Top = 0
       Width = 360
-      Height = 417
+      Height = 321
       Align = alTop
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -162,7 +166,6 @@ object fmFeatures: TfmFeatures
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 0
-      ExplicitWidth = 469
     end
     object btFeatures: TButton
       Left = 16
@@ -182,15 +185,15 @@ object fmFeatures: TfmFeatures
       TabOrder = 2
       OnClick = btBuildAllClick
     end
-    object pnAlg: TPanel
+    object pnFeatures: TPanel
       Left = 0
-      Top = 417
+      Top = 419
       Width = 360
-      Height = 99
+      Height = 87
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitWidth = 469
+      ExplicitTop = 154
       object Label1: TLabel
         Left = 137
         Top = 6
@@ -204,29 +207,60 @@ object fmFeatures: TfmFeatures
         Font.Style = [fsUnderline]
         ParentFont = False
       end
-      object cxChoi1: TCheckBox
+      object cxFeatChoi: TCheckBox
         Left = 16
         Top = 32
         Width = 316
         Height = 17
-        Caption = 'Choi 2016, acht fiduzielle Punkte, Original R-Peak-Detection'
+        Caption = 'Choi 2016, acht fiduzielle Punkte'
         TabOrder = 0
       end
-      object cxRandom: TCheckBox
+      object cxFeatRandom: TCheckBox
         Left = 16
-        Top = 76
+        Top = 55
         Width = 281
         Height = 17
         Caption = 'Random Points, 20 verteilte Punkte im QRS-Komplex'
         TabOrder = 1
       end
-      object cxChoi2: TCheckBox
+    end
+    object pnRPeaks: TPanel
+      Left = 0
+      Top = 321
+      Width = 360
+      Height = 90
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 4
+      ExplicitTop = 113
+      object Label2: TLabel
+        Left = 137
+        Top = 6
+        Width = 98
+        Height = 16
+        Caption = 'R-Peak-Detection'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsUnderline]
+        ParentFont = False
+      end
+      object cxRpeaksAnna: TCheckBox
         Left = 16
-        Top = 53
-        Width = 322
+        Top = 32
+        Width = 233
         Height = 17
-        Caption = 'Choi 2016, acht fiduzielle Punkte, R-Peak-Verbesserung Anna'
-        TabOrder = 2
+        Caption = 'Anna, absteigende Sortierung verwenden'
+        TabOrder = 0
+      end
+      object cxRpeaksChoi: TCheckBox
+        Left = 16
+        Top = 55
+        Width = 233
+        Height = 17
+        Caption = 'Choi 2016, Kandidaten und '#220'berlappungen'
+        TabOrder = 1
       end
     end
   end

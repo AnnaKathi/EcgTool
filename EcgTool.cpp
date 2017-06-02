@@ -10,6 +10,7 @@ USEFORM("RequestBox.cpp", fmRequest);
 USEFORM("Details.cpp", fmDetails);
 USEFORM("Features.cpp", fmFeatures);
 USEFORM("ChoiKlassifizierung.cpp", fmChoiClassification);
+USEFORM("VergleichAlg.cpp", fmVergleich);
 USEFORM("Testform.cpp", fmTest);
 USEFORM("database\DbPersonen.cpp", fmData);
 USEFORM("database\baseforms\basePeople.cpp", fmBasePeople);
@@ -25,7 +26,6 @@ USEFORM("database\toolforms\selectDescDb.cpp", fmSelectDesc);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
 USEFORM("algorithms\AlgChoi2.cpp", fmChoi2);
-USEFORM("VergleichAlg.cpp", fmVergleich);
 //---------------------------------------------------------------------------
 #include "database/classMySql.h"
 cMySql fmysql;

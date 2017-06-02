@@ -582,12 +582,13 @@ bool cChoiSVM::SvmWriteFile(bool bWriteTraining, String filename, int alg, int e
 	for (int i = ecgvon; i <= ecgbis; i++)
 		{
 		//Features laden
-		if (!fmysql.features.select(i, alg))
+		/* TODO if (!fmysql.features.select(i, alg))
 			{
 			//keine Features für dieses EKG vorhanden
 			count_featmissing++;
 			continue;
 			}
+		*/
 
 		//ECG reinladen
 		if (!fmysql.ecg.loadByIdent(i))

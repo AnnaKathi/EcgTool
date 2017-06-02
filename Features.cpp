@@ -148,32 +148,27 @@ void TfmFeatures::GetFeatures()
 	Print("Features bilden für EKG <%d> %s",
 		data.ident, fmysql.people.getNameOf(data.person));
 
-	if (cxChoi1->Checked)
+	if (cxRpeaksAnna->Checked)
 		{
-		if (!DoFeatures(fmysql.ecg.row, fChoi.AlgNr, true))
-			return;
+		if (cxFeatChoi->Checked) 	DoFeatures(fmysql.ecg.row, 1, fFeatChoi.AlgIdent, true);
+		if (cxFeatRandom->Checked)  DoFeatures(fmysql.ecg.row, 1, fRandomPoints.AlgIdent, true);
 		}
 
-	if (cxChoi2->Checked)
+	if (cxRpeaksChoi->Checked)
 		{
-		if (!DoFeatures(fmysql.ecg.row, fChoi.AlgNr+1, true))
-			return;
-		}
-
-	if (cxRandom->Checked)
-		{
-		if (!DoFeatures(fmysql.ecg.row, fRandomPoints.AlgNr, true))
-			return;
+		if (cxFeatChoi->Checked) 	DoFeatures(fmysql.ecg.row, fRpeaksChoi.AlgIdent, fFeatChoi.AlgIdent, true);
+		if (cxFeatRandom->Checked)  DoFeatures(fmysql.ecg.row, fRpeaksChoi.AlgIdent, fRandomPoints.AlgIdent, true);
 		}
 
 	Print("Features erstellt");
 	}
 //---------------------------------------------------------------------------
-bool TfmFeatures::InsertFeatures(String features, int alg)
+bool TfmFeatures::InsertFeatures(String features, int algRpeaks, int algFeat)
 	{
 	sFeature data;
 	data.ecgId    = fmysql.ecg.row.ident;
-	data.algId    = alg;
+	data.algIdRpeaks = algRpeaks;
+	data.algIdFeatures = algFeat;
 	data.features = features;
 
 	if (!fmysql.features.insert(data))
@@ -187,12 +182,13 @@ bool TfmFeatures::InsertFeatures(String features, int alg)
 	return true;
 	}
 //---------------------------------------------------------------------------
-bool TfmFeatures::UpdateFeatures(String features, int alg)
+bool TfmFeatures::UpdateFeatures(String features, int algRpeaks, int algFeat)
 	{
 	sFeature data;
 	data.ident    = fmysql.features.row.ident;
 	data.ecgId    = fmysql.ecg.row.ident;
-	data.algId    = alg;
+	data.algIdRpeaks = algRpeaks;
+	data.algIdFeatures = algFeat;
 	data.features = features;
 
 	if (!fmysql.features.update(data))
@@ -206,32 +202,70 @@ bool TfmFeatures::UpdateFeatures(String features, int alg)
 	return true;
 	}
 //---------------------------------------------------------------------------
-bool TfmFeatures::DoFeatures(sEcgData ecgdata, int alg, bool replace)
+bool TfmFeatures::DoFeatures(sEcgData ecgdata, int algRpeaks, int algFeat, bool replace)
 	{
 	iarray_t array = ecgdata.array_werte;
 	if (array.size() <= 0) return false;
-	if (alg < 0) 		   return false;
+	if (algRpeaks <= 0) return false;
+	if (algFeat   <= 0) return false;
+
+	iarray_t rpeaks;
+	if (algRpeaks == 1) //Anna
+		{
+		rpeaks = fecg.rpeaks.find(array, NULL);
+		if (rpeaks.size() <= 0)
+			{
+			Print("## Fehler beim Erstellen der Anna-RPeaks");
+			Print("## Meldung: %s", fecg.rpeaks.error_msg);
+			return false;
+			}
+		}
+	else if (algRpeaks == 2) //Choi
+		{
+		if (!fRpeaksChoi.findRpeaks(array))
+			{
+			Print("## Fehler beim Erstellen der Choi-RPeaks");
+			Print("## Meldung: %s", fRpeaksChoi.error_msg);
+			return false;
+			}
+
+		rpeaks = fRpeaksChoi.Rpeaks;
+		if (rpeaks.size() <= 0)
+			{
+			Print("## Fehler beim Erstellen der Choi-RPeaks");
+			Print("## Meldung: %s", fRpeaksChoi.error_msg);
+			return false;
+			}
+		}
 
 	String features;
-		 if (alg == fChoi.AlgNr) 		 features = fChoi.getFeaturesStr1(array);
-	else if (alg == (fChoi.AlgNr+1)) 	 features = fChoi.getFeaturesStr2(array);
-	else if (alg == fRandomPoints.AlgNr) features = BuildRandomFeatures(array);
-	else return false;
-
-	if (features == "")
+	if (algFeat == 1) //Choi
 		{
-		String err;
-			 if (alg == fChoi.AlgNr) 		 err = fChoi.error_msg;
-		else if (alg == (fChoi.AlgNr+1)) 	 err = fChoi.error_msg;
-		else if (alg == fRandomPoints.AlgNr) err = fRandomPoints.error_msg;
+		if (!fFeatChoi.getFeatures(array, rpeaks))
+			; //todo Fehlermeludng
 
-		Print("## Fehler beim Erstellen der Features");
-		Print("## Meldung: %s", err);
-		return false;
+		features = fFeatChoi.features_string;
+		if (features == "")
+			{
+			Print("## Fehler beim Erstellen der Choi-Features");
+			Print("## Meldung: %s", fFeatChoi.error_msg);
+			return false;
+			}
+		}
+	else if (algFeat == 2) //Random
+		{
+		//todo: in Klasse bringen
+		features = BuildRandomFeatures(array);
+		if (features == "")
+			{
+			Print("## Fehler beim Erstellen der Random-Features");
+			Print("## Meldung: %s", fRandomPoints.error_msg);
+			return false;
+			}
 		}
 
 	bool vorhanden = false;
-	if (fmysql.features.select(ecgdata.ident, alg))
+	if (fmysql.features.select(ecgdata.ident, algRpeaks, algFeat))
 		{
 		//Print("\tDatensatz bereits vorhanden...");
 		vorhanden = true;
@@ -244,17 +278,17 @@ bool TfmFeatures::DoFeatures(sEcgData ecgdata, int alg, bool replace)
 
 	if (vorhanden)
 		{
-		if (!UpdateFeatures(features, alg))
+		if (!UpdateFeatures(features, algRpeaks, algFeat))
 			return false;
 		Count_Edit++;
 		}
 	else
 		{
-		if (!InsertFeatures(features, alg))
+		if (!InsertFeatures(features, algRpeaks, algFeat))
 			return false;
 		Count_Neu++;
 		}
-		
+
 	return true;
 	}
 //---------------------------------------------------------------------------
@@ -298,11 +332,15 @@ void TfmFeatures::GetAllFeatures()
 		}
 	//Print("Datenbank ecgdata geladen, %d Datensätze", fmysql.ecg.getSize());
 
-	int max = 0;
-	if (cxChoi1->Checked)  max += fmysql.ecg.getSize();
-	if (cxChoi2->Checked)  max += fmysql.ecg.getSize();
-	if (cxRandom->Checked) max += fmysql.ecg.getSize();
-	pbJob->Max = max;
+	int anz_rpeaks = 0;
+	if (cxRpeaksAnna->Checked) anz_rpeaks++;
+	if (cxRpeaksChoi->Checked) anz_rpeaks++;
+
+	int anz_feat = 0;
+	if (cxFeatChoi->Checked)   anz_feat++;
+	if (cxFeatRandom->Checked) anz_feat++;
+
+	pbJob->Max = idents.size() * (anz_rpeaks * anz_feat);
 	pbJob->Position = 0;
 	pbJob->Visible = true;
 
@@ -326,22 +364,20 @@ void TfmFeatures::GetAllFeatures()
 		data = fmysql.ecg.row;
 		Print("EKG %d (%s)", data.ident, fmysql.people.getNameOf(data.person));
 
-		if (cxChoi1->Checked)
+		if (cxRpeaksAnna->Checked)
 			{
-			if (!DoFeatures(data, fChoi.AlgNr, bReplace))
-				break;
+			if (cxFeatChoi->Checked) 	DoFeatures(fmysql.ecg.row, 1, fFeatChoi.AlgIdent, true);
+			pbJob->Position++;
+			if (cxFeatRandom->Checked)  DoFeatures(fmysql.ecg.row, 1, fRandomPoints.AlgIdent, true);
+			pbJob->Position++;
 			}
 
-		if (cxChoi2->Checked)
+		if (cxRpeaksChoi->Checked)
 			{
-			if (!DoFeatures(data, fChoi.AlgNr+1, bReplace))
-				break;
-			}
-
-		if (cxRandom->Checked)
-			{
-			if (!DoFeatures(data, fRandomPoints.AlgNr, bReplace))
-				break;
+			if (cxFeatChoi->Checked) 	DoFeatures(fmysql.ecg.row, fRpeaksChoi.AlgIdent, fFeatChoi.AlgIdent, true);
+			pbJob->Position++;
+			if (cxFeatRandom->Checked)  DoFeatures(fmysql.ecg.row, fRpeaksChoi.AlgIdent, fRandomPoints.AlgIdent, true);
+			pbJob->Position++;
 			}
 		}
 		

@@ -49,8 +49,9 @@ INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('Handrücken');
 INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('Rücken');
 
 # //-- Algorithmen
-INSERT INTO `ecg`.`algorithms` (`Bez`) VALUES ('Vorabtest Anna 1');
-INSERT INTO `ecg`.`algorithms` (`Bez`) VALUES ('Choi 2016 Original');
-INSERT INTO `ecg`.`algorithms` (`Bez`) VALUES ('Choi 2016 R-Peaks Anna');
-INSERT INTO `ecg`.`algorithms` (`Bez`) VALUES ('Random Points');
+INSERT INTO `ecg`.`algrpeaks` (`Bez`) VALUES ('rpeaksAnna');
+INSERT INTO `ecg`.`algrpeaks` (`Bez`) VALUES ('rpeaksChoi');
+
+INSERT INTO `ecg`.`algfeatures` (`Bez`) VALUES ('featChoi');
+INSERT INTO `ecg`.`algfeatures` (`Bez`) VALUES ('featRandomPoints');
 

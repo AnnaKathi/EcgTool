@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------------
 cRandomPoints::cRandomPoints()
 	{
-	fAlg_DbNr = 4;
+	fAlgIdent = 2;
 	}
 //---------------------------------------------------------------------------
 cRandomPoints::~cRandomPoints()
@@ -101,9 +101,9 @@ bool cRandomPoints::nextPointInBeat()
 	return true;
 	}
 //---------------------------------------------------------------------------
-int cRandomPoints::get_algdbnr()
+int cRandomPoints::get_alg_ident()
 	{
-	return fAlg_DbNr;
+	return fAlgIdent;
 	}
 //---------------------------------------------------------------------------
 
