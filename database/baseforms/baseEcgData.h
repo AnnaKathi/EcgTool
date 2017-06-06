@@ -18,11 +18,11 @@ struct sFilterEcg
 	int			identVon;
 	int			identBis;
 	int			session;
-	int			ort;
+	int			place;
 	String		name;
 	ePosition	position;
 	eState		state;
-	eLage   	lage;
+	eLage   	posture;
 	double		wertVon;
 	double		wertBis;
 	};

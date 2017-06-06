@@ -39,8 +39,8 @@ __property cMySqlDescDb&   algfeatures = { read=get_alg_features };
 __property cMySqlDescDb&   positions   = { read=get_positions    };
 __property cMySqlDescDb&   diseases    = { read=get_diseases     };
 __property cMySqlDescDb&   states      = { read=get_states       };
-__property cMySqlDescDb&   lagen       = { read=get_lagen        };
-__property cMySqlDescDb&   orte        = { read=get_orte         };
+__property cMySqlDescDb&   postures    = { read=get_postures     };
+__property cMySqlDescDb&   places      = { read=get_places       };
 
 private:
 	cTools			ftools;
@@ -60,9 +60,9 @@ private:
 
 	//description databases
 	cMySqlDescDb*	fdiseases;     cMySqlDescDb&	get_diseases();
-	cMySqlDescDb*	forte;         cMySqlDescDb&	get_orte();
+	cMySqlDescDb*	fplaces;       cMySqlDescDb&	get_places();
 	cMySqlDescDb*	fresearchers;  cMySqlDescDb&	get_researchers();
-	cMySqlDescDb*	flagen;        cMySqlDescDb&	get_lagen();
+	cMySqlDescDb*	fpostures;     cMySqlDescDb&	get_postures();
 	cMySqlDescDb*	fstates;       cMySqlDescDb&	get_states();
 	cMySqlDescDb*	fpositions;    cMySqlDescDb&	get_positions();
 	cMySqlDescDb*	falgrpeaks;    cMySqlDescDb&	get_alg_rpeaks();

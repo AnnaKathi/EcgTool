@@ -1,57 +1,57 @@
 # //Dummy-Daten in alle Datenbank eintragen: Grunddefinitionen
 #
 # //-- Diseases
-INSERT INTO `ecg`.`diseases` (`Bez`) VALUES ('Koronare Herzkrankheit');
-INSERT INTO `ecg`.`diseases` (`Bez`) VALUES ('Angina Pectoris');
-INSERT INTO `ecg`.`diseases` (`Bez`) VALUES ('Herzklappendefekt');
-INSERT INTO `ecg`.`diseases` (`Bez`) VALUES ('Herzinfarkt');
-INSERT INTO `ecg`.`diseases` (`Bez`) VALUES ('Herzschwäche');
-INSERT INTO `ecg`.`diseases` (`Bez`) VALUES ('Myokarditis');
-INSERT INTO `ecg`.`diseases` (`Bez`) VALUES ('Tachykardie');
-INSERT INTO `ecg`.`diseases` (`Bez`) VALUES ('Bradykardie');
+INSERT INTO `ecg`.`diseases` (`Name`) VALUES ('Koronare Herzkrankheit');
+INSERT INTO `ecg`.`diseases` (`Name`) VALUES ('Angina Pectoris');
+INSERT INTO `ecg`.`diseases` (`Name`) VALUES ('Herzklappendefekt');
+INSERT INTO `ecg`.`diseases` (`Name`) VALUES ('Herzinfarkt');
+INSERT INTO `ecg`.`diseases` (`Name`) VALUES ('Herzschwäche');
+INSERT INTO `ecg`.`diseases` (`Name`) VALUES ('Myokarditis');
+INSERT INTO `ecg`.`diseases` (`Name`) VALUES ('Tachykardie');
+INSERT INTO `ecg`.`diseases` (`Name`) VALUES ('Bradykardie');
 
 # //-- Orte
-INSERT INTO `ecg`.`orte` (`Bez`) VALUES ('Auto A8');
-INSERT INTO `ecg`.`orte` (`Bez`) VALUES ('Zuhause - Arbeitszimmer');
-INSERT INTO `ecg`.`orte` (`Bez`) VALUES ('Zuhause - Balkon');
-INSERT INTO `ecg`.`orte` (`Bez`) VALUES ('Firma - Arb.platz Anna');
-INSERT INTO `ecg`.`orte` (`Bez`) VALUES ('Firma - Kleines Büro');
-INSERT INTO `ecg`.`orte` (`Bez`) VALUES ('Firma - Schulungsraum');
-INSERT INTO `ecg`.`orte` (`Bez`) VALUES ('Verein - Vorraum');
-INSERT INTO `ecg`.`orte` (`Bez`) VALUES ('Verein - Büro');
-INSERT INTO `ecg`.`orte` (`Bez`) VALUES ('Verein - Umkleide');
-INSERT INTO `ecg`.`orte` (`Bez`) VALUES ('Verein - Tanzraum');
-INSERT INTO `ecg`.`orte` (`Bez`) VALUES ('Verein - Dojang');
-INSERT INTO `ecg`.`orte` (`Bez`) VALUES ('Verein - Dojo');
+INSERT INTO `ecg`.`places` (`Name`) VALUES ('Auto A8');
+INSERT INTO `ecg`.`places` (`Name`) VALUES ('Zuhause - Arbeitszimmer');
+INSERT INTO `ecg`.`places` (`Name`) VALUES ('Zuhause - Balkon');
+INSERT INTO `ecg`.`places` (`Name`) VALUES ('Firma - Arb.platz Anna');
+INSERT INTO `ecg`.`places` (`Name`) VALUES ('Firma - Kleines Büro');
+INSERT INTO `ecg`.`places` (`Name`) VALUES ('Firma - Schulungsraum');
+INSERT INTO `ecg`.`places` (`Name`) VALUES ('Verein - Vorraum');
+INSERT INTO `ecg`.`places` (`Name`) VALUES ('Verein - Büro');
+INSERT INTO `ecg`.`places` (`Name`) VALUES ('Verein - Umkleide');
+INSERT INTO `ecg`.`places` (`Name`) VALUES ('Verein - Tanzraum');
+INSERT INTO `ecg`.`places` (`Name`) VALUES ('Verein - Dojang');
+INSERT INTO `ecg`.`places` (`Name`) VALUES ('Verein - Dojo');
 
 # //-- Researchers
-INSERT INTO `ecg`.`researchers` (`Bez`) VALUES ('Anna Stratmann');
-INSERT INTO `ecg`.`researchers` (`Bez`) VALUES ('Ralph Breithaupt');
-INSERT INTO `ecg`.`researchers` (`Bez`) VALUES ('Gerd Nolden');
+INSERT INTO `ecg`.`researchers` (`Name`) VALUES ('Anna Stratmann');
+INSERT INTO `ecg`.`researchers` (`Name`) VALUES ('Ralph Breithaupt');
+INSERT INTO `ecg`.`researchers` (`Name`) VALUES ('Gerd Nolden');
 
 # //-- Lagen
-INSERT INTO `ecg`.`lagen` (`Bez`) VALUES ('liegend');
-INSERT INTO `ecg`.`lagen` (`Bez`) VALUES ('sitzend');
-INSERT INTO `ecg`.`lagen` (`Bez`) VALUES ('stehend');
-INSERT INTO `ecg`.`lagen` (`Bez`) VALUES ('gehend');
+INSERT INTO `ecg`.`postures` (`Name`) VALUES ('liegend');
+INSERT INTO `ecg`.`postures` (`Name`) VALUES ('sitzend');
+INSERT INTO `ecg`.`postures` (`Name`) VALUES ('stehend');
+INSERT INTO `ecg`.`postures` (`Name`) VALUES ('gehend');
 
 # //-- States
-INSERT INTO `ecg`.`states` (`Bez`) VALUES ('in Ruhe');
-INSERT INTO `ecg`.`states` (`Bez`) VALUES ('in Bewegung');
-INSERT INTO `ecg`.`states` (`Bez`) VALUES ('nach leichter Bewegung');
-INSERT INTO `ecg`.`states` (`Bez`) VALUES ('nach mäßiger Bewegung');
-INSERT INTO `ecg`.`states` (`Bez`) VALUES ('nach viel Bewegung');
+INSERT INTO `ecg`.`states` (`Name`) VALUES ('in Ruhe');
+INSERT INTO `ecg`.`states` (`Name`) VALUES ('in Bewegung');
+INSERT INTO `ecg`.`states` (`Name`) VALUES ('nach leichter Bewegung');
+INSERT INTO `ecg`.`states` (`Name`) VALUES ('nach mäßiger Bewegung');
+INSERT INTO `ecg`.`states` (`Name`) VALUES ('nach viel Bewegung');
 
 # //-- Positionens
-INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('Brust normal');
-INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('Brust eng');
-INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('Handrücken');
-INSERT INTO `ecg`.`positions` (`Bez`) VALUES ('Rücken');
+INSERT INTO `ecg`.`positions` (`Name`) VALUES ('Brust normal');
+INSERT INTO `ecg`.`positions` (`Name`) VALUES ('Brust eng');
+INSERT INTO `ecg`.`positions` (`Name`) VALUES ('Handrücken');
+INSERT INTO `ecg`.`positions` (`Name`) VALUES ('Rücken');
 
 # //-- Algorithmen
-INSERT INTO `ecg`.`algrpeaks` (`Bez`) VALUES ('rpeaksAnna');
-INSERT INTO `ecg`.`algrpeaks` (`Bez`) VALUES ('rpeaksChoi');
+INSERT INTO `ecg`.`algrpeaks` (`Name`) VALUES ('rpeaksAnna');
+INSERT INTO `ecg`.`algrpeaks` (`Name`) VALUES ('rpeaksChoi');
 
-INSERT INTO `ecg`.`algfeatures` (`Bez`) VALUES ('featChoi');
-INSERT INTO `ecg`.`algfeatures` (`Bez`) VALUES ('featRandomPoints');
+INSERT INTO `ecg`.`algfeatures` (`Name`) VALUES ('featChoi');
+INSERT INTO `ecg`.`algfeatures` (`Name`) VALUES ('featRandomPoints');
 

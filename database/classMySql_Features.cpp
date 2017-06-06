@@ -6,7 +6,7 @@
 #include "classMySql_Features.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#define TABLE "features"
+#define TABLE "templates"
 //---------------------------------------------------------------------------
 cMySqlFeature::cMySqlFeature(cMySqlWork& worker)
 	{
@@ -116,7 +116,7 @@ bool cMySqlFeature::getLast()
 bool cMySqlFeature::insert(sFeature data)
 	{
 	String q = "INSERT INTO " + String(TABLE) + " ";
-	q+= "(`EcgData_ID`, `AlgRpeaks_ID`, `AlgFeatures_ID`, `Features`) VALUES ";
+	q+= "(`EcgData_ID`, `AlgRpeaks_ID`, `AlgFeatures_ID`, `Template`) VALUES ";
 	q+= "(";
 	q+= "'" + String(data.ecgId) + "', ";
 	q+= "'" + String(data.algIdRpeaks) + "', ";
@@ -141,7 +141,7 @@ bool cMySqlFeature::update(sFeature data)
 	q+= "EcgData_ID='"     + String(data.ecgId)  + "',";
 	q+= "AlgRpeaks_Id='"   + String(data.algIdRpeaks)  + "',";
 	q+= "AlgFeatures_Id='" + String(data.algIdFeatures)  + "',";
-	q+= "Features='"       + data.features       + "' ";
+	q+= "Template='"       + data.features       + "' ";
 	q+= "WHERE ID="        + String(data.ident);
 
 	if (!fwork->send(q))

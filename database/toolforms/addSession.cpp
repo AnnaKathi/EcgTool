@@ -54,7 +54,7 @@ void __fastcall TfmSessionAdd::tStartupTimer(TObject *Sender)
 	tStartup->Enabled = false;
 
 	edStamp->Text = getNow();
-	fmysql.orte.listInCombo(cbOrte);
+	fmysql.places.listInCombo(cbOrte);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmSessionAdd::FormClose(TObject *Sender, TCloseAction &Action)
@@ -114,9 +114,9 @@ bool TfmSessionAdd::SaveSession()
 
 	//-- Session speichern
 	sSession sdata;
-	sdata.ort = (int)cbOrte->Items->Objects[cbOrte->ItemIndex];
+	sdata.place = (int)cbOrte->Items->Objects[cbOrte->ItemIndex];
 	sdata.stamp = edStamp->Text;
-	sdata.kommentar = mKommentar->Text;
+	sdata.note = mKommentar->Text;
 
 	if (!fmysql.sessions.insert(sdata))
 		{
@@ -162,7 +162,7 @@ bool TfmSessionAdd::SaveSession()
 		item = lvEcg->Items->Item[i];
 		edata.person   = item->SubItems->Strings[1].ToInt();
 		edata.state    = item->SubItems->Strings[2].ToInt();
-		edata.lage     = item->SubItems->Strings[3].ToInt();
+		edata.posture  = item->SubItems->Strings[3].ToInt();
 		edata.position = item->SubItems->Strings[4].ToInt();
 		edata.session  = session;
 

@@ -38,8 +38,8 @@ bool cMySqlPeople::parse()
 	{
 	if (frow == NULL) return false;
 	fdata.ident   = atoi(frow[0]);
-	sprintf(fdata.vorname,  "%.127s", frow[1]);
-	sprintf(fdata.nachname, "%.127s", frow[2]);
+	sprintf(fdata.firstname, "%.127s", frow[1]);
+	sprintf(fdata.lastname,  "%.127s", frow[2]);
 	fdata.age = atoi(frow[3]);
 	fdata.sex = atoi(frow[4]);
 	return true;
@@ -93,12 +93,12 @@ bool cMySqlPeople::insert(sPeople data)
 	{
 	//INSERT INTO `ecg`.`subjects` (`Vorname`, `Nachname`) VALUES ('Otto', 'Mustermann');
 	String q = "INSERT INTO " + String(TABLE) + " ";
-	q+= "(`Vorname`, `Nachname`, `Age`, `Sex`) VALUES ";
+	q+= "(`Firstname`, `Lastname`, `Age`, `Sex`) VALUES ";
 	q+= "(";
-	q+= "'" + String(data.vorname)  + "', ";
-	q+= "'" + String(data.nachname) + "', ";
-	q+= "'" + String(data.age)		+ "', ";
-	q+= "'" + String(data.sex)		+ "'";
+	q+= "'" + String(data.firstname) + "', ";
+	q+= "'" + String(data.lastname)  + "', ";
+	q+= "'" + String(data.age)	     + "', ";
+	q+= "'" + String(data.sex)	     + "'";
 	q+= ")";
 
 	if (!fwork->send(q))
@@ -115,8 +115,8 @@ bool cMySqlPeople::update(sPeople data)
 	{
 	//UPDATE `ecg`.`subjects` SET `Vorname`='Otto', `Nachname`='Mustermann' WHERE  `Ident`=7;
 	String q = "UPDATE " + String(TABLE) + " SET ";
-	q+= "Vorname='"  + String(data.vorname)  + "',";
-	q+= "Nachname='" + String(data.nachname) + "',";
+	q+= "Firstname='" + String(data.firstname) + "',";
+	q+= "Lastname='"  + String(data.lastname)  + "',";
 	q+= "Age='" + String(data.age) + "',";
 	q+= "Sex='" + String(data.sex) + "'";
 	q+= "WHERE ID=" + String(data.ident);
@@ -196,15 +196,15 @@ bool cMySqlPeople::listInCombo(TComboBox* cb, int mode) //mode ist mit 0 vorbese
 	{
 	//Alle Personen aus der DB in der ComboBox anzeigen, der mode bestimmt
 	//was angezeigt wird
-	if (!loadTable("Nachname ASC"))
+	if (!loadTable("Lastname ASC"))
 		return fail(fwork->error_code, fwork->error_msg);
 
 	cb->Items->Clear();
 	String pers;
 	while (nextRow())
 		{
-		if (mode == 1)  pers = String(fdata.nachname) + ", " + String(fdata.vorname);
-		else 			pers = String(fdata.vorname) + " " + String(fdata.nachname);
+		if (mode == 1)  pers = String(fdata.lastname)  + ", " + String(fdata.firstname);
+		else 			pers = String(fdata.firstname) + " " + String(fdata.lastname);
 
 		cb->Items->AddObject(pers, (TObject*)fdata.ident);
 		}

@@ -43,7 +43,7 @@ bool cMySqlDescDb::get(int ident)
 	if (frow == NULL) return false;
 
 	fdata.ident   = atoi(frow[0]);
-	sprintf(fdata.bez, "%.127s", frow[1]);
+	sprintf(fdata.name, "%.127s", frow[1]);
 
 	return true;
 	}
@@ -66,7 +66,7 @@ bool cMySqlDescDb::nextRow()
 	if (frow == NULL) return false;
 
 	fdata.ident   = atoi(frow[0]);
-	sprintf(fdata.bez, "%.127s", frow[1]);
+	sprintf(fdata.name, "%.127s", frow[1]);
 
 	return true;
 	}
@@ -78,9 +78,9 @@ bool cMySqlDescDb::nextRow()
 bool cMySqlDescDb::insert(sDescData data)
 	{
 	String q = "INSERT INTO " + String(fTabelle) + " ";
-	q+= "(`Bez`) VALUES ";
+	q+= "(`Name`) VALUES ";
 	q+= "(";
-	q+= "'" + String(data.bez) + "'";
+	q+= "'" + String(data.name) + "'";
 	q+= ")";
 
 	if (!fwork->send(q))
@@ -92,7 +92,7 @@ bool cMySqlDescDb::insert(sDescData data)
 bool cMySqlDescDb::update(sDescData data)
 	{
 	String q = "UPDATE " + String(fTabelle) + " SET ";
-	q+= "Bez='" + String(data.bez) + "' ";
+	q+= "Name='" + String(data.name) + "' ";
 	q+= "WHERE ID=" + String(data.ident);
 
 	if (!fwork->send(q))
@@ -160,7 +160,7 @@ bool cMySqlDescDb::listInCombo(TComboBox* cb, int mode) //mode ist mit 0 vorbese
 	{
 	//Alle Erkrankungen aus der DB in der ComboBox anzeigen,
 	//der mode bestimmt was angezeigt wird
-	if (!loadTable("Bez ASC"))
+	if (!loadTable("Name ASC"))
 		return fail(fwork->error_code, fwork->error_msg);
 
 	cb->Items->Clear();
@@ -169,8 +169,8 @@ bool cMySqlDescDb::listInCombo(TComboBox* cb, int mode) //mode ist mit 0 vorbese
 	while (nextRow())
 		{
 		//todo Kennzeichnung in DB aufnehmen und hier mit einbauen
-		if (mode == 1)  dis = String(fdata.bez) + " (" + String(fdata.ident) + ")";
-		else 			dis = String(fdata.bez);
+		if (mode == 1)  dis = String(fdata.name) + " (" + String(fdata.ident) + ")";
+		else 			dis = String(fdata.name);
 
 		cb->Items->AddObject(dis, (TObject*)fdata.ident);
 		}

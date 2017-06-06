@@ -114,7 +114,7 @@ bool TfmBaseDesc::ShowData()
 	lvData->Items->Clear();
 	lvData->Items->BeginUpdate();
 
-	if (!fdesc->loadTable("Bez ASC"))
+	if (!fdesc->loadTable("Name ASC"))
 		{
 		MsgBox(ftools.fmt(
 			"Die Daten (%s) konnten nicht geladen werden. "
@@ -131,7 +131,7 @@ bool TfmBaseDesc::ShowData()
 		item = lvData->Items->Add();
 		item->Data = (void*) fdesc->row.ident;
 		item->Caption = String(fdesc->row.ident);
-		item->SubItems->Add(fdesc->row.bez);
+		item->SubItems->Add(fdesc->row.name);
 		}
 
 	lvData->Items->EndUpdate();
@@ -146,7 +146,7 @@ bool TfmBaseDesc::ShowFilteredData(String idents)
 	lvData->Items->Clear();
 	lvData->Items->BeginUpdate();
 
-	if (!fdesc->loadTable("Bez ASC"))
+	if (!fdesc->loadTable("Name ASC"))
 		{
 		MsgBox(ftools.fmt(
 			"Die Daten (%s) konnten nicht geladen werden. "
@@ -181,7 +181,7 @@ bool TfmBaseDesc::ShowFilteredData(String idents)
 		item = lvData->Items->Add();
 		item->Data = (void*) fdesc->row.ident;
 		item->Caption = String(fdesc->row.ident);
-		item->SubItems->Add(fdesc->row.bez);
+		item->SubItems->Add(fdesc->row.name);
 		}
 
 	lvData->Items->EndUpdate();

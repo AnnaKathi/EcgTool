@@ -11,8 +11,8 @@
 struct sPeople
 	{
 	int			ident;
-	char		vorname[128];
-	char		nachname[128];
+	char		firstname[128];
+	char		lastname[128];
 	int			age;
 	int			sex; //1 = weiblich, 0 = männlich
 	};

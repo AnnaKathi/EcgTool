@@ -179,7 +179,7 @@ object fmSessionAdd: TfmSessionAdd
       Width = 271
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 1
       OnChange = edStampChange
     end
@@ -263,9 +263,6 @@ object fmSessionAdd: TfmSessionAdd
     ViewStyle = vsReport
     OnChange = lvEcgChange
     OnClick = lvEcgClick
-    ExplicitLeft = -41
-    ExplicitWidth = 784
-    ExplicitHeight = 421
   end
   object pnBottom: TPanel
     Left = 0

@@ -85,8 +85,8 @@ void __fastcall TfmPerson::tStartupTimer(TObject *Sender)
 			}
 		else
 			{
-			edVorname->Text  = fmysql.people.row.vorname;
-			edNachname->Text = fmysql.people.row.nachname;
+			edVorname->Text  = fmysql.people.row.firstname;
+			edNachname->Text = fmysql.people.row.lastname;
 
 			/* TODO
 			sarray_t dis;
@@ -126,8 +126,8 @@ bool TfmPerson::SaveData()
 
 	sPeople data;
 	data.ident = iPerson;
-	sprintf(data.vorname,  "%.127s", edVorname->Text.c_str());
-	sprintf(data.nachname, "%.127s", edNachname->Text.c_str());
+	sprintf(data.firstname, "%.127s", edVorname->Text.c_str());
+	sprintf(data.lastname,  "%.127s", edNachname->Text.c_str());
 
 	if (bNewPerson)
 		{

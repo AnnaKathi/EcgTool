@@ -206,7 +206,7 @@ object fmBaseEcg: TfmBaseEcg
       Width = 106
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 7
       OnChange = cbLageChange
     end
@@ -216,7 +216,7 @@ object fmBaseEcg: TfmBaseEcg
       Width = 106
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 5
       OnChange = cbLageChange
     end
@@ -226,7 +226,7 @@ object fmBaseEcg: TfmBaseEcg
       Width = 106
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 6
       OnChange = cbLageChange
     end
@@ -236,7 +236,7 @@ object fmBaseEcg: TfmBaseEcg
       Width = 106
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 3
       OnChange = cbLageChange
     end
@@ -246,7 +246,7 @@ object fmBaseEcg: TfmBaseEcg
       Width = 106
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 4
       OnChange = cbLageChange
     end

@@ -59,7 +59,7 @@ void __fastcall TfmBaseSession::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
 
-	fmysql.orte.listInCombo(cbOrt);
+	fmysql.places.listInCombo(cbOrt);
 	if (cbOrt->Items->Count > 0) cbOrt->ItemIndex = 0;
 
 	ShowData();
@@ -107,8 +107,8 @@ bool TfmBaseSession::ShowData()
 		item->Caption = String(ident);
 
 		item->SubItems->Add(fmysql.sessions.row.stamp);
-		item->SubItems->Add(fmysql.orte.getNameOf(fmysql.sessions.row.ort));
-		item->SubItems->Add(fmysql.sessions.row.kommentar);
+		item->SubItems->Add(fmysql.places.getNameOf(fmysql.sessions.row.place));
+		item->SubItems->Add(fmysql.sessions.row.note);
 
 		if (fmysql.ecg.loadBySession(ident))
 			item->SubItems->Add(fmysql.ecg.num_rows);
@@ -138,12 +138,12 @@ bool TfmBaseSession::CheckFilter()
 	if (ffilter.identVon > 0 && id < ffilter.identVon) return false;
 	if (ffilter.identBis > 0 && id > ffilter.identBis) return false;
 
-	if (ffilter.ort > 0 && ffilter.ort != fmysql.sessions.row.ort) return false;
+	if (ffilter.ort > 0 && ffilter.ort != fmysql.sessions.row.place) return false;
 
 	if (ffilter.kommentar != "")
 		{
 		//enthält-Suche durchführen
-		String db = fmysql.sessions.row.kommentar.LowerCase();
+		String db = fmysql.sessions.row.note.LowerCase();
 		String kk = ffilter.kommentar.LowerCase();
 
 		if (db.Pos(kk) <= 0) return false;

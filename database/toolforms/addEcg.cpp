@@ -46,7 +46,7 @@ void __fastcall TfmAddEcg::tStartupTimer(TObject *Sender)
 
 	fmysql.people.listInCombo(cbPerson);
 	fmysql.states.listInCombo(cbState);
-	fmysql.lagen.listInCombo(cbLage);
+	fmysql.postures.listInCombo(cbLage);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmAddEcg::FormClose(TObject *Sender, TCloseAction &Action)

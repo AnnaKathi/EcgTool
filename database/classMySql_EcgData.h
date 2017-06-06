@@ -15,7 +15,7 @@ struct sEcgData
 	int			person;
 	int			position;
 	int			state;
-	int			lage;
+	int			posture;
 	double		werte[3000];
 	iarray_t	array_werte;
 	};

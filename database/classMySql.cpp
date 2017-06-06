@@ -16,9 +16,9 @@ cMySql::cMySql()
 	ffeatures = new cMySqlFeature(*fwork);
 
 	fdiseases    = new cMySqlDescDb(*fwork, "diseases");
-	forte        = new cMySqlDescDb(*fwork, "orte");
+	fplaces      = new cMySqlDescDb(*fwork, "places");
 	fresearchers = new cMySqlDescDb(*fwork, "researchers");
-	flagen       = new cMySqlDescDb(*fwork, "lagen");
+	fpostures    = new cMySqlDescDb(*fwork, "postures");
 	fstates      = new cMySqlDescDb(*fwork, "states");
 	fpositions   = new cMySqlDescDb(*fwork, "positions");
 	falgrpeaks   = new cMySqlDescDb(*fwork, "algrpeaks");
@@ -33,10 +33,10 @@ cMySql::~cMySql()
 	if (fsessions) delete fsessions;
 	if (ffeatures) delete ffeatures;
 
-	if (fdiseases)    delete fdiseases; 		if (forte)	    delete forte;
-	if (fresearchers) delete fresearchers;		if (flagen)     delete flagen;
+	if (fdiseases)    delete fdiseases; 		if (fplaces)    delete fplaces;
+	if (fresearchers) delete fresearchers;		if (fpostures)  delete fpostures;
 	if (fpositions)   delete fpositions;		if (fstates)    delete fstates;
-	if (falgfeatures) delete falgfeatures;		if (falgrpeaks) delete (falgrpeaks);
+	if (falgfeatures) delete falgfeatures;		if (falgrpeaks) delete falgrpeaks;
 	}
 //---------------------------------------------------------------------------
 bool cMySql::create()
@@ -180,9 +180,9 @@ cMySqlDescDb& cMySql::get_diseases()
 	return *fdiseases;
 	}
 //---------------------------------------------------------------------------
-cMySqlDescDb& cMySql::get_orte()
+cMySqlDescDb& cMySql::get_places()
 	{
-	return *forte;
+	return *fplaces;
 	}
 //---------------------------------------------------------------------------
 cMySqlDescDb& cMySql::get_researchers()
@@ -190,9 +190,9 @@ cMySqlDescDb& cMySql::get_researchers()
 	return *fresearchers;
 	}
 //---------------------------------------------------------------------------
-cMySqlDescDb& cMySql::get_lagen()
+cMySqlDescDb& cMySql::get_postures()
 	{
-	return *flagen;
+	return *fpostures;
 	}
 //---------------------------------------------------------------------------
 cMySqlDescDb& cMySql::get_states()

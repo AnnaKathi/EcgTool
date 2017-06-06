@@ -63,10 +63,10 @@ void __fastcall TfmBaseEcg::tStartupTimer(TObject *Sender)
 	laAuswahl->Caption = ftools.fmt("Auswahl: %d/%d EKG", anz, anz);
 
 	fmysql.sessions.listInCombo(cbSession);
-	fmysql.orte.listInCombo(cbOrt);
+	fmysql.places.listInCombo(cbOrt);
 	fmysql.positions.listInCombo(cbPosition);
 	fmysql.states.listInCombo(cbState);
-	fmysql.lagen.listInCombo(cbLage);
+	fmysql.postures.listInCombo(cbLage);
 
 	if (cbSession->Items->Count  > 0) cbSession->ItemIndex  = 0;
 	if (cbOrt->Items->Count      > 0) cbOrt->ItemIndex      = 0;
@@ -167,14 +167,14 @@ void TfmBaseEcg::AddLine()
 
 	fmysql.sessions.get(fmysql.ecg.row.session);
 	item->SubItems->Add(fmysql.sessions.row.stamp);
-	item->SubItems->Add(fmysql.orte.getNameOf(fmysql.sessions.row.ort));
+	item->SubItems->Add(fmysql.places.getNameOf(fmysql.sessions.row.place));
 
 	String name = fmysql.people.getNameOf(fmysql.ecg.row.person);
 	item->SubItems->Add(name);
 
 	item->SubItems->Add(fmysql.positions.getNameOf(fmysql.ecg.row.position));
 	item->SubItems->Add(fmysql.states.getNameOf(fmysql.ecg.row.state));
-	item->SubItems->Add(fmysql.lagen.getNameOf(fmysql.ecg.row.lage));
+	item->SubItems->Add(fmysql.postures.getNameOf(fmysql.ecg.row.posture));
 	}
 //---------------------------------------------------------------------------
 bool TfmBaseEcg::BuildFilter()
@@ -187,8 +187,8 @@ bool TfmBaseEcg::BuildFilter()
 	if (cbSession->ItemIndex < 0) ffilter.session = 0;
 	else ffilter.session = (int)cbSession->Items->Objects[cbSession->ItemIndex];
 
-	if (cbOrt->ItemIndex < 0) ffilter.ort = 0;
-	else ffilter.ort = (int)cbOrt->Items->Objects[cbOrt->ItemIndex];
+	if (cbOrt->ItemIndex < 0) ffilter.place = 0;
+	else ffilter.place = (int)cbOrt->Items->Objects[cbOrt->ItemIndex];
 
 	if (cbPosition->ItemIndex < 0) ffilter.position = 0;
 	else ffilter.position = (int)cbPosition->Items->Objects[cbPosition->ItemIndex];
@@ -196,8 +196,8 @@ bool TfmBaseEcg::BuildFilter()
 	if (cbState->ItemIndex < 0) ffilter.state = 0;
 	else ffilter.state = (int)cbState->Items->Objects[cbState->ItemIndex];
 
-	if (cbLage->ItemIndex < 0) ffilter.lage = 0;
-	else ffilter.lage = (int)cbLage->Items->Objects[cbLage->ItemIndex];
+	if (cbLage->ItemIndex < 0) ffilter.posture = 0;
+	else ffilter.posture = (int)cbLage->Items->Objects[cbLage->ItemIndex];
 
 	return true;
 	}
@@ -215,16 +215,16 @@ bool TfmBaseEcg::CheckFilter()
 			return false;
 		}
 
-	if (ffilter.ort > 0)
+	if (ffilter.place > 0)
 		{
 		if (!fmysql.sessions.get(fmysql.ecg.row.session)) return false;
-		if (fmysql.sessions.row.ort != ffilter.ort) return false;
+		if (fmysql.sessions.row.place != ffilter.place) return false;
 		}
 
 	if (ffilter.session  > 0 && fmysql.ecg.row.session  != ffilter.session)  return false;
 	if (ffilter.position > 0 && fmysql.ecg.row.position != ffilter.position) return false;
 	if (ffilter.state    > 0 && fmysql.ecg.row.state    != ffilter.state)    return false;
-	if (ffilter.lage     > 0 && fmysql.ecg.row.lage     != ffilter.lage)     return false;
+	if (ffilter.posture  > 0 && fmysql.ecg.row.posture  != ffilter.posture)  return false;
 
 	return true;
 	}

@@ -90,11 +90,11 @@ bool cMySqlSession::getLast()
 bool cMySqlSession::insert(sSession data)
 	{
 	String q = "INSERT INTO " + String(TABLE) + " ";
-	q+= "(`Orte_ID`, `Stamp`, `Kommentar`) VALUES ";
+	q+= "(`Orte_ID`, `Stamp`, `Note`) VALUES ";
 	q+= "(";
-	q+= "'" + String(data.ort) + "', ";
+	q+= "'" + String(data.place) + "', ";
 	q+= "'" + data.stamp     + "', ";
-	q+= "'" + data.kommentar + "'";
+	q+= "'" + data.note + "'";
 	q+= ")";
 
 	if (!fwork->send(q))
@@ -111,10 +111,10 @@ bool cMySqlSession::update(sSession data)
 	{
 	//UPDATE `ecg`.`subjects` SET `Vorname`='Otto', `Nachname`='Mustermann' WHERE  `Ident`=7;
 	String q = "UPDATE " + String(TABLE) + " SET ";
-	q+= "Orte_ID='"    + String(data.ort)       + "',";
-	q+= "Stamp='"     + data.stamp     + "',";
-	q+= "Kommentar='" + data.kommentar + "' ";
-	q+= "WHERE ID="   + String(data.ident);
+	q+= "Orte_ID='"  + String(data.place)       + "',";
+	q+= "Stamp='"    + data.stamp     + "',";
+	q+= "Note='"     + data.note + "' ";
+	q+= "WHERE ID="  + String(data.ident);
 
 	if (!fwork->send(q))
 		return fail(fwork->error_code, fwork->error_msg);
@@ -156,10 +156,10 @@ int cMySqlSession::getSize()
 //---------------------------------------------------------------------------
 bool cMySqlSession::ParseRow()
 	{
-	fdata.ident     = atoi(frow[0]);
-	fdata.ort       = atoi(frow[1]);
-	fdata.stamp     = String(frow[2]);
-	fdata.kommentar = String(frow[3]);
+	fdata.ident = atoi(frow[0]);
+	fdata.place = atoi(frow[1]);
+	fdata.stamp = String(frow[2]);
+	fdata.note  = String(frow[3]);
 	return true;
 	}
 //---------------------------------------------------------------------------

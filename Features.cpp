@@ -366,17 +366,33 @@ void TfmFeatures::GetAllFeatures()
 
 		if (cxRpeaksAnna->Checked)
 			{
-			if (cxFeatChoi->Checked) 	DoFeatures(fmysql.ecg.row, 1, fFeatChoi.AlgIdent, true);
+			if (cxFeatChoi->Checked)
+				{
+				if (!DoFeatures(fmysql.ecg.row, 1, fFeatChoi.AlgIdent, true))
+					break;
+				}
 			pbJob->Position++;
-			if (cxFeatRandom->Checked)  DoFeatures(fmysql.ecg.row, 1, fRandomPoints.AlgIdent, true);
+			if (cxFeatRandom->Checked)
+				{
+				if (!DoFeatures(fmysql.ecg.row, 1, fRandomPoints.AlgIdent, true))
+					break;
+				}
 			pbJob->Position++;
 			}
 
 		if (cxRpeaksChoi->Checked)
 			{
-			if (cxFeatChoi->Checked) 	DoFeatures(fmysql.ecg.row, fRpeaksChoi.AlgIdent, fFeatChoi.AlgIdent, true);
+			if (cxFeatChoi->Checked)
+				{
+				if (!DoFeatures(fmysql.ecg.row, fRpeaksChoi.AlgIdent, fFeatChoi.AlgIdent, true))
+					break;
+				}
 			pbJob->Position++;
-			if (cxFeatRandom->Checked)  DoFeatures(fmysql.ecg.row, fRpeaksChoi.AlgIdent, fRandomPoints.AlgIdent, true);
+			if (cxFeatRandom->Checked)
+				{
+				if (!DoFeatures(fmysql.ecg.row, fRpeaksChoi.AlgIdent, fRandomPoints.AlgIdent, true))
+					break;
+				}
 			pbJob->Position++;
 			}
 		}

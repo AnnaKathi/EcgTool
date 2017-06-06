@@ -101,7 +101,7 @@ void __fastcall TfmDescAdd::acSaveExecute(TObject *Sender)
 		{
 		sDescData data;
 		data.ident = -1;
-		sprintf(data.bez, "%.127s", edBez->Text.c_str());
+		sprintf(data.name, "%.127s", edBez->Text.c_str());
 		if (!fdesc->insert(data))
 			{
 			MsgBox("Der Datensatz konnte nicht gespeichert werden. "
@@ -114,7 +114,7 @@ void __fastcall TfmDescAdd::acSaveExecute(TObject *Sender)
 		{
 		sDescData data;
 		data.ident = iData;
-		sprintf(data.bez, "%.127s", edBez->Text.c_str());
+		sprintf(data.name, "%.127s", edBez->Text.c_str());
 		if (!fdesc->update(data))
 			{
 			MsgBox("Der Datensatz konnte nicht geändert werden. "

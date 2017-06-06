@@ -11,7 +11,7 @@
 struct sDescData
 	{
 	int			ident;
-	char		bez[128];
+	char		name[128];
 	};
 //---------------------------------------------------------------------------
 class PACKAGE cMySqlDescDb : public cBase

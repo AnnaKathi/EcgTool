@@ -105,8 +105,8 @@ bool TfmBasePeople::ShowData()
 		int person = fmysql.people.row.ident;
 		item->Data = (void*) person;
 		item->Caption = String(person);
-		item->SubItems->Add(fmysql.people.row.vorname);
-		item->SubItems->Add(fmysql.people.row.nachname);
+		item->SubItems->Add(fmysql.people.row.firstname);
+		item->SubItems->Add(fmysql.people.row.lastname);
 		item->SubItems->Add(String(fmysql.people.row.age));
 		s = fmysql.people.row.sex;
 		if (s == 1)

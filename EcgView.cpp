@@ -533,7 +533,7 @@ void TfmEcg::BuildData(sEcgData& data)
 	data.person   = 2;
 	data.position = 1;
 	data.state    = 1;
-	data.lage     = 1;
+	data.posture  = 1;
 
 	int ix = 0; double wert;
 	iarray_t array = ecg.data.data_array;

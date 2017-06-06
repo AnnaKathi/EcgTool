@@ -11,9 +11,9 @@
 struct sSession
 	{
 	int			ident;
-	int			ort;
+	int			place;
 	String		stamp;
-	String		kommentar;
+	String		note;
 	};
 //---------------------------------------------------------------------------
 class PACKAGE cMySqlSession : public cBase
