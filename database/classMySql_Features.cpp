@@ -55,16 +55,17 @@ bool cMySqlFeature::loadTable(String order) //order ist vorbesetzt mit ""
 	return ok();
 	}
 //---------------------------------------------------------------------------
-bool cMySqlFeature::select(int ecg, int rpeaksId, int featId)
+bool cMySqlFeature::select(int ecg, int preId, int rpeaksId, int featId)
 	{
 	if (ecg      <= 0) return fail(2, "Es wurde kein EKG-Ident übergeben");
+	if (preId    <= 0) return fail(2, "Es wurde kein Preprocessing-Ident übergeben");
 	if (rpeaksId <= 0) return fail(2, "Es wurde kein RPeak-Ident übergeben");
 	if (featId   <= 0) return fail(2, "Es wurde kein Feature-Ident übergeben");
 
 	String q =
 		ftools.fmt(
-		"SELECT * FROM %s WHERE `EcgData_ID` = %d AND `AlgRpeaks_ID` = %d AND `AlgFeatures_ID` = %d",
-		String(TABLE), ecg, rpeaksId, featId);
+		"SELECT * FROM %s WHERE `EcgData_ID` = %d AND `AlgPreprocessing_ID` = %d AND `AlgRpeaks_ID` = %d AND `AlgFeatures_ID` = %d",
+		String(TABLE), ecg, preId, rpeaksId, featId);
 
 	if (!fwork->query(q))
 		{
@@ -116,9 +117,10 @@ bool cMySqlFeature::getLast()
 bool cMySqlFeature::insert(sFeature data)
 	{
 	String q = "INSERT INTO " + String(TABLE) + " ";
-	q+= "(`EcgData_ID`, `AlgRpeaks_ID`, `AlgFeatures_ID`, `Template`) VALUES ";
+	q+= "(`EcgData_ID`, `AlgPreprocessing_ID`, `AlgRpeaks_ID`, `AlgFeatures_ID`, `Template`) VALUES ";
 	q+= "(";
 	q+= "'" + String(data.ecgId) + "', ";
+	q+= "'" + String(data.algIdPre) + "', ";
 	q+= "'" + String(data.algIdRpeaks) + "', ";
 	q+= "'" + String(data.algIdFeatures) + "', ";
 	q+= "'" + data.features + "'";
@@ -139,6 +141,7 @@ bool cMySqlFeature::update(sFeature data)
 	//UPDATE `ecg`.`subjects` SET `Vorname`='Otto', `Nachname`='Mustermann' WHERE  `Ident`=7;
 	String q = "UPDATE " + String(TABLE) + " SET ";
 	q+= "EcgData_ID='"     + String(data.ecgId)  + "',";
+	q+= "AlgPreprocessing_Id='" + String(data.algIdPre)  + "',";
 	q+= "AlgRpeaks_Id='"   + String(data.algIdRpeaks)  + "',";
 	q+= "AlgFeatures_Id='" + String(data.algIdFeatures)  + "',";
 	q+= "Template='"       + data.features       + "' ";
@@ -169,9 +172,10 @@ bool cMySqlFeature::ParseRow()
 	{
 	fdata.ident    = atoi(frow[0]);
 	fdata.ecgId    = atoi(frow[1]);
-	fdata.algIdRpeaks   = atoi(frow[2]);
-	fdata.algIdFeatures = atoi(frow[2]);
-	fdata.features = String(frow[3]);
+	fdata.algIdPre = atoi(frow[2]);
+	fdata.algIdRpeaks   = atoi(frow[3]);
+	fdata.algIdFeatures = atoi(frow[4]);
+	fdata.features = String(frow[5]);
 	return true;
 	}
 //---------------------------------------------------------------------------
@@ -193,6 +197,7 @@ bool cMySqlFeature::listInCombo(TComboBox* cb, int mode) //mode ist mit 0 vorbes
 		//todo add mode: get Bez of Alg.
 		str =
 			String(fdata.ecgId) + "-" +
+			String(fdata.algIdPre) + "-" +
 			String(fdata.algIdRpeaks) + "-" +
 			String(fdata.algIdFeatures);
 		cb->Items->AddObject(str, (TObject*)fdata.ident);

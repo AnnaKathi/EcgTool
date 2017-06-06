@@ -680,5 +680,5 @@ Dockable=1
 StayOnTop=0
 TabPosition=0
 ActiveTabID=ProjectManager
-TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
+TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
 

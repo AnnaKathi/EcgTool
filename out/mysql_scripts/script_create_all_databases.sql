@@ -14,6 +14,12 @@ CREATE TABLE algFeatures (
   PRIMARY KEY(ID)
 )
 
+CREATE TABLE algPreprocessing (
+  ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Name VARCHAR(50) NOT NULL,
+  PRIMARY KEY(ID)
+)
+
 CREATE TABLE diseases (
   ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   Name VARCHAR(50) NOT NULL,
@@ -103,12 +109,14 @@ CREATE TABLE ecgData (
 CREATE TABLE templates (
   ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   ecgData_ID INTEGER UNSIGNED NOT NULL,
+  algPreprocessing_ID INTEGER UNSIGNED NOT NULL,
   algRpeaks_ID INTEGER UNSIGNED NOT NULL,
   algFeatures_ID INTEGER UNSIGNED NOT NULL,
   Template VARCHAR(1024) NOT NULL,
   PRIMARY KEY(ID),
-  INDEX Features_FKIndex1(algRpeaks_ID),
-  INDEX Features_FKIndex2(algFeatures_ID),
-  INDEX Features_FKIndex3(ECGData_ID)
+  INDEX Features_FKIndex1(algPreprocessing_ID),
+  INDEX Features_FKIndex2(algRpeaks_ID),
+  INDEX Features_FKIndex3(algFeatures_ID),
+  INDEX Features_FKIndex4(ECGData_ID)
 )
 

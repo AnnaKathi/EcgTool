@@ -100,6 +100,8 @@ void TfmFeatures::GetSelectedEcg()
 	Print("\tAnz. Werte: %d", array.size());
 	}
 //---------------------------------------------------------------------------
+//--  RandomPoints  ---------------------------------------------------------
+//---------------------------------------------------------------------------
 String TfmFeatures::BuildRandomFeatures(iarray_t array)
 	{
 	//todo Stringbildung nach classRandomPoints verlagern
@@ -140,33 +142,13 @@ String TfmFeatures::BuildRandomFeatures(iarray_t array)
 	return features;
 	}
 //---------------------------------------------------------------------------
-void TfmFeatures::GetFeatures()
-	{
-	//fmysql-ecg umlesen in fecg
-	sEcgData data = fmysql.ecg.row;
-	Print("-------------------------------------------------------");
-	Print("Features bilden für EKG <%d> %s",
-		data.ident, fmysql.people.getNameOf(data.person));
-
-	if (cxRpeaksAnna->Checked)
-		{
-		if (cxFeatChoi->Checked) 	DoFeatures(fmysql.ecg.row, 1, fFeatChoi.AlgIdent, true);
-		if (cxFeatRandom->Checked)  DoFeatures(fmysql.ecg.row, 1, fRandomPoints.AlgIdent, true);
-		}
-
-	if (cxRpeaksChoi->Checked)
-		{
-		if (cxFeatChoi->Checked) 	DoFeatures(fmysql.ecg.row, fRpeaksChoi.AlgIdent, fFeatChoi.AlgIdent, true);
-		if (cxFeatRandom->Checked)  DoFeatures(fmysql.ecg.row, fRpeaksChoi.AlgIdent, fRandomPoints.AlgIdent, true);
-		}
-
-	Print("Features erstellt");
-	}
+//--  Datenbank-Funktionen  -------------------------------------------------
 //---------------------------------------------------------------------------
-bool TfmFeatures::InsertFeatures(String features, int algRpeaks, int algFeat)
+bool TfmFeatures::InsertFeatures(String features, int algPre, int algRpeaks, int algFeat)
 	{
 	sFeature data;
 	data.ecgId    = fmysql.ecg.row.ident;
+	data.algIdPre = algPre;
 	data.algIdRpeaks = algRpeaks;
 	data.algIdFeatures = algFeat;
 	data.features = features;
@@ -182,11 +164,12 @@ bool TfmFeatures::InsertFeatures(String features, int algRpeaks, int algFeat)
 	return true;
 	}
 //---------------------------------------------------------------------------
-bool TfmFeatures::UpdateFeatures(String features, int algRpeaks, int algFeat)
+bool TfmFeatures::UpdateFeatures(String features, int algPre, int algRpeaks, int algFeat)
 	{
 	sFeature data;
 	data.ident    = fmysql.features.row.ident;
 	data.ecgId    = fmysql.ecg.row.ident;
+	data.algIdPre = algPre;
 	data.algIdRpeaks = algRpeaks;
 	data.algIdFeatures = algFeat;
 	data.features = features;
@@ -202,13 +185,46 @@ bool TfmFeatures::UpdateFeatures(String features, int algRpeaks, int algFeat)
 	return true;
 	}
 //---------------------------------------------------------------------------
-bool TfmFeatures::DoFeatures(sEcgData ecgdata, int algRpeaks, int algFeat, bool replace)
+//--  Hilfsfunktionen Features  ---------------------------------------------
+//---------------------------------------------------------------------------
+bool TfmFeatures::DoFeaturesBegin(sEcgData ecgdata, bool replace)
+	{
+	if (cxPreNone->Checked) 	DoFeaturesPre(fmysql.ecg.row, replace, 1);
+	if (cxPreFourier->Checked)	DoFeaturesPre(fmysql.ecg.row, replace, 2); //TODO Fourier schreiben
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmFeatures::DoFeaturesPre(sEcgData ecgdata, bool replace, int algPre)
+	{
+	if (cxRpeaksAnna->Checked)	DoFeaturesRpeaks(ecgdata, replace, algPre, 1); //todo Nummer nicht fest angeben
+	if (cxRpeaksChoi->Checked)	DoFeaturesRpeaks(ecgdata, replace, algPre, fRpeaksChoi.AlgIdent);
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmFeatures::DoFeaturesRpeaks(sEcgData ecgdata, bool replace, int algPre, int algRpeaks)
+	{
+	if (cxFeatChoi->Checked) 	DoFeatures(fmysql.ecg.row, replace, algPre, algRpeaks, fFeatChoi.AlgIdent);
+	if (cxFeatRandom->Checked)  DoFeatures(fmysql.ecg.row, replace, algPre, algRpeaks, fRandomPoints.AlgIdent);
+	return true;
+	}
+//---------------------------------------------------------------------------
+//--  Features berechnen  ---------------------------------------------------
+//---------------------------------------------------------------------------
+bool TfmFeatures::DoFeatures(sEcgData ecgdata, bool replace, int algPre, int algRpeaks, int algFeat)
 	{
 	iarray_t array = ecgdata.array_werte;
 	if (array.size() <= 0) return false;
+	if (algPre    <= 0) return false;
 	if (algRpeaks <= 0) return false;
 	if (algFeat   <= 0) return false;
 
+	TickJob();
+	
+	//-- TODO Preprocessing
+	if (algPre == 1) //kein preprocessing
+		;
+
+	//-- R-Peak-Detection
 	iarray_t rpeaks;
 	if (algRpeaks == 1) //Anna
 		{
@@ -238,6 +254,7 @@ bool TfmFeatures::DoFeatures(sEcgData ecgdata, int algRpeaks, int algFeat, bool 
 			}
 		}
 
+	//-- Features bilden
 	String features;
 	if (algFeat == 1) //Choi
 		{
@@ -265,7 +282,7 @@ bool TfmFeatures::DoFeatures(sEcgData ecgdata, int algRpeaks, int algFeat, bool 
 		}
 
 	bool vorhanden = false;
-	if (fmysql.features.select(ecgdata.ident, algRpeaks, algFeat))
+	if (fmysql.features.select(ecgdata.ident, algPre, algRpeaks, algFeat))
 		{
 		//Print("\tDatensatz bereits vorhanden...");
 		vorhanden = true;
@@ -278,13 +295,13 @@ bool TfmFeatures::DoFeatures(sEcgData ecgdata, int algRpeaks, int algFeat, bool 
 
 	if (vorhanden)
 		{
-		if (!UpdateFeatures(features, algRpeaks, algFeat))
+		if (!UpdateFeatures(features, algPre, algRpeaks, algFeat))
 			return false;
 		Count_Edit++;
 		}
 	else
 		{
-		if (!InsertFeatures(features, algRpeaks, algFeat))
+		if (!InsertFeatures(features, algPre, algRpeaks, algFeat))
 			return false;
 		Count_Neu++;
 		}
@@ -292,7 +309,7 @@ bool TfmFeatures::DoFeatures(sEcgData ecgdata, int algRpeaks, int algFeat, bool 
 	return true;
 	}
 //---------------------------------------------------------------------------
-void TfmFeatures::GetAllFeatures()
+void TfmFeatures::GetFeatures()
 	{
 	String EcgIdents = TfmEcg->GetListedEcg();
 	if (EcgIdents == "")
@@ -332,17 +349,11 @@ void TfmFeatures::GetAllFeatures()
 		}
 	//Print("Datenbank ecgdata geladen, %d Datensätze", fmysql.ecg.getSize());
 
-	int anz_rpeaks = 0;
-	if (cxRpeaksAnna->Checked) anz_rpeaks++;
-	if (cxRpeaksChoi->Checked) anz_rpeaks++;
-
-	int anz_feat = 0;
-	if (cxFeatChoi->Checked)   anz_feat++;
-	if (cxFeatRandom->Checked) anz_feat++;
-
-	pbJob->Max = idents.size() * (anz_rpeaks * anz_feat);
-	pbJob->Position = 0;
-	pbJob->Visible = true;
+	if (!StartJob(idents.size()))
+		{
+		Print("## Es wurden nicht genügend Algorithmen ausgewählt");
+		return;
+		}
 
 	Count_Neu  = 0;
 	Count_Edit = 0;
@@ -351,7 +362,6 @@ void TfmFeatures::GetAllFeatures()
 	int count = 0;
 	for (iarray_itr itr = idents.begin(); itr != idents.end(); itr++)
 		{
-		pbJob->Position++;
 		ilist_t& v = itr->second;
 		int id = v[1];
 		if (!fmysql.ecg.loadByIdent(id))
@@ -364,44 +374,49 @@ void TfmFeatures::GetAllFeatures()
 		data = fmysql.ecg.row;
 		Print("EKG %d (%s)", data.ident, fmysql.people.getNameOf(data.person));
 
-		if (cxRpeaksAnna->Checked)
-			{
-			if (cxFeatChoi->Checked)
-				{
-				if (!DoFeatures(fmysql.ecg.row, 1, fFeatChoi.AlgIdent, true))
-					break;
-				}
-			pbJob->Position++;
-			if (cxFeatRandom->Checked)
-				{
-				if (!DoFeatures(fmysql.ecg.row, 1, fRandomPoints.AlgIdent, true))
-					break;
-				}
-			pbJob->Position++;
-			}
-
-		if (cxRpeaksChoi->Checked)
-			{
-			if (cxFeatChoi->Checked)
-				{
-				if (!DoFeatures(fmysql.ecg.row, fRpeaksChoi.AlgIdent, fFeatChoi.AlgIdent, true))
-					break;
-				}
-			pbJob->Position++;
-			if (cxFeatRandom->Checked)
-				{
-				if (!DoFeatures(fmysql.ecg.row, fRpeaksChoi.AlgIdent, fRandomPoints.AlgIdent, true))
-					break;
-				}
-			pbJob->Position++;
-			}
+		DoFeaturesBegin(fmysql.ecg.row, bReplace);
 		}
-		
-	pbJob->Visible = false;
+
+	EndJob();
 	Print("--------------------------------------------------");
 	Print("Es wurden %d EKG-Datensätze bearbeitet", count);
 	Print("\tDatensätze neu anleget\t: %d", Count_Neu);
 	Print("\tDatensätze geändert\t: %d", Count_Edit);
+	}
+//---------------------------------------------------------------------------
+//--  Job-Handling  ---------------------------------------------------------
+//---------------------------------------------------------------------------
+bool TfmFeatures::StartJob(int anz_data)
+	{
+	int anz_pre = 0;
+	if (cxPreNone->Checked)    anz_pre++;
+	if (cxPreFourier->Checked) anz_pre++;
+	if (anz_pre <= 0) return false;
+
+	int anz_rpeaks = 0;
+	if (cxRpeaksAnna->Checked) anz_rpeaks++;
+	if (cxRpeaksChoi->Checked) anz_rpeaks++;
+	if (anz_rpeaks <= 0) return false;
+
+	int anz_feat = 0;
+	if (cxFeatChoi->Checked)   anz_feat++;
+	if (cxFeatRandom->Checked) anz_feat++;
+	if (anz_feat <= 0) return false;
+
+	pbJob->Max = anz_data * (anz_pre * anz_rpeaks * anz_feat);
+	pbJob->Position = 0;
+	pbJob->Visible = true;
+	return true;
+	}
+//---------------------------------------------------------------------------
+void TfmFeatures::TickJob(int pos) //pos ist mit 1 vorbesetzt
+	{
+	pbJob->Position += pos;
+	}
+//---------------------------------------------------------------------------
+void TfmFeatures::EndJob()
+	{
+	pbJob->Visible = false;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -432,13 +447,8 @@ void __fastcall TfmFeatures::CallbackEcgTimer(TObject *Sender)
 	GetSelectedEcg();
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmFeatures::btFeaturesClick(TObject *Sender)
-	{
-	GetFeatures();
-	}
-//---------------------------------------------------------------------------
 void __fastcall TfmFeatures::btBuildAllClick(TObject *Sender)
 	{
-    GetAllFeatures();
+    GetFeatures();
 	}
 //---------------------------------------------------------------------------

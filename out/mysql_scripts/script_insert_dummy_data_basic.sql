@@ -55,3 +55,5 @@ INSERT INTO `ecg`.`algrpeaks` (`Name`) VALUES ('rpeaksChoi');
 INSERT INTO `ecg`.`algfeatures` (`Name`) VALUES ('featChoi');
 INSERT INTO `ecg`.`algfeatures` (`Name`) VALUES ('featRandomPoints');
 
+INSERT INTO `ecg`.`algpreprocessing` (`Name`) VALUES ('preNone');
+

@@ -13,6 +13,7 @@ struct sFeature
 	{
 	int			ident;
 	int			ecgId;
+	int			algIdPre;
 	int			algIdRpeaks;
 	int			algIdFeatures;
 	String		features;
@@ -27,7 +28,7 @@ public:
 	//-- Daten laden
 	bool 	get(int feature); //einzelnen Datensatz laden
 	bool	loadTable(String order = ""); //lädt die gesamte Tabelle
-	bool 	select(int ecg, int rpeaksId, int featId);
+	bool 	select(int ecg, int preId, int rpeaksId, int featId);
 	bool	nextRow();
 	bool	getLast();
 
