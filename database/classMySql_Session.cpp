@@ -90,7 +90,7 @@ bool cMySqlSession::getLast()
 bool cMySqlSession::insert(sSession data)
 	{
 	String q = "INSERT INTO " + String(TABLE) + " ";
-	q+= "(`Orte_ID`, `Stamp`, `Note`) VALUES ";
+	q+= "(`places_ID`, `Stamp`, `Note`) VALUES ";
 	q+= "(";
 	q+= "'" + String(data.place) + "', ";
 	q+= "'" + data.stamp     + "', ";
@@ -111,7 +111,7 @@ bool cMySqlSession::update(sSession data)
 	{
 	//UPDATE `ecg`.`subjects` SET `Vorname`='Otto', `Nachname`='Mustermann' WHERE  `Ident`=7;
 	String q = "UPDATE " + String(TABLE) + " SET ";
-	q+= "Orte_ID='"  + String(data.place)       + "',";
+	q+= "places_ID='"  + String(data.place)       + "',";
 	q+= "Stamp='"    + data.stamp     + "',";
 	q+= "Note='"     + data.note + "' ";
 	q+= "WHERE ID="  + String(data.ident);

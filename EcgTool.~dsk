@@ -1,40 +1,22 @@
 [Closed Files]
-File_0=TSourceModule,'D:\src\EcgTool\definitions.h',0,1,4,11,9,0,0,,
-File_1=TSourceModule,'D:\src\EcgTool\ChoiKlassifizierung.cpp',0,1,1,1,1,0,0,,
-File_2=TSourceModule,'D:\src\EcgTool\VergleichAlg.cpp',0,1,112,1,1,0,0,,
-File_3=TSourceModule,'D:\src\EcgTool\out\mysql_scripts\script_insert_dummy_data_basic.sql',0,1,22,113,41,0,0,,
-File_4=TSourceModule,'D:\src\EcgTool\basics\classTools.cpp',0,1,1,1,1,0,0,,
-File_5=TSourceModule,'D:\src\EcgTool\basics\classBase.cpp',0,1,1,1,1,0,0,,
-File_6=TSourceModule,'D:\src\EcgTool\basics\classCsv.cpp',0,1,1,1,1,0,0,,
-File_7=TSourceModule,'D:\src\EcgTool\basics\classMath.cpp',0,1,1,1,1,0,0,,
-File_8=TSourceModule,'D:\src\EcgTool\basics\classData.cpp',0,1,1,1,1,0,0,,
+File_0=TSourceModule,'D:\src\EcgTool\EcgView.cpp',0,1,316,1,558,0,0,,
+File_1=TSourceModule,'D:\src\EcgTool\basics\classCsv.cpp',0,1,89,1,167,0,0,,{1,245,1}{2,202,1}
+File_2=TSourceModule,'D:\src\EcgTool\basics\classData.cpp',0,1,66,50,74,0,0,,
+File_3=TSourceModule,'D:\src\EcgTool\basics\classArray.cpp',0,1,76,1,1,0,0,,
+File_4=TSourceModule,'D:\src\EcgTool\ecg\classEcg.cpp',0,1,1,1,1,0,0,,
+File_5=TSourceModule,'D:\src\EcgTool\DataAnalysis.cpp',0,1,102,45,124,0,0,,
+File_6=TSourceModule,'D:\src\EcgTool\database\toolforms\addSession.cpp',0,1,181,68,203,0,0,,
+File_7=TSourceModule,'D:\src\EcgTool\database\toolforms\addEcgFiles.cpp',0,1,108,68,130,0,0,,
+File_8=TSourceModule,'D:\src\EcgTool\algorithms\AlgChoi.cpp',0,1,118,71,140,0,0,,
+File_9=TSourceModule,'D:\src\EcgTool\algorithms\AlgChoi2.cpp',0,1,225,77,247,0,0,,
 
 [Modules]
-Module0=D:\src\EcgTool\Features.cpp
-Module1=D:\src\EcgTool\database\classMySql_Features.cpp
-Module2=D:\src\EcgTool\out\mysql_scripts\script_create_all_databases.sql
-Count=3
+Count=0
 EditWindowCount=1
 
-[D:\src\EcgTool\Features.cpp]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=1
-
-[D:\src\EcgTool\database\classMySql_Features.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\src\EcgTool\out\mysql_scripts\script_create_all_databases.sql]
-ModuleType=TSourceModule
-
 [EditWindow0]
-ViewCount=3
-CurrentEditView=D:\src\EcgTool\Features.cpp
-View0=0
-View1=1
-View2=2
+ViewCount=0
+CurrentView=-1
 PercentageSizes=1
 Create=1
 Visible=1
@@ -65,42 +47,11 @@ BottomMiddlePanelSize=1435
 BottomMiddlePanelClients=DockSite0,MessageView@EditWindow0
 BottomMiddelPanelData=0000080001000100000009000000446F636B53697465303619000000000000007D1B0000000000000100000000361900000B0000004D65737361676556696577FFFFFFFF
 
-[View0]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\Features.cpp
-CursorX=5
-CursorY=222
-TopLine=202
-LeftCol=1
-Elisions=
-Bookmarks={1,357,1}{2,197,1}{3,209,1}{9,410,1}
-EditViewName=Borland.FormDesignerView
-
-[View1]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\database\classMySql_Features.cpp
-CursorX=1
-CursorY=59
-TopLine=37
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\database\classMySql_Features.h
-
-[View2]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\out\mysql_scripts\script_create_all_databases.sql
-CursorX=123
-CursorY=107
-TopLine=79
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\out\mysql_scripts\script_create_all_databases.sql
-
 [Watches]
-Count=1
-Watch0='q',256,0,18,1,0,'Überwachte Ausdrücke'
+Count=3
+Watch0='value',256,0,18,1,0,'Überwachte Ausdrücke'
+Watch1='val',256,0,18,1,0,'Überwachte Ausdrücke'
+Watch2='i',256,0,18,1,0,'Überwachte Ausdrücke'
 
 [WatchWindow]
 WatchColumnWidth=120
@@ -416,11 +367,6 @@ Dockable=1
 StayOnTop=0
 SplitPos=176
 
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Align,
-ExpandedItems=Action=0,Anchors=0,Constraints=0,Font=0,Margins=0,PopupMenu=0,BorderIcons=0,GlassFrame=0,HorzScrollBar=0,Menu=0,Padding=0,BevelEdges=0,VertScrollBar=0
-
 [ModelViewTool]
 PercentageSizes=1
 Create=1
@@ -661,7 +607,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
@@ -709,5 +655,5 @@ Dockable=1
 StayOnTop=0
 TabPosition=0
 ActiveTabID=ProjectManager
-TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
+TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
 

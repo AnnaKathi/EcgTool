@@ -3,7 +3,7 @@ object fmBaseSession: TfmBaseSession
   Top = 0
   Caption = 'baseForm Sessions'
   ClientHeight = 698
-  ClientWidth = 647
+  ClientWidth = 607
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object fmBaseSession: TfmBaseSession
   object Bevel4: TBevel
     Left = 0
     Top = 63
-    Width = 647
+    Width = 607
     Height = 8
     Align = alTop
     Shape = bsTopLine
@@ -30,13 +30,14 @@ object fmBaseSession: TfmBaseSession
   object pnFilter: TPanel
     Left = 0
     Top = 0
-    Width = 647
+    Width = 607
     Height = 63
     Align = alTop
     BevelOuter = bvNone
     ParentBackground = False
     ParentColor = True
     TabOrder = 0
+    ExplicitWidth = 647
     object Label10: TLabel
       Left = 8
       Top = 6
@@ -109,7 +110,7 @@ object fmBaseSession: TfmBaseSession
       Width = 145
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 3
       OnChange = acFilterExecute
     end
@@ -117,7 +118,7 @@ object fmBaseSession: TfmBaseSession
   object lvSession: TListView
     Left = 0
     Top = 71
-    Width = 647
+    Width = 607
     Height = 627
     Align = alClient
     Columns = <
@@ -150,6 +151,7 @@ object fmBaseSession: TfmBaseSession
     ViewStyle = vsReport
     OnClick = lvSessionClick
     OnDblClick = lvSessionDblClick
+    ExplicitWidth = 647
   end
   object ActionListDiseases: TActionList
     Left = 272

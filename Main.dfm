@@ -3,7 +3,7 @@ object fmMain: TfmMain
   Top = 0
   BorderStyle = bsToolWindow
   Caption = 'EcgTool'
-  ClientHeight = 279
+  ClientHeight = 299
   ClientWidth = 1026
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
@@ -64,7 +64,7 @@ object fmMain: TfmMain
   end
   object sbMain: TStatusBar
     Left = 0
-    Top = 260
+    Top = 280
     Width = 1026
     Height = 19
     Panels = <
@@ -78,16 +78,18 @@ object fmMain: TfmMain
       item
         Width = 50
       end>
+    ExplicitTop = 260
   end
   object pnMain: TPanel
     Left = 0
     Top = 45
     Width = 1026
-    Height = 215
+    Height = 235
     Align = alClient
     BevelOuter = bvNone
     Enabled = False
     TabOrder = 2
+    ExplicitHeight = 215
     object btAnalysis: TBitBtn
       Left = 8
       Top = 6
@@ -4518,6 +4520,10 @@ object fmMain: TfmMain
       Enabled = False
       OnExecute = acSessionShowExecute
     end
+    object acSessionWizard: TAction
+      Caption = 'Session-Wizard'
+      OnExecute = acSessionWizardExecute
+    end
   end
   object PopupMenuSessions: TPopupMenu
     Left = 600
@@ -4527,6 +4533,12 @@ object fmMain: TfmMain
     end
     object Sessionanlegen1: TMenuItem
       Action = acSessionAdd
+    end
+    object N8: TMenuItem
+      Caption = '-'
+    end
+    object SessionWizard1: TMenuItem
+      Action = acSessionWizard
     end
   end
   object ActionListFeatures: TActionList

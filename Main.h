@@ -107,6 +107,9 @@ __published:	// IDE-verwaltete Komponenten
 	TAction *acTest;
 	TMenuItem *N7;
 	TMenuItem *PreTestTool1;
+	TAction *acSessionWizard;
+	TMenuItem *N8;
+	TMenuItem *SessionWizard1;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -126,6 +129,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acClassifyAllExecute(TObject *Sender);
 	void __fastcall acClassifySvmExecute(TObject *Sender);
 	void __fastcall acTestExecute(TObject *Sender);
+	void __fastcall acSessionWizardExecute(TObject *Sender);
 
 public:
 	__fastcall TfmMain(TComponent* Owner);

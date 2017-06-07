@@ -213,5 +213,8 @@
     <Transaction>2017.06.02 11:24:35.626.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\features\classFeaturesChoi.h</Transaction>
     <Transaction>2017.06.02 11:33:31.748.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\rpeak-detection\classRpeaksChoi.cpp</Transaction>
     <Transaction>2017.06.02 11:33:31.748.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\rpeak-detection\classRpeaksChoi.h</Transaction>
+    <Transaction>2017.06.07 15:25:25.986.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\toolforms\wizardSession_Main.cpp</Transaction>
+    <Transaction>2017.06.07 15:25:25.986.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\toolforms\wizardSession_Main.h</Transaction>
+    <Transaction>2017.06.07 15:25:25.986.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\database\toolforms\wizardSession_Main.dfm</Transaction>
   </Transactions>
 </BorlandProject>

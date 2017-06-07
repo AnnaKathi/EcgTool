@@ -23,6 +23,7 @@ USEFORM("database\toolforms\addSession.cpp", fmSessionAdd);
 USEFORM("database\toolforms\addEcg.cpp", fmAddEcg);
 USEFORM("database\toolforms\addEcgFiles.cpp", fmEcgFiles);
 USEFORM("database\toolforms\selectDescDb.cpp", fmSelectDesc);
+USEFORM("database\toolforms\wizardSession_Main.cpp", fmWizSession);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
 USEFORM("algorithms\AlgChoi2.cpp", fmChoi2);
@@ -54,6 +55,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TfmChoiClassification), &fmChoiClassification);
 		Application->CreateForm(__classid(TfmFeatures), &fmFeatures);
 		Application->CreateForm(__classid(TfmVergleich), &fmVergleich);
+		Application->CreateForm(__classid(TfmWizSession), &fmWizSession);
 		Application->Run();
 	}
 	catch (Exception &exception)
