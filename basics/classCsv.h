@@ -21,11 +21,18 @@ enum CSV_ERROR_CODES
 	};
 //---------------------------------------------------------------------------
 /* Struktur für die auszulesenden EKG-Daten */
-struct cEcgLine //todo weiter ausbauen für weitere leads
+struct cEcgLine
 	{
 	int 	lineno;
 	int		sample;
-	float	i;
+	double	i;
+	double	ii;
+	double	v1;
+	double	v2;
+	double	v3;
+	double	v4;
+	double	v5;
+	double	v6;
 	};
 //---------------------------------------------------------------------------
 //! liest eine CSV-Datei ein
@@ -49,7 +56,7 @@ public:
 		 *		ist ';'
 		 *  /return (bool) true im Erfolgsfall, sonst false
 		 */
-		bool 		OpenFile(String file, eDatFormat format, String delim = ';');
+		bool 		OpenFile(String file, eDatFormat format, String delim, int lead);
 
 		//! Datei schließen
 		/*! Schließt die Datei und gibt den FilePointer frei, sofern gesetzt.
@@ -152,10 +159,12 @@ private:
 	char		Delim[2];
 	eDatFormat	Format;
 	cEcgLine	EcgLine;
+	int			Lead;
 
 	bool 		Skip();
 	bool		SkipRow();
-	bool 		ParseLine();
+	bool 		ParseLineOld();
+	bool		ParseLine();
 	};
 //---------------------------------------------------------------------------
 #endif

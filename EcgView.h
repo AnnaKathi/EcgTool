@@ -62,14 +62,12 @@ __published:	// IDE-verwaltete Komponenten
 	TBevel *Bevel1;
 	TPanel *pnLeft;
 	TBevel *Bevel4;
-	TLabel *laCls;
 	TPanel *Panel3;
 	TLabel *Label1;
 	TSpeedButton *btInputfile;
 	TLabel *Label3;
 	TEdit *edInputfile;
 	TComboBox *cbDelim;
-	TMemo *memo;
 	TProgressBar *pbJob;
 	TButton *btRead;
 	TPanel *pnClient;
@@ -102,9 +100,14 @@ __published:	// IDE-verwaltete Komponenten
 	TTimer *tDetails;
 	TLabel *Label2;
 	TComboBox *cbFormat;
-	TButton *btSave;
 	TSaveDialog *SaveDialog;
+	TPanel *pnBottom;
+	TMemo *memo;
+	TButton *btSave;
 	TButton *btSave2;
+	TLabel *laCls;
+	TBevel *Bevel8;
+	TComboBox *cbLead;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -124,6 +127,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall imgEcgMouseMove(TObject *Sender, TShiftState Shift, int X,
           int Y);
 	void __fastcall btSave2Click(TObject *Sender);
+	void __fastcall cbLeadChange(TObject *Sender);
 
 
 public:

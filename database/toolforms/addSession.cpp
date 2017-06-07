@@ -200,7 +200,7 @@ bool TfmSessionAdd::SaveSession()
 //---------------------------------------------------------------------------
 bool TfmSessionAdd::GetArray(String file, eDatFormat format, String delim, sEcgData& data)
 	{
-	if (!fecg.data.getFile(file, format, delim, 0, 3000))
+	if (!fecg.data.getFile(file, format, delim, 0, 0, 3000)) //TODO
 		{
 		//todo Fejlermeldung
 		return false;

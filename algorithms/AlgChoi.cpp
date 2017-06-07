@@ -137,7 +137,7 @@ void TfmChoi::ShowEcg()
 		format = formatNone;
 
 	//-- EKG-Daten
-	if (!fecg.data.getFile(ecgFile, format, delim, 1, 3000))
+	if (!fecg.data.getFile(ecgFile, format, delim, 0, 1, 3000)) //TODO
 		{
 		Print("\t## Fehler aufgetreten: %d, %s", fecg.data.error_code, fecg.data.error_msg);
 		return;

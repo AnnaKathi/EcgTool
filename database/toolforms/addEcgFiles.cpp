@@ -127,7 +127,7 @@ void __fastcall TfmEcgFiles::acAddExecute(TObject *Sender)
 
 	String file = OpenDialog->FileName;
 
-	if (!fecg.data.getFile(file, format, delim, 0, 3000))
+	if (!fecg.data.getFile(file, format, delim, 0, 0, 3000)) //TODO
 		{
 		; //todo Fehlermeludng
 		return;

@@ -113,12 +113,15 @@ void TfmEcg::ReadFile()
 	else
 		format = formatNone;
 
+	int lead = cbLead->ItemIndex;
+	if (lead < 0) lead = 0;
+
 	int vonSamp = edVonSample->Text.ToIntDef(-1);
 	int bisSamp = edBisSample->Text.ToIntDef(-1);
 
 	//-- EKG-Daten
 	cData& data = ecg.data;
-	if (!data.getFile(ecgFile, format, delim, vonSamp, bisSamp))
+	if (!data.getFile(ecgFile, format, delim, lead, vonSamp, bisSamp))
 		{
 		Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
 		return;
@@ -547,6 +550,11 @@ void TfmEcg::BuildData(sEcgData& data)
 
 		if (ix >= 3000) break;
 		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmEcg::cbLeadChange(TObject *Sender)
+	{
+	sendClick(btRead);
 	}
 //---------------------------------------------------------------------------
 

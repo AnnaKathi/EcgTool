@@ -51,7 +51,7 @@ public:
 		 *  /param (int) Millisekunde bis zu der eingelesen werden soll
 		 *  /return (bool) true im Erfolgsfall, sonst false
 		 */
-		bool		getFile(String file, eDatFormat format, String delim, int vonMsec, int bisMsec);
+		bool		getFile(String file, eDatFormat format, String delim, int lead, int vonMsec, int bisMsec);
 
 		//! Daten des Array in einem Image anzeigen
 		/*! Das interne Datenarray wird im übergebenen Image eingezeichnet. Der

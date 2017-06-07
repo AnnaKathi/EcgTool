@@ -121,7 +121,7 @@ bool TfmAnalysis::DoFile(String file, String name)
 	{
 	//Datei einlesen und auswerten
 	cData& data = fecg.data;
-	if (!data.getFile(file, Format, Delim, 1, 3000))
+	if (!data.getFile(file, Format, Delim, 0, 1, 3000)) //TODO
 		{
 		//todo Print("## Fehler aufgetreten: %d, %s", data.error_code, data.error_msg);
 		return false;

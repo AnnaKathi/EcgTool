@@ -119,7 +119,6 @@ object fmAnalysis: TfmAnalysis
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 91
     object Label1: TLabel
       Left = 9
       Top = 2
@@ -229,9 +228,6 @@ object fmAnalysis: TfmAnalysis
     TabOrder = 3
     ViewStyle = vsReport
     OnCompare = lvDataCompare
-    ExplicitTop = 96
-    ExplicitWidth = 305
-    ExplicitHeight = 129
   end
   object tStartup: TTimer
     Enabled = False

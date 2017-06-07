@@ -80,89 +80,80 @@ object fmEcg: TfmEcg
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 1
-    DesignSize = (
-      337
-      494)
     object Bevel4: TBevel
       Left = 0
-      Top = 49
+      Top = 72
       Width = 337
       Height = 4
       Align = alTop
       Shape = bsTopLine
-      ExplicitLeft = 232
-      ExplicitTop = 56
-      ExplicitWidth = 50
-    end
-    object laCls: TLabel
-      Left = 317
-      Top = 249
-      Width = 18
-      Height = 13
-      Anchors = [akTop, akRight]
-      Caption = 'CLS'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlue
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsUnderline]
-      ParentFont = False
-      OnClick = laClsClick
+      ExplicitLeft = -2
+      ExplicitTop = 48
     end
     object Label4: TLabel
       Left = 139
-      Top = 163
+      Top = 187
       Width = 52
       Height = 13
       Caption = 'EKG-Daten'
     end
     object Label6: TLabel
       Left = 214
-      Top = 163
+      Top = 187
       Width = 47
       Height = 13
       Caption = 'Erste Abl.'
     end
     object Label7: TLabel
       Left = 281
-      Top = 163
+      Top = 187
       Width = 54
       Height = 13
       Caption = 'Zweite Abl.'
     end
     object Label9: TLabel
       Left = 148
-      Top = 118
+      Top = 142
       Width = 35
       Height = 13
       Caption = 'Bereich'
     end
     object Label10: TLabel
       Left = 269
-      Top = 118
+      Top = 142
       Width = 4
       Height = 13
       Caption = '-'
     end
     object Label8: TLabel
       Left = 146
-      Top = 87
+      Top = 111
       Width = 39
       Height = 13
       Caption = 'Samples'
     end
     object Label11: TLabel
       Left = 269
-      Top = 87
+      Top = 111
       Width = 4
       Height = 13
       Caption = '-'
+    end
+    object Bevel8: TBevel
+      Left = 0
+      Top = 248
+      Width = 337
+      Height = 4
+      Align = alBottom
+      Shape = bsBottomLine
+      ExplicitLeft = -2
+      ExplicitTop = 48
     end
     object Panel3: TPanel
       Left = 0
       Top = 0
       Width = 337
-      Height = 49
+      Height = 72
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 11
@@ -228,28 +219,37 @@ object fmEcg: TfmEcg
           '---'
           'ADS')
       end
-    end
-    object memo: TMemo
-      Left = 0
-      Top = 268
-      Width = 337
-      Height = 226
-      Align = alBottom
-      ReadOnly = True
-      ScrollBars = ssBoth
-      TabOrder = 12
+      object cbLead: TComboBox
+        Left = 222
+        Top = 44
+        Width = 107
+        Height = 21
+        Style = csDropDownList
+        ItemHeight = 13
+        TabOrder = 3
+        OnChange = cbLeadChange
+        Items.Strings = (
+          'Lead 1'
+          'Lead 2'
+          'Lead 3'
+          'Lead 4'
+          'Lead 5'
+          'Lead 6'
+          'Lead 7'
+          'Lead 8')
+      end
     end
     object pbJob: TProgressBar
       Left = 8
-      Top = 58
+      Top = 82
       Width = 320
       Height = 17
-      TabOrder = 13
+      TabOrder = 12
     end
     object btRead: TButton
       Tag = 1
       Left = 8
-      Top = 81
+      Top = 105
       Width = 125
       Height = 25
       Caption = '&1 - Werte einlesen'
@@ -259,7 +259,7 @@ object fmEcg: TfmEcg
     object btMovAv: TButton
       Tag = 3
       Left = 8
-      Top = 176
+      Top = 200
       Width = 125
       Height = 25
       Caption = '&3 - Kurven gl'#228'tten'
@@ -269,7 +269,7 @@ object fmEcg: TfmEcg
     object btCut: TButton
       Tag = 2
       Left = 8
-      Top = 112
+      Top = 136
       Width = 125
       Height = 25
       Caption = '&2 - Kurven schneiden'
@@ -278,79 +278,116 @@ object fmEcg: TfmEcg
     end
     object edGl1: TEdit
       Left = 142
-      Top = 178
+      Top = 202
       Width = 46
       Height = 21
       TabOrder = 7
     end
     object edGl2: TEdit
       Left = 212
-      Top = 178
+      Top = 202
       Width = 46
       Height = 21
       TabOrder = 8
     end
     object edGl3: TEdit
       Left = 282
-      Top = 178
+      Top = 202
       Width = 46
       Height = 21
       TabOrder = 9
     end
     object edCutVon: TEdit
       Left = 212
-      Top = 114
+      Top = 138
       Width = 46
       Height = 21
       TabOrder = 4
     end
     object edCutBis: TEdit
       Left = 282
-      Top = 114
+      Top = 138
       Width = 46
       Height = 21
       TabOrder = 5
     end
     object edVonSample: TEdit
       Left = 212
-      Top = 83
+      Top = 107
       Width = 46
       Height = 21
       TabOrder = 1
     end
     object edBisSample: TEdit
       Left = 282
-      Top = 83
+      Top = 107
       Width = 46
       Height = 21
       TabOrder = 2
     end
     object cxDropBegin: TCheckBox
       Left = 142
-      Top = 205
+      Top = 229
       Width = 189
       Height = 17
       Caption = 'Anfangswerte '#252'berspringen'
       TabOrder = 10
     end
-    object btSave: TButton
-      Tag = 4
-      Left = 9
-      Top = 237
-      Width = 150
-      Height = 25
-      Caption = '4 - Werte in Datei speichern'
-      TabOrder = 14
-      OnClick = btSaveClick
-    end
-    object btSave2: TButton
-      Left = 158
-      Top = 237
-      Width = 158
-      Height = 25
-      Caption = '5 - EKG in DB speichern (Test)'
-      TabOrder = 15
-      OnClick = btSave2Click
+    object pnBottom: TPanel
+      Left = 0
+      Top = 252
+      Width = 337
+      Height = 242
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 13
+      DesignSize = (
+        337
+        242)
+      object laCls: TLabel
+        Left = 317
+        Top = 14
+        Width = 18
+        Height = 13
+        Anchors = [akTop, akRight]
+        Caption = 'CLS'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsUnderline]
+        ParentFont = False
+        OnClick = laClsClick
+      end
+      object memo: TMemo
+        Left = 0
+        Top = 37
+        Width = 337
+        Height = 205
+        Align = alBottom
+        ReadOnly = True
+        ScrollBars = ssBoth
+        TabOrder = 0
+      end
+      object btSave: TButton
+        Tag = 4
+        Left = 9
+        Top = 6
+        Width = 150
+        Height = 25
+        Caption = '4 - Werte in Datei speichern'
+        TabOrder = 1
+        OnClick = btSaveClick
+      end
+      object btSave2: TButton
+        Left = 158
+        Top = 6
+        Width = 158
+        Height = 25
+        Caption = '5 - EKG in DB speichern (Test)'
+        TabOrder = 2
+        OnClick = btSave2Click
+      end
     end
   end
   object pnClient: TPanel

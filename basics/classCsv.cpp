@@ -20,7 +20,7 @@ cCsv::~cCsv()
 /******************   Funktionen   *****************************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-bool cCsv::OpenFile(String file, eDatFormat format, String delim) //delim wurde vorbesetzt mit ;
+bool cCsv::OpenFile(String file, eDatFormat format, String delim, int lead)
 	{
 	if (file == "")
 		{
@@ -35,6 +35,7 @@ bool cCsv::OpenFile(String file, eDatFormat format, String delim) //delim wurde 
 
 	strcpy(Delim, delim.c_str());
 	Format = format;
+	Lead = lead;
 
 	LineCount = -1;
 
@@ -163,25 +164,82 @@ bool cCsv::ParseLine()
 	char* pt;
 	float val;
 
+	for (int i = 0; i < Lead; i++)
+		{
+		//Felder überspringen
+		pt = strchr(rowbuf, Delim[0]);
+		*pt = 0;
+		strcpy(rowbuf, pt+1);
+		}
+
+	//jetzt kommt das gewünschte Feld
+	String feld;
+	pt = strchr(rowbuf, Delim[0]);
+	if (pt == NULL)
+		{
+		//Feld ist das letzte Feld
+		feld = String(rowbuf);
+		}
+	else
+		{
+		//Feld ist nicht das letzte Feld
+		*pt = 0;
+		feld = String(rowbuf);
+		}
+
+	//Komma durch Punkt ersetzen, damit die Nachkommastellen richtig rauskommen
+	int n = feld.Pos(",");
+	if (n > 0)
+		feld = feld.SubString(0, n-1) + "." + feld.SubString(n+1, 9999);
+	strcpy(value, feld.c_str());
+
+	val = atof(value);
+
+	EcgLine.sample = LineCount;
+	EcgLine.lineno = LineCount;
+	EcgLine.i = val;
+	return ok();
+	}
+//---------------------------------------------------------------------------
+bool cCsv::ParseLineOld()
+	{
+	//die Werte werden Semikolon- oder Tabgetrennt aufgeführt
+	char value[128];
+	char* pt;
+	float val;
+
 	bool rc = true;
-	for (int i = 0; i < 2; i++)
+	int max;
+	if (Format == formatNone) max = 8;
+	else if (Format == formatADS) max = 7;
+
+	String feld;
+	for (int i = 0; i <= max; i++)
 		{
 		pt = strchr(rowbuf, Delim[0]);
-		if (pt == NULL)
+		if (pt == NULL && i < max)
 			{
-			fail(EC_NOFIELD, "(parse) Feld konnte nicht eingelesen werden");
+			fail(EC_NOFIELD, "(parse) Feld " + String(i) + " konnte nicht eingelesen werden");
 			rc = false;
 			break;
 			}
-
-		*pt = 0;
-		String test = String(rowbuf);
-		int n = test.Pos(",");
-		if (n > 0)
-			test = test.SubString(0, n-1) + "." + test.SubString(n+1, 9999);
-		strcpy(value, test.c_str());
+		else if (pt == NULL)
+			{
+			//letztes Feld erreicht
+			feld = String(rowbuf);
+			}
+		else
+			{
+			*pt = 0;
+			feld = String(rowbuf);
+			strcpy(rowbuf, pt+1);
+			}
 
 		//Komma durch Punkt ersetzen, damit die Nachkommastellen richtig rauskommen
+		int n = feld.Pos(",");
+		if (n > 0)
+			feld = feld.SubString(0, n-1) + "." + feld.SubString(n+1, 9999);
+		strcpy(value, feld.c_str());
 
 		val = atof(value);
 
@@ -192,7 +250,13 @@ bool cCsv::ParseLine()
 				{
 				case 0: EcgLine.sample = LineCount; break;
 				case 1: EcgLine.i      = val;		break;
-				case 2: /*EcgLine.ii = val;*/ 		break;
+				case 2: EcgLine.ii     = val; 		break;
+				case 3: EcgLine.v1     = val; 		break;
+				case 4: EcgLine.v2     = val; 		break;
+				case 5: EcgLine.v3     = val; 		break;
+				case 6: EcgLine.v4     = val; 		break;
+				case 7: EcgLine.v5     = val; 		break;
+				case 8: EcgLine.v6     = val; 		break;
 				default: break;
 				}
 			}
@@ -205,12 +269,16 @@ bool cCsv::ParseLine()
 				case 0: EcgLine.sample = LineCount;
 						EcgLine.i      = val;
 						break;
-				case 1: /*EcgLine.ii = val;*/ break;
+				case 1: EcgLine.ii     = val; 		break;
+				case 2: EcgLine.v1     = val; 		break;
+				case 3: EcgLine.v2     = val; 		break;
+				case 4: EcgLine.v3     = val; 		break;
+				case 5: EcgLine.v4     = val; 		break;
+				case 6: EcgLine.v5     = val; 		break;
+				case 7: EcgLine.v6     = val; 		break;
 				default: break;
 				}
 			}
-
-		strcpy(rowbuf, pt+1);
 		}
 
 	EcgLine.lineno = LineCount;

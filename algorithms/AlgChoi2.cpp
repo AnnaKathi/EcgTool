@@ -244,7 +244,7 @@ bool TfmChoi2::WriteFile(bool train, String filename)
 			if (datei == "") continue;
 
 			//Datei einlesen
-			if (!fecg.data.getFile(datei, format, delim, 1, 3000))
+			if (!fecg.data.getFile(datei, format, delim, 0, 1, 3000)) //TODO
 				{
 				fehler = true;
 				Print("# Eine Datei kann nicht eingelesen werden: %s", datei);
