@@ -27,6 +27,7 @@ USEFORM("database\toolforms\wizardSession_Main.cpp", fmWizSession);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
 USEFORM("algorithms\AlgChoi2.cpp", fmChoi2);
+USEFORM("Databases.cpp", fmDatabases);
 //---------------------------------------------------------------------------
 #include "database/classMySql.h"
 cMySql fmysql;
@@ -56,6 +57,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TfmFeatures), &fmFeatures);
 		Application->CreateForm(__classid(TfmVergleich), &fmVergleich);
 		Application->CreateForm(__classid(TfmWizSession), &fmWizSession);
+		Application->CreateForm(__classid(TfmDatabases), &fmDatabases);
 		Application->Run();
 	}
 	catch (Exception &exception)

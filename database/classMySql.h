@@ -28,12 +28,15 @@ public:
 	bool 	openWithoutDb();
 	bool	close();
 
+	bool	listTabs(TListView* lv);
+
 __property cMySqlEcgData&  ecg      = { read=get_ecg };
 __property cMySqlPeople&   people   = { read=get_people   };
 __property cMySqlSession&  sessions = { read=get_sessions };
 __property cMySqlFeature&  features = { read=get_features };
 
 __property cMySqlDescDb&   researchers = { read=get_researchers  };
+__property cMySqlDescDb&   algpreproc  = { read=get_alg_preproc  };
 __property cMySqlDescDb&   algrpeaks   = { read=get_alg_rpeaks   };
 __property cMySqlDescDb&   algfeatures = { read=get_alg_features };
 __property cMySqlDescDb&   positions   = { read=get_positions    };
@@ -65,6 +68,7 @@ private:
 	cMySqlDescDb*	fpostures;     cMySqlDescDb&	get_postures();
 	cMySqlDescDb*	fstates;       cMySqlDescDb&	get_states();
 	cMySqlDescDb*	fpositions;    cMySqlDescDb&	get_positions();
+	cMySqlDescDb*	falgpreproc;   cMySqlDescDb&	get_alg_preproc();
 	cMySqlDescDb*	falgrpeaks;    cMySqlDescDb&	get_alg_rpeaks();
 	cMySqlDescDb*	falgfeatures;  cMySqlDescDb&	get_alg_features();
 	};

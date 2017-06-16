@@ -21,6 +21,7 @@ cMySql::cMySql()
 	fpostures    = new cMySqlDescDb(*fwork, "postures");
 	fstates      = new cMySqlDescDb(*fwork, "states");
 	fpositions   = new cMySqlDescDb(*fwork, "positions");
+	falgpreproc  = new cMySqlDescDb(*fwork, "algpreprocessing");
 	falgrpeaks   = new cMySqlDescDb(*fwork, "algrpeaks");
 	falgfeatures = new cMySqlDescDb(*fwork, "algfeatures");
 	}
@@ -37,6 +38,7 @@ cMySql::~cMySql()
 	if (fresearchers) delete fresearchers;		if (fpostures)  delete fpostures;
 	if (fpositions)   delete fpositions;		if (fstates)    delete fstates;
 	if (falgfeatures) delete falgfeatures;		if (falgrpeaks) delete falgrpeaks;
+	if (falgpreproc)  delete falgpreproc;
 	}
 //---------------------------------------------------------------------------
 bool cMySql::create()
@@ -118,7 +120,7 @@ bool cMySql::dbExists()
 //---------------------------------------------------------------------------
 bool cMySql::tabExists(String tabelle)
 	{
-	String q = ftools.fmt("SHOW TABLE like '%s'", tabelle);
+	String q = ftools.fmt("SHOW TABLES like '%s'", tabelle);
 
 	if (!fwork->query(q))
 		return fail(fwork->error_code, fwork->error_msg);
@@ -152,6 +154,16 @@ bool cMySql::close()
 	else
 		return ok();
 	}
+//---------------------------------------------------------------------------
+bool cMySql::listTabs(TListView* lv)
+	{
+	if (!fwork->listIn(lv))
+		return fail(fwork->error_code, fwork->error_msg);
+	else
+    	return ok();
+	}
+//---------------------------------------------------------------------------
+//-- eigenständige databases ------------------------------------------------
 //---------------------------------------------------------------------------
 cMySqlEcgData& cMySql::get_ecg()
 	{
@@ -203,6 +215,11 @@ cMySqlDescDb& cMySql::get_states()
 cMySqlDescDb& cMySql::get_positions()
 	{
 	return *fpositions;
+	}
+//---------------------------------------------------------------------------
+cMySqlDescDb& cMySql::get_alg_preproc()
+	{
+	return *falgpreproc;
 	}
 //---------------------------------------------------------------------------
 cMySqlDescDb& cMySql::get_alg_rpeaks()

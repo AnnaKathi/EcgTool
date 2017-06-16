@@ -244,6 +244,40 @@ bool cMySqlWork::loadTable(String tab, String order) //order ist mit "" vorbeset
 		}
 	}
 //---------------------------------------------------------------------------
+bool cMySqlWork::listIn(TListView* lv)
+	{
+	if (lv == NULL) return fail(4, "Es wurde keine ListView übergeben");
+	lv->Items->Clear();
+	
+	String q = "SHOW TABLES";
+
+	if (!query(q))
+		return fail(error_code, error_msg);
+
+	if (mysql_num_rows(fres) <= 0) //keine Tabellen vorhanden
+		return fail(4, "Die Datenbank enthält keine Tabellen");
+
+	String name; int anz; TListItem* item;
+	while ((frow = mysql_fetch_row(fres)) != NULL)
+		{
+		name = String(frow[0]);
+		q = ftools.fmt("SELECT * FROM %s", name);
+
+		MYSQL_RES* oldres = fres;
+		if (!query(q))
+			anz = 0;
+		else
+			anz = mysql_num_rows(fres);
+		fres = oldres;
+
+		item = lv->Items->Add();
+		item->Caption = name;
+		item->SubItems->Add(String(anz));
+		}
+
+	return ok();
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /**************   getter und setter   **************************************/
 /***************************************************************************/

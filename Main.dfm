@@ -78,7 +78,6 @@ object fmMain: TfmMain
       item
         Width = 50
       end>
-    ExplicitTop = 260
   end
   object pnMain: TPanel
     Left = 0
@@ -89,7 +88,6 @@ object fmMain: TfmMain
     BevelOuter = bvNone
     Enabled = False
     TabOrder = 2
-    ExplicitHeight = 215
     object btAnalysis: TBitBtn
       Left = 8
       Top = 6
@@ -1079,7 +1077,7 @@ object fmMain: TfmMain
       Top = 109
       Width = 281
       Height = 97
-      Action = acDatabasePeople
+      Action = acDatabaseAll
       BiDiMode = bdLeftToRight
       Caption = #220'bersicht Datenbank '#39'ecg'#39
       Font.Charset = ANSI_CHARSET
@@ -4479,7 +4477,6 @@ object fmMain: TfmMain
     Top = 160
     object acDatabaseAll: TAction
       Caption = 'Allg. '#220'bersicht'
-      Enabled = False
       OnExecute = acDatabaseAllExecute
     end
     object acDatabaseEcgData: TAction

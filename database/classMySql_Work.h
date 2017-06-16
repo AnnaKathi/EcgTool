@@ -29,6 +29,8 @@ public:
 	//-- Daten laden
 	bool		loadTable(String tab, String order = "");
 
+	bool		listIn(TListView* lv);
+
 __property int num_rows = { read=get_num_rows };
 
 private:

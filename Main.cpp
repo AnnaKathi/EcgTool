@@ -17,6 +17,7 @@ todo: extern cMySql fmysql in definitions.h verlagern?
 #include "database/toolforms/wizardSession_Main.h"
 
 #include "EcgView.h"
+#include "Databases.h"
 #include "DataAnalysis.h"
 #include "Sessions.h"
 #include "Testform.h"
@@ -232,7 +233,7 @@ void __fastcall TfmMain::acAnalyseEcgExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acDatabaseAllExecute(TObject *Sender)
 	{
-	//
+	DlgShowDatabases(this);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acDatabaseEcgDataExecute(TObject *Sender)
