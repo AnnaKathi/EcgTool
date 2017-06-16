@@ -219,5 +219,12 @@
     <Transaction>2017.06.16 10:23:24.036.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\Databases.cpp</Transaction>
     <Transaction>2017.06.16 10:23:24.036.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\Databases.h</Transaction>
     <Transaction>2017.06.16 10:23:24.036.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\Databases.dfm</Transaction>
+    <Transaction>2017.06.16 15:23:42.745.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\features\classWaili3QRS.cpp</Transaction>
+    <Transaction>2017.06.16 15:23:42.745.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\features\classWaili3QRS.h</Transaction>
+    <Transaction>2017.06.16 15:28:05.922.cpp,D:\src\EcgTool\algorithms\features\classWaili3QRS.cpp=</Transaction>
+    <Transaction>2017.06.16 15:29:44.041.cpp,D:\src\EcgTool\algorithms\features\classFeaturesWaili3.cpp=</Transaction>
+    <Transaction>2017.06.16 15:30:46.133.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\features\classFEaturesWaili3.cpp</Transaction>
+    <Transaction>2017.06.16 15:30:46.133.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\features\classFEaturesWaili3.h</Transaction>
+    <Transaction>2017.06.16 15:31:44.765.cpp,D:\src\EcgTool\algorithms\features\classFEaturesWaili3.cpp=</Transaction>
   </Transactions>
 </BorlandProject>

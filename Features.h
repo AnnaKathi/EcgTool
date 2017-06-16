@@ -18,9 +18,10 @@
 //---------------------------------------------------------------------------
 #include "algorithms/rpeak-detection/classRpeaksChoi.h"
 //---------------------------------------------------------------------------
-#include "algorithms/features/classFeaturesChoi.h"
 #include "algorithms/features/classChoiFeatures.h"
 #include "algorithms/features/classRandomPoints.h"
+#include "algorithms/features/classFeaturesChoi.h"
+#include "algorithms/features/classFeaturesWaili3.h"
 //---------------------------------------------------------------------------
 class TfmFeatures : public TForm
 {
@@ -62,6 +63,7 @@ __published:	// IDE-verwaltete Komponenten
 	TCheckBox *cxSmooth;
 	TEdit *edSmooth;
 	TRadioGroup *rgFehler;
+	TCheckBox *cxFeatWaili;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
@@ -88,6 +90,7 @@ private:
 	cRpeaksChoi		fRpeaksChoi;
 
 	cFeaturesChoi	fFeatChoi;
+	cFeaturesWaili3	fFeatWaili;
 
 	int				Count_Neu;
 	int				Count_Edit;

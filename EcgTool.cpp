@@ -4,6 +4,7 @@
 //---------------------------------------------------------------------------
 USEFORM("Main.cpp", fmMain);
 USEFORM("EcgView.cpp", fmEcg);
+USEFORM("Databases.cpp", fmDatabases);
 USEFORM("Sessions.cpp", fmSessions);
 USEFORM("DataAnalysis.cpp", fmAnalysis);
 USEFORM("RequestBox.cpp", fmRequest);
@@ -27,7 +28,6 @@ USEFORM("database\toolforms\wizardSession_Main.cpp", fmWizSession);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
 USEFORM("algorithms\AlgChoi2.cpp", fmChoi2);
-USEFORM("Databases.cpp", fmDatabases);
 //---------------------------------------------------------------------------
 #include "database/classMySql.h"
 cMySql fmysql;

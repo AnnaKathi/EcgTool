@@ -146,7 +146,7 @@ object fmFeatures: TfmFeatures
       601)
     object Bevel3: TBevel
       Left = 0
-      Top = 337
+      Top = 345
       Width = 288
       Height = 8
       Align = alTop
@@ -191,7 +191,7 @@ object fmFeatures: TfmFeatures
       Left = 0
       Top = 237
       Width = 288
-      Height = 100
+      Height = 108
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
@@ -223,6 +223,14 @@ object fmFeatures: TfmFeatures
         Height = 17
         Caption = 'Random Points, 20 verteilte Punkte im QRS-Komplex'
         TabOrder = 1
+      end
+      object cxFeatWaili: TCheckBox
+        Left = 6
+        Top = 78
+        Width = 281
+        Height = 17
+        Caption = 'Waili 2016, 3 exakte QRS-Punkte'
+        TabOrder = 2
       end
     end
     object pnRPeaks: TPanel

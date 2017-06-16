@@ -240,6 +240,14 @@ bool TfmFeatures::DoFeaturesRpeaks(sEcgData ecgdata, bool replace, int algPre, i
 			&& fAbortOnError)
 			return false;
 		}
+
+	if (cxFeatWaili->Checked)
+		{
+		if (!DoFeatures(fmysql.ecg.row, replace, algPre, algRpeaks, fFeatWaili.AlgIdent)
+			&& fAbortOnError)
+			return false;
+		}
+
 	return true;
 	}
 //---------------------------------------------------------------------------
@@ -406,6 +414,24 @@ bool TfmFeatures::doFeats(int algFeat)
 			{
 			Print("## Fehler beim Erstellen der Random-Features");
 			Print("## Meldung: %s", fRandomPoints.error_msg);
+			return false;
+			}
+		}
+
+	else if (algFeat == 3) //Waili-3-QRS-Punkte
+		{
+		if (!fFeatWaili.getFeatures(fValues, fRpeaks))
+			{
+			Print("## Fehler beim Erstellen der Waili-Features (1)");
+			Print("## Meldung: %s", fFeatWaili.error_msg);
+			return false;
+			}
+
+		features = fFeatWaili.features_string;
+		if (features == "")
+			{
+			Print("## Fehler beim Erstellen der Waili-Features (2)");
+			Print("## Meldung: %s", fFeatWaili.error_msg);
 			return false;
 			}
 		}
