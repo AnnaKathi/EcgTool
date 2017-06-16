@@ -3,7 +3,7 @@ object fmMain: TfmMain
   Top = 0
   BorderStyle = bsToolWindow
   Caption = 'EcgTool'
-  ClientHeight = 299
+  ClientHeight = 339
   ClientWidth = 1026
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
@@ -64,7 +64,7 @@ object fmMain: TfmMain
   end
   object sbMain: TStatusBar
     Left = 0
-    Top = 280
+    Top = 320
     Width = 1026
     Height = 19
     Panels = <
@@ -78,16 +78,18 @@ object fmMain: TfmMain
       item
         Width = 50
       end>
+    ExplicitTop = 280
   end
   object pnMain: TPanel
     Left = 0
     Top = 45
     Width = 1026
-    Height = 235
+    Height = 275
     Align = alClient
     BevelOuter = bvNone
     Enabled = False
     TabOrder = 2
+    ExplicitHeight = 235
     object btAnalysis: TBitBtn
       Left = 8
       Top = 6
@@ -4403,20 +4405,17 @@ object fmMain: TfmMain
       object Allgbersicht2: TMenuItem
         Action = acDatabaseAll
       end
-      object EKGDaten2: TMenuItem
-        Action = acDatabaseEcgData
-      end
       object Personen2: TMenuItem
         Action = acDatabasePeople
       end
     end
     object Session1: TMenuItem
       Caption = '&Session'
-      object Sessionsanzeigen2: TMenuItem
-        Action = acSessionShow
-      end
       object Sessionanlegen2: TMenuItem
         Action = acSessionAdd
+      end
+      object SessionWizard2: TMenuItem
+        Action = acSessionWizard
       end
     end
     object Features1: TMenuItem
@@ -4479,11 +4478,6 @@ object fmMain: TfmMain
       Caption = 'Allg. '#220'bersicht'
       OnExecute = acDatabaseAllExecute
     end
-    object acDatabaseEcgData: TAction
-      Caption = 'EKG-Daten'
-      Enabled = False
-      OnExecute = acDatabaseEcgDataExecute
-    end
     object acDatabasePeople: TAction
       Caption = 'Personen'
       OnExecute = acDatabasePeopleExecute
@@ -4498,9 +4492,6 @@ object fmMain: TfmMain
     object N1: TMenuItem
       Caption = '-'
     end
-    object EKGDaten1: TMenuItem
-      Action = acDatabaseEcgData
-    end
     object Personen1: TMenuItem
       Action = acDatabasePeople
     end
@@ -4512,11 +4503,6 @@ object fmMain: TfmMain
       Caption = 'Session anlegen'
       OnExecute = acSessionAddExecute
     end
-    object acSessionShow: TAction
-      Caption = 'Sessions anzeigen'
-      Enabled = False
-      OnExecute = acSessionShowExecute
-    end
     object acSessionWizard: TAction
       Caption = 'Session-Wizard'
       OnExecute = acSessionWizardExecute
@@ -4525,14 +4511,8 @@ object fmMain: TfmMain
   object PopupMenuSessions: TPopupMenu
     Left = 600
     Top = 104
-    object Sessionsanzeigen1: TMenuItem
-      Action = acSessionShow
-    end
     object Sessionanlegen1: TMenuItem
       Action = acSessionAdd
-    end
-    object N8: TMenuItem
-      Caption = '-'
     end
     object SessionWizard1: TMenuItem
       Action = acSessionWizard

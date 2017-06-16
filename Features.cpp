@@ -43,6 +43,8 @@ __fastcall TfmFeatures::~TfmFeatures()
 void __fastcall TfmFeatures::FormShow(TObject *Sender)
 	{
 	ftools.FormLoad(this);
+	edSmooth->Enabled = cxSmooth->Checked;
+
 	TfmEcg = CreateEcgForm(this, pnEcg);
 	tStartup->Enabled = true;
 	}
@@ -189,22 +191,55 @@ bool TfmFeatures::UpdateFeatures(String features, int algPre, int algRpeaks, int
 //---------------------------------------------------------------------------
 bool TfmFeatures::DoFeaturesBegin(sEcgData ecgdata, bool replace)
 	{
-	if (cxPreNone->Checked) 	DoFeaturesPre(fmysql.ecg.row, replace, 1);
-	if (cxPreFourier->Checked)	DoFeaturesPre(fmysql.ecg.row, replace, 2); //TODO Fourier schreiben
+	if (cxPreNone->Checked)
+		{
+		if (!DoFeaturesPre(fmysql.ecg.row, replace, 1) && fAbortOnError)
+			return false;
+		}
+
+	if (cxSmooth->Checked)
+		{
+		if (!DoFeaturesPre(fmysql.ecg.row, replace, 2) && fAbortOnError)
+        	return false;
+		}
+
 	return true;
 	}
 //---------------------------------------------------------------------------
 bool TfmFeatures::DoFeaturesPre(sEcgData ecgdata, bool replace, int algPre)
 	{
-	if (cxRpeaksAnna->Checked)	DoFeaturesRpeaks(ecgdata, replace, algPre, 1); //todo Nummer nicht fest angeben
-	if (cxRpeaksChoi->Checked)	DoFeaturesRpeaks(ecgdata, replace, algPre, fRpeaksChoi.AlgIdent);
+	if (cxRpeaksAnna->Checked)
+		{
+		//todo Nummer nicht fest angeben
+		if (!DoFeaturesRpeaks(ecgdata, replace, algPre, 1)
+			&& fAbortOnError)
+			return false;
+		}
+
+	if (cxRpeaksChoi->Checked)
+		{
+		if (!DoFeaturesRpeaks(ecgdata, replace, algPre, fRpeaksChoi.AlgIdent)
+			&& fAbortOnError)
+			return false;
+		}
 	return true;
 	}
 //---------------------------------------------------------------------------
 bool TfmFeatures::DoFeaturesRpeaks(sEcgData ecgdata, bool replace, int algPre, int algRpeaks)
 	{
-	if (cxFeatChoi->Checked) 	DoFeatures(fmysql.ecg.row, replace, algPre, algRpeaks, fFeatChoi.AlgIdent);
-	if (cxFeatRandom->Checked)  DoFeatures(fmysql.ecg.row, replace, algPre, algRpeaks, fRandomPoints.AlgIdent);
+	if (cxFeatChoi->Checked)
+		{
+		if (!DoFeatures(fmysql.ecg.row, replace, algPre, algRpeaks, fFeatChoi.AlgIdent)
+			&& fAbortOnError)
+			return false;
+		}
+
+	if (cxFeatRandom->Checked)
+		{
+		if (!DoFeatures(fmysql.ecg.row, replace, algPre, algRpeaks, fRandomPoints.AlgIdent)
+			&& fAbortOnError)
+			return false;
+		}
 	return true;
 	}
 //---------------------------------------------------------------------------
@@ -212,73 +247,36 @@ bool TfmFeatures::DoFeaturesRpeaks(sEcgData ecgdata, bool replace, int algPre, i
 //---------------------------------------------------------------------------
 bool TfmFeatures::DoFeatures(sEcgData ecgdata, bool replace, int algPre, int algRpeaks, int algFeat)
 	{
-	iarray_t array = ecgdata.array_werte;
-	if (array.size() <= 0) return false;
+	fArray = ecgdata.array_werte;
+	if (fArray.size() <= 0) return false;
 	if (algPre    <= 0) return false;
 	if (algRpeaks <= 0) return false;
 	if (algFeat   <= 0) return false;
 
 	TickJob();
 	
-	//-- TODO Preprocessing
-	if (algPre == 1) //kein preprocessing
-		;
+	//-- Preprocessing
+	if (!doPre(algPre))
+		{
+		//die Fehlermeldung wurde schon von der Fkt ausgegeben
+		if (fAbortOnError) Print("## Vorgang wird abgebrochen");
+		return false;
+		}
 
 	//-- R-Peak-Detection
-	iarray_t rpeaks;
-	if (algRpeaks == 1) //Anna
+	if (!doRpeaks(algRpeaks))
 		{
-		rpeaks = fecg.rpeaks.find(array, NULL);
-		if (rpeaks.size() <= 0)
-			{
-			Print("## Fehler beim Erstellen der Anna-RPeaks");
-			Print("## Meldung: %s", fecg.rpeaks.error_msg);
-			return false;
-			}
-		}
-	else if (algRpeaks == 2) //Choi
-		{
-		if (!fRpeaksChoi.findRpeaks(array))
-			{
-			Print("## Fehler beim Erstellen der Choi-RPeaks");
-			Print("## Meldung: %s", fRpeaksChoi.error_msg);
-			return false;
-			}
-
-		rpeaks = fRpeaksChoi.Rpeaks;
-		if (rpeaks.size() <= 0)
-			{
-			Print("## Fehler beim Erstellen der Choi-RPeaks");
-			Print("## Meldung: %s", fRpeaksChoi.error_msg);
-			return false;
-			}
+		//die Fehlermeldung wurde schon von der Fkt ausgegeben
+		if (fAbortOnError) Print("## Vorgang wird abgebrochen");
+		return false;
 		}
 
 	//-- Features bilden
-	String features;
-	if (algFeat == 1) //Choi
+	if (!doFeats(algFeat))
 		{
-		if (!fFeatChoi.getFeatures(array, rpeaks))
-			; //todo Fehlermeludng
-
-		features = fFeatChoi.features_string;
-		if (features == "")
-			{
-			Print("## Fehler beim Erstellen der Choi-Features");
-			Print("## Meldung: %s", fFeatChoi.error_msg);
-			return false;
-			}
-		}
-	else if (algFeat == 2) //Random
-		{
-		//todo: in Klasse bringen
-		features = BuildRandomFeatures(array);
-		if (features == "")
-			{
-			Print("## Fehler beim Erstellen der Random-Features");
-			Print("## Meldung: %s", fRandomPoints.error_msg);
-			return false;
-			}
+		//die Fehlermeldung wurde schon von der Fkt ausgegeben
+		if (fAbortOnError) Print("## Vorgang wird abgebrochen");
+		return false;
 		}
 
 	bool vorhanden = false;
@@ -295,17 +293,124 @@ bool TfmFeatures::DoFeatures(sEcgData ecgdata, bool replace, int algPre, int alg
 
 	if (vorhanden)
 		{
-		if (!UpdateFeatures(features, algPre, algRpeaks, algFeat))
+		if (!UpdateFeatures(fFeatures, algPre, algRpeaks, algFeat))
 			return false;
 		Count_Edit++;
 		}
 	else
 		{
-		if (!InsertFeatures(features, algPre, algRpeaks, algFeat))
+		if (!InsertFeatures(fFeatures, algPre, algRpeaks, algFeat))
 			return false;
 		Count_Neu++;
 		}
 
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmFeatures::doPre(int algPre)
+	{
+	iarray_t mov;
+	if (algPre == 1) //kein preprocessing
+		mov = fArray;
+
+	else if (algPre == 2) //gleitenden Durchschnitt bilden
+		{
+		int window = edSmooth->Text.ToIntDef(-1);
+		bool calcbegin = true; //todo Checkbox aufs Formular bringen
+		if (window <= 0)
+			{
+			Print("## Fehler beim Berechnen des gleitenden Durchschnitts, das Fenster ist zu klein");
+			return false;
+			}
+		else
+			{
+			mov = farray.movingAv(fArray, window, calcbegin);
+			if (mov.size() <= 0)
+				{
+				Print("## Fehler beim Berechnen des gleitenden Durchschnitts");
+				Print("## Meldung: %s", farray.error_msg);
+				return false;
+				}
+			}
+		}
+	else
+		{
+		Print("## Fehler: unbekannter Preprocessing-Algorithmus: %d", algPre);
+		return false;
+		}
+
+	fValues = mov;
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmFeatures::doRpeaks(int algRpeaks)
+	{
+	iarray_t rpeaks;
+	if (algRpeaks == 1) //Anna
+		{
+		rpeaks = fecg.rpeaks.find(fValues, NULL);
+		if (rpeaks.size() <= 0)
+			{
+			Print("## Fehler beim Erstellen der Anna-RPeaks");
+			Print("## Meldung: %s", fecg.rpeaks.error_msg);
+			return false;
+			}
+		}
+	else if (algRpeaks == 2) //Choi
+		{
+		if (!fRpeaksChoi.findRpeaks(fValues))
+			{
+			Print("## Fehler beim Erstellen der Choi-RPeaks");
+			Print("## Meldung: %s", fRpeaksChoi.error_msg);
+			return false;
+			}
+
+		rpeaks = fRpeaksChoi.Rpeaks;
+		if (rpeaks.size() <= 0)
+			{
+			Print("## Fehler beim Erstellen der Choi-RPeaks");
+			Print("## Meldung: %s", fRpeaksChoi.error_msg);
+			return false;
+			}
+		}
+
+	fRpeaks = rpeaks;
+	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmFeatures::doFeats(int algFeat)
+	{
+	String features;
+	if (algFeat == 1) //Choi
+		{
+		if (!fFeatChoi.getFeatures(fValues, fRpeaks))
+			{
+			Print("## Fehler beim Erstellen der Choi-Features (1)");
+			Print("## Meldung: %s", fFeatChoi.error_msg);
+			return false;
+			}
+
+		features = fFeatChoi.features_string;
+		if (features == "")
+			{
+			Print("## Fehler beim Erstellen der Choi-Features (2)");
+			Print("## Meldung: %s", fFeatChoi.error_msg);
+			return false;
+			}
+		}
+	else if (algFeat == 2) //Random
+		{
+		//todo: in Klasse bringen
+		features = BuildRandomFeatures(fValues);
+		if (features == "")
+			{
+			Print("## Fehler beim Erstellen der Random-Features");
+			Print("## Meldung: %s", fRandomPoints.error_msg);
+			return false;
+			}
+		}
+
+	fFeatures = features;
 	return true;
 	}
 //---------------------------------------------------------------------------
@@ -358,6 +463,11 @@ void TfmFeatures::GetFeatures()
 	Count_Neu  = 0;
 	Count_Edit = 0;
 
+	if (rgFehler->ItemIndex == 0)
+		fAbortOnError = true;
+	else
+		fAbortOnError = false;
+
 	sEcgData data;
 	int count = 0;
 	for (iarray_itr itr = idents.begin(); itr != idents.end(); itr++)
@@ -367,14 +477,16 @@ void TfmFeatures::GetFeatures()
 		if (!fmysql.ecg.loadByIdent(id))
 			{
 			Print("## EKG <%d> nicht gefunden", id);
-			continue;
+			if (fAbortOnError) break;
+			else continue;
 			}
 
 		count++;
 		data = fmysql.ecg.row;
 		Print("EKG %d (%s)", data.ident, fmysql.people.getNameOf(data.person));
 
-		DoFeaturesBegin(fmysql.ecg.row, bReplace);
+		if (!DoFeaturesBegin(fmysql.ecg.row, bReplace) && fAbortOnError)
+        	break;
 		}
 
 	EndJob();
@@ -452,3 +564,16 @@ void __fastcall TfmFeatures::btBuildAllClick(TObject *Sender)
     GetFeatures();
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmFeatures::cxSmoothClick(TObject *Sender)
+	{
+	edSmooth->Enabled = cxSmooth->Checked;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmFeatures::edSmoothExit(TObject *Sender)
+	{
+	int w = edSmooth->Text.ToIntDef(-1);
+	if (w < 0) w = 0;
+	edSmooth->Text = String(w);
+	}
+//---------------------------------------------------------------------------
+

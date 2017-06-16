@@ -11,6 +11,7 @@
 #include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "basics/classTools.h"
+#include "basics/classArray.h"
 #include "ecg/classEcg.h"
 #include "ecg/classHeartbeat.h"
 #include "database/baseforms/baseEcgData.h"
@@ -58,6 +59,9 @@ __published:	// IDE-verwaltete Komponenten
 	TLabel *Label4;
 	TCheckBox *cxPreFourier;
 	TCheckBox *cxPreNone;
+	TCheckBox *cxSmooth;
+	TEdit *edSmooth;
+	TRadioGroup *rgFehler;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
@@ -65,9 +69,12 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall CallbackEcgTimer(TObject *Sender);
 	void __fastcall btBuildAllClick(TObject *Sender);
+	void __fastcall cxSmoothClick(TObject *Sender);
+	void __fastcall edSmoothExit(TObject *Sender);
 
 private:
 	cEcg			fecg;
+	cArray			farray;
 	cTools			ftools;
 	void 			Print(char* msg, ...);
 
@@ -89,11 +96,20 @@ private:
 	bool			UpdateFeatures(String features, int algPre, int algRpeaks, int algFeat);
 	String			BuildRandomFeatures(iarray_t array);
 
+	bool			fAbortOnError; //in Fehlerfall fortfahren
+	iarray_t		fArray;  //Original-EKG-Werte
+	iarray_t		fValues; //Ausgangswerte, ggf. durch Preprocessing bereinigt
+	iarray_t		fRpeaks;
+	String			fFeatures;
+
 	void			GetFeatures();
 	bool 			DoFeaturesBegin(sEcgData ecgdata, bool replace);
 	bool			DoFeaturesPre(sEcgData ecgdata, bool replace, int algPre);
 	bool			DoFeaturesRpeaks(sEcgData ecgdata, bool replace, int algPre, int algRpeaks);
 	bool 			DoFeatures(sEcgData ecgdata, bool replace, int algPre, int algRpeaks, int algFeat);
+	bool			doPre(int algPre);
+	bool			doRpeaks(int algRpeaks);
+	bool			doFeats(int algFeat);
 
 	bool			StartJob(int anz_data);
 	void			TickJob(int pos=1);

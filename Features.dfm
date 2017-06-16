@@ -69,7 +69,6 @@ object fmFeatures: TfmFeatures
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 1089
     DesignSize = (
       1290
       41)
@@ -93,7 +92,6 @@ object fmFeatures: TfmFeatures
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 1073
     end
   end
   object Panel1: TPanel
@@ -104,8 +102,6 @@ object fmFeatures: TfmFeatures
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = 184
-    ExplicitTop = 642
     DesignSize = (
       1290
       41)
@@ -117,7 +113,6 @@ object fmFeatures: TfmFeatures
       Action = acClose
       Anchors = [akRight, akBottom]
       TabOrder = 0
-      ExplicitLeft = 1006
     end
     object pbJob: TProgressBar
       Left = 8
@@ -127,7 +122,6 @@ object fmFeatures: TfmFeatures
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 1
       Visible = False
-      ExplicitWidth = 1093
     end
   end
   object pnEcg: TPanel
@@ -152,7 +146,7 @@ object fmFeatures: TfmFeatures
       601)
     object Bevel3: TBevel
       Left = 0
-      Top = 316
+      Top = 337
       Width = 288
       Height = 8
       Align = alTop
@@ -163,7 +157,7 @@ object fmFeatures: TfmFeatures
     end
     object Bevel5: TBevel
       Left = 0
-      Top = 208
+      Top = 229
       Width = 288
       Height = 8
       Align = alTop
@@ -174,7 +168,7 @@ object fmFeatures: TfmFeatures
     end
     object Bevel7: TBevel
       Left = 0
-      Top = 100
+      Top = 121
       Width = 288
       Height = 8
       Align = alTop
@@ -195,15 +189,12 @@ object fmFeatures: TfmFeatures
     end
     object pnFeatures: TPanel
       Left = 0
-      Top = 216
+      Top = 237
       Width = 288
       Height = 100
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = -6
-      ExplicitTop = 348
-      ExplicitWidth = 400
       object Label1: TLabel
         Left = 93
         Top = 6
@@ -236,15 +227,12 @@ object fmFeatures: TfmFeatures
     end
     object pnRPeaks: TPanel
       Left = 0
-      Top = 108
+      Top = 129
       Width = 288
       Height = 100
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitLeft = -2
-      ExplicitTop = 181
-      ExplicitWidth = 400
       object Label2: TLabel
         Left = 103
         Top = 6
@@ -279,12 +267,10 @@ object fmFeatures: TfmFeatures
       Left = 0
       Top = 0
       Width = 288
-      Height = 100
+      Height = 121
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitTop = 216
-      ExplicitWidth = 400
       object Label3: TLabel
         Left = 110
         Top = 6
@@ -307,7 +293,7 @@ object fmFeatures: TfmFeatures
       end
       object cxPreFourier: TCheckBox
         Left = 6
-        Top = 62
+        Top = 86
         Width = 281
         Height = 17
         Caption = 'Fourier Transform ???'
@@ -324,6 +310,35 @@ object fmFeatures: TfmFeatures
         State = cbChecked
         TabOrder = 1
       end
+      object cxSmooth: TCheckBox
+        Left = 6
+        Top = 62
+        Width = 206
+        Height = 17
+        Caption = 'Kurve gl'#228'tten (gleitender Durchschnitt)'
+        TabOrder = 2
+        OnClick = cxSmoothClick
+      end
+      object edSmooth: TEdit
+        Left = 216
+        Top = 60
+        Width = 57
+        Height = 21
+        TabOrder = 3
+        OnExit = edSmoothExit
+      end
+    end
+    object rgFehler: TRadioGroup
+      Left = 6
+      Top = 480
+      Width = 265
+      Height = 73
+      Caption = ' Fehlerhandling '
+      ItemIndex = 0
+      Items.Strings = (
+        'Bei Fehler sofort abbrechen'
+        'Bei Fehler Vorgang fortzusetzen')
+      TabOrder = 4
     end
   end
   object pnMemo: TPanel
@@ -334,10 +349,6 @@ object fmFeatures: TfmFeatures
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 4
-    ExplicitLeft = 728
-    ExplicitTop = 224
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object memo: TMemo
       Left = 0
       Top = 0
@@ -353,8 +364,6 @@ object fmFeatures: TfmFeatures
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 0
-      ExplicitWidth = 360
-      ExplicitHeight = 321
     end
   end
   object tStartup: TTimer

@@ -236,11 +236,6 @@ void __fastcall TfmMain::acDatabaseAllExecute(TObject *Sender)
 	DlgShowDatabases(this);
 	}
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::acDatabaseEcgDataExecute(TObject *Sender)
-	{
-	//
-	}
-//---------------------------------------------------------------------------
 void __fastcall TfmMain::acDatabasePeopleExecute(TObject *Sender)
 	{
 	DlgDatabasePersonen(this);
@@ -253,11 +248,6 @@ void __fastcall TfmMain::acSessionAddExecute(TObject *Sender)
 	{
 	DlgShowSessions(this);
 	setDbInfo();
-	}
-//---------------------------------------------------------------------------
-void __fastcall TfmMain::acSessionShowExecute(TObject *Sender)
-	{
-	//
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::acSessionWizardExecute(TObject *Sender)
