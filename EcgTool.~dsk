@@ -80,8 +80,8 @@ WelcomePageURL=bds:/default.htm
 [View1]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\Features.cpp
-CursorX=30
-CursorY=469
+CursorX=42
+CursorY=481
 TopLine=455
 LeftCol=1
 Elisions=
@@ -137,11 +137,10 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=4
+Count=3
 Breakpoint0='D:\src\EcgTool\algorithms\AlgChoi.cpp',320,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint1='D:\src\EcgTool\inc\libsvm\svm.cpp',2106,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint2='D:\src\EcgTool\SessionAdd.cpp',151,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint3='D:\src\EcgTool\Features.cpp',466,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
@@ -429,11 +428,6 @@ Dockable=1
 StayOnTop=0
 SplitPos=176
 
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Caption,
-ExpandedItems=Anchors=0,Constraints=0,Font=0,Margins=0,BevelEdges=0,Padding=0
-
 [ModelViewTool]
 PercentageSizes=1
 Create=1
@@ -674,7 +668,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
