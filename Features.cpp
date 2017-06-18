@@ -528,6 +528,7 @@ bool TfmFeatures::StartJob(int anz_data)
 	{
 	int anz_pre = 0;
 	if (cxPreNone->Checked)    anz_pre++;
+	if (cxSmooth->Checked)     anz_pre++;
 	if (cxPreFourier->Checked) anz_pre++;
 	if (anz_pre <= 0) return false;
 
@@ -539,6 +540,7 @@ bool TfmFeatures::StartJob(int anz_data)
 	int anz_feat = 0;
 	if (cxFeatChoi->Checked)   anz_feat++;
 	if (cxFeatRandom->Checked) anz_feat++;
+	if (cxFeatWaili->Checked)  anz_feat++;
 	if (anz_feat <= 0) return false;
 
 	pbJob->Max = anz_data * (anz_pre * anz_rpeaks * anz_feat);
