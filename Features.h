@@ -64,6 +64,7 @@ __published:	// IDE-verwaltete Komponenten
 	TEdit *edSmooth;
 	TRadioGroup *rgFehler;
 	TCheckBox *cxFeatWaili;
+	TButton *btArff;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
@@ -73,6 +74,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btBuildAllClick(TObject *Sender);
 	void __fastcall cxSmoothClick(TObject *Sender);
 	void __fastcall edSmoothExit(TObject *Sender);
+	void __fastcall btArffClick(TObject *Sender);
 
 private:
 	cEcg			fecg;
@@ -117,6 +119,9 @@ private:
 	bool			StartJob(int anz_data);
 	void			TickJob(int pos=1);
 	void			EndJob();
+
+	//TEST
+	void CreateArff();
 
 public:
 	__fastcall TfmFeatures(TComponent* Owner);

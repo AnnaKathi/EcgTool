@@ -3,6 +3,8 @@
 #pragma hdrstop
 
 #include <stdio.h>
+#include <System.hpp>
+
 #include "database/classMySql.h"
 
 #include "Features.h"
@@ -604,4 +606,49 @@ void __fastcall TfmFeatures::edSmoothExit(TObject *Sender)
 	edSmooth->Text = String(w);
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmFeatures::btArffClick(TObject *Sender)
+	{
+	CreateArff();
+	}
+//---------------------------------------------------------------------------
+void TfmFeatures::CreateArff()
+	{
+	//aus den Features eine arff-Datei für WEKA erstellen
+	String file = ftools.GetPath() + "\\weka\\test.arff";
+	FILE* fp = fopen(file.c_str(), "w");
 
+	fprintf(fp, "%\n");
+	fprintf(fp, "%Test-ARFF-File by Anna\n");
+	fprintf(fp, "%\n");
+
+	fprintf(fp, "@relation 'testarff'\n");
+
+	fprintf(fp, "@attribute IDENT numeric\n"); //Personen-Ident
+	fprintf(fp, "@attribute FEAT1 numeric\n"); //Test-Feature 1
+	fprintf(fp, "@attribute FEAT2 numeric\n"); //Test-Feature 2
+	fprintf(fp, "@attribute FEAT3 numeric\n"); //Test-Feature 3
+
+	fprintf(fp, "@data\n");
+
+	Randomize();
+	char help[32]; int z1, z2, z3; double wert[3]; int ident;
+	for (int id = 0; id < 25; id++) //25 Personen simulieren
+		{
+		for (int f = 0; f < 3; f++) //jeweils 3 Features simulieren
+			{
+			z1 = Random(10);
+			z2 = Random(10);
+			z3 = Random(10);
+
+			sprintf(help, "%d%s%d%d", z1, ".", z2, z3);
+			wert[f] = atof(help);
+			}
+
+		ident = Random(4);
+		String feat = ftools.fmt("%f,%f,%f", wert[0], wert[1], wert[2]);
+		fprintf(fp, "%d,%s\n", ident, feat.c_str());
+		}
+
+	fclose(fp);
+	}
+//---------------------------------------------------------------------------

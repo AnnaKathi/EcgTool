@@ -348,6 +348,15 @@ object fmFeatures: TfmFeatures
         'Bei Fehler Vorgang fortzusetzen')
       TabOrder = 4
     end
+    object btArff: TButton
+      Left = 8
+      Top = 376
+      Width = 225
+      Height = 25
+      Caption = 'Test ARFF-File erstellen'
+      TabOrder = 5
+      OnClick = btArffClick
+    end
   end
   object pnMemo: TPanel
     Left = 929

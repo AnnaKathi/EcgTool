@@ -1,46 +1,58 @@
 [Closed Files]
-File_0=TSourceModule,'D:\src\EcgTool\algorithms\features\classRandomPoints.cpp',0,1,58,1,1,0,0,,
-File_1=TSourceModule,'D:\src\EcgTool\algorithms\features\classFeaturesWaili3.h',0,1,1,1,4,0,0,,
-File_2=TSourceModule,'D:\src\EcgTool\EcgView.cpp',0,1,199,1,225,0,0,,{1,225,17}
-File_3=TSourceModule,'D:\src\EcgTool\algorithms\rpeak-detection\classRpeaksChoi.cpp',0,1,1,1,1,0,0,,
-File_4=TSourceModule,'D:\src\EcgTool\algorithms\features\classWaili3QRS.cpp',0,1,1,33,8,0,0,,
-File_5=TSourceModule,'D:\src\EcgTool\algorithms\features\classChoiFeatures.cpp',0,1,1,1,1,0,0,,
-File_6=TSourceModule,'d:\dev\rad\include\dinkumware\xtree',0,1,422,1,452,0,0,,
-File_7=TSourceModule,'D:\src\EcgTool\basics\classArray.cpp',0,1,285,1,314,0,0,,
+File_0=TSourceModule,'d:\dev\rad\include\vcl\dstring.h',0,1,48,1,68,0,0,,
+File_1=TSourceModule,'D:\src\EcgTool\basics\classTools.cpp',0,1,221,1,256,0,0,,
+File_2=TSourceModule,'C:\Program Files\Weka-3-9\data\weather.numeric.arff',0,1,1,116,23,0,0,,
+File_3=TSourceModule,'D:\src\EcgTool\algorithms\features\classFeaturesWaili3.cpp',0,1,1,1,30,0,0,,
+File_4=TSourceModule,'D:\src\EcgTool\ecg\classQrs.cpp',0,1,18,1,25,0,0,,{1
+File_5=TSourceModule,'D:\src\EcgTool\basics\classData.cpp',0,1,91,21,113,0,0,,
+File_6=TSourceModule,'D:\src\EcgTool\EcgView.cpp',0,1,199,22,212,0,0,,
+File_7=TSourceModule,'D:\src\EcgTool\ecg\classHeartbeat.cpp',0,1,1,1,1,0,0,,
+File_8=TSourceModule,'D:\src\EcgTool\ecg\classTurns.cpp',0,1,1,1,1,0,0,,
+File_9=TSourceModule,'D:\src\EcgTool\ecg\classEcg.cpp',0,1,1,1,1,0,0,,
 
 [Modules]
-Module0=D:\src\EcgTool\algorithms\features\classFeaturesWaili3.cpp
-Module1=D:\src\EcgTool\Features.cpp
-Module2=D:\src\EcgTool\algorithms\features\classFeaturesChoi.cpp
-Module3=default.htm
-Count=4
+Module0=D:\src\EcgTool\Features.cpp
+Module1=default.htm
+Module2=D:\src\EcgTool\ChoiKlassifizierung.cpp
+Module3=C:\Program Files\Weka-3-9\data\cpu.arff
+Module4=C:\Program Files\Weka-3-9\data\weather.nominal.arff
+Module5=D:\src\EcgTool\Main.cpp
+Count=6
 EditWindowCount=1
-
-[D:\src\EcgTool\algorithms\features\classFeaturesWaili3.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
 
 [D:\src\EcgTool\Features.cpp]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[D:\src\EcgTool\algorithms\features\classFeaturesChoi.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
 [default.htm]
 ModuleType=TURLModule
 
+[D:\src\EcgTool\ChoiKlassifizierung.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[C:\Program Files\Weka-3-9\data\cpu.arff]
+ModuleType=TSourceModule
+
+[C:\Program Files\Weka-3-9\data\weather.nominal.arff]
+ModuleType=TSourceModule
+
+[D:\src\EcgTool\Main.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
 [EditWindow0]
-ViewCount=4
-CurrentEditView=D:\src\EcgTool\algorithms\features\classFeaturesWaili3.cpp
+ViewCount=6
+CurrentEditView=D:\src\EcgTool\Features.cpp
 View0=0
 View1=1
 View2=2
 View3=3
+View4=4
+View5=5
 PercentageSizes=1
 Create=1
 Visible=1
@@ -77,41 +89,66 @@ WelcomePageURL=bds:/default.htm
 
 [View1]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\Features.cpp
-CursorX=54
-CursorY=433
-TopLine=395
-LeftCol=1
-Elisions=
-Bookmarks={1,515,19}{2,387,1}
-EditViewName=D:\src\EcgTool\Features.cpp
-
-[View2]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\algorithms\features\classFeaturesWaili3.cpp
-CursorX=21
-CursorY=19
+Module=D:\src\EcgTool\Main.cpp
+CursorX=59
+CursorY=27
 TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=D:\src\EcgTool\algorithms\features\classFeaturesWaili3.cpp
+EditViewName=D:\src\EcgTool\Main.cpp
+
+[View2]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\Features.cpp
+CursorX=30
+CursorY=647
+TopLine=623
+LeftCol=1
+Elisions=
+Bookmarks={1,633,6}{2,389,1}
+EditViewName=D:\src\EcgTool\Features.cpp
 
 [View3]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\algorithms\features\classFeaturesChoi.cpp
-CursorX=78
-CursorY=236
-TopLine=214
+Module=D:\src\EcgTool\ChoiKlassifizierung.cpp
+CursorX=5
+CursorY=270
+TopLine=243
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=D:\src\EcgTool\algorithms\features\classFeaturesChoi.h
+EditViewName=D:\src\EcgTool\ChoiKlassifizierung.cpp
+
+[View4]
+CustomEditViewType=TEditView
+Module=C:\Program Files\Weka-3-9\data\cpu.arff
+CursorX=1
+CursorY=1
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Program Files\Weka-3-9\data\cpu.arff
+
+[View5]
+CustomEditViewType=TEditView
+Module=C:\Program Files\Weka-3-9\data\weather.nominal.arff
+CursorX=115
+CursorY=23
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Program Files\Weka-3-9\data\weather.nominal.arff
 
 [Watches]
-Count=2
-Watch0='name',256,0,18,1,0,'Überwachte Ausdrücke'
-Watch1='anz',256,0,18,1,0,'Überwachte Ausdrücke'
+Count=5
+Watch0='z1',256,0,18,1,0,'Überwachte Ausdrücke'
+Watch1='z2',256,0,18,1,0,'Überwachte Ausdrücke'
+Watch2='z3',256,0,18,1,0,'Überwachte Ausdrücke'
+Watch3='help',256,0,18,1,0,'Überwachte Ausdrücke'
+Watch4='feat',256,0,18,1,0,'Überwachte Ausdrücke'
 
 [WatchWindow]
 WatchColumnWidth=120
@@ -172,11 +209,11 @@ State=0
 Left=0
 Top=0
 Width=2104
-Height=8798
+Height=7019
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2104
-ClientHeight=8798
+ClientHeight=7019
 TBDockHeight=5904
 LRDockWidth=2349
 Dockable=1
@@ -666,7 +703,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
@@ -713,6 +750,6 @@ LRDockWidth=2104
 Dockable=1
 StayOnTop=0
 TabPosition=0
-ActiveTabID=ProjectManager
-TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
+ActiveTabID=ToolForm
+TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
 
