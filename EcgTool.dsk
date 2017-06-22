@@ -101,8 +101,8 @@ EditViewName=D:\src\EcgTool\Main.cpp
 [View2]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\Features.cpp
-CursorX=45
-CursorY=649
+CursorX=57
+CursorY=641
 TopLine=623
 LeftCol=1
 Elisions=

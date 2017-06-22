@@ -101,8 +101,8 @@ EditViewName=D:\src\EcgTool\Main.cpp
 [View2]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\Features.cpp
-CursorX=30
-CursorY=647
+CursorX=45
+CursorY=649
 TopLine=623
 LeftCol=1
 Elisions=
@@ -703,7 +703,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
@@ -751,5 +751,5 @@ Dockable=1
 StayOnTop=0
 TabPosition=0
 ActiveTabID=ToolForm
-TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
+TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
 
