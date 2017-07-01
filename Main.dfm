@@ -78,7 +78,6 @@ object fmMain: TfmMain
       item
         Width = 50
       end>
-    ExplicitTop = 280
   end
   object pnMain: TPanel
     Left = 0
@@ -89,7 +88,7 @@ object fmMain: TfmMain
     BevelOuter = bvNone
     Enabled = False
     TabOrder = 2
-    ExplicitHeight = 235
+    ExplicitTop = 47
     object btAnalysis: TBitBtn
       Left = 8
       Top = 6
@@ -4377,6 +4376,24 @@ object fmMain: TfmMain
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFF}
+    end
+    object btLKeadAnalysis: TButton
+      Left = 320
+      Top = 181
+      Width = 129
+      Height = 25
+      Caption = 'Test Lead Analysis'
+      TabOrder = 10
+      OnClick = btLKeadAnalysisClick
+    end
+    object btEcgAnalysis: TButton
+      Left = 455
+      Top = 181
+      Width = 129
+      Height = 25
+      Caption = 'Test Ecg-Lead Analysis'
+      TabOrder = 11
+      OnClick = btEcgAnalysisClick
     end
   end
   object MainMenu: TMainMenu

@@ -22,6 +22,9 @@ todo: extern cMySql fmysql in definitions.h verlagern?
 #include "Sessions.h"
 #include "Testform.h"
 
+#include "LeadAnalysis.h"
+#include "EcgLeadAnalysis.h"
+
 #include "Features.h"
 #include "VergleichAlg.h"
 #include "ChoiKlassifizierung.h"
@@ -313,6 +316,20 @@ void __fastcall TfmMain::btAnalysisSelectClick(TObject *Sender)
 	else if (comp->Name == "btSessionsSelect") PopupMenuSessions->Popup(pt.x, pt.y);
 	else if (comp->Name == "btFeaturesSelect") PopupMenuFeatures->Popup(pt.x, pt.y);
 	else if (comp->Name == "btClassifySelect") PopupMenuClassify->Popup(pt.x, pt.y);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btLKeadAnalysisClick(TObject *Sender)
+	{
+	//TEST LEAD ANALYSIS
+	String file = "D:\\ADS Tests - Transfer vom Laptop\\2017-06-24 - Durchgang 1\\Senta liegend.txt";
+	DlgShowLeads(this, file, "Senta liegend");
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btEcgAnalysisClick(TObject *Sender)
+	{
+	String path = "D:\\ADS Tests - Transfer vom Laptop\\2017-06-24 - Durchgang 1";
+	String name = "Senta";
+	DlgShowEcgLeads(this, path, name);
 	}
 //---------------------------------------------------------------------------
 

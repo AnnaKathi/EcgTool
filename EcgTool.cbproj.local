@@ -226,5 +226,11 @@
     <Transaction>2017.06.16 15:30:46.133.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\features\classFEaturesWaili3.cpp</Transaction>
     <Transaction>2017.06.16 15:30:46.133.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\features\classFEaturesWaili3.h</Transaction>
     <Transaction>2017.06.16 15:31:44.765.cpp,D:\src\EcgTool\algorithms\features\classFEaturesWaili3.cpp=</Transaction>
+    <Transaction>2017.07.01 10:20:43.942.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\LeadAnalysis.cpp</Transaction>
+    <Transaction>2017.07.01 10:20:43.942.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\LeadAnalysis.h</Transaction>
+    <Transaction>2017.07.01 10:20:43.942.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\LeadAnalysis.dfm</Transaction>
+    <Transaction>2017.07.01 10:52:10.448.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\EcgLeadAnalysis.cpp</Transaction>
+    <Transaction>2017.07.01 10:52:10.448.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\EcgLeadAnalysis.h</Transaction>
+    <Transaction>2017.07.01 10:52:10.448.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\EcgLeadAnalysis.dfm</Transaction>
   </Transactions>
 </BorlandProject>
