@@ -49,6 +49,14 @@ __published:	// IDE-verwaltete Komponenten
 	TPopupMenu *PopupMenu1;
 	TMenuItem *add1;
 	TMenuItem *del1;
+	TLabel *Label4;
+	TComboBox *cbSex;
+	TLabel *Label5;
+	TEdit *edAge;
+	TEdit *edHeight;
+	TLabel *Label6;
+	TEdit *edWeight;
+	TLabel *Label7;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -59,6 +67,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acDisDelExecute(TObject *Sender);
 	void __fastcall cbDiseasesKeyPress(TObject *Sender, char &Key);
 	void __fastcall lvDiseasesClick(TObject *Sender);
+	void __fastcall edAgeKeyPress(TObject *Sender, char &Key);
 
 public:
 	__fastcall TfmPerson(TComponent* Owner);

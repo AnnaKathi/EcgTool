@@ -3,7 +3,7 @@ object fmPerson: TfmPerson
   Top = 0
   BorderStyle = bsToolWindow
   Caption = 'Person anlegen'
-  ClientHeight = 421
+  ClientHeight = 540
   ClientWidth = 288
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -31,7 +31,7 @@ object fmPerson: TfmPerson
   end
   object Bevel2: TBevel
     Left = 0
-    Top = 376
+    Top = 495
     Width = 288
     Height = 4
     Align = alBottom
@@ -55,14 +55,14 @@ object fmPerson: TfmPerson
   end
   object Label3: TLabel
     Left = 16
-    Top = 137
+    Top = 265
     Width = 66
     Height = 13
     Caption = 'Erkrankungen'
   end
   object SpeedButton1: TSpeedButton
     Left = 49
-    Top = 185
+    Top = 313
     Width = 33
     Height = 22
     Action = acDisAdd
@@ -70,11 +70,39 @@ object fmPerson: TfmPerson
   end
   object SpeedButton2: TSpeedButton
     Left = 49
-    Top = 213
+    Top = 341
     Width = 33
     Height = 22
     Action = acDisDel
     Caption = 'del'
+  end
+  object Label4: TLabel
+    Left = 16
+    Top = 128
+    Width = 52
+    Height = 13
+    Caption = 'Geschlecht'
+  end
+  object Label5: TLabel
+    Left = 16
+    Top = 168
+    Width = 23
+    Height = 13
+    Caption = 'Alter'
+  end
+  object Label6: TLabel
+    Left = 16
+    Top = 195
+    Width = 53
+    Height = 13
+    Caption = 'Gr'#246#223'e (cm)'
+  end
+  object Label7: TLabel
+    Left = 16
+    Top = 222
+    Width = 60
+    Height = 13
+    Caption = 'Gewicht (kg)'
   end
   object pnInfo: TPanel
     Left = 0
@@ -84,7 +112,7 @@ object fmPerson: TfmPerson
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
-    TabOrder = 4
+    TabOrder = 8
     DesignSize = (
       288
       41)
@@ -110,12 +138,13 @@ object fmPerson: TfmPerson
   end
   object Panel1: TPanel
     Left = 0
-    Top = 380
+    Top = 499
     Width = 288
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
-    TabOrder = 3
+    TabOrder = 7
+    ExplicitTop = 380
     DesignSize = (
       288
       41)
@@ -153,7 +182,7 @@ object fmPerson: TfmPerson
   end
   object lvDiseases: TListView
     Left = 96
-    Top = 161
+    Top = 289
     Width = 180
     Height = 201
     Columns = <
@@ -168,18 +197,54 @@ object fmPerson: TfmPerson
     ReadOnly = True
     RowSelect = True
     PopupMenu = PopupMenu1
-    TabOrder = 5
+    TabOrder = 9
     ViewStyle = vsReport
     OnClick = lvDiseasesClick
   end
   object cbDiseases: TComboBox
     Left = 96
-    Top = 134
+    Top = 262
     Width = 180
     Height = 21
-    ItemHeight = 0
-    TabOrder = 2
+    ItemHeight = 13
+    TabOrder = 6
     OnKeyPress = cbDiseasesKeyPress
+  end
+  object cbSex: TComboBox
+    Left = 96
+    Top = 125
+    Width = 180
+    Height = 21
+    Style = csDropDownList
+    ItemHeight = 13
+    TabOrder = 2
+    Items.Strings = (
+      'm'#228'nnlich'
+      'weiblich')
+  end
+  object edAge: TEdit
+    Left = 96
+    Top = 165
+    Width = 80
+    Height = 21
+    TabOrder = 3
+    OnKeyPress = edAgeKeyPress
+  end
+  object edHeight: TEdit
+    Left = 96
+    Top = 192
+    Width = 80
+    Height = 21
+    TabOrder = 4
+    OnKeyPress = edAgeKeyPress
+  end
+  object edWeight: TEdit
+    Left = 96
+    Top = 219
+    Width = 80
+    Height = 21
+    TabOrder = 5
+    OnKeyPress = edAgeKeyPress
   end
   object tStartup: TTimer
     Enabled = False
@@ -212,7 +277,7 @@ object fmPerson: TfmPerson
   end
   object PopupMenu1: TPopupMenu
     Left = 184
-    Top = 216
+    Top = 344
     object add1: TMenuItem
       Action = acDisAdd
     end

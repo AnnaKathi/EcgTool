@@ -90,9 +90,11 @@ bool cMySqlSession::getLast()
 bool cMySqlSession::insert(sSession data)
 	{
 	String q = "INSERT INTO " + String(TABLE) + " ";
-	q+= "(`places_ID`, `Stamp`, `Note`) VALUES ";
+	q+= "(`places_ID`, `Temperatur`, `Humidity`, `Stamp`, `Note`) VALUES ";
 	q+= "(";
 	q+= "'" + String(data.place) + "', ";
+	q+= "'" + String(data.temp)  + "', ";
+	q+= "'" + String(data.luft)  + "', ";
 	q+= "'" + data.stamp     + "', ";
 	q+= "'" + data.note + "'";
 	q+= ")";
@@ -113,6 +115,8 @@ bool cMySqlSession::update(sSession data)
 	String q = "UPDATE " + String(TABLE) + " SET ";
 	q+= "places_ID='"  + String(data.place)       + "',";
 	q+= "Stamp='"    + data.stamp     + "',";
+	q+= "Temperatur='"  + String(data.temp)     + "',";
+	q+= "Humidity='"    + String(data.luft)     + "',";
 	q+= "Note='"     + data.note + "' ";
 	q+= "WHERE ID="  + String(data.ident);
 
@@ -159,7 +163,9 @@ bool cMySqlSession::ParseRow()
 	fdata.ident = atoi(frow[0]);
 	fdata.place = atoi(frow[1]);
 	fdata.stamp = String(frow[2]);
-	fdata.note  = String(frow[3]);
+	fdata.temp  = atof(frow[3]);
+	fdata.luft  = atof(frow[4]);
+	fdata.note  = String(frow[5]);
 	return true;
 	}
 //---------------------------------------------------------------------------

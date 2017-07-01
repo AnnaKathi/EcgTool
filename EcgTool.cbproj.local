@@ -232,5 +232,8 @@
     <Transaction>2017.07.01 10:52:10.448.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\EcgLeadAnalysis.cpp</Transaction>
     <Transaction>2017.07.01 10:52:10.448.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\EcgLeadAnalysis.h</Transaction>
     <Transaction>2017.07.01 10:52:10.448.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\EcgLeadAnalysis.dfm</Transaction>
+    <Transaction>2017.07.01 14:34:46.021.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\toolforms\addEcgMessungen.cpp</Transaction>
+    <Transaction>2017.07.01 14:34:46.021.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\toolforms\addEcgMessungen.h</Transaction>
+    <Transaction>2017.07.01 14:34:46.021.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\database\toolforms\addEcgMessungen.dfm</Transaction>
   </Transactions>
 </BorlandProject>

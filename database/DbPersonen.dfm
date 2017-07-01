@@ -54,7 +54,6 @@ object fmData: TfmData
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 1063
     DesignSize = (
       1290
       41)
@@ -75,7 +74,6 @@ object fmData: TfmData
       ParentColor = True
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1047
     end
   end
   object Panel1: TPanel
@@ -86,7 +84,6 @@ object fmData: TfmData
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 1063
     DesignSize = (
       1290
       41)
@@ -98,7 +95,6 @@ object fmData: TfmData
       Action = acClose
       Anchors = [akTop, akRight]
       TabOrder = 0
-      ExplicitLeft = 983
     end
     object pbJob: TProgressBar
       Left = 8
@@ -108,7 +104,6 @@ object fmData: TfmData
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 1
       Visible = False
-      ExplicitWidth = 960
     end
   end
   object pnPeople: TPanel

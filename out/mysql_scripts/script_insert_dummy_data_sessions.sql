@@ -1,10 +1,10 @@
 # //Dummy-Daten in alle Datenbank eintragen: Session-Daten
 #
 # //-- Subjects, 1=weiblich, 0=männlich
-INSERT INTO `ecg`.`subjects` (`Firstname`, `Lastname`, `Age`, `Sex`) VALUES ('Anna', 'Stratmann', 35, 1);
-INSERT INTO `ecg`.`subjects` (`Firstname`, `Lastname`, `Age`, `Sex`) VALUES ('Manfred', 'Umlauff', 63, 0);
-INSERT INTO `ecg`.`subjects` (`Firstname`, `Lastname`, `Age`, `Sex`) VALUES ('Manuela', 'Stratmann', 56, 1);
-INSERT INTO `ecg`.`subjects` (`Firstname`, `Lastname`, `Age`, `Sex`) VALUES ('Martin', 'Stratmann', 58, 0);
+INSERT INTO `ecg`.`subjects` (`Firstname`, `Lastname`, `Sex`, `Age`, `Height`, `Weight`) VALUES ('Anna', 'Stratmann', 1, 35, 175, 73);
+INSERT INTO `ecg`.`subjects` (`Firstname`, `Lastname`, `Sex`, `Age`, `Height`, `Weight`) VALUES ('Manfred', 'Umlauff', 0, 63, 176, 72);
+INSERT INTO `ecg`.`subjects` (`Firstname`, `Lastname`, `Sex`, `Age`, `Height`, `Weight`) VALUES ('Manuela', 'Stratmann', 1, 57, 170, 65);
+INSERT INTO `ecg`.`subjects` (`Firstname`, `Lastname`, `Sex`, `Age`, `Height`, `Weight`) VALUES ('Martin', 'Stratmann', 0, 59, 180, 82);
 
 # //-- Sub-Diseases, Diseases 1-8, Subjects 1-4
 # //Anna ist gesund, bei Manfred, Martin und Manuela Krankheiten simulieren

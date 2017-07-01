@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include "classMySql.h"
+#include "addDesc.h"
 #include "addPeople.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -72,6 +73,10 @@ void __fastcall TfmPerson::tStartupTimer(TObject *Sender)
 		{
 		edVorname->Text  = "";
 		edNachname->Text = "";
+		cbSex->ItemIndex = 0;
+		edAge->Text      = "";
+		edHeight->Text   = "";
+		edWeight->Text   = "";
 		}
 	else
 		{
@@ -87,8 +92,12 @@ void __fastcall TfmPerson::tStartupTimer(TObject *Sender)
 			{
 			edVorname->Text  = fmysql.people.row.firstname;
 			edNachname->Text = fmysql.people.row.lastname;
+			cbSex->ItemIndex = fmysql.people.row.sex;
+			edAge->Text      = String(fmysql.people.row.age);
+			edHeight->Text   = String(fmysql.people.row.height);
+			edWeight->Text   = String(fmysql.people.row.weight);
 
-			/* TODO
+
 			sarray_t dis;
 			dis = fmysql.people.getDiseasesOf(iPerson);
 			dis = fmysql.diseases.getNamesOf(dis);
@@ -102,7 +111,6 @@ void __fastcall TfmPerson::tStartupTimer(TObject *Sender)
 				item->Caption = v[0];
 				item->SubItems->Add(v[1]);
 				}
-			*/
 			}
 		}
 
@@ -123,11 +131,17 @@ void __fastcall TfmPerson::FormClose(TObject *Sender, TCloseAction &Action)
 bool TfmPerson::SaveData()
 	{
 	if (edVorname->Text == "" || edNachname->Text == "") return false;
+	if (cbSex->ItemIndex < 0) return false;
+	if (edAge->Text == "" || edHeight->Text == "" || edWeight->Text == "") return false;
 
 	sPeople data;
 	data.ident = iPerson;
 	sprintf(data.firstname, "%.127s", edVorname->Text.c_str());
 	sprintf(data.lastname,  "%.127s", edNachname->Text.c_str());
+	data.sex = cbSex->ItemIndex;
+	data.age = edAge->Text.ToInt();
+	data.height = edHeight->Text.ToInt();
+	data.weight = edWeight->Text.ToInt();
 
 	if (bNewPerson)
 		{
@@ -148,23 +162,19 @@ bool TfmPerson::SaveData()
 
 	//Erkrankungen speichern
 	int dis;
-	bool fehler = false;
 	TListItem* item;
+	sarray_t diseases; diseases.clear();
 	for (int i = 0; i < lvDiseases->Items->Count; i++)
 		{
 		item = lvDiseases->Items->Item[i];
 		dis = (int)item->Data;
-		/* TODO
-		if (!fmysql.people.addDisease(iPerson, dis))
-			{
-			//todo Fehlermeldung
-			break;
-			}
-		*/
+        diseases[i].push_back(String(dis));
 		}
-	if (fehler) return false;
 
-	return true;
+	if (!fmysql.people.saveDiseases(iPerson, diseases))
+		return false;
+	else
+		return true;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -184,7 +194,8 @@ void __fastcall TfmPerson::acSaveExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmPerson::acDisAddExecute(TObject *Sender)
 	{
-	//
+	DlgDescDbAdd(this, fmysql.diseases);
+	fmysql.diseases.listInCombo(cbDiseases, 1);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmPerson::acDisDelExecute(TObject *Sender)
@@ -236,6 +247,11 @@ void __fastcall TfmPerson::lvDiseasesClick(TObject *Sender)
 		acDisDel->Enabled = true;
 	else
 		acDisDel->Enabled = false;
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmPerson::edAgeKeyPress(TObject *Sender, char &Key)
+	{
+	//todo, nur nummerische Tasten erlauben
 	}
 //---------------------------------------------------------------------------
 

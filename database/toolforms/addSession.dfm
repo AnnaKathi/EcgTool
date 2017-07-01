@@ -48,7 +48,6 @@ object fmSessionAdd: TfmSessionAdd
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 747
     DesignSize = (
       655
       41)
@@ -70,7 +69,6 @@ object fmSessionAdd: TfmSessionAdd
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 731
     end
   end
   object pnBottom: TPanel
@@ -81,7 +79,6 @@ object fmSessionAdd: TfmSessionAdd
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 747
     DesignSize = (
       655
       41)
@@ -93,7 +90,6 @@ object fmSessionAdd: TfmSessionAdd
       Action = acClose
       Anchors = [akRight, akBottom]
       TabOrder = 0
-      ExplicitLeft = 664
     end
     object Button2: TButton
       Left = 8
@@ -112,7 +108,6 @@ object fmSessionAdd: TfmSessionAdd
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitWidth = 649
     object Bevel2: TBevel
       Left = 0
       Top = 188
@@ -132,9 +127,6 @@ object fmSessionAdd: TfmSessionAdd
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = -76
-      ExplicitTop = 245
-      ExplicitWidth = 747
       DesignSize = (
         655
         188)
@@ -201,10 +193,24 @@ object fmSessionAdd: TfmSessionAdd
       end
       object Label4: TLabel
         Left = 407
-        Top = 22
+        Top = 80
         Width = 111
         Height = 13
         Caption = 'Kommentar zur Session'
+      end
+      object Label5: TLabel
+        Left = 407
+        Top = 16
+        Width = 56
+        Height = 13
+        Caption = 'Temperatur'
+      end
+      object Label6: TLabel
+        Left = 407
+        Top = 45
+        Width = 75
+        Height = 13
+        Caption = 'Luftfeuchtigkeit'
       end
       object edStamp: TEdit
         Left = 111
@@ -246,13 +252,26 @@ object fmSessionAdd: TfmSessionAdd
       end
       object mKommentar: TMemo
         Left = 407
-        Top = 42
+        Top = 99
         Width = 240
-        Height = 135
+        Height = 78
         Anchors = [akLeft, akTop, akRight]
         ScrollBars = ssBoth
+        TabOrder = 5
+      end
+      object edTemp: TEdit
+        Left = 526
+        Top = 13
+        Width = 121
+        Height = 21
         TabOrder = 3
-        ExplicitWidth = 234
+      end
+      object edLuft: TEdit
+        Left = 526
+        Top = 42
+        Width = 121
+        Height = 21
+        TabOrder = 4
       end
     end
     object lvEcg: TListView
@@ -304,9 +323,6 @@ object fmSessionAdd: TfmSessionAdd
       ViewStyle = vsReport
       OnChange = lvEcgChange
       OnClick = lvEcgClick
-      ExplicitLeft = 1
-      ExplicitWidth = 647
-      ExplicitHeight = 405
     end
   end
   object tStartup: TTimer

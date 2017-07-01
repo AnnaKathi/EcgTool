@@ -2,37 +2,7 @@ CREATE DATABASE `ecg`
 
 USE `ecg`
 
-CREATE TABLE algRpeaks (
-  ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  Name VARCHAR(50) NOT NULL,
-  PRIMARY KEY(ID)
-)
-
-CREATE TABLE algFeatures (
-  ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  Name VARCHAR(50) NOT NULL,
-  PRIMARY KEY(ID)
-)
-
-CREATE TABLE algPreprocessing (
-  ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  Name VARCHAR(50) NOT NULL,
-  PRIMARY KEY(ID)
-)
-
-CREATE TABLE diseases (
-  ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  Name VARCHAR(50) NOT NULL,
-  PRIMARY KEY(ID)
-)
-
 CREATE TABLE postures (
-  ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  Name VARCHAR(50) NOT NULL,
-  PRIMARY KEY(ID)
-)
-
-CREATE TABLE places (
   ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   Name VARCHAR(50) NOT NULL,
   PRIMARY KEY(ID)
@@ -50,18 +20,50 @@ CREATE TABLE researchers (
   PRIMARY KEY(ID)
 )
 
+CREATE TABLE subjects (
+  ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Firstname VARCHAR(50) NOT NULL,
+  Lastname VARCHAR(50) NOT NULL,
+  Sex BOOL NOT NULL,
+  Age INTEGER UNSIGNED NOT NULL,
+  Height INTEGER UNSIGNED NOT NULL,
+  Weight INTEGER UNSIGNED NOT NULL,
+  PRIMARY KEY(ID)
+)
+
 CREATE TABLE states (
   ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   Name VARCHAR(50) NOT NULL,
   PRIMARY KEY(ID)
 )
 
-CREATE TABLE Subjects (
+CREATE TABLE places (
   ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  Firstname VARCHAR(50) NOT NULL,
-  Lastname VARCHAR(50) NOT NULL,
-  Age INTEGER UNSIGNED NOT NULL,
-  Sex BOOL NOT NULL,
+  Name VARCHAR(50) NOT NULL,
+  PRIMARY KEY(ID)
+)
+
+CREATE TABLE algRpeaks (
+  ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Name VARCHAR(50) NOT NULL,
+  PRIMARY KEY(ID)
+)
+
+CREATE TABLE algPreproc (
+  ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Name VARCHAR(50) NOT NULL,
+  PRIMARY KEY(ID)
+)
+
+CREATE TABLE algFeatures (
+  ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Name VARCHAR(50) NOT NULL,
+  PRIMARY KEY(ID)
+)
+
+CREATE TABLE diseases (
+  ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Name VARCHAR(50) NOT NULL,
   PRIMARY KEY(ID)
 )
 
@@ -69,25 +71,27 @@ CREATE TABLE sessions (
   ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   places_ID INTEGER UNSIGNED NOT NULL,
   Stamp DATETIME NOT NULL,
+  Temperatur DOUBLE NOT NULL,
+  Humidity DOUBLE NOT NULL,
   Note LONGTEXT NULL,
   PRIMARY KEY(ID),
   INDEX Sessions_FKIndex1(places_ID)
 )
 
+CREATE TABLE SubDiseases (
+  subjects_ID INTEGER UNSIGNED NOT NULL,
+  diseases_ID INTEGER UNSIGNED NOT NULL,
+  PRIMARY KEY(subjects_ID, diseases_ID),
+  INDEX Subjects_has_Diseases_FKIndex1(subjects_ID),
+  INDEX Subjects_has_Diseases_FKIndex2(diseases_ID)
+)
+
 CREATE TABLE SessionResearchers (
   sessions_ID INTEGER UNSIGNED NOT NULL,
   researchers_ID INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(Sessions_ID, Researchers_ID),
-  INDEX Sessions_has_Researchers_FKIndex1(Sessions_ID),
-  INDEX Sessions_has_Researchers_FKIndex2(Researchers_ID)
-)
-
-CREATE TABLE SubDiseases (
-  Subjects_ID INTEGER UNSIGNED NOT NULL,
-  Diseases_ID INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(Subjects_ID, Diseases_ID),
-  INDEX Subjects_has_Diseases_FKIndex1(Subjects_ID),
-  INDEX Subjects_has_Diseases_FKIndex2(Diseases_ID)
+  PRIMARY KEY(sessions_ID, researchers_ID),
+  INDEX Sessions_has_Researchers_FKIndex1(sessions_ID),
+  INDEX Sessions_has_Researchers_FKIndex2(researchers_ID)
 )
 
 CREATE TABLE ecgData (
@@ -97,26 +101,30 @@ CREATE TABLE ecgData (
   positions_ID INTEGER UNSIGNED NOT NULL,
   states_ID INTEGER UNSIGNED NOT NULL,
   postures_ID INTEGER UNSIGNED NOT NULL,
-	ecgValues LONGTEXT NOT NULL,
+  BPSys INTEGER UNSIGNED NOT NULL,
+  BPDia INTEGER UNSIGNED NOT NULL,
+  Puls INTEGER UNSIGNED NOT NULL,
+  ECG LONGTEXT NOT NULL,
+  Note LONGTEXT NULL,
   PRIMARY KEY(ID),
-  INDEX ecgData_FKIndex2(postures_ID),
-  INDEX ecgData_FKIndex3(States_ID),
-  INDEX ecgData_FKIndex4(Positions_ID),
-  INDEX ecgData_FKIndex5(Subjects_ID),
-  INDEX ecgData_FKIndex6(Sessions_ID)
+  INDEX ECGData_FKIndex2(postures_ID),
+  INDEX ECGData_FKIndex3(states_ID),
+  INDEX ECGData_FKIndex4(positions_ID),
+  INDEX ECGData_FKIndex5(subjects_ID),
+  INDEX ECGData_FKIndex6(sessions_ID)
 )
 
 CREATE TABLE templates (
   ID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  ecgData_ID INTEGER UNSIGNED NOT NULL,
-  algPreprocessing_ID INTEGER UNSIGNED NOT NULL,
-  algRpeaks_ID INTEGER UNSIGNED NOT NULL,
+  algPreproc_ID INTEGER UNSIGNED NOT NULL,
   algFeatures_ID INTEGER UNSIGNED NOT NULL,
-  Template VARCHAR(1024) NOT NULL,
+  algRpeaks_ID INTEGER UNSIGNED NOT NULL,
+  ecgData_ID INTEGER UNSIGNED NOT NULL,
+  template LONGTEXT NOT NULL,
   PRIMARY KEY(ID),
-  INDEX Features_FKIndex1(algPreprocessing_ID),
-  INDEX Features_FKIndex2(algRpeaks_ID),
-  INDEX Features_FKIndex3(algFeatures_ID),
-  INDEX Features_FKIndex4(ECGData_ID)
+  INDEX Erkennungswerte_FKIndex2(ecgData_ID),
+  INDEX Erkennungswerte_FKIndex3(algRpeaks_ID),
+  INDEX Erkennungswerte_FKIndex4(algFeatures_ID),
+  INDEX templates_FKIndex4(algPreproc_ID)
 )
 

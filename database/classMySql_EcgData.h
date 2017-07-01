@@ -16,6 +16,10 @@ struct sEcgData
 	int			position;
 	int			state;
 	int			posture;
+	int			bpsys;
+	int			bpdia;
+	int			puls;
+	String		note;
 	double		werte[3000];
 	iarray_t	array_werte;
 	};

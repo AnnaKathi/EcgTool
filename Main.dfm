@@ -3,7 +3,7 @@ object fmMain: TfmMain
   Top = 0
   BorderStyle = bsToolWindow
   Caption = 'EcgTool'
-  ClientHeight = 339
+  ClientHeight = 359
   ClientWidth = 1026
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
@@ -64,7 +64,7 @@ object fmMain: TfmMain
   end
   object sbMain: TStatusBar
     Left = 0
-    Top = 320
+    Top = 340
     Width = 1026
     Height = 19
     Panels = <
@@ -78,17 +78,18 @@ object fmMain: TfmMain
       item
         Width = 50
       end>
+    ExplicitTop = 320
   end
   object pnMain: TPanel
     Left = 0
     Top = 45
     Width = 1026
-    Height = 275
+    Height = 295
     Align = alClient
     BevelOuter = bvNone
     Enabled = False
     TabOrder = 2
-    ExplicitTop = 47
+    ExplicitHeight = 275
     object btAnalysis: TBitBtn
       Left = 8
       Top = 6

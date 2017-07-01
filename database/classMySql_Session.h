@@ -13,6 +13,8 @@ struct sSession
 	int			ident;
 	int			place;
 	String		stamp;
+	double		temp;
+	double		luft;
 	String		note;
 	};
 //---------------------------------------------------------------------------

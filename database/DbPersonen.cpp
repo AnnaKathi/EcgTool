@@ -160,9 +160,20 @@ void __fastcall TfmData::tCallbackTimer(TObject *Sender)
 		if (person <= 0) return;
 
 		//Diseases anpassen
-		String diseases = fmysql.people.getDiseasesOf(person);
+		sarray_t diseases = fmysql.people.getDiseasesOf(person);
+		//TODO Stringbildung in fmDiseases verlagern
+		String dis = "";
+		for (sarray_itr itr = diseases.begin(); itr != diseases.end(); itr++)
+			{
+			slist_t& v = itr->second;
+			dis = v[0];
+			if (dis == "")
+				dis = v[0];
+			else
+				dis += ";" + v[0];
+			}
 		fmDiseases->LockFilter();
-		fmDiseases->ShowFilteredData(diseases);
+		fmDiseases->ShowFilteredData(dis);
 
 		//EKG-Daten anpassen
 		fmEcg->LockFilter();

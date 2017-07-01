@@ -9,6 +9,8 @@ USEFORM("Sessions.cpp", fmSessions);
 USEFORM("DataAnalysis.cpp", fmAnalysis);
 USEFORM("RequestBox.cpp", fmRequest);
 USEFORM("Details.cpp", fmDetails);
+USEFORM("LeadAnalysis.cpp", fmLeads);
+USEFORM("EcgLeadAnalysis.cpp", fmEcgLeads);
 USEFORM("Features.cpp", fmFeatures);
 USEFORM("ChoiKlassifizierung.cpp", fmChoiClassification);
 USEFORM("VergleichAlg.cpp", fmVergleich);
@@ -25,11 +27,10 @@ USEFORM("database\toolforms\addEcg.cpp", fmAddEcg);
 USEFORM("database\toolforms\addEcgFiles.cpp", fmEcgFiles);
 USEFORM("database\toolforms\selectDescDb.cpp", fmSelectDesc);
 USEFORM("database\toolforms\wizardSession_Main.cpp", fmWizSession);
+USEFORM("database\toolforms\addEcgMessungen.cpp", fmAddMessung);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
 USEFORM("algorithms\AlgChoi2.cpp", fmChoi2);
-USEFORM("LeadAnalysis.cpp", fmLeads);
-USEFORM("EcgLeadAnalysis.cpp", fmEcgLeads);
 //---------------------------------------------------------------------------
 #include "database/classMySql.h"
 cMySql fmysql;
@@ -62,6 +63,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TfmDatabases), &fmDatabases);
 		Application->CreateForm(__classid(TfmLeads), &fmLeads);
 		Application->CreateForm(__classid(TfmEcgLeads), &fmEcgLeads);
+		Application->CreateForm(__classid(TfmAddMessung), &fmAddMessung);
 		Application->Run();
 	}
 	catch (Exception &exception)

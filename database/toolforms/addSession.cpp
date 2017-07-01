@@ -74,12 +74,12 @@ String TfmSessionAdd::getNow()
 //---------------------------------------------------------------------------
 void TfmSessionAdd::GetEcgData()
 	{
-	int person; int state; int lage;
-	if (!fmAddEcg->GetEcgHeader(person, state, lage)) return;
+	int person;
+	if (!fmAddEcgMessung->GetEcgHeader(person)) return;
 
-	int anz; int pos; String file; int format; String delim;
+	int state; int lage; int anz; int pos; String file; int format; String delim;
 	TListItem* item;
-	while (fmAddEcg->GetNextEcgRow(anz, pos, file, format, delim))
+	while (fmAddEcgMessung->GetNextEcgRow(state, lage, anz, pos, file, format, delim))
 		{
 		item = lvEcg->Items->Add();
 		item->Caption = String(lvEcg->Items->Count);
@@ -93,7 +93,7 @@ void TfmSessionAdd::GetEcgData()
 		item->SubItems->Add(delim);
 		}
 
-	fmAddEcg->Close();
+	fmAddEcgMessung->Close();
 	}
 //---------------------------------------------------------------------------
 bool TfmSessionAdd::CheckSession()
@@ -101,6 +101,9 @@ bool TfmSessionAdd::CheckSession()
 	//Pflichtfelder prüfen
 	if (edStamp->Text == "")   return false;
 	if (cbOrte->ItemIndex < 0) return false;
+
+	if (edTemp->Text == "") return false;
+	if (edLuft->Text == "") return false;
 
 	if (lvResearchers->Items->Count <= 0) return false;
 
@@ -115,6 +118,8 @@ bool TfmSessionAdd::SaveSession()
 	//-- Session speichern
 	sSession sdata;
 	sdata.place = (int)cbOrte->Items->Objects[cbOrte->ItemIndex];
+	sdata.temp  = edTemp->Text.ToDouble();
+	sdata.luft  = edLuft->Text.ToDouble();
 	sdata.stamp = edStamp->Text;
 	sdata.note = mKommentar->Text;
 
@@ -278,12 +283,20 @@ void __fastcall TfmSessionAdd::acSaveExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmSessionAdd::acEcgAddExecute(TObject *Sender)
 	{
+	/* OLD
 	fmAddEcg = new TfmAddEcg(this);
 
 	fmAddEcg->SetCallbackTimer(TimerCallback);
 	fmAddEcg->ShowModal();
 
 	delete fmAddEcg;
+	*/
+
+	fmAddEcgMessung = new TfmAddMessung(this);
+	fmAddEcgMessung->SetCallbackTimer(TimerCallback);
+    fmAddEcgMessung->ShowModal();
+	
+	delete fmAddEcgMessung;
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmSessionAdd::acEcgDelExecute(TObject *Sender)

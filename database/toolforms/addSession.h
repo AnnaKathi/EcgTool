@@ -16,7 +16,8 @@
 #include "basics/classData.h"
 #include "ecg/classEcg.h"
 #include "database/classMySql_Session.h"
-#include "database/toolforms/addEcg.h"
+#include "database/toolforms/addEcg.h" //OLD ??
+#include "database/toolforms/addEcgMessungen.h"
 //---------------------------------------------------------------------------
 class TfmSessionAdd : public TForm
 {
@@ -29,6 +30,8 @@ private:
 
 	TfmAddEcg*	fmAddEcg;
 	void		GetEcgData();
+
+	TfmAddMessung*	fmAddEcgMessung;
 
 	bool		CheckSession();
 	bool		SaveSession();
@@ -71,6 +74,10 @@ __published:	// IDE-verwaltete Komponenten
 	TMemo *mKommentar;
 	TListView *lvEcg;
 	TBevel *Bevel2;
+	TLabel *Label5;
+	TEdit *edTemp;
+	TLabel *Label6;
+	TEdit *edLuft;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
