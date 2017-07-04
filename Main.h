@@ -106,6 +106,7 @@ __published:	// IDE-verwaltete Komponenten
 	TMenuItem *SessionWizard2;
 	TButton *btLKeadAnalysis;
 	TButton *btEcgAnalysis;
+	TButton *btWavelib;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -126,6 +127,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acSessionWizardExecute(TObject *Sender);
 	void __fastcall btLKeadAnalysisClick(TObject *Sender);
 	void __fastcall btEcgAnalysisClick(TObject *Sender);
+	void __fastcall btWavelibClick(TObject *Sender);
 
 public:
 	__fastcall TfmMain(TComponent* Owner);

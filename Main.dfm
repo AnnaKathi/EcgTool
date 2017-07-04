@@ -78,7 +78,6 @@ object fmMain: TfmMain
       item
         Width = 50
       end>
-    ExplicitTop = 320
   end
   object pnMain: TPanel
     Left = 0
@@ -89,7 +88,6 @@ object fmMain: TfmMain
     BevelOuter = bvNone
     Enabled = False
     TabOrder = 2
-    ExplicitHeight = 275
     object btAnalysis: TBitBtn
       Left = 8
       Top = 6
@@ -4395,6 +4393,15 @@ object fmMain: TfmMain
       Caption = 'Test Ecg-Lead Analysis'
       TabOrder = 11
       OnClick = btEcgAnalysisClick
+    end
+    object btWavelib: TButton
+      Left = 320
+      Top = 212
+      Width = 129
+      Height = 25
+      Caption = 'Test Wavelib'
+      TabOrder = 12
+      OnClick = btWavelibClick
     end
   end
   object MainMenu: TMainMenu
