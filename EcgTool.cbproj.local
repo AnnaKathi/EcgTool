@@ -235,5 +235,10 @@
     <Transaction>2017.07.01 14:34:46.021.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\toolforms\addEcgMessungen.cpp</Transaction>
     <Transaction>2017.07.01 14:34:46.021.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\toolforms\addEcgMessungen.h</Transaction>
     <Transaction>2017.07.01 14:34:46.021.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\database\toolforms\addEcgMessungen.dfm</Transaction>
+    <Transaction>2017.07.06 10:23:09.077.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\features\classWavelib.cpp</Transaction>
+    <Transaction>2017.07.06 10:23:09.077.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\features\classWavelib.h</Transaction>
+    <Transaction>2017.07.06 11:03:12.372.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\Wavelet.cpp</Transaction>
+    <Transaction>2017.07.06 11:03:12.372.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\Wavelet.h</Transaction>
+    <Transaction>2017.07.06 11:03:12.372.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\algorithms\Wavelet.dfm</Transaction>
   </Transactions>
 </BorlandProject>
