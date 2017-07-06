@@ -33,8 +33,8 @@ todo: extern cMySql fmysql in definitions.h verlagern?
 //TEST, Integration von wavelib.h
 //#include "inc/wavelib/wavelib.h"
 //#pragma link "inc/wavelib/wavelibAnna.lib"
-#pragma link "inc/wavelib/wtlibrary.lib"
-#include "inc/wavelib/wtlibrary.h"
+//#pragma link "inc/wavelib/wtlibrary.lib"
+//#include "inc/wavelib/wtlibrary.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -343,7 +343,7 @@ void __fastcall TfmMain::btWavelibClick(TObject *Sender)
 	//TEST wavelib
 	//wave_init("db4");
 
-	int nr = test123();
+	//int nr = test123();
 	//testfunktion(12);
 	}
 //---------------------------------------------------------------------------
