@@ -1,72 +1,61 @@
 [Closed Files]
-File_0=TSourceModule,'D:\src\EcgTool\ecg\classEcg.cpp',0,1,1,1,19,0,0,,
-File_1=TSourceModule,'d:\dev\rad\include\vcl\Forms.hpp',0,1,1008,1,1022,0,0,,
-File_2=TSourceModule,'d:\dev\rad\include\dinkumware\stdexcept',0,1,1,1,30,0,0,,
-File_3=TSourceModule,'D:\src\EcgTool\algorithms\Wavelet.cpp',0,1,76,70,87,0,0,,{1,89,9}
-File_4=TSourceModule,'D:\src\EcgTool\algorithms\features\classWavelib.cpp',0,1,686,28,742,0,0,,{1,2432,44}{2,2474,26}{3,2507,26}{4,2539,26}
-File_5=TSourceModule,'D:\src\EcgTool\algorithms\EinzelAusw.cpp',0,1,1,1,1,0,0,,
-File_6=TSourceModule,'D:\Alg.Source\wavelib\header\wavelib.h',0,1,46,24,24,0,0,,
-File_7=TSourceModule,'D:\Alg.Source\wavelib\src\wavelib.h',0,1,121,1,161,0,0,,
+File_0=TSourceModule,'D:\src\EcgTool\basics\classData.cpp',0,1,1,1,18,0,0,,
+File_1=TSourceModule,'D:\src\EcgTool\database\toolforms\addPeople.cpp',0,1,1,1,17,0,0,,
+File_2=TSourceModule,'D:\src\EcgTool\database\baseforms\basePeople.cpp',0,1,200,1,220,0,0,,
+File_3=TSourceModule,'D:\src\EcgTool\database\DbPersonen.cpp',0,1,43,15,65,0,0,,
+File_4=TSourceModule,'D:\src\EcgTool\database\toolforms\selectPeople.cpp',0,1,71,1,91,0,0,,
+File_5=TSourceModule,'D:\src\EcgTool\database\toolforms\selectDescDb.cpp',0,1,1,1,1,0,0,,
+File_6=TSourceModule,'D:\src\EcgTool\database\classMySql.cpp',0,1,1,1,1,0,0,,
+File_7=TSourceModule,'D:\src\EcgTool\Main.cpp',0,1,322,26,341,0,0,,{1,33,1}{2,342,1}
+File_8=TSourceModule,'D:\src\EcgTool\database\classMySql_Session.cpp',0,1,1,43,10,0,0,,
 
 [Modules]
-Module0=D:\src\EcgTool\database\baseforms\basePeople.cpp
+Module0=D:\src\EcgTool\database\toolforms\addPersonSession.cpp
 Module1=D:\src\EcgTool\database\toolforms\addEcgMessungen.cpp
-Module2=D:\src\EcgTool\database\toolforms\addSession.cpp
-Module3=D:\src\EcgTool\database\classMySql_Session.cpp
+Module2=d:\dev\rad\include\dinkumware\xtree
+Module3=D:\src\EcgTool\database\toolforms\addSession.cpp
 Module4=D:\src\EcgTool\Sessions.cpp
-Module5=D:\src\EcgTool\basics\classData.cpp
-Module6=d:\dev\rad\include\dinkumware\xtree
-Module7=D:\src\EcgTool\Main.cpp
-Module8=default.htm
-Count=9
+Module5=D:\src\EcgTool\database\baseforms\baseSession.cpp
+Module6=default.htm
+Count=7
 EditWindowCount=1
 
-[D:\src\EcgTool\database\baseforms\basePeople.cpp]
+[D:\src\EcgTool\database\toolforms\addPersonSession.cpp]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
 
 [D:\src\EcgTool\database\toolforms\addEcgMessungen.cpp]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=1
 
-[D:\src\EcgTool\database\toolforms\addSession.cpp]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=1
-
-[D:\src\EcgTool\database\classMySql_Session.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\src\EcgTool\Sessions.cpp]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[D:\src\EcgTool\basics\classData.cpp]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
 [d:\dev\rad\include\dinkumware\xtree]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[D:\src\EcgTool\Main.cpp]
+[D:\src\EcgTool\database\toolforms\addSession.cpp]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
+
+[D:\src\EcgTool\Sessions.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=1
+
+[D:\src\EcgTool\database\baseforms\baseSession.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=1
 
 [default.htm]
 ModuleType=TURLModule
 
 [EditWindow0]
-ViewCount=9
-CurrentEditView=D:\src\EcgTool\database\baseforms\basePeople.cpp
+ViewCount=7
+CurrentEditView=D:\src\EcgTool\database\toolforms\addPersonSession.cpp
 View0=0
 View1=1
 View2=2
@@ -74,8 +63,6 @@ View3=3
 View4=4
 View5=5
 View6=6
-View7=7
-View8=8
 PercentageSizes=1
 Create=1
 Visible=1
@@ -102,7 +89,7 @@ RightPanelData=00000800010000000000B022000000000000006B0A0000000000000100000000B
 BottomPanelSize=0
 BottomPanelClients=DockSite1
 BottomPanelData=0000080001000100000009000000446F636B5369746531153400000000000000CC03000000000000FFFFFFFF
-BottomMiddlePanelSize=2111
+BottomMiddlePanelSize=1407
 BottomMiddlePanelClients=DockSite0,MessageView@EditWindow0
 BottomMiddelPanelData=0000080001000100000009000000446F636B53697465303619000000000000007D1B0000000000000100000000361900000B0000004D65737361676556696577FFFFFFFF
 
@@ -112,16 +99,27 @@ WelcomePageURL=bds:/default.htm
 
 [View1]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\Main.cpp
-CursorX=26
-CursorY=341
-TopLine=322
+Module=d:\dev\rad\include\dinkumware\xtree
+CursorX=1
+CursorY=472
+TopLine=452
 LeftCol=1
 Elisions=
-Bookmarks={1,33,1}{2,342,1}
-EditViewName=D:\src\EcgTool\Main.cpp
+Bookmarks=
+EditViewName=d:\dev\rad\include\dinkumware\xtree
 
 [View2]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\database\baseforms\baseSession.cpp
+CursorX=1
+CursorY=1
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=Borland.FormDesignerView
+
+[View3]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\Sessions.cpp
 CursorX=1
@@ -130,36 +128,25 @@ TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=D:\src\EcgTool\Sessions.cpp
-
-[View3]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\database\classMySql_Session.cpp
-CursorX=43
-CursorY=10
-TopLine=1
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\database\classMySql_Session.cpp
+EditViewName=Borland.FormDesignerView
 
 [View4]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\basics\classData.cpp
-CursorX=52
-CursorY=15
-TopLine=1
+Module=D:\src\EcgTool\database\toolforms\addSession.cpp
+CursorX=1
+CursorY=321
+TopLine=298
 LeftCol=1
 Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\basics\classData.cpp
+Bookmarks={1,328,7}{2,320,46}
+EditViewName=D:\src\EcgTool\database\toolforms\addSession.cpp
 
 [View5]
 CustomEditViewType=TEditView
-Module=D:\src\EcgTool\database\toolforms\addSession.cpp
+Module=D:\src\EcgTool\database\toolforms\addPersonSession.cpp
 CursorX=1
-CursorY=1
-TopLine=1
+CursorY=76
+TopLine=49
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -176,31 +163,10 @@ Elisions=
 Bookmarks=
 EditViewName=Borland.FormDesignerView
 
-[View7]
-CustomEditViewType=TEditView
-Module=D:\src\EcgTool\database\baseforms\basePeople.cpp
-CursorX=1
-CursorY=1
-TopLine=1
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\src\EcgTool\database\baseforms\basePeople.cpp
-
-[View8]
-CustomEditViewType=TEditView
-Module=d:\dev\rad\include\dinkumware\xtree
-CursorX=1
-CursorY=472
-TopLine=452
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=d:\dev\rad\include\dinkumware\xtree
-
 [Watches]
-Count=1
+Count=2
 Watch0='fderiv2',256,0,18,1,0,'Überwachte Ausdrücke'
+Watch1='person',256,0,18,1,0,'Überwachte Ausdrücke'
 
 [WatchWindow]
 WatchColumnWidth=120
@@ -224,12 +190,11 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=5
+Count=4
 Breakpoint0='D:\src\EcgTool\algorithms\AlgChoi.cpp',320,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint1='D:\src\EcgTool\inc\libsvm\svm.cpp',2106,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint2='D:\src\EcgTool\SessionAdd.cpp',151,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint3='D:\src\EcgTool\database\toolforms\addSession.cpp',78,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint4='D:\src\EcgTool\basics\classData.cpp',18,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint3='D:\src\EcgTool\database\toolforms\addSession.cpp',82,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
@@ -519,8 +484,8 @@ SplitPos=176
 
 [PropInspDesignerSelection]
 ArrangeBy=Name
-SelectedItem=Action,
-ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,Font=0,GlassFrame=0,HorzScrollBar=0,Margins=0,Padding=0,BevelEdges=0,HotTrackStyles=0,IconOptions=0,PopupMenu=0
+SelectedItem=Glyph,Action
+ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,Font=0,GlassFrame=0,HorzScrollBar=0,Margins=0,Padding=0,BevelEdges=0,HotTrackStyles=0,IconOptions=0,PopupMenu=0,Action=0,VertScrollBar=0
 
 [ModelViewTool]
 PercentageSizes=1
@@ -548,7 +513,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-885
+Top=-888
 Width=3562
 Height=4827
 MaxLeft=-1
@@ -567,7 +532,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-885
+Top=-888
 Width=13604
 Height=212
 MaxLeft=-1
@@ -586,7 +551,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-885
+Top=-888
 Width=3562
 Height=4827
 MaxLeft=-1
@@ -605,7 +570,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-885
+Top=-888
 Width=3562
 Height=2298
 MaxLeft=-1
@@ -708,12 +673,12 @@ State=0
 Left=0
 Top=23
 Width=5859
-Height=1971
+Height=1240
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=5859
-ClientHeight=1971
-TBDockHeight=1971
+ClientHeight=1240
+TBDockHeight=1240
 LRDockWidth=4323
 Dockable=1
 StayOnTop=0
@@ -810,5 +775,5 @@ Dockable=1
 StayOnTop=0
 TabPosition=0
 ActiveTabID=ProjectManager
-TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
+TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
 
