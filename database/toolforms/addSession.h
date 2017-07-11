@@ -78,6 +78,10 @@ __published:	// IDE-verwaltete Komponenten
 	TEdit *edTemp;
 	TLabel *Label6;
 	TEdit *edLuft;
+	TAction *acAddKnownPerson;
+	TAction *acAddNewPerson;
+	TButton *btNewPerson;
+	TButton *btKnwonPerson;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
@@ -95,6 +99,8 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acSaveExecute(TObject *Sender);
 	void __fastcall acEcgAddExecute(TObject *Sender);
 	void __fastcall acEcgDelExecute(TObject *Sender);
+	void __fastcall acAddKnownPersonExecute(TObject *Sender);
+	void __fastcall acAddNewPersonExecute(TObject *Sender);
 
 public:		
 	__fastcall TfmSessionAdd(TComponent* Owner);

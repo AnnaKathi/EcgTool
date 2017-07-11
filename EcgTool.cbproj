@@ -19,13 +19,13 @@
     <CfgParent>Base</CfgParent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Base)'!=''">
-    <OutputExt>exe</OutputExt>
     <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
-    <Defines>NO_STRICT</Defines>
+    <OutputExt>exe</OutputExt>
     <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+    <Defines>NO_STRICT</Defines>
     <DynamicRTL>true</DynamicRTL>
-    <UsePackages>true</UsePackages>
     <ILINK_ObjectSearchPath>TestKlassen;ecg;basics;data;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc\opencv-master\lda\src;algorithms\classifications\libSVM;D:\libSVM\libsvm test library;inc\libsvm;algorithms\rpeak-detection</ILINK_ObjectSearchPath>
+    <UsePackages>true</UsePackages>
     <ProjectType>CppVCLApplication</ProjectType>
     <PackageImports>vcl.bpi;rtl.bpi;bcbie.bpi;vclx.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;dbrtl.bpi;vcldb.bpi;bdertl.bpi;vcldbx.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;websnap.bpi;webdsnap.bpi;inet.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;dsnap.bpi</PackageImports>
     <BCC_wpar>false</BCC_wpar>
@@ -35,10 +35,10 @@
     <Multithreaded>true</Multithreaded>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Cfg_1)'!=''">
-    <DCC_Optimize>false</DCC_Optimize>
     <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
-    <Defines>_DEBUG;$(Defines)</Defines>
+    <DCC_Optimize>false</DCC_Optimize>
     <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+    <Defines>_DEBUG;$(Defines)</Defines>
     <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
     <BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
     <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
@@ -49,8 +49,8 @@
     <IntermediateOutputDir>out\debug</IntermediateOutputDir>
     <TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
     <BCC_StackFrames>true</BCC_StackFrames>
-    <ILINK_LibraryPath>$(BDS)\lib\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+    <ILINK_LibraryPath>$(BDS)\lib\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     <TASM_Debugging>Full</TASM_Debugging>
     <BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
   </PropertyGroup>
@@ -81,6 +81,10 @@
     </VFOLDERS><HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Count">15</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item0">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc\mysql;inc\mysql\mysql;..\OpenCV\opencv\build\include;inc\opencv\lda\include;inc\opencv;algorithms\classifications\libSVM;D:\libSVM\libsvm test library;inc\libsvm;algorithms\rpeak-detection;inc\wavelib</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item1">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc\mysql;inc\mysql\mysql;..\OpenCV\opencv\build\include;inc\opencv\lda\include;inc\opencv;algorithms\classifications\libSVM;D:\libSVM\libsvm test library;inc\libsvm</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item2">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc\mysql;inc\mysql\mysql;..\OpenCV\opencv\build\include;inc\opencv\lda\include;inc\opencv</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item3">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc\mysql;inc\mysql\mysql;..\OpenCV\opencv\build\include;inc\opencv-master\lda\src;inc\opencv\lda\include</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item4">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc\mysql;inc\mysql\mysql;..\OpenCV\opencv\build\include</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item5">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc\mysql;inc\mysql\mysql;inc\alglib;inc\alglib\out</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item6">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc\mysql;inc\mysql\mysql</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item7">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item8">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item9">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications;database;database\baseforms</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item10">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications;database</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item11">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc;tools;alg;algorithms;features;classifications;algorithms\features;algorithms\classifications</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item12">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data;inc</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item13">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg;basics;data</HistoryLists_hlIncludePath><HistoryLists_hlIncludePath Name="Item14">$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;TestKlassen;ecg</HistoryLists_hlIncludePath></HistoryLists_hlIncludePath><HistoryLists_hlFinalOutputDir><HistoryLists_hlFinalOutputDir Name="Count">1</HistoryLists_hlFinalOutputDir><HistoryLists_hlFinalOutputDir Name="Item0">out</HistoryLists_hlFinalOutputDir></HistoryLists_hlFinalOutputDir><HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Count">1</HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Item0">$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\lib\psdk;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc;inc\mysql;inc\mysql\mysql;..\OpenCV\opencv\build\include;inc\opencv-master\lda\src;inc\opencv\lda\include;inc\opencv;algorithms\classifications\libSVM;D:\libSVM\libsvm test library;inc\libsvm;algorithms\rpeak-detection;inc\wavelib</HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Item1">$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\lib\psdk;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc;inc\mysql;inc\mysql\mysql;..\OpenCV\opencv\build\include;inc\opencv-master\lda\src;inc\opencv\lda\include</HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Item2">$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\lib\psdk;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc;inc\mysql;inc\mysql\mysql;..\OpenCV\opencv\build\include</HistoryLists_hlILINK_LibraryPath><HistoryLists_hlILINK_LibraryPath Name="Item3">$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\lib\psdk;ecg;basics;inc;algorithms;algorithms\features;algorithms\classifications;database;database\baseforms;database\toolforms;inc;inc\mysql;inc\mysql\mysql;inc\alglib;inc\alglib\out</HistoryLists_hlILINK_LibraryPath></HistoryLists_hlILINK_LibraryPath><HistoryLists_hlDefines><HistoryLists_hlDefines Name="Count">1</HistoryLists_hlDefines><HistoryLists_hlDefines Name="Item0">NO_STRICT</HistoryLists_hlDefines><HistoryLists_hlDefines Name="Item1">NO_STRICT</HistoryLists_hlDefines></HistoryLists_hlDefines><HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_MaxErrors Name="Count">1</HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_MaxErrors Name="Item0">0</HistoryLists_hlILINK_MaxErrors></HistoryLists_hlILINK_MaxErrors><HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_FileAlignment Name="Count">1</HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_FileAlignment Name="Item0">0x200</HistoryLists_hlILINK_FileAlignment></HistoryLists_hlILINK_FileAlignment><HistoryLists_hlILINK_ObjectAlignment><HistoryLists_hlILINK_ObjectAlignment Name="Count">1</HistoryLists_hlILINK_ObjectAlignment><HistoryLists_hlILINK_ObjectAlignment Name="Item0">4096</HistoryLists_hlILINK_ObjectAlignment></HistoryLists_hlILINK_ObjectAlignment><Excluded_Packages>
       
       
+      
+      
+      
+      
       <Excluded_Packages Name="$(BDS)\bin\bcboffice2k100.bpl">CodeGear C++Builder Office 2000 Servers Package</Excluded_Packages>
       <Excluded_Packages Name="$(BDS)\bin\bcbofficexp100.bpl">CodeGear C++Builder Office XP Servers Package</Excluded_Packages>
     </Excluded_Packages><HistoryLists_hlDCC_CodePage><HistoryLists_hlDCC_CodePage Name="Count">1</HistoryLists_hlDCC_CodePage><HistoryLists_hlDCC_CodePage Name="Item0">0</HistoryLists_hlDCC_CodePage></HistoryLists_hlDCC_CodePage><HistoryLists_hlBCC_MaxIdentifierLength><HistoryLists_hlBCC_MaxIdentifierLength Name="Count">1</HistoryLists_hlBCC_MaxIdentifierLength><HistoryLists_hlBCC_MaxIdentifierLength Name="Item0">250</HistoryLists_hlBCC_MaxIdentifierLength></HistoryLists_hlBCC_MaxIdentifierLength><HistoryLists_hlTASM_HashTableCapacity><HistoryLists_hlTASM_HashTableCapacity Name="Count">1</HistoryLists_hlTASM_HashTableCapacity><HistoryLists_hlTASM_HashTableCapacity Name="Item0">8192</HistoryLists_hlTASM_HashTableCapacity></HistoryLists_hlTASM_HashTableCapacity><HistoryLists_hlTASM_MaxSymbolLength><HistoryLists_hlTASM_MaxSymbolLength Name="Count">1</HistoryLists_hlTASM_MaxSymbolLength><HistoryLists_hlTASM_MaxSymbolLength Name="Item0">12</HistoryLists_hlTASM_MaxSymbolLength></HistoryLists_hlTASM_MaxSymbolLength><HistoryLists_hlTASM_Passes><HistoryLists_hlTASM_Passes Name="Count">1</HistoryLists_hlTASM_Passes><HistoryLists_hlTASM_Passes Name="Item0">1</HistoryLists_hlTASM_Passes></HistoryLists_hlTASM_Passes><HistoryLists_hlTASM_VersionId><HistoryLists_hlTASM_VersionId Name="Count">1</HistoryLists_hlTASM_VersionId><HistoryLists_hlTASM_VersionId Name="Item0">0</HistoryLists_hlTASM_VersionId></HistoryLists_hlTASM_VersionId></CPlusPlusBuilder.Personality></BorlandProject></BorlandProject>
@@ -94,70 +98,70 @@
       <VirtualFolder>{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}</VirtualFolder>
       <Form>fmChoi</Form>
       <DependentOn>algorithms\AlgChoi.h</DependentOn>
-      <BuildOrder>52</BuildOrder>
+      <BuildOrder>54</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\AlgChoi2.cpp">
       <VirtualFolder>{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}</VirtualFolder>
       <Form>fmChoi2</Form>
       <DependentOn>algorithms\AlgChoi2.h</DependentOn>
-      <BuildOrder>53</BuildOrder>
+      <BuildOrder>55</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\classifications\classChoiSVM.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
       <DependentOn>algorithms\classifications\classChoiSVM.h</DependentOn>
-      <BuildOrder>64</BuildOrder>
+      <BuildOrder>66</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\classifications\classLDA.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
       <DependentOn>algorithms\classifications\classLDA.h</DependentOn>
-      <BuildOrder>62</BuildOrder>
+      <BuildOrder>64</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\EinzelAusw.cpp">
       <VirtualFolder>{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}</VirtualFolder>
       <Form>fmSingle</Form>
       <DependentOn>algorithms\EinzelAusw.h</DependentOn>
-      <BuildOrder>51</BuildOrder>
+      <BuildOrder>53</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classAC.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classAC.h</DependentOn>
-      <BuildOrder>56</BuildOrder>
+      <BuildOrder>58</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classChoiFeatures.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classChoiFeatures.h</DependentOn>
-      <BuildOrder>58</BuildOrder>
+      <BuildOrder>60</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classFeaturesChoi.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classFeaturesChoi.h</DependentOn>
-      <BuildOrder>57</BuildOrder>
+      <BuildOrder>59</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classFeaturesWaili3.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classFeaturesWaili3.h</DependentOn>
-      <BuildOrder>60</BuildOrder>
+      <BuildOrder>62</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classRandomPoints.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classRandomPoints.h</DependentOn>
-      <BuildOrder>59</BuildOrder>
+      <BuildOrder>61</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\features\classWavelib.cpp">
       <VirtualFolder>{CDCD5E9C-7EAB-4FEB-A06A-BDFDDFEC3E70}</VirtualFolder>
       <DependentOn>algorithms\features\classWavelib.h</DependentOn>
-      <BuildOrder>61</BuildOrder>
+      <BuildOrder>63</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\rpeak-detection\classRpeaksChoi.cpp">
       <VirtualFolder>{0D52018B-A219-403B-8D66-6FCE05A24DF7}</VirtualFolder>
       <DependentOn>algorithms\rpeak-detection\classRpeaksChoi.h</DependentOn>
-      <BuildOrder>55</BuildOrder>
+      <BuildOrder>57</BuildOrder>
     </CppCompile>
     <CppCompile Include="algorithms\Wavelet.cpp">
       <VirtualFolder>{4CFFF5AB-3E87-4649-899E-96C27B14AB7A}</VirtualFolder>
       <Form>fmWavelet</Form>
       <DependentOn>algorithms\Wavelet.h</DependentOn>
-      <BuildOrder>54</BuildOrder>
+      <BuildOrder>56</BuildOrder>
     </CppCompile>
     <CppCompile Include="basics\classArray.cpp">
       <VirtualFolder>{DEE0BA76-10EE-41DE-A5C9-252438BCBA79}</VirtualFolder>
@@ -283,25 +287,31 @@
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
       <Form>fmAddEcg</Form>
       <DependentOn>database\toolforms\addEcg.h</DependentOn>
-      <BuildOrder>44</BuildOrder>
+      <BuildOrder>45</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\toolforms\addEcgFiles.cpp">
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
       <Form>fmEcgFiles</Form>
       <DependentOn>database\toolforms\addEcgFiles.h</DependentOn>
-      <BuildOrder>45</BuildOrder>
+      <BuildOrder>46</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\toolforms\addEcgMessungen.cpp">
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
       <Form>fmAddMessung</Form>
       <DependentOn>database\toolforms\addEcgMessungen.h</DependentOn>
-      <BuildOrder>43</BuildOrder>
+      <BuildOrder>44</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\toolforms\addPeople.cpp">
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
       <Form>fmPerson</Form>
       <DependentOn>database\toolforms\addPeople.h</DependentOn>
       <BuildOrder>40</BuildOrder>
+    </CppCompile>
+    <CppCompile Include="database\toolforms\addPersonSession.cpp">
+      <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
+      <Form>fmAddPersonSession</Form>
+      <DependentOn>database\toolforms\addPersonSession.h</DependentOn>
+      <BuildOrder>43</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\toolforms\addSession.cpp">
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
@@ -313,13 +323,19 @@
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
       <Form>fmSelectDesc</Form>
       <DependentOn>database\toolforms\selectDescDb.h</DependentOn>
-      <BuildOrder>46</BuildOrder>
+      <BuildOrder>47</BuildOrder>
+    </CppCompile>
+    <CppCompile Include="database\toolforms\selectPeople.cpp">
+      <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
+      <Form>fmSelectPerson</Form>
+      <DependentOn>database\toolforms\selectPeople.h</DependentOn>
+      <BuildOrder>48</BuildOrder>
     </CppCompile>
     <CppCompile Include="database\toolforms\wizardSession_Main.cpp">
       <VirtualFolder>{A25C5B07-B871-4FB9-82A5-02C2BB655957}</VirtualFolder>
       <Form>fmWizSession</Form>
       <DependentOn>database\toolforms\wizardSession_Main.h</DependentOn>
-      <BuildOrder>47</BuildOrder>
+      <BuildOrder>49</BuildOrder>
     </CppCompile>
     <CppCompile Include="Details.cpp">
       <Form>fmDetails</Form>
@@ -371,7 +387,7 @@
     </CppCompile>
     <CppCompile Include="inc\libsvm\svm.cpp">
       <VirtualFolder>{8C884026-4975-44CD-9B90-5B123CC770D7}</VirtualFolder>
-      <BuildOrder>63</BuildOrder>
+      <BuildOrder>65</BuildOrder>
     </CppCompile>
     <CppCompile Include="LeadAnalysis.cpp">
       <Form>fmLeads</Form>
@@ -409,15 +425,15 @@
     </None>
     <None Include="out\mysql_scripts\script_create_all_databases.sql">
       <VirtualFolder>{95507C37-82F7-42D0-AAB7-ABB7E192732B}</VirtualFolder>
-      <BuildOrder>48</BuildOrder>
+      <BuildOrder>50</BuildOrder>
     </None>
     <None Include="out\mysql_scripts\script_insert_dummy_data_basic.sql">
       <VirtualFolder>{95507C37-82F7-42D0-AAB7-ABB7E192732B}</VirtualFolder>
-      <BuildOrder>49</BuildOrder>
+      <BuildOrder>51</BuildOrder>
     </None>
     <None Include="out\mysql_scripts\script_insert_dummy_data_sessions.sql">
       <VirtualFolder>{95507C37-82F7-42D0-AAB7-ABB7E192732B}</VirtualFolder>
-      <BuildOrder>50</BuildOrder>
+      <BuildOrder>52</BuildOrder>
     </None>
     <FormResources Include="algorithms\AlgChoi.dfm" />
     <FormResources Include="algorithms\AlgChoi2.dfm" />
@@ -436,8 +452,10 @@
     <FormResources Include="database\toolforms\addEcgFiles.dfm" />
     <FormResources Include="database\toolforms\addEcgMessungen.dfm" />
     <FormResources Include="database\toolforms\addPeople.dfm" />
+    <FormResources Include="database\toolforms\addPersonSession.dfm" />
     <FormResources Include="database\toolforms\addSession.dfm" />
     <FormResources Include="database\toolforms\selectDescDb.dfm" />
+    <FormResources Include="database\toolforms\selectPeople.dfm" />
     <FormResources Include="database\toolforms\wizardSession_Main.dfm" />
     <FormResources Include="Details.dfm" />
     <FormResources Include="EcgLeadAnalysis.dfm" />

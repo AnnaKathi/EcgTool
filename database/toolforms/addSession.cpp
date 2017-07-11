@@ -9,6 +9,10 @@
 #include "database/classMySql.h"
 #include "database/toolforms/selectDescDb.h"
 #include "database/toolforms/addEcg.h"
+#include "database/toolforms/addPeople.h"
+#include "database/baseforms/basePeople.h"
+#include "selectPeople.h"
+#include "addPersonSession.h"
 #include "addSession.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -309,6 +313,22 @@ void __fastcall TfmSessionAdd::acEcgDelExecute(TObject *Sender)
 		if (!item->Selected) continue;
 		item->Delete();
 		}
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmSessionAdd::acAddKnownPersonExecute(TObject *Sender)
+	{
+	int person = DlgSelectSinglePerson(this);
+	if (person <= 0) return;
+	if (DlgAddPersonSession(this, person))
+		; //ShowData
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmSessionAdd::acAddNewPersonExecute(TObject *Sender)
+	{
+	int person = DlgPersonAdd(this);
+	if (person <= 0) return;
+	if (DlgAddPersonSession(this, person))
+		; //ShowData
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/

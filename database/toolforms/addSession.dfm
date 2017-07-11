@@ -3,7 +3,7 @@ object fmSessionAdd: TfmSessionAdd
   Top = 0
   Caption = 'Session hinzuf'#252'gen'
   ClientHeight = 693
-  ClientWidth = 655
+  ClientWidth = 685
   Color = clInfoBk
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object fmSessionAdd: TfmSessionAdd
   object Bevel1: TBevel
     Left = 0
     Top = 41
-    Width = 655
+    Width = 685
     Height = 4
     Align = alTop
     Shape = bsTopLine
@@ -31,7 +31,7 @@ object fmSessionAdd: TfmSessionAdd
   object Bevel3: TBevel
     Left = 0
     Top = 648
-    Width = 655
+    Width = 685
     Height = 4
     Align = alBottom
     Shape = bsBottomLine
@@ -42,19 +42,20 @@ object fmSessionAdd: TfmSessionAdd
   object pnInfo: TPanel
     Left = 0
     Top = 0
-    Width = 655
+    Width = 685
     Height = 41
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
+    ExplicitWidth = 655
     DesignSize = (
-      655
+      685
       41)
     object mInfo: TMemo
       Left = 8
       Top = 10
-      Width = 639
+      Width = 669
       Height = 25
       Anchors = [akLeft, akTop, akRight]
       BorderStyle = bsNone
@@ -69,49 +70,71 @@ object fmSessionAdd: TfmSessionAdd
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
+      ExplicitWidth = 639
     end
   end
   object pnBottom: TPanel
     Left = 0
     Top = 652
-    Width = 655
+    Width = 685
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 655
     DesignSize = (
-      655
+      685
       41)
     object Button1: TButton
-      Left = 572
+      Left = 602
       Top = 6
       Width = 75
       Height = 25
       Action = acClose
       Anchors = [akRight, akBottom]
       TabOrder = 0
+      ExplicitLeft = 572
     end
     object Button2: TButton
-      Left = 8
-      Top = 8
+      Left = 467
+      Top = 6
       Width = 129
       Height = 25
       Action = acSave
+      Anchors = [akTop, akRight]
       TabOrder = 1
+      ExplicitLeft = 622
+    end
+    object btNewPerson: TButton
+      Left = 8
+      Top = 6
+      Width = 165
+      Height = 25
+      Action = acAddNewPerson
+      TabOrder = 2
+    end
+    object btKnwonPerson: TButton
+      Left = 179
+      Top = 6
+      Width = 165
+      Height = 25
+      Action = acAddKnownPerson
+      TabOrder = 3
     end
   end
   object pnBasics: TPanel
     Left = 0
     Top = 45
-    Width = 655
+    Width = 685
     Height = 603
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitWidth = 655
     object Bevel2: TBevel
       Left = 0
       Top = 188
-      Width = 655
+      Width = 685
       Height = 8
       Align = alTop
       Shape = bsTopLine
@@ -122,14 +145,12 @@ object fmSessionAdd: TfmSessionAdd
     object pnSession: TPanel
       Left = 0
       Top = 0
-      Width = 655
+      Width = 685
       Height = 188
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      DesignSize = (
-        655
-        188)
+      ExplicitWidth = 655
       object Label1: TLabel
         Left = 16
         Top = 16
@@ -192,21 +213,21 @@ object fmSessionAdd: TfmSessionAdd
         ParentFont = False
       end
       object Label4: TLabel
-        Left = 407
+        Left = 417
         Top = 80
         Width = 111
         Height = 13
         Caption = 'Kommentar zur Session'
       end
       object Label5: TLabel
-        Left = 407
+        Left = 417
         Top = 16
         Width = 56
         Height = 13
         Caption = 'Temperatur'
       end
       object Label6: TLabel
-        Left = 407
+        Left = 417
         Top = 45
         Width = 75
         Height = 13
@@ -251,23 +272,22 @@ object fmSessionAdd: TfmSessionAdd
         OnClick = lvResearchersClick
       end
       object mKommentar: TMemo
-        Left = 407
+        Left = 417
         Top = 99
         Width = 240
         Height = 78
-        Anchors = [akLeft, akTop, akRight]
         ScrollBars = ssBoth
         TabOrder = 5
       end
       object edTemp: TEdit
-        Left = 526
+        Left = 536
         Top = 13
         Width = 121
         Height = 21
         TabOrder = 3
       end
       object edLuft: TEdit
-        Left = 526
+        Left = 536
         Top = 42
         Width = 121
         Height = 21
@@ -277,7 +297,7 @@ object fmSessionAdd: TfmSessionAdd
     object lvEcg: TListView
       Left = 0
       Top = 196
-      Width = 655
+      Width = 685
       Height = 407
       Align = alClient
       Columns = <
@@ -323,6 +343,7 @@ object fmSessionAdd: TfmSessionAdd
       ViewStyle = vsReport
       OnChange = lvEcgChange
       OnClick = lvEcgClick
+      ExplicitWidth = 655
     end
   end
   object tStartup: TTimer
@@ -336,7 +357,7 @@ object fmSessionAdd: TfmSessionAdd
     Left = 296
     Top = 16
     object acClose: TAction
-      Caption = '&Schlie'#223'en'
+      Caption = '&Abbrechen'
       OnExecute = acCloseExecute
     end
     object acReAdd: TAction
@@ -365,6 +386,14 @@ object fmSessionAdd: TfmSessionAdd
       Caption = 'EKG-Daten l'#246'schen'
       Enabled = False
       OnExecute = acEcgDelExecute
+    end
+    object acAddKnownPerson: TAction
+      Caption = 'Vorhandene Person hinzuf'#252'gen'
+      OnExecute = acAddKnownPersonExecute
+    end
+    object acAddNewPerson: TAction
+      Caption = 'Neue Person hinzuf'#252'gen'
+      OnExecute = acAddNewPersonExecute
     end
   end
   object PopupMenu: TPopupMenu

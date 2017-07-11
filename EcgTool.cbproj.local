@@ -240,5 +240,11 @@
     <Transaction>2017.07.06 11:03:12.372.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\algorithms\Wavelet.cpp</Transaction>
     <Transaction>2017.07.06 11:03:12.372.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\algorithms\Wavelet.h</Transaction>
     <Transaction>2017.07.06 11:03:12.372.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\algorithms\Wavelet.dfm</Transaction>
+    <Transaction>2017.07.11 11:25:08.473.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\toolforms\selectPeople.cpp</Transaction>
+    <Transaction>2017.07.11 11:25:08.474.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\toolforms\selectPeople.h</Transaction>
+    <Transaction>2017.07.11 11:25:08.474.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\database\toolforms\selectPeople.dfm</Transaction>
+    <Transaction>2017.07.11 11:52:17.751.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\toolforms\addPersonSession.cpp</Transaction>
+    <Transaction>2017.07.11 11:52:17.751.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\toolforms\addPersonSession.h</Transaction>
+    <Transaction>2017.07.11 11:52:17.751.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\database\toolforms\addPersonSession.dfm</Transaction>
   </Transactions>
 </BorlandProject>

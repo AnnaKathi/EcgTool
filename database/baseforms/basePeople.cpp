@@ -167,8 +167,8 @@ bool TfmBasePeople::CheckFilter()
 //---------------------------------------------------------------------------
 void __fastcall TfmBasePeople::acAddExecute(TObject *Sender)
 	{
-	if (DlgPersonAdd(this))
-		ShowData();
+	DlgPersonAdd(this);
+	ShowData();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmBasePeople::acChangeExecute(TObject *Sender)
@@ -176,8 +176,8 @@ void __fastcall TfmBasePeople::acChangeExecute(TObject *Sender)
 	if (lvPeople->SelCount <= 0) return;
 	TListItem* item = lvPeople->Selected;
 	int id = (int)item->Data;
-	if (DlgPersonChange(this, id))
-		ShowData();
+	DlgPersonChange(this, id);
+	ShowData();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmBasePeople::acDelExecute(TObject *Sender)

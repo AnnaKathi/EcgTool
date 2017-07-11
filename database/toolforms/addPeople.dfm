@@ -144,7 +144,6 @@ object fmPerson: TfmPerson
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 7
-    ExplicitTop = 380
     DesignSize = (
       288
       41)

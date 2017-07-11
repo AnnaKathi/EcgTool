@@ -73,11 +73,11 @@ public:
 	__fastcall TfmPerson(TComponent* Owner);
 	__fastcall ~TfmPerson();
 
-	bool 	Execute(int person);
+	int 	Execute(int person);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmPerson *fmPerson;
-bool DlgPersonAdd(TForm* Papa);
-bool DlgPersonChange(TForm* Papa, int person);
+int DlgPersonAdd(TForm* Papa);
+int DlgPersonChange(TForm* Papa, int person);
 //---------------------------------------------------------------------------
 #endif

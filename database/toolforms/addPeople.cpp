@@ -13,39 +13,38 @@
 TfmPerson *fmPerson;
 extern cMySql fmysql;
 //---------------------------------------------------------------------------
-bool DlgPersonAdd(TForm* Papa)
+int DlgPersonAdd(TForm* Papa)
 	{
 	TfmPerson* Form = new TfmPerson(Papa);
-	bool rc = false;
+	int ident = -1;
 
 	if (Form)
 		{
-		rc = Form->Execute(-1);
+		ident = Form->Execute(-1);
 		delete Form;
 		}
-	return rc;
+	return ident;
 	}
 //---------------------------------------------------------------------------
-bool DlgPersonChange(TForm* Papa, int ident)
+int DlgPersonChange(TForm* Papa, int ident)
 	{
 	TfmPerson* Form = new TfmPerson(Papa);
-	bool rc = false;
 
 	if (Form)
 		{
-		rc = Form->Execute(ident);
+		Form->Execute(ident);
 		delete Form;
 		}
-	return rc;
+	return ident;
 	}
 //---------------------------------------------------------------------------
-bool TfmPerson::Execute(int person)
+int TfmPerson::Execute(int person)
 	{
 	iPerson = person;
 	person < 0 ? bNewPerson = true : bNewPerson = false;
-	
+
 	ShowModal();
-	return true;
+	return iPerson;
 	}
 //---------------------------------------------------------------------------
 __fastcall TfmPerson::TfmPerson(TComponent* Owner)

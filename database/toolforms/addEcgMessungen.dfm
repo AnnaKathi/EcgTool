@@ -129,6 +129,7 @@ object fmAddMessung: TfmAddMessung
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitTop = 88
     object Label4: TLabel
       Left = 653
       Top = 17

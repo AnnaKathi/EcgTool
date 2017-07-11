@@ -23,10 +23,12 @@ USEFORM("database\baseforms\baseDesc.cpp", fmBaseDesc);
 USEFORM("database\toolforms\addPeople.cpp", fmPerson);
 USEFORM("database\toolforms\addDesc.cpp", fmDescAdd);
 USEFORM("database\toolforms\addSession.cpp", fmSessionAdd);
+USEFORM("database\toolforms\addPersonSession.cpp", fmAddPersonSession);
 USEFORM("database\toolforms\addEcgMessungen.cpp", fmAddMessung);
 USEFORM("database\toolforms\addEcg.cpp", fmAddEcg);
 USEFORM("database\toolforms\addEcgFiles.cpp", fmEcgFiles);
 USEFORM("database\toolforms\selectDescDb.cpp", fmSelectDesc);
+USEFORM("database\toolforms\selectPeople.cpp", fmSelectPerson);
 USEFORM("database\toolforms\wizardSession_Main.cpp", fmWizSession);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
@@ -66,6 +68,8 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TfmEcgLeads), &fmEcgLeads);
 		Application->CreateForm(__classid(TfmAddMessung), &fmAddMessung);
 		Application->CreateForm(__classid(TfmWavelet), &fmWavelet);
+		Application->CreateForm(__classid(TfmSelectPerson), &fmSelectPerson);
+		Application->CreateForm(__classid(TfmAddPersonSession), &fmAddPersonSession);
 		Application->Run();
 	}
 	catch (Exception &exception)
