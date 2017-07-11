@@ -10,23 +10,26 @@ File_7=TSourceModule,'D:\Alg.Source\wavelib\src\wavefilt.h',0,1,1,1,15,0,0,,
 File_8=TSourceModule,'D:\Alg.Source\wavelib\src\conv.h',0,1,16,1,51,0,0,,
 
 [Modules]
-Module0=D:\src\EcgTool\algorithms\Wavelet.cpp
-Module1=d:\dev\rad\include\dinkumware\xtree
-Module2=D:\src\EcgTool\algorithms\features\classWavelib.cpp
-Module3=D:\src\EcgTool\Main.cpp
-Module4=default.htm
+Module0=d:\dev\rad\include\dinkumware\xtree
+Module1=D:\src\EcgTool\algorithms\Wavelet.cpp
+Module2=default.htm
+Module3=D:\src\EcgTool\algorithms\features\classWavelib.cpp
+Module4=D:\src\EcgTool\Main.cpp
 Count=5
 EditWindowCount=1
+
+[d:\dev\rad\include\dinkumware\xtree]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
 
 [D:\src\EcgTool\algorithms\Wavelet.cpp]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[d:\dev\rad\include\dinkumware\xtree]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
+[default.htm]
+ModuleType=TURLModule
 
 [D:\src\EcgTool\algorithms\features\classWavelib.cpp]
 ModuleType=TSourceModule
@@ -38,12 +41,9 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[default.htm]
-ModuleType=TURLModule
-
 [EditWindow0]
 ViewCount=5
-CurrentEditView=D:\src\EcgTool\algorithms\Wavelet.cpp
+CurrentEditView=d:\dev\rad\include\dinkumware\xtree
 View0=0
 View1=1
 View2=2
@@ -97,8 +97,8 @@ EditViewName=D:\src\EcgTool\Main.cpp
 [View2]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\algorithms\Wavelet.cpp
-CursorX=52
-CursorY=109
+CursorX=70
+CursorY=87
 TopLine=76
 LeftCol=1
 Elisions=
@@ -108,8 +108,8 @@ EditViewName=D:\src\EcgTool\algorithms\Wavelet.cpp
 [View3]
 CustomEditViewType=TEditView
 Module=d:\dev\rad\include\dinkumware\xtree
-CursorX=61
-CursorY=477
+CursorX=1
+CursorY=472
 TopLine=449
 LeftCol=1
 Elisions=
@@ -143,11 +143,11 @@ State=0
 Left=0
 Top=0
 Width=3833
-Height=1365
+Height=1433
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1365
+ClientHeight=1433
 TBDockHeight=212
 LRDockWidth=13604
 Dockable=1
@@ -252,11 +252,11 @@ State=0
 Left=0
 Top=0
 Width=3833
-Height=1365
+Height=1433
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1365
+ClientHeight=1433
 TBDockHeight=413
 LRDockWidth=4948
 Dockable=1
@@ -271,11 +271,11 @@ State=0
 Left=0
 Top=0
 Width=3833
-Height=1365
+Height=1433
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1365
+ClientHeight=1433
 TBDockHeight=212
 LRDockWidth=7406
 Dockable=1
@@ -294,11 +294,11 @@ State=0
 Left=0
 Top=0
 Width=3833
-Height=1365
+Height=1433
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1365
+ClientHeight=1433
 TBDockHeight=1538
 LRDockWidth=3490
 Dockable=1
@@ -313,11 +313,11 @@ State=0
 Left=0
 Top=0
 Width=3833
-Height=1365
+Height=1433
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1365
+ClientHeight=1433
 TBDockHeight=2067
 LRDockWidth=3490
 Dockable=1
@@ -446,11 +446,6 @@ Dockable=1
 StayOnTop=0
 SplitPos=176
 
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Visible,OnKeyPress
-ExpandedItems=Anchors=0,Constraints=0,Font=0,Margins=0,BorderIcons=0,GlassFrame=0,HorzScrollBar=0,Padding=0,BevelEdges=0
-
 [ModelViewTool]
 PercentageSizes=1
 Create=1
@@ -555,11 +550,11 @@ State=0
 Left=0
 Top=0
 Width=3833
-Height=1365
+Height=1433
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1365
+ClientHeight=1433
 TBDockHeight=1548
 LRDockWidth=8745
 Dockable=1
@@ -704,17 +699,17 @@ State=0
 Left=0
 Top=23
 Width=3833
-Height=1606
+Height=1673
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3833
-ClientHeight=1606
-TBDockHeight=1606
+ClientHeight=1673
+TBDockHeight=1673
 LRDockWidth=3833
 Dockable=1
 StayOnTop=0
 TabPosition=1
-ActiveTabID=WatchWindow
+ActiveTabID=DebugLogView
 TabDockClients=DebugLogView,BreakpointWindow,ThreadStatusWindow,CallStackWindow,WatchWindow,LocalVarsWindow
 
 [DockSite2]
@@ -739,5 +734,5 @@ Dockable=1
 StayOnTop=0
 TabPosition=0
 ActiveTabID=ToolForm
-TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
+TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
 
