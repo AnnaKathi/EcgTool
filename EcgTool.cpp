@@ -34,6 +34,7 @@ USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
 USEFORM("algorithms\AlgChoi2.cpp", fmChoi2);
 USEFORM("algorithms\Wavelet.cpp", fmWavelet);
+USEFORM("EdanImport.cpp", fmEdan);
 //---------------------------------------------------------------------------
 #include "database/classMySql.h"
 cMySql fmysql;
@@ -70,6 +71,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TfmWavelet), &fmWavelet);
 		Application->CreateForm(__classid(TfmSelectPerson), &fmSelectPerson);
 		Application->CreateForm(__classid(TfmAddPersonSession), &fmAddPersonSession);
+		Application->CreateForm(__classid(TfmEdan), &fmEdan);
 		Application->Run();
 	}
 	catch (Exception &exception)

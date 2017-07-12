@@ -21,6 +21,7 @@ todo: extern cMySql fmysql in definitions.h verlagern?
 #include "DataAnalysis.h"
 #include "Sessions.h"
 #include "Testform.h"
+#include "EdanImport.h"
 
 #include "LeadAnalysis.h"
 #include "EcgLeadAnalysis.h"
@@ -220,6 +221,11 @@ void __fastcall TfmMain::acCloseExecute(TObject *Sender)
 void __fastcall TfmMain::acTestExecute(TObject *Sender)
 	{
 	DlgTestform(this);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::acImportEdanExecute(TObject *Sender)
+	{
+	DlgImportEdan(this);
 	}
 //---------------------------------------------------------------------------
 //--- Analysis-Actions ------------------------------------------------------

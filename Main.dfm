@@ -4412,6 +4412,9 @@ object fmMain: TfmMain
       object PreTestTool1: TMenuItem
         Action = acTest
       end
+      object EdanDatenstzeimportieren1: TMenuItem
+        Action = acImportEdan
+      end
       object N7: TMenuItem
         Caption = '-'
       end
@@ -4623,6 +4626,10 @@ object fmMain: TfmMain
     object acTest: TAction
       Caption = 'Pre-Test Tool'
       OnExecute = acTestExecute
+    end
+    object acImportEdan: TAction
+      Caption = 'Edan-Datens'#228'tze umwandeln'
+      OnExecute = acImportEdanExecute
     end
   end
 end

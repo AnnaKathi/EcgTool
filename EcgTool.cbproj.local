@@ -246,5 +246,8 @@
     <Transaction>2017.07.11 11:52:17.751.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\database\toolforms\addPersonSession.cpp</Transaction>
     <Transaction>2017.07.11 11:52:17.751.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\database\toolforms\addPersonSession.h</Transaction>
     <Transaction>2017.07.11 11:52:17.751.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\database\toolforms\addPersonSession.dfm</Transaction>
+    <Transaction>2017.07.12 09:20:43.698.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\EdanImport.cpp</Transaction>
+    <Transaction>2017.07.12 09:20:43.699.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\EdanImport.h</Transaction>
+    <Transaction>2017.07.12 09:20:43.699.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\EdanImport.dfm</Transaction>
   </Transactions>
 </BorlandProject>
