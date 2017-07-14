@@ -8,26 +8,21 @@
 #pragma resource "*.dfm"
 TfmEcgLeads *fmEcgLeads;
 //---------------------------------------------------------------------------
-bool DlgShowEcgLeads(TForm* Papa, String path, String name)
+bool DlgShowEcgLeads(TForm* Papa)
 	{
-	if (path == "") return false;
-	if (!DirectoryExists(path)) return false;
-
 	TfmEcgLeads* Form = new TfmEcgLeads(Papa);
 	bool rc = false;
 
 	if (Form)
 		{
-		rc = Form->Execute(path, name);
+		rc = Form->Execute();
 		delete Form;
 		}
 	return rc;
 	}
 //---------------------------------------------------------------------------
-bool TfmEcgLeads::Execute(String path, String name)
+bool TfmEcgLeads::Execute()
 	{
-	fPath = path;
-	fName = name;
 	ShowModal();
 	return true;
 	}
@@ -45,17 +40,11 @@ void __fastcall TfmEcgLeads::FormShow(TObject *Sender)
 void __fastcall TfmEcgLeads::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
-	laInfo->Caption = "ECG <" + fName + ">";
 
-	String ecg1 = ftools.fmt("%s\\%s liegend.txt", fPath, fName);
-	String ecg2 = ftools.fmt("%s\\%s sitzend.txt", fPath, fName);
-	String ecg3 = ftools.fmt("%s\\%s stehend.txt", fPath, fName);
-	String ecg4 = ftools.fmt("%s\\%s gehend.txt",  fPath, fName);
-
-	fmLeads1 = CreateLeadForm(this, pnEcg1); fmLeads1->setEcg(ecg1, fName + " liegend");
-	fmLeads2 = CreateLeadForm(this, pnEcg2); fmLeads2->setEcg(ecg2, fName + " sitzend");
-	fmLeads3 = CreateLeadForm(this, pnEcg3); fmLeads3->setEcg(ecg3, fName + " stehend");
-	fmLeads4 = CreateLeadForm(this, pnEcg4); fmLeads4->setEcg(ecg4, fName + " gehend");
+	fmLeads1 = CreateLeadForm(this, pnEcg1, 1);
+	fmLeads2 = CreateLeadForm(this, pnEcg2, 1);
+	fmLeads3 = CreateLeadForm(this, pnEcg3, 1);
+	fmLeads4 = CreateLeadForm(this, pnEcg4, 1); 
 
 	fmLeads1->Show();
 	fmLeads2->Show();
@@ -92,3 +81,13 @@ void __fastcall TfmEcgLeads::FormKeyPress(TObject *Sender, char &Key)
 		}
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmEcgLeads::cbAnsichtChange(TObject *Sender)
+	{
+	int ansicht = cbAnsicht->ItemIndex + 1;
+	fmLeads1->RefreshView(ansicht);
+	fmLeads2->RefreshView(ansicht);
+	fmLeads3->RefreshView(ansicht);
+	fmLeads4->RefreshView(ansicht);
+	}
+//---------------------------------------------------------------------------
+

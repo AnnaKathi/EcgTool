@@ -330,15 +330,12 @@ void __fastcall TfmMain::btAnalysisSelectClick(TObject *Sender)
 void __fastcall TfmMain::btLKeadAnalysisClick(TObject *Sender)
 	{
 	//TEST LEAD ANALYSIS
-	String file = "D:\\ADS Tests - Transfer vom Laptop\\2017-06-24 - Durchgang 1\\Senta liegend.txt";
-	DlgShowLeads(this, file, "Senta liegend");
+	//DlgShowLeads(this);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btEcgAnalysisClick(TObject *Sender)
 	{
-	String path = "D:\\ADS Tests - Transfer vom Laptop\\2017-06-24 - Durchgang 1";
-	String name = "Senta";
-	DlgShowEcgLeads(this, path, name);
+	DlgShowEcgLeads(this);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btWavelibClick(TObject *Sender)

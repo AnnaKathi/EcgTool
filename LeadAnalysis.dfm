@@ -2,8 +2,8 @@ object fmLeads: TfmLeads
   Left = 0
   Top = 0
   Caption = 'Standard-Herzschl'#228'ge eines EKGs'
-  ClientHeight = 785
-  ClientWidth = 390
+  ClientHeight = 687
+  ClientWidth = 305
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,76 +19,95 @@ object fmLeads: TfmLeads
   TextHeight = 13
   object Bevel1: TBevel
     Left = 0
-    Top = 41
-    Width = 390
+    Top = 23
+    Width = 305
     Height = 4
     Align = alTop
     Shape = bsTopLine
     ExplicitLeft = -720
+    ExplicitTop = 41
     ExplicitWidth = 1190
   end
   object iLead1: TImage
-    Left = 5
-    Top = 51
-    Width = 380
-    Height = 86
+    Left = 7
+    Top = 29
+    Width = 289
+    Height = 58
   end
   object iLead2: TImage
-    Left = 5
-    Top = 143
-    Width = 380
-    Height = 86
+    Left = 7
+    Top = 88
+    Width = 289
+    Height = 58
   end
   object iLead3: TImage
-    Left = 5
-    Top = 235
-    Width = 380
-    Height = 86
+    Left = 7
+    Top = 147
+    Width = 289
+    Height = 58
   end
   object iLead4: TImage
-    Left = 5
-    Top = 327
-    Width = 380
-    Height = 86
+    Left = 7
+    Top = 206
+    Width = 289
+    Height = 58
   end
   object iLead5: TImage
-    Left = 5
-    Top = 419
-    Width = 380
-    Height = 86
+    Left = 7
+    Top = 265
+    Width = 289
+    Height = 58
   end
   object iLead6: TImage
-    Left = 5
-    Top = 511
-    Width = 380
-    Height = 86
+    Left = 7
+    Top = 324
+    Width = 289
+    Height = 58
   end
   object iLead7: TImage
-    Left = 5
-    Top = 603
-    Width = 380
-    Height = 86
+    Left = 7
+    Top = 383
+    Width = 289
+    Height = 58
   end
   object iLead8: TImage
-    Left = 5
-    Top = 695
-    Width = 380
-    Height = 86
+    Left = 7
+    Top = 443
+    Width = 289
+    Height = 58
+  end
+  object iAbl12: TImage
+    Left = 7
+    Top = 514
+    Width = 289
+    Height = 58
+  end
+  object iAbl34: TImage
+    Left = 7
+    Top = 573
+    Width = 289
+    Height = 58
+  end
+  object iAbl56: TImage
+    Left = 7
+    Top = 632
+    Width = 289
+    Height = 58
   end
   object pnInfo: TPanel
     Left = 0
     Top = 0
-    Width = 390
-    Height = 41
+    Width = 305
+    Height = 23
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 470
+    ExplicitWidth = 325
     object laInfo: TLabel
       Left = 8
-      Top = 14
-      Width = 377
+      Top = 3
+      Width = 288
       Height = 14
       Alignment = taCenter
       AutoSize = False
@@ -101,6 +120,7 @@ object fmLeads: TfmLeads
       Font.Style = []
       ParentBiDiMode = False
       ParentFont = False
+      OnClick = laInfoClick
     end
   end
   object tStartup: TTimer
@@ -108,6 +128,10 @@ object fmLeads: TfmLeads
     Interval = 100
     OnTimer = tStartupTimer
     Left = 232
+    Top = 8
+  end
+  object OpenDialog: TOpenDialog
+    Left = 200
     Top = 8
   end
 end

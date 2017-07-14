@@ -4386,8 +4386,8 @@ object fmMain: TfmMain
       OnClick = btLKeadAnalysisClick
     end
     object btEcgAnalysis: TButton
-      Left = 455
-      Top = 181
+      Left = 543
+      Top = 197
       Width = 129
       Height = 25
       Caption = 'Test Ecg-Lead Analysis'

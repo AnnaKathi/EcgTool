@@ -8,35 +8,32 @@
 #pragma resource "*.dfm"
 TfmLeads *fmLeads;
 //---------------------------------------------------------------------------
-bool DlgShowLeads(TForm* Papa, String ecgfile, String bez)
+bool DlgShowLeads(TForm* Papa, int ansicht)
 	{
-	if (ecgfile == "") return false;
-	if (!FileExists(ecgfile)) return false;
-
-	TfmLeads* Form = new TfmLeads(Papa, NULL);
+	TfmLeads* Form = new TfmLeads(Papa, NULL, ansicht);
 	bool rc = false;
 
 	if (Form)
 		{
-		rc = Form->Execute(ecgfile, bez);
+		rc = Form->Execute(ansicht);
 		delete Form;
 		}
 	return rc;
 	}
 //---------------------------------------------------------------------------
-bool TfmLeads::Execute(String ecgfile, String bez)
+bool TfmLeads::Execute(int ansicht)
 	{
-	fEcgFile = ecgfile;
-	fBez = bez;
+	bLoaded  = false;
+	iAnsicht = ansicht;
 	ShowModal();
 	return true;
 	}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
-TfmLeads* CreateLeadForm(TForm* caller, TWinControl* container)
+TfmLeads* CreateLeadForm(TForm* caller, TWinControl* container, int ansicht)
 	{
-	return new TfmLeads(caller, container);
+	return new TfmLeads(caller, container, ansicht);
 	}
 //---------------------------------------------------------------------------
 void TfmLeads::snapTo(TWinControl* container, TAlign align)
@@ -60,21 +57,12 @@ void TfmLeads::snapTo(TWinControl* container, TAlign align)
 	Width  = realWidth;
 	}
 //---------------------------------------------------------------------------
-bool TfmLeads::setEcg(String ecgfile, String bez)
-	{
-	if (ecgfile == "") return false;
-	if (!FileExists(ecgfile)) return false;
-
-	fEcgFile = ecgfile;
-	fBez = bez;
-	return true;
-	}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-__fastcall TfmLeads::TfmLeads(TComponent* Owner, TWinControl* Container)
+__fastcall TfmLeads::TfmLeads(TComponent* Owner, TWinControl* Container, int ansicht)
 	: TForm(Owner)
 	{
+	iAnsicht = ansicht;
 	if (Container)
 		snapTo(Container, alClient);
 	}
@@ -87,9 +75,7 @@ void __fastcall TfmLeads::FormShow(TObject *Sender)
 void __fastcall TfmLeads::tStartupTimer(TObject *Sender)
 	{
 	tStartup->Enabled = false;
-	laInfo->Caption = ftools.fmt("EKG <%s>, Lead 1-8", fBez);
-	
-	GetLeads();
+	laInfo->Caption = "...Datei auswählen...";
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmLeads::FormClose(TObject *Sender, TCloseAction &Action)
@@ -101,33 +87,73 @@ void __fastcall TfmLeads::FormClose(TObject *Sender, TCloseAction &Action)
 /******************   Funktionen   *****************************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-bool TfmLeads::GetLeads()
+void TfmLeads::RefreshView(int ansicht)
 	{
-	if (!fdata1.getFile(fEcgFile, formatADS, "\t", 1, 0, 3000)) return false;
-	else fdata1.redisplay(iLead1);
+	iAnsicht = ansicht;
+	if (bLoaded)
+		GetLeads(laInfo->Hint);
+	}
+//---------------------------------------------------------------------------
+bool TfmLeads::GetLeads(String file)
+	{
+	if (!fdata1.getFile(file, formatADS, "\t", 1, 0, 3000)) return false;
+	if (!ShowData(fdata1, iLead1)) return false;
 
-	if (!fdata2.getFile(fEcgFile, formatADS, "\t", 2, 0, 3000)) return false;
-	else fdata2.redisplay(iLead2);
+	if (!fdata2.getFile(file, formatADS, "\t", 2, 0, 3000)) return false;
+	if (!ShowData(fdata2, iLead2)) return false;
 
-	if (!fdata3.getFile(fEcgFile, formatADS, "\t", 3, 0, 3000)) return false;
-	else fdata3.redisplay(iLead3);
+	if (!fdata3.getFile(file, formatADS, "\t", 3, 0, 3000)) return false;
+	if (!ShowData(fdata3, iLead3)) return false;
 
-	if (!fdata4.getFile(fEcgFile, formatADS, "\t", 4, 0, 3000)) return false;
-	else fdata4.redisplay(iLead4);
+	if (!fdata4.getFile(file, formatADS, "\t", 4, 0, 3000)) return false;
+	if (!ShowData(fdata4, iLead4)) return false;
 
-	if (!fdata5.getFile(fEcgFile, formatADS, "\t", 5, 0, 3000)) return false;
-	else fdata5.redisplay(iLead5);
+	if (!fdata5.getFile(file, formatADS, "\t", 5, 0, 3000)) return false;
+	if (!ShowData(fdata5, iLead5)) return false;
 
-	if (!fdata6.getFile(fEcgFile, formatADS, "\t", 6, 0, 3000)) return false;
-	else fdata6.redisplay(iLead6);
+	if (!fdata6.getFile(file, formatADS, "\t", 6, 0, 3000)) return false;
+	if (!ShowData(fdata6, iLead6)) return false;
 
-	if (!fdata7.getFile(fEcgFile, formatADS, "\t", 7, 0, 3000)) return false;
-	else fdata7.redisplay(iLead7);
+	if (!fdata7.getFile(file, formatADS, "\t", 7, 0, 3000)) return false;
+	if (!ShowData(fdata7, iLead7)) return false;
 
-	if (!fdata8.getFile(fEcgFile, formatADS, "\t", 8, 0, 3000)) return false;
-	else fdata8.redisplay(iLead8);
+	if (!fdata8.getFile(file, formatADS, "\t", 8, 0, 3000)) return false;
+	if (!ShowData(fdata8, iLead8)) return false;
 
+	if (!fabl12.getFile(file, formatADS, "\t", 9, 0, 3000)) return false;
+	if (!ShowData(fabl12, iAbl12)) return false;
+
+	if (!fabl34.getFile(file, formatADS, "\t",10, 0, 3000)) return false;
+	if (!ShowData(fabl34, iAbl34)) return false;
+
+	if (!fabl56.getFile(file, formatADS, "\t",11, 0, 3000)) return false;
+	if (!ShowData(fabl56, iAbl56)) return false;
+
+	bLoaded = true;
 	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmLeads::ShowData(cData data, TImage* img)
+	{
+	if (iAnsicht == 1) //Originaldaten
+		{
+		data.redisplay(img);
+		return true;
+		}
+	else if (iAnsicht == 2) //1. Ableitung
+		{
+		if (!data.buildDerivates()) return false;
+		data.derivate1.redisplay(img);
+		return true;
+		}
+	else if (iAnsicht == 3) //2. Ableitung
+		{
+		if (!data.buildDerivates()) return false;
+		data.derivate2.redisplay(img);
+		return true;
+		}
+	else
+		return false;
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -147,3 +173,17 @@ void __fastcall TfmLeads::FormKeyPress(TObject *Sender, char &Key)
 		}
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmLeads::laInfoClick(TObject *Sender)
+	{
+	if (!OpenDialog->Execute()) return;
+	char file[MAX_PATH];
+	sprintf(file, "%s", OpenDialog->FileName.c_str());
+	char* pt = strrchr(file, '\\');
+	if (pt) *pt = 0;
+	sprintf(file, "%s", pt+1);
+	laInfo->Caption = file;
+	laInfo->Hint = OpenDialog->FileName;
+	GetLeads(OpenDialog->FileName);
+	}
+//---------------------------------------------------------------------------
+

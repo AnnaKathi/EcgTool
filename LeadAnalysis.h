@@ -11,6 +11,7 @@
 #include "basics/classTools.h"
 #include "basics/classData.h"
 #include "ecg/classEcg.h"
+#include <Dialogs.hpp>
 //---------------------------------------------------------------------------
 class TfmLeads : public TForm
 {
@@ -27,12 +28,18 @@ __published:	// IDE-verwaltete Komponenten
 	TImage *iLead7;
 	TImage *iLead8;
 	TLabel *laInfo;
+	TImage *iAbl12;
+	TImage *iAbl34;
+	TImage *iAbl56;
+	TOpenDialog *OpenDialog;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
+	void __fastcall laInfoClick(TObject *Sender);
 
 private:
+	int			iAnsicht;
 	cTools		ftools;
 	cEcg		fecg;
 	cData		fdata1;
@@ -44,21 +51,25 @@ private:
 	cData		fdata7;
 	cData		fdata8;
 
-	String 		fEcgFile;
-	String		fBez;
+	cData		fabl12;
+	cData		fabl34;
+	cData		fabl56;
+
+	bool		bLoaded;
 
 	void 		snapTo(TWinControl* container, TAlign align);
-	bool 		GetLeads();
+	bool 		GetLeads(String file);
+	bool 		ShowData(cData data, TImage* img);
 
 public:
-	__fastcall TfmLeads(TComponent* Owner, TWinControl* Container);
-	bool 		Execute(String ecgfile, String bez);
-	bool		setEcg(String ecgfile, String bez);
+	__fastcall TfmLeads(TComponent* Owner, TWinControl* Container, int ansicht);
+	bool 		Execute(int ansicht);
+	void		RefreshView(int ansicht);
 
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmLeads *fmLeads;
-bool DlgShowLeads(TForm* Papa, String ecgfile, String bez);
-TfmLeads* CreateLeadForm(TForm* caller, TWinControl* container);
+bool DlgShowLeads(TForm* Papa, int ansicht);
+TfmLeads* CreateLeadForm(TForm* caller, TWinControl* container, int ansicht);
 //---------------------------------------------------------------------------
 #endif

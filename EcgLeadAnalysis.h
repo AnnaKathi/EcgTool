@@ -14,8 +14,6 @@
 class TfmEcgLeads : public TForm
 {
 __published:	// IDE-verwaltete Komponenten
-	TPanel *pnInfo;
-	TLabel *laInfo;
 	TBevel *Bevel1;
 	TTimer *tStartup;
 	TPanel *pnEcg1;
@@ -26,14 +24,17 @@ __published:	// IDE-verwaltete Komponenten
 	TBevel *Bevel4;
 	TPanel *pnEcg4;
 	TBevel *Bevel5;
+	TPanel *Panel1;
+	TBevel *Bevel6;
+	TLabel *Label1;
+	TComboBox *cbAnsicht;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
+	void __fastcall cbAnsichtChange(TObject *Sender);
 
 private:
-	String		fPath;
-	String		fName;
 	cTools		ftools;
 
 	TfmLeads*	fmLeads1;
@@ -44,10 +45,10 @@ private:
 
 public:
 	__fastcall TfmEcgLeads(TComponent* Owner);
-	bool 		Execute(String path, String name);
+	bool 		Execute();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfmEcgLeads *fmEcgLeads;
-bool DlgShowEcgLeads(TForm* Papa, String path, String name);
+bool DlgShowEcgLeads(TForm* Papa);
 //---------------------------------------------------------------------------
 #endif
