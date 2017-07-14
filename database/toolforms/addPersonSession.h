@@ -76,6 +76,7 @@ __published:	// IDE-verwaltete Komponenten
 	TEdit *edZ3Puls;
 	TEdit *edZ4BP;
 	TEdit *edZ4Puls;
+	TAction *acAddValues;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -86,8 +87,10 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acAddZustand3Execute(TObject *Sender);
 	void __fastcall acAddZustand4Execute(TObject *Sender);
 	void __fastcall mZ1P1DblClick(TObject *Sender);
+	void __fastcall acAddValuesExecute(TObject *Sender);
 
 private:
+	bool	bResult;
 	cTools	ftools;
 	cEcg	fecg;
 	int		iPerson;

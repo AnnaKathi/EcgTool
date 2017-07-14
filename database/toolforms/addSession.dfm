@@ -48,7 +48,6 @@ object fmSessionAdd: TfmSessionAdd
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 655
     DesignSize = (
       685
       41)
@@ -70,7 +69,6 @@ object fmSessionAdd: TfmSessionAdd
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 639
     end
   end
   object pnBottom: TPanel
@@ -81,7 +79,6 @@ object fmSessionAdd: TfmSessionAdd
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 655
     DesignSize = (
       685
       41)
@@ -93,7 +90,6 @@ object fmSessionAdd: TfmSessionAdd
       Action = acClose
       Anchors = [akRight, akBottom]
       TabOrder = 0
-      ExplicitLeft = 572
     end
     object Button2: TButton
       Left = 467
@@ -103,7 +99,6 @@ object fmSessionAdd: TfmSessionAdd
       Action = acSave
       Anchors = [akTop, akRight]
       TabOrder = 1
-      ExplicitLeft = 622
     end
     object btNewPerson: TButton
       Left = 8
@@ -130,7 +125,6 @@ object fmSessionAdd: TfmSessionAdd
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitWidth = 655
     object Bevel2: TBevel
       Left = 0
       Top = 188
@@ -150,7 +144,6 @@ object fmSessionAdd: TfmSessionAdd
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 655
       object Label1: TLabel
         Left = 16
         Top = 16
@@ -278,6 +271,7 @@ object fmSessionAdd: TfmSessionAdd
         Height = 78
         ScrollBars = ssBoth
         TabOrder = 5
+        OnChange = edStampChange
       end
       object edTemp: TEdit
         Left = 536
@@ -285,6 +279,7 @@ object fmSessionAdd: TfmSessionAdd
         Width = 121
         Height = 21
         TabOrder = 3
+        OnChange = edStampChange
       end
       object edLuft: TEdit
         Left = 536
@@ -292,6 +287,7 @@ object fmSessionAdd: TfmSessionAdd
         Width = 121
         Height = 21
         TabOrder = 4
+        OnChange = edStampChange
       end
     end
     object lvEcg: TListView
@@ -325,16 +321,22 @@ object fmSessionAdd: TfmSessionAdd
           Width = 90
         end
         item
+          Caption = 'BP'
+          Width = 65
+        end
+        item
+          Caption = 'Puls'
+        end
+        item
           Caption = 'File'
           Width = 250
         end
         item
           Caption = 'Format'
-          Width = 0
+          Width = 65
         end
         item
           Caption = 'Delim'
-          Width = 0
         end>
       GridLines = True
       ReadOnly = True
@@ -343,7 +345,6 @@ object fmSessionAdd: TfmSessionAdd
       ViewStyle = vsReport
       OnChange = lvEcgChange
       OnClick = lvEcgClick
-      ExplicitWidth = 655
     end
   end
   object tStartup: TTimer

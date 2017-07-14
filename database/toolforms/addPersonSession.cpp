@@ -1,8 +1,11 @@
+//TODO: Tabelle am Bildschirm unsichtbar machen, zweite Tabelle darüberlegen
+//die die ausgeschriebenen Daten wie z.B. "liegend" enthält
 //---------------------------------------------------------------------------
 #include <vcl.h>
 #pragma hdrstop
 
 #include <string.h>
+#include <stdio.h>
 
 #include "..\classMySql.h"
 #include "addPersonSession.h"
@@ -27,9 +30,10 @@ bool DlgAddPersonSession(TForm* Papa, int person)
 //---------------------------------------------------------------------------
 bool TfmAddPersonSession::Execute(int person)
 	{
+	bResult = false;
 	iPerson = person;
 	ShowModal();
-	return true;
+	return bResult;
 	}
 //---------------------------------------------------------------------------
 __fastcall TfmAddPersonSession::TfmAddPersonSession(TComponent* Owner)
@@ -48,6 +52,8 @@ void __fastcall TfmAddPersonSession::tStartupTimer(TObject *Sender)
 	laPerson->Caption = ftools.fmt("%d - %s", iPerson, fmysql.people.getNameOf(iPerson));
 
 	ftools.FormLoad(this);
+	edZ1BP->Text   = ""; edZ2BP->Text   = ""; edZ3BP->Text   = ""; edZ4BP->Text   = "";
+	edZ1Puls->Text = ""; edZ2Puls->Text = ""; edZ3Puls->Text = ""; edZ4Puls->Text = "";
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmAddPersonSession::FormClose(TObject *Sender,
@@ -66,6 +72,7 @@ void __fastcall TfmAddPersonSession::FormClose(TObject *Sender,
 //---------------------------------------------------------------------------
 void __fastcall TfmAddPersonSession::acCloseExecute(TObject *Sender)
 	{
+	bResult = false;
 	Close();
 	}
 //---------------------------------------------------------------------------
@@ -89,18 +96,34 @@ void __fastcall TfmAddPersonSession::acAddZustand4Execute(TObject *Sender)
 	//
 	}
 //---------------------------------------------------------------------------
-/***************************************************************************/
-/**************   Meldungen vom Formular   *********************************/
-/***************************************************************************/
-//---------------------------------------------------------------------------
-void __fastcall TfmAddPersonSession::FormKeyPress(TObject *Sender, char &Key)
+void __fastcall TfmAddPersonSession::acAddValuesExecute(TObject *Sender)
 	{
-	if (Key == VK_ESCAPE)
+	//Übergabedatei schreiben
+	String file = ftools.fmt("%s\\SessionAdd.transfer", ftools.GetPath());
+	FILE* fp = fopen(file.c_str(), "w");
+
+	TListItem* item;
+	for (int i = 0; i < lvData->Items->Count; i++)
 		{
-		Key = 0;
-		acCloseExecute(Sender);
+		item = lvData->Items->Item[i];
+		fprintf(fp, "%d;%d;%d;%d;%s;%s;%s\n",
+			item->Caption.ToIntDef(-1),
+			item->SubItems->Strings[0].ToIntDef(-1),
+			item->SubItems->Strings[1].ToIntDef(-1),
+			item->SubItems->Strings[2].ToIntDef(-1),
+			item->SubItems->Strings[3],
+			item->SubItems->Strings[4],
+			item->SubItems->Strings[5]);
 		}
+
+	fclose(fp);
+	bResult = true;
+	Close();
 	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/**************   Funktionen zum laden von Dateien   ***********************/
+/***************************************************************************/
 //---------------------------------------------------------------------------
 void __fastcall TfmAddPersonSession::mZ1P1DblClick(TObject *Sender)
 	{
@@ -253,6 +276,19 @@ void TfmAddPersonSession::AddLine(String file, eLage lage, eState state, ePositi
 	item->SubItems->Add(bp);
 	item->SubItems->Add(String(puls));
 	item->SubItems->Add(file);
+	}
+//---------------------------------------------------------------------------
+/***************************************************************************/
+/**************   Meldungen vom Formular   *********************************/
+/***************************************************************************/
+//---------------------------------------------------------------------------
+void __fastcall TfmAddPersonSession::FormKeyPress(TObject *Sender, char &Key)
+	{
+	if (Key == VK_ESCAPE)
+		{
+		Key = 0;
+		acCloseExecute(Sender);
+		}
 	}
 //---------------------------------------------------------------------------
 

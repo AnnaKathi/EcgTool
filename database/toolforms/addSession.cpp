@@ -1,9 +1,12 @@
+//TODO: Tabelle am Bildschirm unsichtbar machen, zweite Tabelle darüberlegen
+//die die ausgeschriebenen Daten wie z.B. "liegend" enthält
 //---------------------------------------------------------------------------
 #include <vcl.h>
 #pragma hdrstop
 
 #include <time.h>
 #include <systdate.h>
+#include <string.h>
 
 #include "RequestBox.h"
 #include "database/classMySql.h"
@@ -103,16 +106,16 @@ void TfmSessionAdd::GetEcgData()
 bool TfmSessionAdd::CheckSession()
 	{
 	//Pflichtfelder prüfen
-	if (edStamp->Text == "")   return false;
-	if (cbOrte->ItemIndex < 0) return false;
-
-	if (edTemp->Text == "") return false;
-	if (edLuft->Text == "") return false;
-
-	if (lvResearchers->Items->Count <= 0) return false;
-
-	if (lvEcg->Items->Count <= 0) return false;
-	return true;
+	if (edStamp->Text != "" 	&&
+		edTemp->Text  != ""		&&
+		edLuft->Text  != ""		&&
+		cbOrte->ItemIndex >= 0 	&&
+		lvResearchers->Items->Count > 0 &&
+		lvEcg->Items->Count > 0)
+		acSave->Enabled = true;
+	else
+		acSave->Enabled = false;
+	return acSave->Enabled;
 	}
 //---------------------------------------------------------------------------
 bool TfmSessionAdd::SaveSession()
@@ -175,10 +178,20 @@ bool TfmSessionAdd::SaveSession()
 		edata.position = item->SubItems->Strings[4].ToInt();
 		edata.session  = session;
 
-		String file  = item->SubItems->Strings[5];
-		int format   = item->SubItems->Strings[6].ToInt();
-		String delim = item->SubItems->Strings[7];
-		if (!GetArray(file, (eDatFormat)format, delim, edata))
+		char help[32];
+		sprintf(help, "%s", item->SubItems->Strings[5]);
+		char* pt = strchr(help, '/');
+		if (!pt) continue; *pt = 0;
+		edata.bpsys = atoi(help);
+		sprintf(help, "%s", pt+1);
+		edata.bpdia = atoi(help);
+
+		edata.puls = item->SubItems->Strings[6].ToInt();
+
+		String file  = item->SubItems->Strings[7];
+		int format   = item->SubItems->Strings[8].ToInt();
+		String delim = item->SubItems->Strings[9];
+		if (!GetArray(file, edata.position, (eDatFormat)format, delim, edata))
 			{
 			fehler = true;
 			//todo Fehlermeldung
@@ -207,9 +220,16 @@ bool TfmSessionAdd::SaveSession()
 	return true;
 	}
 //---------------------------------------------------------------------------
-bool TfmSessionAdd::GetArray(String file, eDatFormat format, String delim, sEcgData& data)
+bool TfmSessionAdd::GetArray(String file, ePosition pos, eDatFormat format, String delim, sEcgData& data)
 	{
-	if (!fecg.data.getFile(file, format, delim, 0, 0, 3000)) //TODO
+	//TODO CSV-Einelsefunktiona uf Position statt Lead umstellen
+	int lead;
+		 if (pos == posNone) 		lead = 0;
+	else if (pos == posBrustNormal) lead = 1;
+	else if (pos == posBrustEng)	lead = 3;
+	else if (pos == posHandBack)	lead = 5;
+	else if (pos == posBack)		lead = 7;
+	if (!fecg.data.getFile(file, format, delim, lead, 0, 3000)) //TODO
 		{
 		//todo Fejlermeldung
 		return false;
@@ -229,6 +249,58 @@ bool TfmSessionAdd::GetArray(String file, eDatFormat format, String delim, sEcgD
 		if (ix >= 3000) break;
 		}
 	return true;
+	}
+//---------------------------------------------------------------------------
+void TfmSessionAdd::ShowPersonenData(int person)
+	{
+	String file = ftools.fmt("%s\\SessionAdd.transfer", ftools.GetPath());
+	FILE* fp = fopen(file.c_str(), "r");
+
+	char row[MAX_PATH];
+	while (fgets(row, sizeof(row)-1, fp) != NULL)
+		addPersonRow(person, row);
+
+	fclose(fp);
+	}
+//---------------------------------------------------------------------------
+void TfmSessionAdd::addPersonRow(int person, char* buffer)
+	{
+	int anz, state, lage, pos, puls;
+	String dat, bp;
+
+	char* pt = strchr(buffer, ';'); if (!pt) return; *pt = 0;
+	lage = atoi(buffer); sprintf(buffer, "%s", pt+1);
+
+	pt = strchr(buffer, ';');   if (!pt) return; *pt = 0;
+	state = atoi(buffer); sprintf(buffer, "%s", pt+1);
+
+	pt = strchr(buffer, ';');   if (!pt) return; *pt = 0;
+	pos = atoi(buffer); sprintf(buffer, "%s", pt+1);
+
+	pt = strchr(buffer, ';');   if (!pt) return; *pt = 0;
+	anz = atoi(buffer); sprintf(buffer, "%s", pt+1);
+
+	pt = strchr(buffer, ';');   if (!pt) return; *pt = 0;
+	bp = String(buffer); sprintf(buffer, "%s", pt+1);
+
+	pt = strchr(buffer, ';');   if (!pt) return; *pt = 0;
+	puls = atoi(buffer); sprintf(buffer, "%s", pt+1);
+
+	pt = strrchr(buffer, '\n'); if (!pt) return; *pt = 0;
+	dat = String(buffer);
+
+	TListItem* item = lvEcg->Items->Add();
+	item->Caption = lvEcg->Items->Count;
+	item->SubItems->Add(String(anz));
+	item->SubItems->Add(String(person));
+	item->SubItems->Add(String(state));
+	item->SubItems->Add(String(lage));
+	item->SubItems->Add(String(pos));
+	item->SubItems->Add(bp);
+	item->SubItems->Add(String(puls));
+	item->SubItems->Add(dat);
+	item->SubItems->Add(1); //Format = ADS
+	item->SubItems->Add("\t"); //Delim
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -319,16 +391,16 @@ void __fastcall TfmSessionAdd::acAddKnownPersonExecute(TObject *Sender)
 	{
 	int person = DlgSelectSinglePerson(this);
 	if (person <= 0) return;
-	if (DlgAddPersonSession(this, person))
-		; //ShowData
+	if (!DlgAddPersonSession(this, person)) return;
+	ShowPersonenData(person);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmSessionAdd::acAddNewPersonExecute(TObject *Sender)
 	{
 	int person = DlgPersonAdd(this);
 	if (person <= 0) return;
-	if (DlgAddPersonSession(this, person))
-		; //ShowData
+	if (!DlgAddPersonSession(this, person)) return;
+	ShowPersonenData(person);
 	}
 //---------------------------------------------------------------------------
 /***************************************************************************/
@@ -371,12 +443,12 @@ void __fastcall TfmSessionAdd::TimerCallbackTimer(TObject *Sender)
 void __fastcall TfmSessionAdd::lvEcgChange(TObject *Sender, TListItem *Item,
 	  TItemChange Change)
 	{
-	acSave->Enabled = CheckSession();
+	CheckSession();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmSessionAdd::edStampChange(TObject *Sender)
 	{
-	acSave->Enabled = CheckSession();
+	CheckSession();
 	}
 //---------------------------------------------------------------------------
 

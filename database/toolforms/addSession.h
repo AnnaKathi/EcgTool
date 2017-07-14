@@ -35,7 +35,10 @@ private:
 
 	bool		CheckSession();
 	bool		SaveSession();
-	bool 		GetArray(String file, eDatFormat format, String delim, sEcgData& data);
+	bool 		GetArray(String file, ePosition pos, eDatFormat format, String delim, sEcgData& data);
+
+	void 		ShowPersonenData(int person);
+	void 		addPersonRow(int person, char* buffer);
 
 
 __published:	// IDE-verwaltete Komponenten

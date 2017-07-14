@@ -72,7 +72,6 @@ object fmAddPersonSession: TfmAddPersonSession
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 8
-    ExplicitWidth = 662
     DesignSize = (
       1052
       41)
@@ -94,7 +93,6 @@ object fmAddPersonSession: TfmAddPersonSession
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitWidth = 646
     end
   end
   object pnBottom: TPanel
@@ -105,8 +103,6 @@ object fmAddPersonSession: TfmAddPersonSession
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 9
-    ExplicitTop = 589
-    ExplicitWidth = 662
     DesignSize = (
       1052
       41)
@@ -118,14 +114,13 @@ object fmAddPersonSession: TfmAddPersonSession
       Action = acClose
       Anchors = [akTop, akRight]
       TabOrder = 0
-      ExplicitLeft = 579
     end
     object Button2: TButton
       Left = 8
       Top = 6
       Width = 161
       Height = 25
-      Caption = '&Personen-Daten hinzuf'#252'gen'
+      Action = acAddValues
       TabOrder = 1
     end
   end
@@ -137,7 +132,6 @@ object fmAddPersonSession: TfmAddPersonSession
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 10
-    ExplicitWidth = 662
     object Label1: TLabel
       Left = 8
       Top = 12
@@ -1561,6 +1555,10 @@ object fmAddPersonSession: TfmAddPersonSession
     end
     object acAddZustand4: TAction
       OnExecute = acAddZustand4Execute
+    end
+    object acAddValues: TAction
+      Caption = '&Personen-Daten hinzuf'#252'gen'
+      OnExecute = acAddValuesExecute
     end
   end
   object OpenDialog: TOpenDialog

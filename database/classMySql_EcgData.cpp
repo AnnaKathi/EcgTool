@@ -37,7 +37,7 @@ bool cMySqlEcgData::save(sEcgData data)
 	//Row muss vorher gesetzt sein
 	String s = DataToLongtext(data);
 	String q =
-		"INSERT INTO `ecgdata` (`Sessions_ID`, `Subjects_ID`, `Positions_ID`, `States_ID`, `Postures_ID`, `BPSys`, `BPDia`, `Puls`, `ECG`, `Note`) VALUES (" +
+		"INSERT INTO `ecgdata` (`Sessions_ID`, `Subjects_ID`, `Positions_ID`, `States_ID`, `Postures_ID`, `BPSys`, `BPDia`, `Puls`, `Note`, `ECG`) VALUES (" +
 		String(data.session)  + ", " +
 		String(data.person)   + ", " +
 		String(data.position) + ", " +
@@ -46,6 +46,7 @@ bool cMySqlEcgData::save(sEcgData data)
 		String(data.bpsys)    + ", " +
 		String(data.bpdia)    + ", " +
 		String(data.puls)     + ", " +
+		"'" + data.note + "'," +
 		"'" + s + "')";
 
 	if (!fwork->send(q))
@@ -170,9 +171,10 @@ bool cMySqlEcgData::getRow()
 	fdata.bpsys    = atoi(frow[6]);
 	fdata.bpdia    = atoi(frow[7]);
 	fdata.puls     = atoi(frow[8]);
+	fdata.note     = frow[9];
 
 	//Die EKG-Werte sind als semikolon-getrennter Longtext gespeichert
-	if (!LongstrToData(String(frow[9]), fdata))
+	if (!LongstrToData(String(frow[10]), fdata))
 		return fail(6, "Das Longtext-Feld 'Werte' konnte nicht eingelesen werden");
 
 	return true;
@@ -214,10 +216,11 @@ String cMySqlEcgData::DataToLongtext(sEcgData data)
 	for (int i = 0; i < 3000; i++)
 		{
 		sprintf(feld, "%.8f", data.werte[i]);
+    	wert = atof(feld);
 		if (i == 0)
-			s = String(feld);
+			s = String(wert);
 		else
-			s += ";" + String(feld);
+			s += ";" + String(wert);
 		}
 		
 	return s;

@@ -1,27 +1,82 @@
 [Closed Files]
-File_0=TSourceModule,'D:\src\EcgTool\Main.cpp',0,1,206,25,228,0,0,,{1
-File_1=TSourceModule,'D:\src\EcgTool\EdanImport.cpp',0,1,129,47,152,0,0,,{1
-File_2=TSourceModule,'d:\dev\rad\include\dinkumware\xtree',0,1,1,53,463,0,0,,
-File_3=TSourceModule,'D:\src\EcgTool\basics\classCsv.cpp',0,1,91,38,115,0,0,,
-File_4=TSourceModule,'D:\ADS Tests - Transfer vom Laptop\2017-06-29 - Durchgang 2\Atha liegend.txt',0,1,1,1,7,0,0,,
-File_5=TSourceModule,'D:\Kahrweg ECG Data\Export Edan SE-1515\Stratmann, Martin-10072017-140632.XML',0,1,114,41,114,0,0,,
-File_6=TSourceModule,'D:\src\EcgTool\Databases.cpp',0,1,1,1,1,0,0,,
-File_7=TSourceModule,'D:\src\EcgTool\database\baseforms\baseSession.cpp',0,1,1,1,1,0,0,,
-File_8=TSourceModule,'D:\src\EcgTool\Sessions.cpp',0,1,1,1,1,0,0,,
-File_9=TSourceModule,'D:\src\EcgTool\database\toolforms\addSession.cpp',0,1,298,1,321,0,0,,{1
+File_0=TSourceModule,'d:\dev\rad\include\vcl\dstring.h',0,1,48,1,68,0,0,,
+File_1=TSourceModule,'d:\dev\rad\include\dinkumware\map',0,1,81,1,104,0,0,,
+File_2=TSourceModule,'D:\src\EcgTool\database\classMySql.cpp',0,1,148,1,171,0,0,,
+File_3=TSourceModule,'D:\src\EcgTool\ecg\classEcg.cpp',0,1,1,1,28,0,0,,
+File_4=TSourceModule,'D:\src\EcgTool\basics\classCsv.cpp',0,1,7,1,33,0,0,,
+File_5=TSourceModule,'D:\src\EcgTool\Main.cpp',0,1,206,25,228,0,0,,{1
+File_6=TSourceModule,'D:\src\EcgTool\EdanImport.cpp',0,1,129,47,152,0,0,,{1
+File_7=TSourceModule,'D:\ADS Tests - Transfer vom Laptop\2017-06-29 - Durchgang 2\Atha liegend.txt',0,1,1,1,7,0,0,,
+File_8=TSourceModule,'D:\Kahrweg ECG Data\Export Edan SE-1515\Stratmann, Martin-10072017-140632.XML',0,1,114,41,114,0,0,,
 
 [Modules]
-Module0=default.htm
-Count=1
+Module0=d:\dev\rad\include\dinkumware\xtree
+Module1=D:\src\EcgTool\database\classMySql_EcgData.cpp
+Module2=D:\src\EcgTool\database\toolforms\addSession.cpp
+Module3=D:\src\EcgTool\basics\classData.cpp
+Module4=D:\src\EcgTool\definitions.h
+Module5=D:\src\EcgTool\basics\classArray.cpp
+Module6=D:\src\EcgTool\database\toolforms\addPersonSession.cpp
+Module7=D:\src\EcgTool\Sessions.cpp
+Module8=default.htm
+Count=9
 EditWindowCount=1
+
+[d:\dev\rad\include\dinkumware\xtree]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\database\classMySql_EcgData.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\database\toolforms\addSession.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[D:\src\EcgTool\basics\classData.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\definitions.h]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\basics\classArray.cpp]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\database\toolforms\addPersonSession.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[D:\src\EcgTool\Sessions.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=1
 
 [default.htm]
 ModuleType=TURLModule
 
 [EditWindow0]
-ViewCount=1
-CurrentView=0
+ViewCount=9
+CurrentEditView=d:\dev\rad\include\dinkumware\xtree
 View0=0
+View1=1
+View2=2
+View3=3
+View4=4
+View5=5
+View6=6
+View7=7
+View8=8
 PercentageSizes=1
 Create=1
 Visible=1
@@ -56,13 +111,98 @@ BottomMiddelPanelData=0000080001000100000009000000446F636B5369746530361900000000
 CustomEditViewType=TWelcomePageView
 WelcomePageURL=bds:/default.htm
 
+[View1]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\Sessions.cpp
+CursorX=68
+CursorY=25
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=Borland.FormDesignerView
+
+[View2]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\database\toolforms\addSession.cpp
+CursorX=1
+CursorY=194
+TopLine=174
+LeftCol=1
+Elisions=
+Bookmarks={1,193,26}{9,231,46}
+EditViewName=D:\src\EcgTool\database\toolforms\addSession.cpp
+
+[View3]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\basics\classData.cpp
+CursorX=1
+CursorY=106
+TopLine=74
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\basics\classData.cpp
+
+[View4]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\definitions.h
+CursorX=12
+CursorY=36
+TopLine=4
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\definitions.h
+
+[View5]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\basics\classArray.cpp
+CursorX=1
+CursorY=1
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\basics\classArray.cpp
+
+[View6]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\database\classMySql_EcgData.cpp
+CursorX=1
+CursorY=38
+TopLine=18
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\database\classMySql_EcgData.cpp
+
+[View7]
+CustomEditViewType=TEditView
+Module=d:\dev\rad\include\dinkumware\xtree
+CursorX=53
+CursorY=471
+TopLine=452
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=d:\dev\rad\include\dinkumware\xtree
+
+[View8]
+CustomEditViewType=TEditView
+Module=D:\src\EcgTool\database\toolforms\addPersonSession.cpp
+CursorX=1
+CursorY=3
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks={1,111,53}
+EditViewName=D:\src\EcgTool\database\toolforms\addPersonSession.cpp
+
 [Watches]
-Count=5
-Watch0='line',256,0,18,1,0,'Überwachte Ausdrücke'
-Watch1='InLead',256,0,18,1,0,'Überwachte Ausdrücke'
-Watch2='row',256,0,18,1,0,'Überwachte Ausdrücke'
-Watch3='ix1',256,0,18,1,0,'Überwachte Ausdrücke'
-Watch4='mLead2->Text',256,0,18,1,0,'Überwachte Ausdrücke'
+Count=2
+Watch0='buffer',256,0,18,1,0,'Überwachte Ausdrücke'
+Watch1='feld',256,0,18,1,0,'Überwachte Ausdrücke'
 
 [WatchWindow]
 WatchColumnWidth=120
@@ -86,13 +226,14 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=6
+Count=7
 Breakpoint0='D:\src\EcgTool\algorithms\AlgChoi.cpp',320,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint1='D:\src\EcgTool\inc\libsvm\svm.cpp',2106,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint2='D:\src\EcgTool\SessionAdd.cpp',151,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint3='D:\src\EcgTool\database\toolforms\addSession.cpp',82,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint3='D:\src\EcgTool\database\toolforms\addSession.cpp',85,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint4='D:\src\EcgTool\EdanImport.cpp',267,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint5='D:\src\EcgTool\EdanImport.cpp',261,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint6='D:\src\EcgTool\database\toolforms\addSession.cpp',171,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
@@ -380,6 +521,11 @@ Dockable=1
 StayOnTop=0
 SplitPos=176
 
+[PropInspDesignerSelection]
+ArrangeBy=Name
+SelectedItem=Align,OnAlignInsertBefore
+ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,Font=0,GlassFrame=0,HorzScrollBar=0,Margins=0,Padding=0,Action=0,BevelEdges=0,HotTrackStyles=0,IconOptions=0
+
 [ModelViewTool]
 PercentageSizes=1
 Create=1
@@ -620,7 +766,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
@@ -668,5 +814,5 @@ Dockable=1
 StayOnTop=0
 TabPosition=0
 ActiveTabID=ProjectManager
-TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
+TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
 
