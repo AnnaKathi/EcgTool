@@ -78,7 +78,7 @@ bool cData::getFile(String file, eDatFormat format, String delim, int lead, int 
 		return fail(fcsv->error_code, fcsv->error_msg);
 
 	farr_charac.VonMsec = farr_charac.BisMsec = fcsv->getSample();
-	farr_charac.MinWert = farr_charac.MaxWert = fcsv->getI();
+	farr_charac.MinWert = farr_charac.MaxWert = fcsv->getVal();
 
 	float zeit;
 	float lead1;
@@ -86,7 +86,7 @@ bool cData::getFile(String file, eDatFormat format, String delim, int lead, int 
 	do
 		{
 		zeit  = fcsv->getLineNo(); //todo: fcsv->getSample(); ist in Datei nicht vorhanden
-		lead1 = fcsv->getI();
+		lead1 = fcsv->getVal();
 		farr[ix].push_back(zeit);
 		farr[ix].push_back(lead1);
 		ix++;

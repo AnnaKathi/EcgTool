@@ -229,14 +229,17 @@ object fmEcg: TfmEcg
         TabOrder = 3
         OnChange = cbLeadChange
         Items.Strings = (
-          'Lead 1'
-          'Lead 2'
-          'Lead 3'
-          'Lead 4'
-          'Lead 5'
-          'Lead 6'
-          'Lead 7'
-          'Lead 8')
+          'Channel 1'
+          'Channel 2'
+          'Channel 3'
+          'Channel 4'
+          'Channel 5'
+          'Channel 6'
+          'Channel 7'
+          'Channel 8'
+          'Ableitung 12'
+          'Ableitung 34'
+          'Ableitung 56')
       end
     end
     object pbJob: TProgressBar

@@ -25,15 +25,33 @@ struct cEcgLine
 	{
 	int 	lineno;
 	int		sample;
-	double	i;
-	double	ii;
-	double	v1;
-	double	v2;
-	double	v3;
-	double	v4;
-	double	v5;
-	double	v6;
+	double	ch1; //die acht Kanäle der Datei, siehe auch unten
+	double	ch2;
+	double	ch3;
+	double	ch4;
+	double	ch5;
+	double	ch6;
+	double	ch7;
+	double	ch8;
+
+	double  v12; //C1 zu C2 --> (V1-WCT) - (V2-WCT) = V1 - V2 = Ch.8 - Ch.4
+	double  v34; //C3 zu C4 --> (V3-WCT) - (V4-WCT) = V3 - V4 = Ch.5 - Ch.6
+	double  v56; //C5 zu C6 --> (V5-WCT) - (V6-WCT) = V5 - V6 = Ch.7 - Ch.1
+
+	double	min[12]; //kleinster Wert aller Spalten
+	double  max[12]; //größter Wert aller Spalten
 	};
+//---------------------------------------------------------------------------
+/* Lead-Derivation ADS1298
+Channel 1 = V6 = V6 - WCT
+Channel 2 = Lead I  = LA - RA
+Channel 3 = Lead II = LL - RA
+Channel 4 = V2 = V2 - WCT
+Channel 5 = V3 = V3 - WCT
+Channel 6 = V4 = V4 - WCT
+Channel 7 = V5 = V5 - WCT
+Channel 8 = V1 = V1 - WCT
+*/
 //---------------------------------------------------------------------------
 //! liest eine CSV-Datei ein
 /*! Die Klasse cCsv liest eine csv-Datei (bzw. eine txt-Datei) ein und füllt
@@ -144,11 +162,11 @@ public:
 		 */
 		int 		getSample();
 
-		//! aktueller Wert Lead 1
-		/*! Gibt nach First/Next/NextUntil den aktuellen Wert von lead '1' zurück
-		 *  /return (fliat) Lead 1
-		 */
-		float 		getI();
+		double		getVal(); //gibt den gewünschten Lead zurück (1-8 = Channels, 9-11 Ableitungen)
+		double		getChannel(int channel);
+		double		getC12();
+		double		getC34();
+		double		getC56();
 
 private:
 	FILE*		fp;
@@ -159,12 +177,14 @@ private:
 	char		Delim[2];
 	eDatFormat	Format;
 	cEcgLine	EcgLine;
-	int			Lead;
+	int			iLead;
 
 	bool 		Skip();
 	bool		SkipRow();
+	bool 		ParseLineObsolete();
 	bool 		ParseLineOld();
 	bool		ParseLine();
+	bool		bFirstParse;
 	};
 //---------------------------------------------------------------------------
 #endif

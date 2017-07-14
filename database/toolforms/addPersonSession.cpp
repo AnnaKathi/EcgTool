@@ -212,7 +212,7 @@ bool TfmAddPersonSession::LoadFile(eState state, eLage lage, String bp, int puls
 	//ein bestimmter Lead eingelesen wird, z.B. V1-V2 = Brust eng
 	if (cxLead1->Checked) //Brust weit
 		{
-		if (!fecg.data.getFile(file, format, delim, 1, 0, 3000))
+		if (!fecg.data.getFile(file, format, delim, 2, 0, 3000))
 			{
 			; //todo Fehlermeludng
 			return false;
@@ -225,7 +225,7 @@ bool TfmAddPersonSession::LoadFile(eState state, eLage lage, String bp, int puls
 
 	if (cxLead2->Checked) //Brust eng
 		{
-		if (!fecg.data.getFile(file, format, delim, 3, 0, 3000))
+		if (!fecg.data.getFile(file, format, delim, 9, 0, 3000))
 			{
 			; //todo Fehlermeludng
 			return false;
@@ -238,7 +238,7 @@ bool TfmAddPersonSession::LoadFile(eState state, eLage lage, String bp, int puls
 
 	if (cxLead3->Checked) //Rücken
 		{
-		if (!fecg.data.getFile(file, format, delim, 5, 0, 3000))
+		if (!fecg.data.getFile(file, format, delim, 10, 0, 3000))
 			{
 			; //todo Fehlermeludng
 			return false;
@@ -251,7 +251,7 @@ bool TfmAddPersonSession::LoadFile(eState state, eLage lage, String bp, int puls
 
 	if (cxLead4->Checked) //Hände
 		{
-		if (!fecg.data.getFile(file, format, delim, 7, 0, 3000))
+		if (!fecg.data.getFile(file, format, delim, 11, 0, 3000))
 			{
 			; //todo Fehlermeludng
 			return false;

@@ -113,8 +113,8 @@ void TfmEcg::ReadFile()
 	else
 		format = formatNone;
 
-	int lead = cbLead->ItemIndex;
-	if (lead < 0) lead = 0;
+	int lead = cbLead->ItemIndex+1;
+	if (lead < 0) lead = 1;
 
 	int vonSamp = edVonSample->Text.ToIntDef(-1);
 	int bisSamp = edBisSample->Text.ToIntDef(-1);

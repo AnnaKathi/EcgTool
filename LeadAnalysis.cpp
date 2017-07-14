@@ -103,28 +103,28 @@ void __fastcall TfmLeads::FormClose(TObject *Sender, TCloseAction &Action)
 //---------------------------------------------------------------------------
 bool TfmLeads::GetLeads()
 	{
-	if (!fdata1.getFile(fEcgFile, formatADS, "\t", 0, 0, 3000)) return false;
+	if (!fdata1.getFile(fEcgFile, formatADS, "\t", 1, 0, 3000)) return false;
 	else fdata1.redisplay(iLead1);
 
-	if (!fdata2.getFile(fEcgFile, formatADS, "\t", 1, 0, 3000)) return false;
+	if (!fdata2.getFile(fEcgFile, formatADS, "\t", 2, 0, 3000)) return false;
 	else fdata2.redisplay(iLead2);
 
-	if (!fdata3.getFile(fEcgFile, formatADS, "\t", 2, 0, 3000)) return false;
+	if (!fdata3.getFile(fEcgFile, formatADS, "\t", 3, 0, 3000)) return false;
 	else fdata3.redisplay(iLead3);
 
-	if (!fdata4.getFile(fEcgFile, formatADS, "\t", 3, 0, 3000)) return false;
+	if (!fdata4.getFile(fEcgFile, formatADS, "\t", 4, 0, 3000)) return false;
 	else fdata4.redisplay(iLead4);
 
-	if (!fdata5.getFile(fEcgFile, formatADS, "\t", 4, 0, 3000)) return false;
+	if (!fdata5.getFile(fEcgFile, formatADS, "\t", 5, 0, 3000)) return false;
 	else fdata5.redisplay(iLead5);
 
-	if (!fdata6.getFile(fEcgFile, formatADS, "\t", 5, 0, 3000)) return false;
+	if (!fdata6.getFile(fEcgFile, formatADS, "\t", 6, 0, 3000)) return false;
 	else fdata6.redisplay(iLead6);
 
-	if (!fdata7.getFile(fEcgFile, formatADS, "\t", 6, 0, 3000)) return false;
+	if (!fdata7.getFile(fEcgFile, formatADS, "\t", 7, 0, 3000)) return false;
 	else fdata7.redisplay(iLead7);
 
-	if (!fdata8.getFile(fEcgFile, formatADS, "\t", 7, 0, 3000)) return false;
+	if (!fdata8.getFile(fEcgFile, formatADS, "\t", 8, 0, 3000)) return false;
 	else fdata8.redisplay(iLead8);
 
 	return true;

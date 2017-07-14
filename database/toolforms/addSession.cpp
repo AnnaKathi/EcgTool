@@ -226,9 +226,9 @@ bool TfmSessionAdd::GetArray(String file, ePosition pos, eDatFormat format, Stri
 	int lead;
 		 if (pos == posNone) 		lead = 0;
 	else if (pos == posBrustNormal) lead = 1;
-	else if (pos == posBrustEng)	lead = 3;
-	else if (pos == posHandBack)	lead = 5;
-	else if (pos == posBack)		lead = 7;
+	else if (pos == posBrustEng)	lead = 9;
+	else if (pos == posHandBack)	lead = 10;
+	else if (pos == posBack)		lead = 11;
 	if (!fecg.data.getFile(file, format, delim, lead, 0, 3000)) //TODO
 		{
 		//todo Fejlermeldung
