@@ -9,12 +9,11 @@ USEFORM("Sessions.cpp", fmSessions);
 USEFORM("DataAnalysis.cpp", fmAnalysis);
 USEFORM("RequestBox.cpp", fmRequest);
 USEFORM("Details.cpp", fmDetails);
-USEFORM("LeadAnalysis.cpp", fmLeads);
-USEFORM("EcgLeadAnalysis.cpp", fmEcgLeads);
 USEFORM("Features.cpp", fmFeatures);
 USEFORM("ChoiKlassifizierung.cpp", fmChoiClassification);
 USEFORM("VergleichAlg.cpp", fmVergleich);
 USEFORM("Testform.cpp", fmTest);
+USEFORM("EdanImport.cpp", fmEdan);
 USEFORM("database\DbPersonen.cpp", fmData);
 USEFORM("database\baseforms\basePeople.cpp", fmBasePeople);
 USEFORM("database\baseforms\baseEcgData.cpp", fmBaseEcg);
@@ -34,7 +33,7 @@ USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
 USEFORM("algorithms\AlgChoi2.cpp", fmChoi2);
 USEFORM("algorithms\Wavelet.cpp", fmWavelet);
-USEFORM("EdanImport.cpp", fmEdan);
+USEFORM("FeatChoi.cpp", fmFeatChoi);
 //---------------------------------------------------------------------------
 #include "database/classMySql.h"
 cMySql fmysql;
@@ -65,13 +64,12 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TfmVergleich), &fmVergleich);
 		Application->CreateForm(__classid(TfmWizSession), &fmWizSession);
 		Application->CreateForm(__classid(TfmDatabases), &fmDatabases);
-		Application->CreateForm(__classid(TfmLeads), &fmLeads);
-		Application->CreateForm(__classid(TfmEcgLeads), &fmEcgLeads);
 		Application->CreateForm(__classid(TfmAddMessung), &fmAddMessung);
 		Application->CreateForm(__classid(TfmWavelet), &fmWavelet);
 		Application->CreateForm(__classid(TfmSelectPerson), &fmSelectPerson);
 		Application->CreateForm(__classid(TfmAddPersonSession), &fmAddPersonSession);
 		Application->CreateForm(__classid(TfmEdan), &fmEdan);
+		Application->CreateForm(__classid(TfmFeatChoi), &fmFeatChoi);
 		Application->Run();
 	}
 	catch (Exception &exception)

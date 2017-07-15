@@ -11,18 +11,32 @@ File_8=TSourceModule,'D:\src\EcgTool\ecg\classRpeaks.cpp',0,1,19,31,46,0,0,,
 File_9=TSourceModule,'D:\src\EcgTool\DataAnalysis.cpp',0,1,106,45,124,0,0,,
 
 [Modules]
-Module0=d:\dev\rad\include\dinkumware\xtree
-Module1=D:\src\EcgTool\LeadAnalysis.cpp
-Module2=D:\src\EcgTool\EcgLeadAnalysis.cpp
+Module0=D:\src\EcgTool\Main.cpp
+Module1=d:\dev\rad\include\dinkumware\xtree
+Module2=D:\src\EcgTool\EdanImport.cpp
 Module3=default.htm
-Module4=D:\src\EcgTool\Main.cpp
-Count=5
+Module4=D:\src\EcgTool\LeadAnalysis.cpp
+Module5=D:\src\EcgTool\EcgLeadAnalysis.cpp
+Count=6
 EditWindowCount=1
+
+[D:\src\EcgTool\Main.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
 
 [d:\dev\rad\include\dinkumware\xtree]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
+
+[D:\src\EcgTool\EdanImport.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[default.htm]
+ModuleType=TURLModule
 
 [D:\src\EcgTool\LeadAnalysis.cpp]
 ModuleType=TSourceModule
@@ -34,22 +48,15 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[default.htm]
-ModuleType=TURLModule
-
-[D:\src\EcgTool\Main.cpp]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
 [EditWindow0]
-ViewCount=5
-CurrentEditView=d:\dev\rad\include\dinkumware\xtree
+ViewCount=6
+CurrentEditView=D:\src\EcgTool\Main.cpp
 View0=0
 View1=1
 View2=2
 View3=3
 View4=4
+View5=5
 PercentageSizes=1
 Create=1
 Visible=1
@@ -70,13 +77,13 @@ TopPanelSize=0
 LeftPanelSize=2005
 LeftPanelClients=PropertyInspector
 LeftPanelData=00000800010000000000B02200000000000000E0090000000000000100000000B02200001100000050726F7065727479496E73706563746F72FFFFFFFF
-RightPanelSize=2188
+RightPanelSize=2104
 RightPanelClients=DockSite2
 RightPanelData=00000800010000000000B022000000000000006B0A0000000000000100000000B022000009000000446F636B5369746532FFFFFFFF
 BottomPanelSize=0
 BottomPanelClients=DockSite1
 BottomPanelData=0000080001000100000009000000446F636B5369746531153400000000000000CC03000000000000FFFFFFFF
-BottomMiddlePanelSize=2769
+BottomMiddlePanelSize=1435
 BottomMiddlePanelClients=DockSite0,MessageView@EditWindow0
 BottomMiddelPanelData=0000080001000100000009000000446F636B53697465303619000000000000007D1B0000000000000100000000361900000B0000004D65737361676556696577FFFFFFFF
 
@@ -108,6 +115,17 @@ EditViewName=d:\dev\rad\include\dinkumware\xtree
 
 [View3]
 CustomEditViewType=TEditView
+Module=D:\src\EcgTool\EdanImport.cpp
+CursorX=1
+CursorY=267
+TopLine=250
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\src\EcgTool\EdanImport.cpp
+
+[View4]
+CustomEditViewType=TEditView
 Module=D:\src\EcgTool\EcgLeadAnalysis.cpp
 CursorX=1
 CursorY=86
@@ -117,7 +135,7 @@ Elisions=
 Bookmarks=
 EditViewName=D:\src\EcgTool\EcgLeadAnalysis.cpp
 
-[View4]
+[View5]
 CustomEditViewType=TEditView
 Module=D:\src\EcgTool\LeadAnalysis.cpp
 CursorX=1
@@ -125,7 +143,7 @@ CursorY=145
 TopLine=116
 LeftCol=1
 Elisions=
-Bookmarks={1,94,32}
+Bookmarks={1,94,21}
 EditViewName=D:\src\EcgTool\LeadAnalysis.cpp
 
 [Watches]
@@ -154,16 +172,14 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=9
+Count=7
 Breakpoint0='D:\src\EcgTool\algorithms\AlgChoi.cpp',320,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint1='D:\src\EcgTool\inc\libsvm\svm.cpp',2106,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint2='D:\src\EcgTool\SessionAdd.cpp',151,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint3='D:\src\EcgTool\database\toolforms\addSession.cpp',85,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint4='D:\src\EcgTool\EdanImport.cpp',267,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint5='D:\src\EcgTool\EdanImport.cpp',261,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint6='D:\src\EcgTool\database\toolforms\addSession.cpp',171,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint7='D:\src\EcgTool\EcgLeadAnalysis.cpp',86,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint8='D:\src\EcgTool\LeadAnalysis.cpp',145,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint4='D:\src\EcgTool\database\toolforms\addSession.cpp',171,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint5='D:\src\EcgTool\EcgLeadAnalysis.cpp',86,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint6='D:\src\EcgTool\LeadAnalysis.cpp',145,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
@@ -196,12 +212,12 @@ Docked=1
 State=0
 Left=0
 Top=0
-Width=2188
-Height=7019
+Width=2104
+Height=8798
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=2188
-ClientHeight=7019
+ClientWidth=2104
+ClientHeight=8798
 TBDockHeight=5904
 LRDockWidth=2349
 Dockable=1
@@ -215,12 +231,12 @@ Docked=1
 State=0
 Left=0
 Top=0
-Width=2188
-Height=8798
+Width=2104
+Height=6779
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=2188
-ClientHeight=8798
+ClientWidth=2104
+ClientHeight=6779
 TBDockHeight=7144
 LRDockWidth=2000
 Dockable=1
@@ -451,11 +467,6 @@ Dockable=1
 StayOnTop=0
 SplitPos=176
 
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Text,OnChange
-ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,Font=0,GlassFrame=0,HorzScrollBar=0,Margins=0,Padding=0,Action=0,BevelEdges=0,HotTrackStyles=0,IconOptions=0,VertScrollBar=0
-
 [ModelViewTool]
 PercentageSizes=1
 Create=1
@@ -482,7 +493,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-741
+Top=-885
 Width=3562
 Height=4827
 MaxLeft=-1
@@ -501,7 +512,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-741
+Top=-885
 Width=13604
 Height=212
 MaxLeft=-1
@@ -520,7 +531,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-741
+Top=-885
 Width=3562
 Height=4827
 MaxLeft=-1
@@ -539,7 +550,7 @@ Visible=0
 Docked=1
 State=0
 Left=-388
-Top=-741
+Top=-885
 Width=3562
 Height=2298
 MaxLeft=-1
@@ -584,11 +595,11 @@ Docked=1
 State=0
 Left=0
 Top=0
-Width=2188
+Width=2104
 Height=6779
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=2188
+ClientWidth=2104
 ClientHeight=6779
 TBDockHeight=3673
 LRDockWidth=1896
@@ -641,13 +652,13 @@ Docked=1
 State=0
 Left=0
 Top=23
-Width=5776
-Height=2654
+Width=5859
+Height=1269
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=5776
-ClientHeight=2654
-TBDockHeight=2654
+ClientWidth=5859
+ClientHeight=1269
+TBDockHeight=1269
 LRDockWidth=4323
 Dockable=1
 StayOnTop=0
@@ -696,7 +707,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,RefactoringsView,UsagesView,QAView,MetricsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,RefactoringsView,UsagesView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
@@ -732,17 +743,17 @@ Docked=1
 State=0
 Left=0
 Top=23
-Width=2188
+Width=2104
 Height=9038
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=2188
+ClientWidth=2104
 ClientHeight=9038
 TBDockHeight=9067
-LRDockWidth=2188
+LRDockWidth=2104
 Dockable=1
 StayOnTop=0
 TabPosition=0
-ActiveTabID=ToolForm
-TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
+ActiveTabID=ProjectManager
+TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
 

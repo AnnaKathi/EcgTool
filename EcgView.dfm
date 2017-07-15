@@ -3,7 +3,7 @@ object fmEcg: TfmEcg
   Top = 0
   Caption = 'Auswertung EKG-Daten - EcgTool'
   ClientHeight = 539
-  ClientWidth = 1092
+  ClientWidth = 1090
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,13 +16,14 @@ object fmEcg: TfmEcg
   OnClose = FormClose
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
+  OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Bevel1: TBevel
     Left = 0
     Top = 41
-    Width = 1092
+    Width = 1090
     Height = 4
     Align = alTop
     Shape = bsTopLine
@@ -43,18 +44,19 @@ object fmEcg: TfmEcg
   object pnInfo: TPanel
     Left = 0
     Top = 0
-    Width = 1092
+    Width = 1090
     Height = 41
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 1092
     DesignSize = (
-      1092
+      1090
       41)
     object mInfo: TMemo
       Left = 8
       Top = 10
-      Width = 1076
+      Width = 1074
       Height = 25
       Anchors = [akLeft, akTop, akRight]
       BorderStyle = bsNone
@@ -70,6 +72,7 @@ object fmEcg: TfmEcg
       ParentColor = True
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 1076
     end
   end
   object pnLeft: TPanel
@@ -396,19 +399,21 @@ object fmEcg: TfmEcg
   object pnClient: TPanel
     Left = 341
     Top = 45
-    Width = 751
+    Width = 749
     Height = 494
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
+    ExplicitWidth = 751
     object imgEcg: TImage
       Left = 0
       Top = 0
-      Width = 751
+      Width = 749
       Height = 152
       Align = alTop
+      PopupMenu = PopupMenu1
       OnMouseDown = imgEcgMouseDown
       OnMouseMove = imgEcgMouseMove
       OnMouseUp = imgEcgMouseUp
@@ -416,10 +421,10 @@ object fmEcg: TfmEcg
       ExplicitTop = 2
       ExplicitWidth = 728
     end
-    object Bevel2: TBevel
+    object BevelEcg: TBevel
       Left = 0
       Top = 152
-      Width = 751
+      Width = 749
       Height = 4
       Align = alTop
       Shape = bsTopLine
@@ -430,7 +435,7 @@ object fmEcg: TfmEcg
     object imgDeriv1: TImage
       Left = 0
       Top = 156
-      Width = 751
+      Width = 749
       Height = 152
       Align = alTop
       ExplicitLeft = -4
@@ -440,17 +445,17 @@ object fmEcg: TfmEcg
     object imgDeriv2: TImage
       Left = 0
       Top = 312
-      Width = 751
+      Width = 749
       Height = 152
       Align = alTop
       ExplicitLeft = -4
       ExplicitTop = 308
       ExplicitWidth = 728
     end
-    object Bevel5: TBevel
+    object BevelAbl1: TBevel
       Left = 0
       Top = 308
-      Width = 751
+      Width = 749
       Height = 4
       Align = alTop
       Shape = bsTopLine
@@ -461,7 +466,7 @@ object fmEcg: TfmEcg
     object Bevel6: TBevel
       Left = 0
       Top = 464
-      Width = 751
+      Width = 749
       Height = 4
       Align = alTop
       Shape = bsTopLine
@@ -492,5 +497,17 @@ object fmEcg: TfmEcg
   object SaveDialog: TSaveDialog
     Left = 488
     Top = 8
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 496
+    Top = 96
+    object estSavePic1: TMenuItem
+      Caption = 'Test Save Pic'
+      OnClick = estSavePic1Click
+    end
+  end
+  object SaveDialog2: TSaveDialog
+    Left = 528
+    Top = 96
   end
 end

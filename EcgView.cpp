@@ -159,7 +159,7 @@ void TfmEcg::ReadFile()
 void __fastcall TfmEcg::tDetailsTimer(TObject *Sender)
 	{
 	tDetails->Enabled = false;
-	fmDetails->BringToFront();
+	//TODO obsolete? fmDetails->BringToFront();
 	}
 //---------------------------------------------------------------------------
 void TfmEcg::CutCurve()
@@ -374,10 +374,26 @@ void __fastcall TfmEcg::FormKeyDown(TObject *Sender, WORD &Key,
 		btInputfileClick(Sender);
 		}
 
-	if (Shift.Contains(ssCtrl) && Shift.Contains(ssShift) && Key == 0x44) //"D" -> Detailseite fokussieren
+	else if (Shift.Contains(ssCtrl) && Shift.Contains(ssShift) && Key == 0x44) //"D" -> Detailseite fokussieren
 		{
 		if (bDisplayedDetails)
 			fmDetails->BringToFront();
+		}
+
+	else if (Shift.Contains(ssCtrl) && Shift.Contains(ssShift))
+		{
+			 if (Key == 0x31) { cbLead->ItemIndex =  0; cbLeadChange(Sender); }
+		else if (Key == 0x32) { cbLead->ItemIndex =  1; cbLeadChange(Sender); }
+		else if (Key == 0x33) { cbLead->ItemIndex =  2; cbLeadChange(Sender); }
+		else if (Key == 0x34) { cbLead->ItemIndex =  3; cbLeadChange(Sender); }
+		else if (Key == 0x35) { cbLead->ItemIndex =  4; cbLeadChange(Sender); }
+		else if (Key == 0x36) { cbLead->ItemIndex =  5; cbLeadChange(Sender); }
+		else if (Key == 0x37) { cbLead->ItemIndex =  6; cbLeadChange(Sender); }
+		else if (Key == 0x38) { cbLead->ItemIndex =  7; cbLeadChange(Sender); }
+
+		else if (Key == 0x51) { cbLead->ItemIndex =  8; cbLeadChange(Sender); }
+		else if (Key == 0x41) { cbLead->ItemIndex =  9; cbLeadChange(Sender); }
+		else if (Key == 0x59) { cbLead->ItemIndex = 10; cbLeadChange(Sender); }
 		}
 	}
 //---------------------------------------------------------------------------
@@ -555,6 +571,21 @@ void TfmEcg::BuildData(sEcgData& data)
 void __fastcall TfmEcg::cbLeadChange(TObject *Sender)
 	{
 	sendClick(btRead);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmEcg::estSavePic1Click(TObject *Sender)
+	{
+	if (!SaveDialog2->Execute()) return;
+	String file = SaveDialog2->FileName;
+	imgEcg->Picture->SaveToFile(file);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmEcg::FormResize(TObject *Sender)
+	{
+	double h = double(pnClient->Height - BevelEcg->Height - BevelAbl1->Height - 10) / 3;
+	imgEcg->Height    = (int)h;
+	imgDeriv1->Height = (int)h;
+	imgDeriv2->Height = (int)h;
 	}
 //---------------------------------------------------------------------------
 

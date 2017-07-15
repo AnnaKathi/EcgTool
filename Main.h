@@ -109,9 +109,9 @@ __published:	// IDE-verwaltete Komponenten
 	TButton *btWavelib;
 	TAction *acImportEdan;
 	TMenuItem *EdanDatenstzeimportieren1;
+	TButton *btFeatChoi;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
-	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall acCloseExecute(TObject *Sender);
 	void __fastcall tStartupTimer(TObject *Sender);
 	void __fastcall btAnalysisSelectClick(TObject *Sender);
@@ -131,6 +131,8 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall btEcgAnalysisClick(TObject *Sender);
 	void __fastcall btWavelibClick(TObject *Sender);
 	void __fastcall acImportEdanExecute(TObject *Sender);
+	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall btFeatChoiClick(TObject *Sender);
 
 public:
 	__fastcall TfmMain(TComponent* Owner);

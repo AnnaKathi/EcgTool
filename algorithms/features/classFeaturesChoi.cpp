@@ -29,9 +29,11 @@ bool cFeaturesChoi::getFeatures(iarray_t curve, iarray_t rpeaks)
 	if (rpeaks.size() <= 0)	return fail(1, "Es wurden keine R-Peaks gesetzt");
 
 	//Sicherheitsabfrage: Maximale Anzahl Herzschläge (= R-Peaks) bei Puls 200
+	/* TODO Wieder aktivieren
 	double max_beats = (curve.size() / 1000) * 200/60;
 	if (rpeaks.size() > max_beats)
 		return fail(1, ftools.fmt("Zuviele R-Peaks gefunden: %d (max erlaubt %d)", rpeaks.size(), (int)max_beats));
+	*/
 
 	int round = 0;
 	int zeit, prev, next;

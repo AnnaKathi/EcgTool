@@ -16,7 +16,7 @@ object fmMain: TfmMain
   OldCreateOrder = False
   Position = poDesktopCenter
   OnClose = FormClose
-  OnKeyPress = FormKeyPress
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -4402,6 +4402,15 @@ object fmMain: TfmMain
       Caption = 'Test Wavelib'
       TabOrder = 12
       OnClick = btWavelibClick
+    end
+    object btFeatChoi: TButton
+      Left = 543
+      Top = 228
+      Width = 129
+      Height = 25
+      Caption = 'Feat. Choi vergleichen'
+      TabOrder = 13
+      OnClick = btFeatChoiClick
     end
   end
   object MainMenu: TMainMenu

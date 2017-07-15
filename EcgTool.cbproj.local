@@ -249,5 +249,12 @@
     <Transaction>2017.07.12 09:20:43.698.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\EdanImport.cpp</Transaction>
     <Transaction>2017.07.12 09:20:43.699.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\EdanImport.h</Transaction>
     <Transaction>2017.07.12 09:20:43.699.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\EdanImport.dfm</Transaction>
+    <Transaction>2017.07.15 11:08:49.248.cpp,D:\src\EcgTool\LeadAnalysis.cpp=</Transaction>
+    <Transaction>2017.07.15 11:08:49.249.dfm,D:\src\EcgTool\LeadAnalysis.dfm=</Transaction>
+    <Transaction>2017.07.15 11:08:52.309.cpp,D:\src\EcgTool\EcgLeadAnalysis.cpp=</Transaction>
+    <Transaction>2017.07.15 11:08:52.309.dfm,D:\src\EcgTool\EcgLeadAnalysis.dfm=</Transaction>
+    <Transaction>2017.07.15 14:38:07.693.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\FeatChoi.cpp</Transaction>
+    <Transaction>2017.07.15 14:38:07.693.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\FeatChoi.h</Transaction>
+    <Transaction>2017.07.15 14:38:07.693.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\FeatChoi.dfm</Transaction>
   </Transactions>
 </BorlandProject>

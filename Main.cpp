@@ -23,12 +23,15 @@ todo: extern cMySql fmysql in definitions.h verlagern?
 #include "Testform.h"
 #include "EdanImport.h"
 
+/*
 #include "LeadAnalysis.h"
 #include "EcgLeadAnalysis.h"
+*/
 
 #include "Features.h"
 #include "VergleichAlg.h"
 #include "ChoiKlassifizierung.h"
+#include "FeatChoi.h"
 #include "Main.h"
 
 //TEST, Integration von wavelib.h
@@ -306,11 +309,6 @@ void __fastcall TfmMain::acClassifySvmExecute(TObject *Sender)
 /**************   Meldungen vom Formular   *********************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-void __fastcall TfmMain::FormKeyPress(TObject *Sender, char &Key)
-	{
-	acCloseExecute(Sender);
-	}
-//---------------------------------------------------------------------------
 void __fastcall TfmMain::btAnalysisSelectClick(TObject *Sender)
 	{
 	String cl = Sender->ClassName();
@@ -335,13 +333,31 @@ void __fastcall TfmMain::btLKeadAnalysisClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btEcgAnalysisClick(TObject *Sender)
 	{
-	DlgShowEcgLeads(this);
+	//DlgShowEcgLeads(this);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btWavelibClick(TObject *Sender)
 	{
 	//TEST wavelib
 	DlgShowWavelet(this);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::FormKeyDown(TObject *Sender, WORD &Key,
+	  TShiftState Shift)
+	{
+	if (Key == VK_ESCAPE)
+		{
+		Key = 0;
+		acCloseExecute(Sender);
+		}
+
+	else if (Shift.Contains(ssCtrl) && Shift.Contains(ssShift) && Key == 0x45) //"E"
+    	acAnalyseEcgExecute(Sender);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btFeatChoiClick(TObject *Sender)
+	{
+	DlgShowVglChoi(this);
 	}
 //---------------------------------------------------------------------------
 

@@ -77,10 +77,10 @@ __published:	// IDE-verwaltete Komponenten
 	TOpenDialog *OpenDialog;
 	TButton *btMovAv;
 	TButton *btCut;
-	TBevel *Bevel2;
+	TBevel *BevelEcg;
 	TImage *imgDeriv1;
 	TImage *imgDeriv2;
-	TBevel *Bevel5;
+	TBevel *BevelAbl1;
 	TBevel *Bevel6;
 	TEdit *edGl1;
 	TEdit *edGl2;
@@ -108,6 +108,9 @@ __published:	// IDE-verwaltete Komponenten
 	TLabel *laCls;
 	TBevel *Bevel8;
 	TComboBox *cbLead;
+	TPopupMenu *PopupMenu1;
+	TMenuItem *estSavePic1;
+	TSaveDialog *SaveDialog2;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -128,6 +131,8 @@ __published:	// IDE-verwaltete Komponenten
           int Y);
 	void __fastcall btSave2Click(TObject *Sender);
 	void __fastcall cbLeadChange(TObject *Sender);
+	void __fastcall estSavePic1Click(TObject *Sender);
+	void __fastcall FormResize(TObject *Sender);
 
 
 public:
