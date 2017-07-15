@@ -86,14 +86,14 @@ bool cArray::displayPoints(iarray_t curve, iarray_t points, TImage* img)
 	if (!resetValues(farr_charac))
 		return fail(1, "Reset-Values war nicht möglich.");
 
-	float range_x  = farr_charac.BisIdx  - farr_charac.VonIdx;
-	float range_y  = farr_charac.MaxWert - farr_charac.MinWert;
-	float factor_x = (float)img->Width / range_x;
-	float factor_y = (float)img->Height / range_y;
+	double range_x  = farr_charac.BisIdx  - farr_charac.VonIdx;
+	double range_y  = farr_charac.MaxWert - farr_charac.MinWert;
+	double factor_x = (double)img->Width / range_x;
+	double factor_y = (double)img->Height / range_y;
 
 	img->Canvas->Brush->Color = fPointColor;
 
-	float zeit, wert;
+	double zeit, wert;
 	int x, y;
 	for (int i = 0; i < points.size(); i++)
 		{
@@ -233,7 +233,7 @@ iarray_t cArray::movingAv(iarray_t array, int window, bool CalcBegin)
 
 	farr = array;
 
-	float mov[MAX_NO_MOV_AV];
+	double mov[MAX_NO_MOV_AV];
 	for (int i = 0; i < MAX_NO_MOV_AV; i++)
 		mov[i] = 0.0;
 
@@ -241,8 +241,8 @@ iarray_t cArray::movingAv(iarray_t array, int window, bool CalcBegin)
 	iarray_itr ineu;
 	neu.clear();
 
-	float zeit, lead1;
-	float summe, mittel;
+	double zeit, lead1;
+	double summe, mittel;
 	int count = -1;
 	int new_index = 0;
 	for (iarray_itr itr = farr.begin(); itr != farr.end(); itr++)

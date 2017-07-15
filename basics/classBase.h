@@ -8,8 +8,8 @@
 //---------------------------------------------------------------------------
 #include "../definitions.h"
 //---------------------------------------------------------------------------
-typedef std::vector<float> ilist_t;  //float-map
-typedef std::map<float,ilist_t> iarray_t;
+typedef std::vector<double> ilist_t;  //double-map
+typedef std::map<double,ilist_t> iarray_t;
 typedef iarray_t::iterator iarray_itr;
 //---------------------------------------------------------------------------
 typedef std::vector<String> slist_t;  //String-map

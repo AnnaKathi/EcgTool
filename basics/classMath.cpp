@@ -21,7 +21,7 @@ iarray_t cMath::calcDerivate(iarray_t array)
 	//erste Ableitung = Steigung von farr
 	int zeit;
 	int ix = 0;
-	float before, lead1, steigung;
+	double before, lead1, steigung;
 	bool first = true;
 	for (iarray_itr itr = array.begin(); itr != array.end(); itr++)
 		{
@@ -41,6 +41,18 @@ iarray_t cMath::calcDerivate(iarray_t array)
 		before = lead1;
 		}
 
+	//TEST array
+	int n = deriv.size();
+	for (iarray_itr itr = deriv.begin(); itr != deriv.end(); itr++)
+		{
+		zeit = itr->first;
+		ilist_t& v = itr->second;
+		lead1 = v[1];
+    	int bp = 0;
+		}
+
+	int bp = 0;
+
 	return deriv;
 	}
 //---------------------------------------------------------------------------
@@ -48,7 +60,7 @@ iarray_t cMath::resort(iarray_t array, bool asc)
 	{
 	//array in 2. array umschreiben mit wert als key
 	iarray_t sort; sort.clear();
-	float zeit, lead1;
+	double zeit, lead1;
 	int ix = 0;
 	for (iarray_itr itr = array.begin(); itr != array.end(); itr++)
 		{

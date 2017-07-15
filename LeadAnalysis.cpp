@@ -91,46 +91,63 @@ void TfmLeads::RefreshView(int ansicht)
 	{
 	iAnsicht = ansicht;
 	if (bLoaded)
-		GetLeads(laInfo->Hint);
+    	ShowLeads();
 	}
 //---------------------------------------------------------------------------
 bool TfmLeads::GetLeads(String file)
 	{
 	if (!fdata1.getFile(file, formatADS, "\t", 1, 0, 3000)) return false;
-	if (!ShowData(fdata1, iLead1)) return false;
+	if (!fdata1.buildDerivates()) return false;
 
 	if (!fdata2.getFile(file, formatADS, "\t", 2, 0, 3000)) return false;
-	if (!ShowData(fdata2, iLead2)) return false;
+	if (!fdata2.buildDerivates()) return false;
 
 	if (!fdata3.getFile(file, formatADS, "\t", 3, 0, 3000)) return false;
-	if (!ShowData(fdata3, iLead3)) return false;
+	if (!fdata3.buildDerivates()) return false;
 
 	if (!fdata4.getFile(file, formatADS, "\t", 4, 0, 3000)) return false;
-	if (!ShowData(fdata4, iLead4)) return false;
+	if (!fdata4.buildDerivates()) return false;
 
 	if (!fdata5.getFile(file, formatADS, "\t", 5, 0, 3000)) return false;
-	if (!ShowData(fdata5, iLead5)) return false;
+	if (!fdata5.buildDerivates()) return false;
 
 	if (!fdata6.getFile(file, formatADS, "\t", 6, 0, 3000)) return false;
-	if (!ShowData(fdata6, iLead6)) return false;
+	if (!fdata6.buildDerivates()) return false;
 
 	if (!fdata7.getFile(file, formatADS, "\t", 7, 0, 3000)) return false;
-	if (!ShowData(fdata7, iLead7)) return false;
+	if (!fdata7.buildDerivates()) return false;
 
 	if (!fdata8.getFile(file, formatADS, "\t", 8, 0, 3000)) return false;
-	if (!ShowData(fdata8, iLead8)) return false;
+	if (!fdata8.buildDerivates()) return false;
 
 	if (!fabl12.getFile(file, formatADS, "\t", 9, 0, 3000)) return false;
-	if (!ShowData(fabl12, iAbl12)) return false;
+	if (!fabl12.buildDerivates()) return false;
 
 	if (!fabl34.getFile(file, formatADS, "\t",10, 0, 3000)) return false;
-	if (!ShowData(fabl34, iAbl34)) return false;
+	if (!fabl34.buildDerivates()) return false;
 
 	if (!fabl56.getFile(file, formatADS, "\t",11, 0, 3000)) return false;
-	if (!ShowData(fabl56, iAbl56)) return false;
+	if (!fabl56.buildDerivates()) return false;
 
 	bLoaded = true;
+	ShowLeads();
 	return true;
+	}
+//---------------------------------------------------------------------------
+bool TfmLeads::ShowLeads()
+	{
+	if (!ShowData(fdata1, iLead1)) return false;
+	if (!ShowData(fdata2, iLead2)) return false;
+	if (!ShowData(fdata3, iLead3)) return false;
+	if (!ShowData(fdata4, iLead4)) return false;
+	if (!ShowData(fdata5, iLead5)) return false;
+	if (!ShowData(fdata6, iLead6)) return false;
+	if (!ShowData(fdata7, iLead7)) return false;
+	if (!ShowData(fdata8, iLead8)) return false;
+	if (!ShowData(fabl12, iAbl12)) return false;
+	if (!ShowData(fabl34, iAbl34)) return false;
+	if (!ShowData(fabl56, iAbl56)) return false;
+    return true;
 	}
 //---------------------------------------------------------------------------
 bool TfmLeads::ShowData(cData data, TImage* img)
@@ -142,13 +159,15 @@ bool TfmLeads::ShowData(cData data, TImage* img)
 		}
 	else if (iAnsicht == 2) //1. Ableitung
 		{
-		if (!data.buildDerivates()) return false;
+		//if (!data.buildDerivates()) return false;
+
+		int n = data.derivate1.deriv_array.size();
 		data.derivate1.redisplay(img);
 		return true;
 		}
 	else if (iAnsicht == 3) //2. Ableitung
 		{
-		if (!data.buildDerivates()) return false;
+		//if (!data.buildDerivates()) return false;
 		data.derivate2.redisplay(img);
 		return true;
 		}

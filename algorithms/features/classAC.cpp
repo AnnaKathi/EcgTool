@@ -39,7 +39,7 @@ iarray_t cAC::buildAC(iarray_t array)
 	short order = array.size();
 
 	ilist_t R(order);
-	float sum;
+	double sum;
 	int i,j;
 
 	for (i = 1; i < order; i++)
@@ -70,7 +70,7 @@ iarray_t cAC::buildACOld(iarray_t array)
 	short order = array.size();
 
 	ilist_t R(order);
-	float sum;
+	double sum;
 	int i,j;
 
 	for (i=0; i < order; i++)

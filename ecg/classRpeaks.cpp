@@ -25,7 +25,7 @@ iarray_t cRpeaks::find(iarray_t array, TImage* img1)
 	farray->resetValues(desc, charac);
 
 	//Schwellenwert verwenden, der QRS-Bereich macht vom Herzschlag ca. x% aus
-	float anteil_qrs = 0.025; //todo: vom Benutzer einstellen lassen
+	double anteil_qrs = 0.025; //todo: vom Benutzer einstellen lassen
 
 	iarray_t peaks; peaks.clear();
 	int last = desc.size() * anteil_qrs;
@@ -41,7 +41,7 @@ iarray_t cRpeaks::find(iarray_t array, TImage* img1)
 	int rp_count = 0;
 
 	int rpeakZeit;
-	float rpeakWert;
+	double rpeakWert;
 	while (peaks.size() > 0)
 		{
 		rpeakZeit = peaks[0][0];
@@ -76,7 +76,7 @@ iarray_t cRpeaks::find(iarray_t array, TImage* img1)
 	//vorhanden sind auf die sich aufbauende Funktionen beziehen können
 	iarray_t rr; rr.clear();
 	int key, zeit;
-	float wert;
+	double wert;
 	int ix = 0;
 	for (iarray_itr itr = rp.begin(); itr != rp.end(); itr++)
 		{

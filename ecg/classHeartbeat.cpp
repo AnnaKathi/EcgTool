@@ -82,7 +82,7 @@ bool cHeartbeats::next()
 	fheartbeat.clear();
 	int ix = 0;
 	int zeit;
-	float wert;
+	double wert;
 	for (iarray_itr itr = rp.begin(); itr != rp.end(); itr++)
 		{
 		ilist_t& v = itr->second;
@@ -117,7 +117,7 @@ iarray_t cHeartbeats::calcAvBeat(iarray_t curve)
 
 	iarray_t avs; avs.clear(); //Durchschnittswerte
 	int key, zeit, count, old_anz, new_anz;
-	float wert, old_wert, new_wert;
+	double wert, old_wert, new_wert;
 	while (next())
 		{
 		//jeweils ein Herzschlag ist in fheartbeat abgespeichert, pro Zeitwert
@@ -161,7 +161,7 @@ iarray_t cHeartbeats::calcAvBeat(iarray_t curve)
 		count = v[1];
 		zeit  = key + 1; //key beginnt bei 0, Zeit bei 1
 
-		new_wert = wert / (float)count;
+		new_wert = wert / (double)count;
 		fAvBeat[key].push_back(zeit);
 		fAvBeat[key].push_back(new_wert);
 		}

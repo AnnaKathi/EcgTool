@@ -263,7 +263,7 @@ bool cCsv::ParseLineOld()
 	//die Werte werden Semikolon- oder Tabgetrennt aufgeführt
 	char value[128];
 	char* pt;
-	float val;
+	double val;
 
 	for (int i = 0; i < iLead; i++)
 		{
@@ -307,7 +307,7 @@ bool cCsv::ParseLineObsolete()
 	//die Werte werden Semikolon- oder Tabgetrennt aufgeführt
 	char value[128];
 	char* pt;
-	float val;
+	double val;
 
 	bool rc = true;
 	int max;

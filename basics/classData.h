@@ -17,8 +17,8 @@ typedef struct sARRAYCHA //Charkterwerte eines Arrays
 	int			BisIdx;  //größter Index
 	int			VonMsec; //kleinster Millisek.wert
 	int			BisMsec; //größter Millisek.wert
-	float		MinWert; //tiefster Wert (Ausschlag)
-	float		MaxWert; //höchster Wert (Ausschlag)
+	double		MinWert; //tiefster Wert (Ausschlag)
+	double		MaxWert; //höchster Wert (Ausschlag)
 	int			Number;  //Anzahl Datensätze im Array
 	} sArrayCha;
 //---------------------------------------------------------------------------

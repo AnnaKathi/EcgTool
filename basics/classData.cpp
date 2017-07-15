@@ -29,8 +29,8 @@ void cData::resetValues()
 	iarray_itr itr = farr.begin();
 	int key = itr->first;
 	ilist_t& v = itr->second;
-	float zeit = v[0];
-	float wert = v[1];
+	double zeit = v[0];
+	double wert = v[1];
 
 	farr_charac.VonIdx  = 0;
 	farr_charac.VonMsec = zeit;	farr_charac.BisMsec = zeit;
@@ -80,8 +80,8 @@ bool cData::getFile(String file, eDatFormat format, String delim, int lead, int 
 	farr_charac.VonMsec = farr_charac.BisMsec = fcsv->getSample();
 	farr_charac.MinWert = farr_charac.MaxWert = fcsv->getVal();
 
-	float zeit;
-	float lead1;
+	double zeit;
+	double lead1;
 	int ix = 0;
 	do
 		{
@@ -171,13 +171,13 @@ iarray_t cData::normalize(iarray_t array, int length)
 		{
 		//Array verkürzen
 		int delvals = arraylen - length;  //soviele Werte müssen gelöscht werden
-		float blocks  = (float)arraylen / (float)delvals; //alle x Werte einen Wert löschen
+		double blocks  = (double)arraylen / (double)delvals; //alle x Werte einen Wert löschen
 
 		//der erste Wert wird direkt am Anfang gelöscht (zw. 1. und 2. Wert)
-		float pos = 1.0;
+		double pos = 1.0;
 		int ix  = 0;
 		int key, zeit;
-		float wert, newval;
+		double wert, newval;
 
 		for (iarray_itr itr = array.begin(); itr != array.end(); itr++)
 			{
@@ -204,14 +204,14 @@ iarray_t cData::normalize(iarray_t array, int length)
 		{
 		//Array verlängern
 		int newvals = length - arraylen;  //soviele neue Werte werden benötigt
-		float blocks  = (float)arraylen / (float)newvals; //alle x Werte einen neuen Wert einfügen
+		double blocks  = (double)arraylen / (double)newvals; //alle x Werte einen neuen Wert einfügen
 
 		//der erste Wert wird direkt am Anfang eingefügt (zw. 1. und 2. Wert)
-		float pos = 1.0;
+		double pos = 1.0;
 		int ix  = 0;
 		int key, zeit;
-		float wert, newval;
-		float lastwert = 0.0;
+		double wert, newval;
+		double lastwert = 0.0;
 
 		for (iarray_itr itr = array.begin(); itr != array.end(); itr++)
 			{

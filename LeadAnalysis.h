@@ -59,6 +59,7 @@ private:
 
 	void 		snapTo(TWinControl* container, TAlign align);
 	bool 		GetLeads(String file);
+	bool 		ShowLeads();
 	bool 		ShowData(cData data, TImage* img);
 
 public:

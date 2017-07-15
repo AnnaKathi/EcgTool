@@ -20,7 +20,7 @@ public:
 
 	//! Ableitung über einem Array berechnen
 	/*! Erstellt die Ableitung über dem übergebenen Array
-	 *  /param (std::map) Array mit float-Werten
+	 *  /param (std::map) Array mit double-Werten
 	 *  /return (std::map) Array mit Steigungs-Werten = Ableitung
 	 */
 	iarray_t	calcDerivate(iarray_t array);
