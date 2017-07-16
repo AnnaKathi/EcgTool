@@ -25,8 +25,8 @@ todo: extern cMySql fmysql in definitions.h verlagern?
 
 /*
 #include "LeadAnalysis.h"
-#include "EcgLeadAnalysis.h"
 */
+#include "EcgLeadAnalysis.h"
 
 #include "Features.h"
 #include "VergleichAlg.h"
@@ -35,7 +35,7 @@ todo: extern cMySql fmysql in definitions.h verlagern?
 #include "Main.h"
 
 //TEST, Integration von wavelib.h
-#include "algorithms/Wavelet.h"
+//#include "algorithms/Wavelet.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -333,13 +333,13 @@ void __fastcall TfmMain::btLKeadAnalysisClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btEcgAnalysisClick(TObject *Sender)
 	{
-	//DlgShowEcgLeads(this);
+	DlgShowEcgLeads(this);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btWavelibClick(TObject *Sender)
 	{
 	//TEST wavelib
-	DlgShowWavelet(this);
+	//DlgShowWavelet(this);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::FormKeyDown(TObject *Sender, WORD &Key,

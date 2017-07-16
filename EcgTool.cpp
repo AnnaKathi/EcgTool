@@ -32,8 +32,9 @@ USEFORM("database\toolforms\wizardSession_Main.cpp", fmWizSession);
 USEFORM("algorithms\EinzelAusw.cpp", fmSingle);
 USEFORM("algorithms\AlgChoi.cpp", fmChoi);
 USEFORM("algorithms\AlgChoi2.cpp", fmChoi2);
-USEFORM("algorithms\Wavelet.cpp", fmWavelet);
 USEFORM("FeatChoi.cpp", fmFeatChoi);
+USEFORM("EcgLeadAnalysis.cpp", fmEcgLeads);
+USEFORM("LeadAnalysis.cpp", fmLeads);
 //---------------------------------------------------------------------------
 #include "database/classMySql.h"
 cMySql fmysql;
@@ -65,11 +66,12 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TfmWizSession), &fmWizSession);
 		Application->CreateForm(__classid(TfmDatabases), &fmDatabases);
 		Application->CreateForm(__classid(TfmAddMessung), &fmAddMessung);
-		Application->CreateForm(__classid(TfmWavelet), &fmWavelet);
 		Application->CreateForm(__classid(TfmSelectPerson), &fmSelectPerson);
 		Application->CreateForm(__classid(TfmAddPersonSession), &fmAddPersonSession);
 		Application->CreateForm(__classid(TfmEdan), &fmEdan);
 		Application->CreateForm(__classid(TfmFeatChoi), &fmFeatChoi);
+		Application->CreateForm(__classid(TfmEcgLeads), &fmEcgLeads);
+		Application->CreateForm(__classid(TfmLeads), &fmLeads);
 		Application->Run();
 	}
 	catch (Exception &exception)

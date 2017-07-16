@@ -256,5 +256,8 @@
     <Transaction>2017.07.15 14:38:07.693.cpp,D:\src\EcgTool\Unit1.cpp=D:\src\EcgTool\FeatChoi.cpp</Transaction>
     <Transaction>2017.07.15 14:38:07.693.h,D:\src\EcgTool\Unit1.h=D:\src\EcgTool\FeatChoi.h</Transaction>
     <Transaction>2017.07.15 14:38:07.693.dfm,D:\src\EcgTool\Unit1.dfm=D:\src\EcgTool\FeatChoi.dfm</Transaction>
+    <Transaction>2017.07.15 21:49:17.594.cpp,D:\src\EcgTool\algorithms\features\classWavelib.cpp=</Transaction>
+    <Transaction>2017.07.15 21:50:03.262.cpp,D:\src\EcgTool\algorithms\Wavelet.cpp=</Transaction>
+    <Transaction>2017.07.15 21:50:03.262.dfm,D:\src\EcgTool\algorithms\Wavelet.dfm=</Transaction>
   </Transactions>
 </BorlandProject>

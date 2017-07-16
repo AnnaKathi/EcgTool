@@ -6,10 +6,10 @@
 #include <Controls.hpp>
 #include <StdCtrls.hpp>
 #include <Forms.hpp>
-//---------------------------------------------------------------------------
-#include "features/classWavelib.h"
 #include <ComCtrls.hpp>
 #include <ExtCtrls.hpp>
+//---------------------------------------------------------------------------
+#include "features/classWavelib.h"
 //---------------------------------------------------------------------------
 class TfmWavelet : public TForm
 {
