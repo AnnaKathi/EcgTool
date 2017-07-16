@@ -107,14 +107,17 @@ bool cFeaturesChoi::getFeatures(iarray_t curve, iarray_t rpeaks)
 		}
 
 	int anz = features.size();
-	fFeatures[0].push_back(i_pq / anz);
-	fFeatures[1].push_back(i_qs / anz);
-	fFeatures[2].push_back(i_st / anz);
-	fFeatures[3].push_back(PAmp / anz);
-	fFeatures[4].push_back(QAmp / anz);
-	fFeatures[5].push_back(RAmp / anz);
-	fFeatures[6].push_back(SAmp / anz);
-	fFeatures[7].push_back(TAmp / anz);
+	if (anz != 0)
+		{
+		fFeatures[0].push_back(i_pq / anz);
+		fFeatures[1].push_back(i_qs / anz);
+		fFeatures[2].push_back(i_st / anz);
+		fFeatures[3].push_back(PAmp / anz);
+		fFeatures[4].push_back(QAmp / anz);
+		fFeatures[5].push_back(RAmp / anz);
+		fFeatures[6].push_back(SAmp / anz);
+		fFeatures[7].push_back(TAmp / anz);
+		}
 
 	//Features-String bilden
 	fFeaturesStr = "";
