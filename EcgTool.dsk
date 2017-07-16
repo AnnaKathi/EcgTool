@@ -10,10 +10,10 @@ File_7=TSourceModule,'D:\src\EcgTool\DataAnalysis.cpp',0,1,106,45,124,0,0,,
 
 [Modules]
 Module0=d:\dev\rad\include\dinkumware\xtree
-Module1=D:\src\EcgTool\FeatChoi.cpp
-Module2=D:\src\EcgTool\algorithms\features\classFeaturesChoi.cpp
-Module3=D:\src\EcgTool\EcgView.cpp
-Module4=default.htm
+Module1=default.htm
+Module2=D:\src\EcgTool\FeatChoi.cpp
+Module3=D:\src\EcgTool\algorithms\features\classFeaturesChoi.cpp
+Module4=D:\src\EcgTool\EcgView.cpp
 Module5=D:\src\EcgTool\LeadAnalysis.cpp
 Module6=D:\src\EcgTool\EcgLeadAnalysis.cpp
 Module7=D:\src\EcgTool\basics\classData.cpp
@@ -26,6 +26,9 @@ EditWindowCount=1
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
+
+[default.htm]
+ModuleType=TURLModule
 
 [D:\src\EcgTool\FeatChoi.cpp]
 ModuleType=TSourceModule
@@ -41,9 +44,6 @@ FormOnTop=0
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
-
-[default.htm]
-ModuleType=TURLModule
 
 [D:\src\EcgTool\LeadAnalysis.cpp]
 ModuleType=TSourceModule
@@ -536,11 +536,6 @@ Dockable=1
 StayOnTop=0
 SplitPos=176
 
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Cursor,FocusControl
-ExpandedItems=Anchors=0,Constraints=0,Font=0,Margins=0,BevelEdges=0,BorderIcons=0,GlassFrame=0,HorzScrollBar=0,Padding=0
-
 [ModelViewTool]
 PercentageSizes=1
 Create=1
@@ -829,5 +824,5 @@ Dockable=1
 StayOnTop=0
 TabPosition=0
 ActiveTabID=ToolForm
-TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
+TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
 
