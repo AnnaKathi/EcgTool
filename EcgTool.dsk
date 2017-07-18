@@ -10,19 +10,24 @@ File_7=TSourceModule,'D:\src\EcgTool\DataAnalysis.cpp',0,1,106,45,124,0,0,,
 
 [Modules]
 Module0=d:\dev\rad\include\dinkumware\xtree
-Module1=default.htm
-Module2=D:\src\EcgTool\FeatChoi.cpp
-Module3=D:\src\EcgTool\algorithms\features\classFeaturesChoi.cpp
-Module4=D:\src\EcgTool\EcgView.cpp
-Module5=D:\src\EcgTool\LeadAnalysis.cpp
-Module6=D:\src\EcgTool\EcgLeadAnalysis.cpp
-Module7=D:\src\EcgTool\basics\classData.cpp
+Module1=D:\src\EcgTool\basics\classData.cpp
+Module2=default.htm
+Module3=D:\src\EcgTool\FeatChoi.cpp
+Module4=D:\src\EcgTool\algorithms\features\classFeaturesChoi.cpp
+Module5=D:\src\EcgTool\EcgView.cpp
+Module6=D:\src\EcgTool\LeadAnalysis.cpp
+Module7=D:\src\EcgTool\EcgLeadAnalysis.cpp
 Module8=D:\src\EcgTool\Main.cpp
 Module9=D:\src\EcgTool\EdanImport.cpp
 Count=10
 EditWindowCount=1
 
 [d:\dev\rad\include\dinkumware\xtree]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\src\EcgTool\basics\classData.cpp]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
@@ -53,11 +58,6 @@ FormOnTop=0
 [D:\src\EcgTool\EcgLeadAnalysis.cpp]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=0
-
-[D:\src\EcgTool\basics\classData.cpp]
-ModuleType=TSourceModule
-FormState=0
 FormOnTop=0
 
 [D:\src\EcgTool\Main.cpp]
@@ -824,5 +824,5 @@ Dockable=1
 StayOnTop=0
 TabPosition=0
 ActiveTabID=ToolForm
-TabDockClients=ToolForm,ProjectManager,StructureView,DataExplorer,ModelViewTool
+TabDockClients=ToolForm,ProjectManager,StructureView,ModelViewTool,DataExplorer
 
