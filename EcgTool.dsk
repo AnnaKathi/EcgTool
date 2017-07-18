@@ -10,8 +10,8 @@ File_7=TSourceModule,'D:\src\EcgTool\DataAnalysis.cpp',0,1,106,45,124,0,0,,
 
 [Modules]
 Module0=d:\dev\rad\include\dinkumware\xtree
-Module1=D:\src\EcgTool\basics\classData.cpp
-Module2=default.htm
+Module1=default.htm
+Module2=D:\src\EcgTool\basics\classData.cpp
 Module3=D:\src\EcgTool\FeatChoi.cpp
 Module4=D:\src\EcgTool\algorithms\features\classFeaturesChoi.cpp
 Module5=D:\src\EcgTool\EcgView.cpp
@@ -27,13 +27,13 @@ ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
+[default.htm]
+ModuleType=TURLModule
+
 [D:\src\EcgTool\basics\classData.cpp]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
-
-[default.htm]
-ModuleType=TURLModule
 
 [D:\src\EcgTool\FeatChoi.cpp]
 ModuleType=TSourceModule
