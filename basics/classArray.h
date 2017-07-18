@@ -38,7 +38,7 @@ public:
 	 *  /param (sArrayCha) Charakteristik-Struktur die gefüllt werden soll
 	 *  /return (bool) true im Erfolgsfall, sonst false
 	 */
-	bool 		resetValues(iarray_t array, sArrayCha& cha);
+	bool 		resetValues(iarray_t& array, sArrayCha& cha);
 
 	//! Das übergebene Image löschen
 	/*! Das übergebene Image wird gelöscht (leer gezeichnet).
@@ -55,7 +55,7 @@ public:
 	 *  /param (Image) Image in das gezeichnet werden soll
 	 *  /return (bool) true im Erfolgsfall, sonst false
 	 */
-	bool 		display(iarray_t array, TImage* img);
+	bool 		display(const iarray_t& array, TImage* img);
 
 	//! Daten des übergebenen Array in einem Image anzeigen
 	/*! Das übergebene Array wird im übergebenen Image eingezeichnet. Das übergebene
@@ -65,7 +65,7 @@ public:
 	 *  /param (Image) Image in das gezeichnet werden soll
 	 *  /return (bool) true im Erfolgsfall, sonst false
 	 */
-	bool 		redisplay(iarray_t array, TImage* img); //ruft erst clear und dann display auf
+	bool 		redisplay(const iarray_t& array, TImage* img); //ruft erst clear und dann display auf
 
 	//! Punkte in eine Kurve einzeichnen
 	/*! Das übergebene Array 'curve' wird zunächst im übergebenen Image
@@ -76,9 +76,9 @@ public:
 	 *  /param (Image) Image in das gezeichnet werden soll
 	 *  /return (bool) true im Erfolgsfall, sonst false
 	 */
-	bool 		redisplayPoints(iarray_t curve, iarray_t points, TImage* img);
+	bool 		redisplayPoints(const iarray_t& curve, const iarray_t& points, TImage* img);
 
-	bool 		displayPoints(iarray_t curve, iarray_t points, TImage* img);
+	bool 		displayPoints(const iarray_t& curve, iarray_t points, TImage* img);
 
 	//! Gleitenden Durchschnitt über dem übergebenen Array berechnen
 	/*! Über dem übergebenen Array wird ein gleitender Durchschnitt berechnet.
@@ -91,7 +91,7 @@ public:
 	 *		liegt, mit in die Berechnung einfließen? Ist mit true vorbesetzt
 	 *  /return (std::map) neues Array mit gleitendem Durchschnitt
 	 */
-	iarray_t 	movingAv(iarray_t array, int window, bool CalcBegin);
+	iarray_t 	movingAv(const iarray_t& array, int window, bool CalcBegin);
 
 	//! Berechnet den Durchschnittswert des Arrays
 	/*! Alle Werte des übergebenen Arrays werden addiert und durch die Anzahl
@@ -99,7 +99,7 @@ public:
 	 *  /param (std::map) Array das verwendet werden soll
 	 *  /return (double) Durchschnittswert des Arrays 
 	 */
-	double		calcAvWert(iarray_t array);
+	double		calcAvWert(const iarray_t& array);
 
 	//! Daten aus dem übergebenen Array entfernen
 	/*! Der Bereich von-bis (Millisekunden) wird aus dem übergebenen Array
@@ -109,11 +109,11 @@ public:
 	 *  /param (int) Millisekunden bis zu der die Daten entfernt werden sollen
 	 *  /return (std::map) neues Array
 	 */
-	iarray_t 	cut(iarray_t array, int vonMsec, int bisMsec);
+	iarray_t 	cut(iarray_t& array, int vonMsec, int bisMsec);
 
-	iarray_t 	get(iarray_t array, int vonMsec, int bisMsec);
+	iarray_t 	get(iarray_t& array, int vonMsec, int bisMsec);
 
-	iarray_t	remove(iarray_t source, iarray_t remove, int val_index = 0);
+	iarray_t	remove(const iarray_t& source, const iarray_t& remove, int val_index = 0);
 
 __property int PointWidth = { write=set_PointWidth };
 __property TColor PointColor = { write=set_PointColor };

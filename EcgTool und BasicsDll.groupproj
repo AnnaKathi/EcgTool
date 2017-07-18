@@ -1,0 +1,46 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{9acb7ac1-757d-436b-9331-8ecd6951167c}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="basics\EcgBasics.cbproj" />
+    <Projects Include="EcgTool.cbproj">
+      <Dependencies>basics\EcgBasics.cbproj</Dependencies>
+    </Projects>
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="EcgTool" DependsOnTargets="EcgBasics">
+    <MSBuild Projects="EcgTool.cbproj" Targets="" />
+  </Target>
+  <Target Name="EcgTool:Clean" DependsOnTargets="EcgBasics:Clean">
+    <MSBuild Projects="EcgTool.cbproj" Targets="Clean" />
+  </Target>
+  <Target Name="EcgTool:Make" DependsOnTargets="EcgBasics:Make">
+    <MSBuild Projects="EcgTool.cbproj" Targets="Make" />
+  </Target>
+  <Target Name="EcgBasics">
+    <MSBuild Projects="basics\EcgBasics.cbproj" Targets="" />
+  </Target>
+  <Target Name="EcgBasics:Clean">
+    <MSBuild Projects="basics\EcgBasics.cbproj" Targets="Clean" />
+  </Target>
+  <Target Name="EcgBasics:Make">
+    <MSBuild Projects="basics\EcgBasics.cbproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="EcgTool;EcgBasics" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="EcgTool:Clean;EcgBasics:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="EcgTool:Make;EcgBasics:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

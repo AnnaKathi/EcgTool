@@ -20,7 +20,7 @@ bool cArray::resetValues(sArrayCha& cha)
 	return resetValues(farr, cha);
 	}
 //---------------------------------------------------------------------------
-bool cArray::resetValues(iarray_t array, sArrayCha& cha)
+bool cArray::resetValues(iarray_t& array, sArrayCha& cha)
 	{
 	if (array.size() <= 0)
 		return fail(1, "Das Array ist leer oder nicht vorhanden.");
@@ -29,7 +29,7 @@ bool cArray::resetValues(iarray_t array, sArrayCha& cha)
 	//inputMinWert und inputMaxWert müssen neu gesetzt werden
 	iarray_itr itr = array.begin();
 	int key = itr->first;
-	ilist_t& v = itr->second;
+	ilist_t v = itr->second;
 	double zeit = v[0];
 	double wert = v[1];
 
@@ -43,7 +43,7 @@ bool cArray::resetValues(iarray_t array, sArrayCha& cha)
 	for (itr = arrneu.begin(); itr != arrneu.end(); itr++)
 		{
 		key = itr->first;
-		ilist_t& v = itr->second;
+		ilist_t v = itr->second;
 		zeit = v[0];
 		wert = v[1];
 
@@ -73,14 +73,14 @@ void cArray::clearImg(TImage* img)
 	img->Canvas->Pen->Color = clBlack;
 	}
 //---------------------------------------------------------------------------
-bool cArray::redisplayPoints(iarray_t curve, iarray_t points, TImage* img)
+bool cArray::redisplayPoints(const iarray_t& curve, const iarray_t& points, TImage* img)
 	{
 	//erste Kurve zeichnen
 	if (!redisplay(curve, img)) return false;
 	return displayPoints(curve, points, img);
 	}
 //---------------------------------------------------------------------------
-bool cArray::displayPoints(iarray_t curve, iarray_t points, TImage* img)
+bool cArray::displayPoints(const iarray_t& curve, iarray_t points, TImage* img)
 	{
 	farr = curve;
 	if (!resetValues(farr_charac))
@@ -112,7 +112,7 @@ bool cArray::displayPoints(iarray_t curve, iarray_t points, TImage* img)
 	return ok();
 	}
 //---------------------------------------------------------------------------
-bool cArray::redisplay(iarray_t array, TImage* img)
+bool cArray::redisplay(const iarray_t& array, TImage* img)
 	{
 	//Kombination aus clearImg und display, vereinfacht den Aufruf in höheren Klassen
 	if (img == NULL) return fail(1, "Es wurde kein Bild übergeben.");
@@ -120,7 +120,7 @@ bool cArray::redisplay(iarray_t array, TImage* img)
 	return display(array, img);
 	}
 //---------------------------------------------------------------------------
-bool cArray::display(iarray_t array, TImage* img)
+bool cArray::display(const iarray_t& array, TImage* img)
 	{
 	if (img == NULL)
 		return fail(1, "Es wurde kein Bild übergeben.");
@@ -157,7 +157,7 @@ bool cArray::display(iarray_t array, TImage* img)
 		{
 		count++;
 
-		ilist_t& v = itr->second;
+		ilist_t v = itr->second;
 		val = v[1];
 
 		if (alteBerechnung)
@@ -203,7 +203,7 @@ bool cArray::display(iarray_t array, TImage* img)
 	}
 //---------------------------------------------------------------------------
 #define MAX_NO_MOV_AV 250
-iarray_t cArray::movingAv(iarray_t array, int window, bool CalcBegin)
+iarray_t cArray::movingAv(const iarray_t& array, int window, bool CalcBegin)
 	{
 	farr.clear();
 	if (window <= 0)
@@ -313,7 +313,7 @@ iarray_t cArray::movingAv(iarray_t array, int window, bool CalcBegin)
 	return farr;
 	}
 //---------------------------------------------------------------------------
-iarray_t cArray::cut(iarray_t array, int vonMsec, int bisMsec)
+iarray_t cArray::cut(iarray_t& array, int vonMsec, int bisMsec)
 	{
 	farr.clear();
 	resetValues(array, farr_charac);
@@ -348,7 +348,7 @@ iarray_t cArray::cut(iarray_t array, int vonMsec, int bisMsec)
 		do
 			{
 			key = itr_rev->first;
-			ilist_t& v = itr_rev->second;
+			ilist_t v = itr_rev->second;
 			zeit = v[0];
 
 			if (zeit < vonMsec) break;    //Wert liegt nach gewünschtem (reverse) Abschnitt
@@ -366,12 +366,12 @@ iarray_t cArray::cut(iarray_t array, int vonMsec, int bisMsec)
 	else
 		{
 		//neues Array bilden statt das bestehende zu manipulieren
-		iarray_t arr; arr.clear();
+		iarray_t arr;
 		int count = 0;  double wert;
 		for (iarray_itr itr = farr.begin(); itr != farr.end(); itr++)
 			{
 			key = itr->first;
-			ilist_t& v = itr->second;
+			ilist_t v = itr->second;
 			zeit = v[0];
 			wert = v[1];
 
@@ -392,7 +392,7 @@ iarray_t cArray::cut(iarray_t array, int vonMsec, int bisMsec)
 	return farr;
 	}
 //---------------------------------------------------------------------------
-iarray_t cArray::get(iarray_t array, int vonMsec, int bisMsec)
+iarray_t cArray::get(iarray_t& array, int vonMsec, int bisMsec)
 	{
 	//den angegebenen Bereich rausschneiden und zurückgeben
 	farr.clear();
@@ -416,11 +416,11 @@ iarray_t cArray::get(iarray_t array, int vonMsec, int bisMsec)
 
 	farr = array;
 
-	iarray_t arr; arr.clear();
+	iarray_t arr;
 	int count = 0;  int zeit; double wert;
 	for (iarray_itr itr = farr.begin(); itr != farr.end(); itr++)
 		{
-		ilist_t& v = itr->second;
+		ilist_t v = itr->second;
 		zeit = v[0];
 		wert = v[1];
 
@@ -440,7 +440,7 @@ iarray_t cArray::get(iarray_t array, int vonMsec, int bisMsec)
 	return farr;
 	}
 //---------------------------------------------------------------------------
-iarray_t cArray::remove(iarray_t source, iarray_t remove, int val_index) //val_index ist mit 0 vorbesetzt
+iarray_t cArray::remove(const iarray_t& source, const iarray_t& remove, int val_index) //val_index ist mit 0 vorbesetzt
 	{
 	//aus dem Array "source" alle Einträge entfernen, die auch in "remove"
 	//enthalten sind, identifiziert werden sollen Übereinstimmungen anhand des
@@ -450,15 +450,15 @@ iarray_t cArray::remove(iarray_t source, iarray_t remove, int val_index) //val_i
 	double vals, valr, wert;
 	int zeit;
 	int count = 0;
-	for (iarray_itr src = source.begin(); src != source.end(); src++)
+	for (iarray_citr src = source.begin(); src != source.end(); src++)
 		{
-		ilist_t& vs = src->second;
+		ilist_t vs = src->second;
 		vals = vs[val_index];
 
 		bool found = false;
-		for (iarray_itr rev = remove.begin(); rev != remove.end(); rev++)
+		for (iarray_citr rev = remove.begin(); rev != remove.end(); rev++)
 			{
-			ilist_t& vr = rev->second;
+			ilist_t vr = rev->second;
 			valr = vr[val_index];
 
 			if (valr == vals)
@@ -481,15 +481,15 @@ iarray_t cArray::remove(iarray_t source, iarray_t remove, int val_index) //val_i
 	return res;
 	}
 //---------------------------------------------------------------------------
-double cArray::calcAvWert(iarray_t array)
+double cArray::calcAvWert(const iarray_t& array)
 	{
 	if (array.size() <= 0) return 0.0;
 
 	double sum = 0.0;
 	double wert;
-	for (iarray_itr itr = array.begin(); itr != array.end(); itr++)
+	for (iarray_citr itr = array.begin(); itr != array.end(); itr++)
 		{
-		ilist_t& v = itr->second;
+		ilist_t v = itr->second;
 		wert = v[1];
 		sum += wert;
 		}

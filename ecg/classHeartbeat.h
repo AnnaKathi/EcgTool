@@ -82,6 +82,7 @@ public:
 	 *  /return (bool) Array mit den Werten des Standardherzschlags
 	 */
 	iarray_t	calcAvBeat(iarray_t curve);
+	bool		rf_calcAvBeat(iarray_t curve);
 
 __property iarray_t   heartbeat = { read=get_heartbeat  }; //!< jeweils ein einzelner Herzschlag, für for-Schleifen z.B.
 __property iarray_t   avBeat	= { read=get_AvBeat		}; //!< Standardherzschlag, Durchschnitt aller Herzschläge

@@ -40,6 +40,8 @@ struct cEcgLine
 
 	double	min[12]; //kleinster Wert aller Spalten
 	double  max[12]; //größter Wert aller Spalten
+
+	cEcgLine() : lineno(0), sample(0) {}
 	};
 //---------------------------------------------------------------------------
 /* Lead-Derivation ADS1298

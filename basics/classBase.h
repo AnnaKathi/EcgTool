@@ -11,6 +11,7 @@
 typedef std::vector<double> ilist_t;  //double-map
 typedef std::map<double,ilist_t> iarray_t;
 typedef iarray_t::iterator iarray_itr;
+typedef iarray_t::const_iterator iarray_citr;
 //---------------------------------------------------------------------------
 typedef std::vector<String> slist_t;  //String-map
 typedef std::map<String,slist_t> sarray_t;

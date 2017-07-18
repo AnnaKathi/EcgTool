@@ -105,7 +105,7 @@ public:
 		 */
 		iarray_t	normalize(iarray_t array, int length);
 
-__property iarray_t   data_array = { read=get_array  }; //!< Internes Datenarray
+__property iarray_t&  data_array = { read=get_array  }; //!< Internes Datenarray
 __property cDerivate& derivate1  = { read=get_deriv1 }; //!< Erste Ableitung
 __property cDerivate& derivate2  = { read=get_deriv2 }; //!< Zweite Ableitung
 
@@ -121,7 +121,7 @@ private:
 	cArray*		farray; //Klasse mit Grundfunktionalitäten
 
 	iarray_t	farr;  //alle eingelesenen EKG-Werte
-	iarray_t	get_array();
+	iarray_t&	get_array();
 
 	void 		resetValues();
 	};

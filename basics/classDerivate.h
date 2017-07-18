@@ -71,14 +71,14 @@ public:
 	 */
 	int			cut(int vonMsec, int bisMsec);
 
-__property iarray_t	deriv_array = { read=get_array }; //!< Internes Ableitungsarray
+__property iarray_t&	deriv_array = { read=get_array }; //!< Internes Ableitungsarray
 
 private:
 	cMath*		fmath;
 	cArray*		farray; //Grundfunktionalitäten
 
 	iarray_t	farr;
-	iarray_t	get_array();
+	iarray_t&	get_array();
 	};
 //---------------------------------------------------------------------------
 #endif

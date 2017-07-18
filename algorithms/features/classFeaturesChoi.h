@@ -13,7 +13,7 @@ public:
 	cFeaturesChoi();
 	~cFeaturesChoi();
 
-	bool		getFeatures(iarray_t curve, iarray_t rpeaks);
+	bool		getFeatures(const iarray_t& curve, const iarray_t& rpeaks);
 
 __property int      AlgIdent = { read=get_alg_ident };
 __property iarray_t features = { read=get_features  };

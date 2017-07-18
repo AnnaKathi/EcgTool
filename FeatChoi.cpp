@@ -63,14 +63,14 @@ bool TfmFeatChoi::LoadEcg(cEcg& ecg, TImage* img, TImage* iheart, TImage* iabl)
 	if (!ecg.data.buildDerivates()) return false;
 
 	//Standardherzschlag normal
-	iarray_t heart = ecg.heart.calcAvBeat(ecg.data.data_array);
-	farray.redisplay(heart, iheart);
-
+	//debug todo: auf bool umstellen
+	ecg.heart.rf_calcAvBeat(ecg.data.data_array);
+		;// error
+	farray.redisplay(ecg.heart.avBeat, iheart);
 	//Standardherzschlag auf 1. Ableitung
 	iarray_t abl = fmath.calcDerivate(ecg.data.data_array);
 	iarray_t heartabl = ecg.heart.calcAvBeat(abl);
 	farray.redisplay(heartabl, iabl);
-
 	return true;
 	}
 //---------------------------------------------------------------------------
@@ -79,15 +79,16 @@ bool TfmFeatChoi::GetFeat(cEcg& ecg, TMemo* memo, TMemo* mema)
 	memo->Lines->Clear(); mema->Lines->Clear();
 
 	iarray_t ro = ecg.rpeaks.find(ecg.data.data_array, NULL);
+	int n = ro.size();
 	if (ro.size() <= 0) return false;
 	if (!fFeatChoi.getFeatures(ecg.data.data_array, ro)) return false;
 	memo->Lines->Add(fFeatChoi.features_string);
+
 
 	iarray_t ra = ecg.rpeaks.find(ecg.data.derivate1.deriv_array, NULL);
 	if (ra.size() <= 0) return false;
 	if (!fFeatChoi.getFeatures(ecg.data.derivate1.deriv_array, ra)) return false;
 	mema->Lines->Add(fFeatChoi.features_string);
-
 	return true;
 	}
 //---------------------------------------------------------------------------

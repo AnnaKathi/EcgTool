@@ -16,7 +16,7 @@ cRpeaks::~cRpeaks()
 	if (farray) delete farray;
 	}
 //---------------------------------------------------------------------------
-iarray_t cRpeaks::find(iarray_t array, TImage* img1)
+iarray_t cRpeaks::find(const iarray_t& array, TImage* img1)
 	{
 	iarray_t desc = fmath->resort(array, false);
 	if (img1 != NULL)
@@ -27,7 +27,7 @@ iarray_t cRpeaks::find(iarray_t array, TImage* img1)
 	//Schwellenwert verwenden, der QRS-Bereich macht vom Herzschlag ca. x% aus
 	double anteil_qrs = 0.025; //todo: vom Benutzer einstellen lassen
 
-	iarray_t peaks; peaks.clear();
+	iarray_t peaks;
 	int last = desc.size() * anteil_qrs;
 	for (int i = 0; i < last; i++)
 		{
@@ -35,7 +35,7 @@ iarray_t cRpeaks::find(iarray_t array, TImage* img1)
 		peaks[i].push_back(desc[i][1]);
 		}
 
-	iarray_t rp; rp.clear();
+	iarray_t rp;
 	iarray_t arrneu;
 	int msec_von, msec_bis;
 	int rp_count = 0;

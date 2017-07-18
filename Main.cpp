@@ -23,15 +23,13 @@ todo: extern cMySql fmysql in definitions.h verlagern?
 #include "Testform.h"
 #include "EdanImport.h"
 
-/*
-#include "LeadAnalysis.h"
-*/
 #include "EcgLeadAnalysis.h"
+#include "LeadAnalysis.h"
+#include "FeatChoi.h"
 
 #include "Features.h"
 #include "VergleichAlg.h"
 #include "ChoiKlassifizierung.h"
-#include "FeatChoi.h"
 #include "Main.h"
 
 //TEST, Integration von wavelib.h
@@ -328,7 +326,7 @@ void __fastcall TfmMain::btAnalysisSelectClick(TObject *Sender)
 void __fastcall TfmMain::btLKeadAnalysisClick(TObject *Sender)
 	{
 	//TEST LEAD ANALYSIS
-	//DlgShowLeads(this);
+	DlgShowLeads(this, 1);
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::btEcgAnalysisClick(TObject *Sender)

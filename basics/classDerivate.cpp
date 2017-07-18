@@ -65,7 +65,7 @@ int cDerivate::cut(int vonMsec, int bisMsec)
 /**************   getter und setter   **************************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-iarray_t cDerivate::get_array()
+iarray_t& cDerivate::get_array()
 	{
 	return farr;
 	}

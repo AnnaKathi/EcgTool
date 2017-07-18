@@ -25,7 +25,7 @@ public:
 	 *  /param (std::map) Array mit EKG-Daten
 	 *  /param <b>optional</b> (Image) Image in dem die umsortierten Werte zu Testzwecken angezeigt werden können. 
 	 */
-	iarray_t	find(iarray_t array, TImage* img1);
+	iarray_t	find(const iarray_t& array, TImage* img1);
 
 	bool		reset();
 	int			next();

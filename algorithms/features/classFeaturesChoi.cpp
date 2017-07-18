@@ -21,8 +21,9 @@ cFeaturesChoi::~cFeaturesChoi()
 /******************   public functions   ***********************************/
 /***************************************************************************/
 //---------------------------------------------------------------------------
-bool cFeaturesChoi::getFeatures(iarray_t curve, iarray_t rpeaks)
+bool cFeaturesChoi::getFeatures(const iarray_t& curve, const iarray_t& rpeaks)
 	{
+#if 1
 	fFeatures.clear();
 
 	if (curve.size() <= 0)  return fail(1, "Es wurde keine Kurve übergeben");
@@ -45,9 +46,9 @@ bool cFeaturesChoi::getFeatures(iarray_t curve, iarray_t rpeaks)
 
 	bool first  = true;
 	bool fehler = false;
-	for (iarray_itr itr = rpeaks.begin(); itr != rpeaks.end(); itr++)
+	for (iarray_t::const_iterator itr = rpeaks.begin(); itr != rpeaks.end(); itr++)
 		{
-		ilist_t& v = itr->second;
+		ilist_t v = itr->second;
 		zeit = v[0];
 
 		if (first)
@@ -129,7 +130,9 @@ bool cFeaturesChoi::getFeatures(iarray_t curve, iarray_t rpeaks)
 		else
 			fFeaturesStr += ";" + String(v[0]);
 		}
-
+#else
+	fFeaturesStr = "test123";
+#endif
 	return ok();
 	}
 //---------------------------------------------------------------------------

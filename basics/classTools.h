@@ -16,7 +16,7 @@
  * <li>Positions-String in ComboBox laden
  * <li>Formular speichern und laden</ul> 
  */
-class cTools
+class PACKAGE cTools
 	{
 public:
 	//! Konstruktor für cTools

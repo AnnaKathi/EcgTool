@@ -169,6 +169,70 @@ iarray_t cHeartbeats::calcAvBeat(iarray_t curve)
 	return fAvBeat;
 	}
 //---------------------------------------------------------------------------
+bool cHeartbeats::rf_calcAvBeat(iarray_t curve)
+	{
+	fAvBeat.clear();
+
+	if (!reset(curve))
+		{
+		fail(3, "Funktion 'first' konnte nicht durchgeführt werden.");
+		return false;
+		}
+
+	iarray_t avs; avs.clear(); //Durchschnittswerte
+	int key, zeit, count, old_anz, new_anz;
+	double wert, old_wert, new_wert;
+	while (next())
+		{
+		//jeweils ein Herzschlag ist in fheartbeat abgespeichert, pro Zeitwert
+		//werden alle gefundenen Ausschläge aufaddiert. Im zweiten Feld ist
+		//die Anzahl der Werte gespeichert
+		//todo Normalisierung einfügen
+		for (iarray_itr itr = fheartbeat.begin(); itr != fheartbeat.end(); itr++)
+			{
+			key = itr->first;
+			ilist_t& v = itr->second;
+			zeit = v[0];
+			wert = v[1];
+
+			if (avs.count(key) > 0)
+				{
+				iarray_itr old_itr = avs.find(key);
+				ilist_t& old_v = old_itr->second;
+				old_wert = old_v[0];
+				old_anz  = old_v[1];
+
+				new_wert = old_wert + wert;
+				new_anz  = old_anz  + 1;
+				}
+			else
+				{
+				new_wert = wert;
+				new_anz  = 1;
+				}
+
+			avs.erase(key); //sonst wird ein neuer Vektor angelegt
+			avs[key].push_back(new_wert);
+			avs[key].push_back(new_anz);
+			}
+		}
+
+	for (iarray_itr itr = avs.begin(); itr != avs.end(); itr++)
+		{
+		key = itr->first;
+		ilist_t& v = itr->second;
+		wert  = v[0];
+		count = v[1];
+		zeit  = key + 1; //key beginnt bei 0, Zeit bei 1
+
+		new_wert = wert / (double)count;
+		fAvBeat[key].push_back(zeit);
+		fAvBeat[key].push_back(new_wert);
+		}
+
+	return true;
+	}
+//---------------------------------------------------------------------------
 /***************************************************************************/
 /********************   private Funktionen   *******************************/
 /***************************************************************************/
