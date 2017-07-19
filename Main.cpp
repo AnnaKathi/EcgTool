@@ -51,6 +51,11 @@ __fastcall TfmMain::~TfmMain()
 //---------------------------------------------------------------------------
 void __fastcall TfmMain::FormShow(TObject *Sender)
 	{
+	//Ecg-Logfile löschen, wenn vorhanden
+	String file = ftools.GetPath() + "\\ecg.log";
+	if (FileExists(file))
+		DeleteFile(file);
+		
 	tStartup->Enabled = true;
 	}
 //---------------------------------------------------------------------------
@@ -356,6 +361,37 @@ void __fastcall TfmMain::FormKeyDown(TObject *Sender, WORD &Key,
 void __fastcall TfmMain::btFeatChoiClick(TObject *Sender)
 	{
 	DlgShowVglChoi(this);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmMain::btArffHeadClick(TObject *Sender)
+	{
+	//Header der Arff-Dateien schreiben
+	String file1 = "D:\\ARFF-Export\\beats_training.arff";
+	if (!CreateArffFile(file1, "Trainingsdatei mit Herzschlägen")) return;
+
+	String file2 = "D:\\ARFF-Export\\beats_test.arff";
+	if (!CreateArffFile(file2, "Testdatei mit Herzschlägen")) return;
+
+	Application->MessageBox("Dateien wurden erstellt", "Erfolg", MB_OK);
+	}
+//---------------------------------------------------------------------------
+bool TfmMain::CreateArffFile(String file, String header)
+	{
+    FILE* fp = fopen(file.c_str(), "w"); //neu erstellen
+
+	fprintf(fp, "%\n");
+	fprintf(fp, "%s %s\n", "%", header);
+	fprintf(fp, "% als 'Feature' wird der gesamte Herzschlag verwendet\n");
+	fprintf(fp, "%\n");
+	fprintf(fp, "@relation 'beats'\n");
+
+	for (int i = 1; i <= 400; i++)
+		fprintf(fp, "@attribute VAL%03d REAL\n", i);
+
+	fprintf(fp, "@data\n");
+
+	fclose(fp);
+	return true;
 	}
 //---------------------------------------------------------------------------
 

@@ -170,8 +170,11 @@ iarray_t cData::normalize(iarray_t array, int length)
 	if (arraylen > length)
 		{
 		//Array verkürzen
+ftools.Log("\t\t\tnormalise: aktuelle Länge = %d", arraylen);
 		int delvals = arraylen - length;  //soviele Werte müssen gelöscht werden
+ftools.Log("\t\t\tnormalise: Werte löschen = %d", delvals);
 		double blocks  = (double)arraylen / (double)delvals; //alle x Werte einen Wert löschen
+ftools.Log("\t\t\tnormalise: Blocks, alle %.2f Werte einen löschen", blocks);
 
 		//der erste Wert wird direkt am Anfang gelöscht (zw. 1. und 2. Wert)
 		double pos = 1.0;
@@ -203,8 +206,11 @@ iarray_t cData::normalize(iarray_t array, int length)
 	else
 		{
 		//Array verlängern
+ftools.Log("\t\t\tnormalise: aktuelle Länge = %d", arraylen);
 		int newvals = length - arraylen;  //soviele neue Werte werden benötigt
+ftools.Log("\t\t\tnormalise: Werte hinzufügen = %d", newvals);
 		double blocks  = (double)arraylen / (double)newvals; //alle x Werte einen neuen Wert einfügen
+ftools.Log("\t\t\tnormalise: Blocks, alle %.2f Werte einen einfügen", blocks);
 
 		//der erste Wert wird direkt am Anfang eingefügt (zw. 1. und 2. Wert)
 		double pos = 1.0;
@@ -224,7 +230,7 @@ iarray_t cData::normalize(iarray_t array, int length)
 			newarray[ix].push_back(ix);
 			newarray[ix].push_back(wert);
 			ix++;
-			if (key == (int)pos)
+			if (key >= pos)
 				{
 				//hier einen Wert einfügen
 				newval = (lastwert+wert)/2;

@@ -258,67 +258,83 @@ void TfmEcg::MovingAv()
 	fmDetails->Renew(ecg);
 	}
 //---------------------------------------------------------------------------
-void TfmEcg::SaveData()
+void TfmEcg::SaveArffFile()
 	{
-	//Die Werte aus dem (bearbeitetem Bild) wieder in die txt-Datei zurückspeichern
+	//Das angeziegte Lead in herzschläge separieren und diese in eine Textdatei
+	//speichern. Wird verwendet um manuell arff-Dateien für Weka aufzubauen.
+	ftools.Log("---------------------------");
+	ftools.Log("Inside SaveArffFile()");
+
+	iarray_t curve  = ecg.data.data_array;
+	iarray_t rpeaks = ecg.rpeaks.find(ecg.data.data_array, NULL);
+	if (rpeaks.size() <= 0)
+		{
+		ftools.Log(
+			"Die R-Peaks konnten nicht gebildet werden. ecg.rpeaks meldet: %s",
+			ecg.rpeaks.error_msg);
+		return;
+		}
+
 	if (!SaveDialog->Execute()) return;
 	String datname = SaveDialog->FileName;
 
 	FILE* fp = fopen(datname.c_str(), "w");
-	if (!SaveDataHeader(fp)) return;
 
-	iarray_t arr;
-	arr = ecg.data.data_array;
-
-	int zeit; double wert;
-	for (iarray_itr itr = arr.begin(); itr != arr.end(); itr++)
+	double wert;
+	int zeitvon = 0;
+	int zeitbis = 0;
+	bool first = true;
+	int count = 0;
+	for (iarray_itr itr = rpeaks.begin(); itr != rpeaks.end(); itr++)
 		{
-		ilist_t& v = itr->second;
-		zeit = v[0];
-		wert = v[1];
+		zeitvon = zeitbis;
+		ilist_t v = itr->second;
+		zeitbis = (int)v[0];
+		if (first)
+			{
+			first = false;
+			continue;
+			}
 
-        fprintf(fp, "%.12f \t%.12f \t%.12f\n", wert, 0, 0);
+		count++;
+		iarray_t beat = farray.get(curve, zeitvon, zeitbis);
+		int n = beat.size();
+		ftools.Log("\tHerzschlag %d: %d-%d", count, zeitvon, zeitbis);
+		ftools.Log("\t\t%d Werte", n);
+
+		if (n <= 200) //Beat ist zu kurz
+			{
+			ftools.Log("\t\t-> Beat übersprungen");
+			continue;
+			}
+
+		beat = ecg.data.normalize(beat, 400);
+		ftools.Log("\t\tBeat normalisert, Anz. Werte = %d", beat.size());
+
+		//Herzschlag schreiben, Werte Kommagetrennt hintereinander setzen
+		//alle Herzschläge werden auf 400 Werte normalisiert
+		bool firstvalue = true;
+		for (iarray_itr i = beat.begin(); i != beat.end(); i++)
+			{
+			ilist_t v = itr->second;
+			wert = v[1];
+			if (firstvalue)
+				{
+				firstvalue = false;
+				fprintf(fp, "%.6f", wert);
+				}
+			else
+				fprintf(fp, ",%.6f", wert);
+			}
+		fprintf(fp, "\n");
+		ftools.Log("\t\t-> Beat geschrieben");
 		}
 
 	fclose(fp);
 	Application->MessageBox("Datei wurde gespeichert", "Fertig", MB_OK);
-	}
-//---------------------------------------------------------------------------
-bool TfmEcg::SaveDataHeader(FILE* fp)
-	{
-	if (cbFormat->ItemIndex == 1) //ADS-Format
-		{
-		//12 Kopfzeilen aus der Originaldatei übernehmen
-		String odat = edInputfile->Text;
-		if (!FileExists(odat)) return false;
 
-		FILE* fpo = fopen(odat.c_str(), "r");
-		char rowbuf[128];
-		bool fehler = false;
-		for (int i = 0; i < 12; i++)
-			{
-			if (fgets(rowbuf, sizeof(rowbuf)-1, fp) == NULL)
-				{
-				fprintf(fp, "%d\n", i);
-				/*
-				fehler = true;
-				break;
-				*/
-				}
-			else
-				fprintf(fp, rowbuf);
-			}
-		fclose(fpo);
-		if (fehler) return false;
-		else return true;
-		}
-	else
-		{
-		//Überschriften drucken
-		fprintf(fp, "%s \t%s \t%s \t%s \t%s \t%s", "CH1", "CH2", "CH3", "CH4", "CH5", "CH6");
-		}
-
-	return true; //nur zur Sicherheit, sollte eig schon oben entschieden werden
+	ftools.Log("End of SaveArffFile()");
+	ftools.Log("---------------------------");
 	}
 //---------------------------------------------------------------------------
 void TfmEcg::Importschema()
@@ -425,7 +441,6 @@ void TfmEcg::sendClick(TButton* bt)
 			case  1: ReadFile(); break;
 			case  2: CutCurve(); break;
 			case  3: MovingAv(); break;
-			case  4: SaveData(); break;
 			//default, nicht nötig
 			}
 
@@ -455,7 +470,7 @@ void __fastcall TfmEcg::btMovAvClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfmEcg::btSaveClick(TObject *Sender)
 	{
-	sendClick(btSave);
+	SaveArffFile();
 	}
 //---------------------------------------------------------------------------
 void __fastcall TfmEcg::imgEcgMouseDown(TObject *Sender, TMouseButton Button,

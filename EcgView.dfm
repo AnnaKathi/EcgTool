@@ -49,7 +49,6 @@ object fmEcg: TfmEcg
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 1092
     DesignSize = (
       1090
       41)
@@ -72,7 +71,6 @@ object fmEcg: TfmEcg
       ParentColor = True
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1076
     end
   end
   object pnLeft: TPanel
@@ -381,7 +379,7 @@ object fmEcg: TfmEcg
         Top = 6
         Width = 150
         Height = 25
-        Caption = '4 - Werte in Datei speichern'
+        Caption = 'Beats in Datei speichern'
         TabOrder = 1
         OnClick = btSaveClick
       end
@@ -406,7 +404,6 @@ object fmEcg: TfmEcg
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
-    ExplicitWidth = 751
     object imgEcg: TImage
       Left = 0
       Top = 0

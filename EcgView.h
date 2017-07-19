@@ -47,8 +47,7 @@ private:
 	void		ReadFile();
 	void		CutCurve();
 	void		MovingAv();
-	void		SaveData();
-	bool		SaveDataHeader(FILE* fp);
+	void		SaveArffFile();
 
 	void		Importschema();
 	void		MySqlSave();

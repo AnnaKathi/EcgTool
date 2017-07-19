@@ -1,0 +1,620 @@
+			normalise: aktuelle Länge = 358
+			normalise: Werte hinzufügen = 33
+			normalise: Blocks, alle 10.85 Werte einen einfügen
+			normalise: aktuelle Länge = 382
+			normalise: Werte hinzufügen = 9
+			normalise: Blocks, alle 42.44 Werte einen einfügen
+			normalise: aktuelle Länge = 405
+			normalise: Werte löschen = 14
+			normalise: Blocks, alle 28.93 Werte einen löschen
+			normalise: aktuelle Länge = 428
+			normalise: Werte löschen = 37
+			normalise: Blocks, alle 11.57 Werte einen löschen
+			normalise: aktuelle Länge = 421
+			normalise: Werte löschen = 30
+			normalise: Blocks, alle 14.03 Werte einen löschen
+			normalise: aktuelle Länge = 382
+			normalise: Werte hinzufügen = 9
+			normalise: Blocks, alle 42.44 Werte einen einfügen
+			normalise: aktuelle Länge = 355
+			normalise: Werte hinzufügen = 36
+			normalise: Blocks, alle 9.86 Werte einen einfügen
+---------------------------
+Inside SaveArffFile()
+	Herzschlag 1: 159-518
+		358 Werte
+			normalise: aktuelle Länge = 358
+			normalise: Werte hinzufügen = 42
+			normalise: Blocks, alle 8.52 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 2: 518-901
+		382 Werte
+			normalise: aktuelle Länge = 382
+			normalise: Werte hinzufügen = 18
+			normalise: Blocks, alle 21.22 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 3: 901-1307
+		405 Werte
+			normalise: aktuelle Länge = 405
+			normalise: Werte löschen = 5
+			normalise: Blocks, alle 81.00 Werte einen löschen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 4: 1307-1736
+		428 Werte
+			normalise: aktuelle Länge = 428
+			normalise: Werte löschen = 28
+			normalise: Blocks, alle 15.29 Werte einen löschen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 5: 1736-2158
+		421 Werte
+			normalise: aktuelle Länge = 421
+			normalise: Werte löschen = 21
+			normalise: Blocks, alle 20.05 Werte einen löschen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 6: 2158-2541
+		382 Werte
+			normalise: aktuelle Länge = 382
+			normalise: Werte hinzufügen = 18
+			normalise: Blocks, alle 21.22 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 7: 2541-2897
+		355 Werte
+			normalise: aktuelle Länge = 355
+			normalise: Werte hinzufügen = 45
+			normalise: Blocks, alle 7.89 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+End of SaveArffFile()
+---------------------------
+			normalise: aktuelle Länge = 294
+			normalise: Werte hinzufügen = 88
+			normalise: Blocks, alle 3.34 Werte einen einfügen
+			normalise: aktuelle Länge = 438
+			normalise: Werte löschen = 56
+			normalise: Blocks, alle 7.82 Werte einen löschen
+			normalise: aktuelle Länge = 435
+			normalise: Werte löschen = 53
+			normalise: Blocks, alle 8.21 Werte einen löschen
+			normalise: aktuelle Länge = 399
+			normalise: Werte löschen = 17
+			normalise: Blocks, alle 23.47 Werte einen löschen
+			normalise: aktuelle Länge = 363
+			normalise: Werte hinzufügen = 19
+			normalise: Blocks, alle 19.11 Werte einen einfügen
+			normalise: aktuelle Länge = 367
+			normalise: Werte hinzufügen = 15
+			normalise: Blocks, alle 24.47 Werte einen einfügen
+			normalise: aktuelle Länge = 377
+			normalise: Werte hinzufügen = 5
+			normalise: Blocks, alle 75.40 Werte einen einfügen
+			normalise: aktuelle Länge = 259
+			normalise: Werte löschen = 1
+			normalise: Blocks, alle 259.00 Werte einen löschen
+			normalise: aktuelle Länge = 257
+			normalise: Werte hinzufügen = 1
+			normalise: Blocks, alle 257.00 Werte einen einfügen
+			normalise: aktuelle Länge = 255
+			normalise: Werte hinzufügen = 3
+			normalise: Blocks, alle 85.00 Werte einen einfügen
+			normalise: aktuelle Länge = 294
+			normalise: Werte hinzufügen = 88
+			normalise: Blocks, alle 3.34 Werte einen einfügen
+			normalise: aktuelle Länge = 438
+			normalise: Werte löschen = 56
+			normalise: Blocks, alle 7.82 Werte einen löschen
+			normalise: aktuelle Länge = 435
+			normalise: Werte löschen = 53
+			normalise: Blocks, alle 8.21 Werte einen löschen
+			normalise: aktuelle Länge = 399
+			normalise: Werte löschen = 17
+			normalise: Blocks, alle 23.47 Werte einen löschen
+			normalise: aktuelle Länge = 363
+			normalise: Werte hinzufügen = 19
+			normalise: Blocks, alle 19.11 Werte einen einfügen
+			normalise: aktuelle Länge = 367
+			normalise: Werte hinzufügen = 15
+			normalise: Blocks, alle 24.47 Werte einen einfügen
+			normalise: aktuelle Länge = 377
+			normalise: Werte hinzufügen = 5
+			normalise: Blocks, alle 75.40 Werte einen einfügen
+			normalise: aktuelle Länge = 386
+			normalise: Werte löschen = 29
+			normalise: Blocks, alle 13.31 Werte einen löschen
+			normalise: aktuelle Länge = 387
+			normalise: Werte löschen = 30
+			normalise: Blocks, alle 12.90 Werte einen löschen
+			normalise: aktuelle Länge = 368
+			normalise: Werte löschen = 11
+			normalise: Blocks, alle 33.45 Werte einen löschen
+			normalise: aktuelle Länge = 349
+			normalise: Werte hinzufügen = 8
+			normalise: Blocks, alle 43.62 Werte einen einfügen
+			normalise: aktuelle Länge = 338
+			normalise: Werte hinzufügen = 19
+			normalise: Blocks, alle 17.79 Werte einen einfügen
+			normalise: aktuelle Länge = 335
+			normalise: Werte hinzufügen = 22
+			normalise: Blocks, alle 15.23 Werte einen einfügen
+			normalise: aktuelle Länge = 333
+			normalise: Werte hinzufügen = 24
+			normalise: Blocks, alle 13.88 Werte einen einfügen
+---------------------------
+Inside SaveArffFile()
+	Herzschlag 1: 386-773
+		386 Werte
+			normalise: aktuelle Länge = 386
+			normalise: Werte hinzufügen = 14
+			normalise: Blocks, alle 27.57 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 2: 773-1161
+		387 Werte
+			normalise: aktuelle Länge = 387
+			normalise: Werte hinzufügen = 13
+			normalise: Blocks, alle 29.77 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 3: 1161-1530
+		368 Werte
+			normalise: aktuelle Länge = 368
+			normalise: Werte hinzufügen = 32
+			normalise: Blocks, alle 11.50 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 4: 1530-1880
+		349 Werte
+			normalise: aktuelle Länge = 349
+			normalise: Werte hinzufügen = 51
+			normalise: Blocks, alle 6.84 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 5: 1880-2219
+		338 Werte
+			normalise: aktuelle Länge = 338
+			normalise: Werte hinzufügen = 62
+			normalise: Blocks, alle 5.45 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 6: 2219-2555
+		335 Werte
+			normalise: aktuelle Länge = 335
+			normalise: Werte hinzufügen = 65
+			normalise: Blocks, alle 5.15 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 7: 2555-2889
+		333 Werte
+			normalise: aktuelle Länge = 333
+			normalise: Werte hinzufügen = 67
+			normalise: Blocks, alle 4.97 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+End of SaveArffFile()
+---------------------------
+			normalise: aktuelle Länge = 125
+			normalise: Werte hinzufügen = 205
+			normalise: Blocks, alle 0.61 Werte einen einfügen
+			normalise: aktuelle Länge = 283
+			normalise: Werte hinzufügen = 47
+			normalise: Blocks, alle 6.02 Werte einen einfügen
+			normalise: aktuelle Länge = 406
+			normalise: Werte löschen = 76
+			normalise: Blocks, alle 5.34 Werte einen löschen
+			normalise: aktuelle Länge = 409
+			normalise: Werte löschen = 79
+			normalise: Blocks, alle 5.18 Werte einen löschen
+			normalise: aktuelle Länge = 425
+			normalise: Werte löschen = 95
+			normalise: Blocks, alle 4.47 Werte einen löschen
+			normalise: aktuelle Länge = 382
+			normalise: Werte hinzufügen = 21
+			normalise: Blocks, alle 18.19 Werte einen einfügen
+			normalise: aktuelle Länge = 416
+			normalise: Werte löschen = 13
+			normalise: Blocks, alle 32.00 Werte einen löschen
+			normalise: aktuelle Länge = 405
+			normalise: Werte löschen = 2
+			normalise: Blocks, alle 202.50 Werte einen löschen
+			normalise: aktuelle Länge = 405
+			normalise: Werte löschen = 2
+			normalise: Blocks, alle 202.50 Werte einen löschen
+			normalise: aktuelle Länge = 406
+			normalise: Werte löschen = 3
+			normalise: Blocks, alle 135.33 Werte einen löschen
+			normalise: aktuelle Länge = 385
+			normalise: Werte hinzufügen = 3
+			normalise: Blocks, alle 128.33 Werte einen einfügen
+			normalise: aktuelle Länge = 375
+			normalise: Werte hinzufügen = 13
+			normalise: Blocks, alle 28.85 Werte einen einfügen
+			normalise: aktuelle Länge = 364
+			normalise: Werte hinzufügen = 24
+			normalise: Blocks, alle 15.17 Werte einen einfügen
+			normalise: aktuelle Länge = 378
+			normalise: Werte hinzufügen = 10
+			normalise: Blocks, alle 37.80 Werte einen einfügen
+			normalise: aktuelle Länge = 401
+			normalise: Werte löschen = 13
+			normalise: Blocks, alle 30.85 Werte einen löschen
+			normalise: aktuelle Länge = 406
+			normalise: Werte löschen = 18
+			normalise: Blocks, alle 22.56 Werte einen löschen
+			normalise: aktuelle Länge = 404
+			normalise: Werte löschen = 16
+			normalise: Blocks, alle 25.25 Werte einen löschen
+			normalise: aktuelle Länge = 392
+			normalise: Werte löschen = 2
+			normalise: Blocks, alle 196.00 Werte einen löschen
+			normalise: aktuelle Länge = 399
+			normalise: Werte löschen = 9
+			normalise: Blocks, alle 44.33 Werte einen löschen
+			normalise: aktuelle Länge = 394
+			normalise: Werte löschen = 4
+			normalise: Blocks, alle 98.50 Werte einen löschen
+			normalise: aktuelle Länge = 382
+			normalise: Werte hinzufügen = 8
+			normalise: Blocks, alle 47.75 Werte einen einfügen
+			normalise: aktuelle Länge = 383
+			normalise: Werte hinzufügen = 7
+			normalise: Blocks, alle 54.71 Werte einen einfügen
+			normalise: aktuelle Länge = 388
+			normalise: Werte hinzufügen = 2
+			normalise: Blocks, alle 194.00 Werte einen einfügen
+			normalise: aktuelle Länge = 388
+			normalise: Werte hinzufügen = 2
+			normalise: Blocks, alle 194.00 Werte einen einfügen
+			normalise: aktuelle Länge = 393
+			normalise: Werte löschen = 24
+			normalise: Blocks, alle 16.38 Werte einen löschen
+			normalise: aktuelle Länge = 382
+			normalise: Werte löschen = 13
+			normalise: Blocks, alle 29.38 Werte einen löschen
+			normalise: aktuelle Länge = 368
+			normalise: Werte hinzufügen = 1
+			normalise: Blocks, alle 368.00 Werte einen einfügen
+			normalise: aktuelle Länge = 356
+			normalise: Werte hinzufügen = 13
+			normalise: Blocks, alle 27.38 Werte einen einfügen
+			normalise: aktuelle Länge = 355
+			normalise: Werte hinzufügen = 14
+			normalise: Blocks, alle 25.36 Werte einen einfügen
+			normalise: aktuelle Länge = 363
+			normalise: Werte hinzufügen = 6
+			normalise: Blocks, alle 60.50 Werte einen einfügen
+			normalise: aktuelle Länge = 362
+			normalise: Werte hinzufügen = 7
+			normalise: Blocks, alle 51.71 Werte einen einfügen
+			normalise: aktuelle Länge = 321
+			normalise: Werte löschen = 4
+			normalise: Blocks, alle 80.25 Werte einen löschen
+			normalise: aktuelle Länge = 315
+			normalise: Werte hinzufügen = 2
+			normalise: Blocks, alle 157.50 Werte einen einfügen
+			normalise: aktuelle Länge = 316
+			normalise: Werte hinzufügen = 1
+			normalise: Blocks, alle 316.00 Werte einen einfügen
+			normalise: aktuelle Länge = 318
+			normalise: Werte löschen = 1
+			normalise: Blocks, alle 318.00 Werte einen löschen
+			normalise: aktuelle Länge = 319
+			normalise: Werte löschen = 2
+			normalise: Blocks, alle 159.50 Werte einen löschen
+			normalise: aktuelle Länge = 318
+			normalise: Werte löschen = 1
+			normalise: Blocks, alle 318.00 Werte einen löschen
+			normalise: aktuelle Länge = 315
+			normalise: Werte hinzufügen = 2
+			normalise: Blocks, alle 157.50 Werte einen einfügen
+			normalise: aktuelle Länge = 311
+			normalise: Werte hinzufügen = 6
+			normalise: Blocks, alle 51.83 Werte einen einfügen
+			normalise: aktuelle Länge = 393
+			normalise: Werte löschen = 24
+			normalise: Blocks, alle 16.38 Werte einen löschen
+			normalise: aktuelle Länge = 382
+			normalise: Werte löschen = 13
+			normalise: Blocks, alle 29.38 Werte einen löschen
+			normalise: aktuelle Länge = 368
+			normalise: Werte hinzufügen = 1
+			normalise: Blocks, alle 368.00 Werte einen einfügen
+			normalise: aktuelle Länge = 356
+			normalise: Werte hinzufügen = 13
+			normalise: Blocks, alle 27.38 Werte einen einfügen
+			normalise: aktuelle Länge = 355
+			normalise: Werte hinzufügen = 14
+			normalise: Blocks, alle 25.36 Werte einen einfügen
+			normalise: aktuelle Länge = 363
+			normalise: Werte hinzufügen = 6
+			normalise: Blocks, alle 60.50 Werte einen einfügen
+			normalise: aktuelle Länge = 362
+			normalise: Werte hinzufügen = 7
+			normalise: Blocks, alle 51.71 Werte einen einfügen
+---------------------------
+Inside SaveArffFile()
+	Herzschlag 1: 161-555
+		393 Werte
+			normalise: aktuelle Länge = 393
+			normalise: Werte hinzufügen = 7
+			normalise: Blocks, alle 56.14 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 2: 555-938
+		382 Werte
+			normalise: aktuelle Länge = 382
+			normalise: Werte hinzufügen = 18
+			normalise: Blocks, alle 21.22 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 3: 938-1307
+		368 Werte
+			normalise: aktuelle Länge = 368
+			normalise: Werte hinzufügen = 32
+			normalise: Blocks, alle 11.50 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 4: 1307-1664
+		356 Werte
+			normalise: aktuelle Länge = 356
+			normalise: Werte hinzufügen = 44
+			normalise: Blocks, alle 8.09 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 5: 1664-2020
+		355 Werte
+			normalise: aktuelle Länge = 355
+			normalise: Werte hinzufügen = 45
+			normalise: Blocks, alle 7.89 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 6: 2020-2384
+		363 Werte
+			normalise: aktuelle Länge = 363
+			normalise: Werte hinzufügen = 37
+			normalise: Blocks, alle 9.81 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 7: 2384-2747
+		362 Werte
+			normalise: aktuelle Länge = 362
+			normalise: Werte hinzufügen = 38
+			normalise: Blocks, alle 9.53 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+End of SaveArffFile()
+---------------------------
+			normalise: aktuelle Länge = 344
+			normalise: Werte löschen = 18
+			normalise: Blocks, alle 19.11 Werte einen löschen
+			normalise: aktuelle Länge = 341
+			normalise: Werte löschen = 15
+			normalise: Blocks, alle 22.73 Werte einen löschen
+			normalise: aktuelle Länge = 329
+			normalise: Werte löschen = 3
+			normalise: Blocks, alle 109.67 Werte einen löschen
+			normalise: aktuelle Länge = 319
+			normalise: Werte hinzufügen = 7
+			normalise: Blocks, alle 45.57 Werte einen einfügen
+			normalise: aktuelle Länge = 314
+			normalise: Werte hinzufügen = 12
+			normalise: Blocks, alle 26.17 Werte einen einfügen
+			normalise: aktuelle Länge = 308
+			normalise: Werte hinzufügen = 18
+			normalise: Blocks, alle 17.11 Werte einen einfügen
+			normalise: aktuelle Länge = 307
+			normalise: Werte hinzufügen = 19
+			normalise: Blocks, alle 16.16 Werte einen einfügen
+			normalise: aktuelle Länge = 317
+			normalise: Werte hinzufügen = 9
+			normalise: Blocks, alle 35.22 Werte einen einfügen
+			normalise: aktuelle Länge = 346
+			normalise: Werte löschen = 20
+			normalise: Blocks, alle 17.30 Werte einen löschen
+			normalise: aktuelle Länge = 344
+			normalise: Werte löschen = 18
+			normalise: Blocks, alle 19.11 Werte einen löschen
+			normalise: aktuelle Länge = 341
+			normalise: Werte löschen = 15
+			normalise: Blocks, alle 22.73 Werte einen löschen
+			normalise: aktuelle Länge = 329
+			normalise: Werte löschen = 3
+			normalise: Blocks, alle 109.67 Werte einen löschen
+			normalise: aktuelle Länge = 319
+			normalise: Werte hinzufügen = 7
+			normalise: Blocks, alle 45.57 Werte einen einfügen
+			normalise: aktuelle Länge = 314
+			normalise: Werte hinzufügen = 12
+			normalise: Blocks, alle 26.17 Werte einen einfügen
+			normalise: aktuelle Länge = 307
+			normalise: Werte hinzufügen = 19
+			normalise: Blocks, alle 16.16 Werte einen einfügen
+			normalise: aktuelle Länge = 307
+			normalise: Werte hinzufügen = 19
+			normalise: Blocks, alle 16.16 Werte einen einfügen
+			normalise: aktuelle Länge = 318
+			normalise: Werte hinzufügen = 8
+			normalise: Blocks, alle 39.75 Werte einen einfügen
+			normalise: aktuelle Länge = 346
+			normalise: Werte löschen = 20
+			normalise: Blocks, alle 17.30 Werte einen löschen
+			normalise: aktuelle Länge = 344
+			normalise: Werte löschen = 18
+			normalise: Blocks, alle 19.11 Werte einen löschen
+			normalise: aktuelle Länge = 341
+			normalise: Werte löschen = 15
+			normalise: Blocks, alle 22.73 Werte einen löschen
+			normalise: aktuelle Länge = 329
+			normalise: Werte löschen = 3
+			normalise: Blocks, alle 109.67 Werte einen löschen
+			normalise: aktuelle Länge = 319
+			normalise: Werte hinzufügen = 7
+			normalise: Blocks, alle 45.57 Werte einen einfügen
+			normalise: aktuelle Länge = 314
+			normalise: Werte hinzufügen = 12
+			normalise: Blocks, alle 26.17 Werte einen einfügen
+			normalise: aktuelle Länge = 308
+			normalise: Werte hinzufügen = 18
+			normalise: Blocks, alle 17.11 Werte einen einfügen
+			normalise: aktuelle Länge = 307
+			normalise: Werte hinzufügen = 19
+			normalise: Blocks, alle 16.16 Werte einen einfügen
+			normalise: aktuelle Länge = 317
+			normalise: Werte hinzufügen = 9
+			normalise: Blocks, alle 35.22 Werte einen einfügen
+			normalise: aktuelle Länge = 346
+			normalise: Werte löschen = 20
+			normalise: Blocks, alle 17.30 Werte einen löschen
+---------------------------
+Inside SaveArffFile()
+	Herzschlag 1: 72-417
+		344 Werte
+			normalise: aktuelle Länge = 344
+			normalise: Werte hinzufügen = 56
+			normalise: Blocks, alle 6.14 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 2: 417-759
+		341 Werte
+			normalise: aktuelle Länge = 341
+			normalise: Werte hinzufügen = 59
+			normalise: Blocks, alle 5.78 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 3: 759-1089
+		329 Werte
+			normalise: aktuelle Länge = 329
+			normalise: Werte hinzufügen = 71
+			normalise: Blocks, alle 4.63 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 4: 1089-1409
+		319 Werte
+			normalise: aktuelle Länge = 319
+			normalise: Werte hinzufügen = 81
+			normalise: Blocks, alle 3.94 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 5: 1409-1724
+		314 Werte
+			normalise: aktuelle Länge = 314
+			normalise: Werte hinzufügen = 86
+			normalise: Blocks, alle 3.65 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 6: 1724-2033
+		308 Werte
+			normalise: aktuelle Länge = 308
+			normalise: Werte hinzufügen = 92
+			normalise: Blocks, alle 3.35 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 7: 2033-2341
+		307 Werte
+			normalise: aktuelle Länge = 307
+			normalise: Werte hinzufügen = 93
+			normalise: Blocks, alle 3.30 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 8: 2341-2659
+		317 Werte
+			normalise: aktuelle Länge = 317
+			normalise: Werte hinzufügen = 83
+			normalise: Blocks, alle 3.82 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 9: 2659-3006
+		346 Werte
+			normalise: aktuelle Länge = 346
+			normalise: Werte hinzufügen = 54
+			normalise: Blocks, alle 6.41 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+End of SaveArffFile()
+---------------------------
+			normalise: aktuelle Länge = 129
+			normalise: Werte hinzufügen = 242
+			normalise: Blocks, alle 0.53 Werte einen einfügen
+			normalise: aktuelle Länge = 320
+			normalise: Werte hinzufügen = 51
+			normalise: Blocks, alle 6.27 Werte einen einfügen
+			normalise: aktuelle Länge = 469
+			normalise: Werte löschen = 98
+			normalise: Blocks, alle 4.79 Werte einen löschen
+			normalise: aktuelle Länge = 449
+			normalise: Werte löschen = 78
+			normalise: Blocks, alle 5.76 Werte einen löschen
+			normalise: aktuelle Länge = 407
+			normalise: Werte löschen = 36
+			normalise: Blocks, alle 11.31 Werte einen löschen
+			normalise: aktuelle Länge = 407
+			normalise: Werte löschen = 36
+			normalise: Blocks, alle 11.31 Werte einen löschen
+			normalise: aktuelle Länge = 414
+			normalise: Werte löschen = 43
+			normalise: Blocks, alle 9.63 Werte einen löschen
+---------------------------
+Inside SaveArffFile()
+	Herzschlag 1: 146-276
+		129 Werte
+		-> Beat übersprungen
+	Herzschlag 2: 276-597
+		320 Werte
+			normalise: aktuelle Länge = 320
+			normalise: Werte hinzufügen = 80
+			normalise: Blocks, alle 4.00 Werte einen einfügen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 3: 597-1067
+		469 Werte
+			normalise: aktuelle Länge = 469
+			normalise: Werte löschen = 69
+			normalise: Blocks, alle 6.80 Werte einen löschen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 4: 1067-1517
+		449 Werte
+			normalise: aktuelle Länge = 449
+			normalise: Werte löschen = 49
+			normalise: Blocks, alle 9.16 Werte einen löschen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 5: 1517-1925
+		407 Werte
+			normalise: aktuelle Länge = 407
+			normalise: Werte löschen = 7
+			normalise: Blocks, alle 58.14 Werte einen löschen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 6: 1925-2333
+		407 Werte
+			normalise: aktuelle Länge = 407
+			normalise: Werte löschen = 7
+			normalise: Blocks, alle 58.14 Werte einen löschen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+	Herzschlag 7: 2333-2748
+		414 Werte
+			normalise: aktuelle Länge = 414
+			normalise: Werte löschen = 14
+			normalise: Blocks, alle 29.57 Werte einen löschen
+		Beat normalisert, Anz. Werte = 400
+		-> Beat geschrieben
+End of SaveArffFile()
+---------------------------
+			normalise: aktuelle Länge = 425
+			normalise: Werte löschen = 113
+			normalise: Blocks, alle 3.76 Werte einen löschen
+			normalise: aktuelle Länge = 453
+			normalise: Werte löschen = 141
+			normalise: Blocks, alle 3.21 Werte einen löschen
+			normalise: aktuelle Länge = 124
+			normalise: Werte hinzufügen = 188
+			normalise: Blocks, alle 0.66 Werte einen einfügen
+			normalise: aktuelle Länge = 245
+			normalise: Werte hinzufügen = 67
+			normalise: Blocks, alle 3.66 Werte einen einfügen

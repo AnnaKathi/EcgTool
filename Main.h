@@ -25,6 +25,8 @@ private:
 	void		setStatus(String status, int panel=0);
 	void		setDbInfo();
 
+	bool		CreateArffFile(String file, String header);
+
 __published:	// IDE-verwaltete Komponenten
 	TPanel *pnInfo;
 	TMemo *mInfo;
@@ -110,6 +112,7 @@ __published:	// IDE-verwaltete Komponenten
 	TAction *acImportEdan;
 	TMenuItem *EdanDatenstzeimportieren1;
 	TButton *btFeatChoi;
+	TButton *btArffHead;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall acCloseExecute(TObject *Sender);
@@ -133,6 +136,7 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall acImportEdanExecute(TObject *Sender);
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall btFeatChoiClick(TObject *Sender);
+	void __fastcall btArffHeadClick(TObject *Sender);
 
 public:
 	__fastcall TfmMain(TComponent* Owner);

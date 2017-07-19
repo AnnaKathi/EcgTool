@@ -18,13 +18,14 @@ cMySqlWork::~cMySqlWork()
 //---------------------------------------------------------------------------
 bool cMySqlWork::open()
 	{
+
 	char path[MAX_PATH];
 	strcpy(path, Application->ExeName.c_str());
 	char* pt = strrchr(path, '\\');
 	if (pt != 0)
 		*pt = 0;
 
-	String file = String(path) + "\\EcgTool.ini";
+	String file = ChangeFileExt(ParamStr(0), ".ini");
 	TIniFile* Ini = new TIniFile(file);
 
 	bMySqlConnected = false;

@@ -4412,6 +4412,15 @@ object fmMain: TfmMain
       TabOrder = 13
       OnClick = btFeatChoiClick
     end
+    object btArffHead: TButton
+      Left = 8
+      Top = 228
+      Width = 121
+      Height = 25
+      Caption = 'Schreibe Arff-Head'
+      TabOrder = 14
+      OnClick = btArffHeadClick
+    end
   end
   object MainMenu: TMainMenu
     Left = 256

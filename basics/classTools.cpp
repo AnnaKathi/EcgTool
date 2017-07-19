@@ -383,13 +383,25 @@ String cTools::GetComputerProzessor()
 	return "";
 	}
 //---------------------------------------------------------------------------
-bool cTools::Log(String msg)
+bool cTools::Log(char* msg, ...)
 	{
 	String dat = GetPath() + "\\ecg.log";
 	FILE* fp = fopen(dat.c_str(), "a+");
 	if (fp == NULL) return false;
 
-	fprintf(fp, "%s\r\n", msg.c_str());
+	char    buffer[512];
+	int     nsiz;
+	va_list argptr;
+
+	va_start(argptr, msg);
+	nsiz = vsnprintf(0, 0, msg, argptr);
+	if (nsiz >= sizeof(buffer)-2) nsiz = sizeof(buffer)-2;
+
+	vsnprintf(buffer, nsiz, msg, argptr);
+	buffer[nsiz] = 0;
+	va_end(argptr);
+
+	fprintf(fp, "%s\n", String(buffer).c_str());
 	fclose(fp);
 	return true;
 	}

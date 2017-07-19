@@ -6,6 +6,7 @@
 #include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "classBase.cpp"
+#include "classTools.h"
 #include "classCsv.h"
 #include "classArray.h"
 #include "classDerivate.h"
@@ -110,6 +111,7 @@ __property cDerivate& derivate1  = { read=get_deriv1 }; //!< Erste Ableitung
 __property cDerivate& derivate2  = { read=get_deriv2 }; //!< Zweite Ableitung
 
 private:
+	cTools		ftools;
 	cCsv*		fcsv;
 
 	cDerivate*	fderiv1; //erste Ableitung
