@@ -2,7 +2,7 @@ object fmEcg: TfmEcg
   Left = 0
   Top = 0
   Caption = 'Auswertung EKG-Daten - EcgTool'
-  ClientHeight = 539
+  ClientHeight = 641
   ClientWidth = 1090
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -34,7 +34,7 @@ object fmEcg: TfmEcg
     Left = 337
     Top = 45
     Width = 4
-    Height = 494
+    Height = 596
     Align = alLeft
     Shape = bsLeftLine
     ExplicitLeft = 456
@@ -77,10 +77,11 @@ object fmEcg: TfmEcg
     Left = 0
     Top = 45
     Width = 337
-    Height = 494
+    Height = 596
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitHeight = 494
     object Bevel4: TBevel
       Left = 0
       Top = 72
@@ -142,7 +143,7 @@ object fmEcg: TfmEcg
     end
     object Bevel8: TBevel
       Left = 0
-      Top = 248
+      Top = 350
       Width = 337
       Height = 4
       Align = alBottom
@@ -339,12 +340,13 @@ object fmEcg: TfmEcg
     end
     object pnBottom: TPanel
       Left = 0
-      Top = 252
+      Top = 354
       Width = 337
       Height = 242
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 13
+      ExplicitTop = 252
       DesignSize = (
         337
         242)
@@ -393,17 +395,36 @@ object fmEcg: TfmEcg
         OnClick = btSave2Click
       end
     end
+    object btQrsTurns: TButton
+      Left = 8
+      Top = 319
+      Width = 125
+      Height = 25
+      Caption = 'Qrs-Punkte anzeigen'
+      TabOrder = 14
+      OnClick = btQrsTurnsClick
+    end
+    object btRpeaks: TButton
+      Left = 9
+      Top = 288
+      Width = 125
+      Height = 25
+      Caption = 'R-Peaks anzeigen'
+      TabOrder = 15
+      OnClick = btRpeaksClick
+    end
   end
   object pnClient: TPanel
     Left = 341
     Top = 45
     Width = 749
-    Height = 494
+    Height = 596
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
+    ExplicitHeight = 494
     object imgEcg: TImage
       Left = 0
       Top = 0

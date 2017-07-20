@@ -160,6 +160,7 @@ bool cData::buildDerivates()
 //---------------------------------------------------------------------------
 iarray_t cData::normalize(iarray_t array, int length)
 	{
+	bool bLog = false;
 	//Array auf die übergebene Länge normalisieren
 	//wenn das Array verkürzt werden muss, werden Werte gelöscht, wenn es
 	//verlängert werden muss, werden Durchschnittswerte hinzugefügt
@@ -170,11 +171,12 @@ iarray_t cData::normalize(iarray_t array, int length)
 	if (arraylen > length)
 		{
 		//Array verkürzen
-ftools.Log("\t\t\tnormalise: aktuelle Länge = %d", arraylen);
 		int delvals = arraylen - length;  //soviele Werte müssen gelöscht werden
-ftools.Log("\t\t\tnormalise: Werte löschen = %d", delvals);
 		double blocks  = (double)arraylen / (double)delvals; //alle x Werte einen Wert löschen
-ftools.Log("\t\t\tnormalise: Blocks, alle %.2f Werte einen löschen", blocks);
+
+		if (bLog) ftools.Log("\t\t\tnormalise: aktuelle Länge = %d", arraylen);
+		if (bLog) ftools.Log("\t\t\tnormalise: Werte löschen = %d", delvals);
+		if (bLog) ftools.Log("\t\t\tnormalise: Blocks, alle %.2f Werte einen löschen", blocks);
 
 		//der erste Wert wird direkt am Anfang gelöscht (zw. 1. und 2. Wert)
 		double pos = 1.0;
@@ -206,11 +208,12 @@ ftools.Log("\t\t\tnormalise: Blocks, alle %.2f Werte einen löschen", blocks);
 	else
 		{
 		//Array verlängern
-ftools.Log("\t\t\tnormalise: aktuelle Länge = %d", arraylen);
 		int newvals = length - arraylen;  //soviele neue Werte werden benötigt
-ftools.Log("\t\t\tnormalise: Werte hinzufügen = %d", newvals);
 		double blocks  = (double)arraylen / (double)newvals; //alle x Werte einen neuen Wert einfügen
-ftools.Log("\t\t\tnormalise: Blocks, alle %.2f Werte einen einfügen", blocks);
+
+		if (bLog) ftools.Log("\t\t\tnormalise: aktuelle Länge = %d", arraylen);
+		if (bLog) ftools.Log("\t\t\tnormalise: Werte hinzufügen = %d", newvals);
+		if (bLog) ftools.Log("\t\t\tnormalise: Blocks, alle %.2f Werte einen einfügen", blocks);
 
 		//der erste Wert wird direkt am Anfang eingefügt (zw. 1. und 2. Wert)
 		double pos = 1.0;

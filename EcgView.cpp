@@ -603,4 +603,56 @@ void __fastcall TfmEcg::FormResize(TObject *Sender)
 	imgDeriv2->Height = (int)h;
 	}
 //---------------------------------------------------------------------------
+void __fastcall TfmEcg::btRpeaksClick(TObject *Sender)
+	{
+	iarray_t curve = ecg.data.data_array;
+	iarray_t rpeak = ecg.rpeaks.find(curve, NULL);
+	farray.redisplay(curve, imgDeriv1);
+	farray.displayPoints(curve, rpeak, imgDeriv1);
+	}
+//---------------------------------------------------------------------------
+void __fastcall TfmEcg::btQrsTurnsClick(TObject *Sender)
+	{
+	//QRS-Punkte bilden und in einem Image anzeigen
+	ftools.Log("--------------------------------------------------");
+	ftools.Log("Inside 28-Point-Finder");
+
+	iarray_t curve = ecg.data.data_array;
+	iarray_t rpeak = ecg.rpeaks.find(curve, imgDeriv1);
+	int n = rpeak.size();
+	ftools.Log("Anzahl R-Peaks: %d", n);
+	if (n <= 0)
+		{
+		ftools.Log("\t-> Abbruch");
+		return;
+		}
+
+	if (ecg.qrs.build(curve, rpeak))
+		ftools.Log("Qrs-Bereiche gefunden: %d", ecg.qrs.count);
+	else
+		{
+		ftools.Log("Keine Qrs-Bereiche gefunden -> Abbruch");
+		return;
+		}
+
+	//Test: alle Qrs-Punkte des Signals anzeigen
+	iarray_t points;
+	ecg.qrs.reset();
+	qrsArea qA;
+	int ix = 0;
+	while (ecg.qrs.next())
+		{
+		qA = ecg.qrs.QRS;
+		points[ix].push_back(qA.Q.zeit); points[ix].push_back(qA.Q.wert); ix++;
+		points[ix].push_back(qA.R.zeit); points[ix].push_back(qA.R.wert); ix++;
+		points[ix].push_back(qA.S.zeit); points[ix].push_back(qA.S.wert); ix++;
+		}
+
+	ftools.Log("Punkte gefunden: %d", ix);
+	farray.redisplay(curve, imgDeriv2);
+	farray.displayPoints(curve, points, imgDeriv2);
+
+	ftools.Log("--------------------------------------------------");
+	}
+//---------------------------------------------------------------------------
 

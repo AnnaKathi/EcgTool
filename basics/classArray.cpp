@@ -94,20 +94,60 @@ bool cArray::displayPoints(const iarray_t& curve, iarray_t points, TImage* img)
 	img->Canvas->Brush->Color = fPointColor;
 
 	double zeit, wert;
-	int x, y;
+	int x, y, y1;
+
+	bool alteBerechnung = false;
 	for (int i = 0; i < points.size(); i++)
 		{
 		zeit = points[i][0];
 		wert = points[i][1];
 
-		wert -= farr_charac.MinWert; //relativ ausrichten
+		//Anna 20.07.17: Berechnung angepasst an display()
+		if (alteBerechnung)
+			{
+			wert -= farr_charac.MinWert; //relativ ausrichten
 
-		x  = zeit * factor_x;
-		y = img->Height - (wert * factor_y);
+			x  = zeit * factor_x;
+			y = img->Height - (wert * factor_y);
+			}
+		else
+			{
+			if (farr_charac.MinWert < 0) //es gibt negative Werte in der Kurve
+				{
+				//MinWert muss mit Null gleichgesetzt werden
+				wert += (farr_charac.MinWert * -1);
+				}
+			else //es gubt keine negativen Werte in der Kurve
+				{
+				wert -= farr_charac.MinWert; //Kurve relativ unten ausrichten
+				}
+
+			x  = zeit * factor_x;
+			y1 = wert * factor_y;
+			y = img->Height - y1; //Y = 0 ist oben am Bildrand !
+			}
 
 		img->Canvas->FillRect(Rect(x-fPointWidth, y-fPointWidth, x+fPointWidth, y+fPointWidth));
 		}
 
+/*
+		else //neue Berechnung ab dem 22.04.2017
+			{
+			if (farr_charac.MinWert < 0) //es gibt negative Werte in der Kurve
+				{
+				//MinWert muss mit Null gleichgesetzt werden
+				val += (farr_charac.MinWert * -1);
+				}
+			else //es gubt keine negativen Werte in der Kurve
+				{
+				val -= farr_charac.MinWert; //Kurve relativ unten ausrichten
+				}
+
+			x  = count * factor_x;
+			y1 = val * factor_y;
+			y2 = img->Height - y1; //Y = 0 ist oben am Bildrand !
+			}
+*/
 	img->Canvas->Brush->Color = clBlack;
 	return ok();
 	}
@@ -149,7 +189,7 @@ bool cArray::display(const iarray_t& array, TImage* img)
 	bool alteBerechnung = false;
 
 	//--- Map-Werte einzeichnen
-	int x, y1, y2;
+	int zeit, x, y1, y2;
 	double val;
 	bool first = true;
 	int count = 0;
@@ -158,7 +198,8 @@ bool cArray::display(const iarray_t& array, TImage* img)
 		count++;
 
 		ilist_t v = itr->second;
-		val = v[1];
+		zeit = v[0];
+		val  = v[1];
 
 		if (alteBerechnung)
 			{
@@ -184,8 +225,8 @@ bool cArray::display(const iarray_t& array, TImage* img)
 				val -= farr_charac.MinWert; //Kurve relativ unten ausrichten
 				}
 
-			x  = count * factor_x;
-			y1 = val * factor_y;
+			x  = zeit * factor_x;
+			y1 = val  * factor_y;
 			y2 = img->Height - y1; //Y = 0 ist oben am Bildrand !
 			}
 

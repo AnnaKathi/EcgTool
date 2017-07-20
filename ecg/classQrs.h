@@ -5,6 +5,7 @@
 #include <classes.hpp>
 //---------------------------------------------------------------------------
 #include "../basics/classBase.h"
+#include "../basics/classTools.h"
 #include "../basics/classArray.h"
 #include "../basics/classMath.h"
 //---------------------------------------------------------------------------
@@ -39,6 +40,7 @@ __property int count   = { read=get_anz_turns };
 
 private:
 	cArray		farray;
+	cTools		ftools;
 	cMath		fmath;
 
 	int			fIndex;

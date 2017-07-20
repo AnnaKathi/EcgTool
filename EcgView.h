@@ -110,6 +110,8 @@ __published:	// IDE-verwaltete Komponenten
 	TPopupMenu *PopupMenu1;
 	TMenuItem *estSavePic1;
 	TSaveDialog *SaveDialog2;
+	TButton *btQrsTurns;
+	TButton *btRpeaks;
 	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -132,6 +134,8 @@ __published:	// IDE-verwaltete Komponenten
 	void __fastcall cbLeadChange(TObject *Sender);
 	void __fastcall estSavePic1Click(TObject *Sender);
 	void __fastcall FormResize(TObject *Sender);
+	void __fastcall btQrsTurnsClick(TObject *Sender);
+	void __fastcall btRpeaksClick(TObject *Sender);
 
 
 public:
